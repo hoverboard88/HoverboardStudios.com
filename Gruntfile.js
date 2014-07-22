@@ -106,7 +106,7 @@ module.exports = function(grunt) {
       dev: {
         options: {
           sassDir: 'scss',
-          cssDir: '',
+          cssDir: 'css',
           outputStyle: 'nested',
           require: [
             'breakpoint',
