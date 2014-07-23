@@ -143,7 +143,7 @@ module.exports = function(grunt) {
   // 4. Where we tell Grunt what to do when we type "grunt" into the terminal.
   grunt.registerTask('prod', ['compass:prod', 'concat', 'uglify', 'imagemin', 'svgmin']);
   // grunt.registerTask('favicon', ['favicons']);
-  grunt.registerTask('default', ['watch']);
+  grunt.registerTask('default', ['imagemin', 'watch']);
 
 
 };
