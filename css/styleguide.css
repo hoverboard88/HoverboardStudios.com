@@ -790,16 +790,20 @@ tfoot {
   .column:first-child {
     margin-left: 0; } }
 /* line 1, ../scss/partials/_home.scss */
+.logo {
+  max-width: 400px; }
+
+/* line 4, ../scss/partials/_home.scss */
 .menu--main {
   position: fixed;
   text-align: center;
   width: 100%; }
-  /* line 5, ../scss/partials/_home.scss */
+  /* line 8, ../scss/partials/_home.scss */
   .menu--main li {
     display: inline-block;
     vertical-align: top; }
 
-/* line 10, ../scss/partials/_home.scss */
+/* line 13, ../scss/partials/_home.scss */
 .container--home {
   padding: 20px; }
 
