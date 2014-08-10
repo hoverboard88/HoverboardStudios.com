@@ -521,13 +521,17 @@ label {
     margin-right: 10px;
     margin-bottom: 0; }
 
-/* line 35, ../scss/partials/_forms.scss */
+/* line 36, ../scss/partials/_forms.scss */
+input[type="submit"] {
+  display: block; }
+
+/* line 40, ../scss/partials/_forms.scss */
 select {
   margin-bottom: 25.6px;
   cursor: pointer;
   z-index: 1; }
 
-/* line 40, ../scss/partials/_forms.scss */
+/* line 45, ../scss/partials/_forms.scss */
 input[type="text"],
 input[type="color"],
 input[type="date"],
@@ -544,7 +548,7 @@ textarea {
   padding: 5px;
   max-width: 400px;
   width: 100%; }
-  /* line 56, ../scss/partials/_forms.scss */
+  /* line 61, ../scss/partials/_forms.scss */
   input[type="text"]:focus,
   input[type="color"]:focus,
   input[type="date"]:focus,
@@ -625,7 +629,7 @@ textarea {
   textarea::-webkit-input-placeholder {
     color: rgba(0, 0, 0, 0.5); }
 
-/* line 65, ../scss/partials/_forms.scss */
+/* line 70, ../scss/partials/_forms.scss */
 textarea {
   height: 130px; }
 
@@ -781,14 +785,22 @@ tfoot {
     width: 100%; }
 
   /* line 6, ../scss/partials/_shame.scss */
-  .column {
+  .column-3 {
     float: left;
     width: 30%;
     margin-left: 5%; }
+    /* line 10, ../scss/partials/_shame.scss */
+    .column-3:first-child {
+      margin-left: 0; }
 
-  /* line 11, ../scss/partials/_shame.scss */
-  .column:first-child {
-    margin-left: 0; } }
+  /* line 14, ../scss/partials/_shame.scss */
+  .column-2 {
+    float: left;
+    width: 47.5%;
+    margin-left: 5%; }
+    /* line 18, ../scss/partials/_shame.scss */
+    .column-2:first-child {
+      margin-left: 0; } }
 /* line 1, ../scss/partials/_home.scss */
 .logo {
   max-width: 400px; }
@@ -805,7 +817,14 @@ tfoot {
 
 /* line 13, ../scss/partials/_home.scss */
 .container--home {
-  padding: 20px; }
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto; }
+
+/* line 18, ../scss/partials/_home.scss */
+.capsule-crm-form {
+  text-align: left;
+  margin: 0 auto; }
 
 /* line 1, ../scss/partials/_helpers.scss */
 .ir {
