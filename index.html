@@ -23,21 +23,32 @@ Don't worry, this isn't our final site. Did you want an "Under Construction" pag
 
     <!-- <nav class="menu menu--main">
       <ul>
-        <li><a href="#specialties">Specialties</a></li>
-        <li><a href="#?">Something</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#work">Our Work</a></li>
         <li><a href="#contact">Get In Touch</a></li>
       </ul>
     </nav> -->
 
-    <div class="container--home">
+    <div class="wrap wrap--dark">
+      <div class="container container--home centered">
 
-      <div class="centered">
+        <h1 class="single-spaced"><img class="logo img--no-border" src="/img/hoverboard.svg" onerror="this.src=hoverboard.png" alt="Hoverboard"></h1>
 
-        <h1><img class="logo" src="/img/hoverboard.svg" onerror="this.src=hoverboard.png" alt="Hoverboard"></h1>
+      </div><!-- .container -->
+    </div><!-- .wrap -->
+
+    <div class="wrap wrap--medium">
+      <div class="container container--home centered">
+
+        <p class="font--big single-spaced">Hoverboard is a design and development studio that creates innovative digital experiences to fit the needs of engaged clients.</p>
+
+      </div><!-- .container -->
+    </div><!-- .wrap -->
+
+    <div class="wrap">
+      <div class="container container--home centered">
 
         <h2 id="about">Web Design &amp; Development</h2>
-
-        <p>Hoverboard is a design and development studio that creates innovative digital experiences to fit the needs of engaged clients.</p>
 
         <p>We have a combined 14 years experience, having worked with a wide range of technologies. We specialize in digital design, website and application development.</p>
 
@@ -45,37 +56,71 @@ Don't worry, this isn't our final site. Did you want an "Under Construction" pag
 
         <p>We utilize user-friendly content management systems like Wordpress so that our clients can quickly and easily edit site content. We also enjoy working with Node.js and Python when developing web applications.</p>
 
-        <hr>
+      </div><!-- .container -->
+    </div><!-- .wrap -->
 
-        <h3>Keeping it Small</h3>
+    <div class="wrap wrap--dark">
+      <div class="container container--home centered">
 
-        <p>We're a small, two-person studio, which allows our clients to work with the benefit of a close, personal team. Our focus is to provide a hands-on experience that is dedicated to our client's needs.</p>
+        <div class="columns">
+          <div class="column-2">
 
-        <hr>
+            <h3>Keeping it Small</h3>
 
-        <h3>Create Experiences</h3>
+            <p>We're a small, two-person studio, which allows our clients to work with the benefit of a close, personal team. Our focus is to provide a hands-on experience that is dedicated to our client's needs.</p>
 
-        <p>We strive to create a positive experience for both the client and end user throughout the entire process, leaving the client with a feeling that together we created something great.</p>
+          </div><!-- .column-2 -->
+          <div class="column-2">
 
-        <hr>
+            <h3>Create Experiences</h3>
 
-        <h3 id="work">Our Work</h3>
+            <p>We strive to create a positive experience for both the client and end user throughout the entire process, leaving the client with a feeling that together we created something great.</p>
+
+          </div><!-- .column-2 -->
+        </div><!-- .columns -->
+
+      </div><!-- .container -->
+    </div><!-- .wrap -->
+
+    <div class="wrap wrap--light">
+      <div id="work" class="container container--home centered">
+
+        <h3>Our Work</h3>
 
         <p>To get a taste of our work, check out some of our most recent projects:</p>
 
-        <h4><a href="http://superiorcampers.com">Superior Campers</a></h4>
+        <div class="columns">
+          <div class="column-2">
 
-        <p><a href="http://superiorcampers.com">
-          <img src="/img/SupCampScreenshot.png" alt="[Screenshot of Superior Campers dot com]">
-        </a></p>
+            <h4><a href="http://superiorcampers.com">Superior Campers</a></h4>
 
-        <h4><a href="http://standarddistributing.com">Standard Distributing</a></h4>
+            <p><a href="http://superiorcampers.com">
+              <img src="/img/SupCampScreenshot.png" alt="[Screenshot of Superior Campers dot com]">
+            </a></p>
 
-        <p><a href="http://standarddistributing.com">
-          <img src="/img/SDScreenshot.png" alt="[Screenshot of Standard Distributing dot com]">
-        </a></p>
+            <p>Superior Campers is a camper and trailer dealership in Superior, WI who deal in new and used units.</p>
 
-        <h3 id="contact">Get in Touch</h3>
+          </div><!-- .column-2 -->
+          <div class="column-2">
+
+            <h4><a href="http://standarddistributing.com">Standard Distributing</a></h4>
+
+            <p><a href="http://standarddistributing.com">
+              <img src="/img/SDScreenshot.png" alt="[Screenshot of Standard Distributing dot com]">
+            </a></p>
+
+            <p>Standard Distributing is a convenience store distributer in Oklahoma.</p>
+
+          </div><!-- .column-2 -->
+        </div><!-- .columns -->
+
+      </div><!-- .container -->
+    </div><!-- .wrap -->
+
+    <div class="wrap wrap--medium">
+      <div id="contact" class="container container--home centered">
+
+        <h3>Get in Touch</h3>
 
         <p>Do you have a project/product in mind? Did you just wrap up a project and want a second set of eyes to take a look? Drop us a line and we can start a conversation.</p>
 
@@ -90,10 +135,10 @@ Don't worry, this isn't our final site. Did you want an "Under Construction" pag
             <div class="column-2">
 
               <label for="LAST_NAME">Name:</label>
-              <input required type="text" id="LAST_NAME" name="LAST_NAME">
+              <input type="text" required id="LAST_NAME" name="LAST_NAME">
 
               <label for="EMAIL">Email:</label>
-              <input required type="text" id="EMAIL" name="EMAIL">
+              <input type="text" required id="EMAIL" name="EMAIL">
 
               <label for="PHONE">Phone:</label>
               <input type="tel" id="PHONE" name="PHONE">
@@ -105,7 +150,7 @@ Don't worry, this isn't our final site. Did you want an "Under Construction" pag
               <textarea id="NOTE" name="NOTE"></textarea>
 
               <label for="CF_Budget">Project Budget</label>
-              <select required id="CF_Budget" name="CUSTOMFIELD[Budget]">
+              <select id="CF_Budget" required name="CUSTOMFIELD[Budget]">
                 <option>Budget Amount</option>
                 <option value="4000">0 - $4,000</option>
                 <option value="8000">$4,000 - $8,000</option>
@@ -122,9 +167,46 @@ Don't worry, this isn't our final site. Did you want an "Under Construction" pag
 
         </form>
 
-      </div><!-- .centered -->
+      </div><!-- .container -->
+    </div><!-- .wrap -->
 
-      <script>
+    <div class="wrap--dark">
+      <div class="container--footer">
+
+        <div itemscope itemtype="http://schema.org/LocalBusiness">
+          <h3 class="hidden" itemprop="name">Hoverboard Studios</h3>
+          <span class="hidden" itemprop="description">Hoverboard is a design and development studio that creates innovative digital experiences to fit the needs of engaged clients.</span>
+          <div class="columns">
+            <div class="column-3" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+              <h4 class="single-spaced">Minneapolis</h4>
+              <p>
+                <span itemprop="streetAddress">3948 Yosemite Ave. S</span><br>
+                <span itemprop="addressLocality">Saint Louis Park</span>,
+                <span itemprop="addressRegion">MN</span>
+                <span itemprop="postalCode">55416</span>
+              </p>
+              <p><strong>Phone:</strong> <span itemprop="telephone">612-351-2373</span></p>
+            </div>
+            <div class="column-3" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+              <h4 class="single-spaced">Winston-Salem</h4>
+              <p>
+                <span itemprop="streetAddress">1069 S Hawthorne Rd</span><br>
+                <span itemprop="addressLocality">Winston-Salem</span>,
+                <span itemprop="addressRegion">NC</span>
+                <span itemprop="postalCode">27103</span>
+              </p>
+            </div>
+          </div><!-- .columns -->
+        </div>
+
+        <p class="single-spaced">©2014 Hoverboard | <a href="https://plus.google.com/101904781934699073627" rel="publisher">Google+ (MN)</a> | <a href="https://plus.google.com/114769429182618988844" rel="publisher">Google+ (NC)</a> | <a href="https://twitter.com/hoverboard88">Twitter</a> | <a href="https://www.facebook.com/hoverboardstudios">Facebook</a></p>
+
+      </div>
+    </div>
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script>
 
       function split_names () {
 
@@ -145,44 +227,6 @@ Don't worry, this isn't our final site. Did you want an "Under Construction" pag
       }
 
       </script>
-
-    </div><!-- .container -->
-
-    <div class="wrap--dark">
-        <div class="container--footer">
-
-          <div itemscope itemtype="http://schema.org/LocalBusiness">
-            <h3 class="hidden" itemprop="name">Hoverboard Studios</h3>
-            <span class="hidden" itemprop="description">Hoverboard is a design and development studio that creates innovative digital experiences to fit the needs of engaged clients.</span>
-            <div class="columns">
-              <div class="column-3" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-                <h4>Minneapolis</h4>
-                <p>
-                  <span itemprop="streetAddress">3948 Yosemite Ave. S</span><br>
-                  <span itemprop="addressLocality">Saint Louis Park</span>,
-                  <span itemprop="addressRegion">MN</span>
-                  <span itemprop="postalCode">55416</span>
-                </p>
-                <p><strong>Phone:</strong> <span itemprop="telephone">612-351-2373</span></p>
-              </div>
-              <div class="column-3" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-                <h4>Winston-Salem</h4>
-                <p>
-                  <span itemprop="streetAddress">1069 S Hawthorne Rd</span><br>
-                  <span itemprop="addressLocality">Winston-Salem</span>,
-                  <span itemprop="addressRegion">NC</span>
-                  <span itemprop="postalCode">27103</span>
-                </p>
-              </div>
-            </div><!-- .columns -->
-          </div>
-
-          <p class="single-spaced">©2014 Hoverboard | <a href="https://plus.google.com/101904781934699073627" rel="publisher">Google+ (MN)</a> | <a href="https://plus.google.com/114769429182618988844" rel="publisher">Google+ (NC)</a> | <a href="https://twitter.com/hoverboard88">Twitter</a> | <a href="https://www.facebook.com/hoverboardstudios">Facebook</a></p>
-
-        </div>
-      </div>
-
-    <link rel="stylesheet" href="/css/style.css">
 
     <!-- Google Analytics -->
     <script>

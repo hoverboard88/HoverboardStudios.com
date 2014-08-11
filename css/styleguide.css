@@ -100,44 +100,44 @@ a {
 
 /* line 142, ../scss/partials/_normalize.scss */
 h1 {
-  font-size: 50px;
-  font-size: 3.125rem;
-  line-height: 0.512em;
+  font-size: 45px;
+  font-size: 2.8125rem;
+  line-height: 0.56889em;
   margin: 0 0 25.6px; }
 
 /* line 146, ../scss/partials/_normalize.scss */
 h2 {
-  font-size: 40px;
-  font-size: 2.5rem;
-  line-height: 0.64em;
+  font-size: 30px;
+  font-size: 1.875rem;
+  line-height: 0.85333em;
   margin: 0 0 25.6px; }
 
 /* line 150, ../scss/partials/_normalize.scss */
 h3 {
-  font-size: 28px;
-  font-size: 1.75rem;
-  line-height: 0.91429em;
-  margin: 0 0 25.6px; }
-
-/* line 154, ../scss/partials/_normalize.scss */
-h4 {
   font-size: 24px;
   font-size: 1.5rem;
   line-height: 1.06667em;
   margin: 0 0 25.6px; }
 
-/* line 158, ../scss/partials/_normalize.scss */
-h5 {
+/* line 154, ../scss/partials/_normalize.scss */
+h4 {
   font-size: 20px;
   font-size: 1.25rem;
   line-height: 1.28em;
   margin: 0 0 25.6px; }
 
+/* line 158, ../scss/partials/_normalize.scss */
+h5 {
+  font-size: 26px;
+  font-size: 1.625rem;
+  line-height: 0.98462em;
+  margin: 0 0 25.6px; }
+
 /* line 162, ../scss/partials/_normalize.scss */
 h6 {
-  font-size: 16px;
-  font-size: 1rem;
-  line-height: 1.6em;
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 1.82857em;
   margin: 0 0 25.6px; }
 
 /* line 168, ../scss/partials/_normalize.scss */
@@ -303,14 +303,9 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
-/* line 1, ../scss/partials/_generics.scss */
-html, body {
-  background: #eee; }
-
 /* line 4, ../scss/partials/_generics.scss */
 a {
-  color: #336767;
-  font-family: 'pluto_sansmedium', sans-serif; }
+  color: #336767; }
   /* line 7, ../scss/partials/_generics.scss */
   a:hover, a:focus {
     text-decoration: none; }
@@ -323,19 +318,23 @@ img {
   border: 1px solid #555555; }
 
 /* line 17, ../scss/partials/_generics.scss */
+.img--no-border {
+  border: 0; }
+
+/* line 20, ../scss/partials/_generics.scss */
 img[src*=".svg"] {
   max-height: 100%; }
 
-/* line 20, ../scss/partials/_generics.scss */
+/* line 23, ../scss/partials/_generics.scss */
 h1, h2, h3, h4, h5, h6 {
   font-family: "pluto_sanslight", sans-serif;
   font-weight: normal; }
 
-/* line 24, ../scss/partials/_generics.scss */
+/* line 27, ../scss/partials/_generics.scss */
 .centered {
   text-align: center; }
 
-/* line 27, ../scss/partials/_generics.scss */
+/* line 30, ../scss/partials/_generics.scss */
 .hidden {
   display: none; }
 
@@ -528,15 +527,27 @@ label {
 
 /* line 36, ../scss/partials/_forms.scss */
 input[type="submit"] {
-  display: block; }
+  display: block;
+  background: #033;
+  color: #eee;
+  border: 0;
+  border-radius: 0;
+  padding: 10px;
+  -moz-transition: background 0.3s;
+  -o-transition: background 0.3s;
+  -webkit-transition: background 0.3s;
+  transition: background 0.3s; }
+  /* line 44, ../scss/partials/_forms.scss */
+  input[type="submit"]:focus, input[type="submit"]:hover {
+    background: #006666; }
 
-/* line 40, ../scss/partials/_forms.scss */
+/* line 49, ../scss/partials/_forms.scss */
 select {
   margin-bottom: 25.6px;
   cursor: pointer;
   z-index: 1; }
 
-/* line 45, ../scss/partials/_forms.scss */
+/* line 54, ../scss/partials/_forms.scss */
 input[type="text"],
 input[type="color"],
 input[type="date"],
@@ -553,7 +564,7 @@ textarea {
   padding: 5px;
   max-width: 400px;
   width: 100%; }
-  /* line 61, ../scss/partials/_forms.scss */
+  /* line 70, ../scss/partials/_forms.scss */
   input[type="text"]:focus,
   input[type="color"]:focus,
   input[type="date"]:focus,
@@ -634,7 +645,7 @@ textarea {
   textarea::-webkit-input-placeholder {
     color: rgba(0, 0, 0, 0.5); }
 
-/* line 70, ../scss/partials/_forms.scss */
+/* line 79, ../scss/partials/_forms.scss */
 textarea {
   height: 130px; }
 
@@ -834,13 +845,41 @@ tfoot {
 
 /* line 23, ../scss/partials/_home.scss */
 .wrap--dark {
+  background: #033;
+  color: #fff; }
+  /* line 26, ../scss/partials/_home.scss */
+  .wrap--dark a {
+    color: #6cc; }
+
+/* line 30, ../scss/partials/_home.scss */
+.wrap--light {
+  background: #eee; }
+
+/* line 33, ../scss/partials/_home.scss */
+.wrap--medium {
   background: #399;
   color: #fff; }
+  /* line 36, ../scss/partials/_home.scss */
+  .wrap--medium a {
+    color: #6cc; }
 
-/* line 27, ../scss/partials/_home.scss */
+/* line 40, ../scss/partials/_home.scss */
+.wrap--tiled {
+  background: #339999 url(../img/tiled_background.png);
+  color: #fff; }
+  /* line 43, ../scss/partials/_home.scss */
+  .wrap--tiled a {
+    color: #6cc; }
+
+/* line 47, ../scss/partials/_home.scss */
 .capsule-crm-form {
   text-align: left;
   margin: 0 auto; }
+
+/* line 51, ../scss/partials/_home.scss */
+.font--big {
+  font-size: 24px;
+  font-size: 1.5rem; }
 
 /* line 1, ../scss/partials/_helpers.scss */
 .ir {
