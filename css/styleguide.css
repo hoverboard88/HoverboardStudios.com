@@ -334,6 +334,10 @@ h1, h2, h3, h4, h5, h6 {
 .centered {
   text-align: center; }
 
+/* line 26, ../scss/partials/_generics.scss */
+.hidden {
+  display: none; }
+
 /*
  * Generic Links
  */
