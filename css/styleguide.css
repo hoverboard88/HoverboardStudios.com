@@ -319,22 +319,23 @@ a {
 /* line 12, ../scss/partials/_generics.scss */
 img {
   height: auto;
-  max-width: 100%; }
+  max-width: 100%;
+  border: 1px solid #555555; }
 
-/* line 16, ../scss/partials/_generics.scss */
+/* line 17, ../scss/partials/_generics.scss */
 img[src*=".svg"] {
   max-height: 100%; }
 
-/* line 19, ../scss/partials/_generics.scss */
+/* line 20, ../scss/partials/_generics.scss */
 h1, h2, h3, h4, h5, h6 {
   font-family: "pluto_sanslight", sans-serif;
   font-weight: normal; }
 
-/* line 23, ../scss/partials/_generics.scss */
+/* line 24, ../scss/partials/_generics.scss */
 .centered {
   text-align: center; }
 
-/* line 26, ../scss/partials/_generics.scss */
+/* line 27, ../scss/partials/_generics.scss */
 .hidden {
   display: none; }
 
