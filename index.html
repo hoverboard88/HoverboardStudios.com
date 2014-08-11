@@ -130,37 +130,28 @@ Hoverboard Team
           <!-- <input type="hidden" name="DEVELOPER" value="TRUE"/> -->
           <input type="hidden" id="FIRST_NAME" name="FIRST_NAME">
 
-          <div class="columns">
-            <div class="column-2">
+          <label for="LAST_NAME">Name:</label>
+          <input type="text" required id="LAST_NAME" name="LAST_NAME">
 
-              <label for="LAST_NAME">Name:</label>
-              <input type="text" required id="LAST_NAME" name="LAST_NAME">
+          <label for="EMAIL">Email:</label>
+          <input type="text" required id="EMAIL" name="EMAIL">
 
-              <label for="EMAIL">Email:</label>
-              <input type="text" required id="EMAIL" name="EMAIL">
+          <label for="PHONE">Phone:</label>
+          <input type="tel" id="PHONE" name="PHONE">
 
-              <label for="PHONE">Phone:</label>
-              <input type="tel" id="PHONE" name="PHONE">
+          <label for="NOTE">Tell us about your project:</label>
+          <textarea id="NOTE" name="NOTE"></textarea>
 
-            </div><!-- .column-2 -->
-            <div class="column-2">
-
-              <label for="NOTE">Tell us about your project:</label>
-              <textarea id="NOTE" name="NOTE"></textarea>
-
-              <label for="CF_Budget">Project Budget</label>
-              <select id="CF_Budget" required name="CUSTOMFIELD[Budget]">
-                <option>Budget Amount</option>
-                <option value="4000">0 - $4,000</option>
-                <option value="8000">$4,000 - $8,000</option>
-                <option value="15000">$8,000 - $15,000</option>
-                <option value="30000">$15,000 - $30,000</option>
-                <option value="60000">$30,000 - $60,000</option>
-                <option value="60001">$60,000+</option>
-              </select>
-
-            </div><!-- .column-2 -->
-          </div><!-- .columns -->
+          <label for="CF_Budget">Project Budget</label>
+          <select id="CF_Budget" required name="CUSTOMFIELD[Budget]">
+            <option>Budget Amount</option>
+            <option value="4000">0 - $4,000</option>
+            <option value="8000">$4,000 - $8,000</option>
+            <option value="15000">$8,000 - $15,000</option>
+            <option value="30000">$15,000 - $30,000</option>
+            <option value="60000">$30,000 - $60,000</option>
+            <option value="60001">$60,000+</option>
+          </select>
 
           <input type="submit" value="Get in Touch"/>
 
