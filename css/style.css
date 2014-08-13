@@ -882,6 +882,13 @@ tfoot {
   font-size: 24px;
   font-size: 1.5rem; }
 
+/* line 55, ../scss/partials/_home.scss */
+p.alert__thank-you {
+  display: none; }
+  /* line 57, ../scss/partials/_home.scss */
+  p.alert__thank-you:target {
+    display: block; }
+
 /* line 1, ../scss/partials/_helpers.scss */
 .ir {
   background-color: transparent;

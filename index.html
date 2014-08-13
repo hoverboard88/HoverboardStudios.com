@@ -124,9 +124,9 @@ Hoverboard Team
         <p>Do you have a project/product in mind? Did you just wrap up a project and want a second set of eyes to take a look? Drop us a line and we can start a conversation.</p>
 
         <form class="capsule-crm-form" onsubmit="return split_names();" action="https://service.capsulecrm.com/service/newlead" method="post">
-          <p id="alert__thankyou" class="hidden alert alert-success well">Thank you for contacting us! We'll be in touch.</p>
+          <p id="alert__thank-you" class="alert__thank-you alert alert-success well">Thank you for contacting us! We'll be in touch.</p>
           <input type="hidden" name="FORM_ID" value="527b4032-3da6-4716-8ced-67426a4aea61">
-          <input type="hidden" name="COMPLETE_URL" value="http://hoverboardstudios.com?form_submitted=true#contact">
+          <input type="hidden" name="COMPLETE_URL" value="http://hoverboardstudios.com/#alert__thank-you">
 
           <!-- <input type="hidden" name="DEVELOPER" value="TRUE"/> -->
           <input type="hidden" id="FIRST_NAME" name="FIRST_NAME">
@@ -215,21 +215,6 @@ Hoverboard Team
         //dump the rest into LAST_NAME
         document.getElementById('LAST_NAME').value = nameArray;
 
-      }
-
-      var prodId = getParameterByName('prodId');
-
-      if ( getParameterByName('form_submitted') === 'true' ) {
-
-        document.getElementById("alert__thankyou").className = document.getElementById("alert__thankyou").className.replace(/\bhidden\b/,'');
-
-      }
-
-      function getParameterByName(name) {
-        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-          results = regex.exec(location.search);
-        return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
       }
 
       </script>
