@@ -137,6 +137,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   // grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-svgmin');
+  grunt.loadNpmTasks('grunt-autoprefixer');
   // grunt.loadNpmTasks('grunt-favicons');
   grunt.loadNpmTasks('grunt-svg2png');
 
