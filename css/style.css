@@ -69,12 +69,12 @@
 @import url("//hello.myfonts.net/count/2af4df");
 @font-face {
   font-family: 'PlutoSansLight';
-  src: url("webfonts/2AF4DF_E_0.eot");
-  src: url("webfonts/2AF4DF_E_0.eot?#iefix") format("embedded-opentype"), url("webfonts/2AF4DF_E_0.woff") format("woff"), url("webfonts/2AF4DF_E_0.ttf") format("truetype"); }
+  src: url("../fonts/2AF4DF_E_0.eot");
+  src: url("../fonts/2AF4DF_E_0.eot?#iefix") format("embedded-opentype"), url("../fonts/2AF4DF_E_0.woff") format("woff"), url("../fonts/2AF4DF_E_0.ttf") format("truetype"); }
 @font-face {
   font-family: 'PlutoSansMedium';
-  src: url("webfonts/2AF4DF_F_0.eot");
-  src: url("webfonts/2AF4DF_F_0.eot?#iefix") format("embedded-opentype"), url("webfonts/2AF4DF_F_0.woff") format("woff"), url("webfonts/2AF4DF_F_0.ttf") format("truetype"); }
+  src: url("../fonts/2AF4DF_F_0.eot");
+  src: url("../fonts/2AF4DF_F_0.eot?#iefix") format("embedded-opentype"), url("../fonts/2AF4DF_F_0.woff") format("woff"), url("../fonts/2AF4DF_F_0.ttf") format("truetype"); }
 /***********************
 Variables
 ***********************/
