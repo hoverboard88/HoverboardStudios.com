@@ -4,49 +4,49 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
-    // concat: {
-    //   dist: {
-    //     src: [
-    //       'js/libs/*.js', // All JS in the libs folder
-    //       'js/src/*.js'  // This specific file
-    //     ],
-    //     dest: 'js/main.js',
-    //   }
-    // },
-    // jshint: {
-    //   beforeconcat: ['js/src/*.js'],
-    //   afterconcat: ['js/main.js'],
-    //   options: {
-    //     globals: {
-    //       jQuery: true,
-    //       console: true
-    //     }
-    //   }
-    // },
-    // uglify: {
-    //   build: {
-    //     src: 'js/main.js',
-    //     dest: 'js/main.min.js'
-    //   }
-    // },
-    // favicons: {
-    //   options: {
-    //     trueColor: true,
-    //     precomposed: true,
-    //     appleTouchBackgroundColor: "#ffebbc",
-    //     coast: true,
-    //     windowsTile: true,
-    //     tileBlackWhite: false,
-    //     tileColor: "#ffebbc",
-    //     //This plugin is spotty with creating the html (inc/favicons.php), so, back up the old version first before you run it.
-    //     // html: 'inc/favicons.php',
-    //     // HTMLPrefix: '/wp-content/themes/supcamp_40/img/favicons/'
-    //   },
-    //   icons: {
-    //     src: 'img/favicon-src.png',
-    //     dest: 'img/favicons'
-    //   }
-    // },
+    concat: {
+      dist: {
+        src: [
+          'js/libs/*.js', // All JS in the libs folder
+          'js/src/*.js'  // This specific file
+        ],
+        dest: 'js/main.js',
+      }
+    },
+    jshint: {
+      beforeconcat: ['js/src/*.js'],
+      afterconcat: ['js/main.js'],
+      options: {
+        globals: {
+          jQuery: true,
+          console: true
+        }
+      }
+    },
+    uglify: {
+      build: {
+        src: 'js/main.js',
+        dest: 'js/main.min.js'
+      }
+    },
+    favicons: {
+      options: {
+        trueColor: true,
+        precomposed: true,
+        appleTouchBackgroundColor: "#ffebbc",
+        coast: true,
+        windowsTile: true,
+        tileBlackWhite: false,
+        tileColor: "#ffebbc",
+        //This plugin is spotty with creating the html (inc/favicons.php), so, back up the old version first before you run it.
+        // html: 'inc/favicons.php',
+        // HTMLPrefix: '/wp-content/themes/supcamp_40/img/favicons/'
+      },
+      icons: {
+        src: 'img/favicon-src.png',
+        dest: 'img/favicons'
+      }
+    },
     imagemin: {
       dynamic: {
         files: [{
@@ -130,15 +130,15 @@ module.exports = function(grunt) {
   });
 
   // 3. Where we tell Grunt we plan to use this plug-in.
-  // grunt.loadNpmTasks('grunt-contrib-concat');
-  // grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  // grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-svgmin');
   grunt.loadNpmTasks('grunt-autoprefixer');
-  // grunt.loadNpmTasks('grunt-favicons');
+  grunt.loadNpmTasks('grunt-favicons');
   grunt.loadNpmTasks('grunt-svg2png');
 
   // 4. Where we tell Grunt what to do when we type "grunt" into the terminal.
