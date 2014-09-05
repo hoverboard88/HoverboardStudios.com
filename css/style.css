@@ -1113,8 +1113,7 @@ tfoot {
   font-size: 25px;
   font-size: 1.5625rem;
   line-height: 1.92em;
-  font-family: "PlutoSansLight", sans-serif;
-  color: #fff; }
+  font-family: "PlutoSansLight", sans-serif; }
 
 /* line 57, ../scss/partials/_home.scss */
 p.alert__thank-you {
