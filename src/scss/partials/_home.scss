@@ -1,0 +1,62 @@
+.logo {
+	max-width: 400px;
+}
+.menu--main {
+	text-align: center;
+	li {
+		font-size: 18px;
+		display: inline-block;
+	}
+	a {
+		display: block;
+    padding: 1em 1em;
+		color: #003333;
+	}
+}
+.container--home {
+	padding: 20px;
+	max-width: 800px;
+	margin: 0 auto;
+}
+.container--footer {
+	padding: 20px;
+	max-width: 800px;
+	margin: 0 auto;
+}
+.wrap--dark {
+	background: #033;
+	color: #fff;
+	a {
+		color: #6cc;
+	}
+}
+.wrap--light {
+	background: #eee;
+}
+.wrap--medium {
+	background: #399;
+	color: #fff;
+	a {
+		color: #6cc;
+	}
+}
+.wrap--tiled {
+	background: #fff;
+}
+
+.capsule-crm-form {
+	text-align: left;
+	margin: 0 auto;
+	max-width: 400px;
+}
+.font--big {
+	@include font-size($font-size--hero, true, false);
+	font-family: $secondary--font-family;
+  // color: #fff;
+}
+p.alert__thank-you {
+	display: none;
+	&:target {
+		display: block;
+	}
+}

@@ -1,0 +1,76 @@
+/***********************
+Variables
+***********************/
+
+/**
+  * Booleans
+  */
+
+$border-box: true;
+
+/**
+  * Colors
+  */
+ 
+// $testcolor: #ff0;
+
+/**
+  * Grid
+  */
+
+// Depricated in Singularity 1.2
+// $grids: 12;
+
+// New Singularity 1.2 mixins
+// @include add-grid(12);
+// @include add-gutter(30/54);
+// @include add-gutter-style('slit');
+
+/**
+  * Base Styles
+  */
+
+$base--color: #222;
+
+$base--border: $base--color;
+
+$base--font-family: "AdelleRegular", Georgia, "Times New Roman", serif;
+$secondary--font-family: 'PlutoSansLight', sans-serif;
+
+//set "bold" and "normal" weights here and use @include font-weight() mixin instead of font-weight.
+$font-weight__normal: normal;
+$font-weight__bold: bold;
+
+$base--font-size: 16px;
+$base--line-height: 1.5;
+// Don't change $base--spacing. It will mess up the vertical rhythm.
+// http://coding.smashingmagazine.com/2011/03/14/technical-web-typography-guidelines-and-techniques/
+$base--spacing: $base--font-size * $base--line-height;
+
+/**
+  * Headings
+  */
+
+$font-size--h1: 42px;
+$font-size--h2: 30px;
+$font-size--h3: 22px;
+$font-size--h4: 20px;
+$font-size--h5: 16px;
+$font-size--h6: 14px;
+
+/**
+  * Other Sizes
+  */
+
+$font-size--hero: 25px;
+$font-size--small: 10px;
+
+/**
+  * Dropdowns
+  */
+
+$dropdown__width: 700px;
+//if your boxes have borders or padding;
+$dropdown__width--offset: $dropdown__width - 2;
+
+$legacy_support_for_ie: false;

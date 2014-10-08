@@ -1,0 +1,97 @@
+/*
+ * Class-Based grid system
+ *
+ */
+
+/* If you want to use in Wordpress as shortcodes, add this to functions.php (or better yet in an include for shortcodes)
+
+//so shortcodes don't get wrapped in p tags
+remove_filter( 'the_content', 'wpautop' );
+add_filter( 'the_content', 'wpautop' , 12);
+
+function supcamp_40_grid_grid( $atts, $content = '' ) {
+
+  extract( shortcode_atts( array(
+    'columns' => '2'
+  ), $atts ) );
+
+  return '<div class="easy-columns easy-columns-' . $atts['columns'] . '">' . do_shortcode( $content ) . '</div>';
+}
+add_shortcode( 'grid', 'supcamp_40_grid_grid' );
+
+function supcamp_40_grid_column( $atts, $content = '' ) {
+
+  return '<div class="easy-column">' . do_shortcode( $content ) . '</div>';
+}
+add_shortcode( 'column', 'supcamp_40_grid_column' );
+
+ */
+
+// @mixin easy-columns() {
+// 	$chr: "easy-column-";
+//   $content: $chr;
+//   @for $i from 0 to 8 {
+//     $content: $content + $chr;
+//   }
+//   .{$content} {
+//   	float: left;
+//   	width: $i;
+//   }
+// }
+
+.easy-columns {
+	@extend .clearfix;
+	&.easy-columns-1 .easy-column {
+		float: left;
+		width: 1 / 1 * 100%;
+	}
+	&.easy-columns-2 .easy-column {
+		float: left;
+		width: 100%;
+		@include breakpoint(450px) {
+			width: 1 / 2 * 100%;
+		}
+	}
+	&.easy-columns-3 .easy-column {
+		float: left;
+		width: 100%;
+		@include breakpoint(450px) {
+			width: 1 / 3 * 100%;
+		}
+	}
+	&.easy-columns-4 .easy-column {
+		float: left;
+		width: 100%;
+		@include breakpoint(450px) {
+			width: 1 / 4 * 100%;
+		}
+	}
+	&.easy-columns-5 .easy-column {
+		float: left;
+		width: 100%;
+		@include breakpoint(450px) {
+			width: 1 / 5 * 100%;
+		}
+	}
+	&.easy-columns-6 .easy-column {
+		float: left;
+		width: 100%;
+		@include breakpoint(450px) {
+			width: 1 / 6 * 100%;
+		}
+	}
+	&.easy-columns-7 .easy-column {
+		float: left;
+		width: 100%;
+		@include breakpoint(450px) {
+			width: 1 / 7 * 100%;
+		}
+	}
+	&.easy-columns-8 .easy-column {
+		float: left;
+		width: 100%;
+		@include breakpoint(450px) {
+			width: 1 / 8 * 100%;
+		}
+	}
+}

@@ -1,0 +1,40 @@
+ul, ol {
+  padding-left: 25px;
+}
+.list--unstyled {
+  list-style: none;
+  padding: 0;
+  margin-left: 0;
+  li {
+    display: block;
+  }
+  &.list--horizontal li {
+    display: inline-block;
+  }
+}
+.list--justifed {
+  display: table;
+  width: 100%;
+  li {
+    display: table-cell;
+  }
+}
+.def-list-inline {
+  @extend .clearfix;
+  dt {
+    clear: both;
+    float: left;
+    display: inline-block;
+    font-weight: bold;
+    &:after {
+      content: ":";
+      padding-right: 3px;
+    }
+  }
+  dd {
+
+    float: left;
+    display: inline-block;
+    margin-left: 0;
+  }
+}

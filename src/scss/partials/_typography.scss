@@ -1,0 +1,49 @@
+// bottom margin
+p, ul, ol, blockquote, input, textarea, fieldset, button, pre, table, hr, dl {
+  margin: 0 0 $base--spacing;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @include font-weight(normal);
+}
+
+// For blog posts/body content. Work in progress. Referencing: http://typecast.com/RXnYv4kxWn/share/775c1efb984a98cdde125168321328bd68a95d7dpbtNk
+// h1 {
+//   font-family: 'PlutoSansBold', sans-serif;
+//   @include font-size(42px);
+// }
+// h2 {
+//   color: #4d4d4d;
+//   @include font-size(24px);
+// }
+// h3 {
+//   font-family: 'PlutoSansBold', sans-serif;
+//   text-transform: uppercase;
+//   @include font-size(22px);
+// }
+
+hr {
+  border: 0;
+  border-bottom: 1px solid $base--border;
+  margin-top: -1px;
+}
+
+.single-spaced {
+  margin-bottom: 0;
+}
+
+.one-half-spaced {
+  margin-bottom: $base--spacing / 2;
+}
+
+.double-spaced {
+  margin-bottom: $base--spacing;
+}
+
+.small, small {
+  @include font-size($font-size--small);
+}
+
+.display-font {
+  font-family: $secondary--font-family;
+}

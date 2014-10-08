@@ -1,14 +1,3 @@
-<!--
-
-Hey Snoopy McGee:
-
-Peaking at our code eh? Good! But trust us when we say this isn't our final site. Did you want an "Under Construction" page, circa 1995?
-
-Sincerely
-
-Hoverboard Team
-
--->
 <!doctype html>
 <html>
   <head>
@@ -17,87 +6,189 @@ Hoverboard Team
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Hoverboard Web Design &amp; Development</title>
     <!--[if lt IE 9]><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script><![endif]-->
-
-    <link rel="stylesheet" href="/css/fonts.css">
-
-    <style>
-      body {
-        text-align: center;
-        font-size: 24px;
-        font-family: 'PlutoSansLight', sans-serif;
-        color: #329999;
-        line-height: 1.5;
-      }
-      .wrap {
-        margin: 0 auto;
-        max-width: 840px;
-      }
-      .logo {
-        margin-top: 20px;
-        max-width: 800px;
-      }
-      h1 {
-        margin: 0;
-      }
-      a {
-        color: #329999;
-        text-decoration: none;
-      }
-      p {
-        margin-top: 0;
-      }
-      a:hover, a:focus {
-        color: #013333;
-        text-decoration: underline;
-      }
-      .inline {
-        margin: 0;
-        padding: 0;
-        list-style-type: none;
-      }
-      .twitter_svg {
-        display: inline;
-        height: 20px;
-        position: relative;
-        top: 3px;
-      }
-      @media (min-width: 700px) {
-        .logo {
-          margin-top: 60px;
-        }
-        .mission {
-          padding: 60px 0 30px 0;
-        }
-        .inline li {
-          float: left;
-          width: 33%;
-        }
-      }
-    </style>
   </head>
   <body>
 
-    <div class="wrap">
-      <header class="container">
+    <div class="wrap wrap--tiled">
+      <header class="container container--home centered">
 
-        <h1><img class="logo" src="/img/hoverboard.svg" onerror="this.src=/img/hoverboard.png" alt="Hoverboard"></h1>
+        <h1 class="single-spaced"><a href="/"><img class="logo img--no-border" src="dist/img/hoverboard.svg" onerror="this.src=hoverboard.png" alt="Hoverboard"></a></h1>
+
+        <nav class="menu menu--main">
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#work">Work</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
 
       </header><!-- .container -->
     </div><!-- .wrap -->
 
-    <div class="wrap">
-      <div class="container">
+    <div class="wrap wrap--medium">
+      <div class="container container--home centered">
 
-        <p class="mission">Hoverboard is a design and development studio that creates innovative digital experiences to fit the needs of engaged clients.</p>
-
-        <ul class="inline">
-          <li><a href="mailto:ryan+matt@hoverboardstudios.com">Contact Us</a></li>
-          <li><span>612-351-2373</span></li>
-          <li><img class="twitter_svg" src="/img/twitter.svg" onerror="this.src=twitter.png" alt="Twitter"> <a href="https://twitter.com/hoverboard88" class="twitter">@hoverboard88</a></li>
-        </ul>
+        <p class="font--big single-spaced">Hoverboard is a design and development studio that creates innovative digital experiences to fit the needs of engaged clients.</p>
 
       </div><!-- .container -->
     </div><!-- .wrap -->
+
+    <div class="wrap">
+      <section class="container container--home centered">
+
+        <p>We create digital experiences for websites with a passion for using the latest web technologies. The user experience is optimized for any device, whether browsing on a phone or a desktop computer.</p>
+
+        <p>We utilize user-friendly content management systems, such as Wordpress, so that our clients can quickly and easily edit site content.</p>
+
+      </section><!-- .container -->
+    </div><!-- .wrap -->
+
+    <div class="wrap wrap--dark">
+      <div class="container container--home centered">
+        
+        <section>
+
+          <h2>Why Us?</h2>
+
+          <p>We believe it is important to incorporate our clients into the development process from the beginning and continue a high level of collaboration throughout the project.</p>
+
+          <p>Our goal is to identify the needs and ensure we are creating the appropriate solutions for our clients. We work to create a positive experience for both the client and end user throughout the entire process so that together, we create something great.</p>
+
+        </section><!-- .column-2 -->
+
+      </div><!-- .container -->
+    </div><!-- .wrap -->
+
+    <div class="wrap wrap--dark">
+      <div class="container container--home centered">
+          
+        <section>
+
+          <h2>Keeping it Small</h2>
+
+          <p>We are a small, two-person studio. Our focus is to provide a hands-on experience that is dedicated to our client’s work. This provides our customers the benefit of a close, personal team.</p>
+
+        </section><!-- .column-2 -->
+
+      </div><!-- .container -->
+    </div><!-- .wrap -->
+
+    <div class="wrap wrap--light">
+      <section id="work" class="container container--home centered">
+
+        <h2>Get In Touch</h2>
+
+        <p>Do you have a project/product in mind? Did you just wrap up a project and want a second set of eyes to take a look?</p>
+
+        <p>We just need a few things from you:</p>
+
+        <form class="capsule-crm-form" onsubmit="return split_names();" action="https://service.capsulecrm.com/service/newlead" method="post">
+          <p id="alert__thank-you" class="alert__thank-you alert alert-success well">Thank you for contacting us! We'll be in touch.</p>
+          <input type="hidden" name="FORM_ID" value="527b4032-3da6-4716-8ced-67426a4aea61">
+          <input type="hidden" name="COMPLETE_URL" value="http://hoverboardstudios.com/#alert__thank-you">
+
+          <!-- <input type="hidden" name="DEVELOPER" value="TRUE"/> -->
+          <input type="hidden" id="FIRST_NAME" name="FIRST_NAME">
+
+          <label class="label--required" for="LAST_NAME">Name <span class="required">(required)</span></label>
+          <input type="text" required id="LAST_NAME" name="LAST_NAME">
+
+          <label class="label--required" for="EMAIL">Email <span class="required">(required)</span></label>
+          <input type="text" required id="EMAIL" name="EMAIL">
+
+          <label for="PHONE">Phone</label>
+          <input type="tel" id="PHONE" name="PHONE">
+
+          <label class="label--required" for="CF_Budget">Project Budget <span class="required">(required)</span></label>
+          <select id="CF_Budget" required name="CUSTOMFIELD[Budget]">
+            <option>Budget Amount</option>
+            <option value="4000">0 - $4,000</option>
+            <option value="8000">$4,000 - $8,000</option>
+            <option value="15000">$8,000 - $15,000</option>
+            <option value="30000">$15,000 - $30,000</option>
+            <option value="60000">$30,000 - $60,000</option>
+            <option value="60001">$60,000+</option>
+          </select>
+
+          <label for="NOTE">Tell us about your project:</label>
+          <textarea id="NOTE" name="NOTE"></textarea>
+
+          <input type="submit" value="Submit"/>
+
+        </form>
+
+      </section><!-- .container -->
+    </div><!-- .wrap -->
+
+    <div class="wrap--dark">
+      <footer class="container--footer">
+        
+        <h2>Contact Us</h2>
+
+        <nav class="menu menu--secondary">
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#work">Work</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div itemscope itemtype="http://schema.org/LocalBusiness">
+          <h3 class="hidden" itemprop="name">Hoverboard Studios</h3>
+          <span class="hidden" itemprop="description">Hoverboard is a design and development studio that creates innovative digital experiences to fit the needs of engaged clients.</span>
+          <div class="columns">
+            <div class="column-3" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+              <h4 class="single-spaced">Minneapolis</h4>
+              <p>
+                <span itemprop="streetAddress">3948 Yosemite Ave. S</span><br>
+                <span itemprop="addressLocality">Saint Louis Park</span>,
+                <span itemprop="addressRegion">MN</span>
+                <span itemprop="postalCode">55416</span>
+              </p>
+              <p><strong>Phone:</strong> <span itemprop="telephone">612-351-2373</span></p>
+            </div>
+            <div class="column-3" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+              <h4 class="single-spaced">Winston-Salem</h4>
+              <p>
+                <span itemprop="streetAddress">1069 S Hawthorne Rd</span><br>
+                <span itemprop="addressLocality">Winston-Salem</span>,
+                <span itemprop="addressRegion">NC</span>
+                <span itemprop="postalCode">27103</span>
+              </p>
+            </div>
+          </div><!-- .columns -->
+        </div>
+
+        <p class="single-spaced">©2014 Hoverboard. All rights reserved. <a href="https://plus.google.com/101904781934699073627" rel="publisher">Google+ (MN)</a> | <a href="https://plus.google.com/114769429182618988844" rel="publisher">Google+ (NC)</a> | <a href="https://twitter.com/hoverboard88">Twitter</a> | <a href="https://www.facebook.com/hoverboardstudios">Facebook</a></p>
+
+      </footer>
+    </div>
+
+    <link rel="stylesheet" href="dist/css/style.css">
+
+    <script>
+
+      function split_names () {
+
+        var
+          wholeName = document.getElementById('LAST_NAME').value,
+          nameArray = wholeName.split(' ');
+
+        document.getElementById('FIRST_NAME').value = nameArray[0];
+
+        //remove first name from array
+        nameArray.splice(0, 1);
+        //join back into string
+        nameArray = nameArray.join(' ');
+
+        //dump the rest into LAST_NAME
+        document.getElementById('LAST_NAME').value = nameArray;
+
+      }
+
+      </script>
 
     <!-- Google Analytics -->
     <script>
