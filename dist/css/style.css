@@ -123,13 +123,14 @@
 }
 
 
+*/
+@import url("//hello.myfonts.net/count/2bb850");
 @font-face {
   font-family: 'PlutoSansCondHeavy';
-  src: url('../fonts/2AF4DF_8_0.eot');
-  src: url('../fonts/2AF4DF_8_0.eot?#iefix') format('embedded-opentype'),url('../fonts/2AF4DF_8_0.woff') format('woff'),url('../fonts/2AF4DF_8_0.ttf') format('truetype');
+  src: url("../fonts/2AF4DF_8_0.eot");
+  src: url("../fonts/2AF4DF_8_0.eot?#iefix") format("embedded-opentype"), url("../fonts/2AF4DF_8_0.woff") format("woff"), url("../fonts/2AF4DF_8_0.ttf") format("truetype");
 }
-
-
+/*
 @font-face {
   font-family: 'PlutoSansCondLight';
   src: url('../fonts/2AF4DF_9_0.eot');
@@ -163,7 +164,6 @@
   src: url('../fonts/2AF4DF_D_0.eot');
   src: url('../fonts/2AF4DF_D_0.eot?#iefix') format('embedded-opentype'),url('../fonts/2AF4DF_D_0.woff') format('woff'),url('../fonts/2AF4DF_D_0.ttf') format('truetype');
 } */
-@import url("//hello.myfonts.net/count/2bb850");
 @font-face {
   font-family: 'PlutoSansLight';
   src: url("../fonts/2AF4DF_E_0.eot");
@@ -756,18 +756,18 @@ label {
 
 input[type="submit"], button[type="submit"] {
   display: block;
-  background: -webkit-linear-gradient(top, #336666, #003333);
-  background: linear-gradient(top, #336666, #003333);
-  color: #eee;
+  background: #580d0a;
   border: 0;
-  border-radius: 0;
-  padding: 10px;
+  box-shadow: 4px 4px 0 #ad1414;
+  color: #eee;
+  line-height: 1;
+  padding: 0.75em 1em;
   -webkit-transition: background .3s;
           transition: background .3s;
 }
 input[type="submit"]:focus, input[type="submit"]:hover, button[type="submit"]:focus, button[type="submit"]:hover {
-  background: -webkit-linear-gradient(top, #333333, #333333);
-  background: linear-gradient(top, #333333, #333333);
+  background: #ad1414;
+  box-shadow: 4px 4px 0 #580d0a;
 }
 
 select {
@@ -787,9 +787,10 @@ input[type="tel"],
 input[type="time"],
 input[type="url"],
 textarea {
-  border: 1px solid #222222;
   background: #fff;
-  padding: 5px;
+  border: 0;
+  box-shadow: 4px 4px 0 rgba(104, 14, 15, 0.8);
+  padding: 0.5em;
   max-width: 400px;
   width: 100%;
 }
@@ -920,7 +921,8 @@ p, ul, ol, blockquote, input, textarea, fieldset, button, pre, table, hr, dl {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-weight: normal;
+  font-family: "PlutoSansCondHeavy", sans-serif;
+  text-transform: uppercase;
 }
 
 hr {
@@ -1027,8 +1029,14 @@ tfoot {
   border-top: 1px solid #222222;
 }
 
+.container {
+  padding: 1em;
+  max-width: 80em;
+  margin: 0 auto;
+}
+
 .logo {
-  max-width: 400px;
+  max-width: 10em;
 }
 
 .menu--main {
@@ -1039,15 +1047,68 @@ tfoot {
   display: inline-block;
 }
 .menu--main a {
+  position: relative;
   display: block;
-  padding: 1em 1em;
+  padding: 0.5em 1em;
   color: #003333;
 }
+.menu--main a:active, .menu--main a:hover, .menu--main a:focus {
+  color: #66CCCC;
+}
 
-.container--home {
-  padding: 20px;
-  max-width: 800px;
-  margin: 0 auto;
+.wrap--tiled {
+  background: #fff;
+}
+
+.wrap--teal {
+  background: #67c8ca;
+  color: #093334;
+  font-family: "AdelleBoldItalic", Georgia, "Times New Roman", serif;
+  font-size: 21px;
+  font-style: italic;
+  font-weight: bold;
+  line-height: 1.3125;
+  padding-bottom: 5em;
+  text-shadow: 0 2px 0 rgba(50, 154, 154, 0.5);
+}
+.wrap--teal a {
+  color: #6cc;
+}
+
+.wrap--dkgreen {
+  background: #003333;
+  color: #fff;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.wrap--medgreen {
+  background: #56b1b1;
+  color: #003333;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.wrap--light {
+  background: #eee;
+  color: #282828;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.wrap--red {
+  background: #cc3333;
+  color: #eee;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.wrap--dark {
+  background: #222;
+  color: #8757b5;
+}
+.wrap--dark a {
+  color: #8757b5;
 }
 
 .container--footer {
@@ -1056,34 +1117,9 @@ tfoot {
   margin: 0 auto;
 }
 
-.wrap--dark {
-  background: #033;
-  color: #fff;
-}
-.wrap--dark a {
-  color: #6cc;
-}
-
-.wrap--light {
-  background: #eee;
-}
-
-.wrap--medium {
-  background: #399;
-  color: #fff;
-}
-.wrap--medium a {
-  color: #6cc;
-}
-
-.wrap--tiled {
-  background: #fff;
-}
-
 .capsule-crm-form {
   text-align: left;
   margin: 0 auto;
-  max-width: 400px;
 }
 
 .font--big {

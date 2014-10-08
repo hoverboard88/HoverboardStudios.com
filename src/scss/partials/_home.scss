@@ -1,6 +1,13 @@
-.logo {
-	max-width: 400px;
+.container {
+	padding: 1em;
+	max-width: 80em;
+	margin: 0 auto;
 }
+
+.logo {
+	max-width: 10em;
+}
+
 .menu--main {
 	text-align: center;
 	li {
@@ -8,46 +15,81 @@
 		display: inline-block;
 	}
 	a {
+		position: relative;
 		display: block;
-    padding: 1em 1em;
+    padding: 0.5em 1em;
 		color: #003333;
+		&:active, &:hover, &:focus {
+			color: #66CCCC;
+		}
 	}
 }
-.container--home {
-	padding: 20px;
-	max-width: 800px;
-	margin: 0 auto;
+
+.wrap--tiled {
+	background: #fff;
 }
+
+.wrap--teal {
+	background: #67c8ca;
+	color: #093334;
+	font-family: "AdelleBoldItalic", Georgia, "Times New Roman", serif;
+	font-size: 21px;
+	font-style: italic;
+	font-weight: bold;
+	line-height: 1.3125;
+	padding-bottom: 5em;
+	text-shadow: 0 2px 0 rgba(50, 154, 154, 0.5);
+	a {
+		color: #6cc;
+	}
+}
+
+.wrap--dkgreen {
+	background: #003333;
+	color: #fff;
+	font-size: 18px;
+	line-height: 1.5;
+}
+
+.wrap--medgreen {
+	background: #56b1b1;
+	color: #003333;
+	font-size: 18px;
+	line-height: 1.5;
+}
+
+.wrap--light {
+	background: #eee;
+	color: #282828;
+	font-size: 18px;
+	line-height: 1.5;
+}
+
+.wrap--red {
+	background: #cc3333;
+	color: #eee;
+	font-size: 18px;
+	line-height: 1.5;
+}
+
+.wrap--dark {
+	background: #222;
+	color: #8757b5;
+	a {
+		color: #8757b5;
+	}
+}
+
 .container--footer {
 	padding: 20px;
 	max-width: 800px;
 	margin: 0 auto;
 }
-.wrap--dark {
-	background: #033;
-	color: #fff;
-	a {
-		color: #6cc;
-	}
-}
-.wrap--light {
-	background: #eee;
-}
-.wrap--medium {
-	background: #399;
-	color: #fff;
-	a {
-		color: #6cc;
-	}
-}
-.wrap--tiled {
-	background: #fff;
-}
 
 .capsule-crm-form {
 	text-align: left;
 	margin: 0 auto;
-	max-width: 400px;
+	// max-width: 400px;
 }
 .font--big {
 	@include font-size($font-size--hero, true, false);
