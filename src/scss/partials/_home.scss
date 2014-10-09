@@ -4,6 +4,10 @@
 	margin: 0 auto;
 }
 
+.container--top-padding {
+	padding: 1em 1em 0;
+}
+
 .logo {
 	max-width: 10em;
 }
@@ -26,7 +30,8 @@
 }
 
 .wrap--tiled {
-	background: #fff;
+	background: #fff url(../../src/img/tiled-pattern.svg) center -5px repeat;
+	background-size: contain;
 }
 
 .wrap--teal {
@@ -37,15 +42,26 @@
 	font-style: italic;
 	font-weight: bold;
 	line-height: 1.3125;
-	padding-bottom: 5em;
+	position: relative;
 	text-shadow: 0 2px 0 rgba(50, 154, 154, 0.5);
 	a {
 		color: #6cc;
 	}
 }
 
+.img--skyline {
+	display: block;
+	bottom: 0;
+	border: 0; // Need to zero this out for all images
+	height: auto; // Make all images responsive
+	max-width: 100%; // Make all images responsive
+	position: relative;
+	bottom: -1px; // Seems to fix 1px spacing at bottom of svg
+}
+
 .wrap--dkgreen {
-	background: #003333;
+	background: #003333 url(/dist/img/pattern.svg);
+	background-size: cover;
 	color: #fff;
 	font-size: 18px;
 	line-height: 1.5;

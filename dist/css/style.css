@@ -1035,6 +1035,10 @@ tfoot {
   margin: 0 auto;
 }
 
+.container--top-padding {
+  padding: 1em 1em 0;
+}
+
 .logo {
   max-width: 10em;
 }
@@ -1057,7 +1061,8 @@ tfoot {
 }
 
 .wrap--tiled {
-  background: #fff;
+  background: white url(../../src/img/tiled-pattern.svg) center -5px repeat;
+  background-size: contain;
 }
 
 .wrap--teal {
@@ -1068,15 +1073,26 @@ tfoot {
   font-style: italic;
   font-weight: bold;
   line-height: 1.3125;
-  padding-bottom: 5em;
+  position: relative;
   text-shadow: 0 2px 0 rgba(50, 154, 154, 0.5);
 }
 .wrap--teal a {
   color: #6cc;
 }
 
+.img--skyline {
+  display: block;
+  bottom: 0;
+  border: 0;
+  height: auto;
+  max-width: 100%;
+  position: relative;
+  bottom: -1px;
+}
+
 .wrap--dkgreen {
-  background: #003333;
+  background: #003333 url(/dist/img/pattern.svg);
+  background-size: cover;
   color: #fff;
   font-size: 18px;
   line-height: 1.5;
