@@ -541,10 +541,6 @@ a:hover, a:focus {
 img {
   height: auto;
   max-width: 100%;
-  border: 1px solid #222222;
-}
-
-.img--no-border {
   border: 0;
 }
 
@@ -923,6 +919,7 @@ p, ul, ol, blockquote, input, textarea, fieldset, button, pre, table, hr, dl {
 h1, h2, h3, h4, h5, h6 {
   font-family: "PlutoSansCondHeavy", sans-serif;
   text-transform: uppercase;
+  margin-bottom: 0.5em;
 }
 
 hr {
@@ -1035,10 +1032,6 @@ tfoot {
   margin: 0 auto;
 }
 
-.container--top-padding {
-  padding: 1em 1em 0;
-}
-
 .logo {
   max-width: 10em;
 }
@@ -1080,29 +1073,72 @@ tfoot {
   color: #6cc;
 }
 
+.container--teal {
+  padding: 2em 0 0;
+}
+.container--teal p {
+  padding: 0 1.5em;
+}
+
 .img--skyline {
   display: block;
-  bottom: 0;
-  border: 0;
-  height: auto;
-  max-width: 100%;
   position: relative;
   bottom: -1px;
 }
 
-.wrap--dkgreen {
-  background: #003333 url(/dist/img/pattern.svg);
-  background-size: cover;
+.wrap--medgreen {
+  background: #207c7f;
   color: #fff;
   font-size: 18px;
   line-height: 1.5;
+  position: relative;
+  overflow: hidden;
 }
 
-.wrap--medgreen {
-  background: #56b1b1;
-  color: #003333;
+.container--medgreen {
+  padding: 1.5em 1em 80%;
+}
+
+.img--desktop {
+  position: absolute;
+  bottom: 0;
+  left: 1em;
+  max-height: 90%;
+  max-width: 90%;
+}
+
+.img--laptop {
+  position: absolute;
+  bottom: 0;
+  right: -25%;
+  max-height: 70%;
+  max-width: 70%;
+}
+
+.img--tablet {
+  position: absolute;
+  bottom: 0;
+  left: -3%;
+  max-height: 25%;
+  max-width: 25%;
+}
+
+.img--mobile {
+  position: absolute;
+  bottom: 0;
+  left: 18%;
+  max-height: 15%;
+  max-width: 15%;
+}
+
+.wrap--dkgreen {
+  background: #0f6263;
+  color: #eee;
   font-size: 18px;
   line-height: 1.5;
+}
+.wrap--dkgreen h2 {
+  text-shadow: 2px 2px 0 #093334;
 }
 
 .wrap--light {
@@ -1110,6 +1146,14 @@ tfoot {
   color: #282828;
   font-size: 18px;
   line-height: 1.5;
+  overflow: hidden;
+}
+
+.img--lightbulb {
+  float: right;
+  max-height: 60%;
+  max-width: 60%;
+  margin: -10% -35% 0 4%;
 }
 
 .wrap--red {
@@ -1117,6 +1161,7 @@ tfoot {
   color: #eee;
   font-size: 18px;
   line-height: 1.5;
+  margin: -30% 0 0;
 }
 
 .wrap--dark {
