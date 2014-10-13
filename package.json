@@ -1,4 +1,8 @@
 {
+  "repository": {
+    "type": "git",
+    "url": "ssh://hb/home/hoverboard/hoverboardstudios.com/gitrepo"
+  },
   "name": "Hoverboard",
   "version": "1.0.0",
   "description": "A website built by Hoverboard Studios",

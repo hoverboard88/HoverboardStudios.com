@@ -784,10 +784,12 @@ input[type="time"],
 input[type="url"],
 textarea {
   background: #fff;
+  -webkit-appearance: none;
   border: 0;
   box-shadow: 4px 4px 0 rgba(104, 14, 15, 0.8);
   padding: 0.5em;
   max-width: 400px;
+  border-radius: none;
   width: 100%;
 }
 input[type="text"]:focus,
