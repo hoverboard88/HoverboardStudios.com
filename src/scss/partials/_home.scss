@@ -17,10 +17,13 @@
 	a {
 		position: relative;
 		display: block;
-    padding: 0.5em 1em;
+    padding: 0.5em;
 		color: #003333;
 		&:active, &:hover, &:focus {
 			color: #66CCCC;
+		}
+		@include breakpoint(40em) {
+			padding: 0.5em 1em;
 		}
 	}
 }
@@ -118,22 +121,32 @@
 	color: #282828;
 	font-size: 18px;
 	line-height: 1.5;
-	overflow: hidden;
 }
 
 .img--lightbulb {
-	float: right;
-	max-height: 60%;
-	max-width: 60%;
-	margin: -10% -35% 0 4%;
+	// float: right;
+	// max-height: 60%;
+	// max-width: 60%;
+	// margin: -10% -35% 0 4%;
+	position: absolute;
+	bottom: -120px;
+	right: -30%;
+	width: 65%;
+	max-height: none;
+	@include breakpoint(30em) {
+		background: green;
+	}
+	// there will probably have to be a few breakpoints to get this to look good at every width. -RT
 }
-
+.lightbulb-text {
+	padding-right: 35%;
+}
 .wrap--red {
 	background: #cc3333;
 	color: #eee;
 	font-size: 18px;
 	line-height: 1.5;
-	margin: -30% 0 0;
+	// margin: -30% 0 0;
 }
 
 .wrap--dark {

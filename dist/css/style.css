@@ -544,10 +544,6 @@ img {
   border: 0;
 }
 
-img[src*=".svg"] {
-  max-height: 100%;
-}
-
 h1, h2, h3, h4, h5, h6 {
   font-family: "PlutoSansLight", sans-serif;
   font-weight: normal;
@@ -1048,11 +1044,16 @@ tfoot {
 .menu--main a {
   position: relative;
   display: block;
-  padding: 0.5em 1em;
+  padding: 0.5em;
   color: #003333;
 }
 .menu--main a:active, .menu--main a:hover, .menu--main a:focus {
   color: #66CCCC;
+}
+@media (min-width: 40em) {
+  .menu--main a {
+    padding: 0.5em 1em;
+  }
 }
 
 .wrap--tiled {
@@ -1148,14 +1149,23 @@ tfoot {
   color: #282828;
   font-size: 18px;
   line-height: 1.5;
-  overflow: hidden;
 }
 
 .img--lightbulb {
-  float: right;
-  max-height: 60%;
-  max-width: 60%;
-  margin: -10% -35% 0 4%;
+  position: absolute;
+  bottom: -120px;
+  right: -30%;
+  width: 65%;
+  max-height: none;
+}
+@media (min-width: 30em) {
+  .img--lightbulb {
+    background: green;
+  }
+}
+
+.lightbulb-text {
+  padding-right: 35%;
 }
 
 .wrap--red {
@@ -1163,7 +1173,6 @@ tfoot {
   color: #eee;
   font-size: 18px;
   line-height: 1.5;
-  margin: -30% 0 0;
 }
 
 .wrap--dark {

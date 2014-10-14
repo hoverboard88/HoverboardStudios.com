@@ -31,3 +31,7 @@
   &:-ms-input-placeholder { @content; }
   &::-webkit-input-placeholder { @content; }
 }
+
+@mixin breakpoint($point) {
+  @media (min-width: $point) { @content ; }
+}
