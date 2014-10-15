@@ -138,7 +138,7 @@
 }
 @include breakpoint(63em) {
 	.container--medgreen {
-		padding-right: 45%;
+		padding-right: 41%;
 	}
 	.devices {
 		width: 40%;
@@ -148,57 +148,28 @@
 	position: absolute;
 	bottom: 0;
 	left: 4%;
-	// max-height: 90%;
 	max-width: 90%;
-	// @include breakpoint(40em) {
-	// 	bottom: 0;
-	// 	right: 0;
-	// 	left: auto;
-	// }
 }
 
 .img--laptop {
 	position: absolute;
 	bottom: 0;
 	right: -25%;
-	// max-height: 70%;
 	max-width: 70%;
-	// @include breakpoint(40em) {
-	// 	bottom: 0;
-	// 	right: -20%;
-	// 	max-height: 50%;
-	// 	max-width: 100%;
-	// }
 }
 
 .img--tablet {
 	position: absolute;
 	bottom: 0;
 	left: -3%;
-	// max-height: 25%;
 	max-width: 25%;
-	// @include breakpoint(40em) {
-	// 	bottom: 0;
-	// 	right: 0;
-	// 	left: auto;
-	// 	max-height: 40%;
-	// 	max-width: 100%;
-	// }
 }
 
 .img--mobile {
 	position: absolute;
 	bottom: 0;
 	left: 18%;
-	// max-height: 15%;
 	max-width: 15%;
-	// @include breakpoint(40em) {
-	// 	bottom: 0;
-	// 	right: 0;
-	// 	left: auto;
-	// 	max-height: 20%;
-	// 	max-width: 100%;
-	// }
 }
 
 .wrap--dkgreen {
@@ -217,10 +188,6 @@
 }
 
 .img--lightbulb {
-	// float: right;
-	// max-height: 60%;
-	// max-width: 60%;
-	// margin: -10% -35% 0 4%;
 	position: absolute;
 	top: 70px;
 	right: -30%;
