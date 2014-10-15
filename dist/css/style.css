@@ -323,7 +323,6 @@ h1 {
   font-size: 42px;
   font-size: 2.625rem;
   line-height: 1.14286em;
-  margin-bottom: 24px;
   margin-top: 0;
 }
 
@@ -331,7 +330,6 @@ h2 {
   font-size: 30px;
   font-size: 1.875rem;
   line-height: 1.6em;
-  margin-bottom: 24px;
   margin-top: 0;
 }
 
@@ -339,7 +337,6 @@ h3 {
   font-size: 22px;
   font-size: 1.375rem;
   line-height: 1.09091em;
-  margin-bottom: 24px;
   margin-top: 0;
 }
 
@@ -347,7 +344,6 @@ h4 {
   font-size: 20px;
   font-size: 1.25rem;
   line-height: 1.2em;
-  margin-bottom: 24px;
   margin-top: 0;
 }
 
@@ -355,7 +351,6 @@ h5 {
   font-size: 16px;
   font-size: 1rem;
   line-height: 1.5em;
-  margin-bottom: 24px;
   margin-top: 0;
 }
 
@@ -363,7 +358,6 @@ h6 {
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 1.71429em;
-  margin-bottom: 24px;
   margin-top: 0;
 }
 
@@ -895,7 +889,7 @@ textarea {
 .container {
   margin-left: auto;
   margin-right: auto;
-  padding: 1em;
+  padding: 5%;
   max-width: 80em;
   position: relative;
 }
@@ -936,7 +930,6 @@ hr {
   font-size: 10px;
   font-size: 0.625rem;
   line-height: 2.4em;
-  margin-bottom: 24px;
 }
 
 .display-font {
@@ -999,7 +992,6 @@ th {
   font-size: 18px;
   font-size: 1.125rem;
   line-height: 1.33333em;
-  margin-bottom: 24px;
 }
 
 tr:nth-child(2n) {
@@ -1050,6 +1042,10 @@ tfoot {
     display: block;
   }
 
+  .logo {
+    max-width: 6em;
+  }
+
   .menu--main {
     -webkit-box-flex: 1;
     -webkit-flex: 1 0 0;
@@ -1065,6 +1061,8 @@ tfoot {
 }
 .menu--main li {
   font-size: 18px;
+  font-size: 1.125rem;
+  line-height: 1.33333em;
   display: inline-block;
 }
 .menu--main a {
@@ -1076,9 +1074,11 @@ tfoot {
 .menu--main a:active, .menu--main a:hover, .menu--main a:focus {
   color: #66CCCC;
 }
-@media (min-width: 40em) {
+@media (min-width: 64em) {
   .menu--main a {
     padding: 0.5em 1em;
+    font-size: 24px;
+    font-size: 1.5rem;
   }
 }
 
@@ -1108,6 +1108,20 @@ tfoot {
 .container--teal p {
   padding: 0 1.5em;
 }
+@media (min-width: 40em) {
+  .container--teal p {
+    font-size: 28px;
+    font-size: 1.75rem;
+    line-height: 1.71429em;
+  }
+}
+@media (min-width: 50em) {
+  .container--teal p {
+    font-size: 32px;
+    font-size: 2rem;
+    line-height: 1.5em;
+  }
+}
 
 .img--skyline {
   display: block;
@@ -1119,16 +1133,25 @@ tfoot {
   background: #207c7f;
   color: #fff;
   font-size: 18px;
+  font-size: 1.125rem;
+  line-height: 1.33333em;
   line-height: 1.5;
   overflow: hidden;
   position: relative;
 }
-
-.container--medgreen {
-  padding: 1.5em 1em 80%;
+@media (min-width: 63em) {
+  .wrap--medgreen {
+    font-size: 25px;
+    font-size: 1.5625rem;
+    line-height: 1.92em;
+  }
 }
 
-@media (min-width: 50em) {
+.container--medgreen {
+  padding-bottom: 80%;
+}
+
+@media (min-width: 45em) {
   .devices {
     position: absolute;
     top: 0;
@@ -1138,14 +1161,41 @@ tfoot {
   }
 
   .container--medgreen {
-    padding: 1.5em 55% 1em 1em;
+    padding-right: 55%;
+    padding-bottom: 0;
+  }
+}
+@media (min-width: 55em) {
+  .container--medgreen {
+    padding-right: 50%;
+  }
+
+  .devices {
+    width: 40%;
+  }
+}
+@media (min-width: 60em) {
+  .container--medgreen {
+    padding-right: 40%;
+  }
+
+  .devices {
+    width: 35%;
+  }
+}
+@media (min-width: 63em) {
+  .container--medgreen {
+    padding-right: 45%;
+  }
+
+  .devices {
+    width: 40%;
   }
 }
 .img--desktop {
   position: absolute;
   bottom: 0;
-  left: 1em;
-  max-height: 90%;
+  left: 4%;
   max-width: 90%;
 }
 
@@ -1153,7 +1203,6 @@ tfoot {
   position: absolute;
   bottom: 0;
   right: -25%;
-  max-height: 70%;
   max-width: 70%;
 }
 
@@ -1161,7 +1210,6 @@ tfoot {
   position: absolute;
   bottom: 0;
   left: -3%;
-  max-height: 25%;
   max-width: 25%;
 }
 
@@ -1169,7 +1217,6 @@ tfoot {
   position: absolute;
   bottom: 0;
   left: 18%;
-  max-height: 15%;
   max-width: 15%;
 }
 
@@ -1177,7 +1224,16 @@ tfoot {
   background: #0f6263;
   color: #eee;
   font-size: 18px;
+  font-size: 1.125rem;
+  line-height: 1.33333em;
   line-height: 1.5;
+}
+@media (min-width: 63em) {
+  .wrap--dkgreen {
+    font-size: 25px;
+    font-size: 1.5625rem;
+    line-height: 1.92em;
+  }
 }
 .wrap--dkgreen h2 {
   text-shadow: 2px 2px 0 #093334;
@@ -1187,7 +1243,16 @@ tfoot {
   background: #eee;
   color: #282828;
   font-size: 18px;
+  font-size: 1.125rem;
+  line-height: 1.33333em;
   line-height: 1.5;
+}
+@media (min-width: 63em) {
+  .wrap--light {
+    font-size: 25px;
+    font-size: 1.5625rem;
+    line-height: 1.92em;
+  }
 }
 
 .img--lightbulb {
@@ -1220,7 +1285,16 @@ tfoot {
   background: #cc3333;
   color: #eee;
   font-size: 18px;
+  font-size: 1.125rem;
+  line-height: 1.33333em;
   line-height: 1.5;
+}
+@media (min-width: 63em) {
+  .wrap--red {
+    font-size: 25px;
+    font-size: 1.5625rem;
+    line-height: 1.92em;
+  }
 }
 
 @media (min-width: 21em) {
@@ -1243,9 +1317,16 @@ tfoot {
 }
 
 .container--footer {
-  padding: 20px;
-  max-width: 800px;
-  margin: 0 auto;
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 1.71429em;
+}
+@media (min-width: 63em) {
+  .container--footer {
+    font-size: 16px;
+    font-size: 1rem;
+    line-height: 1.5em;
+  }
 }
 
 @media (min-width: 25em) {

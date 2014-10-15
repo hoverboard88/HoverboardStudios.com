@@ -1,4 +1,4 @@
-@mixin font-size($font-size, $line-height: true, $margin: true ){
+@mixin font-size($font-size, $line-height: true, $margin: false ){
   font-size: $font-size;
   font-size: ($font-size / $base--font-size) * 1rem;
 

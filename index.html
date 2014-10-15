@@ -23,7 +23,7 @@
     <div class="wrap wrap--tiled">
       <header class="container container--header centered">
 
-        <h1 class="single-spaced logo-h1"><a href="/"><img class="logo img--no-border" src="/dist/img/hoverboard.svg" onerror="this.src=hoverboard.png" alt="Hoverboard"></a></h1>
+        <h1 class="single-spaced logo-h1"><a href="/"><img class="logo" src="/dist/img/hoverboard.svg" onerror="this.src=hoverboard.png" alt="Hoverboard"></a></h1>
 
         <nav class="menu menu--main">
           <ul>
@@ -113,16 +113,16 @@
             <!-- <input type="hidden" name="DEVELOPER" value="TRUE"/> -->
             <input type="hidden" id="FIRST_NAME" name="FIRST_NAME">
 
-            <label class="label--required" for="LAST_NAME">Name <span class="required">(required)</span></label>
+            <label for="LAST_NAME">Name <span class="span--required">(required)</span></label>
             <input type="text" required id="LAST_NAME" name="LAST_NAME">
 
-            <label class="label--required" for="EMAIL">Email <span class="required">(required)</span></label>
+            <label for="EMAIL">Email <span class="span--required">(required)</span></label>
             <input type="text" required id="EMAIL" name="EMAIL">
 
             <label for="PHONE">Phone</label>
             <input type="tel" id="PHONE" name="PHONE">
 
-            <label class="label--required" for="CF_Budget">Project Budget <span class="required">(required)</span></label>
+            <label for="CF_Budget">Project Budget <span class="span--required">(required)</span></label>
             <select id="CF_Budget" required name="CUSTOMFIELD[Budget]">
               <option>Budget Amount</option>
               <option value="4000">0 - $4,000</option>
@@ -136,7 +136,7 @@
             <label for="NOTE">Tell us about your project:</label>
             <textarea id="NOTE" name="NOTE"></textarea>
 
-            <input type="submit" value="Submit"/>
+            <input class="single-spaced" type="submit" value="Submit"/>
 
           </form>
 
@@ -146,7 +146,7 @@
 
     <div class="wrap--dark">
 
-      <footer class="container">
+      <footer class="container container--footer">
 
         <h2>Contact Us</h2>
 
