@@ -91,7 +91,7 @@ body,
 textarea {
   font-family: $base--font-family;
   font-weight: $font-weight__normal;
-  @include font-size($base--font-size, true);
+  @include font-size($base--font-size, true, false);
 }
 
 // Addresses margins handled incorrectly in IE6/7

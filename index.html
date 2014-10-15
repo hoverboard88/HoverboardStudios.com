@@ -54,10 +54,12 @@
 
         <p>We utilize user-friendly content management systems, such as Wordpress, so that our clients can quickly and easily edit site content.</p>
 
-        <img class="img--desktop" src="/dist/img/desktop.svg" alt="Desktop">
-        <img class="img--laptop" src="/dist/img/laptop.svg" alt="Laptop">
-        <img class="img--tablet" src="/dist/img/tablet.svg" alt="Tablet">
-        <img class="img--mobile" src="/dist/img/mobile.svg" alt="Mobile">
+        <div class="devices">
+          <img class="img--desktop" src="/dist/img/desktop.svg" alt="Desktop">
+          <img class="img--laptop" src="/dist/img/laptop.svg" alt="Laptop">
+          <img class="img--tablet" src="/dist/img/tablet.svg" alt="Tablet">
+          <img class="img--mobile" src="/dist/img/mobile.svg" alt="Mobile">
+        </div>
 
       </div><!-- .container -->
     </div><!-- .wrap -->
@@ -99,7 +101,7 @@
 
           <h2>Get In Touch</h2>
 
-          <p>Do you have a project/product in mind? Did you just wrap up a project and want a second set of eyes to take a look?</p>
+          <p class="work__blurb">Do you have a project/product in mind? Did you just wrap up a project and want a second set of eyes to take a look?</p>
 
           <p>We just need a few things from you:</p>
 
@@ -148,20 +150,11 @@
 
         <h2>Contact Us</h2>
 
-        <nav class="menu menu--secondary">
-          <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#work">Work</a></li>
-            <li><a href="/blog/">Blog</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </nav>
-
         <div itemscope itemtype="http://schema.org/LocalBusiness">
           <h3 class="hidden" itemprop="name">Hoverboard Studios</h3>
           <span class="hidden" itemprop="description">Hoverboard is a design and development studio that creates innovative digital experiences to fit the needs of engaged clients.</span>
-          <div class="columns">
-            <div class="column-3" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+          <div class="addresses">
+            <div class="addresses__address" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
               <h4 class="single-spaced">Minneapolis</h4>
               <p>
                 <span itemprop="streetAddress">3948 Yosemite Ave. S</span><br>
@@ -169,9 +162,8 @@
                 <span itemprop="addressRegion">MN</span>
                 <span itemprop="postalCode">55416</span>
               </p>
-              <p><strong>Phone:</strong> <span itemprop="telephone">612-351-2373</span></p>
             </div>
-            <div class="column-3" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+            <div class="addresses__address" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
               <h4 class="single-spaced">Winston-Salem</h4>
               <p>
                 <span itemprop="streetAddress">1069 S Hawthorne Rd</span><br>
@@ -180,10 +172,20 @@
                 <span itemprop="postalCode">27103</span>
               </p>
             </div>
-          </div><!-- .columns -->
+            <p class="addresses__phone"><strong>Phone:</strong> <span itemprop="telephone">612-351-2373</span></p>
+          </div><!-- .addresses -->
         </div>
 
-        <p class="single-spaced">©2014 Hoverboard. All rights reserved. <a href="https://plus.google.com/101904781934699073627" rel="publisher">Google+ (MN)</a> | <a href="https://plus.google.com/114769429182618988844" rel="publisher">Google+ (NC)</a> | <a href="https://twitter.com/hoverboard88">Twitter</a> | <a href="https://www.facebook.com/hoverboardstudios">Facebook</a></p>
+        <nav class="menu menu--secondary menu--horizontal">
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#work">Work</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+
+        <p class="fine-print single-spaced">©2014 Hoverboard. All rights reserved. <a href="https://plus.google.com/101904781934699073627" rel="publisher">Google+ (MN)</a> | <a href="https://plus.google.com/114769429182618988844" rel="publisher">Google+ (NC)</a> | <a href="https://twitter.com/hoverboard88">Twitter</a> | <a href="https://www.facebook.com/hoverboardstudios">Facebook</a></p>
 
       </footer>
     </div>

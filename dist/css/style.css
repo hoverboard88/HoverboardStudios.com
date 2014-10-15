@@ -303,7 +303,6 @@ textarea {
   font-size: 16px;
   font-size: 1rem;
   line-height: 1.5em;
-  margin-bottom: 24px;
 }
 
 body {
@@ -570,19 +569,15 @@ a:active {
 .menu ul, .menu ol {
   list-style: none;
   list-style-image: none;
-  padding: 0;
+  padding: 0 0 24px;
   margin: 0;
 }
 .menu.menu--spaced a {
   padding: 10px;
 }
-@media (max-width: 450px) {
-  .menu.menu--horizontal li {
-    display: inline-block;
-  }
-}
 .menu.menu--horizontal li {
-  display: block;
+  display: inline-block;
+  padding-right: 10px;
 }
 .menu a {
   text-decoration: none;
@@ -1037,6 +1032,9 @@ tfoot {
 .menu--main {
   text-align: center;
 }
+.menu--main ul {
+  padding-bottom: 0;
+}
 .menu--main li {
   font-size: 18px;
   display: inline-block;
@@ -1094,14 +1092,27 @@ tfoot {
   color: #fff;
   font-size: 18px;
   line-height: 1.5;
-  position: relative;
   overflow: hidden;
+  position: relative;
 }
 
 .container--medgreen {
   padding: 1.5em 1em 80%;
 }
 
+@media (min-width: 50em) {
+  .devices {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+  }
+
+  .container--medgreen {
+    padding: 1.5em 55% 1em 1em;
+  }
+}
 .img--desktop {
   position: absolute;
   bottom: 0;
@@ -1153,14 +1164,23 @@ tfoot {
 
 .img--lightbulb {
   position: absolute;
-  bottom: -120px;
+  top: 70px;
   right: -30%;
   width: 65%;
   max-height: none;
 }
+@media (min-width: 25em) {
+  .img--lightbulb {
+    width: 55%;
+    right: -20%;
+    top: 50px;
+  }
+}
 @media (min-width: 30em) {
   .img--lightbulb {
-    background: green;
+    width: 55%;
+    right: -20%;
+    top: 50px;
   }
 }
 
@@ -1173,6 +1193,17 @@ tfoot {
   color: #eee;
   font-size: 18px;
   line-height: 1.5;
+}
+
+@media (min-width: 21em) {
+  .work__blurb {
+    padding-right: 20%;
+  }
+}
+@media (min-width: 21em) and (min-width: 35em) {
+  .work__blurb {
+    padding-right: 30%;
+  }
 }
 
 .wrap--dark {
@@ -1189,6 +1220,25 @@ tfoot {
   margin: 0 auto;
 }
 
+@media (min-width: 25em) {
+  .addresses {
+    float: left;
+    width: 100%;
+  }
+
+  .addresses__address {
+    float: left;
+    width: 50%;
+    padding-right: 10px;
+  }
+}
+@media (min-width: 45em) {
+  .addresses__address, .addresses__phone {
+    float: left;
+    width: 33%;
+    padding-right: 10px;
+  }
+}
 .capsule-crm-form {
   text-align: left;
   margin: 0 auto;

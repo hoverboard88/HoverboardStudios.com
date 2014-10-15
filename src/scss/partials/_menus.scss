@@ -2,20 +2,16 @@
   ul, ol {
     list-style: none;
     list-style-image: none;
-    padding: 0;
+    padding: 0 0 $base--spacing;
     margin: 0;
   }
   &.menu--spaced a {
     padding: 10px;
   }
   &.menu--horizontal {
-    @media (max-width: 450px) {
-      li {
-        display: inline-block;
-      }
-    }
     li {
-      display: block;
+      display: inline-block;
+      padding-right: 10px;
     }
   }
   a {

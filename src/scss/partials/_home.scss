@@ -10,6 +10,9 @@
 
 .menu--main {
 	text-align: center;
+	ul {
+		padding-bottom: 0;
+	}
 	li {
 		font-size: 18px;
 		display: inline-block;
@@ -66,20 +69,36 @@
 	color: #fff;
 	font-size: 18px;
 	line-height: 1.5;
-	position: relative;
 	overflow: hidden;
+	position: relative;
 }
 
 .container--medgreen {
 	padding: 1.5em 1em 80%;
 }
-
+@include breakpoint(50em) {
+	.devices {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 50%;
+		height: 100%;
+	}
+	.container--medgreen {
+		padding: 1.5em 55% 1em 1em;
+	}
+}
 .img--desktop {
 	position: absolute;
 	bottom: 0;
 	left: 1em;
 	max-height: 90%;
 	max-width: 90%;
+	// @include breakpoint(40em) {
+	// 	bottom: 0;
+	// 	right: 0;
+	// 	left: auto;
+	// }
 }
 
 .img--laptop {
@@ -88,6 +107,12 @@
 	right: -25%;
 	max-height: 70%;
 	max-width: 70%;
+	// @include breakpoint(40em) {
+	// 	bottom: 0;
+	// 	right: -20%;
+	// 	max-height: 50%;
+	// 	max-width: 100%;
+	// }
 }
 
 .img--tablet {
@@ -96,6 +121,13 @@
 	left: -3%;
 	max-height: 25%;
 	max-width: 25%;
+	// @include breakpoint(40em) {
+	// 	bottom: 0;
+	// 	right: 0;
+	// 	left: auto;
+	// 	max-height: 40%;
+	// 	max-width: 100%;
+	// }
 }
 
 .img--mobile {
@@ -104,6 +136,13 @@
 	left: 18%;
 	max-height: 15%;
 	max-width: 15%;
+	// @include breakpoint(40em) {
+	// 	bottom: 0;
+	// 	right: 0;
+	// 	left: auto;
+	// 	max-height: 20%;
+	// 	max-width: 100%;
+	// }
 }
 
 .wrap--dkgreen {
@@ -129,12 +168,19 @@
 	// max-width: 60%;
 	// margin: -10% -35% 0 4%;
 	position: absolute;
-	bottom: -120px;
+	top: 70px;
 	right: -30%;
 	width: 65%;
 	max-height: none;
+	@include breakpoint(25em) {
+		width: 55%;
+		right: -20%;
+		top: 50px;
+	}
 	@include breakpoint(30em) {
-		background: green;
+		width: 55%;
+		right: -20%;
+		top: 50px;
 	}
 	// there will probably have to be a few breakpoints to get this to look good at every width. -RT
 }
@@ -149,6 +195,15 @@
 	// margin: -30% 0 0;
 }
 
+.work__blurb {
+	@include breakpoint(21em) {
+		padding-right: 20%;
+		@include breakpoint(35em) {
+			padding-right: 30%;
+		}
+	}
+}
+
 .wrap--dark {
 	background: #222;
 	color: #8757b5;
@@ -161,6 +216,26 @@
 	padding: 20px;
 	max-width: 800px;
 	margin: 0 auto;
+}
+
+@include breakpoint (25em) {
+	.addresses {
+		float: left;
+		width: 100%;
+	}
+	.addresses__address {
+		float: left;
+		width: 50%;
+		padding-right: 10px;
+	}
+}
+
+@include breakpoint (45em) {
+	.addresses__address, .addresses__phone {
+		float: left;
+		width: 33%;
+		padding-right: 10px;
+	}
 }
 
 .capsule-crm-form {
