@@ -889,9 +889,19 @@ textarea {
 .container {
   margin-left: auto;
   margin-right: auto;
-  padding: 5%;
-  max-width: 80em;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 1.5em;
+  max-width: 1200px;
+  padding: 1em;
   position: relative;
+}
+@media (min-width: 50em) {
+  .container {
+    font-size: 25px;
+    font-size: 1.5625rem;
+    line-height: 1.92em;
+  }
 }
 .container.container--no-padding {
   padding-left: 0;
@@ -1074,7 +1084,7 @@ tfoot {
 .menu--main a:active, .menu--main a:hover, .menu--main a:focus {
   color: #66CCCC;
 }
-@media (min-width: 64em) {
+@media (min-width: 67em) {
   .menu--main a {
     padding: 0.5em 1em;
     font-size: 24px;
@@ -1103,10 +1113,8 @@ tfoot {
 }
 
 .container--teal {
-  padding: 2em 0 0;
-}
-.container--teal p {
-  padding: 0 1.5em;
+  padding-top: 2em;
+  padding-bottom: 0;
 }
 @media (min-width: 40em) {
   .container--teal p {
@@ -1132,23 +1140,14 @@ tfoot {
 .wrap--medgreen {
   background: #207c7f;
   color: #fff;
-  font-size: 18px;
-  font-size: 1.125rem;
-  line-height: 1.33333em;
   line-height: 1.5;
   overflow: hidden;
   position: relative;
 }
-@media (min-width: 63em) {
-  .wrap--medgreen {
-    font-size: 25px;
-    font-size: 1.5625rem;
-    line-height: 1.92em;
-  }
-}
 
 .container--medgreen {
   padding-bottom: 80%;
+  min-height: 250px;
 }
 
 @media (min-width: 45em) {
@@ -1156,12 +1155,12 @@ tfoot {
     position: absolute;
     top: 0;
     right: 0;
-    width: 50%;
+    width: 40%;
     height: 100%;
   }
 
   .container--medgreen {
-    padding-right: 55%;
+    padding-right: 45%;
     padding-bottom: 0;
   }
 }
@@ -1223,17 +1222,7 @@ tfoot {
 .wrap--dkgreen {
   background: #0f6263;
   color: #eee;
-  font-size: 18px;
-  font-size: 1.125rem;
-  line-height: 1.33333em;
   line-height: 1.5;
-}
-@media (min-width: 63em) {
-  .wrap--dkgreen {
-    font-size: 25px;
-    font-size: 1.5625rem;
-    line-height: 1.92em;
-  }
 }
 .wrap--dkgreen h2 {
   text-shadow: 2px 2px 0 #093334;
@@ -1242,17 +1231,7 @@ tfoot {
 .wrap--light {
   background: #eee;
   color: #282828;
-  font-size: 18px;
-  font-size: 1.125rem;
-  line-height: 1.33333em;
   line-height: 1.5;
-}
-@media (min-width: 63em) {
-  .wrap--light {
-    font-size: 25px;
-    font-size: 1.5625rem;
-    line-height: 1.92em;
-  }
 }
 
 .img--lightbulb {
@@ -1284,17 +1263,7 @@ tfoot {
 .wrap--red {
   background: #cc3333;
   color: #eee;
-  font-size: 18px;
-  font-size: 1.125rem;
-  line-height: 1.33333em;
   line-height: 1.5;
-}
-@media (min-width: 63em) {
-  .wrap--red {
-    font-size: 25px;
-    font-size: 1.5625rem;
-    line-height: 1.92em;
-  }
 }
 
 @media (min-width: 21em) {
@@ -1316,19 +1285,6 @@ tfoot {
   color: #8757b5;
 }
 
-.container--footer {
-  font-size: 14px;
-  font-size: 0.875rem;
-  line-height: 1.71429em;
-}
-@media (min-width: 63em) {
-  .container--footer {
-    font-size: 16px;
-    font-size: 1rem;
-    line-height: 1.5em;
-  }
-}
-
 @media (min-width: 25em) {
   .addresses {
     float: left;
@@ -1339,6 +1295,12 @@ tfoot {
     float: left;
     width: 50%;
     padding-right: 10px;
+  }
+
+  .addresses, .fine-print, .menu--secondary {
+    font-size: 16px;
+    font-size: 1rem;
+    line-height: 1.5em;
   }
 }
 @media (min-width: 45em) {

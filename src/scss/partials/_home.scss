@@ -46,7 +46,7 @@
 		&:active, &:hover, &:focus {
 			color: #66CCCC;
 		}
-		@include breakpoint(64em) {
+		@include breakpoint(67em) {
 			padding: 0.5em 1em;
 			@include font-size(24px, false, false);
 		}
@@ -74,9 +74,10 @@
 }
 
 .container--teal {
-	padding: 2em 0 0;
+	padding-top: 2em;
+	padding-bottom: 0;
 	p {
-		padding: 0 1.5em;
+		// padding: 0 1.5em;
 		@include breakpoint (40em) {
 			@include font-size(28px);
 		}
@@ -95,18 +96,15 @@
 .wrap--medgreen {
 	background: #207c7f;
 	color: #fff;
-	@include font-size(18px);
-	@include breakpoint (63em) {
-		@include font-size(25px);
-	}
 	line-height: 1.5;
 	overflow: hidden;
 	position: relative;
 }
 
 .container--medgreen {
-	//inheriting padding: 5%; from _layout.scss
+	//inheriting padding: 1em; from _layout.scss
 	padding-bottom: 80%;
+	min-height: 250px; //so iMac doesn't get cut off
 }
 
 @include breakpoint(45em) {
@@ -114,11 +112,11 @@
 		position: absolute;
 		top: 0;
 		right: 0;
-		width: 50%;
+		width: 40%;
 		height: 100%;
 	}
 	.container--medgreen {
-		padding-right: 55%;
+		padding-right: 45%;
 		padding-bottom: 0;
 	}
 }
@@ -206,10 +204,6 @@
 .wrap--dkgreen {
 	background: #0f6263;
 	color: #eee;
-	@include font-size(18px);
-	@include breakpoint (63em) {
-		@include font-size(25px);
-	}
 	line-height: 1.5;
 	h2 {
 		text-shadow: 2px 2px 0 #093334;
@@ -219,10 +213,6 @@
 .wrap--light {
 	background: #eee;
 	color: #282828;
-	@include font-size(18px);
-	@include breakpoint (63em) {
-		@include font-size(25px);
-	}
 	line-height: 1.5;
 }
 
@@ -254,10 +244,6 @@
 .wrap--red {
 	background: #cc3333;
 	color: #eee;
-	@include font-size(18px);
-	@include breakpoint (63em) {
-		@include font-size(25px);
-	}
 	line-height: 1.5;
 	// margin: -30% 0 0;
 }
@@ -279,16 +265,6 @@
 	}
 }
 
-.container--footer {
-	// padding: 20px;
-	// max-width: 800px;
-	// margin: 0 auto;
-	@include font-size(14px);
-	@include breakpoint (63em) {
-		@include font-size(16px);
-	}
-}
-
 @include breakpoint (25em) {
 	.addresses {
 		float: left;
@@ -298,6 +274,9 @@
 		float: left;
 		width: 50%;
 		padding-right: 10px;
+	}
+	.addresses, .fine-print, .menu--secondary {
+		@include font-size(16px);
 	}
 }
 
