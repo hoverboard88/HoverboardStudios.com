@@ -895,9 +895,8 @@ textarea {
 .container {
   margin-left: auto;
   margin-right: auto;
-  padding-left: 12px;
-  padding-right: 12px;
-  max-width: 978px;
+  padding: 1em;
+  max-width: 80em;
   position: relative;
 }
 .container.container--no-padding {
@@ -1019,16 +1018,45 @@ tfoot {
   border-top: 1px solid #222222;
 }
 
-.container {
-  padding: 1em;
-  max-width: 80em;
-  margin: 0 auto;
-}
-
 .logo {
   max-width: 10em;
 }
 
+@media (min-width: 50em) {
+  .container--header {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+
+  .logo-h1 {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 0 0;
+        -ms-flex: 1 0 0;
+            flex: 1 0 0;
+    line-height: 0;
+  }
+  .logo-h1 a {
+    display: block;
+  }
+
+  .menu--main {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 0 0;
+        -ms-flex: 1 0 0;
+            flex: 1 0 0;
+  }
+}
 .menu--main {
   text-align: center;
 }

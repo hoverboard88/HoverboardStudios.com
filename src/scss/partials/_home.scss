@@ -1,11 +1,23 @@
-.container {
-	padding: 1em;
-	max-width: 80em;
-	margin: 0 auto;
-}
-
 .logo {
 	max-width: 10em;
+}
+
+@include breakpoint(50em) {
+	.container--header {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+	}
+	.logo-h1 {
+		flex: 1 0 0;
+		line-height: 0; // to get vertical align to work correctly
+		a {
+			display: block;
+		}
+	}
+	.menu--main {
+		flex: 1 0 0;
+	}
 }
 
 .menu--main {
