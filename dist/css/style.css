@@ -755,6 +755,10 @@ select {
   margin-bottom: 24px;
   cursor: pointer;
   z-index: 1;
+  padding: 10px;
+  font-size: 18px;
+  font-size: 1.125rem;
+  line-height: 1.33333em;
 }
 
 input[type="text"],

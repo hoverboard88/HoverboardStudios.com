@@ -52,6 +52,8 @@ select {
   margin-bottom: $base--spacing;
   cursor: pointer;
   z-index: 1;
+  padding: 10px;
+  @include font-size(18px);
 }
 input[type="text"],
 input[type="color"],
