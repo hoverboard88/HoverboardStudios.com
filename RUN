@@ -1,2 +1,6 @@
 #!/bin/bash
-python -m SimpleHTTPServer
+
+python -m SimpleHTTPServer 8080 &
+echo "opening localhost:8080 in browser."
+open http://localhost:8080 &
+gulp watch
