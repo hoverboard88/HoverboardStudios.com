@@ -40,12 +40,14 @@
     <div class="wrap wrap--hero">
       <div class="container container--hero centered">
 
-        <p>Hoverboard is a design and development studio that creates innovative digital experiences to fit the needs of engaged clients.</p>
+        <div class="content-block">
+          <p>Hoverboard is a design and development studio that creates innovative digital experiences to fit the needs of engaged clients.</p>
+        </div>
 
       </div><!-- .container -->
     </div><!-- .wrap -->
 
-    <div class="wrap wrap--content wrap--medgreen">
+    <div class="wrap wrap--content wrap--ltgreen">
       <div id="about" class="container container--who-we-are">
 
         <img class="img--desktop" src="/dist/img/desktop.svg" alt="Desktop">
@@ -61,90 +63,82 @@
       </div><!-- .container -->
     </div><!-- .wrap -->
 
-    <div class="wrap wrap--content wrap--dkgreen">
-      <div class="container">
+    <div class="wrap wrap--medgreen wrap--content">
+      <div class="container container--columns">
+        <div class="column--half">
+          <section class="container container--medgreen container--devices">
 
-        <section>
+            <h2>Why Us?</h2>
 
-          <h2>Why Us?</h2>
+            <p>We believe it is important to incorporate our clients into the development process from the beginning and continue a high level of collaboration throughout the project.</p>
 
-          <p>We believe it is important to incorporate our clients into the development process from the beginning and continue a high level of collaboration throughout the project.</p>
+            <p class="single-spaced">Our goal is to identify the needs and ensure we are creating the appropriate solutions for our clients. We work to create a positive experience for both the client and end user throughout the entire process so that together, we create something great.</p>
 
-          <p class="single-spaced">Our goal is to identify the needs and ensure we are creating the appropriate solutions for our clients. We work to create a positive experience for both the client and end user throughout the entire process so that together, we create something great.</p>
+            <div class="devices">
+              <img class="img--tablet" src="/dist/img/tablet.svg" alt="Tablet">
+              <img class="img--laptop" src="/dist/img/laptop.svg" alt="Laptop">
+              <img class="img--mobile" src="/dist/img/mobile.svg" alt="Mobile">
+            </div>
 
-          <div class="devices">
-            <img class="img--laptop" src="/dist/img/laptop.svg" alt="Laptop">
-            <img class="img--tablet" src="/dist/img/tablet.svg" alt="Tablet">
-            <img class="img--mobile" src="/dist/img/mobile.svg" alt="Mobile">
-          </div>
+          </section>
+        </div><!-- .column--half -->
+        <div class="column--half">
 
-        </section>
-
-      </div>
-    </div>
-    <div style="overflow: hidden;">
-      <div class="wrap wrap--content wrap--ltgreen">
-        <div class="container">
-
-          <section>
+          <section class="container container--dkgreen">
 
             <h2>Keeping it Small</h2>
 
-            <img class="img--lightbulb" src="/dist/img/lightbulb.svg" alt="Lightbulb">
+            <p class="single-spaced">We are a small, two-person studio. Our focus is to provide a hands-on experience that is dedicated to our client’s work. This provides our customers the benefit of a close, personal team.</p>
 
-            <p class="single-spaced lightbulb-text">We are a small, two-person studio. Our focus is to provide a hands-on experience that is dedicated to our client’s work. This provides our customers the benefit of a close, personal team.</p>
+          </section><!-- .container -->
 
-          </section><!-- .column-2 -->
+          <section id="contact" class="container container--red">
 
-        </div><!-- .container -->
-      </div><!-- .wrap -->
+            <h2>Get In Touch</h2>
 
-      <div class="wrap wrap--red">
-        <section id="contact" class="container">
+            <p class="work__blurb">Do you have a project/product in mind? Did you just wrap up a project and want a second set of eyes to take a look?</p>
 
-          <h2>Get In Touch</h2>
+            <p>We just need a few things from you:</p>
 
-          <p class="work__blurb">Do you have a project/product in mind? Did you just wrap up a project and want a second set of eyes to take a look?</p>
+            <form class="capsule-crm-form" onsubmit="return split_names();" action="https://service.capsulecrm.com/service/newlead" method="post">
+              <p id="alert__thank-you" class="alert__thank-you alert alert-success well">Thank you for contacting us! We'll be in touch.</p>
+              <input type="hidden" name="FORM_ID" value="527b4032-3da6-4716-8ced-67426a4aea61">
+              <input type="hidden" name="COMPLETE_URL" value="http://hoverboardstudios.com/#alert__thank-you">
 
-          <p>We just need a few things from you:</p>
+              <!-- <input type="hidden" name="DEVELOPER" value="TRUE"/> -->
+              <input type="hidden" id="FIRST_NAME" name="FIRST_NAME">
 
-          <form class="capsule-crm-form" onsubmit="return split_names();" action="https://service.capsulecrm.com/service/newlead" method="post">
-            <p id="alert__thank-you" class="alert__thank-you alert alert-success well">Thank you for contacting us! We'll be in touch.</p>
-            <input type="hidden" name="FORM_ID" value="527b4032-3da6-4716-8ced-67426a4aea61">
-            <input type="hidden" name="COMPLETE_URL" value="http://hoverboardstudios.com/#alert__thank-you">
+              <label for="LAST_NAME">Name <span class="span--required">(required)</span></label>
+              <input type="text" required id="LAST_NAME" name="LAST_NAME">
 
-            <!-- <input type="hidden" name="DEVELOPER" value="TRUE"/> -->
-            <input type="hidden" id="FIRST_NAME" name="FIRST_NAME">
+              <label for="EMAIL">Email <span class="span--required">(required)</span></label>
+              <input type="text" required id="EMAIL" name="EMAIL">
 
-            <label for="LAST_NAME">Name <span class="span--required">(required)</span></label>
-            <input type="text" required id="LAST_NAME" name="LAST_NAME">
+              <label for="PHONE">Phone</label>
+              <input type="tel" id="PHONE" name="PHONE">
 
-            <label for="EMAIL">Email <span class="span--required">(required)</span></label>
-            <input type="text" required id="EMAIL" name="EMAIL">
+              <label for="CF_Budget">Project Budget <span class="span--required">(required)</span></label>
+              <select id="CF_Budget" required name="CUSTOMFIELD[Budget]">
+                <option>Budget Amount</option>
+                <option value="4000">0 - $4,000</option>
+                <option value="8000">$4,000 - $8,000</option>
+                <option value="15000">$8,000 - $15,000</option>
+                <option value="30000">$15,000 - $30,000</option>
+                <option value="60000">$30,000 - $60,000</option>
+                <option value="60001">$60,000+</option>
+              </select>
 
-            <label for="PHONE">Phone</label>
-            <input type="tel" id="PHONE" name="PHONE">
+              <label for="NOTE">Tell us about your project:</label>
+              <textarea id="NOTE" name="NOTE"></textarea>
 
-            <label for="CF_Budget">Project Budget <span class="span--required">(required)</span></label>
-            <select id="CF_Budget" required name="CUSTOMFIELD[Budget]">
-              <option>Budget Amount</option>
-              <option value="4000">0 - $4,000</option>
-              <option value="8000">$4,000 - $8,000</option>
-              <option value="15000">$8,000 - $15,000</option>
-              <option value="30000">$15,000 - $30,000</option>
-              <option value="60000">$30,000 - $60,000</option>
-              <option value="60001">$60,000+</option>
-            </select>
+              <input class="single-spaced" type="submit" value="Submit"/>
 
-            <label for="NOTE">Tell us about your project:</label>
-            <textarea id="NOTE" name="NOTE"></textarea>
+            </form>
 
-            <input class="single-spaced" type="submit" value="Submit"/>
+          </section><!-- .container -->
 
-          </form>
-
-        </section><!-- .container -->
-      </div><!-- .wrap -->
+        </div><!-- .column--half -->
+      </div><!-- .container--columns -->
     </div>
 
     <div class="wrap--dark">

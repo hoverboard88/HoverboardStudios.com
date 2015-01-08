@@ -38,13 +38,16 @@
 
 @mixin who-we-are-offset ($offset, $img-width) {
   .content-block--who-we-are {
-    padding-left: $offset + 5%;
+    // padding-left: $offset;
+    float: right;
+    width: 100% - $offset;
   }
 
   .img--desktop {
     position: absolute;
     width: $img-width;
-    left: -$img-width + $offset;
+    right: 100% - $offset + $gutter - 1%; // subtracted -1% b/c imac was off for some reason.
+    // left: -$img-width + $offset - $gutter;
     bottom: 0;
   }
 }

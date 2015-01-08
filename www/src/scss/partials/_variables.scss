@@ -11,7 +11,7 @@ $border-box: true;
 /**
   * Colors
   */
- 
+
 // $testcolor: #ff0;
 
 /**
@@ -74,3 +74,19 @@ $dropdown__width: 700px;
 $dropdown__width--offset: $dropdown__width - 2;
 
 $legacy_support_for_ie: false;
+
+// Widths
+$width--1: 1/12 * 100%;
+$width--2: 2/12 * 100%;
+$width--3: 3/12 * 100%;
+$width--4: 4/12 * 100%;
+$width--5: 5/12 * 100%;
+$width--6: 6/12 * 100%;
+$width--7: 7/12 * 100%;
+$width--8: 8/12 * 100%;
+$width--9: 9/12 * 100%;
+$width--10: 10/12 * 100%;
+$width--11: 11/12 * 100%;
+$width--12: 12/12 * 100%;
+
+$gutter: 3%;

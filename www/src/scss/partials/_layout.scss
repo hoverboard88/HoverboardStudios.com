@@ -24,14 +24,14 @@
   margin-left: auto;
   margin-right: auto;
   @include font-size(16px);
-  @include breakpoint (50em) {
-    @include font-size(25px);
-  }
+  // @include breakpoint (50em) {
+  //   @include font-size(25px);
+  // }
   max-width: 1200px;
   //padding if to give breathing room to elements on smaller screens
   // padding-left: $base--spacing/2;
   // padding-right: $base--spacing/2;
-  padding: 1em .5em;
+  padding: $gutter;
   position: relative;
   &.container--no-padding {
     padding-left: 0;
