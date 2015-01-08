@@ -35,3 +35,16 @@
 @mixin breakpoint($point) {
   @media (min-width: $point) { @content ; }
 }
+
+@mixin who-we-are-offset ($offset, $img-width) {
+  .content-block--who-we-are {
+    padding-left: $offset + 5%;
+  }
+
+  .img--desktop {
+    position: absolute;
+    width: $img-width;
+    left: -$img-width + $offset;
+    bottom: 0;
+  }
+}

@@ -1,5 +1,8 @@
+.logo-h1 {
+	text-align: center;
+}
 .logo {
-	max-width: 10em;
+	max-width: 6em;
 }
 
 @include breakpoint(50em) {
@@ -7,19 +10,29 @@
 		display: flex;
 		flex-direction: row;
 		align-items: center;
+		padding-top: 0;
+		padding-bottom: 0;
 	}
 	.logo-h1 {
 		flex: 1 0 0;
 		line-height: 0; // to get vertical align to work correctly
+		text-align: left;
 		a {
 			display: block;
 		}
+		bottom: -15px;
+		position: relative;
 	}
 	.logo {
-		max-width: 6em;
+		max-width: 70%;
 	}
 	.menu--main {
 		flex: 1 0 0;
+	}
+}
+@include breakpoint(65em) {
+	.logo-h1 {
+		bottom: -25px;
 	}
 }
 
@@ -31,31 +44,72 @@
 
 .menu--main {
 	text-align: center;
+	@include breakpoint(50em) {
+		text-align: right;
+	}
 	ul {
 		padding-bottom: 0;
 	}
 	li {
-		@include font-size(18px);
+		@include font-size(16px);
 		display: inline-block;
+		@include breakpoint(67em) {
+			@include font-size(18px);
+		}
 	}
 	a {
 		position: relative;
 		display: block;
-    padding: 0.5em;
+    padding: .5em .75em;
 		color: #003333;
+		text-transform: uppercase;
+		font-weight: bold;
 		&:active, &:hover, &:focus {
 			color: #66CCCC;
 		}
 		@include breakpoint(67em) {
 			padding: 0.5em 1em;
-			@include font-size(24px, false, false);
 		}
 	}
 }
 
+.wrap--hero {
+	background: url(../img/skyline.jpg) center no-repeat;
+	background-size: cover;
+	padding-bottom: 2em;
+	@include breakpoint(27em) {
+		padding-bottom: 4em;
+		padding-top: 2em;
+	}
+	@include breakpoint(37em) {
+		padding-left: 3em;
+		padding-right: 3em;
+		padding-top: 1em;
+	}
+	@include breakpoint(53em) {
+		padding-left: 5em;
+		padding-right: 5em;
+		padding-bottom: 6em;
+	}
+	@include breakpoint(65em) {
+		// background-size: contain;
+		padding-top: 2em;
+		padding-bottom: 9em;
+	}
+	// MPLS background starts to get cropped funny at ~1200px. Need to come up with a solution for this. -RT
+}
+.container--hero {
+	max-width: 700px;
+	@include breakpoint(37em) {
+		@include font-size(24px, false, false);
+	}
+}
 .wrap--tiled {
-	background: #fff url(../../src/img/tiled-pattern.svg) center -5px repeat;
+	background: #fff url(../../src/img/tiled-pattern.svg); // using src because svgmin is messing up the svg.
 	background-size: contain;
+	box-shadow: 0 2px 18px rgba(#000, .25);
+	z-index: 1;
+	position: relative;
 }
 
 .wrap--teal {
@@ -85,26 +139,6 @@
 			@include font-size(32px);
 		}
 	}
-}
-
-.img--skyline {
-	display: block;
-	position: relative;
-	bottom: -1px; // Seems to fix 1px spacing at bottom of svg
-}
-
-.wrap--medgreen {
-	background: #207c7f;
-	color: #fff;
-	line-height: 1.5;
-	overflow: hidden;
-	position: relative;
-}
-
-.container--medgreen {
-	//inheriting padding: 1em; from _layout.scss
-	padding-bottom: 80%;
-	min-height: 250px; //so iMac doesn't get cut off
 }
 
 @include breakpoint(45em) {
@@ -144,48 +178,90 @@
 		width: 40%;
 	}
 }
-.img--desktop {
-	position: absolute;
-	bottom: 0;
-	left: 4%;
-	max-width: 90%;
-}
 
-.img--laptop {
-	position: absolute;
-	bottom: 0;
-	right: -25%;
-	max-width: 70%;
-}
+// .img--laptop {
+// 	position: absolute;
+// 	bottom: 0;
+// 	right: -25%;
+// 	max-width: 70%;
+// }
 
-.img--tablet {
-	position: absolute;
-	bottom: 0;
-	left: -3%;
-	max-width: 25%;
-}
+// .img--tablet {
+// 	position: absolute;
+// 	bottom: 0;
+// 	left: -3%;
+// 	max-width: 25%;
+// }
 
-.img--mobile {
-	position: absolute;
-	bottom: 0;
-	left: 18%;
-	max-width: 15%;
+// .img--mobile {
+// 	position: absolute;
+// 	bottom: 0;
+// 	left: 18%;
+// 	max-width: 15%;
+// }
+
+.wrap--content {
+	line-height: 1.5;
+	color: #fff;
+	h2 {
+		text-shadow: 2px 2px 0 #093334;
+	}
+	position: relative;
 }
 
 .wrap--dkgreen {
 	background: #0f6263;
-	color: #eee;
-	line-height: 1.5;
-	h2 {
-		text-shadow: 2px 2px 0 #093334;
-	}
+}
+.wrap--medgreen {
+	background: #207c7f;
+}
+.wrap--ltgreen {
+	background: #eee;
 }
 
-.wrap--light {
-	background: #eee;
-	color: #282828;
-	line-height: 1.5;
+.container--who-we-are {
+	position: relative;
 }
+
+@include who-we-are-offset(20%, 100%);
+
+@include breakpoint(25em) {
+	@include who-we-are-offset(30%, 75%);
+}
+
+@include breakpoint(35em) {
+	@include who-we-are-offset(40%, 75%);
+}
+
+@include breakpoint(40em) {
+	@include who-we-are-offset(40%, 65%);
+}
+
+@include breakpoint(45em) {
+	@include who-we-are-offset(40%, 60%);
+}
+
+// @include breakpoint(25em) {
+// 	.content-block--who-we-are {
+// 		padding-left: 30%;
+// 	}
+
+// 	.img--desktop {
+// 		width: 75%;
+// 		text-align: right;
+// 		left: -75% + 30%;
+// 	}
+// }
+
+// @include breakpoint(45em) {
+// 	.content-block--who-we-are {
+// 		padding-left: 40%;
+// 	}
+
+// 	.img--desktop {
+// 		left: -100% + 40%;
+// 	}
+// }
 
 .img--lightbulb {
 	position: absolute;

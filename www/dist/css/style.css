@@ -287,7 +287,7 @@ audio:not([controls]) {
 
 html, body {
   background: #fff;
-  color: #222222;
+  color: #222;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
 }
@@ -897,7 +897,7 @@ textarea {
   font-size: 1rem;
   line-height: 1.5em;
   max-width: 1200px;
-  padding: 1em;
+  padding: 1em .5em;
   position: relative;
 }
 @media (min-width: 50em) {
@@ -924,7 +924,7 @@ h1, h2, h3, h4, h5, h6 {
 
 hr {
   border: 0;
-  border-bottom: 1px solid #222222;
+  border-bottom: 1px solid #222;
   margin-top: -1px;
 }
 
@@ -1017,15 +1017,19 @@ tbody tr:last-child {
 }
 
 thead tr {
-  border-bottom: 1px solid #222222;
+  border-bottom: 1px solid #222;
 }
 
 tfoot {
-  border-top: 1px solid #222222;
+  border-top: 1px solid #222;
+}
+
+.logo-h1 {
+  text-align: center;
 }
 
 .logo {
-  max-width: 10em;
+  max-width: 6em;
 }
 
 @media (min-width: 50em) {
@@ -1043,6 +1047,8 @@ tfoot {
     -webkit-align-items: center;
         -ms-flex-align: center;
             align-items: center;
+    padding-top: 0;
+    padding-bottom: 0;
   }
 
   .logo-h1 {
@@ -1051,13 +1057,16 @@ tfoot {
         -ms-flex: 1 0 0;
             flex: 1 0 0;
     line-height: 0;
+    text-align: left;
+    bottom: -15px;
+    position: relative;
   }
   .logo-h1 a {
     display: block;
   }
 
   .logo {
-    max-width: 6em;
+    max-width: 70%;
   }
 
   .menu--main {
@@ -1067,23 +1076,42 @@ tfoot {
             flex: 1 0 0;
   }
 }
+@media (min-width: 65em) {
+  .logo-h1 {
+    bottom: -25px;
+  }
+}
 .menu--main {
   text-align: center;
+}
+@media (min-width: 50em) {
+  .menu--main {
+    text-align: right;
+  }
 }
 .menu--main ul {
   padding-bottom: 0;
 }
 .menu--main li {
-  font-size: 18px;
-  font-size: 1.125rem;
-  line-height: 1.33333em;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 1.5em;
   display: inline-block;
+}
+@media (min-width: 67em) {
+  .menu--main li {
+    font-size: 18px;
+    font-size: 1.125rem;
+    line-height: 1.33333em;
+  }
 }
 .menu--main a {
   position: relative;
   display: block;
-  padding: 0.5em;
+  padding: .5em .75em;
   color: #003333;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 .menu--main a:active, .menu--main a:hover, .menu--main a:focus {
   color: #66CCCC;
@@ -1091,14 +1119,57 @@ tfoot {
 @media (min-width: 67em) {
   .menu--main a {
     padding: 0.5em 1em;
+  }
+}
+
+.wrap--hero {
+  background: url(../img/skyline.jpg) center no-repeat;
+  background-size: cover;
+  padding-bottom: 2em;
+}
+@media (min-width: 27em) {
+  .wrap--hero {
+    padding-bottom: 4em;
+    padding-top: 2em;
+  }
+}
+@media (min-width: 37em) {
+  .wrap--hero {
+    padding-left: 3em;
+    padding-right: 3em;
+    padding-top: 1em;
+  }
+}
+@media (min-width: 53em) {
+  .wrap--hero {
+    padding-left: 5em;
+    padding-right: 5em;
+    padding-bottom: 6em;
+  }
+}
+@media (min-width: 65em) {
+  .wrap--hero {
+    padding-top: 2em;
+    padding-bottom: 9em;
+  }
+}
+
+.container--hero {
+  max-width: 700px;
+}
+@media (min-width: 37em) {
+  .container--hero {
     font-size: 24px;
     font-size: 1.5rem;
   }
 }
 
 .wrap--tiled {
-  background: white url(../../src/img/tiled-pattern.svg) center -5px repeat;
+  background: #fff url(../../src/img/tiled-pattern.svg);
   background-size: contain;
+  box-shadow: 0 2px 18px rgba(0, 0, 0, 0.25);
+  z-index: 1;
+  position: relative;
 }
 
 .wrap--teal {
@@ -1133,25 +1204,6 @@ tfoot {
     font-size: 2rem;
     line-height: 1.5em;
   }
-}
-
-.img--skyline {
-  display: block;
-  position: relative;
-  bottom: -1px;
-}
-
-.wrap--medgreen {
-  background: #207c7f;
-  color: #fff;
-  line-height: 1.5;
-  overflow: hidden;
-  position: relative;
-}
-
-.container--medgreen {
-  padding-bottom: 80%;
-  min-height: 250px;
 }
 
 @media (min-width: 45em) {
@@ -1195,49 +1247,90 @@ tfoot {
     width: 40%;
   }
 }
-.img--desktop {
-  position: absolute;
-  bottom: 0;
-  left: 4%;
-  max-width: 90%;
+.wrap--content {
+  line-height: 1.5;
+  color: #fff;
+  position: relative;
 }
-
-.img--laptop {
-  position: absolute;
-  bottom: 0;
-  right: -25%;
-  max-width: 70%;
-}
-
-.img--tablet {
-  position: absolute;
-  bottom: 0;
-  left: -3%;
-  max-width: 25%;
-}
-
-.img--mobile {
-  position: absolute;
-  bottom: 0;
-  left: 18%;
-  max-width: 15%;
+.wrap--content h2 {
+  text-shadow: 2px 2px 0 #093334;
 }
 
 .wrap--dkgreen {
   background: #0f6263;
-  color: #eee;
-  line-height: 1.5;
-}
-.wrap--dkgreen h2 {
-  text-shadow: 2px 2px 0 #093334;
 }
 
-.wrap--light {
+.wrap--medgreen {
+  background: #207c7f;
+}
+
+.wrap--ltgreen {
   background: #eee;
-  color: #282828;
-  line-height: 1.5;
 }
 
+.container--who-we-are {
+  position: relative;
+}
+
+.content-block--who-we-are {
+  padding-left: 25%;
+}
+
+.img--desktop {
+  position: absolute;
+  width: 100%;
+  left: -80%;
+  bottom: 0;
+}
+
+@media (min-width: 25em) {
+  .content-block--who-we-are {
+    padding-left: 35%;
+  }
+
+  .img--desktop {
+    position: absolute;
+    width: 75%;
+    left: -45%;
+    bottom: 0;
+  }
+}
+@media (min-width: 35em) {
+  .content-block--who-we-are {
+    padding-left: 45%;
+  }
+
+  .img--desktop {
+    position: absolute;
+    width: 75%;
+    left: -35%;
+    bottom: 0;
+  }
+}
+@media (min-width: 40em) {
+  .content-block--who-we-are {
+    padding-left: 45%;
+  }
+
+  .img--desktop {
+    position: absolute;
+    width: 65%;
+    left: -25%;
+    bottom: 0;
+  }
+}
+@media (min-width: 45em) {
+  .content-block--who-we-are {
+    padding-left: 45%;
+  }
+
+  .img--desktop {
+    position: absolute;
+    width: 60%;
+    left: -20%;
+    bottom: 0;
+  }
+}
 .img--lightbulb {
   position: absolute;
   top: 70px;
