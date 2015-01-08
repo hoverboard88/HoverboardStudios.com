@@ -1234,6 +1234,11 @@ tfoot {
   bottom: -1px;
 }
 
+.container--columns {
+  position: relative;
+  padding: 0;
+}
+
 @media (min-width: 50em) {
   .column--half {
     float: left;
@@ -1242,11 +1247,6 @@ tfoot {
   .column--half .container {
     padding-left: 6%;
     padding-right: 6%;
-  }
-
-  .container--columns {
-    position: relative;
-    padding: 0;
   }
 
   .container--devices {

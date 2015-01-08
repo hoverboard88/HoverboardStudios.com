@@ -183,6 +183,10 @@
 		bottom: -1px;
 	}
 }
+.container--columns {
+	position: relative;
+	padding: 0;
+}
 
 @include breakpoint(50em) {
 	.column--half {
@@ -192,10 +196,6 @@
 			padding-left: $gutter * 2;
 			padding-right: $gutter * 2;
 		}
-	}
-	.container--columns {
-		position: relative;
-		padding: 0;
 	}
 	.container--devices {
 		position: static;
