@@ -1352,6 +1352,13 @@ tfoot {
 }
 
 @media (min-width: 50em) {
+  .container--columns {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+
   .column--half {
     float: left;
     width: 50%;

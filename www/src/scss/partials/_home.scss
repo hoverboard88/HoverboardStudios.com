@@ -273,6 +273,13 @@
 }
 
 @include breakpoint(50em) {
+	.container--columns {
+		display: flex;
+		.column--half {
+			// float: none;
+			// width: auto;
+		}
+	}
 	.column--half {
 		float: left;
 		width: 50%;

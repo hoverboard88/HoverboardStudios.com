@@ -90,54 +90,51 @@
 
           </section>
         </div><!-- .column--half -->
-        <div class="column--half">
 
-          <section id="contact" class="container container--red">
+        <section id="contact" class="column--half container container--red">
 
-            <h2>Get In Touch</h2>
+          <h2>Get In Touch</h2>
 
-            <p class="work__blurb">Do you have a project/product in mind? Did you just wrap up a project and want a second set of eyes to take a look?</p>
+          <p class="work__blurb">Do you have a project/product in mind? Did you just wrap up a project and want a second set of eyes to take a look?</p>
 
-            <p>We just need a few things from you:</p>
+          <p>We just need a few things from you:</p>
 
-            <form class="capsule-crm-form" onsubmit="return split_names();" action="https://service.capsulecrm.com/service/newlead" method="post">
-              <p id="alert__thank-you" class="alert__thank-you alert alert-success well">Thank you for contacting us! We'll be in touch.</p>
-              <input type="hidden" name="FORM_ID" value="527b4032-3da6-4716-8ced-67426a4aea61">
-              <input type="hidden" name="COMPLETE_URL" value="http://hoverboardstudios.com/#alert__thank-you">
+          <form class="capsule-crm-form" onsubmit="return split_names();" action="https://service.capsulecrm.com/service/newlead" method="post">
+            <p id="alert__thank-you" class="alert__thank-you alert alert-success well">Thank you for contacting us! We'll be in touch.</p>
+            <input type="hidden" name="FORM_ID" value="527b4032-3da6-4716-8ced-67426a4aea61">
+            <input type="hidden" name="COMPLETE_URL" value="http://hoverboardstudios.com/#alert__thank-you">
 
-              <!-- <input type="hidden" name="DEVELOPER" value="TRUE"/> -->
-              <input type="hidden" id="FIRST_NAME" name="FIRST_NAME">
+            <!-- <input type="hidden" name="DEVELOPER" value="TRUE"/> -->
+            <input type="hidden" id="FIRST_NAME" name="FIRST_NAME">
 
-              <label for="LAST_NAME">Name <span class="span--required">(required)</span></label>
-              <input type="text" required id="LAST_NAME" name="LAST_NAME">
+            <label for="LAST_NAME">Name <span class="span--required">(required)</span></label>
+            <input type="text" required id="LAST_NAME" name="LAST_NAME">
 
-              <label for="EMAIL">Email <span class="span--required">(required)</span></label>
-              <input type="text" required id="EMAIL" name="EMAIL">
+            <label for="EMAIL">Email <span class="span--required">(required)</span></label>
+            <input type="text" required id="EMAIL" name="EMAIL">
 
-              <label for="PHONE">Phone</label>
-              <input type="tel" id="PHONE" name="PHONE">
+            <label for="PHONE">Phone</label>
+            <input type="tel" id="PHONE" name="PHONE">
 
-              <label for="CF_Budget">Project Budget <span class="span--required">(required)</span></label>
-              <select id="CF_Budget" required name="CUSTOMFIELD[Budget]">
-                <option>Budget Amount</option>
-                <option value="4000">0 - $4,000</option>
-                <option value="8000">$4,000 - $8,000</option>
-                <option value="15000">$8,000 - $15,000</option>
-                <option value="30000">$15,000 - $30,000</option>
-                <option value="60000">$30,000 - $60,000</option>
-                <option value="60001">$60,000+</option>
-              </select>
+            <label for="CF_Budget">Project Budget <span class="span--required">(required)</span></label>
+            <select id="CF_Budget" required name="CUSTOMFIELD[Budget]">
+              <option>Budget Amount</option>
+              <option value="4000">0 - $4,000</option>
+              <option value="8000">$4,000 - $8,000</option>
+              <option value="15000">$8,000 - $15,000</option>
+              <option value="30000">$15,000 - $30,000</option>
+              <option value="60000">$30,000 - $60,000</option>
+              <option value="60001">$60,000+</option>
+            </select>
 
-              <label for="NOTE">Tell us about your project:</label>
-              <textarea id="NOTE" name="NOTE"></textarea>
+            <label for="NOTE">Tell us about your project:</label>
+            <textarea id="NOTE" name="NOTE"></textarea>
 
-              <input class="single-spaced" type="submit" value="Submit"/>
+            <input class="single-spaced" type="submit" value="Submit"/>
 
-            </form>
+          </form>
 
-          </section><!-- .container -->
-
-        </div><!-- .column--half -->
+        </section><!-- .container -->
       </div><!-- .container--columns -->
     </div>
 
