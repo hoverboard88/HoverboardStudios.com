@@ -65,7 +65,6 @@
  * © 2014 MyFonts Inc
 */
 /* @import must be at top of file, otherwise CSS will not work */
-@import url("//hello.myfonts.net/count/2af4df");
 /*
 @font-face {
   font-family: 'PlutoSansBlack';
@@ -124,7 +123,6 @@
 
 
 */
-@import url("//hello.myfonts.net/count/2bb850");
 @font-face {
   font-family: 'PlutoSansCondHeavy';
   src: url("/dist/fonts/2AF4DF_8_0.eot");
