@@ -82,7 +82,7 @@ gulp.task('clean', function(cb) {
 
 // Default task
 gulp.task('default', ['clean'], function() {
-    gulp.start('fonts', 'styles', 'scripts', 'images', 'svg2png');
+    gulp.start('fonts', 'styles', 'scripts', 'critical', 'images', 'svg2png');
 });
 
 // Watch
@@ -108,20 +108,36 @@ gulp.task('watch', ['default'], function() {
 gulp.task('copystyles', function () {
   return gulp.src(['dist/css/style.css'])
     .pipe(rename({
-      basename: "site" // site.css
+      basename: "critical" // site.css
     }))
     .pipe(gulp.dest('dist/css'))
-    .pipe(notify({ message: 'CriticalCSS task complete' }));
+    .pipe(notify({ message: 'Copy Styles task complete' }));
 });
 
-gulp.task('critical', ['default', 'copystyles'], function () {
+gulp.task('critical', ['copystyles'], function () {
   critical.generateInline({
-    base: '/',
-    src: 'index.html',
-    styleTarget: 'dist/css/style.css',
-    htmlTarget: 'index_inlined.html',
-    width: 1200,
-    height: 800
-    // minify: true
+    // Your base directory
+    base: 'dist/',
+    // HTML source file
+    src: '../src/index.html',
+    // Your CSS Files (optional)
+    css: ['dist/css/style.css'],
+    // Viewport width
+    width: 800,
+    // Viewport height
+    height: 600,
+    // Target for final HTML output
+    htmlTarget: '../index.html',
+    // Target for generated critical-path CSS (which we inline)
+    styleTarget: 'css/critical.css',
+    // Minify critical-path CSS when inlining
+    minify: true,
+    // Extract inlined styles from referenced stylesheets
+    extract: true
+   }, function (err, output) {
+    //output any errors
+    if (err) {
+      console.log(err);
+    }
   });
 });

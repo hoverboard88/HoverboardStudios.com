@@ -162,24 +162,24 @@
 }
 
 .wrap--hero {
-	background: url(../img/skyline-450.jpg) bottom center no-repeat;
+	background: url(/dist/img/skyline-450.jpg) bottom center no-repeat;
 	background-size: cover;
 	padding-bottom: 2em;
 	// ~435px
 	@include breakpoint(27em) {
-		background-image: url(../img/skyline-600.jpg);
+		background-image: url(/dist/img/skyline-600.jpg);
 		padding-bottom: 4em;
 		padding-top: 1em;
 	}
 	// ~600px
 	@include breakpoint(37em) {
-		background-image: url(../img/skyline-850.jpg);
+		background-image: url(/dist/img/skyline-850.jpg);
 		padding-left: $width--1;
 		padding-right: $width--1;
 	}
 	// ~850px
 	@include breakpoint(53em) {
-		background-image: url(../img/skyline-1100.jpg);
+		background-image: url(/dist/img/skyline-1100.jpg);
 		padding-left: 0;
 		padding-right: 0;
 		padding-bottom: 6em;
@@ -187,7 +187,7 @@
 	}
 	// ~1040px
 	@include breakpoint(65em) {
-		background-image: url(../img/skyline-1300.jpg);
+		background-image: url(/dist/img/skyline-1300.jpg);
 		padding-top: 2em;
 		padding-bottom: 9em;
 	}
@@ -219,7 +219,7 @@
 	}
 }
 .wrap--tiled {
-	background: #fff url(../img/tiled-pattern.svg); // using src because svgmin is messing up the svg.
+	background: #fff url(/dist/img/tiled-pattern.svg); // using src because svgmin is messing up the svg.
 	// background-size: contain;
 	box-shadow: 0 2px 18px rgba(#000, .25);
 	z-index: 1; // so box-shadow shows
