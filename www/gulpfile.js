@@ -12,13 +12,14 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     imagemin = require('gulp-imagemin'),
     svg2png = require('gulp-svg2png'),
-    svgmin = require('gulp-svgmin'),
+    // svgmin = require('gulp-svgmin'),
     rename = require('gulp-rename'),
     concat = require('gulp-concat'),
     notify = require('gulp-notify'),
     cache = require('gulp-cache'),
     livereload = require('gulp-livereload'),
-    del = require('del');
+    del = require('del'),
+    critical = require('critical');
 
 // Fonts
 gulp.task('fonts', function() {
@@ -60,16 +61,16 @@ gulp.task('svg2png', function () {
 });
 
 // Minify SVGs
-gulp.task('svgmin', function () {
-  return gulp.src('dist/img/**/*.svg')
-    .pipe(svgmin())
-    .pipe(gulp.dest('dist/img'));
-});
+// gulp.task('svgmin', function () {
+//   return gulp.src('dist/img/**/*.svg')
+//     .pipe(svgmin())
+//     .pipe(gulp.dest('dist/img'));
+// });
 
 // Images
 gulp.task('images', function() {
   return gulp.src('src/img/**/*')
-    .pipe(cache(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
+    .pipe(cache(imagemin({ optimizationLevel: 7, progressive: true, interlaced: true })))
     .pipe(gulp.dest('dist/img')) // Bug in path: https://github.com/imagemin/imagemin/issues/60
     .pipe(notify({ message: 'Images task complete' }));
 });
@@ -81,14 +82,11 @@ gulp.task('clean', function(cb) {
 
 // Default task
 gulp.task('default', ['clean'], function() {
-    gulp.start('fonts', 'styles', 'scripts', 'images', 'svg2png', 'svgmin');
+    gulp.start('fonts', 'styles', 'scripts', 'images', 'svg2png');
 });
 
 // Watch
-gulp.task('watch', function() {
-
-  // Run all tasks first, then watch
-  gulp.start('fonts', 'styles', 'scripts', 'images', 'svg2png', 'svgmin');
+gulp.task('watch', ['default'], function() {
 
   // Watch .scss files
   gulp.watch('src/scss/**/*.scss', ['styles']);
@@ -105,4 +103,25 @@ gulp.task('watch', function() {
   // // Watch any files in dist/, reload on change
   gulp.watch(['dist/**']).on('change', livereload.changed);
 
+});
+
+gulp.task('copystyles', function () {
+  return gulp.src(['dist/css/style.css'])
+    .pipe(rename({
+      basename: "site" // site.css
+    }))
+    .pipe(gulp.dest('dist/css'))
+    .pipe(notify({ message: 'CriticalCSS task complete' }));
+});
+
+gulp.task('critical', ['default', 'copystyles'], function () {
+  critical.generateInline({
+    base: '/',
+    src: 'index.html',
+    styleTarget: 'dist/css/style.css',
+    htmlTarget: 'index_inlined.html',
+    width: 1200,
+    height: 800
+    // minify: true
+  });
 });
