@@ -1197,35 +1197,29 @@ tfoot {
 }
 
 .menu--social {
-  float: right;
-  width: 50%;
-  text-align: right;
+  clear: both;
+  margin-left: -10px;
 }
 .menu--social ul {
   list-style-type: none;
   padding: 0;
+  margin: 0;
 }
 .menu--social li {
   display: inline-block;
+  width: 50px;
+  height: 50px;
 }
 .menu--social .menu__item a {
   display: block;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+}
+.menu--social .menu__item a:hover, .menu--social .menu__item a:focus {
+  background: #ddd;
 }
 
-@media (min-width: 35em) {
-  .fine-print, .address {
-    float: left;
-    width: 50%;
-  }
-
-  .fine-print {
-    padding-right: 1.5em;
-  }
-
-  .address {
-    padding-left: 1.5em;
-  }
-}
 .wrap--hero {
   background: url(../img/skyline-450.jpg) bottom center no-repeat;
   background-size: cover;

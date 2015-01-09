@@ -138,31 +138,26 @@
 	}
 }
 .menu--social {
-	float: right;
-	width: $width--6;
-	text-align: right;
+	clear: both;
+	margin-left: -10px;
 	ul {
 		list-style-type: none;
 		padding: 0;
+		margin: 0;
 	}
 	li {
 		display: inline-block;
+		width: 50px;
+		height: 50px;
 	}
 	.menu__item a {
 		display: block;
-	}
-}
-
-@include breakpoint (35em) {
-	.fine-print, .address {
-		float: left;
-		width: $width--6;
-	}
-	.fine-print {
-		padding-right: $gutter;
-	}
-	.address {
-		padding-left: $gutter;
+		border-radius: 50%;
+		height: 40px;
+		width: 40px;
+		&:hover, &:focus {
+			background: #ddd;
+		}
 	}
 }
 
@@ -275,10 +270,6 @@
 @include breakpoint(50em) {
 	.container--columns {
 		display: flex;
-		.column--half {
-			// float: none;
-			// width: auto;
-		}
 	}
 	.column--half {
 		float: left;

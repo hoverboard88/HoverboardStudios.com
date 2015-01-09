@@ -24,7 +24,7 @@
     <div class="wrap wrap--tiled">
       <header class="container container--header centered">
 
-        <h1 class="single-spaced logo-h1"><a href="/"><img class="logo" src="/dist/img/hoverboard.svg" onerror="this.src=hoverboard.png" alt="Hoverboard"></a></h1>
+        <h1 class="single-spaced logo-h1"><a href="/"><img class="logo" src="/dist/img/hoverboard.svg" onerror="this.src=/dist/img/hoverboard.png" alt="Hoverboard"></a></h1>
 
         <nav class="menu menu--main">
           <ul>
@@ -69,27 +69,25 @@
 
     <div class="wrap wrap--medgreen wrap--content">
       <div class="container container--columns">
-        <div id="why" class="column--half">
-          <section class="container container--medgreen container--devices">
+        <section id="why" class="column--half container container--medgreen container--devices">
 
-            <h2>Why Us?</h2>
+          <h2>Why Us?</h2>
 
-            <p>We believe it is important to incorporate our clients into the development process from the beginning and continue a high level of collaboration throughout the project.</p>
+          <p>We believe it is important to incorporate our clients into the development process from the beginning and continue a high level of collaboration throughout the project.</p>
 
-            <p>Our goal is to identify the needs and ensure we are creating the appropriate solutions for our clients. We work to create a positive experience for both the client and end user throughout the entire process so that together, we create something great.</p>
+          <p>Our goal is to identify the needs and ensure we are creating the appropriate solutions for our clients. We work to create a positive experience for both the client and end user throughout the entire process so that together, we create something great.</p>
 
-            <h2>Keeping it Small</h2>
+          <h2>Keeping it Small</h2>
 
-            <p class="single-spaced">We are a small, two-person studio. Our focus is to provide a hands-on experience that is dedicated to our client’s work. This provides our customers the benefit of a close, personal team.</p>
+          <p class="single-spaced">We are a small, two-person studio. Our focus is to provide a hands-on experience that is dedicated to our client’s work. This provides our customers the benefit of a close, personal team.</p>
 
-            <div class="devices">
-              <img class="img--tablet" src="/dist/img/tablet.svg" alt="Tablet">
-              <img class="img--laptop" src="/dist/img/laptop.svg" alt="Laptop">
-              <img class="img--mobile" src="/dist/img/mobile.svg" alt="Mobile">
-            </div>
+          <div class="devices">
+            <img class="img--tablet" src="/dist/img/tablet.svg" alt="Tablet">
+            <img class="img--laptop" src="/dist/img/laptop.svg" alt="Laptop">
+            <img class="img--mobile" src="/dist/img/mobile.svg" alt="Mobile">
+          </div>
 
-          </section>
-        </div><!-- .column--half -->
+        </section><!-- .column--half -->
 
         <section id="contact" class="column--half container container--red">
 
@@ -165,23 +163,29 @@
 
       <footer class="container container--footer">
 
-        <p class="fine-print single-spaced">©2014 Hoverboard. All rights reserved.</p>
-        <p class="address" itemscope itemtype="http://schema.org/LocalBusiness">
-          <a itemprop="url" href="http://hoverboardstudios.com">
-            <strong itemprop="name">Hoverboard Studios</strong>
-          </a><br>
-          <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-            <span itemprop="streetAddress">3948 Yosemite Ave South</span>, <span itemprop="addressLocality">Saint Louis Park</span>, <span itemprop="addressRegion">MN</span> <span itemprop="postalCode">55416</span>
-          </span><br>
-          <span itemprop="telephone">612-351-2373</span>
-        </p>
-        <!-- <nav class="menu--social">
-          <ul>
-            <li class="menu__item menu__item--twitter"><a href="https://twitter.com/hoverboard88"><img src="/dist/img/social-twitter.svg" alt="Twitter"></a></li>
-            <li class="menu__item menu__item--facebook"><a href="https://www.facebook.com/hoverboardstudios">Facebook</a></li>
-            <li class="menu__item menu__item--linkedin"><a href="https://www.linkedin.com/company/hoverboard-studios">LinkedIn</a></li>
-          </ul>
-        </nav> -->
+        <div class="column--half column--half--spaced first">
+          <p class="fine-print single-spaced">©2014 Hoverboard. All rights reserved.</p>
+          <nav class="menu--social">
+            <ul>
+              <li class="menu__item menu__item--twitter"><a title="Twitter" href="https://twitter.com/hoverboard88"><img onerror="this.src=/dist/img/social-twitter.png" src="/src/img/social-twitter.svg" alt="Twitter"></a></li>
+              <li class="menu__item menu__item--facebook"><a title="Facebook" href="https://www.facebook.com/hoverboardstudios"><img onerror="this.src=/dist/img/social-facebook.png" src="/src/img/social-facebook.svg" alt="Facebook"></a></li>
+              <li class="menu__item menu__item--linkedin"><a title="LinkedIn" href="https://www.linkedin.com/company/hoverboard-studios"><img onerror="this.src=/dist/img/social-linkedin.png" src="/src/img/social-linkedin.svg" alt="LinkedIn"></a></li>
+              <li class="menu__item menu__item--github"><a title="GitHub" href="https://github.com/hoverboard88"><img onerror="this.src=/dist/img/social-github.png" src="/src/img/social-github.svg" alt="GitHub"></a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="column--half column--half--spaced last">
+          <p class="address" itemscope itemtype="http://schema.org/LocalBusiness">
+            <a itemprop="url" href="http://hoverboardstudios.com">
+              <strong itemprop="name">Hoverboard Studios</strong>
+            </a><br>
+            <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+              <span itemprop="streetAddress">3948 Yosemite Ave South</span>, <span itemprop="addressLocality">Saint Louis Park</span>, <span itemprop="addressRegion">MN</span> <span itemprop="postalCode">55416</span>
+            </span><br>
+            <span itemprop="telephone">612-351-2373</span>
+          </p>
+        </div>
+
         <!-- <a href="https://plus.google.com/101904781934699073627" rel="publisher">Google+ (MN)</a> | <a href="https://plus.google.com/114769429182618988844" rel="publisher">Google+ (NC)</a> -->
 
       </footer>
