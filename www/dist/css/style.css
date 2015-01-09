@@ -739,6 +739,7 @@ input[type="submit"], button[type="submit"] {
   display: block;
   background: #580d0a;
   border: 0;
+  border-radius: 0;
   box-shadow: 4px 4px 0 #ad1414;
   color: #eee;
   line-height: 1;
@@ -777,7 +778,6 @@ textarea {
   border: 0;
   box-shadow: 4px 4px 0 rgba(104, 14, 15, 0.8);
   padding: 0.5em;
-  max-width: 400px;
   border-radius: 0;
   width: 100%;
 }
@@ -896,8 +896,8 @@ textarea {
   font-size: 16px;
   font-size: 1rem;
   line-height: 1.5em;
-  max-width: 1200px;
-  padding: 3%;
+  max-width: 75em;
+  padding: 1.5em;
   position: relative;
 }
 .container.container--no-padding {
@@ -1036,7 +1036,7 @@ tfoot {
     text-align: left;
     float: left;
     width: 33.33333%;
-    padding-right: 3%;
+    padding-right: 1.5em;
     bottom: -15px;
     position: relative;
   }
@@ -1060,8 +1060,33 @@ tfoot {
     bottom: -20px;
   }
 }
+.phone-banner {
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 1.71429em;
+  line-height: 1.4;
+}
+.phone-banner br {
+  display: none;
+}
+@media (min-width: 50em) {
+  .phone-banner {
+    text-align: left;
+    float: left;
+    width: 25%;
+    padding-top: .5em;
+    font-size: 16px;
+    font-size: 1rem;
+    line-height: 1.5em;
+  }
+  .phone-banner br {
+    display: block;
+  }
+}
+
 .menu--main {
   text-align: center;
+  margin: 0 -.5em;
 }
 @media (min-width: 50em) {
   .menu--main {
@@ -1071,9 +1096,19 @@ tfoot {
     padding-top: .5em;
   }
 }
-@media (min-width: 65em) {
+@media (min-width: 55em) {
   .menu--main {
-    padding-top: .75em;
+    padding-top: .7em;
+  }
+}
+@media (min-width: 60em) {
+  .menu--main {
+    padding-top: .8em;
+  }
+}
+@media (min-width: 67em) {
+  .menu--main {
+    padding-top: 1em;
   }
 }
 .menu--main ul {
@@ -1081,9 +1116,9 @@ tfoot {
 }
 .menu--main li {
   display: inline-block;
-  font-size: 14px;
-  font-size: 0.875rem;
-  line-height: 1.71429em;
+  font-size: 13px;
+  font-size: 0.8125rem;
+  line-height: 1.84615em;
 }
 @media (min-width: 22em) {
   .menu--main li {
@@ -1099,23 +1134,85 @@ tfoot {
     line-height: 1.33333em;
   }
 }
+.menu--main li:first-child a {
+  padding-left: 0;
+}
+.menu--main li:last-child a {
+  padding-right: 0;
+}
 .menu--main a {
   position: relative;
   display: block;
-  padding: .5em;
   color: #003333;
+  padding: 0 .5em;
   text-transform: uppercase;
   font-weight: bold;
+  -webkit-transition: text-shadow .25s ease-out;
+          transition: text-shadow .25s ease-out;
 }
-.menu--main a:active, .menu--main a:hover, .menu--main a:focus {
+.menu--main a:before, .menu--main a:after {
+  display: inline-block;
+  opacity: 0;
+  -webkit-transition: -webkit-transform 0.3s, opacity 0.2s;
+          transition: transform 0.3s, opacity 0.2s;
   color: #66CCCC;
 }
-@media (min-width: 67em) {
+@media (min-width: 30em) {
   .menu--main a {
-    padding: 0.5em 1em;
+    padding: 0;
+  }
+  .menu--main a:before {
+    margin-right: .25em;
+    content: '<';
+    -webkit-transform: translateX(10px);
+        -ms-transform: translateX(10px);
+            transform: translateX(10px);
+  }
+  .menu--main a:after {
+    margin-left: .25em;
+    content: '>';
+    -webkit-transform: translateX(-10px);
+        -ms-transform: translateX(-10px);
+            transform: translateX(-10px);
+  }
+  .menu--main a:active:before, .menu--main a:active:after, .menu--main a:hover:before, .menu--main a:hover:after, .menu--main a:focus:before, .menu--main a:focus:after {
+    opacity: 1;
+    -webkit-transform: translateX(0px);
+        -ms-transform: translateX(0px);
+            transform: translateX(0px);
   }
 }
 
+.menu--social {
+  float: right;
+  width: 50%;
+  text-align: right;
+}
+.menu--social ul {
+  list-style-type: none;
+  padding: 0;
+}
+.menu--social li {
+  display: inline-block;
+}
+.menu--social .menu__item a {
+  display: block;
+}
+
+@media (min-width: 35em) {
+  .fine-print, .address {
+    float: left;
+    width: 50%;
+  }
+
+  .fine-print {
+    padding-right: 1.5em;
+  }
+
+  .address {
+    padding-left: 1.5em;
+  }
+}
 .wrap--hero {
   background: url(../img/skyline-450.jpg) bottom center no-repeat;
   background-size: cover;
@@ -1172,18 +1269,21 @@ tfoot {
   font-style: italic;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.75);
 }
+.container--hero .content-block {
+  text-align: center;
+}
 @media (min-width: 37em) {
-  .container--hero {
-    font-size: 24px;
-    font-size: 1.5rem;
+  .container--hero .content-block {
+    font-size: 25px;
+    font-size: 1.5625rem;
+    line-height: 1.92em;
   }
 }
 @media (min-width: 53em) {
-  .container--hero {
-    text-align: left;
-  }
   .container--hero .content-block {
-    padding-left: 33.33333%;
+    width: 66.66667%;
+    float: right;
+    text-align: left;
   }
 }
 
@@ -1245,8 +1345,18 @@ tfoot {
     width: 50%;
   }
   .column--half .container {
-    padding-left: 6%;
-    padding-right: 6%;
+    padding: 1.5em;
+  }
+  .column--half .container--devices {
+    padding-bottom: 400px;
+  }
+
+  .column--half--spaced.first {
+    padding-right: 1.5em;
+  }
+
+  .column--half--spaced.last {
+    padding-left: 1.5em;
   }
 
   .container--devices {
@@ -1266,8 +1376,15 @@ tfoot {
   color: #fff;
   position: relative;
 }
-.wrap--content h2 {
+.wrap--content h2, .wrap--content h3 {
   text-shadow: 2px 2px 0 #093334;
+}
+.wrap--content h2 a, .wrap--content h3 a {
+  color: #67c8ca;
+}
+.wrap--content h2 a:hover, .wrap--content h2 a:focus, .wrap--content h3 a:hover, .wrap--content h3 a:focus {
+  color: #fff;
+  text-decoration: underline;
 }
 
 .wrap--dkgreen, .container--dkgreen {
@@ -1280,6 +1397,15 @@ tfoot {
 
 .wrap--ltgreen, .container--ltgreen {
   background: #67c8ca;
+}
+
+.container--work img {
+  -webkit-transition: box-shadow .3s ease-out;
+          transition: box-shadow .3s ease-out;
+  box-shadow: 4px 4px 0 rgba(17, 94, 95, 0.8);
+}
+.container--work a:hover img, .container--work a:focus img {
+  box-shadow: 0 0 0 rgba(17, 94, 95, 0.8);
 }
 
 .container--who-we-are {
@@ -1389,7 +1515,7 @@ tfoot {
     bottom: 0;
   }
 }
-@media (min-width: 65em) {
+@media (min-width: 70em) {
   .content-block--who-we-are {
     float: right;
     width: 66.66667%;

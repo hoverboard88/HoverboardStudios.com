@@ -46,7 +46,7 @@
   .img--desktop {
     position: absolute;
     width: $img-width;
-    right: 100% - $offset + $gutter - 1%; // subtracted -1% b/c imac was off for some reason.
+    right: 100% - $offset + 3% - 1%; // subtracted -1% b/c imac was off for some reason.
     // left: -$img-width + $offset - $gutter;
     bottom: 0;
   }
