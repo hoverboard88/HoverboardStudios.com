@@ -71,6 +71,12 @@
 	@include breakpoint(67em) {
 		padding-top: 1em;
 	}
+	@include breakpoint(70em) {
+		padding-top: 1.2em;
+	}
+	@include breakpoint(72em) {
+		padding-top: 1.4em;
+	}
 	ul {
 		padding-bottom: 0;
 	}
@@ -99,7 +105,10 @@
 		padding: 0 .5em;
 		text-transform: uppercase;
 		font-weight: bold;
-		transition: text-shadow .25s ease-out;
+		transition: color 0.2s ease-out;
+		&:active, &:hover, &:focus {
+			color: #66CCCC;
+		}
 		&:before, &:after {
 			display: inline-block;
 			opacity: 0;
@@ -125,9 +134,6 @@
 					transform: translateX(0px);
 				}
 			}
-		}
-		@include breakpoint(67em) {
-			// padding: 0.5em 1em;
 		}
 	}
 }
@@ -218,8 +224,8 @@
 	}
 }
 .wrap--tiled {
-	background: #fff url(../../src/img/tiled-pattern.svg); // using src because svgmin is messing up the svg.
-	background-size: contain;
+	background: #fff url(../img/tiled-pattern.svg); // using src because svgmin is messing up the svg.
+	// background-size: contain;
 	box-shadow: 0 2px 18px rgba(#000, .25);
 	z-index: 1; // so box-shadow shows
 	position: relative;

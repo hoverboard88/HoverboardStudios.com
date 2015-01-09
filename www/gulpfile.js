@@ -2,7 +2,7 @@
  * gulp
  * $ npm install gulp-ruby-sass gulp-autoprefixer gulp-minify-css gulp-jshint gulp-concat gulp-uglify gulp-imagemin gulp-notify gulp-rename gulp-livereload gulp-cache del --save-dev
  */
- 
+
 // Load plugins
 var gulp = require('gulp'),
     sass = require('gulp-ruby-sass'),
@@ -19,7 +19,7 @@ var gulp = require('gulp'),
     cache = require('gulp-cache'),
     livereload = require('gulp-livereload'),
     del = require('del');
- 
+
 // Fonts
 gulp.task('fonts', function() {
   return gulp.src('src/fonts/**/*')
@@ -38,7 +38,7 @@ gulp.task('styles', function() {
     .pipe(gulp.dest('dist/css'))
     .pipe(notify({ message: 'Styles task complete' }));
 });
- 
+
 // Scripts
 gulp.task('scripts', function() {
   return gulp.src('src/js/**/*.js')
@@ -65,7 +65,7 @@ gulp.task('svgmin', function () {
     .pipe(svgmin())
     .pipe(gulp.dest('dist/img'));
 });
- 
+
 // Images
 gulp.task('images', function() {
   return gulp.src('src/img/**/*')
@@ -73,33 +73,36 @@ gulp.task('images', function() {
     .pipe(gulp.dest('dist/img')) // Bug in path: https://github.com/imagemin/imagemin/issues/60
     .pipe(notify({ message: 'Images task complete' }));
 });
- 
+
 // Clean
 gulp.task('clean', function(cb) {
     del(['dist/assets/css', 'dist/assets/js', 'dist/assets/img'], cb)
 });
- 
+
 // Default task
 gulp.task('default', ['clean'], function() {
     gulp.start('fonts', 'styles', 'scripts', 'images', 'svg2png', 'svgmin');
 });
- 
+
 // Watch
 gulp.task('watch', function() {
 
+  // Run all tasks first, then watch
+  gulp.start('fonts', 'styles', 'scripts', 'images', 'svg2png', 'svgmin');
+
   // Watch .scss files
   gulp.watch('src/scss/**/*.scss', ['styles']);
- 
+
   // Watch .js files
   gulp.watch('src/js/**/*.js', ['scripts']);
- 
+
   // Watch image files
   gulp.watch('src/img/**/*', ['images']);
 
   // Create LiveReload server
   livereload.listen();
- 
+
   // // Watch any files in dist/, reload on change
   gulp.watch(['dist/**']).on('change', livereload.changed);
- 
+
 });
