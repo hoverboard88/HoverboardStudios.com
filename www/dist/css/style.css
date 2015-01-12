@@ -68,109 +68,109 @@
 /*
 @font-face {
   font-family: 'PlutoSansBlack';
-  src: url('/dist/fonts/2AF4DF_0_0.eot');
-  src: url('/dist/fonts/2AF4DF_0_0.eot?#iefix') format('embedded-opentype'),url('/dist/fonts/2AF4DF_0_0.woff') format('woff'),url('/dist/fonts/2AF4DF_0_0.ttf') format('truetype');
+  src: url('/fonts/2AF4DF_0_0.eot');
+  src: url('/fonts/2AF4DF_0_0.eot?#iefix') format('embedded-opentype'),url('/fonts/2AF4DF_0_0.woff') format('woff'),url('/fonts/2AF4DF_0_0.ttf') format('truetype');
 }
 
 
 @font-face {
   font-family: 'PlutoSansThin';
-  src: url('/dist/fonts/2AF4DF_1_0.eot');
-  src: url('/dist/fonts/2AF4DF_1_0.eot?#iefix') format('embedded-opentype'),url('/dist/fonts/2AF4DF_1_0.woff') format('woff'),url('/dist/fonts/2AF4DF_1_0.ttf') format('truetype');
+  src: url('/fonts/2AF4DF_1_0.eot');
+  src: url('/fonts/2AF4DF_1_0.eot?#iefix') format('embedded-opentype'),url('/fonts/2AF4DF_1_0.woff') format('woff'),url('/fonts/2AF4DF_1_0.ttf') format('truetype');
 }
 
 
 @font-face {
   font-family: 'PlutoSansCondThin';
-  src: url('/dist/fonts/2AF4DF_2_0.eot');
-  src: url('/dist/fonts/2AF4DF_2_0.eot?#iefix') format('embedded-opentype'),url('/dist/fonts/2AF4DF_2_0.woff') format('woff'),url('/dist/fonts/2AF4DF_2_0.ttf') format('truetype');
+  src: url('/fonts/2AF4DF_2_0.eot');
+  src: url('/fonts/2AF4DF_2_0.eot?#iefix') format('embedded-opentype'),url('/fonts/2AF4DF_2_0.woff') format('woff'),url('/fonts/2AF4DF_2_0.ttf') format('truetype');
 }
 
 
 @font-face {
   font-family: 'PlutoSansRegular';
-  src: url('/dist/fonts/2AF4DF_3_0.eot');
-  src: url('/dist/fonts/2AF4DF_3_0.eot?#iefix') format('embedded-opentype'),url('/dist/fonts/2AF4DF_3_0.woff') format('woff'),url('/dist/fonts/2AF4DF_3_0.ttf') format('truetype');
+  src: url('/fonts/2AF4DF_3_0.eot');
+  src: url('/fonts/2AF4DF_3_0.eot?#iefix') format('embedded-opentype'),url('/fonts/2AF4DF_3_0.woff') format('woff'),url('/fonts/2AF4DF_3_0.ttf') format('truetype');
 }
 
 
 @font-face {
   font-family: 'PlutoSansBold';
-  src: url('/dist/fonts/2AF4DF_4_0.eot');
-  src: url('/dist/fonts/2AF4DF_4_0.eot?#iefix') format('embedded-opentype'),url('/dist/fonts/2AF4DF_4_0.woff') format('woff'),url('/dist/fonts/2AF4DF_4_0.ttf') format('truetype');
+  src: url('/fonts/2AF4DF_4_0.eot');
+  src: url('/fonts/2AF4DF_4_0.eot?#iefix') format('embedded-opentype'),url('/fonts/2AF4DF_4_0.woff') format('woff'),url('/fonts/2AF4DF_4_0.ttf') format('truetype');
 }
 
 
 @font-face {
   font-family: 'PlutoSansCondBlack';
-  src: url('/dist/fonts/2AF4DF_5_0.eot');
-  src: url('/dist/fonts/2AF4DF_5_0.eot?#iefix') format('embedded-opentype'),url('/dist/fonts/2AF4DF_5_0.woff') format('woff'),url('/dist/fonts/2AF4DF_5_0.ttf') format('truetype');
+  src: url('/fonts/2AF4DF_5_0.eot');
+  src: url('/fonts/2AF4DF_5_0.eot?#iefix') format('embedded-opentype'),url('/fonts/2AF4DF_5_0.woff') format('woff'),url('/fonts/2AF4DF_5_0.ttf') format('truetype');
 }
 
 
 @font-face {
   font-family: 'PlutoSansCondBold';
-  src: url('/dist/fonts/2AF4DF_6_0.eot');
-  src: url('/dist/fonts/2AF4DF_6_0.eot?#iefix') format('embedded-opentype'),url('/dist/fonts/2AF4DF_6_0.woff') format('woff'),url('/dist/fonts/2AF4DF_6_0.ttf') format('truetype');
+  src: url('/fonts/2AF4DF_6_0.eot');
+  src: url('/fonts/2AF4DF_6_0.eot?#iefix') format('embedded-opentype'),url('/fonts/2AF4DF_6_0.woff') format('woff'),url('/fonts/2AF4DF_6_0.ttf') format('truetype');
 }
 
 
 @font-face {
   font-family: 'PlutoSansCondExLight';
-  src: url('/dist/fonts/2AF4DF_7_0.eot');
-  src: url('/dist/fonts/2AF4DF_7_0.eot?#iefix') format('embedded-opentype'),url('/dist/fonts/2AF4DF_7_0.woff') format('woff'),url('/dist/fonts/2AF4DF_7_0.ttf') format('truetype');
+  src: url('/fonts/2AF4DF_7_0.eot');
+  src: url('/fonts/2AF4DF_7_0.eot?#iefix') format('embedded-opentype'),url('/fonts/2AF4DF_7_0.woff') format('woff'),url('/fonts/2AF4DF_7_0.ttf') format('truetype');
 }
 
 
 */
 @font-face {
   font-family: 'PlutoSansCondHeavy';
-  src: url("/dist/fonts/2AF4DF_8_0.eot");
-  src: url("/dist/fonts/2AF4DF_8_0.eot?#iefix") format("embedded-opentype"), url("/dist/fonts/2AF4DF_8_0.woff") format("woff"), url("/dist/fonts/2AF4DF_8_0.ttf") format("truetype");
+  src: url("/fonts/2AF4DF_8_0.eot");
+  src: url("/fonts/2AF4DF_8_0.eot?#iefix") format("embedded-opentype"), url("/fonts/2AF4DF_8_0.woff") format("woff"), url("/fonts/2AF4DF_8_0.ttf") format("truetype");
 }
 /*
 @font-face {
   font-family: 'PlutoSansCondLight';
-  src: url('/dist/fonts/2AF4DF_9_0.eot');
-  src: url('/dist/fonts/2AF4DF_9_0.eot?#iefix') format('embedded-opentype'),url('/dist/fonts/2AF4DF_9_0.woff') format('woff'),url('/dist/fonts/2AF4DF_9_0.ttf') format('truetype');
+  src: url('/fonts/2AF4DF_9_0.eot');
+  src: url('/fonts/2AF4DF_9_0.eot?#iefix') format('embedded-opentype'),url('/fonts/2AF4DF_9_0.woff') format('woff'),url('/fonts/2AF4DF_9_0.ttf') format('truetype');
 }
 
 
 @font-face {
   font-family: 'PlutoSansCondMedium';
-  src: url('/dist/fonts/2AF4DF_A_0.eot');
-  src: url('/dist/fonts/2AF4DF_A_0.eot?#iefix') format('embedded-opentype'),url('/dist/fonts/2AF4DF_A_0.woff') format('woff'),url('/dist/fonts/2AF4DF_A_0.ttf') format('truetype');
+  src: url('/fonts/2AF4DF_A_0.eot');
+  src: url('/fonts/2AF4DF_A_0.eot?#iefix') format('embedded-opentype'),url('/fonts/2AF4DF_A_0.woff') format('woff'),url('/fonts/2AF4DF_A_0.ttf') format('truetype');
 }
 
 
 @font-face {
   font-family: 'PlutoSansCondRegular';
-  src: url('/dist/fonts/2AF4DF_B_0.eot');
-  src: url('/dist/fonts/2AF4DF_B_0.eot?#iefix') format('embedded-opentype'),url('/dist/fonts/2AF4DF_B_0.woff') format('woff'),url('/dist/fonts/2AF4DF_B_0.ttf') format('truetype');
+  src: url('/fonts/2AF4DF_B_0.eot');
+  src: url('/fonts/2AF4DF_B_0.eot?#iefix') format('embedded-opentype'),url('/fonts/2AF4DF_B_0.woff') format('woff'),url('/fonts/2AF4DF_B_0.ttf') format('truetype');
 }
 
 
 @font-face {
   font-family: 'PlutoSansExtraLight';
-  src: url('/dist/fonts/2AF4DF_C_0.eot');
-  src: url('/dist/fonts/2AF4DF_C_0.eot?#iefix') format('embedded-opentype'),url('/dist/fonts/2AF4DF_C_0.woff') format('woff'),url('/dist/fonts/2AF4DF_C_0.ttf') format('truetype');
+  src: url('/fonts/2AF4DF_C_0.eot');
+  src: url('/fonts/2AF4DF_C_0.eot?#iefix') format('embedded-opentype'),url('/fonts/2AF4DF_C_0.woff') format('woff'),url('/fonts/2AF4DF_C_0.ttf') format('truetype');
 }
 
 
 @font-face {
   font-family: 'PlutoSansHeavy';
-  src: url('/dist/fonts/2AF4DF_D_0.eot');
-  src: url('/dist/fonts/2AF4DF_D_0.eot?#iefix') format('embedded-opentype'),url('/dist/fonts/2AF4DF_D_0.woff') format('woff'),url('/dist/fonts/2AF4DF_D_0.ttf') format('truetype');
+  src: url('/fonts/2AF4DF_D_0.eot');
+  src: url('/fonts/2AF4DF_D_0.eot?#iefix') format('embedded-opentype'),url('/fonts/2AF4DF_D_0.woff') format('woff'),url('/fonts/2AF4DF_D_0.ttf') format('truetype');
 } */
 @font-face {
   font-family: 'PlutoSansLight';
-  src: url("/dist/fonts/2AF4DF_E_0.eot");
-  src: url("/dist/fonts/2AF4DF_E_0.eot?#iefix") format("embedded-opentype"), url("/dist/fonts/2AF4DF_E_0.woff") format("woff"), url("/dist/fonts/2AF4DF_E_0.ttf") format("truetype");
+  src: url("/fonts/2AF4DF_E_0.eot");
+  src: url("/fonts/2AF4DF_E_0.eot?#iefix") format("embedded-opentype"), url("/fonts/2AF4DF_E_0.woff") format("woff"), url("/fonts/2AF4DF_E_0.ttf") format("truetype");
 }
 @font-face {
   font-family: 'PlutoSansMedium';
-  src: url("/dist/fonts/2AF4DF_F_0.eot");
-  src: url("/dist/fonts/2AF4DF_F_0.eot?#iefix") format("embedded-opentype"), url("/dist/fonts/2AF4DF_F_0.woff") format("woff"), url("/dist/fonts/2AF4DF_F_0.ttf") format("truetype");
+  src: url("/fonts/2AF4DF_F_0.eot");
+  src: url("/fonts/2AF4DF_F_0.eot?#iefix") format("embedded-opentype"), url("/fonts/2AF4DF_F_0.woff") format("woff"), url("/fonts/2AF4DF_F_0.ttf") format("truetype");
 }
 /**
  * @license
@@ -204,29 +204,29 @@
 /* @import must be at top of file, otherwise CSS will not work */
 @font-face {
   font-family: 'AdelleBold';
-  src: url("/dist/fonts/2BB850_0_0.eot");
-  src: url("/dist/fonts/2BB850_0_0.eot?#iefix") format("embedded-opentype"), url("/dist/fonts/2BB850_0_0.woff") format("woff"), url("/dist/fonts/2BB850_0_0.ttf") format("truetype");
+  src: url("/fonts/2BB850_0_0.eot");
+  src: url("/fonts/2BB850_0_0.eot?#iefix") format("embedded-opentype"), url("/fonts/2BB850_0_0.woff") format("woff"), url("/fonts/2BB850_0_0.ttf") format("truetype");
   font-weight: bold;
   font-style: normal;
 }
 @font-face {
   font-family: 'AdelleBoldItalic';
-  src: url("/dist/fonts/2BB850_1_0.eot");
-  src: url("/dist/fonts/2BB850_1_0.eot?#iefix") format("embedded-opentype"), url("/dist/fonts/2BB850_1_0.woff") format("woff"), url("/dist/fonts/2BB850_1_0.ttf") format("truetype");
+  src: url("/fonts/2BB850_1_0.eot");
+  src: url("/fonts/2BB850_1_0.eot?#iefix") format("embedded-opentype"), url("/fonts/2BB850_1_0.woff") format("woff"), url("/fonts/2BB850_1_0.ttf") format("truetype");
   font-weight: bold;
   font-style: italic;
 }
 @font-face {
   font-family: 'AdelleItalic';
-  src: url("/dist/fonts/2BB850_2_0.eot");
-  src: url("/dist/fonts/2BB850_2_0.eot?#iefix") format("embedded-opentype"), url("/dist/fonts/2BB850_2_0.woff") format("woff"), url("/dist/fonts/2BB850_2_0.ttf") format("truetype");
+  src: url("/fonts/2BB850_2_0.eot");
+  src: url("/fonts/2BB850_2_0.eot?#iefix") format("embedded-opentype"), url("/fonts/2BB850_2_0.woff") format("woff"), url("/fonts/2BB850_2_0.ttf") format("truetype");
   font-weight: normal;
   font-style: italic;
 }
 @font-face {
   font-family: 'AdelleRegular';
-  src: url("/dist/fonts/2BB850_3_0.eot");
-  src: url("/dist/fonts/2BB850_3_0.eot?#iefix") format("embedded-opentype"), url("/dist/fonts/2BB850_3_0.woff") format("woff"), url("/dist/fonts/2BB850_3_0.ttf") format("truetype");
+  src: url("/fonts/2BB850_3_0.eot");
+  src: url("/fonts/2BB850_3_0.eot?#iefix") format("embedded-opentype"), url("/fonts/2BB850_3_0.woff") format("woff"), url("/fonts/2BB850_3_0.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -1205,41 +1205,42 @@ tfoot {
 }
 .menu--social li {
   display: inline-block;
-  width: 50px;
-  height: 50px;
+}
+.menu--social svg, .menu--social img {
+  display: inline-block;
 }
 .menu--social .menu__item a {
   display: block;
   border-radius: 50%;
-  height: 40px;
-  width: 40px;
+  height: 50px;
+  width: 50px;
 }
 .menu--social .menu__item a:hover, .menu--social .menu__item a:focus {
   background: #ddd;
 }
 
 .wrap--hero {
-  background: url(/dist/img/skyline-450.jpg) bottom center no-repeat;
+  background: url(/img/skyline-450.jpg) bottom center no-repeat;
   background-size: cover;
   padding-bottom: 2em;
 }
 @media (min-width: 27em) {
   .wrap--hero {
-    background-image: url(/dist/img/skyline-600.jpg);
+    background-image: url(/img/skyline-600.jpg);
     padding-bottom: 4em;
     padding-top: 1em;
   }
 }
 @media (min-width: 37em) {
   .wrap--hero {
-    background-image: url(/dist/img/skyline-850.jpg);
+    background-image: url(/img/skyline-850.jpg);
     padding-left: 8.33333%;
     padding-right: 8.33333%;
   }
 }
 @media (min-width: 53em) {
   .wrap--hero {
-    background-image: url(/dist/img/skyline-1100.jpg);
+    background-image: url(/img/skyline-1100.jpg);
     padding-left: 0;
     padding-right: 0;
     padding-bottom: 6em;
@@ -1248,7 +1249,7 @@ tfoot {
 }
 @media (min-width: 65em) {
   .wrap--hero {
-    background-image: url(/dist/img/skyline-1300.jpg);
+    background-image: url(/img/skyline-1300.jpg);
     padding-top: 2em;
     padding-bottom: 9em;
   }
@@ -1293,7 +1294,7 @@ tfoot {
 }
 
 .wrap--tiled {
-  background: #fff url(/dist/img/tiled-pattern.svg);
+  background: #fff url(/img/tiled-pattern.svg);
   box-shadow: 0 2px 18px rgba(0, 0, 0, 0.25);
   z-index: 1;
   position: relative;

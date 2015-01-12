@@ -10,6 +10,7 @@ var gulp = require('gulp'),
     minifycss = require('gulp-minify-css'),
     jshint = require('gulp-jshint'),
     uglify = require('gulp-uglify'),
+    inline = require('gulp-inline'),
     imagemin = require('gulp-imagemin'),
     svg2png = require('gulp-svg2png'),
     // svgmin = require('gulp-svgmin'),
@@ -24,8 +25,8 @@ var gulp = require('gulp'),
 // Fonts
 gulp.task('fonts', function() {
   return gulp.src('src/fonts/**/*')
-    .pipe(gulp.dest('dist/fonts'))
-    .pipe(notify({ message: 'Fonts task complete' }));
+    .pipe(gulp.dest('dist/fonts'));
+    // .pipe(notify({ message: 'Fonts task complete' }));
 });
 
 // Styles
@@ -70,7 +71,7 @@ gulp.task('svg2png', function () {
 // Images
 gulp.task('images', function() {
   return gulp.src('src/img/**/*')
-    .pipe(cache(imagemin({ optimizationLevel: 7, progressive: true, interlaced: true })))
+    .pipe(cache(imagemin({ optimizationLevel: 7, progressive: true, interlaced: true, svgoPlugins: [{removeViewBox: false}] })))
     .pipe(gulp.dest('dist/img')) // Bug in path: https://github.com/imagemin/imagemin/issues/60
     .pipe(notify({ message: 'Images task complete' }));
 });
@@ -82,11 +83,11 @@ gulp.task('clean', function(cb) {
 
 // Default task
 gulp.task('default', ['clean'], function() {
-    gulp.start('fonts', 'styles', 'scripts', 'critical', 'images', 'svg2png');
+    gulp.start('fonts', 'styles', 'scripts', 'html', 'images', 'svg2png');
 });
 
 // Watch
-gulp.task('watch', ['default'], function() {
+gulp.task('watch', ['default', 'html'], function() {
 
   // Watch .scss files
   gulp.watch('src/scss/**/*.scss', ['styles']);
@@ -96,6 +97,9 @@ gulp.task('watch', ['default'], function() {
 
   // Watch image files
   gulp.watch('src/img/**/*', ['images']);
+
+  // Watch html files
+  gulp.watch('src/**/*.html', ['html']);
 
   // Create LiveReload server
   livereload.listen();
@@ -114,7 +118,7 @@ gulp.task('copystyles', function () {
     .pipe(notify({ message: 'Copy Styles task complete' }));
 });
 
-gulp.task('critical', ['copystyles'], function () {
+gulp.task('html', ['copystyles'], function () {
   critical.generateInline({
     // Your base directory
     base: 'dist/',
@@ -127,7 +131,7 @@ gulp.task('critical', ['copystyles'], function () {
     // Viewport height
     height: 600,
     // Target for final HTML output
-    htmlTarget: '../index.html',
+    htmlTarget: 'index.html',
     // Target for generated critical-path CSS (which we inline)
     styleTarget: 'css/critical.css',
     // Minify critical-path CSS when inlining
