@@ -428,7 +428,7 @@
 }
 .font--big {
 	@include font-size($font-size--hero, true, false);
-	font-family: $secondary--font-family;
+	@include responsible-font-family($secondary--font-family, sans-serif);
 }
 p.alert__thank-you {
 	display: none;

@@ -10,7 +10,7 @@ td, th {
   padding: 5px;
 }
 th {
-  font-family: $secondary--font-family;
+  @include responsible-font-family($secondary--font-family, sans-serif);
   font-weight: $font-weight__normal;
   text-align: left;
   @include font-size(18px);

@@ -4,7 +4,7 @@ p, ul, ol, blockquote, input, textarea, fieldset, button, pre, table, hr, dl {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "PlutoSansCondHeavy", sans-serif;
+  @include responsible-font-family($secondary--font-family__bold, sans-serif);
   text-transform: uppercase;
   margin-bottom: 0.5em;
 }
@@ -47,5 +47,5 @@ hr {
 }
 
 .display-font {
-  font-family: $secondary--font-family;
+  @include responsible-font-family($secondary--font-family, sans-serif);
 }

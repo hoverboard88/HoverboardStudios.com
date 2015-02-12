@@ -89,9 +89,12 @@ input,
 select,
 body,
 textarea {
-  font-family: $base--font-family;
+  @include responsible-font-family($base--font-family, serif);
   font-weight: $font-weight__normal;
   @include font-size($base--font-size, true, false);
+}
+body {
+  @include responsible-font-family($base--font-family, serif, true);
 }
 
 // Addresses margins handled incorrectly in IE6/7

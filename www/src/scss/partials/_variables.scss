@@ -36,6 +36,7 @@ $base--border: $base--color;
 
 $base--font-family: "AdelleRegular", Georgia, "Times New Roman", serif;
 $secondary--font-family: 'PlutoSansLight', sans-serif;
+$secondary--font-family__bold: "PlutoSansCondHeavy", sans-serif;
 
 //set "bold" and "normal" weights here and use @include font-weight() mixin instead of font-weight.
 $font-weight__normal: normal;

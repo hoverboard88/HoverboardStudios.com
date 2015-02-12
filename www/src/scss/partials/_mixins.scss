@@ -51,3 +51,16 @@
     bottom: 0;
   }
 }
+@mixin responsible-font-family($font-family, $backup, $on_body: false) {
+  font-family: $backup;
+  @if $on_body {
+    &.fonts-loaded {
+      font-family: $font-family;
+    }
+  } @else {
+    .fonts-loaded & {
+      font-family: $font-family;
+    }
+  }
+
+}

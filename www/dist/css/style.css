@@ -296,11 +296,26 @@ input,
 select,
 body,
 textarea {
-  font-family: "AdelleRegular", Georgia, "Times New Roman", serif;
+  font-family: serif;
   font-weight: normal;
   font-size: 16px;
   font-size: 1rem;
   line-height: 1.5em;
+}
+.fonts-loaded html, .fonts-loaded
+button, .fonts-loaded
+input, .fonts-loaded
+select, .fonts-loaded
+body, .fonts-loaded
+textarea {
+  font-family: "AdelleRegular", Georgia, "Times New Roman", serif;
+}
+
+body {
+  font-family: serif;
+}
+body.fonts-loaded {
+  font-family: "AdelleRegular", Georgia, "Times New Roman", serif;
 }
 
 body {
@@ -533,11 +548,6 @@ img {
   height: auto;
   max-width: 100%;
   border: 0;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: "PlutoSansLight", sans-serif;
-  font-weight: normal;
 }
 
 .centered {
@@ -908,9 +918,12 @@ p, ul, ol, blockquote, input, textarea, fieldset, button, pre, table, hr, dl {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "PlutoSansCondHeavy", sans-serif;
+  font-family: sans-serif;
   text-transform: uppercase;
   margin-bottom: 0.5em;
+}
+.fonts-loaded h1, .fonts-loaded h2, .fonts-loaded h3, .fonts-loaded h4, .fonts-loaded h5, .fonts-loaded h6 {
+  font-family: "PlutoSansCondHeavy", sans-serif;
 }
 
 hr {
@@ -938,6 +951,9 @@ hr {
 }
 
 .display-font {
+  font-family: sans-serif;
+}
+.fonts-loaded .display-font {
   font-family: "PlutoSansLight", sans-serif;
 }
 
@@ -991,12 +1007,15 @@ td, th {
 }
 
 th {
-  font-family: "PlutoSansLight", sans-serif;
+  font-family: sans-serif;
   font-weight: normal;
   text-align: left;
   font-size: 18px;
   font-size: 1.125rem;
   line-height: 1.33333em;
+}
+.fonts-loaded th {
+  font-family: "PlutoSansLight", sans-serif;
 }
 
 tr:nth-child(2n) {
@@ -1599,6 +1618,9 @@ tfoot {
   font-size: 25px;
   font-size: 1.5625rem;
   line-height: 1.92em;
+  font-family: sans-serif;
+}
+.fonts-loaded .font--big {
   font-family: "PlutoSansLight", sans-serif;
 }
 
