@@ -126,13 +126,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #
   #   chef.validation_client_name = "ORGNAME-validator"
 
-  config.hostmanager.enabled = true
-  config.hostmanager.manage_host = true
-  config.hostmanager.ignore_private_ip = false
-  config.hostmanager.include_offline = true
-  config.vm.hostname = 'hoverboardstudios.vagrant'
-  config.vm.define 'hoverboard-studios' do |node|
-    node.vm.hostname = 'hoverboardstudios.vagrant'
-    node.vm.network :private_network, ip: '192.168.42.88'
-  end
+  config.vm.network :private_network, ip: "192.168.42.88"
+  config.vm.hostname = "hoverboardstudios.vagrant"
+  # config.vm.define = "hoverboard-studios"
+  # config.hostsupdater.aliases = ["alias.testing.de", "alias2.somedomain.com"]
 end
