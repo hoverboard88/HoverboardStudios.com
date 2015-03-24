@@ -72,8 +72,8 @@ gulp.task('svg2png', function () {
 gulp.task('images', function() {
   return gulp.src('src/img/**/*')
     .pipe(cache(imagemin({ optimizationLevel: 7, progressive: true, interlaced: true, svgoPlugins: [{removeViewBox: false}] })))
-    .pipe(gulp.dest('dist/img')) // Bug in path: https://github.com/imagemin/imagemin/issues/60
-    .pipe(notify({ message: 'Images task complete' }));
+    .pipe(gulp.dest('dist/img')); // Bug in path: https://github.com/imagemin/imagemin/issues/60
+    // .pipe(notify({ message: 'Images task complete' }));
 });
 
 // Clean
@@ -119,29 +119,42 @@ gulp.task('copystyles', function () {
 });
 
 gulp.task('html', ['copystyles'], function () {
-  critical.generateInline({
-    // Your base directory
-    base: 'dist/',
-    // HTML source file
-    src: '../src/index.html',
-    // Your CSS Files (optional)
-    css: ['dist/css/style.css'],
-    // Viewport width
-    width: 800,
-    // Viewport height
-    height: 600,
-    // Target for final HTML output
-    htmlTarget: 'index.html',
-    // Target for generated critical-path CSS (which we inline)
-    styleTarget: 'css/critical.css',
-    // Minify critical-path CSS when inlining
-    minify: true,
-    // Extract inlined styles from referenced stylesheets
-    extract: true
-   }, function (err, output) {
-    //output any errors
-    if (err) {
-      console.log(err);
-    }
-  });
+
+  //list out all pages we want to sniff
+  var pages = ['index.html', 'work/superiorcampers.html'];
+
+  //loop all pages and run Critical on them
+  for (var i = 0; i < pages.length; i++) {
+
+    var pagename = pages[i].match(/([^\/]*)\.html/i);
+    console.log(pagename);
+
+    critical.generateInline({
+      // Your base directory
+      base: 'dist/',
+      // HTML source file
+      src: '../src/' + pages[i],
+      // Your CSS Files (optional)
+      css: ['dist/css/style.css'],
+      // Viewport width
+      width: 800,
+      // Viewport height
+      height: 600,
+      // Target for final HTML output
+      htmlTarget: pages[i],
+      // Target for generated critical-path CSS (which we inline)
+      styleTarget: 'css/critical-' + pagename[1] + '.css',
+      // Minify critical-path CSS when inlining
+      minify: true,
+      // Extract inlined styles from referenced stylesheets
+      extract: true
+     }, function (err, output) {
+      //output any errors
+      if (err) {
+        console.log(err);
+      }
+    });
+
+  }
+
 });
