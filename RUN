@@ -1,6 +1,0 @@
-#!/bin/bash
-
-vagrant up &
-gulp watch --cwd www &
-open http://hoverboardstudios.vagrant --background
-echo "Opened http://hoverboardstudios.vagrant in browser."
