@@ -1,0 +1,36 @@
+// =============================================================================
+// Tables
+// =============================================================================
+
+table {
+  width: 100%;
+}
+td, th {
+  margin: 0;
+  padding: 5px;
+}
+th {
+  @include responsible-font-family($secondary--font-family, sans-serif);
+  font-weight: $font-weight__normal;
+  text-align: left;
+  @include font-size(18px);
+
+}
+tr:nth-child(2n) {
+  background: rgba($base--border, 0.1);
+}
+tbody {
+  tr {
+    &:last-child {
+      border: 0;
+    }
+  }
+}
+thead {
+  tr {
+    border-bottom: 1px solid $base--border;
+  }
+}
+tfoot {
+  border-top: 1px solid $base--border;
+}

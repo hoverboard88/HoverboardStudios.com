@@ -1,0 +1,98 @@
+.inventory-item {
+
+}
+.inventory-item__title {
+  color: $green--dark;
+  a {
+  	color: $green--dark;
+  	text-decoration: none;
+  	&:hover, &:focus {
+  		color: $green--light;
+  	}
+  }
+}
+.inventory-item__price {
+  color: $green--light;
+  @include font-size(30px);
+  display: inline-block;
+}
+.inventory-item__question {
+	display: inline-block;
+	position: relative;
+	top: -3px;
+	cursor: pointer;
+}
+.inventory-item__color {
+
+}
+.inventory-item__details {
+  list-style-type: none;
+  padding-left: 0;
+}
+.inventory-item__img {
+
+}
+.inventory-item__cta {
+
+}
+//specific to archive page
+.well--inventory {
+	overflow: hidden;
+	.inventory-item__title {
+		@include font-size(22px);
+	}
+	@include breakpoint(400px) {
+		.inventory-item__img {
+			float: right;
+			width: 50%;
+			// margin-right: 10px;
+		}
+	}
+	.entry-content {
+		float: left;
+		width: 50%;
+	}
+}
+.inventory-item__images {
+	.flex-direction-nav a {
+		top: 120px;
+	}
+	@include breakpoint(600px) {
+		@include grid-span(6, 1);
+	}
+	ul {
+		display: block;
+	}
+	.inventory-item__img {
+		display: block;
+	}
+}
+.entry-content--inventory {
+	@include breakpoint(600px) {
+			@include grid-span(6, 7);
+		}
+}
+.flex-control-thumbs {
+	clear: both;
+	margin-bottom: $base--spacing;
+	margin-right: -5px;
+	li {
+		img {
+			@extend .img--thumbnail;
+		}
+		float: left;
+		width: 10%;
+		padding-right: 5px;
+		margin-bottom: 5px;
+	}
+	.flex-active {
+		background: #fff;
+	}
+}
+.content-area--inventory {
+	padding: $base--spacing 0;
+}
+.inventory-item__fancybox {
+	display: inline-block;
+	width: 100%;
+}

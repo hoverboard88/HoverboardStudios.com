@@ -1,0 +1,47 @@
+.menu--social {
+	clear: both;
+	margin-left: -10px;
+	ul {
+		list-style-type: none;
+		padding: 0;
+		margin: 0;
+	}
+	li {
+		display: inline-block;
+	}
+	svg, img {
+		display: inline-block;
+	}
+	.menu__item a {
+		display: block;
+		border-radius: 50%;
+		height: 50px;
+		width: 50px;
+		&:hover, &:focus {
+			background: #ddd;
+		}
+	}
+}
+
+@include breakpoint (25em) {
+	.addresses {
+		float: left;
+		width: 100%;
+	}
+	.addresses__address {
+		float: left;
+		width: 50%;
+		padding-right: 10px;
+	}
+	.addresses, .fine-print, .menu--secondary {
+		@include font-size(16px);
+	}
+}
+
+@include breakpoint (45em) {
+	.addresses__address, .addresses__phone {
+		float: left;
+		width: 33%;
+		padding-right: 10px;
+	}
+}

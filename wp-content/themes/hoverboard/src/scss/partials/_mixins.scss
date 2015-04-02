@@ -1,0 +1,66 @@
+@mixin font-size($font-size, $line-height: true, $margin: false ){
+  font-size: $font-size;
+  font-size: ($font-size / $base--font-size) * 1rem;
+
+  $lh: ($base--spacing / $font-size * 1em);
+
+  @if $font-size > $base--font-size * $base--line-height {
+    $lh: $lh + $lh;
+  }
+
+  @if $line-height == true {
+    line-height: $lh;
+  }
+
+  @if $margin == true {
+    margin-bottom: $base--spacing;
+  }
+
+}
+@mixin font-weight($weight) {
+  @if $weight == "bold" {
+    font-weight: $font-weight__bold;
+  } @else {
+    font-weight: $font-weight__normal;
+  }
+}
+@mixin input-placeholder {
+  &.placeholder { @content; }
+  &:-moz-placeholder { @content; }
+  &::-moz-placeholder { @content; }
+  &:-ms-input-placeholder { @content; }
+  &::-webkit-input-placeholder { @content; }
+}
+
+@mixin breakpoint($point) {
+  @media (min-width: $point) { @content ; }
+}
+
+@mixin who-we-are-offset ($offset, $img-width) {
+  .content-block--who-we-are {
+    // padding-left: $offset;
+    float: right;
+    width: 100% - $offset;
+  }
+
+  .img--desktop {
+    position: absolute;
+    width: $img-width;
+    right: 100% - $offset + 3% - 1%; // subtracted -1% b/c imac was off for some reason.
+    // left: -$img-width + $offset - $gutter;
+    bottom: 0;
+  }
+}
+@mixin responsible-font-family($font-family, $backup, $on_body: false) {
+  font-family: $backup;
+  @if $on_body {
+    &.fonts-loaded {
+      font-family: $font-family;
+    }
+  } @else {
+    .fonts-loaded & {
+      font-family: $font-family;
+    }
+  }
+
+}

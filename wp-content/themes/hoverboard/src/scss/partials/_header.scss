@@ -1,0 +1,139 @@
+.logo-h1 {
+	text-align: center;
+}
+.logo {
+	max-width: 6em;
+}
+
+@include breakpoint(50em) {
+	.container--header {
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+	.logo-h1 {
+		line-height: 0; // to get vertical align to work correctly
+		text-align: left;
+		float: left;
+		width: $width--4;
+		padding-right: $gutter;
+		a {
+			display: block;
+		}
+		bottom: -15px;
+		position: relative;
+	}
+	.logo {
+		max-width: none;
+	}
+	.menu--main {
+		flex: 1 0 0;
+	}
+}
+@include breakpoint(65em) {
+	.logo-h1 {
+		bottom: -20px;
+	}
+}
+
+.phone-banner {
+	@include font-size(14px);
+	line-height: 1.4;
+	br {
+		display: none;
+	}
+	@include breakpoint(50em) {
+		text-align: left;
+		float: left;
+		width: $width--3;
+		padding-top: .5em;
+		@include font-size(16px);
+		br {
+			display: block;
+		}
+	}
+}
+
+.menu--main {
+	text-align: center;
+	margin: 0 -.5em;
+	@include breakpoint(50em) {
+		text-align: right;
+		float: left;
+		width: $width--8;
+		padding-top: .5em;
+	}
+	@include breakpoint(55em) {
+		padding-top: .7em;
+	}
+	@include breakpoint(60em) {
+		padding-top: .8em;
+	}
+	@include breakpoint(67em) {
+		padding-top: 1em;
+	}
+	@include breakpoint(70em) {
+		padding-top: 1.2em;
+	}
+	@include breakpoint(72em) {
+		padding-top: 1.4em;
+	}
+	ul {
+		padding-bottom: 0;
+	}
+	li {
+		display: inline-block;
+		// need small font for iPhone 5 and below
+		@include font-size(13px);
+		// now we can bump it back up to 16 for iPhone 6 and above
+		@include breakpoint(22em) {
+			@include font-size(16px);
+		}
+		@include breakpoint(67em) {
+			@include font-size(18px);
+		}
+	}
+	li:first-child a {
+		padding-left: 0;
+	}
+	li:last-child a {
+		padding-right: 0;
+	}
+	a {
+		position: relative;
+		display: block;
+		color: #003333;
+		padding: 0 .5em;
+		text-transform: uppercase;
+		font-weight: bold;
+		transition: color 0.2s ease-out;
+		&:active, &:hover, &:focus {
+			color: #66CCCC;
+		}
+		&:before, &:after {
+			display: inline-block;
+			opacity: 0;
+			transition: transform 0.3s, opacity 0.2s;
+			color: #66CCCC;
+		}
+		@include breakpoint(30em) {
+			padding: 0;
+			&:before {
+				margin-right: .25em;
+				content: '<';
+				transform: translateX(10px);
+			}
+
+			&:after {
+				margin-left: .25em;
+				content: '>';
+				transform: translateX(-10px);
+			}
+			&:active, &:hover, &:focus {
+				&:before, &:after {
+					opacity: 1;
+					transform: translateX(0px);
+				}
+			}
+		}
+	}
+}
