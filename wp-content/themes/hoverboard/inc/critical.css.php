@@ -146,7 +146,7 @@ textarea{ height: 130px; }
 }
  .wrap--content h2, .wrap--content h3{ text-shadow: rgb(9, 51, 52) 2px 2px 0px; }
  .wrap--content h3 a{ color: rgb(103, 200, 202); }
-.container--medgreen{ background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgb(50, 154, 154); background-position: initial initial; background-repeat: initial initial; }
+.container--medgreen, .wrap--hero{ background-color: rgb(50, 154, 154); }
 .container--work img{ -webkit-transition-property: box-shadow; -webkit-transition-duration: 0.3s; -webkit-transition-timing-function: ease-out; -webkit-transition-delay: initial; box-shadow: rgba(17, 94, 95, 0.796875) 4px 4px 0px; }
 .container--who-we-are{ position: relative; }
 .content-block--who-we-are{ float: right; width: 83.33333%; }
