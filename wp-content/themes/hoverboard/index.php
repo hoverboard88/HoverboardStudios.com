@@ -14,9 +14,9 @@
 get_header(); ?>
 
 	<div class="wrap wrap--ltgreen wrap--content">
-		<div class="container container--page-title">
-			<h1><?php echo get_the_title(get_option('page_for_posts')); ?></h1>
-		</div>
+		<header class="container container--page-title">
+			<h1 class="entry-title"><?php echo get_the_title(get_option('page_for_posts')); ?></h1>
+		</header>
 	</div>
 
 	<div id="primary" class="content-area wrap">

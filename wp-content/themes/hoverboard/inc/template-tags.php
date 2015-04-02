@@ -83,16 +83,16 @@ function hb_posted_on() {
 	);
 
 	$posted_on = sprintf(
-		_x( 'Posted on %s', 'post date', 'hb' ),
+		_x( '%s', 'post date', 'hb' ),
 		'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
 	);
 
 	$byline = sprintf(
 		_x( 'by %s', 'post author', 'hb' ),
-		'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
+		'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'name' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
 	);
 
-	echo '<span class="posted-on">' . $posted_on . '</span><span class="byline"> ' . $byline . '</span>';
+	echo '<span class="posted-on">' . $posted_on . '</span><br><span class="byline"> ' . $byline . '</span>';
 
 }
 endif;
@@ -117,11 +117,11 @@ function hb_entry_footer() {
 		}
 	}
 
-	if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
-		echo '<span class="comments-link">';
-		comments_popup_link( __( 'Leave a comment', 'hb' ), __( '1 Comment', 'hb' ), __( '% Comments', 'hb' ) );
-		echo '</span>';
-	}
+	// if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
+	// 	echo '<span class="comments-link">';
+	// 	comments_popup_link( __( 'Leave a comment', 'hb' ), __( '1 Comment', 'hb' ), __( '% Comments', 'hb' ) );
+	// 	echo '</span>';
+	// }
 
 	// edit_post_link( __( 'Edit', 'hb' ), '<span class="edit-link">', '</span>' );
 }

@@ -7,8 +7,17 @@
 
 get_header(); ?>
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
+	<div class="wrap wrap--ltgreen wrap--content">
+		<header class="container container--page-title">
+			<h1 class="entry-title"><?php the_title(); ?></h1>
+			<div class="entry-meta">
+				<?php hb_posted_on(); ?>
+			</div><!-- .entry-meta -->
+		</header>
+	</div>
+
+	<div id="primary" class="content-area wrap">
+		<main id="main" class="site-main container" role="main">
 
 		<?php while ( have_posts() ) : the_post(); ?>
 
@@ -28,5 +37,4 @@ get_header(); ?>
 		</main><!-- #main -->
 	</div><!-- #primary -->
 
-<?php get_sidebar(); ?>
 <?php get_footer(); ?>

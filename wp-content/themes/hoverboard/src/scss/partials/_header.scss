@@ -1,11 +1,13 @@
+$header_breakpoint: 52em;
+
 .logo-h1 {
 	text-align: center;
 }
 .logo {
-	max-width: 6em;
+	max-width: 16em;
 }
 
-@include breakpoint(50em) {
+@include breakpoint($header_breakpoint) {
 	.container--header {
 		padding-top: 0;
 		padding-bottom: 0;
@@ -35,28 +37,28 @@
 	}
 }
 
-.phone-banner {
-	@include font-size(14px);
-	line-height: 1.4;
-	br {
-		display: none;
-	}
-	@include breakpoint(50em) {
-		text-align: left;
-		float: left;
-		width: $width--3;
-		padding-top: .5em;
-		@include font-size(16px);
-		br {
-			display: block;
-		}
-	}
-}
+/* .phone-banner {
+  @include font-size(14px);
+  line-height: 1.4;
+  br {
+    display: none;
+  }
+  @include breakpoint(50em) {
+    text-align: left;
+    float: left;
+    width: $width--3;
+    padding-top: .5em;
+    @include font-size(16px);
+    br {
+      display: block;
+    }
+  }
+} */
 
 .menu--main {
 	text-align: center;
 	margin: 0 -.5em;
-	@include breakpoint(50em) {
+	@include breakpoint($header_breakpoint) {
 		text-align: right;
 		float: left;
 		width: $width--8;

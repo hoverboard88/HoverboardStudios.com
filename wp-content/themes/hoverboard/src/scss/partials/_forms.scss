@@ -35,17 +35,18 @@ label {
 
 input[type="submit"], button[type="submit"] {
   display: block;
-  background: #580d0a;
+  background: #ad1414;
   border: 0;
   border-radius: 0;
-  box-shadow: 4px 4px 0 rgba(173, 20, 20, 1);
+  box-shadow: 4px 4px 0 rgba(#580d0a, 1);
   color: #eee;
   line-height: 1;
   padding: 0.75em 1em;
-  transition: background .3s;
+  transition: background .3s, box-shadow .3s;
   &:focus, &:hover {
-    background: #ad1414;
-    box-shadow: 4px 4px 0 #580d0a;
+    background: lighten(#ad1414, 10%);
+    color: #fff;
+    box-shadow: 2px 2px 0 #580d0a;
   }
 }
 
@@ -67,12 +68,10 @@ input[type="tel"],
 input[type="time"],
 input[type="url"],
 textarea {
-  background: #fff;
   -webkit-appearance: none;
-  border: 0;
-  box-shadow: 4px 4px 0 rgba(104, 14, 15, 0.8);
   padding: 0.5em;
-  // max-width: 400px;
+  border: 1px solid #093334;
+  box-shadow: 4px 4px 0 rgba(#093334, 0.8);
   border-radius: 0;
   width: 100%;
   &:focus {
@@ -82,6 +81,32 @@ textarea {
   }
   @include input-placeholder {
     color: rgba(#000, 0.5);
+  }
+}
+.container--red {
+  input[type="text"],
+  input[type="color"],
+  input[type="date"],
+  input[type="datetime"],
+  input[type="datetime-local"],
+  input[type="email"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="time"],
+  input[type="url"],
+  textarea {
+    border: 0;
+    box-shadow: 4px 4px 0 rgba(104, 14, 15, 0.8);
+    background: #fff;
+  }
+  input[type="submit"], button[type="submit"] {
+    background: #580d0a;
+    box-shadow: 4px 4px 0 rgba(173, 20, 20, 1);
+    color: #eee;
+    &:focus, &:hover {
+      background: #ad1414;
+      box-shadow: 4px 4px 0 #580d0a;
+    }
   }
 }
 textarea {
