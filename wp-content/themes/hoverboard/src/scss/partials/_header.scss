@@ -63,6 +63,8 @@ $header_breakpoint: 52em;
 		float: left;
 		width: $width--8;
 		padding-top: .5em;
+		right: -1.5em;
+		position: relative;
 	}
 	@include breakpoint(55em) {
 		padding-top: .7em;

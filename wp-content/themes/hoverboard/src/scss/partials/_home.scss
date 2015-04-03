@@ -218,7 +218,12 @@
 	background: #cc3333;
 	color: #eee;
 	line-height: 1.5;
-	// margin: -30% 0 0;
+	a {
+    color: #fff;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    text-shadow: 2px 2px 0 #000;
+  }
 }
 
 .work__blurb {

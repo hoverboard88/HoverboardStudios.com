@@ -84,6 +84,4 @@
 <?php wp_footer(); ?>
 
 </body>
-<!-- add class to body so webfont styles take. -->
-<script>document.body.className = "fonts-loaded";</script>
 </html>

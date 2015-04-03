@@ -74,6 +74,7 @@ textarea {
   box-shadow: 4px 4px 0 rgba(#093334, 0.8);
   border-radius: 0;
   width: 100%;
+  max-width: 600px;
   &:focus {
     border-color: darken($base--border, 10%);
     outline: 0;
@@ -83,7 +84,7 @@ textarea {
     color: rgba(#000, 0.5);
   }
 }
-.container--red {
+.container--red, .wrap--red {
   input[type="text"],
   input[type="color"],
   input[type="date"],
@@ -111,4 +112,15 @@ textarea {
 }
 textarea {
   height: 130px;
+}
+
+.comment-form-author,
+.comment-form-email,
+.comment-form-url,
+.comment-form-comment {
+  margin-bottom: 0;
+}
+.form-allowed-tags {
+  @include font-size(12px);
+  max-width: 600px;
 }
