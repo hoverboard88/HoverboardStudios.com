@@ -72,7 +72,7 @@ if ( ! function_exists( 'hb_posted_on' ) ) :
 function hb_posted_on() {
 	$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
 	if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
-		$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
+		$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated visuallyhidden" datetime="%3$s">%4$s</time>';
 	}
 
 	$time_string = sprintf( $time_string,
@@ -110,11 +110,6 @@ function hb_entry_footer() {
 			printf( '<span class="cat-links">' . __( 'Posted in %1$s', 'hb' ) . '</span>', $categories_list );
 		}
 
-		/* translators: used between list items, there is a space after the comma */
-		$tags_list = get_the_tag_list( '', __( ', ', 'hb' ) );
-		if ( $tags_list ) {
-			printf( '<span class="tags-links">' . __( 'Tagged %1$s', 'hb' ) . '</span>', $tags_list );
-		}
 	}
 
 	// if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {

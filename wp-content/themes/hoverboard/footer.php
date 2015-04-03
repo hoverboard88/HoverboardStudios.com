@@ -74,8 +74,6 @@
 				</p>
 			</div>
 
-			<!-- <a href="https://plus.google.com/101904781934699073627" rel="publisher">Google+ (MN)</a> | <a href="https://plus.google.com/114769429182618988844" rel="publisher">Google+ (NC)</a> -->
-
 		</footer>
 	</div>
 

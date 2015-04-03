@@ -9,17 +9,19 @@
 
 get_header(); ?>
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
+	<div class="wrap wrap--content wrap--category wrap--category--<?php echo get_the_category()[0]->slug; ?>">
+		<header class="container container--page-title">
+			<?php
+				the_archive_title( '<h1 class="page-title single-spaced">', '</h1>' );
+				the_archive_description( '<div class="taxonomy-description">', '</div>' );
+			?>
+		</header>
+	</div>
+
+	<div id="primary" class="content-area wrap">
+		<main id="main" class="site-main container" role="main">
 
 		<?php if ( have_posts() ) : ?>
-
-			<header class="page-header">
-				<?php
-					the_archive_title( '<h1 class="page-title">', '</h1>' );
-					the_archive_description( '<div class="taxonomy-description">', '</div>' );
-				?>
-			</header><!-- .page-header -->
 
 			<?php /* Start the Loop */ ?>
 			<?php while ( have_posts() ) : the_post(); ?>
@@ -45,5 +47,4 @@ get_header(); ?>
 		</main><!-- #main -->
 	</div><!-- #primary -->
 
-<?php get_sidebar(); ?>
 <?php get_footer(); ?>

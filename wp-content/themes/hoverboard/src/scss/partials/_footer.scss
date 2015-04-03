@@ -14,12 +14,8 @@
 	}
 	.menu__item a {
 		display: block;
-		border-radius: 50%;
 		height: 50px;
 		width: 50px;
-		&:hover, &:focus {
-			background: #ddd;
-		}
 	}
 }
 
