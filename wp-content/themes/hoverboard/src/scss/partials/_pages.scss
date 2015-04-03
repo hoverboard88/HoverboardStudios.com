@@ -3,7 +3,7 @@
   padding-top: 20px;
   text-align: center;
 
-  .entry-title {
+  .entry-title, .page-title {
     @include font-size(32px, false);
     margin-bottom: 0;
   }
