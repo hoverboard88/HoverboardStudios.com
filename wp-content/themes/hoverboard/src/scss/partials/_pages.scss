@@ -1,30 +1,41 @@
 .container--page-title {
-	padding-top: 20px;
-	padding-bottom: 15px;
+  padding-bottom: 15px;
+  padding-top: 20px;
   text-align: center;
+
   .entry-title {
-    margin-bottom: 0;
     @include font-size(32px, false);
-    /* line-height: 1.5; */
+    margin-bottom: 0;
   }
+
   .entry-meta a {
     color: #fff;
     text-decoration: none;
   }
+
   @include breakpoint(50em) {
+    margin-bottom: 1.5em;
+    padding-bottom: 25px;
     padding-top: 40px;
     text-align: left;
-  	padding-bottom: 25px;
-    margin-bottom: 1.5em;
+
     .entry-title {
+      @include font-size(42px);
       float: left;
       width: 66%;
-      @include font-size(42px);
     }
+
     .entry-meta {
       float: right;
       text-align: right;
     }
   }
 
+}
+
+.wrap--category {
+  background: #000;
+}
+.wrap--category--developer {
+  background: url(dist/img/banner-developer.png);
 }

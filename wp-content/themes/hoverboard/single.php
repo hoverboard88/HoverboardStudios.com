@@ -7,7 +7,7 @@
 
 get_header(); ?>
 
-	<div class="wrap wrap--ltgreen wrap--content">
+	<div class="wrap wrap--content wrap--category--<?php echo get_the_category()[0]->slug; ?>">
 		<header class="container container--page-title">
 			<h1 class="entry-title"><?php the_title(); ?></h1>
 			<div class="entry-meta">
