@@ -9,10 +9,14 @@ get_header(); ?>
 
 	<div class="wrap wrap--content wrap--category wrap--category--<?php echo get_the_category()[0]->slug; ?>">
 		<header class="container container--page-title">
-			<h1 class="entry-title"><?php the_title(); ?></h1>
-
+			<div class="title-wrap">
+				<h1 class="entry-title"><?php the_title(); ?></h1>
+				<?php hb_byline(); ?>
+			</div>
 			<div class="entry-meta">
-				<?php hb_posted_on(); ?>
+				<span class="author-gravatar">
+					<?php echo get_avatar(get_the_author_meta('ID'), 96); ?>
+				</span>
 			</div><!-- .entry-meta -->
 		</header>
 	</div>

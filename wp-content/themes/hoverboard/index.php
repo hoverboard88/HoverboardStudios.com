@@ -13,7 +13,7 @@
 
 get_header(); ?>
 
-	<div class="wrap wrap--ltgreen wrap--content">
+	<div class="wrap wrap--medgreen wrap--content">
 		<header class="container container--page-title">
 			<h1 class="entry-title"><?php echo get_the_title(get_option('page_for_posts')); ?></h1>
 		</header>

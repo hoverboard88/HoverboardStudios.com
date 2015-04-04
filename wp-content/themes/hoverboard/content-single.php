@@ -6,6 +6,8 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
+	<?php hb_posted_on(); ?>
+
 	<div class="entry-content">
 		<?php the_content(); ?>
 		<?php
@@ -16,7 +18,4 @@
 		?>
 	</div><!-- .entry-content -->
 
-	<footer class="entry-footer">
-		<?php hb_entry_footer(); ?>
-	</footer><!-- .entry-footer -->
 </article><!-- #post-## -->

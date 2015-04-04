@@ -87,12 +87,9 @@ function hb_posted_on() {
 		'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
 	);
 
-	$byline = sprintf(
-		_x( 'by %s', 'post author', 'hb' ),
-		'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author_meta('first_name') . ' ' . get_the_author_meta('last_name') ) . '</a></span>'
-	);
+	$categories_list = get_the_category_list( __( ', ', 'hb' ) );
 
-	echo '<span class="posted-on">' . $posted_on . '</span><br><span class="byline"> ' . $byline . '</span>';
+	echo '<p class="entry-meta"><span class="posted-on">' . $posted_on . '</span><span class="cat-links">' . $categories_list . '</span></p><!-- .entry-meta -->';
 
 }
 endif;
@@ -101,6 +98,15 @@ if ( ! function_exists( 'hb_entry_footer' ) ) :
 /**
  * Prints HTML with meta information for the categories, tags and comments.
  */
+
+function hb_byline() {
+	$byline = sprintf(
+		_x( 'by %s', 'post author', 'hb' ),
+		'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author_meta('first_name') . ' ' . get_the_author_meta('last_name') ) . '</a></span>'
+	);
+	echo '<span class="byline">' . $byline . '</span>';
+}
+
 function hb_entry_footer() {
 	// Hide category and tag text for pages.
 	if ( 'post' == get_post_type() ) {

@@ -13,6 +13,10 @@
     text-decoration: none;
   }
 
+  .title-wrap a {
+    color: $white;
+  }
+
   @include breakpoint(50em) {
     .single & {
       margin-bottom: 1.5em;
@@ -22,8 +26,10 @@
     padding-top: 40px;
     text-align: left;
 
-    .entry-title {
-      @include font-size(42px);
+    .title-wrap {
+      .entry-title, .page-title {
+        @include font-size(42px);
+      }
       float: left;
       width: 66%;
     }
@@ -45,4 +51,33 @@
 
 .taxonomy-description p:last-child {
   margin-bottom: 0;
+}
+
+.content-area {
+  .post {
+    border-bottom: 1px solid $grey--light;
+    margin-bottom: $base--spacing;
+    padding-bottom: $base--spacing;
+    &:last-child {
+      border: 0;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+  }
+}
+
+.author-gravatar img {
+  border-radius: 50%;
+}
+
+.posted-on a {
+  text-decoration: none;
+}
+
+.cat-links {
+  &:before {
+    content: "//";
+    padding: 0 5px;
+    color: $greens--light;
+  }
 }

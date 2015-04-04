@@ -6,12 +6,11 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header">
-		<?php the_title( sprintf( '<h1 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h1>' ); ?>
+		<?php the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
 
 		<?php if ( 'post' == get_post_type() ) : ?>
-		<p class="entry-meta">
-			<?php hb_posted_on(); ?>
-		</p><!-- .entry-meta -->
+
+		<?php hb_posted_on(); ?>
 		<?php endif; ?>
 	</header><!-- .entry-header -->
 
@@ -36,7 +35,4 @@
 		?>
 	</div><!-- .entry-content -->
 
-	<footer class="entry-footer">
-		<?php hb_entry_footer(); ?>
-	</footer><!-- .entry-footer -->
 </article><!-- #post-## -->
