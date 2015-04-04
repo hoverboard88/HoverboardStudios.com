@@ -105,19 +105,19 @@ $header_breakpoint: 52em;
 	a {
 		position: relative;
 		display: block;
-		color: #003333;
+		color: $greens--dark;
 		padding: 0 .5em;
 		text-transform: uppercase;
 		font-weight: bold;
 		transition: color 0.2s ease-out;
 		&:active, &:hover, &:focus {
-			color: #66CCCC;
+			color: $greens--light;
 		}
 		&:before, &:after {
 			display: inline-block;
 			opacity: 0;
 			transition: transform 0.3s, opacity 0.2s;
-			color: #66CCCC;
+			color: $greens--light;
 		}
 		@include breakpoint(30em) {
 			padding: 0;

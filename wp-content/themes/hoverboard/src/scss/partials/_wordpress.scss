@@ -41,8 +41,8 @@ a img.aligncenter {
 }
 
 .wp-caption {
-  background: #fff;
-  border: 1px solid #f0f0f0;
+  background: $white;
+  border: 1px solid $grey--light;
   max-width: 96%; /* Image does not overflow the content area */
   padding: .5em 3px 10px;
   text-align: center;
@@ -79,8 +79,8 @@ a img.aligncenter {
 
 
 blockquote {
-  border-top: 1px solid #f0f0f0;
-  border-bottom: 1px solid #f0f0f0;
+  border-top: 1px solid $grey--light;
+  border-bottom: 1px solid $grey--light;
   font-style: italic;
   padding: 1.5em;
   @include font-size(14px);

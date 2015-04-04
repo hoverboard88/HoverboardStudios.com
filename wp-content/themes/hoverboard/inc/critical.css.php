@@ -32,8 +32,8 @@ label{ display: block; }
  input[type="submit"]{ display: block; background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgb(173, 20, 20); border-top-width: 0px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 0px; border-style: initial; border-color: initial; border-top-left-radius: 0px 0px; border-top-right-radius: 0px 0px; border-bottom-right-radius: 0px 0px; border-bottom-left-radius: 0px 0px; box-shadow: rgb(88, 13, 10) 4px 4px 0px; color: rgb(238, 238, 238); line-height: 1; padding-top: 0.75em; padding-right: 1em; padding-bottom: 0.75em; padding-left: 1em; -webkit-transition-property: background, box-shadow; -webkit-transition-duration: 0.3s, 0.3s; -webkit-transition-timing-function: initial, initial; -webkit-transition-delay: initial, initial; background-position: initial initial; background-repeat: initial initial; }
 select{ margin-bottom: 28px; cursor: pointer; z-index: 1; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px; font-size: 1.28571rem; line-height: 1.55556em; }
  input[type="tel"], input[type="text"], textarea{ -webkit-appearance: none; padding-top: 0.5em; padding-right: 0.5em; padding-bottom: 0.5em; padding-left: 0.5em; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; border-top-color: rgb(9, 51, 52); border-right-color: rgb(9, 51, 52); border-bottom-color: rgb(9, 51, 52); border-left-color: rgb(9, 51, 52); box-shadow: rgba(9, 51, 52, 0.796875) 4px 4px 0px; border-top-left-radius: 0px 0px; border-top-right-radius: 0px 0px; border-bottom-right-radius: 0px 0px; border-bottom-left-radius: 0px 0px; width: 100%; max-width: 600px; }
- .container--red input[type="tel"], .container--red input[type="text"], .container--red textarea{ border-top-width: 0px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 0px; border-style: initial; border-color: initial; box-shadow: rgba(104, 14, 15, 0.796875) 4px 4px 0px; background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgb(255, 255, 255); background-position: initial initial; background-repeat: initial initial; }
- .container--red input[type="submit"]{ background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgb(88, 13, 10); box-shadow: rgb(173, 20, 20) 4px 4px 0px; color: rgb(238, 238, 238); background-position: initial initial; background-repeat: initial initial; }
+ .container--red input[type="tel"], .container--red input[type="text"], .container--red textarea{ border-top-width: 0px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 0px; border-style: initial; border-color: initial; box-shadow: rgba(88, 13, 10, 0.796875) 4px 4px 0px; background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgb(255, 255, 255); background-position: initial initial; background-repeat: initial initial; }
+ .container--red input[type="submit"]{ background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgb(88, 13, 10); box-shadow: rgb(88, 13, 10) 4px 4px 0px; color: rgb(238, 238, 238); background-position: initial initial; background-repeat: initial initial; }
 textarea{ height: 130px; }
 .container{ margin-left: auto; margin-right: auto; font-size: 1.14286rem; line-height: 1.75em; max-width: 75em; padding-top: 1.5em; padding-right: 1.5em; padding-bottom: 1.5em; padding-left: 1.5em; position: relative; }
  input, p, textarea, ul{ margin-top: 0px; margin-right: 0px; margin-bottom: 28px; margin-left: 0px; }
@@ -82,8 +82,8 @@ textarea{ height: 130px; }
 }
 .menu--main li:first-child a{ padding-left: 0px; }
 .menu--main li:last-child a{ padding-right: 0px; }
-.menu--main a{ position: relative; display: block; color: rgb(0, 51, 51); padding-top: 0px; padding-right: 0.5em; padding-bottom: 0px; padding-left: 0.5em; text-transform: uppercase; font-weight: 700; -webkit-transition-property: color; -webkit-transition-duration: 0.2s; -webkit-transition-timing-function: ease-out; -webkit-transition-delay: initial; }
-.menu--main a::after, .menu--main a::before{ display: inline-block; opacity: 0; -webkit-transition-property: -webkit-transform, opacity; -webkit-transition-duration: 0.3s, 0.2s; -webkit-transition-timing-function: initial, initial; -webkit-transition-delay: initial, initial; color: rgb(102, 204, 204); }
+.menu--main a{ position: relative; display: block; color: rgb(9, 51, 52); padding-top: 0px; padding-right: 0.5em; padding-bottom: 0px; padding-left: 0.5em; text-transform: uppercase; font-weight: 700; -webkit-transition-property: color; -webkit-transition-duration: 0.2s; -webkit-transition-timing-function: ease-out; -webkit-transition-delay: initial; }
+.menu--main a::after, .menu--main a::before{ display: inline-block; opacity: 0; -webkit-transition-property: -webkit-transform, opacity; -webkit-transition-duration: 0.3s, 0.2s; -webkit-transition-timing-function: initial, initial; -webkit-transition-delay: initial, initial; color: rgb(103, 200, 202); }
 @media (min-width: 30em){
 .menu--main a{ padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; }
 .menu--main a::before{ margin-right: 0.25em; content: '<'; -webkit-transform: translateX(10px); }
@@ -125,7 +125,7 @@ textarea{ height: 130px; }
 @media (min-width: 53em){
 .container--hero .content-block{ width: 66.66667%; float: right; text-align: left; }
 }
-.wrap--tiled{ background-image: url(dist/img/tiled-pattern.svg); background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgb(255, 255, 255); box-shadow: rgba(0, 0, 0, 0.246094) 0px 2px 18px; z-index: 1; position: relative; background-position: initial initial; background-repeat: initial initial; }
+.wrap--tiled{ background-image: url(dist/img/tiled-pattern.svg); background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgb(255, 255, 255); box-shadow: rgba(34, 34, 34, 0.246094) 0px 2px 18px; z-index: 1; position: relative; background-position: initial initial; background-repeat: initial initial; }
 .container--devices{ padding-bottom: 0px; }
 @media (min-width: 50em){
 .container--devices{ padding-bottom: 420px; }
@@ -187,8 +187,8 @@ textarea{ height: 130px; }
 .content-block--who-we-are{ float: right; width: 66.66667%; }
 .img--desktop{ position: absolute; width: 30%; right: 68.66667%; bottom: 0px; }
 }
-.container--red{ background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgb(204, 51, 51); color: rgb(238, 238, 238); line-height: 1.5; background-position: initial initial; background-repeat: initial initial; }
- .container--red h2{ text-shadow: rgb(0, 0, 0) 2px 2px 0px; }
+.container--red{ background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgb(173, 20, 20); color: rgb(238, 238, 238); line-height: 1.5; background-position: initial initial; background-repeat: initial initial; }
+ .container--red h2{ text-shadow: rgb(34, 34, 34) 2px 2px 0px; }
 @media (min-width: 21em){
 .work__blurb{ padding-right: 20%; }
 }

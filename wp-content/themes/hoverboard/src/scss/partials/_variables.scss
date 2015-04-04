@@ -12,7 +12,21 @@ $border-box: true;
   * Colors
   */
 
-// $testcolor: #ff0;
+$white: #fff;
+$grey--light: #eee;
+$black: #222;
+$greens--light: #67c8ca;
+$greens--medium: #329a9a;
+$greens--dark: #093334;
+
+$secondary--red: #ad1414;
+$secondary--red-dark: #580d0a;
+$secondary--purple-light: #8757b5;
+$secondary--purple-dark: #483360;
+$secondary--blue: #24408f;
+$secondary--blue-dark: #27365b;
+$secondary--green: #668c62;
+$secondary--green-lt: #6fc067;
 
 /**
   * Grid
@@ -30,8 +44,7 @@ $border-box: true;
   * Base Styles
   */
 
-$base--color: #222;
-
+$base--color: $black;
 $base--border: $base--color;
 
 $base--font-family: "AdelleRegular", Georgia, "Times New Roman", serif;

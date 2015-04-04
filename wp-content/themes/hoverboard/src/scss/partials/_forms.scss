@@ -15,7 +15,7 @@ label {
 .label--required {
   &:after {
     content: " *";
-    color: #c33;
+    color: $secondary--red;
   }
 }
 .label--radio {
@@ -35,18 +35,18 @@ label {
 
 input[type="submit"], button[type="submit"] {
   display: block;
-  background: #ad1414;
+  background: $secondary--red;
   border: 0;
   border-radius: 0;
-  box-shadow: 4px 4px 0 rgba(#580d0a, 1);
-  color: #eee;
+  box-shadow: 4px 4px 0 $secondary--red-dark;
+  color: $grey--light;
   line-height: 1;
   padding: 0.75em 1em;
   transition: background .3s, box-shadow .3s;
   &:focus, &:hover {
-    background: lighten(#ad1414, 10%);
-    color: #fff;
-    box-shadow: 2px 2px 0 #580d0a;
+    background: lighten($secondary--red, 10%);
+    color: $white;
+    box-shadow: 2px 2px 0 $secondary--red-dark;
   }
 }
 
@@ -70,18 +70,18 @@ input[type="url"],
 textarea {
   -webkit-appearance: none;
   padding: 0.5em;
-  border: 1px solid #093334;
-  box-shadow: 4px 4px 0 rgba(#093334, 0.8);
+  border: 1px solid $greens--dark;
+  box-shadow: 4px 4px 0 rgba($greens--dark, 0.8);
   border-radius: 0;
   width: 100%;
   max-width: 600px;
   &:focus {
     border-color: darken($base--border, 10%);
     outline: 0;
-    box-shadow: inset 0 1px 1px rgba(0,0,0, 0.075),0 0 8px rgba($base--border, 0.6);
+    box-shadow: inset 0 1px 1px rgba($black, 0.075), 0 0 8px rgba($base--border, 0.6);
   }
   @include input-placeholder {
-    color: rgba(#000, 0.5);
+    color: rgba($black, 0.5);
   }
 }
 .container--red, .wrap--red {
@@ -97,16 +97,16 @@ textarea {
   input[type="url"],
   textarea {
     border: 0;
-    box-shadow: 4px 4px 0 rgba(104, 14, 15, 0.8);
-    background: #fff;
+    box-shadow: 4px 4px 0 rgba($secondary--red-dark, 0.8);
+    background: $white;
   }
   input[type="submit"], button[type="submit"] {
-    background: #580d0a;
-    box-shadow: 4px 4px 0 rgba(173, 20, 20, 1);
-    color: #eee;
+    background: $secondary--red-dark;
+    box-shadow: 4px 4px 0 $secondary--red-dark;
+    color: $grey--light;
     &:focus, &:hover {
-      background: #ad1414;
-      box-shadow: 4px 4px 0 #580d0a;
+      background: $secondary--red;
+      box-shadow: 4px 4px 0 $secondary--red-dark;
     }
   }
 }
