@@ -81,3 +81,9 @@
     color: $greens--light;
   }
 }
+
+.entry-summary {
+  p:last-child {
+    margin-bottom: 0;
+  }
+}

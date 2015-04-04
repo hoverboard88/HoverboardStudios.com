@@ -65,6 +65,12 @@ $header_breakpoint: 52em;
 		padding-top: .5em;
 		right: -1.5em;
 		position: relative;
+		li:first-child a {
+			padding-left: 0;
+		}
+		li:last-child a {
+			padding-right: 0;
+		}
 	}
 	@include breakpoint(55em) {
 		padding-top: .7em;
@@ -95,12 +101,6 @@ $header_breakpoint: 52em;
 		@include breakpoint(67em) {
 			@include font-size(18px);
 		}
-	}
-	li:first-child a {
-		padding-left: 0;
-	}
-	li:last-child a {
-		padding-right: 0;
 	}
 	a {
 		position: relative;

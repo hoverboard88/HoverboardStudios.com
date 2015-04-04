@@ -56,6 +56,8 @@ textarea{ height: 130px; }
 .menu--main{ text-align: center; margin-top: 0px; margin-right: -0.5em; margin-bottom: 0px; margin-left: -0.5em; }
 @media (min-width: 52em){
 .menu--main{ text-align: right; float: left; width: 66.66667%; padding-top: 0.5em; right: -1.5em; position: relative; }
+.menu--main li:first-child a{ padding-left: 0px; }
+.menu--main li:last-child a{ padding-right: 0px; }
 }
 @media (min-width: 55em){
 .menu--main{ padding-top: 0.7em; }
@@ -80,8 +82,6 @@ textarea{ height: 130px; }
 @media (min-width: 67em){
 .menu--main li{ font-size: 1.28571rem; line-height: 1.55556em; }
 }
-.menu--main li:first-child a{ padding-left: 0px; }
-.menu--main li:last-child a{ padding-right: 0px; }
 .menu--main a{ position: relative; display: block; color: rgb(9, 51, 52); padding-top: 0px; padding-right: 0.5em; padding-bottom: 0px; padding-left: 0.5em; text-transform: uppercase; font-weight: 700; -webkit-transition-property: color; -webkit-transition-duration: 0.2s; -webkit-transition-timing-function: ease-out; -webkit-transition-delay: initial; }
 .menu--main a::after, .menu--main a::before{ display: inline-block; opacity: 0; -webkit-transition-property: -webkit-transform, opacity; -webkit-transition-duration: 0.3s, 0.2s; -webkit-transition-timing-function: initial, initial; -webkit-transition-delay: initial, initial; color: rgb(103, 200, 202); }
 @media (min-width: 30em){
