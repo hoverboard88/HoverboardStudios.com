@@ -158,13 +158,20 @@
 }
 .wrap--dkgreen, .container--dkgreen {
 	background: $greens--dark;
-
 }
+
 .wrap--medgreen, .container--medgreen, .wrap--hero {
 	background-color: $greens--medium;
 }
 .wrap--ltgreen, .container--ltgreen {
 	background: $greens--light;
+}
+
+.wrap--blue, .container--blue {
+	background: $secondary--blue;
+	a {
+		color: lighten($secondary--blue, 40%);
+	}
 }
 
 .container--work {

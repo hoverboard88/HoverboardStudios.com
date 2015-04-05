@@ -33,7 +33,7 @@ get_header(); ?>
 		</main><!-- #main -->
 	</div><!-- #primary -->
 
-	<div class="wrap wrap--red wrap--content">
+	<div class="wrap wrap--blue wrap--content">
 		<div class="container">
 			<?php
 				// If comments are open or we have at least one comment, load up the comment template
