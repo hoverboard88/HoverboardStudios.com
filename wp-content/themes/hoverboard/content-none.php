@@ -28,6 +28,12 @@
 			<p><?php _e( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'hb' ); ?></p>
 			<?php get_search_form(); ?>
 
+			<p>Check out some of our other categories:</p>
+
+			<?php wp_list_categories(array(
+				'title_li' => false
+			)); ?>
+
 		<?php endif; ?>
 	</div><!-- .page-content -->
 </section><!-- .no-results -->

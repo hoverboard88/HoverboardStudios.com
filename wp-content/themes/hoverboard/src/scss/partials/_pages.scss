@@ -3,7 +3,8 @@
   padding-top: 20px;
   text-align: center;
 
-  .entry-title, .page-title {
+  .entry-title,
+  .page-title {
     @include font-size(32px, false);
     margin-bottom: 0;
   }
@@ -18,18 +19,22 @@
   }
 
   @include breakpoint(50em) {
-    .single & {
-      margin-bottom: 1.5em;
-    }
 
     padding-bottom: 25px;
     padding-top: 40px;
     text-align: left;
 
+    .single & {
+      margin-bottom: 1.5em;
+    }
+
     .title-wrap {
-      .entry-title, .page-title {
+
+      .entry-title,
+      .page-title {
         @include font-size(42px);
       }
+
       float: left;
       width: 66%;
     }
@@ -43,10 +48,10 @@
 }
 
 .wrap--category {
-  background: $greens--light;
+  background: $greens--medium;
 }
 .wrap--category--developer {
-  background: url(dist/img/banner-developer.png);
+  background: url("dist/img/banner-developer.png");
 }
 
 .taxonomy-description p:last-child {
@@ -54,7 +59,8 @@
 }
 
 .content-area {
-  .post, .page {
+  .post,
+  .page {
     border-bottom: 1px solid $grey--light;
     margin-bottom: $base--spacing;
     //  padding-bottom: $base--spacing; Assumes the last element has space on the bottom.
@@ -75,8 +81,50 @@
 
 .cat-links {
   &:before {
-    content: "//";
-    padding: 0 5px;
     color: $greens--light;
+    content: '//';
+    padding: 0 5px;
+  }
+}
+
+.pinboard-link-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  li {
+    background: darken($grey--light, 20%);
+    margin-bottom: $base--spacing;
+    padding: $base--spacing;
+    color: $white;
+    a {
+      color: $white;
+      font-family: $secondary--font-family__bold;
+      text-decoration: none;
+      @include font-size(24px);
+    }
+    &:nth-child(8n+1) {
+      background: lighten($secondary--red, 10%);
+    }
+    &:nth-child(8n+2) {
+      background: $secondary--green-lt;
+    }
+    &:nth-child(8n+3) {
+      background: $secondary--green;
+    }
+    &:nth-child(8n+4) {
+      background: $secondary--blue;
+    }
+    &:nth-child(8n+5) {
+      background: $secondary--blue-dark;
+    }
+    &:nth-child(8n+6) {
+      background: $secondary--purple-light;
+    }
+    &:nth-child(8n+7) {
+      background: $secondary--purple-dark;
+    }
+  }
+  .pinboard-link-note {
+    display: block;
   }
 }

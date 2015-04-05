@@ -142,6 +142,13 @@ function hb_wp_head() { ?>
 <?php }
 add_action( 'wp_head', 'hb_wp_head' );
 
+function hb_the_archive_title($before, $after) {
+	$title = get_the_archive_title();
+	$title = str_replace('Category: ', '', $title);
+
+	echo $before . $title . $after;
+}
+
 /**
  * Implement the Custom Header feature.
  */
