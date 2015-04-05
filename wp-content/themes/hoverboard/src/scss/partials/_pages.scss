@@ -103,24 +103,27 @@
       @include font-size(24px);
     }
     &:nth-child(8n+1) {
-      background: lighten($secondary--red, 10%);
+      background: lighten($secondary--blue, 20%);
     }
     &:nth-child(8n+2) {
-      background: $secondary--green-lt;
+      background: lighten($secondary--blue, 10%);
     }
     &:nth-child(8n+3) {
-      background: $secondary--green;
-    }
-    &:nth-child(8n+4) {
       background: $secondary--blue;
     }
+    &:nth-child(8n+4) {
+      background: lighten($secondary--blue-dark, 10%);
+    }
     &:nth-child(8n+5) {
-      background: $secondary--blue-dark;
+      background: lighten($secondary--purple-light, 10%);
     }
     &:nth-child(8n+6) {
-      background: $secondary--purple-light;
+      background: lighten($secondary--purple-light, 5%);
     }
     &:nth-child(8n+7) {
+      background: lighten($secondary--purple-light, 0);
+    }
+    &:nth-child(8n+8) {
       background: $secondary--purple-dark;
     }
   }
