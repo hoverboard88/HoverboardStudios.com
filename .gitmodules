@@ -1,0 +1,3 @@
+[submodule "wp-content/plugins/pinboard-curator"]
+	path = wp-content/plugins/pinboard-curator
+	url = https://github.com/hoverboard88/pinboard-curator.git
