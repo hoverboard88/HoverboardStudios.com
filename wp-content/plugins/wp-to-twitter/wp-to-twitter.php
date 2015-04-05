@@ -3,7 +3,7 @@
 Plugin Name: WP to Twitter
 Plugin URI: http://www.joedolson.com/wp-to-twitter/
 Description: Posts a Tweet when you update your WordPress blog or post a link, using your URL shortening service. Rich in features for customizing and promoting your Tweets.
-Version: 3.0.2
+Version: 3.0.3
 Author: Joseph Dolson
 Author URI: http://www.joedolson.com/
 */
@@ -54,7 +54,7 @@ require_once( plugin_dir_path( __FILE__ ) . '/wpt-feed.php' );
 require_once( plugin_dir_path( __FILE__ ) . '/wpt-widget.php' );
 
 global $wpt_version;
-$wpt_version = "3.0.2";
+$wpt_version = "3.0.3";
 load_plugin_textdomain( 'wp-to-twitter', false, dirname( plugin_basename( __FILE__ ) ) . '/lang' );
 
 // check for OAuth configuration
@@ -385,7 +385,7 @@ function jd_doTwitterAPIPost( $twit, $auth = false, $id = false, $media = false 
 				);
 		// support for HTTP deprecated as of 1/14/2014 -- https://dev.twitter.com/discussions/24239
 		if ( wtt_oauth_test( $auth ) && ( $connection = wtt_oauth_connection( $auth ) ) ) {
-			wpt_mail( "First Tweet Attachment", "Auth: $auth", true );
+			wpt_mail( "First Tweet Attachment", "Auth: $auth" );
 			if ( $media && $attachment && !$media_id ) {
 				$media_id = $connection->media( $upload_api, array( 'auth'=>$auth, 'media'=>$attachment ) );
 				if ( $media_id ) {
@@ -1219,7 +1219,7 @@ function jd_add_twitter_inner_box( $post ) {
 					wpt_schedule_values( $post_id );
 					do_action( 'wpt_custom_tab', $post_id, 'visible' );
 				} else {
-					printf( "<p>" . __( 'Upgrade to WP Tweets PRO to configure options! <a href="%s">Upgrade now!</a>' . "</p>", 'wp-to-twitter' ), 'http://www.joedolson.com/wp-tweets-pro/' );
+					echo "<p>" .sprintf( __( 'Upgrade to WP Tweets PRO to configure options! <a href="%s">Upgrade now!</a>', 'wp-to-twitter' ), 'http://www.joedolson.com/wp-tweets-pro/' ) . "</p>";
 				}
 				?>
 				</div>

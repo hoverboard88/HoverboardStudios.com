@@ -54,14 +54,13 @@
 }
 
 .content-area {
-  .post {
+  .post, .page {
     border-bottom: 1px solid $grey--light;
     margin-bottom: $base--spacing;
-    padding-bottom: $base--spacing;
+    //  padding-bottom: $base--spacing; Assumes the last element has space on the bottom.
     &:last-child {
       border: 0;
       margin-bottom: 0;
-      padding-bottom: 0;
     }
   }
 }
@@ -79,11 +78,5 @@
     content: "//";
     padding: 0 5px;
     color: $greens--light;
-  }
-}
-
-.entry-summary {
-  p:last-child {
-    margin-bottom: 0;
   }
 }

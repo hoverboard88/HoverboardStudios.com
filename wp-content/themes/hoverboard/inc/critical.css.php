@@ -6,7 +6,7 @@ body{ font-family: serif; }
 body.fonts-loaded{ font-family: AdelleRegular, Georgia, 'Times New Roman', serif; }
 body{ margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; }
 a{ background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: initial; background-position: 0px 0px; background-repeat: initial initial; }
-h2{ font-size: 2.14286rem; line-height: 1.86667em; margin-top: 0px; }
+h2{ font-size: 2rem; line-height: 1em; margin-top: 0px; }
 h3{ font-size: 1.57143rem; line-height: 1.27273em; margin-top: 0px; }
  strong{ font-weight: 700; }
 svg:not(:root){ overflow-x: hidden; overflow-y: hidden; }
