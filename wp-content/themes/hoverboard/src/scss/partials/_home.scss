@@ -116,17 +116,17 @@
 		float: left;
 		width: 50%;
 		.container {
-			padding: $gutter;
+			padding: $base--spacing;
 		}
 		.container--devices {
 			padding-bottom: 400px;
 		}
 	}
 	.column--half--spaced.first {
-		padding-right: $gutter;
+		padding-right: $base--spacing;
 	}
 	.column--half--spaced.last {
-		padding-left: $gutter;
+		padding-left: $base--spacing;
 	}
 	.container--devices {
 		position: static;

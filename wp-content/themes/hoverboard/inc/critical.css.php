@@ -35,7 +35,10 @@ select{ margin-bottom: 28px; cursor: pointer; z-index: 1; padding-top: 10px; pad
  .container--red input[type="tel"], .container--red input[type="text"], .container--red textarea{ border-top-width: 0px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 0px; border-style: initial; border-color: initial; box-shadow: rgba(88, 13, 10, 0.796875) 4px 4px 0px; background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgb(255, 255, 255); background-position: initial initial; background-repeat: initial initial; }
  .container--red input[type="submit"]{ background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgb(88, 13, 10); box-shadow: rgb(88, 13, 10) 4px 4px 0px; color: rgb(238, 238, 238); background-position: initial initial; background-repeat: initial initial; }
 textarea{ height: 130px; }
-.container{ margin-left: auto; margin-right: auto; font-size: 1.14286rem; line-height: 1.75em; max-width: 75em; padding-top: 1.5em; padding-right: 1.5em; padding-bottom: 1.5em; padding-left: 1.5em; position: relative; }
+.container{ margin-left: auto; margin-right: auto; font-size: 1.14286rem; line-height: 1.75em; max-width: 75em; padding-top: 14px; padding-right: 14px; padding-bottom: 14px; padding-left: 14px; position: relative; }
+@media (min-width: 50em){
+.container{ padding-top: 28px; padding-right: 28px; padding-bottom: 28px; padding-left: 28px; }
+}
  input, p, textarea, ul{ margin-top: 0px; margin-right: 0px; margin-bottom: 28px; margin-left: 0px; }
  h2, h3{ font-family: sans-serif; text-transform: uppercase; margin-bottom: 0.5em; }
  .fonts-loaded h2, .fonts-loaded h3{ font-family: PlutoSansCondHeavy, sans-serif; }
@@ -45,7 +48,7 @@ textarea{ height: 130px; }
 .logo{ max-width: 16em; }
 @media (min-width: 52em){
 .container--header{ padding-top: 0px; padding-bottom: 0px; }
-.logo-h1{ line-height: 0; text-align: left; float: left; width: 33.33333%; padding-right: 1.5em; bottom: -15px; position: relative; }
+.logo-h1{ line-height: 0; text-align: left; float: left; width: 33.33333%; padding-right: 28px; bottom: -15px; position: relative; }
 .logo-h1 a{ display: block; }
 .logo{ max-width: none; }
 .menu--main{ -webkit-box-flex: 1; }
@@ -143,8 +146,8 @@ textarea{ height: 130px; }
 @media (min-width: 50em){
 .container--columns{ display: -webkit-box; }
 .column--half{ float: left; width: 50%; }
-.column--half--spaced.first{ padding-right: 1.5em; }
-.column--half--spaced.last{ padding-left: 1.5em; }
+.column--half--spaced.first{ padding-right: 28px; }
+.column--half--spaced.last{ padding-left: 28px; }
 .container--devices{ position: static; }
 .devices{ position: absolute; bottom: 0px; width: 50%; left: 0px; margin-left: 0px; }
 }

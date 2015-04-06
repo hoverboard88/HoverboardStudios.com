@@ -1,0 +1,138 @@
+.comment-list {
+  padding: 0;
+  margin: 0 0 $base--spacing;
+  list-style: none;
+  .children {
+    clear: both;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 $base--spacing/2;
+    @include breakpoint($base-spacing-change-breakpoint) {
+      margin: 0 0 $base--spacing;
+    }
+  }
+  .comment {
+    background: $grey--light;
+    color: $secondary--blue-dark;
+    box-shadow: 4px 4px 0 $secondary--purple-dark;
+    padding: $base--spacing/2 $base--spacing/2 0;
+    margin-bottom: $base--spacing/2;
+    @include breakpoint($base-spacing-change-breakpoint) {
+      padding: $base--spacing $base--spacing 0;
+      margin-bottom: $base--spacing;
+    }
+    @extend .clearfix;
+    .comment {
+      background: darken($grey--light, 5%);
+      margin-bottom: 0;
+      .comment {
+        background: darken($grey--light, 10%);
+        .comment {
+          border: 1px solid $secondary--purple-dark;
+        }
+      }
+    }
+    .reply {
+      margin-bottom: $base--spacing/2;
+      @include breakpoint($base-spacing-change-breakpoint) {
+        margin-bottom: $base--spacing;
+      }
+    }
+    .wrap--content & h1, .wrap--content & h2, .wrap--content & h3 {
+      color: $secondary--blue;
+      text-shadow: none;
+      a {
+        color: $secondary--blue;
+        &:hover, &:focus {
+          color: lighten($secondary--blue, 10%);
+        }
+      }
+    }
+  }
+}
+
+.container--blue .comment, .wrap--blue .comment {
+  a {
+    color: $secondary--blue;
+  }
+  .reply a {
+    color: $white;
+  }
+}
+
+@include breakpoint(30em) {
+  .comment-meta-wrap {
+    float: left;
+    width: 25%;
+  }
+  .comment-wrap {
+    float: right;
+    width: 75%;
+  }
+}
+@include breakpoint(50em) {
+  .comment-meta-wrap {
+    width: 12%;
+  }
+  .comment-wrap {
+    width: 88%;
+  }
+}
+
+.comment-meta-wrap {
+  @include font-size(14px);
+  padding-right: $base--spacing/2;
+  @include breakpoint($base-spacing-change-breakpoint) {
+    padding-right: $base--spacing;
+  }
+  a {
+    text-decoration: none;
+  }
+}
+.comment-author {
+  .avatar {
+    display: block;
+  }
+  cite {
+    clear: both;
+    font-style: normal;
+
+  }
+}
+
+.comment-reply-link {
+  display: inline-block;
+  background: $secondary--purple-light;
+  box-shadow: 4px 4px 0 $secondary--purple-dark;
+  line-height: 1;
+  padding: 0.75em 1em;
+  text-decoration: none;
+  /* margin-bottom: $base--spacing; */
+  transition: background .3s, box-shadow .3s;
+  .container--blue &, .wrap--blue &, & {
+    color: $grey--light;
+  }
+  &:focus, &:hover {
+    background: lighten($secondary--purple-light, 10%);
+    color: $white;
+    box-shadow: 2px 2px 0 $secondary--purple-dark;
+  }
+}
+
+.comment .comment-respond {
+  clear: both;
+  margin-top: $base--spacing;
+}
+.comment-respond {
+  button[type=submit], input[type=submit] {
+    margin-bottom: 0;
+  }
+  .comment & {
+    button[type=submit], input[type=submit] {
+      margin-bottom: $base--spacing;
+    }
+  }
+}
+.form-submit {
+  margin-bottom: 0;
+}

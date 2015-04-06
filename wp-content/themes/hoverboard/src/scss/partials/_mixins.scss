@@ -47,7 +47,7 @@
     position: absolute;
     width: $img-width;
     right: 100% - $offset + 3% - 1%; // subtracted -1% b/c imac was off for some reason.
-    // left: -$img-width + $offset - $gutter;
+    // left: -$img-width + $offset - $base--spacing;
     bottom: 0;
   }
 }

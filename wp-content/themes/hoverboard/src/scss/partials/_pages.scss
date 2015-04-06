@@ -25,7 +25,7 @@
     text-align: left;
 
     .single & {
-      margin-bottom: 1.5em;
+      margin-bottom: $base--spacing/2; //not sure why, but this just makes the spacing look better at the top of the content on single.php pages.
     }
 
     .title-wrap {
@@ -140,6 +140,7 @@
   margin-bottom: $base--spacing/2;
   float: right;
   @include breakpoint(40em) {
+    float: right;
     width: 100px;
     height: 100px;
     padding: 25px;
