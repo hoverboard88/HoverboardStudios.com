@@ -6,6 +6,8 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
+	<?php hb_func_icon(); ?>
+
 	<?php hb_posted_on(); ?>
 
 	<div class="entry-content">

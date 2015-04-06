@@ -132,19 +132,21 @@
   }
 }
 
-.hb-icon {
-
-}
-
 .hb-icon-svg {
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+  margin-left: $base--spacing/2;
+  margin-bottom: $base--spacing/2;
   float: right;
-  width: 100px;
-  height: 100px;
+  @include breakpoint(40em) {
+    width: 100px;
+    height: 100px;
+    padding: 25px;
+    margin-left: $base--spacing;
+    margin-bottom: $base--spacing;
+  }
   background: $secondary--blue; //default
-  margin-left: $base--spacing;
-  margin-bottom: $base--spacing;
-  text-align: center;
-  padding: 25px;
   box-shadow: 0 0 20px rgba(#000, .3);
   svg {
     width: 100%;
