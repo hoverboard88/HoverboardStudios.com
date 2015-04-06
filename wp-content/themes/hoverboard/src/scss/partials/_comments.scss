@@ -112,7 +112,7 @@
   .container--blue &, .wrap--blue &, & {
     color: $grey--light;
   }
-  &:focus, &:hover {
+  &:hover, &:focus {
     background: lighten($secondary--purple-light, 10%);
     color: $white;
     box-shadow: 2px 2px 0 $secondary--purple-dark;
@@ -126,6 +126,9 @@
 .comment-respond {
   button[type=submit], input[type=submit] {
     margin-bottom: 0;
+    &:hover, &:focus {
+
+    }
   }
   .comment & {
     button[type=submit], input[type=submit] {
