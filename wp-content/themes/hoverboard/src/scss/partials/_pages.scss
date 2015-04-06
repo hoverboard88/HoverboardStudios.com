@@ -93,7 +93,10 @@
   margin: 0;
   li {
     background: darken($grey--light, 20%);
-    margin-bottom: $base--spacing;
+    margin-bottom: $base--spacing/2;
+    @include breakpoint($base-spacing-change-breakpoint) {
+      margin-bottom: $base--spacing;
+    }
     padding: $base--spacing;
     color: $white;
     a {
