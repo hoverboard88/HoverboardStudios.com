@@ -58,6 +58,18 @@ function hb_func_admin_head() {
 		padding: 5px;
 		color: #fff;
 	}
+	@media only screen and (min-width: 400px) {
+		.cmb_id__hbf_icon li {
+			float: left;
+			width: 50%;
+		}
+	}
+	@media only screen and (min-width: 1200px) {
+		.cmb_id__hbf_icon li {
+			float: left;
+			width: 33%;
+		}
+	}
 	</style>';
 }
 add_action( 'admin_head', 'hb_func_admin_head' );
