@@ -86,7 +86,13 @@
     padding: 0 5px;
   }
 }
-
+/*
+<li>
+  <h3><a class="pinboard-link" title="Email aliasing in Google Apps" href="http://james.padolsey.com/general/email-aliasing-in-google-apps/">Email aliasing in Google Apps</a></h3>
+  <p class="pinboard-link-note">Interesting technique for Google Apps admins.</p>
+  <p class="pinboard-source-wrap"><span class="pinboard-source">Source: </span><a class="pinboard-source-link" title="Email aliasing in Google Apps" href="http://james.padolsey.com/general/email-aliasing-in-google-apps/">james.padolsey.com</a></p>
+</li>
+ */
 .pinboard-link-list {
   list-style-type: none;
   padding: 0;
@@ -101,9 +107,14 @@
     color: $white;
     a {
       color: $white;
+      &:hover, &:focus {
+        color: lighten($secondary--purple-light, 20%);
+      }
+    }
+    .pinboard-link {
       font-family: $secondary--font-family__bold;
-      text-decoration: none;
       @include font-size(24px);
+      text-decoration: none;
     }
     &:nth-child(8n+1) {
       background: lighten($secondary--blue-dark, 10%);
@@ -130,10 +141,19 @@
       background: $secondary--purple-dark;
     }
   }
-  .pinboard-link-note {
-    display: block;
+  h3 {
+    margin-bottom: 0;
   }
 }
+.pinboard-link-note {
+  display: block;
+  margin-bottom: 0;
+}
+.pinboard-source-wrap {
+  margin-bottom: 0;
+  @include font-size(12px);
+}
+
 
 .hb-icon-svg {
   width: 50px;
@@ -159,4 +179,9 @@
   path {
     fill: $white;
   }
+}
+
+.entry-title,
+.page-title {
+  text-transform: none;
 }
