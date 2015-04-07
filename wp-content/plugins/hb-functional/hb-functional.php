@@ -73,3 +73,17 @@ function hb_func_admin_head() {
 	</style>';
 }
 add_action( 'admin_head', 'hb_func_admin_head' );
+
+function hb_func_custom_post_type() {
+    $args = array(
+      'public' => true,
+      'label'  => 'Podcast'
+    );
+    register_post_type( 'podcast', $args );
+}
+//add_action( 'init', 'hb_func_custom_post_type' );
+
+function hb_func_post_type_suppports() {
+	add_post_type_support( 'podcast', 'comments' );
+}
+add_action('init', 'hb_func_post_type_suppports');
