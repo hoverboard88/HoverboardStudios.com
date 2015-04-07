@@ -3,7 +3,7 @@
 Plugin Name: WP to Twitter
 Plugin URI: http://www.joedolson.com/wp-to-twitter/
 Description: Posts a Tweet when you update your WordPress blog or post a link, using your URL shortening service. Rich in features for customizing and promoting your Tweets.
-Version: 3.0.3
+Version: 3.0.4
 Author: Joseph Dolson
 Author URI: http://www.joedolson.com/
 */
@@ -54,7 +54,7 @@ require_once( plugin_dir_path( __FILE__ ) . '/wpt-feed.php' );
 require_once( plugin_dir_path( __FILE__ ) . '/wpt-widget.php' );
 
 global $wpt_version;
-$wpt_version = "3.0.3";
+$wpt_version = "3.0.4";
 load_plugin_textdomain( 'wp-to-twitter', false, dirname( plugin_basename( __FILE__ ) ) . '/lang' );
 
 // check for OAuth configuration
@@ -70,13 +70,79 @@ function wpt_check_oauth( $auth = false ) {
 
 function wpt_check_version() {
 	global $wpt_version;
-	$prev_version = get_option( 'wp_to_twitter_version' );
+	$prev_version = ( get_option( 'wp_to_twitter_version' ) != '' ) ? get_option( 'wp_to_twitter_version' ) : '1.0.0';
 	if ( version_compare( $prev_version, $wpt_version, "<" ) ) {
 		wptotwitter_activate();
 	}
 }
 
 function wptotwitter_activate() {
+	// If this has never run before, do the initial setup.
+	$new_install = ( get_option( 'wpt_twitter_setup' ) == 1 || get_option( 'twitterInitialiased' ) == 1 ) ? false : true;
+	if ( $new_install ) {	
+		$initial_settings = array(
+			'post' => array(
+				'post-published-update' => 1,
+				'post-published-text'   => 'New post: #title# #url#',
+				'post-edited-update'    => 1,
+				'post-edited-text'      => 'Post Edited: #title# #url#'
+			),
+			'page' => array(
+				'post-published-update' => 0,
+				'post-published-text'   => 'New page: #title# #url#',
+				'post-edited-update'    => 0,
+				'post-edited-text'      => 'Page edited: #title# #url#'
+			)
+		);
+		update_option( 'wpt_post_types', $initial_settings );
+		update_option( 'jd_twit_blogroll', '1' );
+		update_option( 'newlink-published-text', 'New link: #title# #url#' );
+		update_option( 'jd_shortener', '1' );
+		update_option( 'jd_strip_nonan', '0' );
+		update_option( 'jd_max_tags', 3 );
+		update_option( 'jd_max_characters', 15 );
+		update_option( 'jd_replace_character', '' );
+		$administrator = get_role( 'administrator' );
+		$administrator->add_cap( 'wpt_twitter_oauth' );
+		$administrator->add_cap( 'wpt_twitter_custom' );
+		$administrator->add_cap( 'wpt_twitter_switch' );
+		$administrator->add_cap( 'wpt_can_tweet' );
+		$administrator->add_cap( 'wpt_tweet_now' );
+		$editor = get_role( 'editor' );
+		if ( is_object( $editor ) ) {
+			$editor->add_cap( 'wpt_can_tweet' );
+		}
+		$author = get_role( 'author' );
+		if ( is_object( $author ) ) {
+			$author->add_cap( 'wpt_can_tweet' );
+		}
+		$contributor = get_role( 'contributor' );
+		if ( is_object( $contributor ) ) {
+			$contributor->add_cap( 'wpt_can_tweet' );
+		}
+
+		update_option( 'jd_twit_remote', '0' );
+		update_option( 'jd_post_excerpt', 30 );
+		// Use Google Analytics with Twitter
+		update_option( 'twitter-analytics-campaign', 'twitter' );
+		update_option( 'use-twitter-analytics', '0' );
+		update_option( 'jd_dynamic_analytics', '0' );
+		update_option( 'no-analytics', 1 );
+		update_option( 'use_dynamic_analytics', 'category' );
+		// Use custom external URLs to point elsewhere. 
+		update_option( 'jd_twit_custom_url', 'external_link' );
+		// Error checking
+		update_option( 'wp_url_failure', '0' );
+		// Default publishing options.
+		update_option( 'jd_tweet_default', '0' );
+		update_option( 'jd_tweet_default_edit', '0' );
+		update_option( 'wpt_inline_edits', '0' );
+		// Note that default options are set.
+		update_option( 'wpt_twitter_setup', '1' );
+		//YOURLS API
+		update_option( 'jd_keyword_format', '0' );	
+	}
+	
 	global $wpt_version;
 	$prev_version = get_option( 'wp_to_twitter_version' );
 	// this is a switch to plan for future versions
@@ -385,7 +451,6 @@ function jd_doTwitterAPIPost( $twit, $auth = false, $id = false, $media = false 
 				);
 		// support for HTTP deprecated as of 1/14/2014 -- https://dev.twitter.com/discussions/24239
 		if ( wtt_oauth_test( $auth ) && ( $connection = wtt_oauth_connection( $auth ) ) ) {
-			wpt_mail( "First Tweet Attachment", "Auth: $auth" );
 			if ( $media && $attachment && !$media_id ) {
 				$media_id = $connection->media( $upload_api, array( 'auth'=>$auth, 'media'=>$attachment ) );
 				if ( $media_id ) {

@@ -133,6 +133,7 @@ label[for="wpt_license_key"] {
     padding: 0 4px;
     position: relative;
     top: 1px;
+	font-size: 1.2em;
 }
 
 #wpt_settings_page .tabs li {
@@ -143,7 +144,7 @@ label[for="wpt_license_key"] {
 
 #wpt_settings_page .tabs a {
     display: inline-block;
-    padding: 4px 8px;
+    padding: 6px 12px;
     border-radius: 4px 4px 0 0;
     border: 1px solid #ccc;
     background: #f3f3f3;
@@ -152,6 +153,9 @@ label[for="wpt_license_key"] {
 #wpt_settings_page .tabs a.active {
     border-bottom: 1px solid #fefefe;
     background: #fefefe;
+	text-decoration: none;
+	color: #333;
+	font-weight: 700;
 }
 
 #wpt_settings_page .wptab {

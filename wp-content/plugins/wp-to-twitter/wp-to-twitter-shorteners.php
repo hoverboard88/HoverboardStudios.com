@@ -136,9 +136,9 @@ if ( ! function_exists( 'jd_shorten_link' ) ) { // prep work for future plug-in 
 				}
 				$json = jd_remote_json( $api_url, false );
 				if ( is_object( $json ) ) {
-					$shrink = "Error code: " . $json->shorturl;
+					$shrink = $json->shorturl;
 				} else {
-					$error = $json;
+					$error = "Error code: " . $json->shorturl;
 					$shrink = false;
 				}
 				break;

@@ -21,71 +21,6 @@ function wpt_updated_settings() {
 
 	$message = "";
 
-	// SET DEFAULT OPTIONS
-	if ( get_option( 'wpt_twitter_setup' ) != '1' ) {
-		$initial_settings = array(
-			'post' => array(
-				'post-published-update' => 1,
-				'post-published-text'   => 'New post: #title# #url#',
-				'post-edited-update'    => 1,
-				'post-edited-text'      => 'Post Edited: #title# #url#'
-			),
-			'page' => array(
-				'post-published-update' => 0,
-				'post-published-text'   => 'New page: #title# #url#',
-				'post-edited-update'    => 0,
-				'post-edited-text'      => 'Page edited: #title# #url#'
-			)
-		);
-		update_option( 'wpt_post_types', $initial_settings );
-		update_option( 'jd_twit_blogroll', '1' );
-		update_option( 'newlink-published-text', 'New link: #title# #url#' );
-		update_option( 'jd_shortener', '1' );
-		update_option( 'jd_strip_nonan', '0' );
-		update_option( 'jd_max_tags', 3 );
-		update_option( 'jd_max_characters', 15 );
-		update_option( 'jd_replace_character', '' );
-		$administrator = get_role( 'administrator' );
-		$administrator->add_cap( 'wpt_twitter_oauth' );
-		$administrator->add_cap( 'wpt_twitter_custom' );
-		$administrator->add_cap( 'wpt_twitter_switch' );
-		$administrator->add_cap( 'wpt_can_tweet' );
-		$administrator->add_cap( 'wpt_tweet_now' );
-		$editor = get_role( 'editor' );
-		if ( is_object( $editor ) ) {
-			$editor->add_cap( 'wpt_can_tweet' );
-		}
-		$author = get_role( 'author' );
-		if ( is_object( $author ) ) {
-			$author->add_cap( 'wpt_can_tweet' );
-		}
-		$contributor = get_role( 'contributor' );
-		if ( is_object( $contributor ) ) {
-			$contributor->add_cap( 'wpt_can_tweet' );
-		}
-
-		update_option( 'jd_twit_remote', '0' );
-		update_option( 'jd_post_excerpt', 30 );
-		// Use Google Analytics with Twitter
-		update_option( 'twitter-analytics-campaign', 'twitter' );
-		update_option( 'use-twitter-analytics', '0' );
-		update_option( 'jd_dynamic_analytics', '0' );
-		update_option( 'no-analytics', 1 );
-		update_option( 'use_dynamic_analytics', 'category' );
-		// Use custom external URLs to point elsewhere. 
-		update_option( 'jd_twit_custom_url', 'external_link' );
-		// Error checking
-		update_option( 'wp_url_failure', '0' );
-		// Default publishing options.
-		update_option( 'jd_tweet_default', '0' );
-		update_option( 'jd_tweet_default_edit', '0' );
-		update_option( 'wpt_inline_edits', '0' );
-		// Note that default options are set.
-		update_option( 'wpt_twitter_setup', '1' );
-		//YOURLS API
-		update_option( 'jd_keyword_format', '0' );
-	}
-
 	// notifications from oauth connection		
 	if ( isset( $_POST['oauth_settings'] ) ) {
 		if ( $oauth_message == "success" ) {
@@ -778,7 +713,7 @@ function wpt_update_settings() {
 	</div>
 	<?php } ?>
 	<p>
-		<?php _e( 'Check whether WP to Twitter is setup correctly for Twitter and your URL Shortener. The test sends a status update to Twitter and shortens a URL using your chose shortener.', 'wp-to-twitter' ); ?>
+		<?php _e( 'Check whether WP to Twitter is setup correctly for Twitter and your URL Shortener. The test sends a status update to Twitter and shortens a URL using your chosen shortener.', 'wp-to-twitter' ); ?>
 	</p>
 	<form method="post" action="">
 		<fieldset>
@@ -923,6 +858,6 @@ function wpt_do_server_check( $test = false ) {
 		update_option( 'wpt_server_string', $wpt_server_string );
 	}
 	echo $wpt_server_string;
-	$admin_url = ( is_plugin_active( 'wp-tweets-pro/wpt-pro-functions.php?refresh_wpt_server_string=true' ) ) ? admin_url( 'admin.php?page=wp-tweets-pro' ) : admin_url( 'options-general.php?page=wp-to-twitter/wp-to-twitter.php&amp;refresh_wpt_server_string=true' );
+	$admin_url = ( is_plugin_active( 'wp-tweets-pro/wpt-pro-functions.php' ) ) ? admin_url( 'admin.php?page=wp-tweets-pro&amp;refresh_wpt_server_string=true' ) : admin_url( 'options-general.php?page=wp-to-twitter/wp-to-twitter.php&amp;refresh_wpt_server_string=true' );
 	echo "<p><a href='" . $admin_url . "'>" . __( 'Test again', 'wp-to-twitter' ) . "</a></p>";
 }
