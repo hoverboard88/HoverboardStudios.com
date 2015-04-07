@@ -7,3 +7,6 @@
 [submodule "wp-content/plugins/hb-functional/metaboxes"]
 	path = wp-content/plugins/hb-functional/metaboxes
 	url = https://github.com/WebDevStudios/Custom-Metaboxes-and-Fields-for-WordPress.git
+[submodule "git-wordpress-checks"]
+	path = git-wordpress-checks
+	url = git@github.com:hoverboard88/git-wordpress-checks.git
