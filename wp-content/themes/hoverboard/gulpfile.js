@@ -19,6 +19,7 @@ var gulp = require('gulp'),
     notify = require('gulp-notify'),
     cache = require('gulp-cache'),
     livereload = require('gulp-livereload'),
+    phplint = require('phplint').lint,
     del = require('del');
 
 // Fonts
@@ -65,6 +66,20 @@ gulp.task('svg2png', function () {
 //     .pipe(gulp.dest('dist/img'));
 // });
 
+gulp.task('phplint', function(cb) {
+  phplint(['**/*.php'], {limit: 10}, function (err, stdout, stderr) {
+    if (err) {
+      cb(err);
+      process.exit(1);
+    }
+    console.log('passed err');
+    cb();
+  });
+});
+
+// doesn't work
+// gulp.task('test', ['phplint']);
+
 // Images
 gulp.task('images', function() {
   return gulp.src('src/img/**/*')
@@ -94,6 +109,9 @@ gulp.task('watch', ['default'], function() {
 
   // Watch image files
   gulp.watch('src/img/**/*', ['images']);
+
+  // Watch php
+  gulp.watch('**/*.php', ['phplint']);
 
   // Create LiveReload server
   livereload.listen();
