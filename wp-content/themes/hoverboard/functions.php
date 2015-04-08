@@ -116,7 +116,7 @@ function hb_scripts() {
 add_action( 'wp_enqueue_scripts', 'hb_scripts' );
 
 function hb_wp_footer() {
-	echo '<link rel="stylesheet" href="' . get_stylesheet_uri() .'" type="text/css" media="all" />';
+	echo '<link rel="stylesheet" href="' . get_stylesheet_uri() .'" type="text/css" media="all" property="stylesheet">';
 }
 add_action( 'wp_footer', 'hb_wp_footer' );
 

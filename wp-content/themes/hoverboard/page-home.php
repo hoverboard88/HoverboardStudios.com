@@ -60,7 +60,7 @@ get_header(); ?>
 	            <img class="img--mobile" src="<?php echo get_template_directory_uri(); ?>/dist/img/mobile.svg" alt="Mobile">
 	          </div>
 
-	        </section><!-- .column--half -->
+	        </section><!-- .column––half -->
 
 	        <section id="contact" class="column--half container container--red">
 
@@ -89,7 +89,7 @@ get_header(); ?>
 
 	            <label for="CF_Budget">Project Budget <span class="span--required">(required)</span></label>
 	            <select id="CF_Budget" required name="CUSTOMFIELD[Budget]">
-	              <option>Budget Amount</option>
+	              <option value="">Budget Amount</option>
 	              <option value="4000">0 - $4,000</option>
 	              <option value="8000">$4,000 - $8,000</option>
 	              <option value="15000">$8,000 - $15,000</option>
@@ -126,7 +126,7 @@ get_header(); ?>
 						</script>
 
 	        </section><!-- .container -->
-	      </div><!-- .container--columns -->
+	      </div><!-- .container––columns -->
 	    </div>
 
 	    <div class="wrap wrap--dkgreen wrap--content">
