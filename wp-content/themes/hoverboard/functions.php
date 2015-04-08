@@ -192,10 +192,22 @@ function hb_comment_theme ($comment, $args, $depth) {
 			<?php endif; ?>
 	</div>
 
-
-
 <?php
 }
+
+function hb_filter_the_author ($username) {
+
+	// first check for a first name (last name not necessarily required, right?)
+	if ( get_the_author_meta('first_name', $post->post_author) ) {
+		// use author's full name rather than user name
+		return get_the_author_meta('first_name', $post->post_author) . ' ' . get_the_author_meta('last_name', $post->post_author);
+	} else {
+		return $username;
+	}
+
+}
+
+add_filter('the_author', 'hb_filter_the_author');
 
 /**
  * Implement the Custom Header feature.
