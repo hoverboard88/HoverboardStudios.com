@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: image, attachment, optimize, optimization, lossless, lossy, photo, picture, seo, compression, gmagick, jpegtran, gifsicle, optipng, pngout, pngquant, jpegmini, tinyjpg, tinypng, webp, wp-cli 
 Requires at least: 3.5
 Tested up to: 4.2-beta4
-Stable tag: 2.3.0
+Stable tag: 2.3.1
 License: GPLv3
 
 Reduce file sizes for images in WordPress including NextGEN, GRAND FlAGallery and more using lossless/lossy methods and image format conversion.
@@ -173,6 +173,14 @@ NOTE: The WebP naming scheme was changed in 2.0.1 to avoid filename conflicts. Y
 * copy metadata from original images to webp variants
 * If you would like to help translate this plugin in your language, get started here: http://translate.ewww.io/projects/ewww-image-optimizer/
 
+= 2.3.1 =
+* fixed: load_webp.js was being inserted regardless of the associated Alternative WebP Rewrites option
+* fixed: wrong slash in plugin path for Windows users with NextGEN and FlaGallery
+* fixed: extra comma in table upgrade sql
+* fixed: special characters malformed by alternate webp rewriting
+* updated: translation for Spanish
+* changed: progressbar color updated to match new colors in 4.2 for default theme
+
 = 2.3.0 =
 * fixed: bug in GIF processing rendered Gifsicle impotent (no savings possible), non Cloud users should re-optimize all their GIFs in Force mode
 * added: WebP url rewriting for sites using CDNs, requires output buffering and libxml in PHP, and may require modifications for some themes
@@ -203,6 +211,7 @@ NOTE: The WebP naming scheme was changed in 2.0.1 to avoid filename conflicts. Y
 * fixed: originals from converted resizes were not deleted during attachment removal
 * fixed: WebP versions of retina 2x images were not renamed properly
 * fixed: Unoptimized images displays an empty table for zero images to optimize
+* updated: translations for Portuguese, Romanian, and Polish
 
 = 2.2.2 =
 * fixed: previous fix for deleting webp images was not working properly

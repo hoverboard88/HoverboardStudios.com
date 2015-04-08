@@ -6,7 +6,7 @@ Requires at least: 3.9.2
 Tested up to: 4.1.1
 License: GPLv2 or later
 Text Domain: wp-to-twitter
-Stable tag: 3.0.3
+Stable tag: 3.0.4
 
 Posts a Twitter update when you update your WordPress blog or add a link, with your chosen URL shortening service.
 
@@ -64,6 +64,10 @@ Translating my plug-ins is always appreciated. Visit <a href="http://translate.j
 
 * Use apply_filters( 'wpt_tweet_sentence', $tweet, $post_ID ) to pass custom taxonomy Tweet formats - Pending WordPress support for taxonomy meta.
 * Add regex filter to detect URLs typed into Tweet fields for counting/shortening purposes. [todo]
+
+= 3.0.5 =
+
+* Bug fix: Typo in fix for settings update screwed things up.
 
 = 3.0.4 =
 
@@ -1120,4 +1124,4 @@ Writing and maintaining a plug-in is a lot of work. You can help me by providing
 
 == Upgrade Notice ==
 
-* 3.0.4 - Bug producing short URLs with YOURLS. Sorry about all the rapid updates!
+* 3.0.5 - I don't think I'm sleeping enough. Sorry about all the rapid updates!

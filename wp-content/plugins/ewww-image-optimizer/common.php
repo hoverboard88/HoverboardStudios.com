@@ -1,7 +1,7 @@
 <?php
 // common functions for Standard and Cloud plugins
 
-define('EWWW_IMAGE_OPTIMIZER_VERSION', '230.0');
+define('EWWW_IMAGE_OPTIMIZER_VERSION', '231.0');
 
 // initialize debug global
 $disabled = ini_get('disable_functions');
@@ -113,7 +113,6 @@ add_action( 'load-upload.php', 'ewww_image_optimizer_load_admin_js' );
 //add_action('admin_head-upload.php', 'ewww_image_optimizer_add_bulk_actions_via_javascript'); 
 add_action( 'admin_action_bulk_optimize', 'ewww_image_optimizer_bulk_action_handler' ); 
 add_action( 'admin_action_-1', 'ewww_image_optimizer_bulk_action_handler' ); 
-add_action( 'wp_enqueue_scripts', 'ewww_image_optimizer_webp_load_script', 1 );
 add_action( 'admin_enqueue_scripts', 'ewww_image_optimizer_media_scripts' );
 add_action( 'admin_enqueue_scripts', 'ewww_image_optimizer_settings_script' );
 add_action( 'ewww_image_optimizer_auto', 'ewww_image_optimizer_auto' );
@@ -126,6 +125,7 @@ add_action( 'shutdown', 'ewwwio_memory_output' );
 if ( ewww_image_optimizer_get_option( 'ewww_image_optimizer_webp_for_cdn' ) ) {
 	add_action('init', 'ewww_image_optimizer_buffer_start');
 	add_action('wp_after_admin_bar_render', 'ewww_image_optimizer_buffer_end');
+	add_action( 'wp_enqueue_scripts', 'ewww_image_optimizer_webp_load_script', 1 );
 }
 
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
@@ -165,7 +165,8 @@ function ewww_image_optimizer_filter_page_output( $buffer ) {
 		$html = new DOMDocument;
 		$libxml_previous_error_reporting = libxml_use_internal_errors(true);
 		$html->encoding = 'utf-8';
-		$html->loadHTML(utf8_decode($buffer));
+//		$html->loadHTML(utf8_decode($buffer));
+		$html->loadHTML($buffer);
 		$images = $html->getElementsByTagName('img');
 		foreach ($images as $image) {
 			if ($image->parentNode->tagName == 'noscript') {
@@ -565,7 +566,7 @@ function ewww_image_optimizer_admin_background() {
 			case 'sunrise':
 				return "#dd823b";
 			default:
-				return "#0074a2";
+				return "#0073aa";
 		}
 	}
 	ewwwio_memory( __FUNCTION__ );
@@ -592,7 +593,7 @@ function ewww_image_optimizer_install_table() {
 		image_size int UNSIGNED,
 		orig_size int UNSIGNED,
 		UNIQUE KEY id (id),
-		INDEX path_image_size (path(255), image_size),
+		INDEX path_image_size (path(255), image_size)
 	);";
 
 	// include the upgrade library to initialize a table

@@ -106,7 +106,7 @@ function wpt_twitter_feed( $instance ) {
 			}
 			$tweet_classes = wpt_generate_classes( $tweet );
 
-			$intents = ( $instance['intents'] ) ? "<div class='wpt-intents-border'></div><div class='wpt-intents'><a class='wpt-reply' href='https://twitter.com/intent/tweet?in_reply_to=$tweet[id_str]'><span></span>Reply</a> <a class='wpt-retweet' href='https://twitter.com/intent/retweet?tweet_id=$tweet[id_str]'><span></span>Retweet</a> <a class='wpt-favorite' href='https://twitter.com/intent/favorite?tweet_id=$tweet[id_str]'><span></span>Favorite</a></div>" : '';
+			$intents = ( $instance['intents'] ) ? "<div class='wpt-intents-border'></div><div class='wpt-intents'><a class='wpt-reply' href='https://twitter.com/intent/tweet?in_reply_to=$tweet[id_str]'><span></span><span class='intent-text reply-text'>Reply</span></a> <a class='wpt-retweet' href='https://twitter.com/intent/retweet?tweet_id=$tweet[id_str]'><span></span><span class='intent-text retweet-text'>Retweet</span></a> <a class='wpt-favorite' href='https://twitter.com/intent/favorite?tweet_id=$tweet[id_str]'><span></span><span class='intent-text favorite-text'>Favorite</span></a></div>" : '';
 			/** Add tweet to array */
 			$before_tweet = apply_filters( 'wpt_before_tweet', '', $tweet );
 			$after_tweet  = apply_filters( 'wpt_after_tweet', '', $tweet );
