@@ -155,7 +155,7 @@ $header_breakpoint: 52em;
 	margin: 0 auto;
 	@include breakpoint(52em) {
 		display: inline-block;
-		top: -3px;
+		top: -1px;
 	}
 	position: relative;
 	/* label {

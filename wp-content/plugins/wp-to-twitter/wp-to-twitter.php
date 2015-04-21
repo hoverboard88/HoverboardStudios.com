@@ -3,7 +3,7 @@
 Plugin Name: WP to Twitter
 Plugin URI: http://www.joedolson.com/wp-to-twitter/
 Description: Posts a Tweet when you update your WordPress blog or post a link, using your URL shortening service. Rich in features for customizing and promoting your Tweets.
-Version: 3.0.5
+Version: 3.0.6
 Author: Joseph Dolson
 Author URI: http://www.joedolson.com/
 */
@@ -54,7 +54,7 @@ require_once( plugin_dir_path( __FILE__ ) . '/wpt-feed.php' );
 require_once( plugin_dir_path( __FILE__ ) . '/wpt-widget.php' );
 
 global $wpt_version;
-$wpt_version = "3.0.5";
+$wpt_version = "3.0.6";
 load_plugin_textdomain( 'wp-to-twitter', false, dirname( plugin_basename( __FILE__ ) ) . '/lang' );
 
 // check for OAuth configuration
@@ -436,6 +436,7 @@ function jd_doTwitterAPIPost( $twit, $auth = false, $id = false, $media = false 
 		// must be designated as media and have a valid attachment
 		$attachment = ( $media ) ? wpt_post_attachment( $id ) : false;
 		if ( $attachment ) {
+			wpt_mail( 'Has Upload', "$auth, $attachment" );
 			$meta = wp_get_attachment_metadata( $attachment );
 			if ( ! isset( $meta['width'], $meta['height'] ) ) {
 				wpt_mail( "Image Data Does not Exist for Attachment #$attachment", print_r( $meta, 1 ) );
@@ -453,6 +454,7 @@ function jd_doTwitterAPIPost( $twit, $auth = false, $id = false, $media = false 
 		if ( wtt_oauth_test( $auth ) && ( $connection = wtt_oauth_connection( $auth ) ) ) {
 			if ( $media && $attachment && !$media_id ) {
 				$media_id = $connection->media( $upload_api, array( 'auth'=>$auth, 'media'=>$attachment ) );
+				wpt_mail( 'Media Uploaded', "$auth, $media_id, $attachment" );
 				if ( $media_id ) {
 					$status['media_ids'] = $media_id;
 				}
@@ -883,7 +885,7 @@ function jd_twit( $post_ID, $type = 'instant' ) {
 					if ( empty( $wpt_selected_users ) && get_option( 'jd_individual_twitter_users' ) == 1 ) {
 						$wpt_selected_users = ( $auth_verified ) ? array( $auth ) : array( false );
 					}
-					if ( $post_info['wpt_cotweet'] == 1 || get_option( 'jd_individual_twitter_users' ) != 1 ) {
+					if ( $post_info['wpt_cotweet'] == 1 || get_option( 'jd_individual_twitter_users' ) != 1 || in_array( 'main', $wpt_selected_users ) ) {
 						$wpt_selected_users['main'] = false;
 					}
 					// filter selected users before using
@@ -1026,6 +1028,13 @@ function jd_twit_link( $link_ID ) {
 		} else {
 			$sentence = str_ireplace( "#url#", $shrink, $sentence );
 		}
+		
+		if ( stripos( $sentence, "#longurl#" ) === false ) {
+			$sentence = $sentence . " " . $thispostlink;
+		} else {
+			$sentence = str_ireplace( "#longurl#", $thispostlink, $sentence );
+		}
+		
 		if ( $sentence != '' ) {
 			jd_doTwitterAPIPost( $sentence, false, $link_ID );
 		}
@@ -1227,13 +1236,11 @@ function jd_add_twitter_inner_box( $post ) {
 			$nochecked  = ( $jd_tweet_this == 'no' ) ? ' checked="checked"' : '';
 			$yeschecked = ( $jd_tweet_this == 'yes' ) ? ' checked="checked"' : '';
 			?>
-			<p class='toggle-btn-group'><input type="radio" name="_jd_tweet_this" value="no"
-			                                   id="jtn"<?php echo $nochecked; ?> /><label
-					for="jtn"><?php _e( "Don't Tweet post.", 'wp-to-twitter' ); ?></label> <input type="radio"
-			                                                                                      name="_jd_tweet_this"
-			                                                                                      value="yes"
-			                                                                                      id="jty"<?php echo $yeschecked; ?> />
-				<label for="jty"><?php _e( "Tweet post.", 'wp-to-twitter' ); ?></label></p>
+			<p class='toggle-btn-group'>
+				<input type="radio" name="_jd_tweet_this" value="no" id="jtn"<?php echo $nochecked; ?> /><label for="jtn"><?php _e( "Don't Tweet post.", 'wp-to-twitter' ); ?></label> 
+				<input type="radio" name="_jd_tweet_this" value="yes" id="jty"<?php echo $yeschecked; ?> />
+				<label for="jty"><?php _e( "Tweet post.", 'wp-to-twitter' ); ?></label>
+			</p>
 		<?php
 		} else {
 			?>
@@ -1284,7 +1291,9 @@ function jd_add_twitter_inner_box( $post ) {
 					wpt_schedule_values( $post_id );
 					do_action( 'wpt_custom_tab', $post_id, 'visible' );
 				} else {
-					echo "<p>" .sprintf( __( 'Upgrade to WP Tweets PRO to configure options! <a href="%s">Upgrade now!</a>', 'wp-to-twitter' ), 'http://www.joedolson.com/wp-tweets-pro/' ) . "</p>";
+					if ( function_exists( 'wpt_pro_exists' ) ) {
+						echo "<p>" .sprintf( __( 'Upgrade to WP Tweets PRO to configure options! <a href="%s">Upgrade now!</a>', 'wp-to-twitter' ), 'http://www.joedolson.com/wp-tweets-pro/' ) . "</p>";
+					}
 				}
 				?>
 				</div>
@@ -1306,7 +1315,7 @@ function jd_add_twitter_inner_box( $post ) {
 				?>
 				<div class='wptab' id='notes' aria-labelledby='tab_notes' role='tabpanel'>
 					<p>
-						<?php _e( "Tweets must be less than 140 characters; Twitter counts URLs as 22 or 23 characters. Template Tags: <code>#url#</code>, <code>#title#</code>, <code>#post#</code>, <code>#category#</code>, <code>#date#</code>, <code>#modified#</code>, <code>#author#</code>, <code>#account#</code>, <code>#tags#</code>, or <code>#blog#</code>.", 'wp-to-twitter' );
+						<?php _e( "Tweets must be less than 140 characters; Twitter counts URLs as 22 or 23 characters. Template Tags: <code>#url#</code>, <code>#title#</code>, <code>#post#</code>, <code>#category#</code>, <code>#date#</code>, <code>#modified#</code>, <code>#author#</code>, <code>#account#</code>, <code>#tags#</code>, or <code>#blog#</code>, <code>#longurl#</code>.", 'wp-to-twitter' );
 						do_action( 'wpt_notes_tab', $post_id );
 						?>
 					</p>
@@ -1399,12 +1408,12 @@ add_action( 'admin_enqueue_scripts', 'wpt_admin_scripts', 10, 1 );
  * Enqueue admin scripts for WP to Twitter and WP Tweets PRO.
  */
 function wpt_admin_scripts() {
-	global $current_screen;
+	global $current_screen, $wpt_version;
 	if ( $current_screen->base == 'post' || $current_screen->id == 'wp-tweets-pro_page_wp-to-twitter-schedule' ) {
-		wp_enqueue_script( 'charCount', plugins_url( 'wp-to-twitter/js/jquery.charcount.js' ), array( 'jquery' ) );
+		wp_enqueue_script( 'charCount', plugins_url( 'wp-to-twitter/js/jquery.charcount.js' ), array( 'jquery' ), $wpt_version );
 	}
 	if ( $current_screen->base == 'post' && isset( $_GET['post'] ) && ( current_user_can( 'wpt_tweet_now' ) || current_user_can( 'manage_options' ) ) ) {
-		wp_enqueue_script( 'wpt.ajax', plugins_url( 'js/ajax.js', __FILE__ ), array( 'jquery' ) );
+		wp_enqueue_script( 'wpt.ajax', plugins_url( 'js/ajax.js', __FILE__ ), array( 'jquery' ), $wpt_version );
 		wp_localize_script( 'wpt.ajax', 'wpt_data', array(
 			'post_ID'  => (int) $_GET['post'],
 			'action'   => 'wpt_tweet',
@@ -1412,7 +1421,7 @@ function wpt_admin_scripts() {
 		) );
 	}
 	if ( $current_screen->id == 'settings_page_wp-to-twitter/wp-to-twitter' || $current_screen->id == 'toplevel_page_wp-tweets-pro' ) {
-		wp_enqueue_script( 'wpt.tabs', plugins_url( 'js/tabs.js', __FILE__ ), array( 'jquery' ) );
+		wp_enqueue_script( 'wpt.tabs', plugins_url( 'js/tabs.js', __FILE__ ), array( 'jquery' ), $wpt_version );
 		wp_localize_script( 'wpt.tabs', 'firstItem', 'wpt_post' );
 		wp_localize_script( 'wpt.tabs', 'firstPerm', 'wpt_editor' );
 		wp_enqueue_script( 'dashboard' );
@@ -1431,6 +1440,8 @@ function wpt_ajax_tweet() {
 		die;
 	}
 	$action       = ( $_REQUEST['tweet_action'] == 'tweet' ) ? 'tweet' : 'schedule';
+	// This isn't used right now, because of time. 
+	$authors      = ( isset( $_REQUEST['tweet_auth'] ) && $_REQUEST['tweet_auth'] != null ) ? $_REQUEST['tweet_auth'] : false;
 	$current_user = wp_get_current_user();
 	if ( function_exists( 'wpt_pro_exists' ) && wpt_pro_exists() ) {
 		if ( wtt_oauth_test( $current_user->ID, 'verify' ) ) {

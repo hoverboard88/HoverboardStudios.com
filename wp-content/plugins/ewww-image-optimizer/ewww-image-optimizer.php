@@ -1,7 +1,7 @@
 <?php
 /**
  * Integrate image optimizers into WordPress.
- * @version 2.3.1
+ * @version 2.3.2
  * @package EWWW_Image_Optimizer
  */
 /*
@@ -10,7 +10,7 @@ Plugin URI: http://wordpress.org/extend/plugins/ewww-image-optimizer/
 Description: Reduce file sizes for images within WordPress including NextGEN Gallery and GRAND FlAGallery. Uses jpegtran, optipng/pngout, and gifsicle.
 Author: Shane Bishop
 Text Domain: ewww-image-optimizer
-Version: 2.3.1
+Version: 2.3.2
 Author URI: https://ewww.io/
 License: GPLv3
 */
@@ -46,7 +46,6 @@ function ewww_image_optimizer_cloud_init() {
 	$ewww_debug .= "<b>ewww_image_optimizer_cloud_init()</b><br>";
 	if (!defined('EWWW_IMAGE_OPTIMIZER_CLOUD') && ewww_image_optimizer_get_option('ewww_image_optimizer_cloud_jpg') && ewww_image_optimizer_get_option('ewww_image_optimizer_cloud_png') && ewww_image_optimizer_get_option('ewww_image_optimizer_cloud_gif')) {
 		define('EWWW_IMAGE_OPTIMIZER_CLOUD', TRUE);
-//		wp_enqueue_style('ewww-nocloud', plugins_url('nocloud.css', __FILE__));
 	} elseif (!defined('EWWW_IMAGE_OPTIMIZER_CLOUD')) {
 		define('EWWW_IMAGE_OPTIMIZER_CLOUD', FALSE);
 	}
@@ -930,7 +929,8 @@ function ewww_image_optimizer_md5check($path) {
 		);
 	foreach ($valid_md5sums as $md5_sum) {
 		if ($md5_sum == md5_file($path)) {
-	ewwwio_memory( __FUNCTION__ );
+			$ewww_debug .= 'md5sum verified, binary is intact<br>';
+			ewwwio_memory( __FUNCTION__ );
 			return TRUE;
 		}
 	}

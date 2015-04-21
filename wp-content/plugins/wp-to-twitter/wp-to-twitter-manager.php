@@ -405,6 +405,7 @@ function wpt_update_settings() {
 						<li><?php _e( "<code>#date#</code>: the post date", 'wp-to-twitter' ); ?></li>
 						<li><?php _e( "<code>#modified#</code>: the post modified date", 'wp-to-twitter' ); ?></li>
 						<li><?php _e( "<code>#url#</code>: the post URL", 'wp-to-twitter' ); ?></li>
+						<li><?php _e( "<code>#longurl#</code>: the unshortened post URL", 'wp-to-twitter' ); ?></li>
 						<li><?php _e( "<code>#author#</code>: the post author (@reference if available, otherwise display name)", 'wp-to-twitter' ); ?></li>
 						<li><?php _e( "<code>#displayname#</code>: post author's display name", 'wp-to-twitter' ); ?></li>
 						<li><?php _e( "<code>#account#</code>: the twitter @reference for the account (or the author, if author settings are enabled and set.)", 'wp-to-twitter' ); ?></li>

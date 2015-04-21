@@ -193,7 +193,7 @@ class WPT_TwitterFeed {
 			if ( $options['geocode'] != '' ) {
 				$args['geocode'] = urlencode( $options['geocode'] );
 			}
-			$url    = add_query_arg( $args, 'https://api.twitter.com/1.1/search/tweets.json' );
+			$url    = esc_url( add_query_arg( $args, 'https://api.twitter.com/1.1/search/tweets.json' ) );
 			$result = $connection->get( $url, $options );
 		} else {
 			$result = $connection->get( 'https://api.twitter.com/1.1/statuses/user_timeline.json', $options );

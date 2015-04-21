@@ -28,6 +28,11 @@
     text-align: center;
 }
 
+.wpt-twitter-image {
+	width: 100%;
+	height: auto;
+}
+
 .wpt-intents a span {
     width: 16px;
     height: 16px;
@@ -67,4 +72,12 @@
 
 .favorited .wpt-intents .wpt-favorite span {
     background-position: -64px;
+}
+
+.wpt-intents a span.intent-text {
+	width: auto;
+	height: auto;
+	margin: 0;
+	top: 0;
+	background: none;
 }

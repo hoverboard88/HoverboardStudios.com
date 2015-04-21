@@ -472,11 +472,6 @@ class SSP_Admin {
 				$val = strip_tags( trim( $_POST[ $k ] ) );
 			}
 
-			// Escape the URLs.
-			if ( 'url' == $field['type'] ) {
-				$val = esc_url( $val );
-			}
-
 			if ( $k == 'audio_file' ) {
 				$enclosure = $val;
 			}

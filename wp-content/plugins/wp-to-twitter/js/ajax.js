@@ -18,6 +18,7 @@
             var text = $('#jtw').val();
             var date = $('#jts .date').val();
             var time = $('#jts .time').val();
+			var auth = $('#jts #wpt_authorized_users').val();
             var tweet_action = ( $(this).attr('data-action') === 'tweet' ) ? 'tweet' : 'schedule'
             var data = {
                 'action': wpt_data.action,
@@ -25,6 +26,7 @@
                 'tweet_text': text,
                 'tweet_schedule': date + ' ' + time,
                 'tweet_action': tweet_action,
+				'tweet_auth': auth,
                 'security': wpt_data.security
             };
             $.post(ajaxurl, data, function (response) {

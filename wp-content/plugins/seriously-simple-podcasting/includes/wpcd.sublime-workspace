@@ -1,0 +1,1387 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"font-",
+				"font-size"
+			],
+			[
+				"data",
+				"data_block"
+			],
+			[
+				"icon",
+				"icon_block"
+			],
+			[
+				"res",
+				"resource_list"
+			],
+			[
+				"get_sit",
+				"get_site_url"
+			],
+			[
+				"list-",
+				"list-style-type"
+			],
+			[
+				"media",
+				"media_list"
+			],
+			[
+				"get_term",
+				"get_term_link"
+			],
+			[
+				"margin-",
+				"margin-top"
+			],
+			[
+				"update_post",
+				"update_post_meta"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"episode",
+				"episode_id"
+			],
+			[
+				"delete",
+				"delete_transient"
+			],
+			[
+				"podcast_",
+				"podcast_series"
+			],
+			[
+				"fon-",
+				"font-family"
+			],
+			[
+				"option",
+				"option_name"
+			],
+			[
+				"get_ter",
+				"get_terms"
+			],
+			[
+				"ep",
+				"episode_id"
+			],
+			[
+				"woocommerce",
+				"woocommerce-box-office"
+			],
+			[
+				"email",
+				"email_data"
+			],
+			[
+				"deliv",
+				"delivery_cost"
+			],
+			[
+				"episo",
+				"episode_id"
+			],
+			[
+				"em",
+				"email_data"
+			],
+			[
+				"delivery",
+				"delivery_location"
+			],
+			[
+				"podc",
+				"podcast_post_types"
+			],
+			[
+				"stats",
+				"status_message"
+			],
+			[
+				"WC",
+				"WC_Order"
+			],
+			[
+				"cancel",
+				"cancel_order_delivery"
+			],
+			[
+				"woocomm",
+				"woocommerce-wumdrop"
+			],
+			[
+				"func",
+				"function"
+			],
+			[
+				"pickup",
+				"pickup_location"
+			],
+			[
+				"wc-",
+				"woocommerce-wumdrop"
+			],
+			[
+				"plugin",
+				"plugin_data"
+			],
+			[
+				"ss_podc",
+				"ss_podcasting"
+			],
+			[
+				"function",
+				"function_exists"
+			],
+			[
+				"ss-po",
+				"ss-podcasting"
+			],
+			[
+				"ss",
+				"ss-podcasting"
+			],
+			[
+				"get_post_",
+				"get_post_meta"
+			],
+			[
+				"update",
+				"update_post_meta"
+			],
+			[
+				"jetp",
+				"jetpack-contact-form-auto-reply"
+			],
+			[
+				"jet",
+				"jetpack-contact-form-auto-reply"
+			],
+			[
+				"view",
+				"views"
+			],
+			[
+				"post-",
+				"post-hit-counter"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/wpcd/style.css",
+			"settings":
+			{
+				"buffer_size": 5728,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/canvas/functions/admin-functions.php",
+			"settings":
+			{
+				"buffer_size": 158058,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-includes/general-template.php",
+			"settings":
+			{
+				"buffer_size": 104515,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/wpcd/functions.php",
+			"settings":
+			{
+				"buffer_size": 15953,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/wpcd/content-resource.php",
+			"settings":
+			{
+				"buffer_size": 1615,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/plugins/wpcd/includes/class-wpcd.php",
+			"settings":
+			{
+				"buffer_size": 10497,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/canvas/includes/theme-functions.php",
+			"settings":
+			{
+				"buffer_size": 48481,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 369.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"mark",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"markdo",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"markd",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"markdown",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"pack",
+				"Package Control: List Packages"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 593.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/plugins",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/plugins/wpcd",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/plugins/wpcd/assets/css",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/plugins/wpcd/includes",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/canvas",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/wpcd"
+	],
+	"file_history":
+	[
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/plugins/event-organiser-pro/includes/shortcodes.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/wpcd/taxonomy-resource_type.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/canvas/loop-archive.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/wpcd/taxonomy-resource_cat.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/wpcd/archive-event.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/wpcd/content-team.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-includes/default-widgets.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-includes/widgets.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/wpcd/content-resource.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/wpcd/archive-resource.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/canvas/css/partials/_shortcodes.scss",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/canvas/includes/theme-functions.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-config.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/plugins/event-organiser-posterboard/event-organiser-posterboard.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/canvas/taxonomy-tumblog.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/canvas/includes/theme-actions.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/canvas/archive.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/canvas/content-post.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/canvas/content.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/wpcd/loop-archive-resource.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/canvas/content-archive-portfolio.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/canvas/loop-portfolio.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/canvas/archive-portfolio.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/wpcd/taxonomy-event-tag.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/wpcd/taxonomy-event-venue.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/wpcd/taxonomy-event-category.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-includes/functions.wp-scripts.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-includes/class.wp-scripts.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/plugins/event-organiser-pro/includes/functions.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/plugins/wpcd/includes/class-wpcd.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/plugins/event-organiser/event-organiser-venues.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/plugins/event-organiser/includes/event-organiser-venue-functions.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/plugins/event-organiser/includes/event-organiser-cpt.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/plugins/event-organiser/includes/event-organiser-event-functions.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/wpcd/single-event.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/plugins/wpcd/includes/lib/class-wpcd-post-type.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/canvas/header.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/canvas/single.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/plugins/event-organiser/templates/archive-event.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/wpcd/template-home.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/plugins/wpcd/assets/css/admin.css",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/plugins/wpcd/includes/lib/class-wpcd-admin-api.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/plugins/wpcd/wpcd.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/plugins/wpcd/uninstall.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/twentyfifteen_child_wpcd/front-page.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/canvas/content-page.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/wpcd/loop-archive.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/wpcd/images/header-tile.png",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/wpcd/functions.php",
+		"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/wpcd/style.css",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/seriously-simple-podcasting/includes/class-ssp-frontend.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/seriously-simple-podcasting/includes/class-ssp-admin.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/seriously-simple-podcasting/readme.txt",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/seriously-simple-podcasting/templates/feed-podcast.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/seriously-simple-podcasting/seriously-simple-podcasting.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce-product-vendors/classes/class-woocommerce-product-vendors.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/Post-Hit-Counter/includes/class-post-hit-counter.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce/includes/admin/settings/class-wc-settings-general.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce-order-barcodes/includes/class-woocommerce-order-barcodes.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce-order-barcodes/includes/woocommerce-order-barcodes-functions.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce-order-barcodes/changelog.txt",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce-order-barcodes/woocommerce-order-barcodes.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce-order-barcodes/includes/class-woocommerce-order-barcodes-settings.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/ssp-stats/assets/css/admin.less",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/ssp-stats/includes/class-ssp-stats.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/ssp-stats/ssp-stats.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/seriously-simple-podcasting/includes/ssp-functions.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce-shipping-wumdrop/classes/class-wc-wumdrop-method.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce-shipping-wumdrop/classes/class-wc-wumdrop.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/themes/twentytwelve/functions.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-includes/rewrite.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/ssp-stats/ssp-includes/ssp-functions.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/ssp-stats/ssp-includes/class-ssp-dependencies.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-includes/media.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-includes/functions.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/seriously-simple-podcasting/includes/class-ssp-settings.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/ssp-stats/readme.txt",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-includes/class-feed.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-includes/feed.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/ssp-stats/assets/css/frontend.less",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/ssp-stats/assets/js/frontend.min.js",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/ssp-stats/includes/class-ssp-stats-settings.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/ssp-stats/includes/lib/class-ssp-stats-taxonomy.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce-box-office/woocommerce-box-office.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/seriously-simple-podcasting/includes/widgets/class-ssp-widget-single-episode.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/seriously-simple-podcasting/includes/widgets/class-ssp-widget-series.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/seriously-simple-podcasting/includes/widgets/class-ssp-widget-recent-episodes.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/seriously-simple-podcasting/assets/css/admin.css",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-config.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/seriously-simple-podcasting/README.md",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/seriously-simple-podcasting/assets/js/admin.js",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/seriously-simple-podcasting/index.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/seriously-simple-podcasting/_repo_assets/banner-772x250.png",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-includes/default-widgets.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-includes/functions.wp-scripts.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/seriously-simple-podcasting/assets/js/admin.min.js",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/wordpress-plugin-template/includes/class-wordpress-plugin-template-settings.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/wordpress-plugin-template/includes/class-wordpress-plugin-template.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/wordpress-plugin-template/includes/lib/class-wordpress-plugin-template-post-type.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/myvinos-wumdrop/includes/class-myvinos-wumdrop.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/myvinos-wumdrop/myvinos-wumdrop.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce-shipping-wumdrop/wumdrop.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce/includes/abstracts/abstract-wc-settings-api.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce/includes/abstracts/abstract-wc-shipping-method.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/myvinos-wumdrop/readme.txt",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/myvinos-wumdrop/uninstall.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/myvinos-wumdrop/includes/class-myvinos-wumdrop-settings.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce-box-office/assets/css/admin.less",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce-box-office/assets/js/admin.js",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce-box-office/includes/class-woocommerce-box-office.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce-box-office/assets/js/frontend.js",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce-box-office/includes/class-woocommerce-box-office-tools.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce-box-office/assets/css/frontend.less",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce-box-office/includes/lib/class-woocommerce-box-office-post-type.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/info.php",
+		"/Users/hlashbrooke/Downloads/Video info",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce/includes/wc-notice-functions.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-includes/general-template.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-includes/default-filters.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/export-plus/includes/export-functions.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/custom-team-manager/inc/functions.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-includes/feed-rss2.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce/assets/js/frontend/checkout.js",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce-email-validation/classes/class-woocommerce-email-validation.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/Post-Hit-Counter/post-hit-counter.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/Post-Hit-Counter/readme.txt",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/Post-Hit-Counter/includes/lib/class-post-hit-counter-admin-api.php",
+		"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce-box-office/assets/js/imagesloaded.pkgd.js"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-includes",
+			"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/canvas",
+			"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/canvas/includes",
+			"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/plugins/event-organiser-pro",
+			"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/plugins/event-organiser",
+			"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-includes",
+			"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/canvas",
+			"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/canvas/includes",
+			"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/canvas",
+			"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-includes",
+			"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/plugins/event-organiser-pro",
+			"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/plugins/event-organiser",
+			"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/canvas/includes",
+			"/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/canvas/functions",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce-order-barcodes",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-includes",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/seriously-simple-podcasting",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/seriously-simple-podcasting/includes",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-includes",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-admin",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-includes",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/seriously-simple-podcasting",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/seriously-simple-podcasting",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce-box-office",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-includes",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/custom-team-manager",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-includes",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-admin",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-includes",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/wordpress-seo",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-includes",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/the-events-calendar",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/seriously-simple-podcasting",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce/includes",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce/includes",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce/includes",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce/includes/admin",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce-give-products",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-includes",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-admin",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-includes",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-admin",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce-product-vendors",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-includes",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-includes",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-admin",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-includes",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/seriously-simple-podcasting/includes",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/wysija-newsletters/helpers",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/wysija-newsletters",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/wysija-newsletters/classes",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/wysija-newsletters/helpers",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/wysija-newsletters",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/wysija-newsletters/classes",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/wysija-newsletters",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/wp-plugin-info-card",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/jetpack",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-admin",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-includes",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-content/plugins/woocommerce",
+			"/Users/hlashbrooke/vagrant-local/www/dev/htdocs/wp-admin"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"function wp_title",
+			"woo_title",
+			"resource_type",
+			"function woo_archive_title",
+			"eventorganiser_event_map_tooltip",
+			"wp_widget_rss",
+			"rss",
+			"-box",
+			"post-entries",
+			"'post-entries'",
+			"post-more",
+			"function woo_post_meta",
+			"eventorganiser_posterboard_query",
+			"<pre",
+			"ss",
+			"function localize",
+			"function wp_localize_script",
+			"eo_get_venue_cities",
+			"eo_venuemeta",
+			"<?",
+			"eo_venuemeta",
+			"'eo_venue'",
+			"eo_venue",
+			"function eo_get_venues",
+			"function _eventorganiser_get_venue_address_fields",
+			"add_post_meta",
+			"update_post_meta",
+			"register_taxonomy",
+			"taxonomy",
+			"background-position",
+			"woo_header_inside",
+			"woo_logo",
+			"display_field",
+			"h2",
+			"form-field",
+			"#header",
+			"nav",
+			"#212121",
+			"#F44336",
+			"448",
+			"esc_url",
+			"audio_player",
+			"download_file",
+			"update",
+			"barcode_attr",
+			"$barcode_attr",
+			"WC_Settings_General",
+			"color_picker",
+			"views:",
+			"strpos",
+			"function wp_check_filetype",
+			"wp_audio_shortcode",
+			"meta_boxes",
+			"wp_audio_shortcode",
+			"get_episode_download_link",
+			"download_file",
+			"wp_feed_cache_transient_lifetime",
+			"'player'",
+			"if(",
+			"apply_filters",
+			"do_action",
+			"script_suffix",
+			" load_plugin_textdomain",
+			"$meta",
+			"meta_box_save",
+			"register_custom_columns",
+			"while(",
+			"foreach(",
+			"if(",
+			"widget_recent_episodes",
+			"changelog",
+			"recent",
+			"shortcode",
+			"series feed url",
+			"updat",
+			"ssp_feed_slug",
+			"update_enclosures",
+			"setup_permastruct",
+			"itunes_description",
+			"title",
+			"1.8.11",
+			"hasDatepicker",
+			"ui-datepicker",
+			"datepicker",
+			"enqueue_admin_styles",
+			"get_episode_download_link",
+			"install",
+			"_version",
+			"$_GET",
+			"feed_link_series",
+			"ssp_admin",
+			"feed",
+			"get_enclosure",
+			"get_episode_download_link",
+			"apply_filters",
+			"class WC_Settings_API",
+			"class WC_Shipping_Method",
+			"ticket-list",
+			"test-mail-box",
+			"get_email_data",
+			"ticket_id",
+			"chosen_select",
+			"get_email_data",
+			"send_test_email",
+			"ss_podcast",
+			"get_episode_from_file",
+			"log_email",
+			"attendee_email",
+			"_event_ticket_created",
+			"status",
+			"wp_mail",
+			"send_ticket_email",
+			"process_updated_ticket",
+			"send_ticket_email",
+			"this->ticket",
+			"send_test_email",
+			"iframe",
+			"send-test-email",
+			"function wc_add_notice",
+			"notice",
+			"get_the_generator_",
+			"add_feed",
+			"wp_query",
+			"cmt_team_manager",
+			"register_post_type",
+			"the_generator",
+			"generator",
+			"function wc_add_notice"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"#464646",
+			"#D54E21",
+			"while (",
+			"foreach (",
+			"if ("
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 3,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/wpcd/style.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5728,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4356,
+								4356
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 3155.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/canvas/functions/admin-functions.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 158058,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								47481,
+								47489
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 23167.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-includes/general-template.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 104515,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								25876,
+								25887
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 1.0,
+						"translation.y": 14350.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/wpcd/functions.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 15953,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3924,
+								3924
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1480.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/wpcd/content-resource.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1615,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								287,
+								287
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 75.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/plugins/wpcd/includes/class-wpcd.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10497,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3942,
+								3942
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1963.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/Users/hlashbrooke/vagrant-local/www/wpcd/htdocs/wp-content/themes/canvas/includes/theme-functions.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 48481,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								20925,
+								20931
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 8124.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 25.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "wpcd.sublime-project",
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 27.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 746.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 222.0,
+	"status_bar_visible": false,
+	"template_settings":
+	{
+	}
+}

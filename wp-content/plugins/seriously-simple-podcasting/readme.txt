@@ -3,8 +3,8 @@ Contributors: hlashbrooke
 Donate link: http://www.hughlashbrooke.com/donate/
 Tags: podcast, audio, rss, rss2, m4a, mp3, feed, itunes, media player, podcasting, radio, audio player, media, id3, stitcher, show, shows, series, simple, docs, documentation
 Requires at least: 4.0
-Tested up to: 4.1.1
-Stable tag: 1.9.4
+Tested up to: 4.2
+Stable tag: 1.9.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -79,6 +79,11 @@ You can find complete user and developer documentation (along with the FAQs) on 
 12. Podcast series widget
 
 == Changelog ==
+
+= 1.9.5 =
+* 2015-04-20
+* [FIX] Properly escaping URLs to account for recent security exposure in WordPress core
+* [FIX] Removing URL escaping when saving audio file to episode - prevents stripping of spaces from file names
 
 = 1.9.4 =
 * 2015-03-31
@@ -419,5 +424,5 @@ You can find complete user and developer documentation (along with the FAQs) on 
 
 == Upgrade Notice ==
 
-= 1.9.4 =
-* v1.9 adds a number of useful new features, including the ability to customise each series' RSS feed as well as additional widgets and a shortcode.
+= 1.9.5 =
+* v1.9.5 fixes an important security issue that was recently exposed in WordPress core.

@@ -106,7 +106,7 @@ class SSP_Frontend {
 			$link = add_query_arg( array( 'ref' => $referrer ), $link );
 		}
 
-		return apply_filters( 'ssp_episode_download_link', $link, $episode_id, $file );
+		return apply_filters( 'ssp_episode_download_link', esc_url( $link ), $episode_id, $file );
 	}
 
 	/**

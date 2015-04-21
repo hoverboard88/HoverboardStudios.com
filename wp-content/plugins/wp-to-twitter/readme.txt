@@ -6,7 +6,7 @@ Requires at least: 3.9.2
 Tested up to: 4.1.1
 License: GPLv2 or later
 Text Domain: wp-to-twitter
-Stable tag: 3.0.4
+Stable tag: 3.0.5
 
 Posts a Twitter update when you update your WordPress blog or add a link, with your chosen URL shortening service.
 
@@ -64,6 +64,13 @@ Translating my plug-ins is always appreciated. Visit <a href="http://translate.j
 
 * Use apply_filters( 'wpt_tweet_sentence', $tweet, $post_ID ) to pass custom taxonomy Tweet formats - Pending WordPress support for taxonomy meta.
 * Add regex filter to detect URLs typed into Tweet fields for counting/shortening purposes. [todo]
+
+= 3.0.6 =
+
+* Bug fix: missing styles from Twitter feed
+* Bug fix: test whether Tweet is possibly sensitive always returned true
+* New feature: display uploaded images in Twitter feed instead of link to image.
+* New template tag: #longurl# - use to Tweet the unshortened URL for a post.
 
 = 3.0.5 =
 

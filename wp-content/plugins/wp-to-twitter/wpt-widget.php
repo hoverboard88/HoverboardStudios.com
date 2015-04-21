@@ -30,7 +30,8 @@ function wpt_get_twitter_feed( $atts, $content ) {
 		'mentions' => 1,
 		'hashtags' => 0,
 		'intents'  => 1,
-		'source'   => 0
+		'source'   => 0,
+		'show_images' => 1
 	), $atts, 'get_tweets' ) );
 	$instance = array(
 		'twitter_id'           => $id,
@@ -42,7 +43,8 @@ function wpt_get_twitter_feed( $atts, $content ) {
 		'link_mentions'        => $mentions,
 		'link_hashtags'        => $hashtags,
 		'intents'              => $intents,
-		'source'               => $source
+		'source'               => $source,
+		'show_images'          => $show_images
 	);
 
 	return wpt_twitter_feed( $instance );
@@ -83,9 +85,10 @@ function wpt_twitter_feed( $instance ) {
 		$options['result_type'] = $instance['result_type'];
 		$instance['twitter_id'] = get_option( 'wtt_twitter_username' );
 	}
-	$opts['links']    = $instance['link_links'];
-	$opts['mentions'] = $instance['link_mentions'];
-	$opts['hashtags'] = $instance['link_hashtags'];
+	$opts['links']       = $instance['link_links'];
+	$opts['mentions']    = $instance['link_mentions'];
+	$opts['hashtags']    = $instance['link_hashtags'];
+	$opts['show_images'] = $instance['show_images'];
 	$rawtweets        = WPT_getTweets( $instance['twitter_num'], $instance['twitter_id'], $options );
 
 	if ( isset( $rawtweets['error'] ) ) {
@@ -110,7 +113,7 @@ function wpt_twitter_feed( $instance ) {
 			/** Add tweet to array */
 			$before_tweet = apply_filters( 'wpt_before_tweet', '', $tweet );
 			$after_tweet  = apply_filters( 'wpt_after_tweet', '', $tweet );
-			$tweets[]     = '<li class="' . $tweet_classes . '">' . $before_tweet . WPT_tweet_linkify( $tweet['text'], $opts, $tweet ) . "<br /><span class='wpt-tweet-time'>$timetweet</span> $intents " . $after_tweet . "</li>\n";
+			$tweets[]     = '<li class="' . $tweet_classes . '">' . $before_tweet . wpt_tweet_linkify( $tweet['text'], $opts, $tweet ) . "<br /><span class='wpt-tweet-time'>$timetweet</span> $intents " . $after_tweet . "</li>\n";
 		}
 	}
 	if ( is_array( $tweets ) ) {
@@ -151,7 +154,8 @@ class WPT_Latest_Tweets_Widget extends WP_Widget {
 			'link_mentions'        => '',
 			'link_hashtags'        => '',
 			'intents'              => '',
-			'source'               => ''
+			'source'               => '',
+			'show_images'          => ''
 		);
 
 		$widget_ops = array(
@@ -277,6 +281,14 @@ class WPT_Latest_Tweets_Widget extends WP_Widget {
 			<label
 				for="<?php echo $this->get_field_id( 'link_mentions' ); ?>"><?php _e( 'Parse @mentions', 'wp-to-twitter' ); ?></label>
 		</p>
+		
+		<p>
+			<input id="<?php echo $this->get_field_id( 'show_images' ); ?>" type="checkbox"
+			       name="<?php echo $this->get_field_name( 'show_images' ); ?>"
+			       value="1" <?php checked( $instance['show_images'] ); ?>/>
+			<label
+				for="<?php echo $this->get_field_id( 'show_images' ); ?>"><?php _e( 'Show Images', 'wp-to-twitter' ); ?></label>
+		</p>		
 
 		<p>
 			<input id="<?php echo $this->get_field_id( 'link_hashtags' ); ?>" type="checkbox"
@@ -511,7 +523,23 @@ add_action( 'widgets_init', create_function( '', "register_widget('WPT_Search_Tw
  *
  * @return string Linkified tweet content
  */
-function WPT_tweet_linkify( $text, $opts, $tweet ) {
+function wpt_tweet_linkify( $text, $opts, $tweet ) {
+	if ( $opts['show_images'] == true ) {
+		$media = $tweet['entities']['media'];
+		$media_urls = array();
+		if ( !empty( $media ) ) {
+			foreach ( $media as $image ) {
+				$media_urls[] = $image['url'];
+				// alt attributes are not available on Twitter.
+				$text .= "<img src='$image[media_url_https]' alt='' class='wpt-twitter-image' />";
+			}
+		}
+		if ( !empty( $media_urls ) ) {
+			foreach ( $media_urls as $media_url ) {
+				$text = str_replace( "$media_url", '', $text );
+			}
+		}
+	}
 	$text = ( $opts['links'] == true ) ? preg_replace( "#(^|[\n ])([\w]+?://[\w]+[^ \"\n\r\t< ]*)#", '\\1<a href="\\2" rel="nofollow">\\2</a>', $text ) : $text;
 	$text = ( $opts['links'] == true ) ? preg_replace( "#(^|[\n ])((www|ftp)\.[^ \"\t\n\r< ]*)#", '\\1<a href="http://\\2" rel="nofollow">\\2</a>', $text ) : $text;
 	$text = ( $opts['mentions'] == true ) ? preg_replace( '/@(\w+)/', '<a href="https://www.twitter.com/\\1" rel="nofollow">@\\1</a>', $text ) : $text;
@@ -519,6 +547,7 @@ function WPT_tweet_linkify( $text, $opts, $tweet ) {
 	$urls = $tweet['entities']['urls'];
 	if ( is_array( $urls ) ) {
 		foreach ( $urls as $url ) {
+
 			$text = str_replace( ">$url[url]<", ">$url[display_url]<", $text );
 		}
 	}
@@ -552,7 +581,7 @@ function wpt_generate_classes( $tweet ) {
 	// take Tweet array and parse selected options into classes.
 	$classes[] = ( $tweet['favorited'] ) ? 'favorited' : '';
 	$clasees[] = ( $tweet['retweeted'] ) ? 'retweeted' : '';
-	$classes[] = ( isset( $tweet['possibly_sensitive'] ) ) ? 'sensitive' : '';
+	$classes[] = ( isset( $tweet['possibly_sensitive'] ) && $tweet['possibly_sensitive'] ) ? 'sensitive' : '';
 	$classes[] = 'lang-' . $tweet['lang'];
 	$class     = trim( implode( ' ', $classes ) );
 
