@@ -1,4 +1,4 @@
-$header_breakpoint: 52em;
+$header_breakpoint: 58em;
 
 .logo-h1 {
 	text-align: center;
@@ -11,7 +11,6 @@ $header_breakpoint: 52em;
 	.container--header {
 		padding-top: 0;
 		padding-bottom: 0;
-		position: relative;
 	}
 	.logo-h1 {
 		line-height: 0; // to get vertical align to work correctly
@@ -22,8 +21,10 @@ $header_breakpoint: 52em;
 		a {
 			display: block;
 		}
-		bottom: -15px;
-		position: absolute;
+		position: relative;
+		@include breakpoint(72em) {
+			position: absolute;
+		}
 	}
 	.logo {
 		max-width: none;
@@ -32,47 +33,10 @@ $header_breakpoint: 52em;
 		flex: 1 0 0;
 	}
 }
-@include breakpoint(65em) {
-	.logo-h1 {
-		bottom: -20px;
-	}
-}
-
-/* .phone-banner {
-  @include font-size(14px);
-  line-height: 1.4;
-  br {
-    display: none;
-  }
-  @include breakpoint(50em) {
-    text-align: left;
-    float: left;
-    width: $width--3;
-    padding-top: .5em;
-    @include font-size(16px);
-    br {
-      display: block;
-    }
-  }
-} */
-
-.menu--main {
-	text-align: center;
-	/* margin: 0 -.5em; */
+.container--header {
 	@include breakpoint($header_breakpoint) {
-		text-align: right;
-		float: right;
-		width: $width--8;
 		padding-top: .5em;
 		padding-bottom: .5em;
-		/* right: -1.5em; */
-		position: relative;
-		li:first-child a {
-			padding-left: 0;
-		}
-		li:last-child a {
-			padding-right: 0;
-		}
 	}
 	@include breakpoint(55em) {
 		padding-top: .7em;
@@ -93,9 +57,28 @@ $header_breakpoint: 52em;
 	@include breakpoint(72em) {
 		padding-top: 1.4em;
 		padding-bottom: 1.4em;
+		height: 94px;
+	}
+}
+
+.menu--main {
+	text-align: center;
+	/* margin: 0 -.5em; */
+	@include breakpoint($header_breakpoint) {
+		text-align: right;
+		float: right;
+		width: $width--8;
+		/* right: -1.5em; */
+		position: relative;
+		li:first-child a {
+			padding-left: 0;
+		}
+		li:last-child a {
+			padding-right: 0;
+		}
 	}
 	ul {
-		padding-bottom: 0;
+		padding-bottom: $base--spacing/2;
 		display: inline-block;
 	}
 	li {
@@ -153,14 +136,11 @@ $header_breakpoint: 52em;
 .search-form {
 	max-width: 400px;
 	margin: 0 auto;
-	@include breakpoint(52em) {
+	@include breakpoint($header_breakpoint) {
 		display: inline-block;
 		top: -1px;
 	}
 	position: relative;
-	/* label {
-		display: inline-block;
-	} */
 	.search-submit {
 		position: absolute;
 		right: .25em;
@@ -187,9 +167,9 @@ $header_breakpoint: 52em;
 }
 input[type=search].search-form__input {
 	margin-bottom: 0;
-	transition: width .3s;
+	transition: width .3s, box-shadow .3s;
 	padding-right: 35px;
-	@include breakpoint(52em) {
+	@include breakpoint($header_breakpoint) {
 		width: 120px;
 		&:focus {
 			width: 200px;
