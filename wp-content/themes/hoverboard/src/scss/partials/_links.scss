@@ -20,5 +20,61 @@ a:active {
  */
 
 a.btn, .btn {
+  display: inline-block;
+  background: $grey--light;
+  border: 0;
+  border-radius: 0;
+  box-shadow: 4px 4px 0 darken($grey--light, 30%);
+  color: $black;
+  line-height: 1;
+  padding: 0.75em 1em;
+  transition: background .3s, box-shadow .3s;
+  &:hover, &:focus {
+    background: lighten($grey--light, 10%);
+    color: lighten($black, 10%);
+    box-shadow: 2px 2px 0 darken($grey--light, 20%);
+  }
+}
+a.btn--purple, .btn--purple {
+  @extend .btn;
+  background: $secondary--purple-light;
+  box-shadow: 4px 4px 0 $secondary--purple-dark;
+  color: $grey--light;
+  &:hover, &:focus {
+    background: lighten($secondary--purple-light, 10%);
+    color: $white;
+    box-shadow: 2px 2px 0 $secondary--purple-dark;
+  }
+}
+a.btn--red, .btn--red {
+  @extend .btn;
+  background: $secondary--red-dark;
+  box-shadow: 4px 4px 0 $secondary--red-dark;
+  color: $grey--light;
+  &:hover, &:focus {
+    background: lighten($secondary--red-dark, 10%);
+    box-shadow: 2px 2px 0 $secondary--red-dark;
+  }
+}
 
+.btn--search {
+  position: relative;
+  top: 4px;
+  $btn-search-padding: 13px;
+  width: $btn-search-padding*2 + 18px;
+	height: $btn-search-padding*2 + 18px;
+  padding: $btn-search-padding;
+  margin: 0;
+  &:hover, &:focus {
+		path {
+			fill: darken($grey--light, 20%);
+		}
+	}
+  svg {
+		height: 100%;
+		width: 100%;
+	}
+	path {
+		fill: darken($grey--light, 40%);
+	}
 }

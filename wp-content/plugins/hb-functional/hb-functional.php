@@ -33,6 +33,10 @@ function hb_func_icon($before='', $after='') {
 	}
 }
 
+function hb_func_icon_svg($icon) {
+	include 'open-iconic/svg/' . $icon . '.svg';
+}
+
 function hb_func_icon_name() {
 	return get_post_meta( get_the_ID(), '_hb_func_icon')[0];
 }

@@ -139,3 +139,25 @@
 .form-submit {
   margin-bottom: 0;
 }
+
+.hb-form-allowed-tags {
+  @include font-size(12px);
+}
+
+.hb-form-allowed-tags {
+  .form-allowed-tags {
+    max-height: 0;
+    height: 0;
+    transition: max-height .3s;
+    display: block;
+    overflow: hidden;
+  }
+  input:checked + .form-allowed-tags {
+    max-height: 999px;
+    height: auto;
+    padding-top: $base--spacing;
+  }
+  input {
+    display: none;
+  }
+}

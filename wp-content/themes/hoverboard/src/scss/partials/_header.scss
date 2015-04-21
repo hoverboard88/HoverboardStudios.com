@@ -11,6 +11,7 @@ $header_breakpoint: 52em;
 	.container--header {
 		padding-top: 0;
 		padding-bottom: 0;
+		position: relative;
 	}
 	.logo-h1 {
 		line-height: 0; // to get vertical align to work correctly
@@ -22,7 +23,7 @@ $header_breakpoint: 52em;
 			display: block;
 		}
 		bottom: -15px;
-		position: relative;
+		position: absolute;
 	}
 	.logo {
 		max-width: none;
@@ -57,13 +58,14 @@ $header_breakpoint: 52em;
 
 .menu--main {
 	text-align: center;
-	margin: 0 -.5em;
+	/* margin: 0 -.5em; */
 	@include breakpoint($header_breakpoint) {
 		text-align: right;
-		float: left;
+		float: right;
 		width: $width--8;
 		padding-top: .5em;
-		right: -1.5em;
+		padding-bottom: .5em;
+		/* right: -1.5em; */
 		position: relative;
 		li:first-child a {
 			padding-left: 0;
@@ -74,21 +76,27 @@ $header_breakpoint: 52em;
 	}
 	@include breakpoint(55em) {
 		padding-top: .7em;
+		padding-bottom: .7em;
 	}
 	@include breakpoint(60em) {
 		padding-top: .8em;
+		padding-bottom: .8em;
 	}
 	@include breakpoint(67em) {
 		padding-top: 1em;
+		padding-bottom: 1em;
 	}
 	@include breakpoint(70em) {
 		padding-top: 1.2em;
+		padding-bottom: 1.2em;
 	}
 	@include breakpoint(72em) {
 		padding-top: 1.4em;
+		padding-bottom: 1.4em;
 	}
 	ul {
 		padding-bottom: 0;
+		display: inline-block;
 	}
 	li {
 		display: inline-block;
@@ -96,7 +104,7 @@ $header_breakpoint: 52em;
 		@include font-size(13px);
 		// now we can bump it back up to 16 for iPhone 6 and above
 		@include breakpoint(22em) {
-			@include font-size(16px);
+			@include font-size(15px);
 		}
 		@include breakpoint(67em) {
 			@include font-size(18px);
@@ -139,5 +147,73 @@ $header_breakpoint: 52em;
 				}
 			}
 		}
+	}
+}
+
+.search-form {
+	max-width: 400px;
+	margin: 0 auto;
+	@include breakpoint(52em) {
+		display: inline-block;
+		top: -3px;
+	}
+	position: relative;
+	/* label {
+		display: inline-block;
+	} */
+	.search-submit {
+		position: absolute;
+		right: .25em;
+		top: 25%;
+		background: none;
+		border: 0;
+		border-radius: 0;
+		width: 28px;
+		height: 50%;
+		margin: 0;
+		&:hover, &:focus {
+			path {
+				fill: darken($grey--light, 20%);
+			}
+		}
+	  svg {
+			height: 100%;
+			width: 100%;
+		}
+		path {
+			fill: darken($grey--light, 40%);
+		}
+	}
+}
+input[type=search].search-form__input {
+	margin-bottom: 0;
+	transition: width .3s;
+	padding-right: 35px;
+	@include breakpoint(52em) {
+		width: 120px;
+		&:focus {
+			width: 200px;
+		}
+	}
+}
+
+.search-toggle {
+	background: none;
+	box-shadow: none;
+	border: 0;
+	padding: 0;
+	width: 18px;
+	height: 18px;
+	&:hover, &:focus {
+		path {
+			fill: $greens--medium;
+		}
+	}
+	svg {
+		height: 100%;
+		width: 100%;
+	}
+	path {
+		fill: $greens--dark;
 	}
 }

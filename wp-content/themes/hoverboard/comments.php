@@ -74,6 +74,8 @@ if ( post_password_required() ) {
 		<p class="no-comments"><?php _e( 'Comments are closed.', 'hb' ); ?></p>
 	<?php endif; ?>
 
-	<?php comment_form(); ?>
+	<?php comment_form(array(
+		'comment_notes_after' =>  '<p class="hb-form-allowed-tags"><label class="hb-form-allowed-tags-toggle btn" for="hb-form-allowed-tags-toggle">Available HTML Tags</label><input type="checkbox" id="hb-form-allowed-tags-toggle" name="hb-form-allowed-tags-toggle"><span class="form-allowed-tags">You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes: <code>' . allowed_tags() . '</code></span></p>'
+	)); ?>
 
 </div><!-- #comments -->

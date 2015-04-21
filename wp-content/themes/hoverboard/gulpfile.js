@@ -111,7 +111,7 @@ gulp.task('watch', ['default'], function() {
   gulp.watch('src/img/**/*', ['images']);
 
   // Watch php
-  gulp.watch('**/*.php', ['phplint']);
+  // gulp.watch('**/*.php', ['phplint']);
 
   // Create LiveReload server
   livereload.listen();

@@ -59,8 +59,7 @@
 }
 
 .content-area {
-  .post,
-  .page {
+  article {
     border-bottom: 1px solid $grey--light;
     margin-bottom: $base--spacing;
     //  padding-bottom: $base--spacing; Assumes the last element has space on the bottom.
@@ -184,4 +183,25 @@
 .entry-title,
 .page-title {
   text-transform: none;
+}
+.wrap--search {
+  .search-field {
+    border: 0;
+    box-shadow: none;
+    margin-bottom: 0;
+    width: 90%;
+    float: left;
+    max-width: none;
+    padding: .6em;
+  }
+  .search-submit {
+    float: right;
+    width: 10%;
+    box-shadow: none;
+    margin-bottom: 0;
+  }
+  .container {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
 }

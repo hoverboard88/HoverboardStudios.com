@@ -173,6 +173,9 @@
 		color: lighten($secondary--blue, 40%);
 	}
 }
+.wrap--grey, .container--grey {
+	background: $grey--light;
+}
 
 .container--work {
 	img {
