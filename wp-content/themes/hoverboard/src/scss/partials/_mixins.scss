@@ -64,3 +64,18 @@
   }
 
 }
+
+@mixin long-box-shadow($color, $type: 'btn') {
+  box-shadow: 4px 4px 0 $color;
+  transition: box-shadow .3s;
+  @if $type == 'input' {
+    &:focus {
+      box-shadow: 2px 2px 0 $color;
+      outline: 0;
+    }
+  } @else {
+    &:hover, &:focus {
+      box-shadow: 2px 2px 0 $color;
+    }
+  }
+}

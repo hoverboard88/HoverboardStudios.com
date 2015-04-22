@@ -55,14 +55,13 @@ textarea {
   padding: .5em;
   transition: box-shadow .3s;
   border: 1px solid darken($grey--light, 30%);
-  box-shadow: 4px 4px 0 darken($grey--light, 30%);
   border-radius: 0;
   width: 100%;
   max-width: 600px;
+  @include long-box-shadow(darken($grey--light, 30%), 'input');
   &:focus {
     border-color: darken($base--border, 10%);
     outline: 0;
-    box-shadow: 2px 2px 0 darken($grey--light, 30%);
   }
   @include input-placeholder {
     color: rgba($black, 0.5);
@@ -82,12 +81,8 @@ textarea {
   input[type="url"],
   textarea {
     border: 0;
-    box-shadow: 4px 4px 0 $secondary--blue-dark;
+    @include long-box-shadow($secondary--blue-dark, 'input');
     background: $white;
-    &:focus {
-      outline: 0;
-      box-shadow: 2px 2px 0 $secondary--blue-dark;
-    }
   }
   input[type="submit"], button[type="submit"] {
     @extend .btn--purple;
@@ -107,12 +102,8 @@ textarea {
   input[type="url"],
   textarea {
     border: 0;
-    box-shadow: 4px 4px 0 rgba($secondary--red-dark, 0.8);
+    @include long-box-shadow(rgba($secondary--red-dark, 0.8), 'input');
     background: $white;
-    &:focus {
-      outline: 0;
-      box-shadow: 2px 2px 0 rgba($secondary--red-dark, 0.8);
-    }
   }
   input[type="submit"], button[type="submit"] {
     @extend .btn--red;

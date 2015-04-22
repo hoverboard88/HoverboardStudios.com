@@ -180,12 +180,7 @@
 .container--work {
 	img {
 		transition: box-shadow .3s ease-out;
-		box-shadow: 4px 4px 0 rgba(lighten($greens--dark, 10%), 0.8);
-	}
-	a:hover, a:focus {
-		img {
-			box-shadow: 0 0 0 rgba(lighten($greens--dark, 10%), 0.8);
-		}
+		@include long-box-shadow(rgba(lighten($greens--dark, 10%), 0.8));
 	}
 }
 .container--who-we-are {

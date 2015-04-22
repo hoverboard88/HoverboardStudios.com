@@ -14,7 +14,7 @@
   .comment {
     background: $grey--light;
     color: $secondary--blue-dark;
-    box-shadow: 4px 4px 0 $secondary--purple-dark;
+    @include long-box-shadow($secondary--purple-dark);
     padding: $base--spacing/2 $base--spacing/2 0;
     margin-bottom: $base--spacing/2;
     @include breakpoint($base-spacing-change-breakpoint) {
@@ -103,7 +103,6 @@
 .comment-reply-link {
   display: inline-block;
   background: $secondary--purple-light;
-  box-shadow: 4px 4px 0 $secondary--purple-dark;
   line-height: 1;
   padding: 0.75em 1em;
   text-decoration: none;
@@ -112,10 +111,10 @@
   .container--blue &, .wrap--blue &, & {
     color: $grey--light;
   }
+  @include long-box-shadow($secondary--purple-dark, 'input');
   &:hover, &:focus {
     background: lighten($secondary--purple-light, 10%);
     color: $white;
-    box-shadow: 2px 2px 0 $secondary--purple-dark;
   }
 }
 
