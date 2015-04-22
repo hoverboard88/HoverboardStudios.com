@@ -187,7 +187,7 @@ class SSP_Frontend {
 		if ( $file ) {
 
 			if ( get_option( 'permalink_structure' ) ) {
-				$file = $this->get_episode_download_link( $episode_id, 'player' );
+				$file = $this->get_episode_download_link( $episode_id );
 			}
 
 			$meta .= '<div class="podcast_player">' . $this->audio_player( $file ) . '</div>';
@@ -816,6 +816,9 @@ class SSP_Frontend {
 
 					case 'player':
 						$file = $this->get_enclosure( $episode_id );
+						if ( get_option( 'permalink_structure' ) ) {
+							$file = $this->get_episode_download_link( $episode_id );
+						}
 		    			$html .= '<div class="podcast_player">' . $this->audio_player( $file ) . '</div>' . "\n";
 					break;
 

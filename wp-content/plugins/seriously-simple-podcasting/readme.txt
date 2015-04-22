@@ -1,10 +1,10 @@
 === Seriously Simple Podcasting ===
 Contributors: hlashbrooke
 Donate link: http://www.hughlashbrooke.com/donate/
-Tags: podcast, audio, rss, rss2, m4a, mp3, feed, itunes, media player, podcasting, radio, audio player, media, id3, stitcher, show, shows, series, simple, docs, documentation
+Tags: podcast, audio, rss, rss2, m4a, mp3, feed, itunes, media player, podcasting, radio, audio player, media, id3, stitcher, show, shows, series, simple, docs, documentation, wav
 Requires at least: 4.0
 Tested up to: 4.2
-Stable tag: 1.9.5
+Stable tag: 1.9.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -79,6 +79,11 @@ You can find complete user and developer documentation (along with the FAQs) on 
 12. Podcast series widget
 
 == Changelog ==
+
+= 1.9.6 =
+* 2015-04-22
+* [TWEAK] Making sure that widget & shortcode audio player use correct file URL
+* [FIX] Removing `ref` parameter from audio player file URL to ensure reliable playback
 
 = 1.9.5 =
 * 2015-04-20
@@ -424,5 +429,5 @@ You can find complete user and developer documentation (along with the FAQs) on 
 
 == Upgrade Notice ==
 
-= 1.9.5 =
-* v1.9.5 fixes an important security issue that was recently exposed in WordPress core.
+= 1.9.6 =
+* v1.9.6 fixes an important security issue that was recently exposed in WordPress core as well as an issue with the audio player not working reliably in all instances.
