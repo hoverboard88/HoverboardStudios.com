@@ -100,9 +100,10 @@ add_action( 'widgets_init', 'hb_widgets_init' );
  * Enqueue scripts and styles.
  */
 function hb_scripts() {
-	// wp_enqueue_style( 'hb-style', get_stylesheet_uri() );
 
-	// wp_enqueue_script( 'hb-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20120206', true );
+	if ( is_single() ) {
+		wp_enqueue_script( 'hb-lightbox', get_template_directory_uri() . '/js/photolightbox.js', array(), '20120206', true );
+	}
 
 	wp_dequeue_style('prism-detached');
 
@@ -116,6 +117,28 @@ function hb_scripts() {
 add_action( 'wp_enqueue_scripts', 'hb_scripts' );
 
 function hb_wp_footer() {
+
+	if ( is_single() ) {
+		echo '<link rel="stylesheet" href="' . get_template_directory_uri() .'/single.css" type="text/css" media="all" property="stylesheet">';
+		echo '<!-- Include this on pages you want the gallery to appear -->
+		<div id="PhotoViewer" class="photo-viewer">
+		  <header class="photo-viewer--title">
+		    <h1 id="PhotoViewerTitle">Image Title</h1>
+		    <div id="PhotoViewerClose" class="photo-viewer--close"><a href="#">X</a></div>
+		  </header>
+		  <div class="photo-viewer--container">
+		    <figure class="photo-viewer--current-image" id="PhotoViewerCurrentImageContainer">
+		      <img id="PhotoViewerCurrentImage" src="">
+		    </figure>
+		  </div>
+		  <div class="photo-viewer--controls">
+		      <div id="PhotoViewerPreviousImage" class="photo-viewer--previous-image"><a href="#">&laquo; Previous</a></div>
+		      <div id="PhotoViewerCount" class="photo-viewer--count">1/10</div>
+		      <div id="PhotoViewerNextImage" class="photo-viewer--next-image"><a href="#">Next &raquo;</a></div>
+		    </div>
+		</div>';
+	}
+
 	echo '<link rel="stylesheet" href="' . get_stylesheet_uri() .'" type="text/css" media="all" property="stylesheet">';
 }
 add_action( 'wp_footer', 'hb_wp_footer' );
@@ -209,6 +232,15 @@ function hb_filter_the_author ($username) {
 
 add_filter('the_author', 'hb_filter_the_author');
 
+add_filter( 'image_send_to_editor', 'fancy_capable', 10, 7);
+// to get wrapping div for lightbox. Only do if the $url is an image
+function fancy_capable($html, $id, $alt, $title, $align, $url, $size ) {
+	if ( strstr($url, '.jpg') || strstr($url, '.jpeg') || strstr($url, '.png') || strstr($url, '.gif') ) {
+		return '<div class="lightbox-image">' . $html . '</div>';
+	} else {
+		return $html;
+	}
+}
 /**
  * Implement the Custom Header feature.
  */

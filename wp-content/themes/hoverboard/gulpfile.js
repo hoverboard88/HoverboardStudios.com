@@ -31,8 +31,8 @@ gulp.task('fonts', function() {
 
 // Styles
 gulp.task('styles', ['critical'], function() {
-  return gulp.src('src/scss/style.scss')
-    .pipe(sass({ style: 'expanded', }))
+  return gulp.src(['src/scss/style.scss', 'src/scss/single.scss'])
+    .pipe(sass({ style: 'expanded' }))
     .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
     .pipe(minifycss())
     .pipe(gulp.dest(''))
