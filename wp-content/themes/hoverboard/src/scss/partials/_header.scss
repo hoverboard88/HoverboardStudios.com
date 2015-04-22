@@ -22,7 +22,7 @@ $header_breakpoint: 58em;
 			display: block;
 			transition: all .3s;
 			&:hover {
-				transform: perspective(800px) rotateY(25deg);
+				transform: perspective(800px) rotateY(15deg);
 			}
 		}
 		position: relative;

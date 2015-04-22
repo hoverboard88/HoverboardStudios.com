@@ -93,8 +93,8 @@ textarea{ height: 130px; }
 .menu--social{ clear: both; margin-left: -10px; }
 .menu--social ul{ list-style-type: none; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; }
  .menu--social li, .menu--social svg{ display: inline-block; }
-.menu--social svg path{ fill: #8757b5; }
-.menu--social .menu__item a{ display: block; height: 50px; width: 50px; }
+.menu--social svg path{ fill: #8757b5; -webkit-transition-property: fill; -webkit-transition-duration: 0.3s; -webkit-transition-timing-function: initial; -webkit-transition-delay: initial; }
+.menu--social .menu__item a{ display: block; height: 50px; width: 50px; -webkit-transition-property: -webkit-transform; -webkit-transition-duration: 0.3s; -webkit-transition-timing-function: initial; -webkit-transition-delay: initial; }
 @media (min-width: 25em){
  .fine-print{ font-size: 1.14286rem; line-height: 1.75em; }
 }

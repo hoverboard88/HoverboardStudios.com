@@ -126,9 +126,7 @@
 .comment-respond {
   button[type=submit], input[type=submit] {
     margin-bottom: 0;
-    &:hover, &:focus {
-
-    }
+    @extend .btn--purple;
   }
   .comment & {
     button[type=submit], input[type=submit] {
@@ -140,11 +138,12 @@
   margin-bottom: 0;
 }
 
-.hb-form-allowed-tags {
-  @include font-size(12px);
+.hb-form-allowed-tags-toggle {
+  @include font-size(10px, false);
 }
 
 .hb-form-allowed-tags {
+  @include font-size(12px);
   .form-allowed-tags {
     max-height: 0;
     height: 0;

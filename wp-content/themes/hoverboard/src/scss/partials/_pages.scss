@@ -9,9 +9,12 @@
     margin-bottom: 0;
   }
 
-  .entry-meta a {
-    color: $white;
-    text-decoration: none;
+  .entry-meta {
+    margin-bottom: 0;
+    a {
+      color: $white;
+      text-decoration: none;
+    }
   }
 
   .title-wrap a {
@@ -39,7 +42,7 @@
       width: 66%;
     }
 
-    .entry-meta {
+    .author-gravatar {
       float: right;
       text-align: right;
     }
@@ -93,6 +96,7 @@
 </li>
  */
 .pinboard-link-list {
+  clear: both;
   list-style-type: none;
   padding: 0;
   margin: 0;
@@ -116,27 +120,51 @@
       text-decoration: none;
     }
     &:nth-child(8n+1) {
+      a:hover, a:focus {
+        color: lighten($secondary--blue-dark, 50%);
+      }
       background: lighten($secondary--blue-dark, 10%);
     }
     &:nth-child(8n+2) {
+      a:hover, a:focus {
+        color: lighten($secondary--blue, 40%);
+      }
       background: $secondary--blue;
     }
     &:nth-child(8n+3) {
+      a:hover, a:focus {
+        color: lighten($secondary--blue, 50%);
+      }
       background: lighten($secondary--blue, 10%);
     }
     &:nth-child(8n+4) {
+      a:hover, a:focus {
+        color: lighten($secondary--blue, 50%);
+      }
       background: lighten($secondary--blue, 20%);
     }
     &:nth-child(8n+5) {
+      a:hover, a:focus {
+        color: lighten($secondary--purple-light, 30%);
+      }
       background: lighten($secondary--purple-light, 10%);
     }
     &:nth-child(8n+6) {
+      a:hover, a:focus {
+        color: lighten($secondary--purple-light, 30%);
+      }
       background: lighten($secondary--purple-light, 5%);
     }
     &:nth-child(8n+7) {
-      background: lighten($secondary--purple-light, 0);
+      a:hover, a:focus {
+        color: lighten($secondary--purple-light, 30%);
+      }
+      background: $secondary--purple-light;
     }
     &:nth-child(8n+8) {
+      a:hover, a:focus {
+        color: lighten($secondary--purple-dark, 50%);
+      }
       background: $secondary--purple-dark;
     }
   }

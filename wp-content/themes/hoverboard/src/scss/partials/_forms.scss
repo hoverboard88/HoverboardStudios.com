@@ -68,6 +68,32 @@ textarea {
     color: rgba($black, 0.5);
   }
 }
+
+.container--blue, .wrap--blue {
+  input[type="text"],
+  input[type="color"],
+  input[type="date"],
+  input[type="datetime"],
+  input[type="datetime-local"],
+  input[type="email"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="time"],
+  input[type="url"],
+  textarea {
+    border: 0;
+    box-shadow: 4px 4px 0 $secondary--blue-dark;
+    background: $white;
+    &:focus {
+      outline: 0;
+      box-shadow: 2px 2px 0 $secondary--blue-dark;
+    }
+  }
+  input[type="submit"], button[type="submit"] {
+    @extend .btn--purple;
+  }
+}
+
 .container--red, .wrap--red {
   input[type="text"],
   input[type="color"],

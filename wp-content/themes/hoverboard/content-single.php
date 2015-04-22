@@ -8,8 +8,6 @@
 
 	<?php hb_func_icon(); ?>
 
-	<?php hb_posted_on(); ?>
-
 	<div class="entry-content">
 		<?php the_content(); ?>
 		<?php

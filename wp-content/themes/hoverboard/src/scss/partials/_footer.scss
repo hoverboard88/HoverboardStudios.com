@@ -14,6 +14,7 @@
 	}
 	svg path {
 		fill: $secondary--purple-light;
+		transition: fill .3s;
 	}
 	a:hover, a:focus {
 		svg path {
@@ -24,6 +25,10 @@
 		display: block;
 		height: 50px;
 		width: 50px;
+		transition: transform .3s;
+		&:hover, &:focus {
+			transform: scale(1.2);
+		}
 	}
 }
 
