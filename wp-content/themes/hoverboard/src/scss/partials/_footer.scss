@@ -12,6 +12,14 @@
 	svg, img {
 		display: inline-block;
 	}
+	svg path {
+		fill: $secondary--purple-light;
+	}
+	a:hover, a:focus {
+		svg path {
+			fill: lighten($secondary--purple-light, 10%);
+		}
+	}
 	.menu__item a {
 		display: block;
 		height: 50px;

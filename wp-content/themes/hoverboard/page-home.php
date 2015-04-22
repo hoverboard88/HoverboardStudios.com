@@ -101,7 +101,7 @@ get_header(); ?>
 	            <label for="NOTE">Tell us about your project:</label>
 	            <textarea id="NOTE" name="NOTE"></textarea>
 
-	            <input class="single-spaced" type="submit" value="Submit"/>
+	            <input class="clear single-spaced" type="submit" value="Submit"/>
 
 	          </form>
 

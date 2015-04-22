@@ -20,6 +20,10 @@ $header_breakpoint: 58em;
 		padding-right: $base--spacing;
 		a {
 			display: block;
+			transition: all .3s;
+			&:hover {
+				transform: perspective(800px) rotateY(25deg);
+			}
 		}
 		position: relative;
 		@include breakpoint(72em) {
