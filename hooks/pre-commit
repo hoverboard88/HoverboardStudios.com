@@ -1,3 +1,3 @@
 #!/bin/sh
-# ../../git-wordpress-checks/git-wordpress-checks.sh
+cd cd wp-content/themes/hoverboard/ && gulp critical
 ~/Dropbox/Sites/localwordpress_vvv/www/hoverboardstudios/htdocs/git-wordpress-checks/git-wordpress-checks.sh
