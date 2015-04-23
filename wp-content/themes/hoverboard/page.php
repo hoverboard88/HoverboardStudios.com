@@ -12,7 +12,7 @@
 
 get_header(); ?>
 
-	<div class="wrap wrap--content wrap--ltgreen">
+	<div class="wrap--content wrap--ltgreen">
 		<header class="container container--page-title">
 			<h1 class="entry-title"><?php the_title(); ?></h1>
 		</header>

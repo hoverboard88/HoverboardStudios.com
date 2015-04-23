@@ -20,28 +20,33 @@
 				<nav class="menu--social">
 					<ul>
 						<li class="menu__item menu__item--twitter">
-							<a title="Twitter" href="https://twitter.com/hoverboard88">
+							<a href="https://twitter.com/hoverboard88">
 								<?php include 'src/img/social-twitter.svg'; ?>
+								<span class="visuallyhidden">Twitter</span>
 							</a>
 						</li>
 						<li class="menu__item menu__item--facebook">
-							<a title="Facebook" href="https://www.facebook.com/hoverboardstudios">
+							<a href="https://www.facebook.com/hoverboardstudios">
 								<?php include 'src/img/social-facebook.svg'; ?>
+								<span class="visuallyhidden">Facebook</span>
 							</a>
 						</li>
 						<li class="menu__item menu__item--linkedin">
-							<a title="LinkedIn" href="https://www.linkedin.com/company/hoverboard-studios">
+							<a href="https://www.linkedin.com/company/hoverboard-studios">
 								<?php include 'src/img/social-linkedin.svg'; ?>
+								<span class="visuallyhidden">LinkedIn</span>
 							</a>
 						</li>
 						<li class="menu__item menu__item--github">
-							<a title="GitHub" href="https://github.com/hoverboard88">
+							<a href="https://github.com/hoverboard88">
 								<?php include 'src/img/social-github.svg'; ?>
+								<span class="visuallyhidden">GitHub</span>
 							</a>
 						</li>
 						<li class="menu__item menu__item--rss">
-							<a title="RSS" href="/feed/">
+							<a href="/feed/">
 								<?php include 'src/img/social-rss.svg'; ?>
+								<span class="visuallyhidden">RSS</span>
 							</a>
 						</li>
 					</ul>

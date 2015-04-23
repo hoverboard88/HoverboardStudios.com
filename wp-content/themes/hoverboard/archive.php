@@ -9,7 +9,7 @@
 
 get_header(); ?>
 
-	<div class="wrap wrap--content wrap--category wrap--category--<?php echo get_the_category()[0]->slug; ?>">
+	<div class="wrap--content wrap--category wrap--category--<?php echo get_the_category()[0]->slug; ?>">
 		<header class="container container--page-title">
 			<?php
 				hb_the_archive_title( '<h1 class="page-title single-spaced">', '</h1>' );

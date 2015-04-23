@@ -28,8 +28,37 @@
 		transition: transform .3s;
 		&:hover, &:focus {
 			transform: scale(1.2);
+			&:after {
+				opacity: 1;
+			}
+		}
+		&:after {
+			position: absolute;
+			opacity: 0;
+			transition: opacity .3s;
+			bottom: -20px;
+			@include font-size(10px);
+			left: 0;
+			width: 100%;
+			text-align: center;
 		}
 	}
+}
+
+.menu__item--twitter a:after {
+	content: "Twitter";
+}
+.menu__item--facebook a:after {
+	content: "Facebook";
+}
+.menu__item--linkedin a:after {
+	content: "LinkedIn";
+}
+.menu__item--github a:after {
+	content: "GitHub";
+}
+.menu__item--rss a:after {
+	content: "RSS Feed";
 }
 
 @include breakpoint (25em) {

@@ -156,26 +156,6 @@
 	}
 	position: relative;
 }
-.wrap--dkgreen, .container--dkgreen {
-	background: $greens--dark;
-}
-
-.wrap--medgreen, .container--medgreen, .wrap--hero {
-	background-color: $greens--medium;
-}
-.wrap--ltgreen, .container--ltgreen {
-	background: $greens--light;
-}
-
-.wrap--blue, .container--blue {
-	background: $secondary--blue;
-	a {
-		color: lighten($secondary--blue, 40%);
-	}
-}
-.wrap--grey, .container--grey {
-	background: $grey--light;
-}
 
 .container--work {
 	img {
@@ -217,35 +197,6 @@
 }
 @include breakpoint(70em) {
 	@include who-we-are-offset($width--4, 30%);
-}
-
-.wrap--red, .container--red {
-	background: $secondary--red;
-	color: $grey--light;
-	line-height: 1.5;
-	a {
-    color: $white;
-  }
-  h1, h2, h3, h4, h5, h6 {
-    text-shadow: 2px 2px 0 $black;
-  }
-}
-
-/* .work__blurb {
-	@include breakpoint(21em) {
-		padding-right: 20%;
-		@include breakpoint(35em) {
-			padding-right: 30%;
-		}
-	}
-} */
-
-.wrap--dark {
-	background: $black;
-	color: $secondary--purple-light;
-	a {
-		color: $secondary--purple-light;
-	}
 }
 
 .capsule-crm-form {

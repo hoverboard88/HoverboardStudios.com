@@ -7,7 +7,7 @@
 
 get_header(); ?>
 
-	<div class="wrap wrap--content wrap--category wrap--category--podcast">
+	<div class="wrap--content wrap--category wrap--category--podcast">
 		<header class="container container--page-title">
 			<div class="title-wrap">
 				<h1 class="entry-title"><?php the_title(); ?></h1>
@@ -29,7 +29,7 @@ get_header(); ?>
 		</main><!-- #main -->
 	</div><!-- #primary -->
 
-	<div class="wrap wrap--blue wrap--content">
+	<div class="wrap--blue wrap--content">
 		<div class="container">
 			<?php var_dump(comments_open()); ?>
 			<?php if ( comments_open() || get_comments_number() ) : ?>

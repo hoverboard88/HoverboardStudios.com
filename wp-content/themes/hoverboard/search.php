@@ -7,7 +7,7 @@
 
 get_header(); ?>
 
-<div class="wrap wrap--content wrap--medgreen">
+<div class="wrap--content wrap--medgreen">
 	<header class="container container--page-title">
 		<h1 class="page-title"><?php printf( __( 'Search Results for: %s', 'hb' ), '<span>' . get_search_query() . '</span>' ); ?></h1>
 	</header>

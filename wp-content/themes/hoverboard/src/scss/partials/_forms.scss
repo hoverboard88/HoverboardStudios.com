@@ -84,9 +84,9 @@ textarea {
     @include long-box-shadow($secondary--blue-dark, 'input');
     background: $white;
   }
-  input[type="submit"], button[type="submit"] {
+  /* input[type="submit"], button[type="submit"] {
     @extend .btn--purple;
-  }
+  } */
   label {
     color: $white;
   }
@@ -108,9 +108,9 @@ textarea {
     @include long-box-shadow(rgba($secondary--red-dark, 0.8), 'input');
     background: $white;
   }
-  input[type="submit"], button[type="submit"] {
+  /* input[type="submit"], button[type="submit"] {
     @extend .btn--red;
-  }
+  } */
 }
 textarea {
   height: 130px;
@@ -138,6 +138,6 @@ textarea {
 
 }
 
-input:required:focus {
+/* input:required:focus {
   background: lighten($secondary--red, 50%) !important;
-}
+} */

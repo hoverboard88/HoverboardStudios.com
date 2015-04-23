@@ -45,14 +45,26 @@ a.btn--purple, .btn--purple {
     color: $white;
   }
 }
+
+a.btn--blue, .btn--blue {
+  @extend .btn;
+  background: $secondary--blue;
+  color: $grey--light;
+  @include long-box-shadow($secondary--blue-dark);
+  &:hover, &:focus {
+    background: lighten($secondary--blue, 10%);
+    color: $white;
+  }
+}
+
 a.btn--red, .btn--red {
   @extend .btn;
-  background: $secondary--red-dark;
+  background: $secondary--red;
   color: $grey--light;
   @include long-box-shadow($secondary--red-dark);
   &:hover, &:focus {
     color: $grey--light;
-    background: lighten($secondary--red-dark, 10%);
+    background: lighten($secondary--red, 10%);
   }
 }
 

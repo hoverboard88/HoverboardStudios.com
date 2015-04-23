@@ -1,0 +1,48 @@
+.wrap--dkgreen, .container--dkgreen {
+	background: $greens--dark;
+}
+
+.wrap--medgreen, .container--medgreen, .wrap--hero {
+	background-color: $greens--medium;
+}
+.wrap--ltgreen, .container--ltgreen {
+	background: $greens--light;
+}
+
+.wrap--blue, .container--blue {
+	background: $secondary--blue;
+	a {
+		color: lighten($secondary--blue, 40%);
+	}
+}
+
+.wrap--ltblue, .container--ltblue {
+	background: lighten($secondary--blue, 20%);;
+}
+
+.wrap--purple, .container--purple {
+	background: $secondary--purple-light;
+}
+.wrap--grey, .container--grey {
+	background: $grey--light;
+}
+
+.wrap--red, .container--red {
+	background: $secondary--red;
+	color: $grey--light;
+	line-height: 1.5;
+	a {
+    color: $white;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    text-shadow: 2px 2px 0 $black;
+  }
+}
+
+.wrap--dark {
+	background: $black;
+	color: $secondary--purple-light;
+	a {
+		color: $secondary--purple-light;
+	}
+}

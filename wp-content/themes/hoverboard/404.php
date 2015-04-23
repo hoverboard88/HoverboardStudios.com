@@ -7,7 +7,7 @@
 
 get_header(); ?>
 
-	<div class="wrap wrap--content wrap--medgreen">
+	<div class="wrap--content wrap--medgreen">
 		<header class="container container--page-title">
 			<h1 class="entry-title"><?php _e( 'Great Scott!', 'hb' ); ?></h1>
 		</header>

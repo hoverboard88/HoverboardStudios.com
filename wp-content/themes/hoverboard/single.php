@@ -7,7 +7,7 @@
 
 get_header(); ?>
 
-	<div class="wrap wrap--content wrap--category wrap--category--<?php echo get_the_category()[0]->slug; ?>">
+	<div class="wrap--content wrap--category wrap--category--<?php echo get_the_category()[0]->slug; ?>">
 		<header class="container container--page-title">
 			<div class="title-wrap">
 				<h1 class="entry-title"><?php the_title(); ?></h1>
@@ -32,7 +32,7 @@ get_header(); ?>
 		</main><!-- #main -->
 	</div><!-- #primary -->
 
-	<div class="wrap wrap--blue wrap--content">
+	<div class="wrap--blue wrap--content">
 		<div class="container">
 			<?php
 				// If comments are open or we have at least one comment, load up the comment template

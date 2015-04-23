@@ -10,7 +10,7 @@
 
 get_header(); ?>
 
-	<div class="wrap wrap--content wrap--ltgreen">
+	<div class="wrap--content wrap--ltgreen">
 		<header class="container container--page-title">
 			<h1 class="entry-title"><?php the_title(); ?></h1>
 		</header>
@@ -19,7 +19,7 @@ get_header(); ?>
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
 
-			<div class="wrap">
+			<div class="wrap--grey">
 				<div class="container container--columns">
 					<section class="column--half container">
 
@@ -34,6 +34,8 @@ get_header(); ?>
 					<section class="column--half container container--content container--blue">
 
 						<h2>Get in Touch Today</h2>
+
+						<p>Have a project already in mind but don’t know where to start? Looking for some advice or a quote on a branding revamp? Have an idea for an app but feel lost?</p>
 
 						<p>Send us a quick note about your upcoming project and we will be happy to help!</p>
 

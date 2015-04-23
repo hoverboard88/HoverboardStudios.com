@@ -20,7 +20,7 @@
 <body <?php body_class('fonts-loaded'); ?>>
 <div id="page" class="site">
 
-	<div class="wrap wrap--tiled hfeed">
+	<div class="wrap--tiled hfeed">
 		<a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', 'hb' ); ?></a>
 		<header id="masthead" class="container container--header centered site-header" role="banner">
 
