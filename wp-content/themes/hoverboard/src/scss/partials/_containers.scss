@@ -46,3 +46,69 @@
 		color: $secondary--purple-light;
 	}
 }
+
+.wrap--hero {
+	background: url(dist/img/skyline-450.jpg) bottom center no-repeat;
+	background-size: cover;
+	padding-bottom: 2em;
+	// ~435px
+	@include breakpoint(27em) {
+		background-image: url(dist/img/skyline-600.jpg);
+		padding-bottom: 4em;
+		padding-top: 1em;
+	}
+	// ~600px
+	@include breakpoint(37em) {
+		background-image: url(dist/img/skyline-850.jpg);
+		padding-left: $width--1;
+		padding-right: $width--1;
+	}
+	// ~850px
+	@include breakpoint(53em) {
+		background-image: url(dist/img/skyline-1100.jpg);
+		padding-left: 0;
+		padding-right: 0;
+		padding-bottom: 6em;
+		overflow: hidden;
+	}
+	// ~1040px
+	@include breakpoint(65em) {
+		background-image: url(dist/img/skyline-1300.jpg);
+		padding-top: 2em;
+		padding-bottom: 9em;
+	}
+	//excessive screen sizes. Consider making larger background images for these.
+	@include breakpoint(90em) {
+		padding-bottom: 9em;
+	}
+	@include breakpoint(125em) {
+		padding-bottom: 12em;
+	}
+	@include breakpoint(145em) {
+		padding-bottom: 15em;
+	}
+}
+
+.container--hero {
+	color: $white;
+	font-style: italic;
+	text-shadow: 1px 1px 2px rgba($black, .75);
+	.content-block {
+		text-align: center;
+		@include breakpoint(40em) {
+			@include font-size(20px);
+		}
+		@include breakpoint(53em) {
+			width: $width--8;
+			float: right;
+			text-align: left;
+		}
+	}
+}
+.wrap--tiled {
+	background: $white url(dist/img/tiled-pattern.svg); // using src because svgmin is messing up the svg.
+	// background-size: contain;
+	box-shadow: 0 2px 18px rgba($black, .25);
+	z-index: 1; // so box-shadow shows
+	position: relative;
+}
