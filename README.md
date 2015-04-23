@@ -20,3 +20,15 @@ The task-runner used is Gulp.js. To setup, run `npm install` in `wp-content/them
 ## SCSS ##
 
 We used the [Hoverboard SCSS Boilerplate](https://github.com/hoverboard88/scss-boilerplate) as a starting point.
+
+## Git Hooks ##
+
+If you are a committing code to this repo, make sure to symlink your `hooks` folder in you `.git` directory:
+
+```
+cd to/root/of/repo
+rm -rf .git/hooks
+ln -s hooks .git/hooks
+```
+
+Then php will be linted, CriticalCSS will be dealt with correctly and other checks will be made. See `hooks` directory for more info.
