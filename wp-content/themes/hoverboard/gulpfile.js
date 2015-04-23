@@ -99,14 +99,9 @@ gulp.task('clean', function(cb) {
 
 // Default task
 gulp.task('default', function() {
-  var includePath = path.join( __dirname, 'inc/critical.css.php' );
 
-  fs.unlink(includePath, function (err) {
-    if (err) {
-      console.log('Critical CSS not there.');
-    } else {
-      console.log("Critical CSS deleted!");
-    }
+  fs.truncate(path.join( __dirname, 'inc/critical.css.php' ), 0, function(){
+    console.log("Critical CSS truncated.");
   });
 
   gulp.start('styles', 'scripts', 'images', 'svg2png');
