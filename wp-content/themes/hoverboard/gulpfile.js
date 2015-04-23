@@ -150,14 +150,11 @@ gulp.task('critical', function() {
             throw new Error(err);
           } else {
 
-            fs.unlink(includePath, function (err) {
-              if (err) throw err;
-              fs.writeFile(includePath, output, function(err) {
-                if(err) {
-                  return console.log(err);
-                }
-                console.log("Critical written to include!");
-              });
+            fs.writeFile(includePath, output, function(err) {
+              if(err) {
+                return console.log(err);
+              }
+              console.log("Critical written to include!");
             });
 
           }
