@@ -16,9 +16,8 @@ get_header(); ?>
 	      <div class="container container--hero">
 
 	        <div class="content-block">
-	          <p>Hoverboard is a design and development studio that creates innovative digital experiences to fit the needs of engaged clients.</p>
-	          <!-- <p>We'd want to hear from you!<br>
-	          612-351-2373</p> -->
+	          <h2>Ready to engage with your website?</h2>
+						<p>Get involved in the building of your own website or app as the creative visionary leader, and help us to create a custom-branded website or application specific for your business.</p>
 	        </div>
 
 	      </div><!-- .container -->
@@ -30,11 +29,11 @@ get_header(); ?>
 	        <img class="img--desktop" src="<?php echo get_template_directory_uri(); ?>/dist/img/desktop.svg" alt="Desktop">
 
 	        <div class="content-block content-block--who-we-are">
-	          <h2>Who We Are</h2>
+	          <h2>About Us</h2>
 
-	          <p>We create digital experiences for websites with a passion for using the latest web technologies. The user experience is optimized for any device, whether browsing on a phone or a desktop computer.</p>
+						<p>Matt and Ryan are the co-owners and two-person team behind Hoverboard Studios. Having engrossed themselves with all things tech for over 10 years, they each bring an incredible understanding of websites and web applications to your project—the do’s, don’ts, and ingrained know-how.</p>
 
-	          <p>We utilize user-friendly content management systems, such as Wordpress, so that our clients can quickly and easily edit site content.</p>
+						<p><a class="btn btn--green" href="/about/">More About Us</a></p>
 	        </div>
 
 	      </div><!-- .container -->
@@ -66,64 +65,11 @@ get_header(); ?>
 
 	          <h2>Get In Touch</h2>
 
-	          <p class="work__blurb">Do you have a project/product in mind? Did you just wrap up a project and want a second set of eyes to take a look?</p>
+	          <p>Do you have a project/product in mind? Did you just wrap up a project and want a second set of eyes to take a look?</p>
 
 	          <p>We just need a few things from you:</p>
 
-	          <form class="capsule-crm-form" onsubmit="return split_names();" action="https://service.capsulecrm.com/service/newlead" method="post">
-	            <p id="alert__thank-you" class="alert__thank-you alert alert-success well">Thank you for contacting us! We'll be in touch.</p>
-	            <input type="hidden" name="FORM_ID" value="527b4032-3da6-4716-8ced-67426a4aea61">
-	            <input type="hidden" name="COMPLETE_URL" value="http://hoverboardstudios.com/#alert__thank-you">
-
-	            <!-- <input type="hidden" name="DEVELOPER" value="TRUE"/> -->
-	            <input type="hidden" id="FIRST_NAME" name="FIRST_NAME">
-
-	            <label for="LAST_NAME">Name <span class="span--required">(required)</span></label>
-	            <input type="text" required id="LAST_NAME" name="LAST_NAME">
-
-	            <label for="EMAIL">Email <span class="span--required">(required)</span></label>
-	            <input type="text" required id="EMAIL" name="EMAIL">
-
-	            <label for="PHONE">Phone</label>
-	            <input type="tel" id="PHONE" name="PHONE">
-
-	            <label for="CF_Budget">Project Budget <span class="span--required">(required)</span></label>
-	            <select id="CF_Budget" required name="CUSTOMFIELD[Budget]">
-	              <option value="">Budget Amount</option>
-	              <option value="4000">0 - $4,000</option>
-	              <option value="8000">$4,000 - $8,000</option>
-	              <option value="15000">$8,000 - $15,000</option>
-	              <option value="30000">$15,000 - $30,000</option>
-	              <option value="60000">$30,000 - $60,000</option>
-	              <option value="60001">$60,000+</option>
-	            </select>
-
-	            <label for="NOTE">Tell us about your project:</label>
-	            <textarea id="NOTE" name="NOTE"></textarea>
-
-	            <input class="clear single-spaced" type="submit" value="Submit"/>
-
-	          </form>
-
-						<script>
-						function split_names () {
-
-							var
-								wholeName = document.getElementById('LAST_NAME').value,
-								nameArray = wholeName.split(' ');
-
-							document.getElementById('FIRST_NAME').value = nameArray[0];
-
-							//remove first name from array
-							nameArray.splice(0, 1);
-							//join back into string
-							nameArray = nameArray.join(' ');
-
-							//dump the rest into LAST_NAME
-							document.getElementById('LAST_NAME').value = nameArray;
-
-						}
-						</script>
+						<?php include 'inc/contact-form.php'; ?>
 
 	        </section><!-- .container -->
 	      </div><!-- .container––columns -->
@@ -136,16 +82,30 @@ get_header(); ?>
 	          <h2>Our Work</h2>
 
 	          <div class="column--half column--half--spaced first">
-	            <h3><a href="http://superiorcampers.com">Superior Campers</a></h3>
-	            <p><a href="http://superiorcampers.com"><img src="<?php echo get_template_directory_uri(); ?>/dist/img/work-supcamp.jpg" alt="screenshot of Superior Campers Web Site"></a></p>
-	            <p>Superior Campers is a camper and trailer dealership in Superior, WI who deal in new and used units. We had originally designed their last site in 2008, but they were starting to outgrow their current site, and wanted more things like active inventory and an updated design. For the feature they were looking for, we thought WordPress would be a great fit because of the plethora of plugins and it would also make subsequent design updates easier down the road.</p>
+
+							<h3><a href="http://superiorcampers.com">Superior Campers</a></h3>
+
+							<p><a href="http://superiorcampers.com"><img src="<?php echo get_template_directory_uri(); ?>/dist/img/work-supcamp.jpg" alt="screenshot of Superior Campers Web Site"></a></p>
+
+							<p>This Superior, Wisconsin based camper and trailer dealership came to us originally in 2008 looking for a fresh, new website.</p>
+
+							<p>Six years later, Superior Camper had outgrown their website and was looking for an updated design that was easy for their customers to navigate.</p>
+
+							<p>Using an active-inventory addition and updating their current design, nature-lovers can easily find the exact home away from home they’re looking for online before ever setting foot on the lot.</p>
+
 	          </div>
 	          <div class="column--half column--half--spaced last">
-	            <h3><a href="http://standarddistributing.com">Standard Distributing</a></h3>
-	            <p><a href="http://standarddistributing.com"><img src="<?php echo get_template_directory_uri(); ?>/dist/img/work-standard.jpg" alt="screenshot of Standard Distributing Web Site"></a></p>
-	            <p>Standard Distributing is a convenience store distributer in Oklahoma. They had been on their old website for a while, but never had a chance to refresh it.</p>
 
-	            <p>Previously, they were using a Front Page-like process, so they had full control of the design. The challenge was to make the site as editable as possible without giving the ability to compromise the overall design aesthetic. We utilized custom menus, widgets and the Theme Customizer as must as possible when integrating the design into WordPress.</p>
+							<h3><a href="http://standarddistributing.com">Standard Distributing</a></h3>
+
+							<p><a href="http://standarddistributing.com"><img src="<?php echo get_template_directory_uri(); ?>/dist/img/work-standard.jpg" alt="screenshot of Standard Distributing Web Site"></a></p>
+
+							<p>Hailing from Sapulpa, Oklahoma, Standard Distributing works to bring the sweet and salty snacks to local convenience stores. They came to us looking for something professional that could be edited anytime they wanted.</p>
+
+							<p>Using custom menus, widgets, and customizers, Standard Distributing is now able to pick and choose exactly what they want from day to day without compromising the look and feel of their branding or their website.</p>
+
+							<p>Less hassle and website-frustrations. More work and profit.</p>
+
 	          </div>
 
 	        </div>

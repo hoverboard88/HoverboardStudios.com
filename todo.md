@@ -20,3 +20,13 @@
 * design page.php
 * Design subscription email form.
 * Add tags somewhere in post design. Will be using. small button treatment?
+
+## Content ##
+
+* Enter new content on home page
+* create pages from Lindsay content
+
+
+## Case Studies ##
+
+* Design flexible Case Study template for SupCamp and Standard.

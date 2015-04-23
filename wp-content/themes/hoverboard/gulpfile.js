@@ -20,7 +20,11 @@ var gulp = require('gulp'),
     cache = require('gulp-cache'),
     livereload = require('gulp-livereload'),
     phplint = require('phplint').lint,
-    del = require('del');
+    del = require('del'),
+    path = require( 'path' ),
+    request = require('request'),
+    criticalcss = require("criticalcss"),
+    fs = require('fs');
 
 // Fonts
 gulp.task('fonts', function() {
@@ -30,7 +34,7 @@ gulp.task('fonts', function() {
 });
 
 // Styles
-gulp.task('styles', ['critical'], function() {
+gulp.task('styles', function() {
   return gulp.src(['src/scss/style.scss', 'src/scss/single.scss'])
     .pipe(sass({ style: 'expanded' }))
     .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
@@ -95,7 +99,17 @@ gulp.task('clean', function(cb) {
 
 // Default task
 gulp.task('default', function() {
-    gulp.start('styles', 'scripts', 'images', 'svg2png');
+  var includePath = path.join( __dirname, 'inc/critical.css.php' );
+
+  fs.unlink(includePath, function (err) {
+    if (err) {
+      console.log('Critical CSS not there.');
+    } else {
+      console.log("Critical CSS deleted!");
+    }
+  });
+
+  gulp.start('styles', 'scripts', 'images', 'svg2png');
 });
 
 // Watch
@@ -121,10 +135,6 @@ gulp.task('watch', ['default'], function() {
 
 });
 gulp.task('critical', function() {
-  var request = require('request');
-  var path = require( 'path' );
-  var criticalcss = require("criticalcss");
-  var fs = require('fs');
   var tmpDir = require('os').tmpdir();
 
   var cssUrl = 'http://hoverboardstudios.vvv/wp-content/themes/hoverboard/style.css';

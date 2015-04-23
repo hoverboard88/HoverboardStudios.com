@@ -32,14 +32,7 @@
 
 			<nav id="site-navigation" class="main-navigation menu menu--main" role="navigation">
 				<?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false, 'menu_id' => 'primary-menu' ) ); ?>
-				<?php
-					if ( !is_page_template('page-home.php') ) {
-						get_search_form();
-					}
-				?>
-				<!-- <button class="search-toggle" type="button">
-					<?php hb_func_icon_svg('magnifying-glass'); ?>
-				</button> -->
+				<?php get_search_form(); ?>
 			</nav>
 
 		</header><!-- .container -->

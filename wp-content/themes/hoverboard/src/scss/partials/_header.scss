@@ -16,12 +16,12 @@ $header_breakpoint: 58em;
 		line-height: 0; // to get vertical align to work correctly
 		text-align: left;
 		float: left;
-		width: $width--4;
-		padding-right: $base--spacing;
+		width: $width--4 - 1%; //not sure why this lines up, but it does.
+		padding-right: 2%;
 		a {
 			display: block;
 			transition: all .3s;
-			&:hover {
+			&:hover, &:focus {
 				transform: perspective(800px) rotateY(15deg);
 			}
 		}

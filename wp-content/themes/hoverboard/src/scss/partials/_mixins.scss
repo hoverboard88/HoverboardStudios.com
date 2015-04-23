@@ -1,10 +1,13 @@
 @mixin font-size($font-size, $line-height: true, $margin: false ){
+
+  $lh-threshold: 5;
+
   font-size: $font-size;
   font-size: ($font-size / $base--font-size) * 1rem;
 
   $lh: ($base--spacing / $font-size * 1em);
 
-  @if $font-size > $base--font-size * $base--line-height {
+  @if ($font-size + $lh-threshold) > $base--font-size * $base--line-height {
     $lh: $lh + $lh;
   }
 

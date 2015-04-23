@@ -57,7 +57,7 @@ textarea {
   border: 1px solid darken($grey--light, 30%);
   border-radius: 0;
   width: 100%;
-  max-width: 600px;
+  max-width: 700px;
   @include long-box-shadow(darken($grey--light, 30%), 'input');
   &:focus {
     border-color: darken($base--border, 10%);
@@ -80,12 +80,15 @@ textarea {
   input[type="time"],
   input[type="url"],
   textarea {
-    border: 0;
+    border-color: transparent;
     @include long-box-shadow($secondary--blue-dark, 'input');
     background: $white;
   }
   input[type="submit"], button[type="submit"] {
     @extend .btn--purple;
+  }
+  label {
+    color: $white;
   }
 }
 
@@ -101,7 +104,7 @@ textarea {
   input[type="time"],
   input[type="url"],
   textarea {
-    border: 0;
+    border-color: transparent;
     @include long-box-shadow(rgba($secondary--red-dark, 0.8), 'input');
     background: $white;
   }
@@ -121,5 +124,20 @@ textarea {
 }
 .form-allowed-tags {
   @include font-size(12px);
-  max-width: 600px;
+  max-width: 700px;
+}
+
+.span--required {
+  @extend .invisible;
+  &:before {
+    content: " *";
+    color: $secondary--red;
+    text-shadow: -1px 0 $white, 0 1px $white, 1px 0 $white, 0 -1px $white;
+    visibility: visible;
+  }
+
+}
+
+input:required:focus {
+  background: lighten($secondary--red, 50%) !important;
 }
