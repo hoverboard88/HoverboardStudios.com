@@ -29,7 +29,7 @@
   <label for="NOTE">Tell us about your project:</label>
   <textarea id="NOTE" name="NOTE"></textarea>
 
-  <button class="clear single-spaced btn--red" type="submit">Get In Touch</button>
+  <button class="clear single-spaced btn--purple" type="submit">Get In Touch</button>
 
 </form>
 

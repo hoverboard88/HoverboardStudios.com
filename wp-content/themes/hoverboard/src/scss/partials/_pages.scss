@@ -20,8 +20,15 @@
   .title-wrap a {
     color: $white;
   }
+  .author-gravatar {
+    display: none;
+  }
 
   @include breakpoint(50em) {
+
+    .author-gravatar {
+      display: block;
+    }
 
     padding-bottom: $base--spacing;
     padding-top: $base--spacing;
@@ -170,6 +177,7 @@
   }
   h3 {
     margin-bottom: 0;
+    text-transform: none;
   }
 }
 .pinboard-link-note {

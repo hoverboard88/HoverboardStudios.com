@@ -29,9 +29,15 @@ get_header(); ?>
 	        <img class="img--desktop" src="<?php echo get_template_directory_uri(); ?>/dist/img/desktop.svg" alt="Desktop">
 
 	        <div class="content-block content-block--who-we-are">
-	          <h2>About Us</h2>
+	          <h2>Who We Are</h2>
 
-						<p>Matt and Ryan are the co-owners and two-person team behind Hoverboard Studios. Having engrossed themselves with all things tech for over 10 years, they each bring an incredible understanding of websites and web applications to your project—the do’s, don’ts, and ingrained know-how.</p>
+						<p>We are your next right-hand design and development studio.</p>
+
+						<p>We use your creative ideas for your business, and together we build a digital experience that you and your audience will love.</p>
+
+						<p>Audience Engagement. Application Innovation. Website Speed. </p>
+
+						<p>When it comes to your new website or application, we’re right beside you every step of the way.</p>
 
 						<a class="btn--red" href="/about/">Learn More About Us</a>
 	        </div>
@@ -45,11 +51,19 @@ get_header(); ?>
 
 	          <h2>Why Us?</h2>
 
-						<p>We believe in your collaboration throughout every part of your project. From design ideas and inspiration to branding and implementation, Hoverboard is determined to bring your audience the very best experience to the web.</p>
+						<p>Rather than taking an idea and running potentially off course, Hoverboard focuses on your ideas, your consistent input, and your branding to give you exactly what you’ve imagined for your business.</p>
 
-						<p>Our attention to detail allows us to better understand your clients, customers, and prospects through your eyes. Get that creative edge through knowing your audience and together building something specifically for them.</p>
+						<p>We get to know every aspect of what you’re looking for and translate it into your business needs. This way, you’re never paying for anything you don’t need and never sacrificing what you want.</p>
 
-	          <a class="btn--purple single-spaced" href="/why-us/">More On Our Awesomeness</a>
+						<h2>Keeping It Small</h2>
+
+						<p>We’re a two-man studio with a passion for design and web development. We want our clients to range from small, engaged shops to large, invested corporations. </p>
+
+						<p>Yet no matter the size, at Hoverboard, we treat all of our clients the same. </p>
+
+						<p>We’re an extension of your company; your own private design and development firm.</p>
+
+						<a class="btn--purple single-spaced" href="/why-us/">More On Our Awesomeness</a>
 
 	          <div class="devices">
 	            <img class="img--tablet" src="<?php echo get_template_directory_uri(); ?>/dist/img/tablet.svg" alt="Tablet">
@@ -63,9 +77,9 @@ get_header(); ?>
 
 						<h2>Get in Touch Today</h2>
 
-						<p>Have a project already in mind but don’t know where to start? Looking for some advice or a quote on a branding revamp? Have an idea for an app but feel lost?</p>
+						<p>Thinking of a website revamp? Want more information about designing a company app? Looking for feedback on your latest project?</p>
 
-						<p>Send us a quick note about your upcoming project and we will be happy to help!</p>
+						<p>Let us know what you’re up to and how we can help you on your next project.</p>
 
 						<?php include 'inc/contact-form.php'; ?>
 
@@ -85,11 +99,7 @@ get_header(); ?>
 
 							<p><a href="http://superiorcampers.com"><img src="<?php echo get_template_directory_uri(); ?>/dist/img/work-supcamp.jpg" alt="screenshot of Superior Campers Web Site"></a></p>
 
-							<p>This Superior, Wisconsin based camper and trailer dealership came to us originally in 2008 looking for a fresh, new website.</p>
-
-							<p>Six years later, Superior Camper had outgrown their website and was looking for an updated design that was easy for their customers to navigate.</p>
-
-							<p>Using an active-inventory addition and updating their current design, nature-lovers can easily find the exact home away from home they’re looking for online before ever setting foot on the lot.</p>
+							<p>Superior Campers out of Superior, WI came to us looking for a website revamp. After we had originally created their website in 2008, they had outgrown what they had and was looking to add an active inventory feature on an updated site.</p>
 
 							<a class="btn--green" href="^_^">Full Case Study</a>
 
@@ -100,11 +110,7 @@ get_header(); ?>
 
 							<p><a href="http://standarddistributing.com"><img src="<?php echo get_template_directory_uri(); ?>/dist/img/work-standard.jpg" alt="screenshot of Standard Distributing Web Site"></a></p>
 
-							<p>Hailing from Sapulpa, Oklahoma, Standard Distributing works to bring the sweet and salty snacks to local convenience stores. They came to us looking for something professional that could be edited anytime they wanted.</p>
-
-							<p>Using custom menus, widgets, and customizers, Standard Distributing is now able to pick and choose exactly what they want from day to day without compromising the look and feel of their branding or their website.</p>
-
-							<p>Less hassle and website-frustrations. More work and profit.</p>
+							<p>Standard Distributing, a convenience store distributer in Oklahoma, needed an overhaul to their website. Their design was dated but worse yet, they couldn’t update it without potentially compromising the design and development of the site.</p>
 
 							<a class="btn--green" href="^_^">Full Case Study</a>
 

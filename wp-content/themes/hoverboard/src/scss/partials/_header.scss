@@ -2,6 +2,9 @@ $header_breakpoint: 58em;
 
 .logo-h1 {
 	text-align: center;
+	svg {
+		max-width: 400px;
+	}
 }
 .logo {
 	max-width: 16em;

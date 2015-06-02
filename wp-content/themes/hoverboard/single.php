@@ -11,8 +11,10 @@ get_header(); ?>
 		<header class="container container--page-title">
 			<div class="title-wrap">
 				<h1 class="entry-title"><?php the_title(); ?></h1>
-				<?php hb_posted_on(); ?>
-				<?php hb_byline(); ?>
+				<div class="single__meta">
+					<?php hb_posted_on(); ?>
+					<?php hb_byline(); ?>
+				</div>
 			</div>
 			<span class="author-gravatar">
 				<?php echo get_avatar(get_the_author_meta('ID'), 96); ?>
