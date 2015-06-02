@@ -1,17 +1,17 @@
 === Simple Feed Stats ===
 
 Plugin Name: Simple Feed Stats
-Plugin URI: http://perishablepress.com/simple-feed-stats/
+Plugin URI: https://perishablepress.com/simple-feed-stats/
 Description: Tracks your feeds, adds custom content, and displays your feed statistics on your site.
 Tags: feed, feeds, stats, statistics, feedburner, tracking, subscribers
 Author: Jeff Starr
 Author URI: http://monzilla.biz/
 Donate link: http://m0n.co/donate
 Contributors: specialk
-Requires at least: 3.8
-Tested up to: 4.1
+Requires at least: 3.9
+Tested up to: 4.2
 Stable tag: trunk
-Version: 20150317
+Version: 20150507
 Text Domain: sfs
 Domain Path: /languages/
 License: GPL v2 or later
@@ -20,12 +20,12 @@ Simple Feed Stats makes it easy to track your feeds, add custom content, and dis
 
 == Description ==
 
-[Simple Feed Stats](http://perishablepress.com/simple-feed-stats/) (SFS) tracks your feeds automatically using a variety of methods, and provides a wealth of tools and options for further configuration and management. Also displays your subscriber count via template tag or shortcode. Fully configurable. Visit the "Simple Feed Stats" settings page for stats, tools, and more info.
+[Simple Feed Stats](https://perishablepress.com/simple-feed-stats/) (SFS) tracks your feeds automatically using a variety of methods, and provides a wealth of tools and options for further configuration and management. Also displays your subscriber count via template tag or shortcode. Fully configurable. Visit the "Simple Feed Stats" settings page for stats, tools, and more info.
 
 **Features**
 
 * Dashboard widget - provides quick overview of your feed stats
-* Custom feed content - embellish your feed with custom graphics, markup, &amp; text content
+* Custom feed content - embellish your feed with graphics, markup &amp; text
 * Custom feed count - display any number or text for your feed count
 * Custom CSS - use your own styles to customize your feed stats
 * Shortcodes and template tags to display daily, total, RSS2, and comment stats
@@ -57,6 +57,9 @@ Simple Feed Stats tracks the following data for each feed request:
 == Installation ==
 
 Upload the `/simple-feed-stats/` directory to your `/plugins/` folder and activate in the WP Admin. Then visit the Simple Feed Stats Settings page to view your stats, customize options, grab shortcodes, and more. Everything works automatically out of the box, with plenty of tools and options to customize and manage your feed stats.
+
+
+[More info on installing WP plugins](http://codex.wordpress.org/Managing_Plugins#Installing_Plugins)
 
 **Shortcodes**
 
@@ -120,9 +123,16 @@ To upgrade, simply upload the new version and you should be good to go.
 
 == Screenshots ==
 
-Screenshots and more info available at the [SFS Homepage](http://perishablepress.com/simple-feed-stats/).
+Screenshots and more info available at the [SFS Homepage](https://perishablepress.com/simple-feed-stats/).
 
 == Changelog ==
+
+= 20150507 =
+
+* Tested with WP 4.2 + 4.3 (alpha)
+* Changed a few "http" links to "https"
+* Update: fixed stats for https sites
+* Update: fixed multisite stats
 
 = 20150317 =
 
@@ -236,7 +246,7 @@ Screenshots and more info available at the [SFS Homepage](http://perishablepress
 
 Question: "How can I monitor a custom feed, such as one at http://example.com/feed/podcast/"
 
-Answer: If you use WordPress API for the [custom feed template](http://digwp.com/2011/08/custom-feeds/), and include the usual template tags for feeds, the SFS plugin will automatically track the custom feed. 
+Answer: If you use WordPress API for the [custom feed template](https://digwp.com/2011/08/custom-feeds/), and include the usual template tags for feeds, the SFS plugin will automatically track the custom feed. 
 
 Question: "What's up with 'strict mode' reporting?"
 
@@ -250,15 +260,15 @@ Question: "The stats are showing zero for the shortcodes and template tags, even
 
 Answer: During the first 12 hours, data is collected. Then the cache is refreshed to show the latest stats for the previous 12 hours. If your stats are showing zero or you would just like to update the count, visit the "Tools and Options" panel and click the "Clear cache" link.
 
-To ask a question, visit the [SFS Homepage](http://perishablepress.com/simple-feed-stats/) or [contact me](http://perishablepress.com/contact/).
+To ask a question, visit the [SFS Homepage](https://perishablepress.com/simple-feed-stats/) or [contact me](https://perishablepress.com/contact/).
 
 == Donations ==
 
 I created this plugin with love for the WP community. To show support, you can [make a donation](http://m0n.co/donate) or purchase one of my books: 
 
-* [The Tao of WordPress](http://wp-tao.com/)
-* [Digging into WordPress](http://digwp.com/)
-* [.htaccess made easy](http://htaccessbook.com/)
-* [WordPress Themes In Depth](http://wp-tao.com/wordpress-themes-book/)
+* [The Tao of WordPress](https://wp-tao.com/)
+* [Digging into WordPress](https://digwp.com/)
+* [.htaccess made easy](https://htaccessbook.com/)
+* [WordPress Themes In Depth](https://wp-tao.com/wordpress-themes-book/)
 
 Links, tweets and likes also appreciated. Thanks! :)

@@ -1,17 +1,17 @@
 <?php
 /*
 	Plugin Name: Simple Feed Stats
-	Plugin URI: http://perishablepress.com/simple-feed-stats/
+	Plugin URI: https://perishablepress.com/simple-feed-stats/
 	Description: Tracks your feeds, adds custom content, and displays your feed statistics on your site.
 	Tags: feed, feeds, stats, statistics, feedburner, tracking, subscribers
 	Author: Jeff Starr
 	Author URI: http://monzilla.biz/
 	Donate link: http://m0n.co/donate
 	Contributors: specialk
-	Requires at least: 3.8
-	Tested up to: 4.1
+	Requires at least: 3.9
+	Tested up to: 4.2
 	Stable tag: trunk
-	Version: 20150317
+	Version: 20150507
 	Text Domain: sfs
 	Domain Path: /languages/
 	License: GPL v2 or later
@@ -19,8 +19,8 @@
 
 if (!defined('ABSPATH')) die();
 
-$sfs_wp_vers = '3.8';
-$sfs_version = '20150317';
+$sfs_wp_vers = '3.9';
+$sfs_version = '20150507';
 $sfs_options = get_option('sfs_options');
 
 // i18n
@@ -109,11 +109,14 @@ function sfs_clean($string) {
 function simple_feed_stats() {
 	global $wpdb, $sfs_options;
 	if (($sfs_options['sfs_tracking_method'] == 'sfs_default_tracking') && (is_feed())) {
-
+		
+		$protocol = 'http://';
+		if (is_ssl()) $protocol = 'https://';
+		
 		$host = 'n/a'; $request = 'n/a'; $referer = 'n/a'; $qstring = 'n/a'; $address = 'n/a'; $agent = 'n/a';
 
 		if (isset($_SERVER['HTTP_HOST']))       $host    = sfs_clean($_SERVER['HTTP_HOST']);
-		if (isset($_SERVER['REQUEST_URI']))     $request = sfs_clean('http://'.$host.$_SERVER['REQUEST_URI']);
+		if (isset($_SERVER['REQUEST_URI']))     $request = sfs_clean($protocol.$host.$_SERVER['REQUEST_URI']);
 		if (isset($_SERVER['HTTP_REFERER']))    $referer = sfs_clean($_SERVER['HTTP_REFERER']);
 		if (isset($_SERVER['QUERY_STRING']))    $qstring = sfs_clean($_SERVER['QUERY_STRING']);
 		if (isset($_SERVER['REMOTE_ADDR']))     $address = sfs_clean($_SERVER['REMOTE_ADDR']);
@@ -426,8 +429,7 @@ function sfs_truncate($string, $max = 50, $rep = '') {
 // display total stats template tag
 function sfs_display_total_count() {
 	global $sfs_options; 
-	if (is_multisite()) $all_count = get_site_transient('all_count');
-	else $all_count = get_transient('all_count');
+	$all_count = get_transient('all_count');
 	if ($all_count) echo $all_count;
 	else echo '0';
 }
@@ -438,8 +440,7 @@ function sfs_display_subscriber_count() {
 	if ($sfs_options['sfs_custom_enable'] == 1) {
 		echo $sfs_options['sfs_custom'];
 	} else {
-		if (is_multisite()) $feed_count = get_site_transient('feed_count');
-		else $feed_count = get_transient('feed_count');	
+		$feed_count = get_transient('feed_count');	
 		if ($feed_count) echo $feed_count;
 		else echo '0';
 	}
@@ -451,8 +452,7 @@ function sfs_subscriber_count() {
 	if ($sfs_options['sfs_custom_enable'] == 1) {
 		return $sfs_options['sfs_custom'];
 	} else {
-		if (is_multisite()) $feed_count = get_site_transient('feed_count');
-		else $feed_count = get_transient('feed_count');	
+		$feed_count = get_transient('feed_count');	
 		if ($feed_count) return $feed_count;
 		else return '0';
 	}
@@ -462,8 +462,7 @@ add_shortcode('sfs_subscriber_count','sfs_subscriber_count');
 // display daily RSS2 stats shortcode
 function sfs_rss2_count() { 
 	global $sfs_options;
-	if (is_multisite()) $feed_count = get_site_transient('rss2_count');
-	else $feed_count = get_transient('rss2_count');	
+	$feed_count = get_transient('rss2_count');	
 	if ($feed_count) return $feed_count;
 	else return '0';
 }
@@ -472,8 +471,7 @@ add_shortcode('sfs_rss2_count','sfs_rss2_count');
 // display daily comment stats shortcode
 function sfs_comments_count() {
 	global $sfs_options;
-	if (is_multisite()) $feed_count = get_site_transient('comment_count');
-	else $feed_count = get_transient('comment_count');	
+	$feed_count = get_transient('comment_count');	
 	if ($feed_count) return $feed_count;
 	else return '0';
 }
@@ -488,8 +486,7 @@ function sfs_display_count_badge() {
 	if ($sfs_options['sfs_custom_enable'] == 1) {
 		echo $sfs_pre_badge . $sfs_options['sfs_custom'] . $sfs_post_badge;
 	} else {
-		if (is_multisite()) $feed_count = get_site_transient('feed_count');
-		else $feed_count = get_transient('feed_count');	
+		$feed_count = get_transient('feed_count');	
 		if ($feed_count) echo $sfs_pre_badge . $feed_count . $sfs_post_badge;
 		else echo $sfs_pre_badge . '0' . $sfs_post_badge;
 	}
@@ -504,8 +501,7 @@ function sfs_count_badge() {
 	if ($sfs_options['sfs_custom_enable'] == 1) {
 		return $sfs_pre_badge . $sfs_options['sfs_custom'] . $sfs_post_badge;
 	} else {
-		if (is_multisite()) $feed_count = get_site_transient('feed_count');
-		else $feed_count = get_transient('feed_count');	
+		$feed_count = get_transient('feed_count');	
 		if ($feed_count) return $sfs_pre_badge . $feed_count . $sfs_post_badge;
 		else return $sfs_pre_badge . '0' . $sfs_post_badge;
 	}
@@ -583,25 +579,14 @@ function sfs_cache_data() {
 	if (is_array($comment_stats)) $comment_stats = $comment_stats[$count];
 	else $comment_stats = 'n/a';
 	
-	if (is_multisite()) {
-		set_site_transient('feed_count', $current_stats, 60*60*24); // 12 hour cache 60*60*12 , 24 hour cache = 60*60*24
-		$feed_count = get_site_transient('feed_count');
-		set_site_transient('all_count', $all_stats, 60*60*24); // 12 hour cache 60*60*12 , 24 hour cache = 60*60*24
-		$all_count = get_site_transient('all_count');
-		set_site_transient('rss2_count', $rss2_stats, 60*60*24); // 12 hour cache 60*60*12 , 24 hour cache = 60*60*24
-		$rss2_count = get_site_transient('rss2_count');
-		set_site_transient('comment_count', $comment_stats, 60*60*24); // 12 hour cache 60*60*12 , 24 hour cache = 60*60*24
-		$comment_count = get_site_transient('comment_count');
-	} else {
-		set_transient('feed_count', $current_stats, 60*60*24); // 12 hour cache 60*60*12 , 24 hour cache = 60*60*24
-		$feed_count = get_transient('feed_count');
-		set_transient('all_count', $all_stats, 60*60*24); // 12 hour cache 60*60*12 , 24 hour cache = 60*60*24
-		$all_count = get_transient('all_count');
-		set_transient('rss2_count', $rss2_stats, 60*60*24); // 12 hour cache 60*60*12 , 24 hour cache = 60*60*24
-		$rss2_count = get_transient('rss2_count');
-		set_transient('comment_count', $comment_stats, 60*60*24); // 12 hour cache 60*60*12 , 24 hour cache = 60*60*24
-		$comment_count = get_transient('comment_count');
-	}
+	set_transient('feed_count', $current_stats, 60*60*24); // 12 hour cache 60*60*12 , 24 hour cache = 60*60*24
+	$feed_count = get_transient('feed_count');
+	set_transient('all_count', $all_stats, 60*60*24); // 12 hour cache 60*60*12 , 24 hour cache = 60*60*24
+	$all_count = get_transient('all_count');
+	set_transient('rss2_count', $rss2_stats, 60*60*24); // 12 hour cache 60*60*12 , 24 hour cache = 60*60*24
+	$rss2_count = get_transient('rss2_count');
+	set_transient('comment_count', $comment_stats, 60*60*24); // 12 hour cache 60*60*12 , 24 hour cache = 60*60*24
+	$comment_count = get_transient('comment_count');
 }
 add_action('sfs_cron_cache', 'sfs_cache_data');
 
@@ -869,31 +854,26 @@ function sfs_render_form() {
 				<div <?php echo $display_alert; ?> class="postbox">
 					<h3><?php _e('Simple Feed Stats needs your support!', 'sfs'); ?></h3>
 					<div class="toggle">
-						<p>
-							<strong><?php _e('Your support is needed to keep this plugin going.', 'sfs'); ?></strong> 
-						</p>
-						<p>
-							<?php _e('If you use Simple Feed Stats and would like development to continue, please', 'sfs'); ?> 
-							<a target="_blank" href="http://m0n.co/donate"><?php _e('make a donation&nbsp;&raquo;', 'sfs'); ?></a>
-						</p>
-						<p>
-							<?php _e('If you are unable to donate, please', 'sfs'); ?> 
-							<a target="_blank" href="http://wordpress.org/support/view/plugin-reviews/<?php echo basename(dirname(__FILE__)); ?>?rate=5#postform" title="<?php _e('Click here to rate and review this plugin', 'sfs'); ?>">
-								<?php _e('give a 5-star rating at the Plugin Directory', 'sfs'); ?>&nbsp;&raquo;
-							</a>
-						</p>
-						<p>
-							<?php _e('Your generous support will help keep this plugin going. Thank you!', 'sfs'); ?>
-						</p>
-						<div class="dismiss-alert">
-							<form action="">
-								<div class="dismiss-alert-wrap">
-									<input class="input-alert" name="sfs_alert" type="checkbox" value="1" <?php if ($checked) echo 'checked="checked"'; ?> />  
-									<label class="description" for="sfs_alert"><?php _e('Check this box if you have shown support', 'sfs') ?></label>
-									<?php wp_nonce_field('sfs-alert', 'sfs-alert', false); ?>
-									<input type="hidden" name="page" value="sfs-options" />
-								</div>
-							</form>
+						<div class="mm-panel-alert">
+							<p>
+								<?php _e('Please', 'sfs'); ?> <a target="_blank" href="http://m0n.co/donate" title="<?php _e('Make a donation via PayPal', 'sfs'); ?>"><?php _e('make a donation', 'sfs'); ?></a> <?php _e('and/or', 'sfs'); ?> 
+								<a target="_blank" href="http://wordpress.org/support/view/plugin-reviews/<?php echo basename(dirname(__FILE__)); ?>?rate=5#postform" title="<?php _e('Rate and review at the Plugin Directory', 'sfs'); ?>">
+									<?php _e('give it a 5-star rating', 'sfs'); ?>&nbsp;&raquo;
+								</a>
+							</p>
+							<p>
+								<?php _e('Your generous support enables continued development of this free plugin. Thank you!', 'sfs'); ?>
+							</p>
+							<div class="dismiss-alert">
+								<form action="">
+									<div class="dismiss-alert-wrap">
+										<input class="input-alert" name="sfs_alert" type="checkbox" value="1" <?php if ($checked) echo 'checked="checked"'; ?> />  
+										<label class="description" for="sfs_alert"><?php _e('Check this box if you have shown support', 'sfs') ?></label>
+										<?php wp_nonce_field('sfs-alert', 'sfs-alert', false); ?>
+										<input type="hidden" name="page" value="sfs-options" />
+									</div>
+								</form>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -914,7 +894,7 @@ function sfs_render_form() {
 							<li><?php _e('Visit the SFS Widget in the', 'sfs'); ?> <a href="<?php echo get_admin_url(); ?>"><?php _e('Dashboard', 'sfs'); ?></a> <?php _e('any time for a quick overview', 'sfs'); ?></li>
 							<li>
 								<?php _e('For more info check the', 'sfs'); ?> <a target="_blank" href="<?php echo plugins_url('/simple-feed-stats/readme.txt', dirname(__FILE__)); ?>">readme.txt</a> 
-								<?php _e('and', 'sfs'); ?> <a target="_blank" href="http://perishablepress.com/simple-feed-stats/"><?php _e('Simple Feed Stats Homepage', 'sfs'); ?></a>
+								<?php _e('and', 'sfs'); ?> <a target="_blank" href="https://perishablepress.com/simple-feed-stats/"><?php _e('Simple Feed Stats Homepage', 'sfs'); ?></a>
 							</li>
 							<li><?php _e('If you like this plugin, please', 'sfs'); ?> 
 								<a target="_blank" href="http://wordpress.org/support/view/plugin-reviews/<?php echo basename(dirname(__FILE__)); ?>?rate=5#postform" title="<?php _e('Click here to rate and review this plugin', 'sfs'); ?>">
@@ -1350,9 +1330,9 @@ function sfs_render_form() {
 						</div>
 						<p><strong><?php _e('More about WordPress feeds', 'sfs'); ?></strong></p>
 						<ul>
-							<li><a target="_blank" href="http://perishablepress.com/simple-feed-stats/"><?php _e('Simple Feed Stats Homepage', 'sfs'); ?></a></li>
+							<li><a target="_blank" href="https://perishablepress.com/simple-feed-stats/"><?php _e('Simple Feed Stats Homepage', 'sfs'); ?></a></li>
 							<li><a target="_blank" href="http://codex.wordpress.org/WordPress_Feeds"><?php _e('WP Codex: WordPress Feeds', 'sfs'); ?></a></li>
-							<li><a target="_blank" href="http://perishablepress.com/what-is-my-wordpress-feed-url/"><?php _e('What is my WordPress Feed URL?', 'sfs'); ?></a></li>
+							<li><a target="_blank" href="https://perishablepress.com/what-is-my-wordpress-feed-url/"><?php _e('What is my WordPress Feed URL?', 'sfs'); ?></a></li>
 							<li><a target="_blank" href="http://feedburner.google.com/"><?php _e('Google/Feedburner', 'sfs'); ?></a></li>
 						</ul>
 						<p><strong><?php _e('Your browser/IP info', 'sfs'); ?></strong></p>
@@ -1369,15 +1349,15 @@ function sfs_render_form() {
 					<h3><?php _e('Updates &amp; Info', 'sfs'); ?></h3>
 					<div class="toggle">
 						<div class="sfs-current">
-							<iframe src="http://perishablepress.com/current/index-sfs.html"></iframe>
+							<iframe src="https://perishablepress.com/current/index-sfs.html"></iframe>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="sfs-credits">
-			<a target="_blank" href="http://perishablepress.com/simple-feed-stats/" title="Simple Feed Stats Homepage">Simple Feed Stats</a> by 
-			<a target="_blank" href="http://twitter.com/perishable" title="Jeff Starr on Twitter">Jeff Starr</a> @ 
+			<a target="_blank" href="https://perishablepress.com/simple-feed-stats/" title="Simple Feed Stats Homepage">Simple Feed Stats</a> by 
+			<a target="_blank" href="https://twitter.com/perishable" title="Jeff Starr on Twitter">Jeff Starr</a> @ 
 			<a target="_blank" href="http://monzilla.biz/" title="Obsessive Web Design &amp; Development">Monzilla Media</a>
 		</div>
 	</div>

@@ -3,8 +3,8 @@ Contributors: nosilver4u
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MKMQKCBFFG3WW
 Tags: image, attachment, optimize, optimization, lossless, lossy, photo, picture, seo, compression, gmagick, jpegtran, gifsicle, optipng, pngout, pngquant, jpegmini, tinyjpg, tinypng, webp, wp-cli 
 Requires at least: 3.5
-Tested up to: 4.2-beta4
-Stable tag: 2.3.2
+Tested up to: 4.2.2
+Stable tag: 2.4.1
 License: GPLv3
 
 Reduce file sizes for images in WordPress including NextGEN, GRAND FlAGallery and more using lossless/lossy methods and image format conversion.
@@ -193,9 +193,24 @@ Pngout, TinyJPG/TinyPNG, JPEGmini, and Pngquant were recommended by EWWW IO user
 = future =
 * these are current feature requests, if you see something you like here, go vote for it in the support forum
 * full GMedia support
+* WebP support for CDNs besides Cloudflare
 * copy metadata from original images to webp variants
 * EWWW I.O. as a stand-alone tool
 * If you would like to help translate this plugin in your language, get started here: http://translate.ewww.io/projects/ewww-image-optimizer/
+
+= 2.4.1 =
+* fixed: Alt WebP Rewriting was slow due to an inefficient regexp
+* fixed: Scan & Optimize fails when it encounters a permissions error
+
+= 2.4.0 =
+* added: advanced option to disable specific resizes or just exclude them from optimization
+* added: Turkish and Swedish translations (with updates of most other translations)
+* added: protection to prevent corruption of images in case of broken mimetype detection
+* fixed: check to prevent issues with reloading nextgen2 support was only half-effective
+* fixed: previous fix for wrong slash on Windows breaks savings settings for Network sites
+* fixed: WP_Image_Editor init() check was not checking the right constant
+* fixed: Alternative WebP Rewriting had a mismatched preg_replace causing broken <html> or <head> tags
+* fixed: some NextGen bulk optimize functions were broken when using various translations
 
 = 2.3.2 =
 * fixed: sql error for duplicate key name during plugin upgrade
