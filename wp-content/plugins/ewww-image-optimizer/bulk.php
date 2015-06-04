@@ -4,7 +4,7 @@ function ewww_image_optimizer_bulk_preview() {
 	global $ewww_debug;
 	$ewww_debug .= "<b>ewww_image_optimizer_bulk_preview()</b><br>";
 	// retrieve the attachment IDs that were pre-loaded in the database
-	list($fullsize_count, $unoptimized_count, $resize_count, $unoptimized_resize_count) = ewww_image_optimizer_count_optimized ('media');
+	list( $fullsize_count, $unoptimized_count, $resize_count, $unoptimized_resize_count ) = ewww_image_optimizer_count_optimized( 'media' );
 //	$upload_import = get_option('ewww_image_optimizer_imported');
 	$upload_import = true;
 ?>
@@ -74,7 +74,7 @@ function ewww_image_optimizer_bulk_preview() {
 }
 
 // retrieve image counts for the bulk process
-function ewww_image_optimizer_count_optimized ( $gallery, $return_ids = false ) {
+function ewww_image_optimizer_count_optimized( $gallery, $return_ids = false ) {
 	global $ewww_debug;
 	global $wpdb;
 	$ewww_debug .= "<b>ewww_image_optimizer_count_optmized()</b><br>";
@@ -86,6 +86,9 @@ function ewww_image_optimizer_count_optimized ( $gallery, $return_ids = false ) 
 	$ewww_debug .= "scanning for $gallery<br>";
 	// retrieve the time when the optimizer starts
 	$started = microtime(true);
+	if ( ewww_image_optimizer_stl_check() ) {
+		set_time_limit( 0 );
+	}
 	$max_query = 3000;
 	$attachment_query_count = 0;
 	switch ($gallery) {
@@ -263,7 +266,7 @@ function ewww_image_optimizer_count_optimized ( $gallery, $return_ids = false ) 
 }
 
 // prepares the bulk operation and includes the javascript functions
-function ewww_image_optimizer_bulk_script($hook) {
+function ewww_image_optimizer_bulk_script( $hook ) {
 	global $ewww_debug;
 	// make sure we are being called from the bulk optimization page
 	if ('media_page_ewww-image-optimizer-bulk' != $hook) {
@@ -417,14 +420,11 @@ function ewww_image_optimizer_bulk_loop() {
 	if ( ! wp_verify_nonce( $_REQUEST['ewww_wpnonce'], 'ewww-image-optimizer-bulk' ) || ! current_user_can( $permissions ) ) {
 		wp_die( __( 'Cheatin&#8217; eh?', EWWW_IMAGE_OPTIMIZER_DOMAIN ) );
 	} 
-	if (!empty($_REQUEST['ewww_sleep'])) {
-		sleep($_REQUEST['ewww_sleep']);
+	if ( ! empty( $_REQUEST['ewww_sleep'] ) ) {
+		sleep( $_REQUEST['ewww_sleep'] );
 	}
 	// retrieve the time when the optimizer starts
-	$started = microtime(true);
-	if ( ini_get( 'max_execution_time' ) < 60 ) {
-		set_time_limit (0);
-	}
+	$started = microtime( true );
 	// get the attachment ID of the current attachment
 	$attachment = $_POST['ewww_attachment'];
 	// get the 'bulk attachments' with a list of IDs remaining
@@ -456,6 +456,10 @@ function ewww_image_optimizer_bulk_loop() {
 	$elapsed = microtime(true) - $started;
 	// output how much time has elapsed since we started
 	printf(__('Elapsed: %.3f seconds', EWWW_IMAGE_OPTIMIZER_DOMAIN) . "</p>", $elapsed);
+	global $ewww_attachment;
+	$ewww_attachment['id'] = $attachment;
+	$ewww_attachment['meta'] = $meta;
+	add_filter( 'w3tc_cdn_update_attachment_metadata', 'ewww_image_optimizer_w3tc_update_files' );
 	// update the metadata for the current attachment
 	wp_update_attachment_metadata( $attachment, $meta );
 	// remove the first element from the $attachments array

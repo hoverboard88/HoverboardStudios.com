@@ -442,15 +442,15 @@ function ewww_image_optimizer_image_scan($dir) {
 	$query = "SELECT path,image_size FROM $wpdb->ewwwio_images";
 	$already_optimized = $wpdb->get_results($query, ARRAY_A);
 	$file_counter = 0;
+	if ( ewww_image_optimizer_stl_check() ) {
+		set_time_limit (0);
+	}
 	foreach ($iterator as $path) {
-		if ( ini_get( 'max_execution_time' ) < 60 ) {
-			set_time_limit (0);
-		}
 		$file_counter++;
 		$skip_optimized = false;
-		if ($path->isDir()) {
-			continue;
-		} else {
+		if ( $path->isFile() ) {
+		//	continue;
+		//} else {
 			$path = $path->getPathname();
 			if ( preg_match( '/\.(po|mo|pot|php|txt|js|css|html|woff|webp|json|svg|xml|ttf|otf|eot|md)$/', $path ) ) {
 				$ewww_debug .= "not a usable extension: $path<br>";
