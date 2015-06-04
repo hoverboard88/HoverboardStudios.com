@@ -101,7 +101,7 @@ add_action( 'widgets_init', 'hb_widgets_init' );
  */
 function hb_scripts() {
 
-	if ( is_single() ) {
+	if ( is_single() || is_page() ) {
 		wp_enqueue_script( 'hb-lightbox', get_template_directory_uri() . '/js/photolightbox.js', array(), '20120206', true );
 	}
 
@@ -118,7 +118,7 @@ add_action( 'wp_enqueue_scripts', 'hb_scripts' );
 
 function hb_wp_footer() {
 
-	if ( is_single() ) {
+	if ( is_single() || is_page() ) {
 		echo '<link rel="stylesheet" href="' . get_template_directory_uri() .'/single.css" type="text/css" media="all" property="stylesheet">';
 		echo '<!-- Include this on pages you want the gallery to appear -->
 		<div id="PhotoViewer" class="photo-viewer">
@@ -265,3 +265,22 @@ require get_template_directory() . '/inc/customizer.php';
  * Load Jetpack compatibility file.
  */
 require get_template_directory() . '/inc/jetpack.php';
+
+/**
+ * Load Shortcodes
+ */
+require get_template_directory() . '/inc/shortcodes.php';
+
+function custom_upload_mimes ( $existing_mimes=array() ) {
+
+	// add your ext => mime to the array
+	$existing_mimes['svg'] = 'mime/type';
+
+	// add as many as you like
+
+	// and return the new full result
+	return $existing_mimes;
+
+}
+
+add_filter('upload_mimes', 'custom_upload_mimes');

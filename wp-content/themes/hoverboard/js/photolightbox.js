@@ -59,7 +59,6 @@ var PhotoViewerPlugin = (function( document, pv ) {
     images = [];
 
     PhotoGallery = document.querySelectorAll(ClassName);
-    console.log(PhotoGallery);
     PhotoViewer = document.getElementById("PhotoViewer");
 
     PhotoViewerTitle = document.getElementById("PhotoViewerTitle");
