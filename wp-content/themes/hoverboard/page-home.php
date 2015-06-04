@@ -45,7 +45,7 @@ get_header(); ?>
 	      </div><!-- .container -->
 	    </div><!-- .wrap -->
 
-	    <div class="wrap--ltblue wrap--content">
+	    <div class="wrap--medblue wrap--content">
 	      <div class="container container--columns">
 	        <section id="why" class="column--half container container--ltblue container--devices">
 

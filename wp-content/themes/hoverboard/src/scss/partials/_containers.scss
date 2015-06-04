@@ -16,8 +16,12 @@
 	}
 }
 
-.wrap--ltblue, .container--ltblue {
+.wrap--medblue, .container--medblue {
 	background: lighten($secondary--blue, 20%);;
+}
+
+.wrap--ltblue, .container--ltblue {
+	background: lighten($secondary--blue, 50%);;
 }
 
 .wrap--purple, .container--purple {

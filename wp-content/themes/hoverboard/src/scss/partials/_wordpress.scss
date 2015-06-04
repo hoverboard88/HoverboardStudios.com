@@ -88,3 +88,10 @@ blockquote {
     margin-bottom: 0;
   }
 }
+
+.callout {
+  background: $secondary--purple-light;
+  color: $white;
+  padding: $base--spacing;
+  @include long-box-shadow(darken($secondary--purple-dark, 30%), 'non-button');
+}

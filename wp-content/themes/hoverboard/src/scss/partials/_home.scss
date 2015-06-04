@@ -96,7 +96,11 @@
 .container--work {
 	img {
 		transition: box-shadow .3s ease-out;
+		filter: saturate(40%);
 		@include long-box-shadow(rgba(lighten($greens--dark, 10%), 0.8));
+		&:hover, &:focus {
+			filter: none;
+		}
 	}
 }
 .container--who-we-are {
