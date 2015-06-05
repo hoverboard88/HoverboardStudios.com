@@ -76,6 +76,13 @@
 	}
 }
 
+.column--half.column--half--spaced.first {
+	padding-bottom: $base--spacing;
+	@include breakpoint(50em) {
+		padding-bottom: 0;
+	}
+}
+
 @include breakpoint(55em) {
 	.column--third {
 		float: left;
