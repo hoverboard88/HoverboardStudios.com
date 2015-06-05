@@ -14,7 +14,10 @@
 	a {
 		color: lighten($secondary--blue, 40%);
 	}
-	a.btn {
+	.btn {
+		color: $black;
+	}
+	.btn--purple {
 		color: $white;
 	}
 }
