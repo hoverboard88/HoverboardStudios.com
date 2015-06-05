@@ -3,6 +3,10 @@
 
 .alignright, .alignleft, .alignnone, .aligncenter {
   margin-bottom: $base--spacing;
+  display: block;
+  @include breakpoint(37em) {
+    display: inline-block;
+  }
 }
 
 @include breakpoint(37em) {

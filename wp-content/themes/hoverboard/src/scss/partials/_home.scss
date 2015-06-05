@@ -76,6 +76,20 @@
 	}
 }
 
+@include breakpoint(55em) {
+	.column--third {
+		float: left;
+		width: 33.3%;
+		word-wrap: break-word;
+	}
+	.column--third--spaced.first {
+		padding-right: $base--spacing;
+	}
+	.column--third--spaced.last {
+		padding-left: $base--spacing;
+	}
+}
+
 //generic styles for content blocks
 .wrap--content, .container--content {
 	line-height: 1.5;
@@ -109,13 +123,18 @@
 }
 
 //wrote a mixin to easialy change the position of the iMac. First param is the width of the page it takes up and the second is the width of the image.
-@include who-we-are-offset($width--2, 50%);
-
-@include breakpoint(25em) {
-	@include who-we-are-offset($width--3, 75%);
+/* @include who-we-are-offset($width--2, 50%); */
+.img--desktop {
+	display: none;
 }
+/* @include breakpoint(25em) {
+	@include who-we-are-offset($width--3, 75%);
+} */
 
 @include breakpoint(35em) {
+	.img--desktop {
+		display: block;
+	}
 	@include who-we-are-offset($width--4, 70%);
 }
 
