@@ -1,4 +1,4 @@
 #!/bin/sh
 
 # push database to QA
-vagrant ssh -c 'wp migratedb profile 1 --path="/srv/www/hoverboardstudios/htdocs"'
+#vagrant ssh -c 'wp migratedb profile 1 --path="/srv/www/hoverboardstudios/htdocs"'
