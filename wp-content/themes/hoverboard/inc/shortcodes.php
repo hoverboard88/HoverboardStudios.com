@@ -5,6 +5,9 @@
  * @package Hoverboard Studios
  */
 
+ remove_filter( 'the_content', 'wpautop' );
+ add_filter( 'the_content', 'wpautop' , 12);
+
 function hb_shortcode_profile_pictures( $atts ){
  	return '<div class="profiles">
      <figure class="profile">
@@ -24,11 +27,14 @@ function hb_shortcode_profile_pictures( $atts ){
 add_shortcode( 'hb_profiles', 'hb_shortcode_profile_pictures' );
 
 function hb_shortcode_columns_1( $atts, $content = NULL ){
- 	return '<div class="column--half column--half--spaced first">' .  do_shortcode($content) . '</div>';
+  //this is a shortterm fix. If you have actual p tags in this shortcode, I think they'll be stripped.
+  $content = wpautop(trim($content));
+  return '<div class="column--half column--half--spaced first">' .  do_shortcode($content) . '</div>';
 }
 add_shortcode( 'hb_column_half_1', 'hb_shortcode_columns_1' );
 
 function hb_shortcode_columns_2( $atts, $content = NULL ){
- 	return '<div class="column--half column--half--spaced last">' .  do_shortcode($content) . '</div><div class="clear"></div>';
+  $content = wpautop(trim($content));
+  return '<div class="column--half column--half--spaced last">' .  do_shortcode($content) . '</div><div class="clear"></div>';
 }
 add_shortcode( 'hb_column_half_2', 'hb_shortcode_columns_2' );

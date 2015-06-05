@@ -54,7 +54,7 @@
 			</div>
 			<div class="column--half column--half--spaced last">
 				<p class="address" itemscope itemtype="http://schema.org/LocalBusiness">
-					<a itemprop="url" href="http://hoverboardstudios.com">
+					<a itemprop="url" href="<?php echo get_site_url(); ?>">
 						<strong itemprop="name">Hoverboard Studios</strong>
 					</a><br>
 					<span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">

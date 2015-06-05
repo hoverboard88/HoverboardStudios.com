@@ -39,7 +39,7 @@ get_header(); ?>
 
 						<p>When it comes to your new website or application, we’re right beside you every step of the way.</p>
 
-						<a class="btn--red" href="/about/">Learn More About Us</a>
+						<a class="btn--red" href="<?php echo get_site_url(); ?>/about/">Learn More About Us</a>
 	        </div>
 
 	      </div><!-- .container -->
@@ -63,7 +63,7 @@ get_header(); ?>
 
 						<p>We’re an extension of your company; your own private design and development firm.</p>
 
-						<a class="btn--purple single-spaced" href="/why-us/">More On Our Awesomeness</a>
+						<a class="btn--purple single-spaced" href="<?php echo get_site_url(); ?>/why-us/">More On Our Awesomeness</a>
 
 	          <div class="devices">
 	            <img class="img--tablet" src="<?php echo get_template_directory_uri(); ?>/dist/img/tablet.svg" alt="Tablet">
@@ -95,24 +95,24 @@ get_header(); ?>
 
 	          <div class="column--half column--half--spaced first">
 
-							<h3><a href="http://superiorcampers.com">Superior Campers</a></h3>
+							<h3><a href="<?php echo get_site_url(); ?>/case-studies/superior-campers/">Superior Campers</a></h3>
 
-							<p><a href="http://superiorcampers.com"><img src="<?php echo get_template_directory_uri(); ?>/dist/img/work-supcamp.jpg" alt="screenshot of Superior Campers Web Site"></a></p>
+							<p><a href="<?php echo get_site_url(); ?>/case-studies/superior-campers/"><img src="<?php echo get_template_directory_uri(); ?>/dist/img/work-supcamp.jpg" alt="screenshot of Superior Campers Web Site"></a></p>
 
 							<p>Superior Campers out of Superior, WI came to us looking for a website revamp. After we had originally created their website in 2008, they had outgrown what they had and was looking to add an active inventory feature on an updated site.</p>
 
-							<a class="btn--green" href="^_^">Full Case Study</a>
+							<a class="btn--green" href="<?php echo get_site_url(); ?>/case-studies/superior-campers/">Full Case Study</a>
 
 	          </div>
 	          <div class="column--half column--half--spaced last">
 
-							<h3><a href="http://standarddistributing.com">Standard Distributing</a></h3>
+							<h3><a href="<?php echo get_site_url(); ?>/case-studies/standard-distributing/">Standard Distributing</a></h3>
 
-							<p><a href="http://standarddistributing.com"><img src="<?php echo get_template_directory_uri(); ?>/dist/img/work-standard.jpg" alt="screenshot of Standard Distributing Web Site"></a></p>
+							<p><a href="<?php echo get_site_url(); ?>/case-studies/standard-distributing/"><img src="<?php echo get_template_directory_uri(); ?>/dist/img/work-standard.jpg" alt="screenshot of Standard Distributing Web Site"></a></p>
 
 							<p>Standard Distributing, a convenience store distributer in Oklahoma, needed an overhaul to their website. Their design was dated but worse yet, they couldn’t update it without potentially compromising the design and development of the site.</p>
 
-							<a class="btn--green" href="^_^">Full Case Study</a>
+							<a class="btn--green" href="<?php echo get_site_url(); ?>/case-studies/standard-distributing/">Full Case Study</a>
 
 	          </div>
 
