@@ -1,0 +1,17 @@
+.study-devices {
+  text-align: center;
+  img {
+    position: relative;
+    bottom: -24px;
+  }
+  @include breakpoint(50em) {
+    text-align: left;
+    padding-right: 55%;
+    img {
+      width: 50%;
+      position: absolute;
+      bottom: 0;
+      right: $base--spacing;
+    }
+  }
+}
