@@ -47,7 +47,7 @@ get_header(); ?>
 
 	    <div class="wrap--medblue wrap--content">
 	      <div class="container container--columns">
-	        <section id="why" class="column--half container container--ltblue container--devices">
+	        <section id="why" class="column--half container container--medblue container--devices">
 
 	          <h2>Why Us?</h2>
 

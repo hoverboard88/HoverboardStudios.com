@@ -14,6 +14,9 @@
 	a {
 		color: lighten($secondary--blue, 40%);
 	}
+	a.btn {
+		color: $white;
+	}
 }
 
 .wrap--medblue, .container--medblue {

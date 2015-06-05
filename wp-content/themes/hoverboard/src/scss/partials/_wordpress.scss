@@ -53,7 +53,7 @@ div.aligncenter {
   background: $white;
   border: 1px solid $grey--light;
   max-width: 96%; /* Image does not overflow the content area */
-  padding: $base--spacing/2 3px 10px;
+  padding: $base--spacing/4;
   text-align: center;
   @include font-size(12px);
   /* &.alignnone {
