@@ -101,6 +101,9 @@ add_action( 'widgets_init', 'hb_widgets_init' );
  */
 function hb_scripts() {
 
+	//plugin for some reason is enqueuing style on front-end.
+	wp_dequeue_style('wpt-twitter-feed');
+
 	if ( is_single() || is_page() ) {
 		wp_enqueue_script( 'hb-lightbox', get_template_directory_uri() . '/js/photolightbox.js', array(), '20120206', true );
 	}
