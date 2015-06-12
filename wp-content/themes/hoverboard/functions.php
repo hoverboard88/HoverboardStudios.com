@@ -209,7 +209,9 @@ function hb_comment_theme ($comment, $args, $depth) {
 	<<?php echo $tag ?> <?php comment_class( empty( $args['has_children'] ) ? '' : 'parent' ) ?> id="comment-<?php comment_ID() ?>">
 
 	<div class="comment-meta-wrap">
-		<?php if ( $args['avatar_size'] != 0 ) echo get_avatar( $comment, $args['avatar_size'] ); ?>
+		<?php if ( $args['avatar_size'] != 0 ) { ?>
+			<?php echo get_avatar( $comment->comment_author_email, $args['avatar_size'] ); ?>
+		<?php } ?>
 		<div class="comment-meta commentmetadata">
 			<a href="<?php echo htmlspecialchars( get_comment_link( $comment->comment_ID ) ); ?>">
 				<?php echo get_comment_date(); ?><br>
