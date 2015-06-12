@@ -15,7 +15,7 @@ var PhotoViewerPlugin = (function( document, pv ) {
 
   // Private Members
   ////////////////////////////////////////
-  var ClassName = ".lightbox-image a";
+  var ClassName = ".lightbox-image a, .gallery a";
 
   var images = [];
   var currentLoadedImage;
@@ -37,7 +37,7 @@ var PhotoViewerPlugin = (function( document, pv ) {
   ////////////////////////////////////////
   pv.Initialize = function (className) {
     if ( arguments.length < 1 ) {
-      ClassName = ".lightbox-image a";
+      ClassName = ".lightbox-image a, .gallery a";
     }
     else {
       ClassName = className;

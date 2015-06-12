@@ -129,3 +129,17 @@ blockquote {
   border-radius: 50%;
   border: 5px solid $secondary--blue;
 }
+
+.gallery {
+  @extend .clearfix;
+  margin-bottom: $base--spacing;
+}
+.gallery-item {
+  float: left;
+  padding: $base--spacing/2;
+  margin-right: $base--spacing;
+  background: $white;
+  border: 1px solid $grey--light;
+  @include font-size(12px);
+  color: lighten($black, 50%);
+}
