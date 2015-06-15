@@ -313,3 +313,5 @@ function custom_upload_mimes ( $existing_mimes=array() ) {
 }
 
 add_filter('upload_mimes', 'custom_upload_mimes');
+
+add_theme_support( 'post-thumbnails' );
