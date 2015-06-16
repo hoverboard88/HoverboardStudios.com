@@ -1,7 +1,6 @@
 <form class="capsule-crm-form" onsubmit="return split_names();" action="https://service.capsulecrm.com/service/newlead" method="post">
-  <p id="alert__thank-you" class="alert__thank-you alert alert-success well">Thank you for contacting us! We'll be in touch.</p>
   <input type="hidden" name="FORM_ID" value="527b4032-3da6-4716-8ced-67426a4aea61">
-  <input type="hidden" name="COMPLETE_URL" value="<?php echo get_site_url(); ?>/#alert__thank-you">
+  <input type="hidden" name="COMPLETE_URL" value="<?php echo get_site_url(); ?>/thanks/">
 
   <!-- <input type="hidden" name="DEVELOPER" value="TRUE"/> -->
   <input type="hidden" id="FIRST_NAME" name="FIRST_NAME">
