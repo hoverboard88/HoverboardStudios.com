@@ -126,3 +126,15 @@ function hb_func_add_icon_to_title( $title, $id = null ) {
 	}
 }
 add_filter( 'the_title', 'hb_func_add_icon_to_title', 10, 2 );
+
+function hb_func_append_link ($content) {
+	global $post;
+
+	if (get_post_meta($post->ID, '_hbf_link_post_url', true) && get_post_meta($post->ID, '_hbf_link_post_site', true) && is_single()) {
+		return $content . '<p class="hb-func-tumblr-read-more"><a href="' . get_post_meta($post->ID, '_hbf_link_post_url', true) . '">∞ Read the full post on ' . get_post_meta($post->ID, '_hbf_link_post_site', true) . '</a></p>';
+	}
+  // otherwise returns the database content
+  return $content;
+}
+
+add_filter( 'the_content', 'hb_func_append_link' );

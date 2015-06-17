@@ -84,6 +84,12 @@ function cmb_sample_metaboxes( array $meta_boxes ) {
 		    'id'      => $prefix . 'link_post_url',
 		    'type'    => 'text_url'
 			),
+			array(
+		    'name'    => 'Site Name',
+				'desc' => __( 'Used in "Read full post on…"', 'cmb' ),
+		    'id'      => $prefix . 'link_post_site',
+		    'type'    => 'text'
+			),
 		),
 	);
 

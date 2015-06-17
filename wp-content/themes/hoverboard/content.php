@@ -7,7 +7,14 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<?php hb_func_icon(); ?>
 	<header class="entry-header">
+		<?php if (get_post_meta($post->ID, '_hbf_link_post_url', true)) { ?>
+			<a href="<?php echo get_post_meta($post->ID, '_hbf_link_post_url', true); ?>">
+		<?php } ?>
 		<?php the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
+
+		<?php if (get_post_meta($post->ID, '_hbf_link_post_url', true)) { ?>
+			</a>
+		<?php } ?>
 
 		<?php if ( 'post' == get_post_type() ) : ?>
 			<?php hb_posted_on(); ?>
