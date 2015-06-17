@@ -68,6 +68,25 @@ function cmb_sample_metaboxes( array $meta_boxes ) {
 		),
 	);
 
+	$meta_boxes['link_post_metabox'] = array(
+		'id'         => 'link_post_metabox',
+		'title'      => __( 'Link Post', 'cmb' ),
+		'desc' => __( 'Tumblr-like Link Posts', 'cmb' ),
+		'pages'      => array( 'post', ), // Post type
+		'context'    => 'normal',
+		'priority'   => 'high',
+		'show_names' => true, // Show field names on the left
+		// 'cmb_styles' => true, // Enqueue the CMB stylesheet on the frontend
+		'fields'     => array(
+			array(
+		    'name'    => 'URL',
+				'desc' => __( 'link url', 'cmb' ),
+		    'id'      => $prefix . 'link_post_url',
+		    'type'    => 'text_url'
+			),
+		),
+	);
+
 	return $meta_boxes;
 }
 

@@ -17,7 +17,7 @@
 
 	<div class="entry-content">
 		<?php
-			if ( is_category() || is_archive() || is_home() ) {
+			if ( (is_category() || is_archive() || is_home()) && !get_post_meta($post->ID, '_hbf_link_post_url', true) ) {
 				the_excerpt();
 			} else {
 				/* translators: %s: Name of current post */

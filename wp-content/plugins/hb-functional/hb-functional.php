@@ -91,3 +91,38 @@ function hb_func_post_type_suppports() {
 	add_post_type_support( 'podcast', 'comments' );
 }
 add_action('init', 'hb_func_post_type_suppports');
+
+function custom_upload_mimes ( $existing_mimes=array() ) {
+
+	// add your ext => mime to the array
+	$existing_mimes['svg'] = 'mime/type';
+
+	// add as many as you like
+
+	// and return the new full result
+	return $existing_mimes;
+
+}
+
+add_filter('upload_mimes', 'custom_upload_mimes');
+
+add_theme_support( 'post-thumbnails' );
+
+// filter post title for tumblr links
+function hb_func_link_filter($link, $post) {
+	global $post;
+	if (get_post_meta($post->ID, '_hbf_link_post_url', true)) {
+	  $link = get_post_meta($post->ID, '_hbf_link_post_url', true);
+	}
+	return $link;
+}
+add_filter('post_link', 'hb_func_link_filter', 10, 2);
+
+function hb_func_add_icon_to_title( $title, $id = null ) {
+	if (get_post_meta($id, '_hbf_link_post_url', true) && get_post_type($id) == 'post') {
+	  return $title . ' ∞';
+	} else {
+		return $title;
+	}
+}
+add_filter( 'the_title', 'hb_func_add_icon_to_title', 10, 2 );
