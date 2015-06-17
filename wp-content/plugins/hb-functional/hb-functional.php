@@ -116,7 +116,7 @@ function hb_func_link_filter($link, $post) {
 	}
 	return $link;
 }
-add_filter('post_link', 'hb_func_link_filter', 10, 2);
+// add_filter('post_link', 'hb_func_link_filter', 10, 2);
 
 function hb_func_add_icon_to_title( $title, $id = null ) {
 	if (get_post_meta($id, '_hbf_link_post_url', true) && get_post_type($id) == 'post') {
@@ -130,7 +130,7 @@ add_filter( 'the_title', 'hb_func_add_icon_to_title', 10, 2 );
 function hb_func_append_link ($content) {
 	global $post;
 
-	if (get_post_meta($post->ID, '_hbf_link_post_url', true) && get_post_meta($post->ID, '_hbf_link_post_site', true) && is_single()) {
+	if (get_post_meta($post->ID, '_hbf_link_post_url', true) && get_post_meta($post->ID, '_hbf_link_post_site', true)) {
 		return $content . '<p class="hb-func-tumblr-read-more"><a href="' . get_post_meta($post->ID, '_hbf_link_post_url', true) . '">Direct Link to ' . get_post_meta($post->ID, '_hbf_link_post_site', true) . '</a> | <a href="' . get_the_permalink() . '">Permalink</a></p>';
 	}
   // otherwise returns the database content
