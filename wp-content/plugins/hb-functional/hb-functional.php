@@ -111,7 +111,7 @@ add_theme_support( 'post-thumbnails' );
 // filter post title for tumblr links
 function hb_func_link_filter($link, $post) {
 	global $post;
-	if (get_post_meta($post->ID, '_hbf_link_post_url', true)) {
+	if (get_post_meta( $post->ID, '_hbf_link_post_url', true) && !is_single() ) {
 	  $link = get_post_meta($post->ID, '_hbf_link_post_url', true);
 	}
 	return $link;
@@ -131,7 +131,7 @@ function hb_func_append_link ($content) {
 	global $post;
 
 	if (get_post_meta($post->ID, '_hbf_link_post_url', true) && get_post_meta($post->ID, '_hbf_link_post_site', true) && is_single()) {
-		return $content . '<p class="hb-func-tumblr-read-more"><a href="' . get_post_meta($post->ID, '_hbf_link_post_url', true) . '">∞ Read the full post on ' . get_post_meta($post->ID, '_hbf_link_post_site', true) . '</a></p>';
+		return $content . '<p class="hb-func-tumblr-read-more"><a href="' . get_post_meta($post->ID, '_hbf_link_post_url', true) . '">Direct Link to ' . get_post_meta($post->ID, '_hbf_link_post_site', true) . '</a> | <a href="' . get_the_permalink() . '">Permalink</a></p>';
 	}
   // otherwise returns the database content
   return $content;
