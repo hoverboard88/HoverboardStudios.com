@@ -1,7 +1,7 @@
 <?php
 /**
  * Integrate image optimizers into WordPress.
- * @version 2.4.4
+ * @version 2.4.6
  * @package EWWW_Image_Optimizer
  */
 /*
@@ -10,7 +10,7 @@ Plugin URI: http://wordpress.org/extend/plugins/ewww-image-optimizer/
 Description: Reduce file sizes for images within WordPress including NextGEN Gallery and GRAND FlAGallery. Uses jpegtran, optipng/pngout, and gifsicle.
 Author: Shane Bishop
 Text Domain: ewww-image-optimizer
-Version: 2.4.4
+Version: 2.4.6
 Author URI: https://ewww.io/
 License: GPLv3
 */
@@ -97,7 +97,7 @@ function ewww_image_optimizer_exec_init() {
 		$ewww_debug .= 'unsupported OS, disabling tools: ' . PHP_OS . '<br>';
 		ewww_image_optimizer_disable_tools();
 	} else {
-		add_action( 'load-upload.php', 'ewww_image_optimizer_tool_init' );
+		add_action( 'load-upload.php', 'ewww_image_optimizer_tool_init', 9 );
 		add_action( 'load-media-new.php', 'ewww_image_optimizer_tool_init' );
 		add_action( 'load-media_page_ewww-image-optimizer-bulk', 'ewww_image_optimizer_tool_init' );
 		add_action( 'load-settings_page_ewww-image-optimizer/ewww-image-optimizer', 'ewww_image_optimizer_tool_init' );
@@ -105,7 +105,7 @@ function ewww_image_optimizer_exec_init() {
 		add_action( 'load-ims_gallery_page_ewww-ims-optimize', 'ewww_image_optimizer_tool_init' );
 		add_action( 'load-media_page_ewww-image-optimizer-unoptimized', 'ewww_image_optimizer_tool_init' );
 		add_action( 'load-flagallery_page_flag-manage-gallery', 'ewww_image_optimizer_tool_init' );
-//		add_action( 'load-gallery_page_nggallery-manage-gallery', 'ewww_image_optimizer_tool_init' );
+//		add_action( 'load-index.php', 'ewww_image_optimizer_tool_init' );
 //		add_action( 'load-galleries_page_nggallery-manage-gallery', 'ewww_image_optimizer_tool_init' );
 //		add_action( 'load-', 'ewww_image_optimizer_tool_init' );
 	} 
@@ -452,8 +452,7 @@ function ewww_image_optimizer_notice_utils() {
 		define('EWWW_IMAGE_OPTIMIZER_NOEXEC', false);
 	}
 
-	// attempt to retrieve values for utility paths, and store them in the appropriate variables
-	$required = ewww_image_optimizer_path_check();
+//	$required = ewww_image_optimizer_path_check();
 	// set the variables false otherwise
 	$skip_jpegtran_check = false;
 	$skip_optipng_check = false;
@@ -462,71 +461,79 @@ function ewww_image_optimizer_notice_utils() {
 	$skip_pngquant_check = true;
 	$skip_webp_check = true;
 	// if the user has disabled a variable, we aren't going to bother checking to see if it is there
-	if (ewww_image_optimizer_get_option('ewww_image_optimizer_disable_jpegtran')) {
+	if ( ewww_image_optimizer_get_option( 'ewww_image_optimizer_disable_jpegtran' ) || ewww_image_optimizer_get_option( 'ewww_image_optimizer_cloud_jpg' ) ) {
 		$skip_jpegtran_check = true;
 	}
-	if (ewww_image_optimizer_get_option('ewww_image_optimizer_disable_optipng')) {
+	if ( ewww_image_optimizer_get_option( 'ewww_image_optimizer_disable_optipng' ) || ewww_image_optimizer_get_option( 'ewww_image_optimizer_cloud_png' ) ) {
 		$skip_optipng_check = true;
 	}
-	if (ewww_image_optimizer_get_option('ewww_image_optimizer_disable_gifsicle')) {
+	if ( ewww_image_optimizer_get_option( 'ewww_image_optimizer_disable_gifsicle' ) || ewww_image_optimizer_get_option( 'ewww_image_optimizer_cloud_gif' ) ) {
 		$skip_gifsicle_check = true;
 	}
-	if (ewww_image_optimizer_get_option('ewww_image_optimizer_disable_pngout')) {
+	if ( ewww_image_optimizer_get_option( 'ewww_image_optimizer_disable_pngout' ) || ewww_image_optimizer_get_option( 'ewww_image_optimizer_cloud_png' ) ) {
 		$skip_pngout_check = true;
 	}
-	if (ewww_image_optimizer_get_option('ewww_image_optimizer_png_lossy')) {
+	if ( ewww_image_optimizer_get_option( 'ewww_image_optimizer_png_lossy' ) && ! ewww_image_optimizer_get_option( 'ewww_image_optimizer_cloud_png' ) ) {
 		$skip_pngquant_check = false;
 	}
-	if (ewww_image_optimizer_get_option('ewww_image_optimizer_webp')) {
+	if ( ewww_image_optimizer_get_option( 'ewww_image_optimizer_webp' ) && ! ( ewww_image_optimizer_get_option( 'ewww_image_optimizer_cloud_jpg' ) && ewww_image_optimizer_get_option( 'ewww_image_optimizer_cloud_png' ) ) ) {
 		$skip_webp_check = false;
 	}
+	// attempt to retrieve values for utility paths, and store them in the appropriate variables
+	$required = ewww_image_optimizer_path_check( ! $skip_jpegtran_check, ! $skip_optipng_check, ! $skip_gifsicle_check, ! $skip_pngout_check, ! $skip_pngquant_check, ! $skip_webp_check );
 	// we are going to store our validation results in $missing
 	$missing = array();
 	// go through each of the required tools
-	foreach($required as $key => $req){
+	foreach( $required as $key => $req ) {
 		// if the tool wasn't found, add it to the $missing array if we are supposed to check the tool in question
-		switch($key) {
+		switch( $key ) {
 			case 'JPEGTRAN':
-				if (!$skip_jpegtran_check && empty($req)) {
+				if ( ! $skip_jpegtran_check && empty( $req ) ) {
 					$missing[] = 'jpegtran';
 					$req = false;
 				}
-				define('EWWW_IMAGE_OPTIMIZER_' . $key, $req);
+				$ewww_debug .= "defining EWWW_IMAGE_OPTIMIZER_$key<br>";
+				define( 'EWWW_IMAGE_OPTIMIZER_' . $key, $req );
 				break; 
 			case 'OPTIPNG':
-				if (!$skip_optipng_check && empty($req)) {
+				if ( ! $skip_optipng_check && empty( $req ) ) {
 					$missing[] = 'optipng';
 					$req = false;
 				}
-				define('EWWW_IMAGE_OPTIMIZER_' . $key, $req);
+				$ewww_debug .= "defining EWWW_IMAGE_OPTIMIZER_$key<br>";
+				define( 'EWWW_IMAGE_OPTIMIZER_' . $key, $req );
 				break;
 			case 'GIFSICLE':
-				if (!$skip_gifsicle_check && empty($req)) {
+				if ( ! $skip_gifsicle_check && empty( $req ) ) {
 					$missing[] = 'gifsicle';
 					$req = false;
 				}
-				define('EWWW_IMAGE_OPTIMIZER_' . $key, $req);
+				$ewww_debug .= "defining EWWW_IMAGE_OPTIMIZER_$key<br>";
+				define( 'EWWW_IMAGE_OPTIMIZER_' . $key, $req );
 				break;
 			case 'PNGOUT':
-				if (!$skip_pngout_check && empty($req)) {
+				if ( ! $skip_pngout_check && empty( $req ) ) {
 					$missing[] = 'pngout';
 					$req = false;
 				}
-				define('EWWW_IMAGE_OPTIMIZER_' . $key, $req);
+				$ewww_debug .= "defining EWWW_IMAGE_OPTIMIZER_$key<br>";
+				define( 'EWWW_IMAGE_OPTIMIZER_' . $key, $req );
 				break;
 			case 'PNGQUANT':
-				if (!$skip_pngquant_check && empty($req)) {
+				if ( ! $skip_pngquant_check && empty( $req ) ) {
 					$missing[] = 'pngquant';
 					$req = false;
 				}
-				define('EWWW_IMAGE_OPTIMIZER_' . $key, $req);
+				$ewww_debug .= "defining EWWW_IMAGE_OPTIMIZER_$key<br>";
+				define( 'EWWW_IMAGE_OPTIMIZER_' . $key, $req );
 				break;
 			case 'WEBP':
-				if (!$skip_webp_check && empty($req)) {
+				if ( ! $skip_webp_check && empty( $req ) ) {
 					$missing[] = 'webp';
 					$req = false;
 				}
-				define('EWWW_IMAGE_OPTIMIZER_' . $key, $req);
+				$ewww_debug .= "defining EWWW_IMAGE_OPTIMIZER_$key<br>";
+				define( 'EWWW_IMAGE_OPTIMIZER_' . $key, $req );
 				break;
 		}
 	}
@@ -732,9 +739,9 @@ function ewww_image_optimizer_path_check ( $j = true, $o = true, $g = true, $p =
 				$gifsicle = ewww_image_optimizer_find_binary('gifsicle', 'g');
 			}
 		}
-		if ($p) {
+		if ( $p ) {
 			// pngout is special and has a dynamic and static binary to check
-			if (file_exists(EWWW_IMAGE_OPTIMIZER_TOOL_PATH . 'pngout-static') && !$use_system) {
+			if ( file_exists( EWWW_IMAGE_OPTIMIZER_TOOL_PATH . 'pngout-static' ) && ! $use_system ) {
 				$ppt = EWWW_IMAGE_OPTIMIZER_TOOL_PATH . 'pngout-static';
 				$ewww_debug .= "found $ppt, testing...<br>";
 				if (ewww_image_optimizer_md5check($ppt) && ewww_image_optimizer_mimetype($ppt, 'b')) {
@@ -890,7 +897,7 @@ function ewww_image_optimizer_md5check($path) {
 		'39aca9edbb9495a241dc21fa678a09da', // gifsicle-mac 1.84
 		'a474c8fa2237bb0b758bf646670a7d12', // gifsicle-mac 1.87
 		'32a75a5122ff9b783ed7dd76d65f6297', // gifsicle.exe 1.84
-		'9f4e0fad8d136d0649f5c3bcafd519e1', // gifsicle.exe 1.87
+		'dbbe27fff4373b744b514839797a1234', // gifsicle.exe 1.87
 		//pngout
 		'2b62778559e31bc750dc2dcfd249be32', 
 		'ea8655d1a1ef98833b294fb74f349c3e',
