@@ -107,7 +107,7 @@
   list-style-type: none;
   padding: 0;
   margin: 0;
-  li {
+  .pinboard-link-item, li {
     background: darken($grey--light, 20%);
     margin-bottom: $base--spacing/2;
     @include breakpoint($base-spacing-change-breakpoint) {
@@ -175,11 +175,12 @@
       background: $secondary--purple-dark;
     }
   }
-  h3 {
+  .pinboard-link-header, h3 {
     margin-bottom: 0;
     text-transform: none;
   }
 }
+
 .pinboard-link-note {
   display: block;
   margin-bottom: 0;
