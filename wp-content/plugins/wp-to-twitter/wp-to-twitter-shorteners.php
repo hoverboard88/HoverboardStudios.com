@@ -122,6 +122,7 @@ if ( ! function_exists( 'jd_shorten_link' ) ) { // prep work for future plug-in 
 							'url'       => $encoded,
 							'action'    => 'shorturl',
 							'keyword'   => $keyword_format,
+							'title'     => $thisposttitle,
 							'format'    => 'json'
 						), $yourlsurl );
 				} else {
@@ -131,6 +132,7 @@ if ( ! function_exists( 'jd_shorten_link' ) ) { // prep work for future plug-in 
 							'url'      => $encoded,
 							'action'   => 'shorturl',
 							'keyword'  => $keyword_format,
+							'title'     => $thisposttitle,							
 							'format'   => 'json'
 						), $yourlsurl );
 				}

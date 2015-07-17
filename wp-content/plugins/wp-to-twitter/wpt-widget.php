@@ -55,7 +55,7 @@ function wpt_get_twitter_feed( $atts, $content ) {
 function wpt_twitter_feed( $instance ) {
 	$header = '';
 	if ( ! isset( $instance['search'] ) ) {
-		$twitter_ID = esc_html( ( isset( $instance['twitter_id'] ) && $instance['twitter_id'] != '' ) ? $instance['twitter_id'] : get_option( 'wtt_twitter_username' ) );
+		$twitter_ID = ( isset( $instance['twitter_id'] ) && $instance['twitter_id'] != '' ) ? $instance['twitter_id'] : get_option( 'wtt_twitter_username' );
 		$user = wpt_get_user( $twitter_ID );
 		if ( isset( $user->errors ) && $user->errors[0]->message ) {
 			return __( "Error: ", 'wp-to-twitter' ) . $user->errors[0]->message;
@@ -66,13 +66,13 @@ function wpt_twitter_feed( $instance ) {
 		$img_alignment    = ( is_rtl() ) ? 'wpt-right' : 'wpt-left';
 		$follow_alignment = ( is_rtl() ) ? 'wpt-left' : 'wpt-right';
 		$follow_url       = esc_url( 'https://twitter.com/' . $twitter_ID );
-		$follow_button    = apply_filters( 'wpt_follow_button', "<a href='$follow_url' class='twitter-follow-button $follow_alignment' data-width='30px' data-show-screen-name='false' data-size='large' data-show-count='false' data-lang='en'>Follow @$twitter_ID</a>" );
+		$follow_button    = apply_filters( 'wpt_follow_button', "<a href='$follow_url' class='twitter-follow-button $follow_alignment' data-width='30px' data-show-screen-name='false' data-size='large' data-show-count='false' data-lang='en'>Follow @" .  esc_html( $twitter_ID ) . "</a>" );
 		$header .= '<div class="wpt-header">';
 		$header .= "<p>
 		$follow_button
 		<img src='$avatar' alt='' class='wpt-twitter-avatar $img_alignment $verified' />
 		<span class='wpt-twitter-name'>$name</span><br />
-		<span class='wpt-twitter-id'><a href='$follow_url'>@$twitter_ID</a></span>
+		<span class='wpt-twitter-id'><a href='$follow_url'>@" .  esc_html( $twitter_ID ) . "</a></span>
 		</p>";
 		$header .= '</div>';
 	}
@@ -86,7 +86,6 @@ function wpt_twitter_feed( $instance ) {
 		$options['search']      = $instance['search'];
 		$options['geocode']     = $instance['geocode'];
 		$options['result_type'] = $instance['result_type'];
-		$instance['twitter_id'] = get_option( 'wtt_twitter_username' );
 	}
 	
 	if ( $hide_header ) {
@@ -99,7 +98,7 @@ function wpt_twitter_feed( $instance ) {
 	$opts['mentions']    = $instance['link_mentions'];
 	$opts['hashtags']    = $instance['link_hashtags'];
 	$opts['show_images'] = isset( $instance['show_images'] ) ? $instance['show_images'] : false;
-	$rawtweets        = WPT_getTweets( $instance['twitter_num'], $instance['twitter_id'], $options );
+	$rawtweets        = WPT_getTweets( $instance['twitter_num'], $twitter_ID, $options );
 
 	if ( isset( $rawtweets['error'] ) ) {
 		$return .= "<li>" . $rawtweets['error'] . "</li>";
@@ -113,9 +112,9 @@ function wpt_twitter_feed( $instance ) {
 			}
 			if ( $instance['source'] ) {
 				$source    = $tweet['source'];
-				$timetweet = sprintf( __( '<a href="%3$s">about %1$s ago</a> via %2$s', 'wp-to-twitter' ), human_time_diff( strtotime( $tweet['created_at'] ) ), $source, "http://twitter.com/$instance[twitter_id]/status/$tweet[id_str]" );
+				$timetweet = sprintf( __( '<a href="%3$s">about %1$s ago</a> via %2$s', 'wp-to-twitter' ), human_time_diff( strtotime( $tweet['created_at'] ) ), $source, "http://twitter.com/" . $twitter_ID . "/status/$tweet[id_str]" );
 			} else {
-				$timetweet = sprintf( __( '<a href="%2$s">about %1$s ago</a>', 'wp-to-twitter' ), human_time_diff( strtotime( $tweet['created_at'] ) ), "http://twitter.com/$instance[twitter_id]/status/$tweet[id_str]" );
+				$timetweet = sprintf( __( '<a href="%2$s">about %1$s ago</a>', 'wp-to-twitter' ), human_time_diff( strtotime( $tweet['created_at'] ) ), "http://twitter.com/$twitter_ID/status/$tweet[id_str]" );
 			}
 			$tweet_classes = wpt_generate_classes( $tweet );
 
@@ -179,7 +178,7 @@ class WPT_Latest_Tweets_Widget extends WP_Widget {
 			'width'   => 200,
 			'height'  => 250,
 		);
-		$this->WP_Widget( 'wpt-latest-tweets', __( 'WP to Twitter - Latest Tweets', 'wp-to-twitter' ), $widget_ops, $control_ops );
+		parent::__construct( 'wpt-latest-tweets', __( 'WP to Twitter - Latest Tweets', 'wp-to-twitter' ), $widget_ops, $control_ops );
 	}
 
 	/**
@@ -379,7 +378,7 @@ class WPT_Search_Tweets_Widget extends WP_Widget {
 			'width'   => 200,
 			'height'  => 250,
 		);
-		$this->WP_Widget( 'wpt-search-tweets', __( 'WP to Twitter - Searched Tweets', 'wp-to-twitter' ), $widget_ops, $control_ops );
+		parent::__construct( 'wpt-search-tweets', __( 'WP to Twitter - Searched Tweets', 'wp-to-twitter' ), $widget_ops, $control_ops );
 	}
 
 	/**

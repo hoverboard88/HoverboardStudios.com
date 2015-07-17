@@ -425,7 +425,7 @@ class WPMDBPro_CLI extends WPMDBPro_CLI_Export {
 	function check_wpmdbpro_version_before_migration( $profile ) {
 		// TODO: maybe instantiate WPMDBPro_CLI_Addon to make WPMDBPro_Addon::meets_version_requirements() available here
 		$wpmdb_pro_version = $GLOBALS['wpmdb_meta']['wp-migrate-db-pro']['version'];
-		if ( ! version_compare( $wpmdb_pro_version, '1.5', '>=' ) ) {
+		if ( ! version_compare( $wpmdb_pro_version, '1.5.1', '>=' ) ) {
 			return $this->cli_error( __( 'Please update WP Migrate DB Pro.', 'wp-migrate-db-pro-cli' ) );
 		}
 

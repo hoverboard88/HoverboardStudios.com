@@ -8,7 +8,8 @@ if ( ! defined( 'ABSPATH' ) && ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 
 	delete_option( 'comment-published-update' );
 	delete_option( 'comment-published-text' );
-
+	delete_option( 'wpt_status_message_last' );
+	delete_option( 'wtt_twitter_username' );
 // Su.pr API
 	delete_option( 'suprapi' );
 
@@ -20,6 +21,11 @@ if ( ! defined( 'ABSPATH' ) && ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	delete_option( 'wp_bitly_failure' );
 	delete_option( 'wpt_curl_error' );
 
+// Rate Limiting
+	delete_option( 'wpt_rate_limits' );
+	delete_option( 'wpt_default_rate_limit' );
+	delete_option( 'wpt_rate_limit' );
+	
 // Blogroll options
 	delete_option( 'jd-use-link-title' );
 	delete_option( 'jd-use-link-description' );

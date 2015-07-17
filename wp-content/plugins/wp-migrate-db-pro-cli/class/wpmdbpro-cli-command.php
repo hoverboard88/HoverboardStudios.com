@@ -72,7 +72,7 @@ class WPMDBPro_CLI_Command extends WPMDBPro_Command {
 	 * [--include-transients]
 	 * : Include transients (temporary cached data).
 	 *
-	 * [--backup=<backup>]
+	 * [--backup=<prefix|selected|table_one,table_two,table_etc>]
 	 * : Perform a backup of the destination site's database tables before replacing it.
 	 *
 	 *     Accepted values:
@@ -181,7 +181,7 @@ class WPMDBPro_CLI_Command extends WPMDBPro_Command {
 	 * [--include-transients]
 	 * : Include transients (temporary cached data).
 	 *
-	 * [--backup=<backup>]
+	 * [--backup=<prefix|selected|table_one,table_two,table_etc>]
 	 * : Perform a backup of the destination site's database tables before replacing it.
 	 *
 	 *     Accepted values:

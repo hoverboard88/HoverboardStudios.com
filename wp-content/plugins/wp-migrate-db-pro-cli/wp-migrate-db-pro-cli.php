@@ -4,7 +4,7 @@ Plugin Name: WP Migrate DB Pro CLI
 Plugin URI: http://deliciousbrains.com/wp-migrate-db-pro/
 Description: An extension to WP Migrate DB Pro, allows you to execute migrations using a function call or via WP-CLI
 Author: Delicious Brains
-Version: 1.2
+Version: 1.2.1
 Author URI: http://deliciousbrains.com
 Network: True
 */
@@ -24,8 +24,8 @@ require_once 'version.php';
 $GLOBALS['wpmdb_meta']['wp-migrate-db-pro-cli']['folder'] = basename( plugin_dir_path( __FILE__ ) );
 
 function wp_migrate_db_pro_cli_addon_loaded() {
-	// register with wp-cli if it's running, and command hasn't already been defined elsewhere
-	if ( defined( 'WP_CLI' ) && WP_CLI && ! class_exists( 'WPMDBPro_CLI_Command' ) ) {
+	// register with wp-cli if it's running, command hasn't already been defined elsewhere, and WPMDBPro is active
+	if ( defined( 'WP_CLI' ) && WP_CLI && ! class_exists( 'WPMDBPro_CLI_Command' ) && class_exists( 'WPMDBPro' ) ) {
 		require_once dirname( __FILE__ ) . '/class/wpmdbpro-cli-command.php';
 	}
 
