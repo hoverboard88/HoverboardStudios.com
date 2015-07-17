@@ -1,0 +1,31 @@
+If you're curious, this is a text chart of how pairs of categories and tags behave when filtered using WP Tweets PRO's taxonomy filtering.
+
+Format: Method of checking categories, type of category chosen, method of checking tags, tags chosen, outcome.
+
+With positives, other category takes preference.
+With negatives, the current category takes preference.
+Empty term set does not effect results..
+
+1) Positive, disallowed category, Positive, no tags == false 			Switcher, none
+2) Positive, disallowed category, Positive, allowed tag == true			Switcher, minute
+3) Positive, disallowed category, Positive, disallowed tag == false		Switcher, test
+ 
+4) Positive, allowed category, Positive, no tags == true				This&That, none
+5) Positive, allowed category, Positive, allowed tag == true			This&That, minute
+6) Positive, allowed category, Positive, disallowed tag == false		This&That, test
+
+7) Negative, allowed category, Positive, no tags == true				Switcher, none
+8) Negative, allowed category, Positive, allowed tag == true			Switcher, minute		
+9) Negative, allowed category, Positive, disallowed tag == false		Switcher, test
+ 
+10) Negative, disallowed category, Positive, no tags == false			This&That, none
+11) Negative, disallowed category, Positive, allowed tag == false		This&That, minute
+12) Negative, disallowed category, Positive, disallowed tag == false	This&That, test
+ 
+13) Negative, allowed category, Negative, no tags == true				Switcher, none
+14) Negative, allowed category, Negative, disallowed tag == false		Switcher, minute
+15) Negative, allowed category, Negative, allowed tag == true			Switcher, test
+ 
+16) Negative, disallowed category, Negative, no tags == false			This&That, none
+17) Negative, disallowed category, Negative, disallowed tag == false	This&That, minute
+18) Negative, disallowed category, Negative, allowed tag == false		This&That, test
