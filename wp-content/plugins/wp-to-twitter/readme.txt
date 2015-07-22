@@ -6,7 +6,7 @@ Requires at least: 3.9.2
 Tested up to: 4.2.2
 License: GPLv2 or later
 Text Domain: wp-to-twitter
-Stable tag: 3.1.0
+Stable tag: 3.1.1
 
 Posts a Twitter update when you update your WordPress blog or add a link, with your chosen URL shortening service.
 
@@ -57,7 +57,7 @@ Want to stay up to date on WP to Twitter? [Follow me on Twitter!](https://twitte
 Visit the [WP to Twitter translations page](http://translate.joedolson.com/projects/wp-to-twitter) to see how complete these are.
 
 Translations available (in order of completeness):
-Japanese, Dutch, French, Italian, Russian, Danish, Catalan, Portuguese (Brazil), Spanish (Spain), Chinese (Taiwan), German, Romanian, Estonian, Polish, Lithuanian, Ukrainian, Irish, Swedish, Turkish
+Japanese, Dutch, French, Italian, Russian, Danish, Catalan, Portuguese (Brazil), Spanish (Spain), Chinese (Taiwan), German, Romanian, Estonian, English (Australia), Polish, Lithuanian, Ukrainian, Irish, Swedish, Turkish
 
 Translating my plug-ins is always appreciated. Visit <a href="http://translate.joedolson.com">my translations site</a> to start getting your language into shape!
 
@@ -68,6 +68,12 @@ Translating my plug-ins is always appreciated. Visit <a href="http://translate.j
 * Use apply_filters( 'wpt_tweet_sentence', $tweet, $post_ID ) to pass custom taxonomy Tweet formats - Pending WordPress support for taxonomy meta.
 * Add regex filter to detect URLs typed into Tweet fields for counting/shortening purposes. [todo]
 * 4.2 added compat function for mb_substr; drop mine when I drop support for 4.1
+
+= 3.1.2 =
+
+* Misnamed variable in 3.1.1.
+* Minor update to Dutch translation
+* Added partial Australian English translation
 
 = 3.1.1 =
 

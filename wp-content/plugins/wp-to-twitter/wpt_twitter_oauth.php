@@ -253,7 +253,7 @@ if ( ! class_exists( 'jd_TwitterOAuth' ) ) {
 			
 			$response = $tmhOAuth->response['response'];
 			$full = $tmhOAuth->response;
-			wpt_mail( "Media Posted - Media ID #$args[media]", print_r( $full, 1 ) );
+			wpt_mail( "Media Posted - Media ID #$args[media]", print_r( $full, 1 ) . "\n" . "\n" . print_r( $upload, 1 ) .  "\n" . $image_url );
 
 			if ( is_wp_error( $response ) ) {
 				return '';
