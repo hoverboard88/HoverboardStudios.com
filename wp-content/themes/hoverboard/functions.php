@@ -46,7 +46,7 @@ function hb_setup() {
 	 *
 	 * @link http://codex.wordpress.org/Function_Reference/add_theme_support#Post_Thumbnails
 	 */
-	//add_theme_support( 'post-thumbnails' );
+	add_theme_support( 'post-thumbnails' );
 
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus( array(
@@ -103,6 +103,9 @@ function hb_scripts() {
 
 	//plugin for some reason is enqueuing style on front-end.
 	wp_dequeue_style('wpt-twitter-feed');
+
+	// dequeue tooltip plugin css
+	wp_dequeue_style('mci-footnotes-css-public');
 
 	// if ( !is_home() ) {
 		wp_enqueue_script( 'hb-lightbox', get_template_directory_uri() . '/js/photolightbox.js', array(), '20120206', true );
@@ -299,3 +302,8 @@ require get_template_directory() . '/inc/jetpack.php';
  * Load Shortcodes
  */
 require get_template_directory() . '/inc/shortcodes.php';
+
+/**
+ * RSS Feed
+ */
+require get_template_directory() . '/inc/rss-feeds.php';
