@@ -21,15 +21,13 @@ function rss_feed_content_filter($content) {
 	if($thumbId) {
 		$img = wp_get_attachment_image_src($thumbId, 'rss_feed');
 		$image = '<img align="center" src="'. $img[0] .'" alt="" />';
-		$content = $image . $content;
+		// $content = $image . $content;
 	}
-
-  // var_dump(preg_replace('/<img.*src="(.*)\-[0-9]*x[0-9]*(.[a-zA-Z]{3,4})".*alt="(.*)"[ \/]?[^\>]*>/', '<img src="${1}${2}" alt="${3}" \>', $content));
 
   $content = preg_replace('/<img.*src="(.*)\-[0-9]*x[0-9]*(.[a-zA-Z]{3,4})".*alt="(.*)"[ \/]?[^\>]*>/', '<img src="${1}${2}" alt="${3}" \>', $content);
 
 	// This needs rewording before we push it out.
-	$content .= '<p>Have a web project? <a href="'. get_bloginfo('url') .'/contact/">Contact Us</a> to see if we can help!</p>';
+	// $content .= '<p>Have a web project? <a href="'. get_bloginfo('url') .'/contact/">Contact Us</a> to see if we can help!</p>';
 
 	return $content;
 }
