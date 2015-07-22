@@ -1,4 +1,6 @@
 #!/bin/sh
 
-# push database to QA
-#vagrant ssh -c 'wp migratedb profile 1 --path="/srv/www/hoverboardstudios/htdocs"'
+echo "Pulling DB from Production..."
+
+# pull database from PROD
+vagrant ssh -c 'wp migratedb pull http://hoverboardstudios.com Wqbf4gZP+KA84vKHO1e4tg6c8ros2fCK0FbO9PQk --find=//hoverboardstudios.com,/home/hoverboard/hoverboardstudios.com/prod --replace=//hoverboardstudios.vvv,/srv/www/hoverboardstudios/htdocs --media=compare --path="/srv/www/hoverboardstudios/htdocs"'
