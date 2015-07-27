@@ -29,13 +29,12 @@ get_header(); ?>
 		</main><!-- #main -->
 	</div><!-- #primary -->
 
-	<div class="wrap--blue wrap--content">
-		<div class="container">
-			<?php var_dump(comments_open()); ?>
-			<?php if ( comments_open() || get_comments_number() ) : ?>
+	<?php if ( comments_open() || get_comments_number() ) : ?>
+		<div class="wrap--blue wrap--content">
+			<div class="container">
 				<?php comments_template(); ?>
-			<?php endif; ?>
+			</div>
 		</div>
-	</div>
+	<?php endif; ?>
 
 <?php get_footer(); ?>
