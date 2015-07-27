@@ -52,7 +52,7 @@
 					</ul>
 				</nav>
 			</div>
-			<div class="column--half column--half--spaced last">
+			<div class="column--half column--half--spaced last visuallyhidden">
 				<p class="address" itemscope itemtype="http://schema.org/LocalBusiness">
 					<a itemprop="url" href="<?php echo get_site_url(); ?>">
 						<strong itemprop="name">Hoverboard</strong>
