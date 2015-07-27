@@ -4,7 +4,7 @@
  * Plugin Name: HoverboardStudios.com Functional Plugin
  * Description: Functionality for Hoverboardstudios.com
  * Version: The plugin's version number. Example: 1.0.0
- * Author: Hoverboard Studios
+ * Author: Hoverboard
  * Author URI: http://hoverboardstudios.com
  * Text Domain: hb_func_
  */

@@ -5,7 +5,7 @@
  *
  * This is the Contact Template. It can be used ony page where you want a contact form below the content area.
  *
- * @package Hoverboard Studios
+ * @package Hoverboard
  */
 
 get_header(); ?>

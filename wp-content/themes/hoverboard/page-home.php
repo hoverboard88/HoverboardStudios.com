@@ -4,7 +4,7 @@
  *
  * This is the Home Page Template. It can be used on any page if you want, but only recommended for home and landing pages.
  *
- * @package Hoverboard Studios
+ * @package Hoverboard
  */
 
 get_header(); ?>
@@ -55,15 +55,15 @@ get_header(); ?>
 
 						<p>We get to know every aspect of what you’re looking for and translate it into your business needs. This way, you’re never paying for anything you don’t need and never sacrificing what you want.</p>
 
-						<h2>Keeping It Small</h2>
+						<h2>Catering to Your Company</h2>
 
-						<p>We’re a two-man studio with a passion for design and web development. We want our clients to range from small, engaged shops to large, invested corporations. </p>
+						<p>We’re a creative studio with a passion for design and web development. We want our clients to range from small, engaged shops to large, invested corporations.</p>
 
-						<p>Yet no matter the size, at Hoverboard, we treat all of our clients the same. </p>
+						<p>Yet no matter the size, at Hoverboard, we treat all of our clients the same.</p>
 
 						<p>We’re an extension of your company; your own private design and development firm.</p>
 
-						<a class="btn--purple single-spaced" href="<?php echo get_site_url(); ?>/why-us/">More On Our Awesomeness</a>
+						<a class="btn--purple single-spaced" href="<?php echo get_site_url(); ?>/why-us/">Why Go With Us?</a>
 
 	          <div class="devices">
 	            <img class="img--tablet" src="<?php echo get_template_directory_uri(); ?>/dist/img/tablet.svg" alt="Tablet">

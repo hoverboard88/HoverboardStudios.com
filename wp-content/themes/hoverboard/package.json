@@ -5,7 +5,7 @@
   },
   "name": "Hoverboard",
   "version": "1.0.0",
-  "description": "A website built by Hoverboard Studios",
+  "description": "A website built by Hoverboard",
   "author": "Matt Biersdorf",
   "license": "BSD-2-Clause",
   "devDependencies": {

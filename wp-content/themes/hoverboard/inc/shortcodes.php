@@ -1,8 +1,8 @@
 <?php
 /**
- * Hoverboard Studios Shortcodes
+ * Hoverboard Shortcodes
  *
- * @package Hoverboard Studios
+ * @package Hoverboard
  */
 
  remove_filter( 'the_content', 'wpautop' );

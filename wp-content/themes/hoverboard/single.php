@@ -2,7 +2,7 @@
 /**
  * The template for displaying all single posts.
  *
- * @package Hoverboard Studios
+ * @package Hoverboard
  */
 
 get_header(); ?>

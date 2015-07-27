@@ -1,6 +1,6 @@
 <?php
 /**
- * @package Hoverboard Studios
+ * @package Hoverboard
  */
 ?>
 

@@ -1,8 +1,8 @@
 <?php
 /**
- * Hoverboard Studios Theme Customizer
+ * Hoverboard Theme Customizer
  *
- * @package Hoverboard Studios
+ * @package Hoverboard
  */
 
 /**

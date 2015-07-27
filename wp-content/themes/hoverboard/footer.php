@@ -4,7 +4,7 @@
  *
  * Contains the closing of the #content div and all content after
  *
- * @package Hoverboard Studios
+ * @package Hoverboard
  */
 ?>
 
@@ -55,7 +55,7 @@
 			<div class="column--half column--half--spaced last">
 				<p class="address" itemscope itemtype="http://schema.org/LocalBusiness">
 					<a itemprop="url" href="<?php echo get_site_url(); ?>">
-						<strong itemprop="name">Hoverboard Studios</strong>
+						<strong itemprop="name">Hoverboard</strong>
 					</a><br>
 					<span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
 						<span itemprop="streetAddress">3948 Yosemite Ave South</span>, <span itemprop="addressLocality">Saint Louis Park</span>, <span itemprop="addressRegion">MN</span> <span itemprop="postalCode">55416</span>
