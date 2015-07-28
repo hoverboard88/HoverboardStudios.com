@@ -89,6 +89,10 @@ function hb_posted_on() {
 
 	$categories_list = get_the_category_list( __( ', ', 'hb' ) );
 
+	if ( get_post_type(get_the_ID()) == 'podcast' ) {
+		$categories_list = 'Podcast'; // Should be changed to the name of the podcast (when that happens)
+	}
+
 	echo '<p class="entry-meta"><span class="posted-on">' . $posted_on . '</span><span class="cat-links">' . $categories_list . '</span></p><!-- .entry-meta -->';
 
 }

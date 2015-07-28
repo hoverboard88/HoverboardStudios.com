@@ -1,0 +1,10 @@
+.podcast_player {
+  max-width: 600px;
+  br {
+    display: none;
+  }
+}
+.podcast_meta {
+  @include font-size(12px);
+  margin-bottom: $base--spacing / 2;
+}

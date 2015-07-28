@@ -11,11 +11,10 @@ get_header(); ?>
 		<header class="container container--page-title">
 			<div class="title-wrap">
 				<h1 class="entry-title"><?php the_title(); ?></h1>
+				<?php hb_posted_on(); ?>
 			</div>
 		</header>
 	</div>
-
-	<p>media player? http://mediaelementjs.com/</p>
 
 	<div id="primary" class="content-area wrap">
 		<main id="main" class="site-main container" role="main">
@@ -28,6 +27,19 @@ get_header(); ?>
 
 		</main><!-- #main -->
 	</div><!-- #primary -->
+
+	<?php /*<div class="podcast_player_wrap wrap--blue">
+		<div id="podcast_player_wrap" class="container">
+
+		</div>
+	</div>
+
+	<script>
+	// (function () {
+	// 	document.getElementById('podcast_player_wrap').appendChild(document.querySelector('.podcast_player'));
+	// 	document.getElementById('podcast_player_wrap').appendChild(document.querySelector('.podcast_meta'));
+	// }());
+	</script>*/ ?>
 
 	<?php if ( comments_open() || get_comments_number() ) : ?>
 		<div class="wrap--blue wrap--content">
