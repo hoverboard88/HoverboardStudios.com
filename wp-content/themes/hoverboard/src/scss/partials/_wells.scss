@@ -8,7 +8,13 @@
     margin-bottom: 0;
   }
 }
-.alert {
+div.wpcf7-response-output {
+  margin-top: $base--spacing;
+  @media (max-width: 700px) {
+    margin-top: $base--spacing * 2;
+  }
+}
+.alert, div.wpcf7-response-output {
   padding: 15px;
   margin-bottom: 20px;
   border: 1px solid transparent;
