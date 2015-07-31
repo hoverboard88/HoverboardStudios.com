@@ -104,6 +104,9 @@ function hb_scripts() {
 	//plugin for some reason is enqueuing style on front-end.
 	wp_dequeue_style('wpt-twitter-feed');
 
+	//don't need CF7 styles. Gonna write our own.
+	wp_deregister_style('contact-form-7');
+
 	// dequeue tooltip plugin css
 	wp_dequeue_style('mci-footnotes-css-public');
 
