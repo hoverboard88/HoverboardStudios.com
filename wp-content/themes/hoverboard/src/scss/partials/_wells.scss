@@ -37,10 +37,10 @@
   right: -21px;
   color: inherit;
 }
-.alert-success {
+.alert-success, div.wpcf7-mail-sent-ok {
   background-color: #6fc067;
   border-color: #668c62;
-  color: darken(#668c62, 20%);
+  color: $white;
 }
 .alert-success hr {
   border-top-color: #668c62;
@@ -59,7 +59,7 @@
 .alert-info .alert-link {
   color: #245269;
 }
-.alert-warning {
+.alert-warning, div.wpcf7-spam-blocked, div.wpcf7-validation-errors {
   background-color: #fcf8e3;
   border-color: #faebcc;
   color: #8a6d3b;
@@ -70,7 +70,7 @@
 .alert-warning .alert-link {
   color: #66512c;
 }
-.alert-danger {
+.alert-danger, div.wpcf7-mail-sent-ng, .use-floating-validation-tip span.wpcf7-not-valid-tip {
   background-color: #f2dede;
   border-color: #ebccd1;
   color: #a94442;

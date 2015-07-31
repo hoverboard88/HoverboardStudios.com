@@ -35,7 +35,7 @@ get_header(); ?>
 
 						<h2>Get in Touch Today</h2>
 
-						<?php include 'inc/contact-form.php'; ?>
+						<?php echo do_shortcode('[contact-form-7 id="307" title="Contact Form"]'); ?>
 
 					</section><!-- .container -->
 				</div><!-- .container––columns -->

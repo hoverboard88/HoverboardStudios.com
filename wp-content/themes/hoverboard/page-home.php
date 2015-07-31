@@ -81,7 +81,7 @@ get_header(); ?>
 
 						<p>Let us know what you’re up to and how we can help you on your next project.</p>
 
-						<?php include 'inc/contact-form.php'; ?>
+						<?php echo do_shortcode('[contact-form-7 id="307" title="Contact Form"]'); ?>
 
 	        </section><!-- .container -->
 	      </div><!-- .container––columns -->

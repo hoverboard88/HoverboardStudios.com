@@ -138,6 +138,16 @@ textarea {
 
 }
 
+// Contact Form 7 Stuff
+.wpcf7-form {
+  br {
+    display: none;
+  }
+  p {
+    margin-bottom: 0;
+  }
+}
+
 /* input:required:focus {
   background: lighten($secondary--red, 50%) !important;
 } */
