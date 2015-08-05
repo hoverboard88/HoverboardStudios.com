@@ -131,7 +131,7 @@ function hb_func_append_link ($content) {
 	global $post;
 
 	if (get_post_meta($post->ID, '_hbf_link_post_url', true) && get_post_meta($post->ID, '_hbf_link_post_site', true)) {
-		return $content . '<p class="hb-func-tumblr-read-more"><a href="' . get_post_meta($post->ID, '_hbf_link_post_url', true) . '">Direct Link to ' . get_post_meta($post->ID, '_hbf_link_post_site', true) . '</a> | <a href="' . get_the_permalink() . '">Permalink</a></p>';
+		return $content . '<p class="hb-func-tumblr-read-more">via <a href="' . get_post_meta($post->ID, '_hbf_link_post_url', true) . '">' . get_post_meta($post->ID, '_hbf_link_post_site', true) . '</a> | <a href="' . get_the_permalink() . '">Permalink</a></p>';
 	}
   // otherwise returns the database content
   return $content;
