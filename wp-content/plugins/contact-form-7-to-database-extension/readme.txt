@@ -5,8 +5,8 @@ Tags: contact form,database,contact form database,save contact form,form databas
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Requires at least: 3.2.1
-Tested up to: 4.2.3
-Stable tag: 2.9.6
+Tested up to: 4.3
+Stable tag: 2.9.12
 
 Saves submitted form data to the database. Export the data to a file or use short codes to display it.
 
@@ -83,6 +83,25 @@ You can always deactivate the plugin without loosing data.
 1. Admin Panel view of submitted form data
 
 == Changelog ==
+
+= 2.9.13 =
+* Bug Fix: on some WP installations, delete operations were being blocked
+
+= 2.9.12 =
+* Added <a href="http://cfdbplugin.com/?page_id=1167#SummationRow">SummationRow</a> transform
+
+= 2.9.11 =
+* Bug fix: where download files can be corrupted (2nd fix)
+
+= 2.9.10 =
+* Bug fix: where download files can be corrupted
+
+= 2.9.9 =
+* Bug fix: fixing rare stripslash() error
+* Bug fix: fixes to permissions
+
+= 2.9.8 =
+* Bug fix: Capturing Gravity Forms List element when it has columns
 
 = 2.9.7 =
 * Bug Fix: Capturing file uploads from WR Contact Form 1.1.10

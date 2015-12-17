@@ -107,13 +107,13 @@ class ITSEC_File_Change_Admin {
 				'itsec_file_change',
 				array(
 					'mem_limit'            => ITSEC_Lib::get_memory_limit(),
-					'text'                 => __( 'Warning: Your server has less than 128MB of RAM dedicated to PHP. If you have many files in your installation or a lot of active plugins activating this feature may result in your site becoming disabled with a memory error. See the plugin homepage for more information.', 'it-l10n-better-wp-security' ),
+					'text'                 => __( 'Warning: Your server has less than 128MB of RAM dedicated to PHP. If you have many files in your installation or a lot of active plugins activating this feature may result in your site becoming disabled with a memory error. See the plugin homepage for more information.', 'better-wp-security' ),
 					'module_path'          => $this->module_path,
-					'button_text'          => isset( $this->settings['split'] ) && true === $this->settings['split'] ? __( 'Scan Next File Chunk', 'it-l10n-better-wp-security' ) : __( 'Scan Files Now', 'it-l10n-better-wp-security' ),
-					'scanning_button_text' => __( 'Scanning...', 'it-l10n-better-wp-security' ),
-					'no_changes'           => __( 'No changes were detected.', 'it-l10n-better-wp-security' ),
-					'changes'              => __( 'Changes were detected. Please check the log page for details.', 'it-l10n-better-wp-security' ),
-					'error'                => __( 'An error occured. Please try again later', 'it-l10n-better-wp-security' ),
+					'button_text'          => isset( $this->settings['split'] ) && true === $this->settings['split'] ? __( 'Scan Next File Chunk', 'better-wp-security' ) : __( 'Scan Files Now', 'better-wp-security' ),
+					'scanning_button_text' => __( 'Scanning...', 'better-wp-security' ),
+					'no_changes'           => __( 'No changes were detected.', 'better-wp-security' ),
+					'changes'              => __( 'Changes were detected. Please check the log page for details.', 'better-wp-security' ),
+					'error'                => __( 'An error occured. Please try again later', 'better-wp-security' ),
 					'ABSPATH'              => ITSEC_Lib::get_home_path(),
 					'nonce'                => wp_create_nonce( 'itsec_do_file_check' ),
 				)
@@ -177,9 +177,9 @@ class ITSEC_File_Change_Admin {
 					printf(
 						'<div id="itsec_file_change_warning_dialog" class="error"><p>%s %s</p> <p><input type="button" id="itsec_go_to_logs" class="button-primary" value="%s">&nbsp;<input type="button" id="itsec_dismiss_file_change_warning" class="button-secondary" value="%s"></p></div>',
 						$itsec_globals['plugin_name'],
-						__( 'has noticed a change to some files in your WordPress site. Please review the logs to make sure your system has not been compromised.', 'it-l10n-better-wp-security' ),
-						__( 'View Logs', 'it-l10n-better-wp-security' ),
-						__( 'Dismiss Warning', 'it-l10n-better-wp-security' )
+						__( 'has noticed a change to some files in your WordPress site. Please review the logs to make sure your system has not been compromised.', 'better-wp-security' ),
+						__( 'View Logs', 'better-wp-security' ),
+						__( 'Dismiss Warning', 'better-wp-security' )
 
 					);
 
@@ -257,8 +257,8 @@ class ITSEC_File_Change_Admin {
 			echo '<form id="itsec_one_time_file_check" method="post" action="">';
 			echo wp_nonce_field( 'itsec_do_file_check', 'wp_nonce' );
 			echo '<input type="hidden" name="itsec_file_change_origin" value="' . sanitize_text_field( $origin ) . '">';
-			echo '<p>' . __( "Press the button below to scan your site's files for changes. Note that if changes are found this will take you to the logs page for details.", 'it-l10n-better-wp-security' ) . '</p>';
-			echo '<p><input type="submit" id="itsec_one_time_file_check_submit" class="button-primary" value="' . ( isset( $this->settings['split'] ) && true === $this->settings['split'] ? __( 'Scan Next File Chunk', 'it-l10n-better-wp-security' ) : __( 'Scan Files Now', 'it-l10n-better-wp-security' ) ) . '" /></p>';
+			echo '<p>' . __( "Press the button below to scan your site's files for changes. Note that if changes are found this will take you to the logs page for details.", 'better-wp-security' ) . '</p>';
+			echo '<p><input type="submit" id="itsec_one_time_file_check_submit" class="button-primary" value="' . ( isset( $this->settings['split'] ) && true === $this->settings['split'] ? __( 'Scan Next File Chunk', 'better-wp-security' ) : __( 'Scan Files Now', 'better-wp-security' ) ) . '" /></p>';
 			echo '<div id="itsec_file_change_status"><p></p></div>';
 			echo '</form>';
 
@@ -279,7 +279,7 @@ class ITSEC_File_Change_Admin {
 	public function itsec_add_admin_meta_boxes() {
 
 		$id    = 'file_change_options';
-		$title = __( 'File Change Detection', 'it-l10n-better-wp-security' );
+		$title = __( 'File Change Detection', 'better-wp-security' );
 
 		add_meta_box(
 			$id,
@@ -317,7 +317,7 @@ class ITSEC_File_Change_Admin {
 
 			$status_array = 'safe-medium';
 			$status       = array(
-				'text' => __( 'Your site will detect changes to your files.', 'it-l10n-better-wp-security' ),
+				'text' => __( 'Your site will detect changes to your files.', 'better-wp-security' ),
 				'link' => '#itsec_file_change_enabled',
 			);
 
@@ -325,7 +325,7 @@ class ITSEC_File_Change_Admin {
 
 			$status_array = 'medium';
 			$status       = array(
-				'text' => __( 'Your website is not looking for changed files. Consider turning on file change detections.', 'it-l10n-better-wp-security' ),
+				'text' => __( 'Your website is not looking for changed files. Consider turning on file change detections.', 'better-wp-security' ),
 				'link' => '#itsec_file_change_enabled',
 			);
 
@@ -354,14 +354,14 @@ class ITSEC_File_Change_Admin {
 		//Add Settings sections
 		add_settings_section(
 			'file_change-enabled',
-			__( 'File Change Detection', 'it-l10n-better-wp-security' ),
+			__( 'File Change Detection', 'better-wp-security' ),
 			'__return_empty_string',
 			'security_page_toplevel_page_itsec_settings'
 		);
 
 		add_settings_section(
 			'file_change-settings',
-			__( 'File Change Detection Settings', 'it-l10n-better-wp-security' ),
+			__( 'File Change Detection Settings', 'better-wp-security' ),
 			'__return_empty_string',
 			'security_page_toplevel_page_itsec_settings'
 		);
@@ -369,7 +369,7 @@ class ITSEC_File_Change_Admin {
 		//File Change Detection Fields
 		add_settings_field(
 			'itsec_file_change[enabled]',
-			__( 'File Change Detection', 'it-l10n-better-wp-security' ),
+			__( 'File Change Detection', 'better-wp-security' ),
 			array( $this, 'settings_field_enabled' ),
 			'security_page_toplevel_page_itsec_settings',
 			'file_change-enabled'
@@ -377,7 +377,7 @@ class ITSEC_File_Change_Admin {
 
 		add_settings_field(
 			'itsec_file_change[split]',
-			__( 'Split File Scanning', 'it-l10n-better-wp-security' ),
+			__( 'Split File Scanning', 'better-wp-security' ),
 			array( $this, 'settings_field_split' ),
 			'security_page_toplevel_page_itsec_settings',
 			'file_change-settings'
@@ -385,7 +385,7 @@ class ITSEC_File_Change_Admin {
 
 		add_settings_field(
 			'itsec_file_change[method]',
-			__( 'Include/Exclude Files and Folders', 'it-l10n-better-wp-security' ),
+			__( 'Include/Exclude Files and Folders', 'better-wp-security' ),
 			array( $this, 'settings_field_method' ),
 			'security_page_toplevel_page_itsec_settings',
 			'file_change-settings'
@@ -393,7 +393,7 @@ class ITSEC_File_Change_Admin {
 
 		add_settings_field(
 			'itsec_file_change[file_list]',
-			__( 'Files and Folders List', 'it-l10n-better-wp-security' ),
+			__( 'Files and Folders List', 'better-wp-security' ),
 			array( $this, 'settings_field_file_list' ),
 			'security_page_toplevel_page_itsec_settings',
 			'file_change-settings'
@@ -401,7 +401,7 @@ class ITSEC_File_Change_Admin {
 
 		add_settings_field(
 			'itsec_file_change[types]',
-			__( 'Ignore File Types', 'it-l10n-better-wp-security' ),
+			__( 'Ignore File Types', 'better-wp-security' ),
 			array( $this, 'settings_field_types' ),
 			'security_page_toplevel_page_itsec_settings',
 			'file_change-settings'
@@ -409,7 +409,7 @@ class ITSEC_File_Change_Admin {
 
 		add_settings_field(
 			'itsec_file_change[email]',
-			__( 'Email File Change Notifications', 'it-l10n-better-wp-security' ),
+			__( 'Email File Change Notifications', 'better-wp-security' ),
 			array( $this, 'settings_field_email' ),
 			'security_page_toplevel_page_itsec_settings',
 			'file_change-settings'
@@ -417,7 +417,7 @@ class ITSEC_File_Change_Admin {
 
 		add_settings_field(
 			'itsec_file_change[notify_admin]',
-			__( 'Display File Change Admin Warning', 'it-l10n-better-wp-security' ),
+			__( 'Display File Change Admin Warning', 'better-wp-security' ),
 			array( $this, 'settings_field_notify_admin' ),
 			'security_page_toplevel_page_itsec_settings',
 			'file_change-settings'
@@ -447,7 +447,7 @@ class ITSEC_File_Change_Admin {
 		if ( isset( $_POST['itsec_file_change'] ) ) {
 
 			if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'security_page_toplevel_page_itsec_settings-options' ) ) {
-				die( __( 'Security error!', 'it-l10n-better-wp-security' ) );
+				die( __( 'Security error!', 'better-wp-security' ) );
 			}
 
 			update_site_option( 'itsec_file_change', $_POST['itsec_file_change'] ); //we must manually save network options
@@ -474,7 +474,7 @@ class ITSEC_File_Change_Admin {
 
 			$displays[] = array(
 				'module'   => 'file_change',
-				'title'    => __( 'File Change History', 'it-l10n-better-wp-security' ),
+				'title'    => __( 'File Change History', 'better-wp-security' ),
 				'callback' => array( $this, 'logs_metabox_content' )
 			);
 
@@ -543,15 +543,15 @@ class ITSEC_File_Change_Admin {
 			$next_run_raw = $this->settings['last_run'] + $interval;
 
 			if ( date( 'j', $next_run_raw ) == date( 'j', $itsec_globals['current_time'] ) ) {
-				$next_run_day = __( 'Today', 'it-l10n-better-wp-security' );
+				$next_run_day = __( 'Today', 'better-wp-security' );
 			} else {
-				$next_run_day = __( 'Tomorrow', 'it-l10n-better-wp-security' );
+				$next_run_day = __( 'Tomorrow', 'better-wp-security' );
 			}
 
 			$next_run = $next_run_day . ' at ' . date( 'g:i a', $next_run_raw );
 
-			echo '<p>' . __( 'Next automatic scan at: ', 'it-l10n-better-wp-security' ) . '<strong>' . $next_run . '*</strong></p>';
-			echo '<p><em>*' . __( 'Automatic file change scanning is triggered by a user visiting your page and may not happen exactly at the time listed.', 'it-l10n-better-wp-security' ) . '</em>';
+			echo '<p>' . __( 'Next automatic scan at: ', 'better-wp-security' ) . '<strong>' . $next_run . '*</strong></p>';
+			echo '<p><em>*' . __( 'Automatic file change scanning is triggered by a user visiting your page and may not happen exactly at the time listed.', 'better-wp-security' ) . '</em>';
 
 		}
 
@@ -574,7 +574,7 @@ class ITSEC_File_Change_Admin {
 	 */
 	public function metabox_advanced_file_change_settings() {
 
-		echo '<p>' . __( 'Even the best security solutions can fail. How do you know if someone gets into your site? You will know because they will change something. File Change detection will tell you what files have changed in your WordPress installation alerting you to changes not made by yourself. Unlike other solutions this plugin will look only at your installation and compare files to the last check instead of comparing them with a remote installation thereby taking into account whether or not you modify the files yourself.', 'it-l10n-better-wp-security' ) . '</p>';
+		echo '<p>' . __( 'Even the best security solutions can fail. How do you know if someone gets into your site? You will know because they will change something. File Change detection will tell you what files have changed in your WordPress installation alerting you to changes not made by yourself. Unlike other solutions this plugin will look only at your installation and compare files to the last check instead of comparing them with a remote installation thereby taking into account whether or not you modify the files yourself.', 'better-wp-security' ) . '</p>';
 
 		echo $this->file_change_form( 'logs' );
 
@@ -585,7 +585,7 @@ class ITSEC_File_Change_Admin {
 
 		settings_fields( 'security_page_toplevel_page_itsec_settings' );
 
-		echo '<input class="button-primary" name="submit" type="submit" value="' . __( 'Save All Changes', 'it-l10n-better-wp-security' ) . '" />' . PHP_EOL;
+		echo '<input class="button-primary" name="submit" type="submit" value="' . __( 'Save All Changes', 'better-wp-security' ) . '" />' . PHP_EOL;
 
 		echo '</p>' . PHP_EOL;
 
@@ -714,8 +714,8 @@ class ITSEC_File_Change_Admin {
 		}
 
 		echo '<input type="checkbox" id="itsec_file_change_email" name="itsec_file_change[email]" value="1" ' . checked( 1, $email, false ) . '/>';
-		echo '<label for="itsec_file_change_email"> ' . __( 'Email file change notifications', 'it-l10n-better-wp-security' ) . '</label>';
-		echo '<p class="description">' . __( 'Notifications will be sent to all emails set to receive notifications on the global settings page.', 'it-l10n-better-wp-security' ) . '</p>';
+		echo '<label for="itsec_file_change_email"> ' . __( 'Email file change notifications', 'better-wp-security' ) . '</label>';
+		echo '<p class="description">' . __( 'Notifications will be sent to all emails set to receive notifications on the global settings page.', 'better-wp-security' ) . '</p>';
 
 	}
 
@@ -741,7 +741,7 @@ class ITSEC_File_Change_Admin {
 		}
 
 		echo '<input type="checkbox" id="itsec_file_change_enabled" name="itsec_file_change[enabled]" value="1" ' . checked( 1, $enabled, false ) . '/>';
-		echo '<label for="itsec_file_change_enabled"> ' . __( 'Enable File Change detection', 'it-l10n-better-wp-security' ) . '</label>';
+		echo '<label for="itsec_file_change_enabled"> ' . __( 'Enable File Change detection', 'better-wp-security' ) . '</label>';
 
 	}
 
@@ -766,7 +766,7 @@ class ITSEC_File_Change_Admin {
 
 		}
 
-		echo '<p class="description">' . __( 'Exclude files or folders by clicking the red minus next to the file or folder name.', 'it-l10n-better-wp-security' ) . '</p>';
+		echo '<p class="description">' . __( 'Exclude files or folders by clicking the red minus next to the file or folder name.', 'better-wp-security' ) . '</p>';
 		echo '<div class="file_list">';
 		echo '<div class="file_chooser"><div class="jquery_file_tree"></div></div>';
 		echo '<div class="list_field">';
@@ -798,10 +798,10 @@ class ITSEC_File_Change_Admin {
 		}
 
 		echo '<select id="itsec_file_change_method" name="itsec_file_change[method]">';
-		echo '<option value="1" ' . selected( $method, '1' ) . '>' . __( 'Exclude Selected', 'it-l10n-better-wp-security' ) . '</option>';
-		echo '<option value="0" ' . selected( $method, '0' ) . '>' . __( 'Include Selected', 'it-l10n-better-wp-security' ) . '</option>';
+		echo '<option value="1" ' . selected( $method, '1' ) . '>' . __( 'Exclude Selected', 'better-wp-security' ) . '</option>';
+		echo '<option value="0" ' . selected( $method, '0' ) . '>' . __( 'Include Selected', 'better-wp-security' ) . '</option>';
 		echo '</select><br />';
-		echo '<label for="itsec_file_change_method"> ' . __( 'Include/Exclude Files', 'it-l10n-better-wp-security' ) . '</label>';
+		echo '<label for="itsec_file_change_method"> ' . __( 'Include/Exclude Files', 'better-wp-security' ) . '</label>';
 		echo '<p class="description">' . __( 'Select whether we should exclude files and folders selected or whether the scan should only include files and folders selected.' ) . '</p>';
 
 	}
@@ -829,8 +829,8 @@ class ITSEC_File_Change_Admin {
 		}
 
 		echo '<input type="checkbox" id="itsec_file_change_notify_admin" name="itsec_file_change[notify_admin]" value="1" ' . checked( 1, $notify_admin, false ) . '/>';
-		echo '<label for="itsec_file_change_notify_admin"> ' . __( 'Display file change admin warning', 'it-l10n-better-wp-security' ) . '</label>';
-		echo '<p class="description">' . __( 'Disabling this feature will prevent the file change warning from displaying to the site administrator in the WordPress Dashboard. Note that disabling both the error message and the email notification will result in no notifications of file changes. The only way you will be able to tell is by manually checking the log files.', 'it-l10n-better-wp-security' ) . '</p>';
+		echo '<label for="itsec_file_change_notify_admin"> ' . __( 'Display file change admin warning', 'better-wp-security' ) . '</label>';
+		echo '<p class="description">' . __( 'Disabling this feature will prevent the file change warning from displaying to the site administrator in the WordPress Dashboard. Note that disabling both the error message and the email notification will result in no notifications of file changes. The only way you will be able to tell is by manually checking the log files.', 'better-wp-security' ) . '</p>';
 
 	}
 
@@ -857,8 +857,8 @@ class ITSEC_File_Change_Admin {
 		}
 
 		echo '<input type="checkbox" id="itsec_file_change_split" name="itsec_file_change[split]" value="1" ' . checked( 1, $split, false ) . '/>';
-		echo '<label for="itsec_file_change_split"> ' . __( 'Split file checking into chunks.', 'it-l10n-better-wp-security' ) . '</label>';
-		echo '<p class="description"> ' . __( 'Splits file checking into 7 chunks (plugins, themes, wp-admin, wp-includes, uploads, the rest of wp-content and everything that is left over) and divides the checks evenly over the course of a day. This feature may result in more notifications but will allow for the scanning of bigger sites to continue even on a lower-end web host.', 'it-l10n-better-wp-security' ) . '</p>';
+		echo '<label for="itsec_file_change_split"> ' . __( 'Split file checking into chunks.', 'better-wp-security' ) . '</label>';
+		echo '<p class="description"> ' . __( 'Splits file checking into 7 chunks (plugins, themes, wp-admin, wp-includes, uploads, the rest of wp-content and everything that is left over) and divides the checks evenly over the course of a day. This feature may result in more notifications but will allow for the scanning of bigger sites to continue even on a lower-end web host.', 'better-wp-security' ) . '</p>';
 
 	}
 
@@ -892,7 +892,7 @@ class ITSEC_File_Change_Admin {
 		}
 
 		echo '<textarea id="itsec_file_change_types" name="itsec_file_change[types]" wrap="off" cols="20" rows="10">' . $types . PHP_EOL . '</textarea><br />';
-		echo '<label for="itsec_file_change_types"> ' . __( 'File types listed here will not be checked for changes. While it is possible to change files such as images it is quite rare and nearly all known WordPress attacks exploit php, js and other text files.', 'it-l10n-better-wp-security' ) . '</label>';
+		echo '<label for="itsec_file_change_types"> ' . __( 'File types listed here will not be checked for changes. While it is possible to change files such as images it is quite rare and nearly all known WordPress attacks exploit php, js and other text files.', 'better-wp-security' ) . '</label>';
 
 	}
 
@@ -909,7 +909,7 @@ class ITSEC_File_Change_Admin {
 	public function wp_ajax_itsec_file_change_warning_ajax() {
 
 		if ( ! wp_verify_nonce( sanitize_text_field( $_POST['nonce'] ), 'itsec_file_change_warning' ) ) {
-			die( __( 'Security error!', 'it-l10n-better-wp-security' ) );
+			die( __( 'Security error!', 'better-wp-security' ) );
 		}
 
 		die( delete_site_option( 'itsec_file_change_warning' ) );
@@ -931,7 +931,7 @@ class ITSEC_File_Change_Admin {
 		global $itsec_globals;
 
 		if ( ! wp_verify_nonce( sanitize_text_field( $_POST['nonce'] ), 'itsec_jquery_filetree' ) || ! current_user_can( $itsec_globals['plugin_access_lvl'] ) ) {
-			die( __( 'Security error!', 'it-l10n-better-wp-security' ) );
+			die( __( 'Security error!', 'better-wp-security' ) );
 		}
 
 		$directory = sanitize_text_field( $_POST['dir'] );
@@ -988,7 +988,7 @@ class ITSEC_File_Change_Admin {
 	public function wp_ajax_itsec_file_change_ajax() {
 
 		if ( ! wp_verify_nonce( sanitize_text_field( $_POST['nonce'] ), 'itsec_do_file_check' ) ) {
-			die( __( 'Security error!', 'it-l10n-better-wp-security' ) );
+			die( __( 'Security error!', 'better-wp-security' ) );
 		}
 
 		$module = new ITSEC_File_Change();

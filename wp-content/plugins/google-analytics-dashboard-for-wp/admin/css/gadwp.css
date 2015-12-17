@@ -5,21 +5,21 @@
 }
 
 /* Options pages */
-table.options {
+table.gadwp-settings-options {
 	padding-left: 10px;
 	width: 100%;
 }
 
-.options td {
+.gadwp-settings-options td {
 	padding: 0px 5px 5px 5px;
 }
 
-td.title, td.info {
+td.gadwp-settings-title, td.info {
 	width: 130px;
 	padding-left: 20px;
 }
 
-td.title-select {
+td.gadwp-settings-title-s {
 	width: 300px;
 }
 
@@ -27,15 +27,11 @@ td.title-select {
 	padding-left: 15px;
 }
 
-td.debugging {
-	width: 300px;
-}
-
-td.info {
+td.gadwp-settings-info {
 	padding-bottom: 15px;
 }
 
-td.title label {
+td.gadwp-settings-title label {
 	font-weight: bold;
 }
 
@@ -54,15 +50,11 @@ td.title label {
 	vertical-align: top;
 }
 
-pre.gadash {
-	
-}
-
-pre.log_data {
+pre.gadwp-settings-logdata {
 	white-space: pre-wrap;
 }
 
-td.roles {
+td.gadwp-settings-roles {
 	padding-bottom: 15px;
 }
 
@@ -70,49 +62,56 @@ td.roles {
 	width: 50px;
 }
 
-.event-option, .event-option-desc {
-	float: left;
-}
-
 #gapi-access-code {
 	color: red !important;
 }
 
-#poststuff h2 {
+#poststuff.gadwp h2 {
 	padding-bottom: 0;
+	font-size: 19.5px;
+	font-weight: normal;
+	padding: 0;
+	margin: 20px 0 15px 0;
+	
+}
+
+#poststuff.gadwp h2.nav-tab-wrapper {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 0;
 }
 
 /* Options pages ON/OFF Switch */
-.onoffswitch {
+.button-primary.gadwp-settings-switchoo {
 	position: relative;
 	width: 50px;
 	float: left;
-	border: none !important;
-	padding: 0 !important;
-	height: 22px !important;
-	-moz-box-shadow: none !important;
-	-webkit-box-shadow: none !important;
-	-o-box-shadow: none !important;
-	box-shadow: none !important;
+	border: none;
+	padding: 0;
+	height: 22px;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	-o-box-shadow: none;
+	box-shadow: none;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 }
 
-.onoffswitch-checkbox {
-	display: none !important;
+input.gadwp-settings-switchoo-checkbox {
+	display: none;
 }
 
-.onoffswitch-label {
+.gadwp-settings-switchoo-label {
 	display: block;
 	overflow: hidden;
 	cursor: pointer;
 	background: transparent;
 	border: 1px solid #ddd;
 	border-radius: 2px;
+	text-shadow: none;	
 }
 
-.onoffswitch-inner {
+.gadwp-settings-switchoo-inner {
 	width: 200%;
 	margin-left: -100%;
 	border-radius: 2px;
@@ -122,7 +121,7 @@ td.roles {
 	transition: margin 0.2s ease-in 0s;
 }
 
-.onoffswitch-inner:before, .onoffswitch-inner:after {
+.gadwp-settings-switchoo-inner:before, .gadwp-settings-switchoo-inner:after {
 	float: left;
 	width: 50%;
 	font-weight: normal;
@@ -133,9 +132,10 @@ td.roles {
 	height: 22px;
 	line-height: 22px;
 	font-size: 12px;
+	text-shadow: none;
 }
 
-.onoffswitch-inner:before {
+.gadwp-settings-switchoo-inner:before {
 	content: "On";
 	padding-left: 5px;
 	border-bottom: none;
@@ -143,14 +143,14 @@ td.roles {
 	color: #fff;  /* inherit from button props */
 }
 
-.onoffswitch-inner:after {
+.gadwp-settings-switchoo-inner:after {
 	content: "Off";
 	padding-right: 5px;
 	background-color: #ddd;
 	text-align: right;
 }
 
-.onoffswitch-switch {
+.gadwp-settings-switchoo-switch {
 	width: 22px;
 	height: 22px;
 	background: #fff;
@@ -167,12 +167,12 @@ td.roles {
 	transition: all 0.2s ease-in 0s;
 }
 
-.onoffswitch-switch:hover {
+.gadwp-settings-switchoo-switch:hover {
 	color: #aaa;
 	border-color: #aaa;
 }
 
-.onoffswitch-switch:after {
+.gadwp-settings-switchoo-switch:after {
 	margin: 0;
 	outline: 0;
 	display: inline-block;
@@ -185,11 +185,11 @@ td.roles {
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.onoffswitch-checkbox:checked+.onoffswitch-label .onoffswitch-inner {
+.gadwp-settings-switchoo-checkbox:checked+.gadwp-settings-switchoo-label .gadwp-settings-switchoo-inner {
 	margin-left: 0;
 }
 
-.onoffswitch-checkbox:checked+.onoffswitch-label .onoffswitch-switch {
+.gadwp-settings-switchoo-checkbox:checked+.gadwp-settings-switchoo-label .gadwp-settings-switchoo-switch {
 	right: 0px;
 }
 
@@ -197,194 +197,4 @@ td.roles {
 	float: left;
 	margin-left: 10px;
 	line-height: 20px;
-}
-
-/* Admin Widget & Real-Time Stats*/
-
-/* Real-Time content */
-.gadash-pline {
-	width: 100%;
-	margin: 0 0;
-	padding: 5px 0 5px 0;
-	background: #fff;
-	-moz-box-shadow: 0px 0px 3px 0px #BBB;
-	-webkit-box-shadow: 0px 0px 3px 0px #BBB;
-	box-shadow: 0px 0px 3px 0px #BBB;
-	display: table;
-	overflow: hidden;
-}
-
-.gadash-pleft {
-	width: 90%;
-	float: left;
-	padding-left: 5px;
-}
-
-.gadash-pright {
-	width: 5%;
-	float: right;
-	padding-right: 5px;
-}
-
-#gadash-widget .realtime {
-	margin: 10px 0 0 0;
-	width: 100%;
-}
-
-.gadash-rt-box {
-	width: 100%;
-	margin: 0 0;
-	background: #fff;
-	text-align: center;
-	-moz-box-shadow: 0px 0px 5px 0px #BBB;
-	-webkit-box-shadow: 0px 0px 5px 0px #BBB;
-	box-shadow: 0px 0px 5px 0px #BBB;
-	display: table;
-}
-
-.gadash-tdo-left {
-	width: 60%;
-	padding: 33px 0;
-	float: left;
-	text-align: center;
-}
-
-.gadash-tdo-right {
-	width: 35%;
-	margin: 0px 10px 0px 0;
-	text-align: left;
-	font-weight: bold;
-	vertical-align: middle;
-	float: right;
-	display: table;
-}
-
-.gadash-online {
-	font-size: 100px;
-	font-weight: normal;
-	line-height: 1em;
-	margin: 0 auto;
-	width: 80%;
-}
-
-.gadash-bigtext {
-	font-size: 14px;
-	width: 100%;
-	margin: 0 0;
-	padding: 5px 5px 5px 5px;
-	background: #fff;
-	-moz-box-shadow: 0px 0px 3px 0px #BBB;
-	-webkit-box-shadow: 0px 0px 3px 0px #BBB;
-	box-shadow: 0px 0px 3px 0px #BBB;
-	display: table;
-	overflow: hidden;
-}
-
-.gadash-bleft {
-	float: left;
-	width: 80%;
-}
-
-.gadash-bright {
-	float: right;
-	width: 20%;
-}
-
-.gadash-pgdetailsr {
-	padding-left: 20px;
-	text-align: right;
-}
-
-.gadash-pgdetailsl {
-	min-width: 250px;
-}
-
-#gadash-mainchart {
-	width: 98%;
-	height: 100%;
-	margin: 10px auto 10px 0;
-	height: 250px;
-}
-
-.gadash-floatwraper {
-	display: table;
-	width: 100%;
-	height: 100%;
-}
-
-#gadash-trafficmediums, #gadash-traffictype, #gadash-socialnetworks,
-	#gadash-trafficorganic {
-	width: 47%;
-	margin: 10px 0 0 0;
-	height: 200px;
-}
-
-#gadash-trafficmediums, #gadash-trafficorganic {
-	float: left;
-}
-
-#gadash-traffictype, #gadash-socialnetworks {
-	float: right;
-}
-
-#gadash-map, #gadash-prs {
-	width: 98%;
-	height: 100%;
-	margin: 10px auto 10px 0;
-}
-
-#ga_dash_period, #ga_dash_profile_select {
-	font-size: 14px !important;
-	padding: 1px !important;
-	height: 26px !important;
-}
-
-#dashboard-widgets-wrap .postbox {
-	margin-right: 10px;
-}
-
-/* Admin Widget content */
-#gadash-progressbar {
-	width: 100%;
-	height: 3px;
-	margin: 5px 0 0px 0;
-}
-
-.gadash-wrapper {
-	width: 100%;
-}
-
-.gadash-wrapper .inside {
-	display: table;
-	margin: 0 auto;
-	padding: 0px;
-}
-
-.gadash-wrapper .inside .small-box {
-	width: 30%;
-	float: left;
-	margin: 0 5px 10px 5px;
-	background: #fff;
-	text-align: center;
-	-moz-box-shadow: 0px 0px 7px 0px #BBB;
-	-webkit-box-shadow: 0px 0px 7px 0px #BBB;
-	box-shadow: 0px 0px 7px 0px #BBB;
-}
-
-.gadash-wrapper .inside .small-box h3 {
-	font-size: 1em;
-	color: #777;
-	padding: 0px 5px 0px 5px;
-	margin: 0px 0px 0px 0px;
-}
-
-.gadash-wrapper .inside .small-box p {
-	font-size: 1.2em;
-	margin: 0px 0px 2px 0px;
-}
-
-@media screen and (max-width: 410px) {
-	.gadash-wrapper .inside .small-box {
-		width: 45%;
-	}
 }

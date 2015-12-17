@@ -31,12 +31,17 @@
         function calculate(obj) {
             var count = $(obj).val().length;
             // supported shortcodes
-            var urlcount = $(obj).val().indexOf('#url#') > -1 ? 18 : 0;
-            var titlecount = $(obj).val().indexOf('#title#') > -1 ? ($('#title').val().length - 7) : 0;
-            var namecount = $(obj).val().indexOf('#blog#') > -1 ? ($('#wp-admin-bar-site-name').val().length - 6) : 0;
-			var imgcount = ( $('#wpt_image_yes:checked').length && $( '#remove-post-thumbnail' ).length ) ? 22 : 0;
+            var urlcount     = $(obj).val().indexOf('#url#') > -1 ? 18 : 0;
+            var longurlcount = $(obj).val().indexOf('#longurl#') > -1 ? 14 : 0;
+			if ( $( '#title' ).length ) {
+				var titlecount   = $(obj).val().indexOf('#title#') > -1 ? ( $('#title').val().length - 7 ) : 0;
+			} else {
+				var titlecount = 0;
+			}
+            var namecount    = $(obj).val().indexOf('#blog#') > -1 ? ($('#wp-admin-bar-site-name a').val().length - 6) : 0;
+			var imgcount     = ( $('#wpt_image_yes:checked').length && $( '#remove-post-thumbnail' ).length ) ? 22 : 0;
 			
-            var available = options.allowed - ( count + urlcount + titlecount + namecount + imgcount );
+            var available = options.allowed - ( count + urlcount + longurlcount + titlecount + namecount + imgcount );
 
             if (available <= options.warning && available >= 0) {
                 $(obj).next().addClass(options.cssWarning);

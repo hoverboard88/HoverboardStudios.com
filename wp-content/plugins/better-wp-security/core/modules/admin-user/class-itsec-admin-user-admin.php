@@ -30,7 +30,7 @@ class ITSEC_Admin_User_Admin {
 	public function add_admin_meta_boxes() {
 
 		$id    = 'admin_user_options';
-		$title = __( 'Admin User', 'it-l10n-better-wp-security' );
+		$title = __( 'Admin User', 'better-wp-security' );
 
 		add_meta_box(
 			$id,
@@ -83,7 +83,7 @@ class ITSEC_Admin_User_Admin {
 			//Get the full user object
 			$user_object = get_user_by( 'id', '1' );
 
-			if ( $username !== null && validate_username( $new_user ) && username_exists( $new_user ) === null ) { //there is a valid username to change
+			if ( ! is_null( $username ) && validate_username( $new_user ) && false === username_exists( $new_user ) ) { //there is a valid username to change
 
 				if ( $id === true ) { //we're changing the id too so we'll set the username
 
@@ -110,7 +110,6 @@ class ITSEC_Admin_User_Admin {
 				}
 
 			} elseif ( $username !== null ) { //username didn't validate
-
 				$itsec_files->release_file_lock( 'admin_user' );
 
 				return false;
@@ -174,7 +173,7 @@ class ITSEC_Admin_User_Admin {
 
 			$status_array = 'safe-high';
 			$status       = array(
-				'text' => __( 'The <em>admin</em> user has been removed or renamed.', 'it-l10n-better-wp-security' ),
+				'text' => __( 'The <em>admin</em> user has been removed or renamed.', 'better-wp-security' ),
 				'link' => '#itsec_authentication_admin_user_username', 'advanced' => true,
 			);
 
@@ -182,7 +181,7 @@ class ITSEC_Admin_User_Admin {
 
 			$status_array = 'high';
 			$status       = array(
-				'text' => __( 'The <em>admin</em> user still exists.', 'it-l10n-better-wp-security' ),
+				'text' => __( 'The <em>admin</em> user still exists.', 'better-wp-security' ),
 				'link' => '#itsec_authentication_admin_user_username', 'advanced' => true,
 			);
 
@@ -194,7 +193,7 @@ class ITSEC_Admin_User_Admin {
 
 			$status_array = 'safe-medium';
 			$status       = array(
-				'text' => __( 'The user with id 1 has been removed.', 'it-l10n-better-wp-security' ),
+				'text' => __( 'The user with id 1 has been removed.', 'better-wp-security' ),
 				'link' => '#itsec_authentication_admin_user_userid', 'advanced' => true,
 			);
 
@@ -202,7 +201,7 @@ class ITSEC_Admin_User_Admin {
 
 			$status_array = 'medium';
 			$status       = array(
-				'text' => __( 'A user with id 1 still exists.', 'it-l10n-better-wp-security' ),
+				'text' => __( 'A user with id 1 still exists.', 'better-wp-security' ),
 				'link' => '#itsec_authentication_admin_user_userid', 'advanced' => true,
 			);
 
@@ -226,7 +225,7 @@ class ITSEC_Admin_User_Admin {
 		if ( ! $this->settings === true && isset( $_POST['itsec_enable_admin_user'] ) && $_POST['itsec_enable_admin_user'] == 'true' ) {
 
 			if ( ! wp_verify_nonce( $_POST['wp_nonce'], 'ITSEC_admin_save' ) ) {
-				die( __( 'Security check', 'it-l10n-better-wp-security' ) );
+				die( __( 'Security check', 'better-wp-security' ) );
 			}
 
 			//Process admin user
@@ -248,7 +247,7 @@ class ITSEC_Admin_User_Admin {
 			if ( $admin_success === false ) {
 
 				$type    = 'error';
-				$message = __( 'The new admin username you entered is invalid or WordPress could not change the user id or username. Please check the name and try again.', 'it-l10n-better-wp-security' );
+				$message = __( 'The new admin username you entered is invalid or WordPress could not change the user id or username. Please check the name and try again.', 'better-wp-security' );
 
 				add_settings_error( 'itsec', esc_attr( 'settings_updated' ), $message, $type );
 
@@ -298,13 +297,13 @@ class ITSEC_Admin_User_Admin {
 
 		if ( $this->settings === true ) {
 
-			echo '<p>' . __( 'It looks like you have already removed the admin user. No further action is necessary.', 'it-l10n-better-wp-security' ) . '</p>';
+			echo '<p>' . __( 'It looks like you have already removed the admin user. No further action is necessary.', 'better-wp-security' ) . '</p>';
 
 		} else {
 
-			echo '<p>' . __( 'This feature will improve the security of your WordPress installation by removing common user attributes that can be used to target your site.', 'it-l10n-better-wp-security' ) . '</p>';
-			echo sprintf( '<div class="itsec-warning-message"><span>%s: </span><a href="?page=toplevel_page_itsec_backups">%s</a> %s</div>', __( 'WARNING', 'it-l10n-better-wp-security' ), __( 'Backup your database', 'it-l10n-better-wp-security' ), __( 'before changing the admin user.', 'it-l10n-better-wp-security' ) );
-			echo sprintf( '<div class="itsec-notice-message"><span>%s: </span> %s </div>', __( 'Notice', 'it-l10n-better-wp-security' ), __( 'Changing the admin username or id of user 1 will log you out of your site requiring you to log back in again.', 'it-l10n-better-wp-security' ) );
+			echo '<p>' . __( 'This feature will improve the security of your WordPress installation by removing common user attributes that can be used to target your site.', 'better-wp-security' ) . '</p>';
+			echo sprintf( '<div class="itsec-warning-message"><span>%s: </span><a href="?page=toplevel_page_itsec_backups">%s</a> %s</div>', __( 'WARNING', 'better-wp-security' ), __( 'Backup your database', 'better-wp-security' ), __( 'before changing the admin user.', 'better-wp-security' ) );
+			echo sprintf( '<div class="itsec-notice-message"><span>%s: </span> %s </div>', __( 'Notice', 'better-wp-security' ), __( 'Changing the admin username or id of user 1 will log you out of your site requiring you to log back in again.', 'better-wp-security' ) );
 
 			?>
 
@@ -317,14 +316,14 @@ class ITSEC_Admin_User_Admin {
 					<tr valign="top">
 						<th scope="row" class="settinglabel">
 							<label
-								for="itsec_enable_admin_user"><?php _e( 'Enable Change Admin User', 'it-l10n-better-wp-security' ); ?></label>
+								for="itsec_enable_admin_user"><?php _e( 'Enable Change Admin User', 'better-wp-security' ); ?></label>
 						</th>
 						<td class="settingfield">
 							<?php //username field ?>
 							<input type="checkbox" id="itsec_enable_admin_user" name="itsec_enable_admin_user"
 							       value="true"/>
 
-							<p class="description"><?php _e( 'Check this box to enable admin user renaming.', 'it-l10n-better-wp-security' ); ?></p>
+							<p class="description"><?php _e( 'Check this box to enable admin user renaming.', 'better-wp-security' ); ?></p>
 						</td>
 					</tr>
 
@@ -332,14 +331,14 @@ class ITSEC_Admin_User_Admin {
 						<tr valign="top" id="admin_user_username_field">
 							<th scope="row" class="settinglabel">
 								<label
-									for="itsec_admin_user_username"><?php _e( 'New Admin Username', 'it-l10n-better-wp-security' ); ?></label>
+									for="itsec_admin_user_username"><?php _e( 'New Admin Username', 'better-wp-security' ); ?></label>
 							</th>
 							<td class="settingfield">
 								<?php //username field ?>
 								<input name="itsec_admin_user_username" id="itsec_admin_user_username" value=""
 								       type="text"><br/>
 
-								<p class="description"><?php _e( 'Enter a new username to replace "admin." Please note that if you are logged in as admin you will have to log in again.', 'it-l10n-better-wp-security' ); ?></p>
+								<p class="description"><?php _e( 'Enter a new username to replace "admin." Please note that if you are logged in as admin you will have to log in again.', 'better-wp-security' ); ?></p>
 							</td>
 						</tr>
 					<?php } ?>
@@ -347,20 +346,20 @@ class ITSEC_Admin_User_Admin {
 						<tr valign="top" id="admin_user_id_field">
 							<th scope="row" class="settinglabel">
 								<label
-									for="itsec_admin_user_id"><?php _e( 'Change User ID 1', 'it-l10n-better-wp-security' ); ?></label>
+									for="itsec_admin_user_id"><?php _e( 'Change User ID 1', 'better-wp-security' ); ?></label>
 							</th>
 							<td class="settingfield">
 								<?php //username field ?>
 								<input type="checkbox" id="itsec_admin_user_id" name="itsec_admin_user_id" value="1"/>
 
-								<p class="description"><?php _e( 'Change the ID of the user with ID 1.', 'it-l10n-better-wp-security' ); ?></p>
+								<p class="description"><?php _e( 'Change the ID of the user with ID 1.', 'better-wp-security' ); ?></p>
 							</td>
 						</tr>
 					<?php } ?>
 				</table>
 				<p class="submit">
 					<input type="submit" class="button-primary"
-					       value="<?php _e( 'Save Admin User', 'it-l10n-better-wp-security' ); ?>"/>
+					       value="<?php _e( 'Save Admin User', 'better-wp-security' ); ?>"/>
 				</p>
 			</form>
 

@@ -8,10 +8,10 @@ Author: Jeff Starr
 Author URI: http://monzilla.biz/
 Donate link: http://m0n.co/donate
 Contributors: specialk
-Requires at least: 3.9
-Tested up to: 4.2
+Requires at least: 4.1
+Tested up to: 4.4
 Stable tag: trunk
-Version: 20150507
+Version: 20151111
 Text Domain: sfs
 Domain Path: /languages/
 License: GPL v2 or later
@@ -126,6 +126,30 @@ To upgrade, simply upload the new version and you should be good to go.
 Screenshots and more info available at the [SFS Homepage](https://perishablepress.com/simple-feed-stats/).
 
 == Changelog ==
+
+= 20151111 =
+
+* Admin notices now are dismissible
+* Added sfs_clear_cache() function
+* Added sfs_reset_stats() function
+* Improved functionality of clear cache feature
+* Improved functionality of reset stats feature
+* Refined functionality of plugin settings page
+* Updated some text in the plugin settings popup tips
+* Refined the Subscriber Count panels in the plugin settings
+* Removed unnecessary global variables from sfs_create_table()
+* Added setting to enable shortcodes in widgets
+* Change default stat value from "n/a" to "0"
+* Added tip to total subscriber count panel
+* Updated heading hierarchy in plugin settings
+* Updated minimum version requirement
+* Updated translation template file
+* Tested on WordPress 4.4 beta
+
+= 20150808 =
+
+* Tested on WordPress 4.3
+* Updated minimum version requirement
 
 = 20150507 =
 
@@ -262,13 +286,20 @@ Answer: During the first 12 hours, data is collected. Then the cache is refreshe
 
 To ask a question, visit the [SFS Homepage](https://perishablepress.com/simple-feed-stats/) or [contact me](https://perishablepress.com/contact/).
 
-== Donations ==
+== Support development of this plugin ==
 
-I created this plugin with love for the WP community. To show support, you can [make a donation](http://m0n.co/donate) or purchase one of my books: 
+I develop and maintain this free plugin with love for the WordPress community. To show support, you can [make a donation](http://m0n.co/donate) or purchase one of my books: 
 
 * [The Tao of WordPress](https://wp-tao.com/)
 * [Digging into WordPress](https://digwp.com/)
 * [.htaccess made easy](https://htaccessbook.com/)
 * [WordPress Themes In Depth](https://wp-tao.com/wordpress-themes-book/)
 
+And/or purchase one of my premium WordPress plugins:
+
+* [BBQ Pro](https://plugin-planet.com/bbq-pro/) - Pro version of Block Bad Queries
+* [SES Pro](https://plugin-planet.com/ses-pro/) - Super-simple &amp; flexible email signup forms
+* [USP Pro](https://plugin-planet.com/usp-pro/) - Pro version of User Submitted Posts
+
 Links, tweets and likes also appreciated. Thanks! :)
+

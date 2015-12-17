@@ -27,6 +27,7 @@ if ( ! class_exists( 'ITSEC_Tweaks_Setup' ) ) {
 				'comment_spam'                => false,
 				'file_editor'                 => false,
 				'disable_xmlrpc'              => 0,
+				'allow_xmlrpc_multiauth'      => true,
 				'uploads_php'                 => false,
 				'login_errors'                => false,
 				'force_unique_nicename'       => false,

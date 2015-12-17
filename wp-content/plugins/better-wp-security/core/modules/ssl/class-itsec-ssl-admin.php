@@ -103,7 +103,7 @@ class ITSEC_SSL_Admin {
 	public function add_admin_meta_boxes() {
 
 		$id    = 'ssl_options';
-		$title = __( 'Secure Socket Layers (SSL)', 'it-l10n-better-wp-security' );
+		$title = __( 'Secure Socket Layers (SSL)', 'better-wp-security' );
 
 		add_meta_box(
 			$id,
@@ -137,7 +137,7 @@ class ITSEC_SSL_Admin {
 			wp_enqueue_script( 'itsec_ssl_js', $this->module_path . 'js/admin-ssl.js', array( 'jquery' ), $itsec_globals['plugin_build'] );
 
 			//make sure the text of the warning is translatable
-			wp_localize_script( 'itsec_ssl_js', 'ssl_warning_text', array( 'text' => __( 'Are you sure you want to enable SSL? If your server does not support SSL you will be locked out of your WordPress Dashboard.', 'it-l10n-better-wp-security' ) ) );
+			wp_localize_script( 'itsec_ssl_js', 'ssl_warning_text', array( 'text' => __( 'Are you sure you want to enable SSL? If your server does not support SSL you will be locked out of your WordPress Dashboard.', 'better-wp-security' ) ) );
 
 		}
 
@@ -154,13 +154,13 @@ class ITSEC_SSL_Admin {
 		if ( ( defined( 'FORCE_SSL_ADMIN' ) && FORCE_SSL_ADMIN ) || ( defined( 'FORCE_SSL_LOGIN' ) && FORCE_SSL_LOGIN ) ) {
 			$status_array = 'safe-low';
 			$status       = array(
-				'text' => __( 'You are requiring a secure connection for accessing the dashboard.', 'it-l10n-better-wp-security' ),
+				'text' => __( 'You are requiring a secure connection for accessing the dashboard.', 'better-wp-security' ),
 				'link' => '#itsec_ssl_admin',
 			);
 		} else {
 			$status_array = 'low';
 			$status       = array(
-				'text' => __( 'You are not requiring a secure connection for accessing the dashboard.', 'it-l10n-better-wp-security' ),
+				'text' => __( 'You are not requiring a secure connection for accessing the dashboard.', 'better-wp-security' ),
 				'link' => '#itsec_ssl_admin',
 			);
 		}
@@ -184,7 +184,7 @@ class ITSEC_SSL_Admin {
 		//primary settings section
 		add_settings_section(
 			'ssl_settings',
-			__( 'Configure SSL', 'it-l10n-better-wp-security' ),
+			__( 'Configure SSL', 'better-wp-security' ),
 			'__return_empty_string',
 			'security_page_toplevel_page_itsec_settings'
 		);
@@ -192,7 +192,7 @@ class ITSEC_SSL_Admin {
 		//enabled field
 		add_settings_field(
 			'itsec_ssl[frontend]',
-			__( 'Front End SSL Mode', 'it-l10n-better-wp-security' ),
+			__( 'Front End SSL Mode', 'better-wp-security' ),
 			array( $this, 'ssl_frontend' ),
 			'security_page_toplevel_page_itsec_settings',
 			'ssl_settings'
@@ -201,7 +201,7 @@ class ITSEC_SSL_Admin {
 		//enabled field
 		add_settings_field(
 			'itsec_ssl[admin]',
-			__( 'SSL for Dashboard', 'it-l10n-better-wp-security' ),
+			__( 'SSL for Dashboard', 'better-wp-security' ),
 			array( $this, 'ssl_admin' ),
 			'security_page_toplevel_page_itsec_settings',
 			'ssl_settings'
@@ -232,12 +232,12 @@ class ITSEC_SSL_Admin {
 		
 		echo '<select id="itsec_ssl_frontend" name="itsec_ssl[frontend]">';
 		
-		echo '<option value="0" ' . selected( $frontend, '0', false ) . '>' . __( 'Off', 'it-l10n-better-wp-security' ) . '</option>';
-		echo '<option value="1" ' . selected( $frontend, '1', false ) . '>' . __( 'Per Content', 'it-l10n-better-wp-security' ) . '</option>';
-		echo '<option value="2" ' . selected( $frontend, '2', false ) . '>' . __( 'Whole Site', 'it-l10n-better-wp-security' ) . '</option>';
+		echo '<option value="0" ' . selected( $frontend, '0', false ) . '>' . __( 'Off', 'better-wp-security' ) . '</option>';
+		echo '<option value="1" ' . selected( $frontend, '1', false ) . '>' . __( 'Per Content', 'better-wp-security' ) . '</option>';
+		echo '<option value="2" ' . selected( $frontend, '2', false ) . '>' . __( 'Whole Site', 'better-wp-security' ) . '</option>';
 		echo '</select><br />';
-		echo '<label for="itsec_ssl_frontend"> ' . __( 'Front End SSL Mode', 'it-l10n-better-wp-security' ) . '</label>';
-		echo '<p class="description">' . __( 'Enables secure SSL connection for the front-end (public parts of your site). Turning this off will disable front-end SSL control, turning this on "Per Content" will place a checkbox on the edit page for all posts and pages (near the publish settings) allowing you to turn on SSL for selected pages or posts, and selecting "Whole Site" will force the whole site to use SSL (not recommended unless you have a really good reason to use it', 'it-l10n-better-wp-security' ) . '</p>';
+		echo '<label for="itsec_ssl_frontend"> ' . __( 'Front End SSL Mode', 'better-wp-security' ) . '</label>';
+		echo '<p class="description">' . __( 'Enables secure SSL connection for the front-end (public parts of your site). Turning this off will disable front-end SSL control, turning this on "Per Content" will place a checkbox on the edit page for all posts and pages (near the publish settings) allowing you to turn on SSL for selected pages or posts, and selecting "Whole Site" will force the whole site to use SSL (not recommended unless you have a really good reason to use it', 'better-wp-security' ) . '</p>';
 	}
 
 	/**
@@ -256,8 +256,8 @@ class ITSEC_SSL_Admin {
 		}
 
 		$content = '<input onchange="forcessl()" type="checkbox" id="itsec_ssl_admin" name="itsec_ssl[admin]" value="1" ' . checked( 1, $admin, false ) . '/>';
-		$content .= '<label for="itsec_ssl_admin">' . __( 'Force SSL for Dashboard', 'it-l10n-better-wp-security' ) . '</label>';
-		$content .= '<p class="description">' . __( 'Forces all dashboard access to be served only over an SSL connection.', 'it-l10n-better-wp-security' ) . '</p>';
+		$content .= '<label for="itsec_ssl_admin">' . __( 'Force SSL for Dashboard', 'better-wp-security' ) . '</label>';
+		$content .= '<p class="description">' . __( 'Forces all dashboard access to be served only over an SSL connection.', 'better-wp-security' ) . '</p>';
 
 		echo $content;
 
@@ -270,21 +270,21 @@ class ITSEC_SSL_Admin {
 	 */
 	public function metabox_advanced_settings() {
 
-		$content = '<p>' . __( 'Secure Socket Layers (SSL) is a technology that is used to encrypt the data sent between your server or host and a visitor to your web page. When SSL is activated, it makes it almost impossible for an attacker to intercept data in transit, therefore making the transmission of form, password or other encrypted data much safer.', 'it-l10n-better-wp-security' ) . '</p>';
-		$content .= '<p>' . __( 'This plugin gives you the option of turning on SSL (if your server or host supports it) for all or part of your site. The options below allow you to automatically use SSL for major parts of your site such as the login page, the admin dashboard or the site as a whole. You can also turn on SSL for any post or page by editing the content and selecting "Enable SSL" in the publishing options of the content in question.', 'it-l10n-better-wp-security' ) . '</p>';
-		$content .= '<p>' . __( 'Note: While this plugin does give you the option of encrypting everything, SSL may not be for you. SSL does add overhead to your site which will increase download times slightly. Therefore we recommend you enable SSL at a minimum on the login page, then on the whole admin section and finally on individual pages or posts with forms that require sensitive information.', 'it-l10n-better-wp-security' ) . '</p>';
+		$content = '<p>' . __( 'Secure Socket Layers (SSL) is a technology that is used to encrypt the data sent between your server or host and a visitor to your web page. When SSL is activated, it makes it almost impossible for an attacker to intercept data in transit, therefore making the transmission of form, password or other encrypted data much safer.', 'better-wp-security' ) . '</p>';
+		$content .= '<p>' . __( 'This plugin gives you the option of turning on SSL (if your server or host supports it) for all or part of your site. The options below allow you to automatically use SSL for major parts of your site such as the login page, the admin dashboard or the site as a whole. You can also turn on SSL for any post or page by editing the content and selecting "Enable SSL" in the publishing options of the content in question.', 'better-wp-security' ) . '</p>';
+		$content .= '<p>' . __( 'Note: While this plugin does give you the option of encrypting everything, SSL may not be for you. SSL does add overhead to your site which will increase download times slightly. Therefore we recommend you enable SSL at a minimum on the login page, then on the whole admin section and finally on individual pages or posts with forms that require sensitive information.', 'better-wp-security' ) . '</p>';
 
 		if ( $this->has_ssl === false ) {
 
-			$content .= sprintf( '<div class="itsec-warning-message"><span>%s: </span>%s</div>', __( 'WARNING', 'it-l10n-better-wp-security' ), __( 'Your server does not appear to support SSL. Your server MUST support SSL to use these features. Using these features without SSL support on your server or host will cause some or all of your site to become unavailable.', 'it-l10n-better-wp-security' ) );
+			$content .= sprintf( '<div class="itsec-warning-message"><span>%s: </span>%s</div>', __( 'WARNING', 'better-wp-security' ), __( 'Your server does not appear to support SSL. Your server MUST support SSL to use these features. Using these features without SSL support on your server or host will cause some or all of your site to become unavailable.', 'better-wp-security' ) );
 
 		} else {
 
-			$content .= sprintf( '<div class="itsec-notice-message"><span>%s: </span>%s</div>', __( 'WARNING', 'it-l10n-better-wp-security' ), __( 'Your server does appear to support SSL. Using these features without SSL support on your server or host will cause some or all of your site to become unavailable.', 'it-l10n-better-wp-security' ) );
+			$content .= sprintf( '<div class="itsec-notice-message"><span>%s: </span>%s</div>', __( 'WARNING', 'better-wp-security' ), __( 'Your server does appear to support SSL. Using these features without SSL support on your server or host will cause some or all of your site to become unavailable.', 'better-wp-security' ) );
 
 		}
 
-		$content .= '<p>' . __( 'Note: When turning SSL on you will be logged out and you will have to log back in. This is to prevent possible cookie conflicts that could make it more difficult to get in otherwise.', 'it-l10n-better-wp-security' ) . '</p>';
+		$content .= '<p>' . __( 'Note: When turning SSL on you will be logged out and you will have to log back in. This is to prevent possible cookie conflicts that could make it more difficult to get in otherwise.', 'better-wp-security' ) . '</p>';
 
 		echo $content;
 
@@ -294,7 +294,7 @@ class ITSEC_SSL_Admin {
 
 		settings_fields( 'security_page_toplevel_page_itsec_settings' );
 
-		echo '<input class="button-primary" name="submit" type="submit" value="' . __( 'Save All Changes', 'it-l10n-better-wp-security' ) . '" />' . PHP_EOL;
+		echo '<input class="button-primary" name="submit" type="submit" value="' . __( 'Save All Changes', 'better-wp-security' ) . '" />' . PHP_EOL;
 
 		echo '</p>' . PHP_EOL;
 
@@ -309,8 +309,8 @@ class ITSEC_SSL_Admin {
 		
 		
 		if ( ( isset( $input['login'] ) && ( true == $input['login'] ) ) || ( isset( $input['admin'] ) && ( true == $input['admin'] ) ) ) {
-			$modification .= "define( 'FORCE_SSL_LOGIN', true ); // " . __( 'Force SSL for Dashboard - Security > Settings > Secure Socket Layers (SSL) > SSL for Dashboard', 'it-l10n-better-wp-security' ) . "\n";
-			$modification .= "define( 'FORCE_SSL_ADMIN', true ); // " . __( 'Force SSL for Dashboard - Security > Settings > Secure Socket Layers (SSL) > SSL for Dashboard', 'it-l10n-better-wp-security' ) . "\n";
+			$modification .= "define( 'FORCE_SSL_LOGIN', true ); // " . __( 'Force SSL for Dashboard - Security > Settings > Secure Socket Layers (SSL) > SSL for Dashboard', 'better-wp-security' ) . "\n";
+			$modification .= "define( 'FORCE_SSL_ADMIN', true ); // " . __( 'Force SSL for Dashboard - Security > Settings > Secure Socket Layers (SSL) > SSL for Dashboard', 'better-wp-security' ) . "\n";
 		}
 		
 		return $modification;
@@ -392,7 +392,7 @@ class ITSEC_SSL_Admin {
 		if ( isset( $_POST['itsec_ssl'] ) ) {
 
 			if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'security_page_toplevel_page_itsec_settings-options' ) ) {
-				die( __( 'Security error!', 'it-l10n-better-wp-security' ) );
+				die( __( 'Security error!', 'better-wp-security' ) );
 			}
 
 			update_site_option( 'itsec_ssl', $_POST['itsec_ssl'] ); //we must manually save network options

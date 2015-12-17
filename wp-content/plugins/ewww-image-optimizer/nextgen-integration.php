@@ -68,10 +68,10 @@ class ewwwngg {
 	/* optimize the thumbs of the images POSTed from the previous page */
 	function ewww_ngg_thumb_bulk() {
 		if (!wp_verify_nonce( $_REQUEST['ewww_wpnonce'], 'ewww-image-optimizer-bulk' ) || !current_user_can( 'edit_others_posts' ) ) {
-			wp_die(__('Cheatin&#8217; eh?', EWWW_IMAGE_OPTIMIZER_DOMAIN));
+			wp_die( __( 'Access denied.', EWWW_IMAGE_OPTIMIZER_DOMAIN ) );
 		}?> 
 		<div class="wrap">
-                <div id="icon-upload" class="icon32"></div><h2><?php _e('Bulk Thumbnail Optimize', EWWW_IMAGE_OPTIMIZER_DOMAIN); ?></h2>
+                <div id="icon-upload" class="icon32"></div><h1><?php _e('Bulk Thumbnail Optimize', EWWW_IMAGE_OPTIMIZER_DOMAIN); ?></h1>
 <?php		$images = unserialize ($_POST['ewww_attachments']);
 		// initialize $current, and $started time
 		$started = time();
@@ -157,7 +157,7 @@ class ewwwngg {
 			// get the mimetype of the image
 			$type = ewww_image_optimizer_mimetype($file_path, 'i');
 			// retrieve the human-readable filesize of the image
-			$file_size = size_format(filesize($file_path), 2);
+			$file_size = size_format( ewww_image_optimizer_filesize( $file_path ), 2 );
 			$file_size = str_replace('B ', 'B', $file_size);
 			//$file_size = ewww_image_optimizer_format_bytes(filesize($file_path));
 			$valid = true;
@@ -231,7 +231,7 @@ class ewwwngg {
                 }
                 ?>
 		<div class="wrap">
-                <div id="icon-upload" class="icon32"></div><h2><?php _e('Bulk Optimize', EWWW_IMAGE_OPTIMIZER_DOMAIN); ?></h2>
+                <div id="icon-upload" class="icon32"></div><h1><?php _e('Bulk Optimize', EWWW_IMAGE_OPTIMIZER_DOMAIN); ?></h1>
                 <?php
                 // Retrieve the value of the 'bulk resume' option and set the button text for the form to use
                 $resume = get_option('ewww_image_optimizer_bulk_ngg_resume');
@@ -349,7 +349,7 @@ class ewwwngg {
 	/* start the bulk operation */
 	function ewww_ngg_bulk_init() {
                 if (!wp_verify_nonce( $_REQUEST['ewww_wpnonce'], 'ewww-image-optimizer-bulk' ) || !current_user_can( 'edit_others_posts' ) ) {
-                        wp_die(__('Cheatin&#8217; eh?', EWWW_IMAGE_OPTIMIZER_DOMAIN));
+			wp_die( __( 'Access denied.', EWWW_IMAGE_OPTIMIZER_DOMAIN ) );
                 }
 		// toggle the resume flag to indicate an operation is in progress
                 update_option('ewww_image_optimizer_bulk_ngg_resume', 'true');
@@ -362,7 +362,7 @@ class ewwwngg {
 	/* output the filename of the image being optimized */
 	function ewww_ngg_bulk_filename() {
                 if (!wp_verify_nonce( $_REQUEST['ewww_wpnonce'], 'ewww-image-optimizer-bulk' ) || !current_user_can( 'edit_others_posts' ) ) {
-                        wp_die(__('Cheatin&#8217; eh?', EWWW_IMAGE_OPTIMIZER_DOMAIN));
+			wp_die( __( 'Access token has expired, please reload the page.', EWWW_IMAGE_OPTIMIZER_DOMAIN ) );
                 }
 		// need this file to work with metadata
 		require_once(WP_CONTENT_DIR . '/plugins/nextgen-gallery/lib/meta.php');
@@ -379,7 +379,7 @@ class ewwwngg {
 	/* process each image in the bulk loop */
 	function ewww_ngg_bulk_loop() {
                 if (!wp_verify_nonce( $_REQUEST['ewww_wpnonce'], 'ewww-image-optimizer-bulk' ) || !current_user_can( 'edit_others_posts' ) ) {
-                        wp_die(__('Cheatin&#8217; eh?', EWWW_IMAGE_OPTIMIZER_DOMAIN));
+			wp_die( __( 'Access token has expired, please reload the page.', EWWW_IMAGE_OPTIMIZER_DOMAIN ) );
                 }
 		// need this file to work with metadata
 		require_once(WP_CONTENT_DIR . '/plugins/nextgen-gallery/lib/meta.php');
@@ -424,7 +424,7 @@ class ewwwngg {
 	/* finish the bulk operation */
 	function ewww_ngg_bulk_cleanup() {
                 if (!wp_verify_nonce( $_REQUEST['ewww_wpnonce'], 'ewww-image-optimizer-bulk' ) || !current_user_can( 'edit_others_posts' ) ) {
-                        wp_die(__('Cheatin&#8217; eh?', EWWW_IMAGE_OPTIMIZER_DOMAIN));
+			wp_die( __( 'Access token has expired, please reload the page.', EWWW_IMAGE_OPTIMIZER_DOMAIN ) );
                 }
 		// reset all the bulk options in the db
 		update_option('ewww_image_optimizer_bulk_ngg_resume', '');

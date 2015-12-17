@@ -109,12 +109,12 @@ class ITSEC_File_Change {
 	 */
 	private function build_table_section( $title, $files ) {
 
-		$section = '<h4>' . __( 'Files', 'it-l10n-better-wp-security' ) . ' ' . $title . '</h4>';
+		$section = '<h4>' . __( 'Files', 'better-wp-security' ) . ' ' . $title . '</h4>';
 		$section .= '<table border="1" style="width: 100%; text-align: center;">' . PHP_EOL;
 		$section .= '<tr>' . PHP_EOL;
-		$section .= '<th>' . __( 'File', 'it-l10n-better-wp-security' ) . '</th>' . PHP_EOL;
-		$section .= '<th>' . __( 'Modified', 'it-l10n-better-wp-security' ) . '</th>' . PHP_EOL;
-		$section .= '<th>' . __( 'File Hash', 'it-l10n-better-wp-security' ) . '</th>' . PHP_EOL;
+		$section .= '<th>' . __( 'File', 'better-wp-security' ) . '</th>' . PHP_EOL;
+		$section .= '<th>' . __( 'Modified', 'better-wp-security' ) . '</th>' . PHP_EOL;
+		$section .= '<th>' . __( 'File Hash', 'better-wp-security' ) . '</th>' . PHP_EOL;
 		$section .= '</tr>' . PHP_EOL;
 
 		if ( isset( $files ) && is_array( $files ) && 0 < sizeof( $files ) ) {
@@ -132,7 +132,7 @@ class ITSEC_File_Change {
 		} else {
 
 			$section .= '<tr>' . PHP_EOL;
-			$section .= '<td colspan="3">' . __( 'No files were changed.', 'it-l10n-better-wp-security' ) . '</td>' . PHP_EOL;
+			$section .= '<td colspan="3">' . __( 'No files were changed.', 'better-wp-security' ) . '</td>' . PHP_EOL;
 			$section .= '</tr>' . PHP_EOL;
 
 		}
@@ -408,15 +408,15 @@ class ITSEC_File_Change {
 		$added   = $email_details[3]['added'];
 		$removed = $email_details[3]['removed'];
 		$changed = $email_details[3]['changed'];
-		$report  = '<strong>' . __( 'Scan Time:', 'it-l10n-better-wp-security' ) . '</strong> ' . date( 'l, F jS g:i a e', $itsec_globals['current_time'] ) . "<br />" . PHP_EOL;
-		$report .= '<strong>' . __( 'Files Added:', 'it-l10n-better-wp-security' ) . '</strong> ' . $email_details[0] . "<br />" . PHP_EOL;
-		$report .= '<strong>' . __( 'Files Deleted:', 'it-l10n-better-wp-security' ) . '</strong> ' . $email_details[1] . "<br />" . PHP_EOL;
-		$report .= '<strong>' . __( 'Files Modified:', 'it-l10n-better-wp-security' ) . '</strong> ' . $email_details[2] . "<br />" . PHP_EOL;
-		$report .= '<strong>' . __( 'Memory Used:', 'it-l10n-better-wp-security' ) . '</strong> ' . $email_details[3]['memory'] . " MB<br />" . PHP_EOL;
+		$report  = '<strong>' . __( 'Scan Time:', 'better-wp-security' ) . '</strong> ' . date( 'l, F jS g:i a e', $itsec_globals['current_time'] ) . "<br />" . PHP_EOL;
+		$report .= '<strong>' . __( 'Files Added:', 'better-wp-security' ) . '</strong> ' . $email_details[0] . "<br />" . PHP_EOL;
+		$report .= '<strong>' . __( 'Files Deleted:', 'better-wp-security' ) . '</strong> ' . $email_details[1] . "<br />" . PHP_EOL;
+		$report .= '<strong>' . __( 'Files Modified:', 'better-wp-security' ) . '</strong> ' . $email_details[2] . "<br />" . PHP_EOL;
+		$report .= '<strong>' . __( 'Memory Used:', 'better-wp-security' ) . '</strong> ' . $email_details[3]['memory'] . " MB<br />" . PHP_EOL;
 
-		$report .= $this->build_table_section( __( 'Added', 'it-l10n-better-wp-security' ), $added );
-		$report .= $this->build_table_section( __( 'Deleted', 'it-l10n-better-wp-security' ), $removed );
-		$report .= $this->build_table_section( __( 'Modified', 'it-l10n-better-wp-security' ), $changed );
+		$report .= $this->build_table_section( __( 'Added', 'better-wp-security' ), $added );
+		$report .= $this->build_table_section( __( 'Deleted', 'better-wp-security' ), $removed );
+		$report .= $this->build_table_section( __( 'Modified', 'better-wp-security' ), $changed );
 
 		return $report;
 
@@ -507,7 +507,7 @@ class ITSEC_File_Change {
 
 		$logger_modules['file_change'] = array(
 			'type'     => 'file_change',
-			'function' => __( 'File Changes Detected', 'it-l10n-better-wp-security' ),
+			'function' => __( 'File Changes Detected', 'better-wp-security' ),
 		);
 
 		return $logger_modules;
@@ -655,9 +655,9 @@ class ITSEC_File_Change {
 		if ( ! isset( $itsec_globals['settings']['digest_email'] ) || false === $itsec_globals['settings']['digest_email'] ) {
 
 			$headers = 'From: ' . get_bloginfo( 'name' ) . ' <' . get_option( 'admin_email' ) . '>' . "\r\n";
-			$subject = '[' . get_option( 'siteurl' ) . '] ' . __( 'WordPress File Change Warning', 'it-l10n-better-wp-security' ) . ' ' . date( 'l, F jS, Y \a\\t g:i a e', $itsec_globals['current_time'] );
+			$subject = '[' . get_option( 'siteurl' ) . '] ' . __( 'WordPress File Change Warning', 'better-wp-security' ) . ' ' . date( 'l, F jS, Y \a\\t g:i a e', $itsec_globals['current_time'] );
 
-			$body = '<p>' . __( 'A file (or files) on your site at ', 'it-l10n-better-wp-security' ) . ' ' . get_option( 'siteurl' ) . __( ' have been changed. Please review the report below to verify changes are not the result of a compromise.', 'it-l10n-better-wp-security' ) . '</p>';
+			$body = '<p>' . __( 'A file (or files) on your site at ', 'better-wp-security' ) . ' ' . get_option( 'siteurl' ) . __( ' have been changed. Please review the report below to verify changes are not the result of a compromise.', 'better-wp-security' ) . '</p>';
 			$body .= $this->get_email_report( $email_details ); //get report
 
 			$args = array(
@@ -676,9 +676,9 @@ class ITSEC_File_Change {
 
 				$message = sprintf(
 					'<strong>%s:</strong> %s %s.',
-					__( 'File changes detected', 'it-l10n-better-wp-security' ),
+					__( 'File changes detected', 'better-wp-security' ),
 					$itsec_globals['plugin_name'],
-					__( 'detected file changes on your system', 'it-l10n-better-wp-security' )
+					__( 'detected file changes on your system', 'better-wp-security' )
 				);
 
 				$itsec_notify->notify( $message );

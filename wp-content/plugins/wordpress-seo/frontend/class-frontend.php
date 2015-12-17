@@ -73,8 +73,8 @@ class WPSEO_Frontend {
 
 		// The head function here calls action wpseo_head, to which we hook all our functionality.
 		add_action( 'wpseo_head', array( $this, 'debug_marker' ), 2 );
-		add_action( 'wpseo_head', array( $this, 'robots' ), 6 );
-		add_action( 'wpseo_head', array( $this, 'metadesc' ), 10 );
+		add_action( 'wpseo_head', array( $this, 'metadesc' ), 6 );
+		add_action( 'wpseo_head', array( $this, 'robots' ), 10 );
 		add_action( 'wpseo_head', array( $this, 'metakeywords' ), 11 );
 		add_action( 'wpseo_head', array( $this, 'canonical' ), 20 );
 		add_action( 'wpseo_head', array( $this, 'adjacent_rel_links' ), 21 );
@@ -87,7 +87,10 @@ class WPSEO_Frontend {
 		remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head' );
 		remove_action( 'wp_head', 'noindex', 1 );
 
+		// When using WP 4.4, just use the new hook.
+		add_filter( 'pre_get_document_title', array( $this, 'title' ), 15 );
 		add_filter( 'wp_title', array( $this, 'title' ), 15, 3 );
+
 		add_filter( 'thematic_doctitle', array( $this, 'title' ), 15 );
 
 		add_action( 'wp', array( $this, 'page_redirect' ), 99 );
@@ -138,7 +141,8 @@ class WPSEO_Frontend {
 		add_filter( 'the_content_feed', array( $this, 'embed_rssfooter' ) );
 		add_filter( 'the_excerpt_rss', array( $this, 'embed_rssfooter_excerpt' ) );
 
-		if ( $this->options['forcerewritetitle'] === true ) {
+		// For WordPress functions below 4.4.
+		if ( ! current_theme_supports( 'title-tag' ) && $this->options['forcerewritetitle'] === true ) {
 			add_action( 'template_redirect', array( $this, 'force_rewrite_output_buffer' ), 99999 );
 			add_action( 'wp_footer', array( $this, 'flush_cache' ), - 1 );
 		}
@@ -191,7 +195,7 @@ class WPSEO_Frontend {
 	/**
 	 * Override Woo's title with our own.
 	 *
-	 * @param string $title
+	 * @param string $title Title string.
 	 *
 	 * @return string
 	 */
@@ -614,7 +618,16 @@ class WPSEO_Frontend {
 	 * @return string
 	 */
 	public function debug_marker( $echo = true ) {
-		$marker = '<!-- This site is optimized with the ' . $this->head_product_name() . ' v' . WPSEO_VERSION . ' - https://yoast.com/wordpress/plugins/seo/ -->';
+		$marker = sprintf(
+			'<!-- This site is optimized with the ' . $this->head_product_name() . '%1$s - https://yoast.com/wordpress/plugins/seo/ -->',
+			/**
+			 * Filter: 'wpseo_hide_version' - can be used to hide the Yoast SEO version in the debug marker (only available in Yoast SEO Premium)
+			 *
+			 * @api bool
+			 */
+			( ( apply_filters( 'wpseo_hide_version', false ) && $this->is_premium() ) ? '' : ' v' . WPSEO_VERSION )
+		);
+
 		if ( $echo === false ) {
 			return $marker;
 		}
@@ -800,8 +813,8 @@ class WPSEO_Frontend {
 	/**
 	 * Determine $robots values for a single post
 	 *
-	 * @param array      $robots
-	 * @param int|string $post_id The post ID for which to determine the $robots values, defaults to current post.
+	 * @param array $robots  Robots data array.
+	 * @param int   $post_id The post ID for which to determine the $robots values, defaults to current post.
 	 *
 	 * @return    array
 	 */
@@ -992,7 +1005,7 @@ class WPSEO_Frontend {
 	/**
 	 * Parse the home URL setting to find the base URL for relative URLs.
 	 *
-	 * @param string $path
+	 * @param string $path Optional path string.
 	 *
 	 * @return string
 	 */
@@ -1174,6 +1187,9 @@ class WPSEO_Frontend {
 					$keywords = wpseo_replace_vars( $this->options[ 'metakey-' . $post->post_type ], $post );
 				}
 			}
+			elseif ( $this->is_posts_page() ) {
+				$keywords = $this->get_keywords( get_post( get_option( 'page_for_posts' ) ) );
+			}
 			elseif ( is_category() || is_tag() || is_tax() ) {
 				$term = $wp_query->get_queried_object();
 
@@ -1219,7 +1235,7 @@ class WPSEO_Frontend {
 	/**
 	 * Outputs the meta description element or returns the description text.
 	 *
-	 * @param bool $echo
+	 * @param bool $echo Echo or return output flag.
 	 *
 	 * @return string
 	 */
@@ -1231,6 +1247,7 @@ class WPSEO_Frontend {
 		if ( $echo !== false ) {
 			if ( is_string( $this->metadesc ) && $this->metadesc !== '' ) {
 				echo '<meta name="description" content="', esc_attr( strip_tags( stripslashes( $this->metadesc ) ) ), '"/>', "\n";
+				$this->add_robot_content_noodp( $this->metadesc );
 			}
 			elseif ( current_user_can( 'manage_options' ) && is_singular() ) {
 				echo '<!-- ', __( 'Admin only notice: this page doesn\'t show a meta description because it doesn\'t have one, either write it for this page specifically or go into the SEO -> Titles menu and set up a template.', 'wordpress-seo' ), ' -->', "\n";
@@ -1390,7 +1407,7 @@ class WPSEO_Frontend {
 	public function noindex_feed() {
 
 		if ( ( is_feed() || is_robots() ) && headers_sent() === false ) {
-			header( 'X-Robots-Tag: noindex,follow', true );
+			header( 'X-Robots-Tag: noindex, follow', true );
 
 			return true;
 		}
@@ -1450,8 +1467,8 @@ class WPSEO_Frontend {
 	 *
 	 * Thanks to Mark Jaquith for this code.
 	 *
-	 * @param string $url
-	 * @param string $type
+	 * @param string $url  URL string.
+	 * @param string $type Context (such as single).
 	 *
 	 * @return string
 	 */
@@ -1736,6 +1753,7 @@ class WPSEO_Frontend {
 		 * Filter: 'wpseo_include_rss_footer' - Allow the the RSS footer to be dynamically shown/hidden
 		 *
 		 * @api boolean $show_embed Indicates if the RSS footer should be shown or not
+		 *
 		 * @param string $context The context of the RSS content - 'full' or 'excerpt'.
 		 */
 		if ( ! apply_filters( 'wpseo_include_rss_footer', true, $context ) ) {
@@ -1776,8 +1794,7 @@ class WPSEO_Frontend {
 			return false;
 		}
 
-		$content = ob_get_contents();
-		ob_end_clean();
+		$content = ob_get_clean();
 
 		$old_wp_query = $wp_query;
 
@@ -1807,7 +1824,7 @@ class WPSEO_Frontend {
 	/**
 	 * Function used in testing whether the title should be force rewritten or not.
 	 *
-	 * @param string $title
+	 * @param string $title Title string.
 	 *
 	 * @return string
 	 */
@@ -1850,7 +1867,7 @@ class WPSEO_Frontend {
 	 * @return string
 	 */
 	private function head_product_name() {
-		if ( file_exists( WPSEO_PATH . 'premium/' ) ) {
+		if ( $this->is_premium() ) {
 			return 'Yoast SEO Premium plugin';
 		}
 		else {
@@ -1858,4 +1875,41 @@ class WPSEO_Frontend {
 		}
 	}
 
+	/**
+	 * Check if this plugin is the premium version of WPSEO
+	 *
+	 * @return bool
+	 */
+	private function is_premium() {
+		return file_exists( WPSEO_PATH . 'premium/' );
+	}
+
+	/**
+	 * Checks whether the user has written a meta-description. If written,  makes sure meta robots content is noodp.
+	 *
+	 * @param String $description The content of the meta description.
+	 */
+	private function add_robot_content_noodp( $description ) {
+		if ( ! ( empty( $description )  ) && $this->options['noodp'] === false ) {
+			$this->options['noodp'] = true;
+		}
+	}
+
+	/**
+	 * Getting the keywords
+	 *
+	 * @param WP_Post $post The post object with the values.
+	 *
+	 * @return string
+	 */
+	private function get_keywords( $post ) {
+		$keywords        = WPSEO_Meta::get_value( 'metakeywords', $post->ID );
+		$option_meta_key = 'metakey-' . $post->post_type;
+
+		if ( $keywords === '' && ( is_object( $post ) && ( isset( $this->options[ $option_meta_key ] ) && $this->options[ $option_meta_key ] !== '' ) ) ) {
+			$keywords = wpseo_replace_vars( $this->options[ $option_meta_key ], $post );
+		}
+
+		return $keywords;
+	}
 } /* End of class */

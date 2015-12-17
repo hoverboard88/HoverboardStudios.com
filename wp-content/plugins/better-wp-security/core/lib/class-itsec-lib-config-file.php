@@ -63,7 +63,7 @@ class ITSEC_Lib_Config_File {
 		}
 		
 		$comment_delimiter = self::get_comment_delimiter( $server );
-		$modification = "$comment_delimiter " . __( 'iThemes Security preserved the following settings as removing them could prevent the site from functioning correctly.', 'it-l10n-better-wp-security' ) . "\n$modification";
+		$modification = "$comment_delimiter " . __( 'iThemes Security preserved the following settings as removing them could prevent the site from functioning correctly.', 'better-wp-security' ) . "\n$modification";
 		$modification = self::get_prepared_modification( $modification, $comment_delimiter );
 		
 		return $modification;
@@ -139,7 +139,7 @@ class ITSEC_Lib_Config_File {
 		
 		if ( empty( $file_path ) ) {
 			return true;
-//			return new WP_Error( 'itsec-lib-config-file-server-config-file-updates-disabled', __( 'Updates to the server config file are disabled via a filter.', 'it-l10n-better-wp-security' ) );
+//			return new WP_Error( 'itsec-lib-config-file-server-config-file-updates-disabled', __( 'Updates to the server config file are disabled via a filter.', 'better-wp-security' ) );
 		}
 		
 		return self::update( $file_path, $server, $modification, $clear_existing_modifications );
@@ -179,7 +179,7 @@ class ITSEC_Lib_Config_File {
 		}
 		
 		$comment_delimiter = self::get_comment_delimiter( 'wp-config' );
-		$modification = "$comment_delimiter " . __( 'iThemes Security preserved the following settings as removing them could prevent the site from functioning correctly.', 'it-l10n-better-wp-security' ) . "\n$modification";
+		$modification = "$comment_delimiter " . __( 'iThemes Security preserved the following settings as removing them could prevent the site from functioning correctly.', 'better-wp-security' ) . "\n$modification";
 		$modification = self::get_prepared_modification( $modification, $comment_delimiter );
 		
 		return $modification;
@@ -255,7 +255,7 @@ class ITSEC_Lib_Config_File {
 		$file_path = self::get_wp_config_file_path();
 		
 		if ( empty( $file_path ) ) {
-			return new WP_Error( 'itsec-lib-config-file-wp-config-file-updates-disabled', __( 'Updates to <code>wp-config.php</code> are disabled via a filter.', 'it-l10n-better-wp-security' ) );
+			return new WP_Error( 'itsec-lib-config-file-wp-config-file-updates-disabled', __( 'Updates to <code>wp-config.php</code> are disabled via a filter.', 'better-wp-security' ) );
 		}
 		
 		return self::remove( $file_path, $patterns );
@@ -276,7 +276,7 @@ class ITSEC_Lib_Config_File {
 		$file_path = self::get_wp_config_file_path();
 		
 		if ( empty( $file_path ) ) {
-			return new WP_Error( 'itsec-lib-config-file-wp-config-file-updates-disabled', __( 'Updates to <code>wp-config.php</code> are disabled via a filter.', 'it-l10n-better-wp-security' ) );
+			return new WP_Error( 'itsec-lib-config-file-wp-config-file-updates-disabled', __( 'Updates to <code>wp-config.php</code> are disabled via a filter.', 'better-wp-security' ) );
 		}
 		
 		return self::update( $file_path, 'wp-config', $modification, $clear_existing_modifications );
@@ -299,7 +299,7 @@ class ITSEC_Lib_Config_File {
 		$contents = ITSEC_Lib_File::read( $file );
 		
 		if ( is_wp_error( $contents ) ) {
-			return new WP_Error( 'itsec-lib-config-file-cannot-read-file', sprintf( __( 'Unable to read %1$s due to the following error: %2$s', 'it-l10n-better-wp-security' ), $file, $contents->get_error_message() ) );
+			return new WP_Error( 'itsec-lib-config-file-cannot-read-file', sprintf( __( 'Unable to read %1$s due to the following error: %2$s', 'better-wp-security' ), $file, $contents->get_error_message() ) );
 		}
 		
 		return $contents;
@@ -431,7 +431,7 @@ class ITSEC_Lib_Config_File {
 			$display_file = preg_replace( '/^' . preg_quote( $abspath, '/' ) . '/', '', $display_file );
 			$display_file = ltrim( $display_file, '/' );
 			
-			return new WP_Error( 'itsec-file-writes-are-disabled', sprintf( __( 'The "Write to Files" setting is disabled. Manual configuration for the <code>%s</code> file can be found on the Security > Dashboard page.', 'it-l10n-better-wp-security' ), $display_file ) );
+			return new WP_Error( 'itsec-file-writes-are-disabled', sprintf( __( 'The "Write to Files" setting is disabled. Manual configuration for the <code>%s</code> file can be found on the Security > Dashboard page.', 'better-wp-security' ), $display_file ) );
 		}
 		
 		
@@ -537,10 +537,10 @@ class ITSEC_Lib_Config_File {
 		// Update the modification to have the beginning and ending comments in order to identify the section as being
 		// added by iThemes Security.
 		$supplied_modification = $modification;
-		$modification  = "$comment_delimiter BEGIN iThemes Security - " . __( 'Do not modify or remove this line', 'it-l10n-better-wp-security' ) . "\n";
+		$modification  = "$comment_delimiter BEGIN iThemes Security - " . __( 'Do not modify or remove this line', 'better-wp-security' ) . "\n";
 		$modification .= "$comment_delimiter iThemes Security Config Details: " . self::FORMAT_VERSION . "\n";
 		$modification .= "$supplied_modification\n";
-		$modification .= "$comment_delimiter END iThemes Security - " . __( 'Do not modify or remove this line', 'it-l10n-better-wp-security' );
+		$modification .= "$comment_delimiter END iThemes Security - " . __( 'Do not modify or remove this line', 'better-wp-security' );
 		
 		return $modification;
 	}
@@ -683,6 +683,8 @@ class ITSEC_Lib_Config_File {
 		if ( empty( $file ) ) {
 			return '';
 		}
+		
+		require_once( ABSPATH . 'wp-admin/includes/file.php' );
 		
 		$home_path = get_home_path();
 		$file_path = $home_path . $file;

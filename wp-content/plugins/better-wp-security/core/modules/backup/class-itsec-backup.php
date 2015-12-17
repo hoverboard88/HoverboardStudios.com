@@ -104,19 +104,19 @@ class ITSEC_Backup {
 				switch ( $this->settings['method'] ) {
 
 					case 0:
-						$details = __( 'emailed to backup recipients and saved locally.', 'it-l10n-better-wp-security' );
+						$details = __( 'emailed to backup recipients and saved locally.', 'better-wp-security' );
 						break;
 					case 1:
-						$details = __( 'emailed to backup recipients.', 'it-l10n-better-wp-security' );
+						$details = __( 'emailed to backup recipients.', 'better-wp-security' );
 						break;
 					default:
-						$details = __( 'saved locally.', 'it-l10n-better-wp-security' );
+						$details = __( 'saved locally.', 'better-wp-security' );
 						break;
 
 				}
 
 				$type    = 'updated';
-				$message = __( 'Backup Completed and ' . $details, 'it-l10n-better-wp-security' );
+				$message = __( 'Backup Completed and ' . $details, 'better-wp-security' );
 
 			}
 
@@ -127,7 +127,7 @@ class ITSEC_Backup {
 			if ( true === $one_time ) {
 
 				$type    = 'error';
-				$message = __( 'Something went wrong with your backup. It looks like another process might already be trying to backup your database. Please try again in a few minutes. If the problem persists please contact support.', 'it-l10n-better-wp-security' );
+				$message = __( 'Something went wrong with your backup. It looks like another process might already be trying to backup your database. Please try again in a few minutes. If the problem persists please contact support.', 'better-wp-security' );
 
 			}
 
@@ -280,11 +280,11 @@ class ITSEC_Backup {
 			$option = get_site_option( 'itsec_global' );
 
 			$attachment = array( $itsec_globals['ithemes_backup_dir'] . '/' . $file . $fileext );
-			$body       = __( 'Attached is the backup file for the database powering', 'it-l10n-better-wp-security' ) . ' ' . get_option( 'siteurl' ) . __( ' taken', 'it-l10n-better-wp-security' ) . ' ' . date( 'l, F jS, Y \a\\t g:i a', $itsec_globals['current_time'] );
+			$body       = __( 'Attached is the backup file for the database powering', 'better-wp-security' ) . ' ' . get_option( 'siteurl' ) . __( ' taken', 'better-wp-security' ) . ' ' . date( 'l, F jS, Y \a\\t g:i a', $itsec_globals['current_time'] );
 
 			//Setup the remainder of the email
 			$recipients   = $option['backup_email'];
-			$subject      = __( 'Site Database Backup', 'it-l10n-better-wp-security' ) . ' ' . date( 'l, F jS, Y \a\\t g:i a', $itsec_globals['current_time'] );
+			$subject      = __( 'Site Database Backup', 'better-wp-security' ) . ' ' . date( 'l, F jS, Y \a\\t g:i a', $itsec_globals['current_time'] );
 			$subject      = apply_filters( 'itsec_backup_email_subject', $subject );
 			$headers      = 'From: ' . get_bloginfo( 'name' ) . ' <' . get_option( 'admin_email' ) . '>' . "\r\n";
 			$mail_success = false;
@@ -363,15 +363,15 @@ class ITSEC_Backup {
 				if ( false === $mail_success ) {
 
 					$status = array(
-						'status'  => __( 'Error', 'it-l10n-better-wp-security' ),
-						'details' => __( 'saved locally but email to backup recipients could not be sent.', 'it-l10n-better-wp-security' ),
+						'status'  => __( 'Error', 'better-wp-security' ),
+						'details' => __( 'saved locally but email to backup recipients could not be sent.', 'better-wp-security' ),
 					);
 
 				} else {
 
 					$status = array(
-						'status'  => __( 'Success', 'it-l10n-better-wp-security' ),
-						'details' => __( 'emailed to backup recipients and saved locally', 'it-l10n-better-wp-security' ),
+						'status'  => __( 'Success', 'better-wp-security' ),
+						'details' => __( 'emailed to backup recipients and saved locally', 'better-wp-security' ),
 					);
 
 				}
@@ -382,15 +382,15 @@ class ITSEC_Backup {
 				if ( false === $mail_success ) {
 
 					$status = array(
-						'status'  => __( 'Error', 'it-l10n-better-wp-security' ),
-						'details' => __( 'email to backup recipients could not be sent.', 'it-l10n-better-wp-security' ),
+						'status'  => __( 'Error', 'better-wp-security' ),
+						'details' => __( 'email to backup recipients could not be sent.', 'better-wp-security' ),
 					);
 
 				} else {
 
 					$status = array(
-						'status'  => __( 'Success', 'it-l10n-better-wp-security' ),
-						'details' => __( 'emailed to backup recipients', 'it-l10n-better-wp-security' ),
+						'status'  => __( 'Success', 'better-wp-security' ),
+						'details' => __( 'emailed to backup recipients', 'better-wp-security' ),
 					);
 
 				}
@@ -398,8 +398,8 @@ class ITSEC_Backup {
 				break;
 			default:
 				$status = array(
-					'status'  => __( 'Success', 'it-l10n-better-wp-security' ),
-					'details' => __( 'saved locally', 'it-l10n-better-wp-security' ),
+					'status'  => __( 'Success', 'better-wp-security' ),
+					'details' => __( 'saved locally', 'better-wp-security' ),
 				);
 				break;
 
@@ -424,7 +424,7 @@ class ITSEC_Backup {
 
 		$logger_modules['backup'] = array(
 			'type'     => 'backup',
-			'function' => __( 'Database Backup Executed', 'it-l10n-better-wp-security' ),
+			'function' => __( 'Database Backup Executed', 'better-wp-security' ),
 		);
 
 		return $logger_modules;

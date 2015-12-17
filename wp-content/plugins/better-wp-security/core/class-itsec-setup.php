@@ -26,9 +26,9 @@ class ITSEC_Setup {
 		$this->defaults = array(
 			'notification_email'        => array( get_option( 'admin_email' ) ),
 			'backup_email'              => array( get_option( 'admin_email' ) ),
-			'lockout_message'           => __( 'error', 'it-l10n-better-wp-security' ),
-			'user_lockout_message'      => __( 'You have been locked out due to too many invalid login attempts.', 'it-l10n-better-wp-security' ),
-			'community_lockout_message' => __( "Your IP address has been flagged as a threat by the iThemes Security network.", 'it-l10n-better-wp-security' ),
+			'lockout_message'           => __( 'error', 'better-wp-security' ),
+			'user_lockout_message'      => __( 'You have been locked out due to too many invalid login attempts.', 'better-wp-security' ),
+			'community_lockout_message' => __( "Your IP address has been flagged as a threat by the iThemes Security network.", 'better-wp-security' ),
 			'blacklist'                 => true,
 			'blacklist_count'           => 3,
 			'blacklist_period'          => 7,
@@ -202,7 +202,7 @@ class ITSEC_Setup {
 		//if this is multisite make sure they're network activating or die
 		if ( defined( 'ITSEC_DO_ACTIVATION' ) && ITSEC_DO_ACTIVATION == true && is_multisite() && ! strpos( $_SERVER['REQUEST_URI'], 'wp-admin/network/plugins.php' ) ) {
 
-			die ( __( '<strong>ERROR</strong>: You must activate this plugin from the network dashboard.', 'it-l10n-better-wp-security' ) );
+			die ( __( '<strong>ERROR</strong>: You must activate this plugin from the network dashboard.', 'better-wp-security' ) );
 
 		}
 

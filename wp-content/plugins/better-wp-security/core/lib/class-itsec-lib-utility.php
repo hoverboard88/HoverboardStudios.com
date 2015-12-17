@@ -135,14 +135,14 @@ class ITSEC_Lib_Utility {
 	 */
 	public static function strip_php_comments( $contents ) {
 		if ( ! self::is_callable_function( 'token_get_all' ) ) {
-			return new WP_Error( 'itsec-lib-utility-strip-php-comments-token-get-all-is-disabled', __( 'Unable to strip comments from the source code as the token_get_all() function is disabled. This is a system configuration issue.', 'it-l10n-better-wp-security' ) );
+			return new WP_Error( 'itsec-lib-utility-strip-php-comments-token-get-all-is-disabled', __( 'Unable to strip comments from the source code as the token_get_all() function is disabled. This is a system configuration issue.', 'better-wp-security' ) );
 		}
 		
 		
 		$tokens = token_get_all( $contents );
 		
 		if ( ! is_array( $tokens ) ) {
-			return new WP_Error( 'itsec-lib-utility-strip-php-comments-token-get-all-invalid-response', sprintf( __( 'Unable to strip comments from the source code as the token_get_all() function returned an unrecognized value (type: %s)', 'it-l10n-better-wp-security' ), gettype( $tokens ) ) );
+			return new WP_Error( 'itsec-lib-utility-strip-php-comments-token-get-all-invalid-response', sprintf( __( 'Unable to strip comments from the source code as the token_get_all() function returned an unrecognized value (type: %s)', 'better-wp-security' ), gettype( $tokens ) ) );
 		}
 		
 		

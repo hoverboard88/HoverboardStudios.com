@@ -47,7 +47,11 @@ class SSP_Frontend {
 		}
 
 		if ( in_array( 'excerpt', (array) $locations ) ) {
-			add_filter( 'the_excerpt', array( $this, 'excerpt_meta_data' ), 10, 1 );
+			add_filter( 'the_excerpt', array( $this, 'get_excerpt_meta_data' ), 10, 1 );
+		}
+
+		if ( in_array( 'excerpt_embed', (array) $locations ) ) {
+			add_filter( 'the_excerpt_embed', array( $this, 'get_embed_meta_data' ), 10, 1 );
 		}
 
 		// Add SSP label and version to generator tags
@@ -157,11 +161,29 @@ class SSP_Frontend {
 	}
 
 	/**
+	 * Add the meta data to the episode excerpt
+	 * @param  string $excerpt Existing excerpt
+	 * @return string          Modified excerpt
+	 */
+	public function get_excerpt_meta_data( $excerpt = '' ) {
+		return $this->excerpt_meta_data( $excerpt, 'excerpt' );
+	}
+
+	/**
+	 * Add the meta data to the embedded episode excerpt
+	 * @param  string $excerpt Existing excerpt
+	 * @return string          Modified excerpt
+	 */
+	public function get_embed_meta_data( $excerpt = '' ) {
+		return $this->excerpt_meta_data( $excerpt, 'embed' );
+	}
+
+	/**
 	 * Add episode meta data to the excerpt
 	 * @param  string $excerpt Existing excerpt
 	 * @return string          Modified excerpt
 	 */
-	public function excerpt_meta_data( $excerpt = '' ) {
+	public function excerpt_meta_data( $excerpt = '', $content = 'excerpt' ) {
 		global $post;
 
 		if( post_password_required( $post->ID ) ) {
@@ -172,7 +194,7 @@ class SSP_Frontend {
 
 		if ( ( in_array( $post->post_type, $podcast_post_types ) ) && ! is_feed() ) {
 
-			$meta = $this->episode_meta( $post->ID, 'excerpt' );
+			$meta = $this->episode_meta( $post->ID, $content );
 
 			$excerpt = $meta . $excerpt;
 
@@ -203,7 +225,19 @@ class SSP_Frontend {
 				$file = $this->get_episode_download_link( $episode_id );
 			}
 
-			$meta .= '<div class="podcast_player">' . $this->audio_player( $file ) . '</div>';
+			// Hide audio player in `ss_podcast` shortcode by default
+			$show_player = true;
+			if( 'shortcode' == $context ) {
+				$show_player = false;
+			}
+
+			// Allow audio player to be dynamically hidden/displayed
+			$show_player = apply_filters( 'ssp_show_audio_player', $show_player, $context );
+
+			// Show audio player if requested
+			if( $show_player ) {
+				$meta .= '<div class="podcast_player">' . $this->audio_player( $file ) . '</div>';
+			}
 
 			if ( apply_filters( 'ssp_show_episode_details', true, $episode_id, $context ) ) {
 				$meta .= $this->episode_meta_details( $episode_id, $context );
@@ -252,16 +286,95 @@ class SSP_Frontend {
 
 		$date_recorded = get_post_meta( $episode_id, 'date_recorded', true );
 
-		$meta = '<div class="podcast_meta"><aside>';
-		if ( $link ) { $meta .= '<a href="' . esc_url( $link ) . '" title="' . get_the_title() . ' ">' . __( 'Download file' , 'ss-podcasting' ) . '</a>'; }
-		if ( $duration ) { if ( $link ) { $meta .= ' | '; } $meta .= __( 'Duration' , 'ss-podcasting' ) . ': ' . $duration; }
-		if ( $size ) { if ( $duration || $link ) { $meta .= ' | '; } $meta .= __( 'Size' , 'ss-podcasting' ) . ': ' . $size; }
-		if ( $date_recorded ) { if ( $size || $duration || $link ) { $meta .= ' | '; } $meta .= __( 'Recorded on' , 'ss-podcasting' ) . ' ' . date( get_option( 'date_format' ), strtotime( $date_recorded ) ); }
-		$meta .= '</aside></div>';
+		// Build up meta data array with default values
+		$meta = array(
+			'link' => '',
+			'new_window' => false,
+			'duration' => 0,
+			'size' => 0,
+			'date_recorded' => '',
+		);
 
+		if( $link ) {
+			$meta['link'] = $link;
+		}
+
+		if( $link && apply_filters( 'ssp_show_new_window_link', true, $context ) ) {
+			$meta['new_window'] = true;
+		}
+
+		if( $link ) {
+			$meta['duration'] = $duration;
+		}
+
+		if( $size ) {
+			$meta['size'] = $size;
+		}
+
+		if( $date_recorded ) {
+			$meta['date_recorded'] = $date_recorded;
+		}
+
+		// Allow dynamic filtering of meta data - to remove, add or reorder meta items
 		$meta = apply_filters( 'ssp_episode_meta_details', $meta, $episode_id, $context );
 
-		return $meta;
+		$meta_display = '';
+		$meta_sep = apply_filters( 'ssp_episode_meta_separator', ' | ' );
+		foreach ( $meta as $key => $data ) {
+
+			if( ! $data ) {
+				continue;
+			}
+
+			if( $meta_display ) {
+				$meta_display .= $meta_sep;
+			}
+
+			switch( $key ) {
+
+				case 'link':
+					$meta_display .= '<a href="' . esc_url( $data ) . '" title="' . get_the_title() . ' ">' . __( 'Download file' , 'seriously-simple-podcasting' ) . '</a>';
+				break;
+
+				case 'new_window':
+					$play_link = add_query_arg( 'ref', 'new_window', $link );
+					$meta_display .= '<a href="' . esc_url( $play_link ) . '" target="_blank" title="' . get_the_title() . ' ">' . __( 'Play in new window' , 'seriously-simple-podcasting' ) . '</a>';
+				break;
+
+				case 'duration':
+					$meta_display .= __( 'Duration' , 'seriously-simple-podcasting' ) . ': ' . $data;
+				break;
+
+				case 'size':
+					$meta_display .= __( 'Size' , 'seriously-simple-podcasting' ) . ': ' . $data;
+				break;
+
+				case 'date_recorded':
+					$meta_display .= __( 'Recorded on' , 'seriously-simple-podcasting' ) . ' ' . date( get_option( 'date_format' ), strtotime( $data ) );
+				break;
+
+				// Allow for custom items to be added, but only allow a small amount of HTML tags
+				default:
+					$allowed_tags = array(
+						'strong' => array(),
+						'b' => array(),
+						'em' => array(),
+						'i' => array(),
+						'a' => array(
+							'href' => array(),
+							'title' => array(),
+							'target' => array(),
+						),
+					);
+					$meta_display .= wp_kses( $data, $allowed_tags );
+				break;
+
+			}
+		}
+
+		$meta_display = '<div class="podcast_meta"><aside>' . $meta_display . '</aside></div>';
+
+		return $meta_display;
 
 	}
 
@@ -426,27 +539,103 @@ class SSP_Frontend {
 	}
 
 	/**
+	 * Get the ID of an attachment from its image URL.
+	 *
+	 * @param   string      $url    The path to an image.
+	 * @return  int|bool            ID of the attachment or 0 on failure.
+	 */
+	public function get_attachment_id_from_url( $url = '' ) {
+
+		// Let's hash the URL to ensure that we don't get
+		// any illegal chars that might break the cache.
+		$key = md5( $url );
+
+		// Do we have anything in the cache for this URL?
+		$attachment_id = wp_cache_get( $key, 'attachment_id' );
+
+		if ( $attachment_id === false ) {
+
+			// Globalize
+			global $wpdb;
+
+			// If there is no url, return.
+			if ( '' === $url ) {
+				return false;
+			}
+
+			// Set the default
+			$attachment_id = 0;
+
+
+			// Function introduced in 4.0, let's try this first.
+			if ( function_exists( 'attachment_url_to_postid' ) ) {
+				$attachment_id = absint( attachment_url_to_postid( $url ) );
+				if ( 0 !== $attachment_id ) {
+					wp_cache_set( $key, $attachment_id, 'attachment_id', DAY_IN_SECONDS );
+					return $attachment_id;
+				}
+			}
+
+			// Then this.
+			if ( preg_match( '#\.[a-zA-Z0-9]+$#', $url ) ) {
+				$sql = $wpdb->prepare(
+					"SELECT ID FROM $wpdb->posts WHERE post_type = 'attachment' AND guid = %s",
+					esc_url_raw( $url )
+				);
+				$attachment_id = absint( $wpdb->get_var( $sql ) );
+				if ( 0 !== $attachment_id ) {
+					wp_cache_set( $key, $attachment_id, 'attachment_id', DAY_IN_SECONDS );
+					return $attachment_id;
+				}
+			}
+
+			// And then try this
+			$upload_dir_paths = wp_upload_dir();
+			if ( false !== strpos( $url, $upload_dir_paths['baseurl'] ) ) {
+				// Ensure that we have file extension that matches iTunes.
+				$url = preg_replace( '/(?=\.(m4a|mp3|mov|mp4)$)/i', '', $url );
+				// Remove the upload path base directory from the attachment URL
+				$url = str_replace( $upload_dir_paths['baseurl'] . '/', '', $url );
+				// Finally, run a custom database query to get the attachment ID from the modified attachment URL
+				$sql = $wpdb->prepare( "SELECT wposts.ID FROM $wpdb->posts wposts, $wpdb->postmeta wpostmeta WHERE wposts.ID = wpostmeta.post_id AND wpostmeta.meta_key = '_wp_attached_file' AND wpostmeta.meta_value = '%s' AND wposts.post_type = 'attachment'", $url );
+				$attachment_id = absint( $wpdb->get_var( $sql ) );
+				if ( 0 !== $attachment_id ) {
+					wp_cache_set( $key, $attachment_id, 'attachment_id', DAY_IN_SECONDS );
+					return $attachment_id;
+				}
+			}
+
+		}
+
+		return $attachment_id;
+	}
+
+	/**
 	 * Get MIME type of attachment file
-	 * @param  string $attachment Attachment URL
-	 * @return mixed              MIME type on success, false on failure
+	 * @param  string $attachment  URL of resource
+	 * @return mixed               MIME type on success, false on failure
 	 */
 	public function get_attachment_mimetype( $attachment = '' ) {
 
+		// Let's hash the URL to ensure that we don't get
+		// any illegal chars that might break the cache.
+		$key = md5( $attachment );
+
 		if ( $attachment ) {
-		    global $wpdb;
+			// Do we have anything in the cache for this?
+			$mime = wp_cache_get( $key, 'mime-type' );
+			if ( $mime === false ) {
 
-		    $sql = "SELECT ID FROM $wpdb->posts WHERE guid = %s";
-		    $prepped = $wpdb->prepare( $sql, esc_url_raw( $attachment ) );
-		    $attachment = $wpdb->get_col( $prepped );
+				// Get the ID
+				$id   = $this->get_attachment_id_from_url( $attachment );
 
-		    if ( isset( $attachment[0] ) ) {
-			    $id = $attachment[0];
-
-			    $mime_type = get_post_mime_type( $id );
-
-			    return apply_filters( 'ssp_attachment_mimetype', $mime_type, $id );
+				// Get the MIME type
+				$mime = get_post_mime_type( $id );
+				// Set the cache
+				wp_cache_set( $key, $mime, 'mime-type', DAY_IN_SECONDS );
 			}
 
+		    return $mime;
 		}
 
 		return false;
@@ -463,8 +652,12 @@ class SSP_Frontend {
 		$player = '';
 
 		if ( $src ) {
+
+			// Switch to podcast audio player URL
+			$src = str_replace( 'podcast-download', 'podcast-player', $src );
+
 			// Use built-in WordPress media player
-			$player = wp_audio_shortcode( array( 'src' => $src ) );
+			$player = wp_audio_shortcode( array( 'src' => $src, 'preload' => 'none' ) );
 
 			// Allow filtering so that alternative players can be used
 			$player = apply_filters( 'ssp_audio_player', $player, $src );
@@ -644,8 +837,12 @@ class SSP_Frontend {
 
 				// Get file referrer
 				$referrer = '';
-				if( isset( $_GET['ref'] ) ) {
-					$referrer = esc_attr( $_GET['ref'] );
+				if( isset( $wp_query->query_vars['podcast_ref'] ) && $wp_query->query_vars['podcast_ref'] ) {
+					$referrer = $wp_query->query_vars['podcast_ref'];
+				} else {
+					if( isset( $_GET['ref'] ) ) {
+						$referrer = esc_attr( $_GET['ref'] );
+					}
 				}
 
 				// Allow other actions - functions hooked on here must not output any data
@@ -673,11 +870,13 @@ class SSP_Frontend {
 
 			        // Use ssp_readfile_chunked() if allowed on the server or simply access file directly
 					@ssp_readfile_chunked( "$file" ) or header( 'Location: ' . $file );
-
 				} else {
 					// For all other referrers simply access the file directly
-					header( 'Location: ' . $file );
+					wp_redirect( $file, 302 );
 				}
+
+				// Exit to prevent other processes running later on
+				exit();
 
 			}
 		}
@@ -722,6 +921,7 @@ class SSP_Frontend {
 		} else {
 			$feed_url = $this->home_url . '?feed=' . $feed_slug;
 		}
+
 		$custom_feed_url = get_option( 'ss_podcasting_feed_url' );
 		if ( $custom_feed_url ) {
 			$feed_url = $custom_feed_url;
@@ -729,7 +929,29 @@ class SSP_Frontend {
 
 		$feed_url = apply_filters( 'ssp_feed_url', $feed_url );
 
-		$html = '<link rel="alternate" type="application/rss+xml" title="' . __( 'Podcast RSS feed', 'ss-podcasting' ) . '" href="' . esc_url( $feed_url ) . '" />';
+		$html = '';
+
+		if( apply_filters( 'ssp_show_global_feed_tag', true ) ) {
+			$html = '<link rel="alternate" type="application/rss+xml" title="' . __( 'Podcast RSS feed', 'seriously-simple-podcasting' ) . '" href="' . esc_url( $feed_url ) . '" />';
+		}
+
+		// Check if this is a series taxonomy archive and display series-specific RSS feed tag
+		$current_obj = get_queried_object();
+		if( isset( $current_obj->taxonomy ) && 'series' == $current_obj->taxonomy && isset( $current_obj->slug ) && $current_obj->slug ) {
+
+			if( apply_filters( 'ssp_show_series_feed_tag', true, $current_obj->slug ) ) {
+
+				if ( get_option( 'permalink_structure' ) ) {
+					$series_feed_url = $feed_url . '/' . $current_obj->slug;
+				} else {
+					$series_feed_url = $feed_url . '&podcast_series=' . $current_obj->slug;
+				}
+
+				$html .= "\n" . '<link rel="alternate" type="application/rss+xml" title="' . sprintf( __( '%s RSS feed', 'seriously-simple-podcasting' ), $current_obj->name ) . '" href="' . esc_url( $series_feed_url ) . '" />';
+
+			}
+
+		}
 
 		echo "\n" . apply_filters( 'ssp_rss_meta_tag', $html ) . "\n\n";
 	}

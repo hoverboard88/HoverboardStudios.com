@@ -122,8 +122,8 @@ if ( ! function_exists( 'jd_shorten_link' ) ) { // prep work for future plug-in 
 							'url'       => $encoded,
 							'action'    => 'shorturl',
 							'keyword'   => $keyword_format,
-							'title'     => $thisposttitle,
-							'format'    => 'json'
+							'format'    => 'json',							
+							'title'     => urlencode( $thisposttitle )
 						), $yourlsurl );
 				} else {
 					$api_url = add_query_arg( array(
@@ -132,15 +132,16 @@ if ( ! function_exists( 'jd_shorten_link' ) ) { // prep work for future plug-in 
 							'url'      => $encoded,
 							'action'   => 'shorturl',
 							'keyword'  => $keyword_format,
-							'title'     => $thisposttitle,							
-							'format'   => 'json'
+							'format'   => 'json',							
+							'title'     => urlencode( $thisposttitle )						
 						), $yourlsurl );
 				}
 				$json = jd_remote_json( $api_url, false );
+				wpt_mail( "YOURLS JSON Response", print_r( $json, 1 ) ); // DEBUG YOURLS response
 				if ( is_object( $json ) ) {
 					$shrink = $json->shorturl;
 				} else {
-					$error = "Error code: " . $json->shorturl;
+					$error = "Error code: " . $json->shorturl . ' ' . $json->message;
 					$shrink = false;
 				}
 				break;
@@ -243,7 +244,8 @@ if ( ! function_exists( 'jd_shorten_link' ) ) { // prep work for future plug-in 
 	}
 
 	function wpt_store_url( $post_ID, $url ) {
-		if ( function_exists( 'jd_shorten_link' ) ) {
+		$store_urls = apply_filters( 'wpt_store_urls', true, $post_ID, $url );
+		if ( function_exists( 'jd_shorten_link' )  && $store_urls ) {
 			$shortener = get_option( 'jd_shortener' );
 			if ( get_post_meta( $post_ID, '_wpt_short_url', true ) != $url ) {
 				update_post_meta( $post_ID, '_wpt_short_url', $url );
@@ -294,7 +296,7 @@ if ( ! function_exists( 'jd_shorten_link' ) ) { // prep work for future plug-in 
 			} else {
 				$decoded = jd_remote_json( $yourl_api . "?action=expand&shorturl=$short_url&format=json&username=$user&password=$pass" );
 			}
-			$url = $decoded['longurl'];
+			$url = ( isset( $decoded['longurl'] ) ) ? $decoded['longurl'] : $short_url;
 
 			return $url;
 		} else {
@@ -327,8 +329,7 @@ if ( ! function_exists( 'jd_shorten_link' ) ) { // prep work for future plug-in 
 		?>
 		<div class="ui-sortable meta-box-sortables">
 			<div class="postbox">
-				<div class="handlediv"><span class="screen-reader-text">Click to toggle</span></div>
-				<h3 class='hndle'>
+				<h3>
 					<span><?php _e( '<abbr title="Uniform Resource Locator">URL</abbr> Shortener Account Settings', 'wp-to-twitter' ); ?></span>
 				</h3>
 

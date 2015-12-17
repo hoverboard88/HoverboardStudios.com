@@ -26,7 +26,7 @@ class ITSEC_Lib_File {
 	 */
 	public static function read( $file ) {
 		if ( ! self::is_file( $file ) ) {
-			return new WP_Error( 'itsec-lib-file-read-non-file', sprintf( __( '%s could not be read. It does not appear to be a file.', 'it-l10n-better-wp-security' ), $file ) );
+			return new WP_Error( 'itsec-lib-file-read-non-file', sprintf( __( '%s could not be read. It does not appear to be a file.', 'better-wp-security' ), $file ) );
 		}
 		
 		
@@ -40,7 +40,7 @@ class ITSEC_Lib_File {
 		}
 		
 		if ( empty( $callable ) ) {
-			return new WP_Error( 'itsec-lib-file-read-no-callable-functions', sprintf( __( '%s could not be read. Both the fopen/feof/fread/flock and file_get_contents functions are disabled on the server.', 'it-l10n-better-wp-security' ), $file ) );
+			return new WP_Error( 'itsec-lib-file-read-no-callable-functions', sprintf( __( '%s could not be read. Both the fopen/feof/fread/flock and file_get_contents functions are disabled on the server.', 'better-wp-security' ), $file ) );
 		}
 		
 		
@@ -98,7 +98,7 @@ class ITSEC_Lib_File {
 		}
 		
 		
-		return new WP_Error( 'itsec-lib-file-read-cannot-read', sprintf( __( '%s could not be read due to an unknown error.', 'it-l10n-better-wp-security' ), $file ) );
+		return new WP_Error( 'itsec-lib-file-read-cannot-read', sprintf( __( '%s could not be read due to an unknown error.', 'better-wp-security' ), $file ) );
 	}
 	
 	/**
@@ -122,12 +122,12 @@ class ITSEC_Lib_File {
 		}
 		
 		if ( empty( $callable ) ) {
-			return new WP_Error( 'itsec-lib-file-write-no-callable-functions', sprintf( __( '%s could not be written. Both the fopen/fwrite/flock and file_put_contents functions are disabled on the server. This is a server configuration issue that must be resolved before iThemes Security can write files.', 'it-l10n-better-wp-security' ), $file ) );
+			return new WP_Error( 'itsec-lib-file-write-no-callable-functions', sprintf( __( '%s could not be written. Both the fopen/fwrite/flock and file_put_contents functions are disabled on the server. This is a server configuration issue that must be resolved before iThemes Security can write files.', 'better-wp-security' ), $file ) );
 		}
 		
 		
 		if ( ITSEC_Lib_Directory::is_dir( $file ) ) {
-			return new WP_Error( 'itsec-lib-file-write-path-exists-as-directory', sprintf( __( '%s could not be written as a file. The requested path already exists as a directory. The directory must be removed or a new file name must be chosen before the file can be written.', 'it-l10n-better-wp-security' ), $file ) );
+			return new WP_Error( 'itsec-lib-file-write-path-exists-as-directory', sprintf( __( '%s could not be written as a file. The requested path already exists as a directory. The directory must be removed or a new file name must be chosen before the file can be written.', 'better-wp-security' ), $file ) );
 		}
 		
 		if ( ! ITSEC_Lib_Directory::is_dir( dirname( $file ) ) ) {
@@ -224,7 +224,7 @@ class ITSEC_Lib_File {
 		}
 		
 		
-		return new WP_Error( 'itsec-lib-file-write-file-put-contents-failed', sprintf( __( '%s could not be written. This could be due to a permissions issue. Ensure that PHP runs as a user that has permission to write to this location.', 'it-l10n-better-wp-security' ), $file ) );
+		return new WP_Error( 'itsec-lib-file-write-file-put-contents-failed', sprintf( __( '%s could not be written. This could be due to a permissions issue. Ensure that PHP runs as a user that has permission to write to this location.', 'better-wp-security' ), $file ) );
 	}
 	
 	/**
@@ -253,7 +253,7 @@ class ITSEC_Lib_File {
 		}
 		
 		if ( ! ITSEC_Lib_Utility::is_callable_function( 'unlink' ) ) {
-			return new WP_Error( 'itsec-lib-file-remove-unlink-is-disabled', sprintf( __( 'The file %s could not be removed as the unlink() function is disabled. This is a system configuration issue.', 'it-l10n-better-wp-security' ), $file ) );
+			return new WP_Error( 'itsec-lib-file-remove-unlink-is-disabled', sprintf( __( 'The file %s could not be removed as the unlink() function is disabled. This is a system configuration issue.', 'better-wp-security' ), $file ) );
 		}
 		
 		
@@ -264,7 +264,7 @@ class ITSEC_Lib_File {
 			return true;
 		}
 		
-		return new WP_Error( 'itsec-lib-file-remove-unknown-error', sprintf( __( 'Unable to remove %s due to an unknown error.', 'it-l10n-better-wp-security' ), $file ) );
+		return new WP_Error( 'itsec-lib-file-remove-unknown-error', sprintf( __( 'Unable to remove %s due to an unknown error.', 'better-wp-security' ), $file ) );
 	}
 	
 	/**
@@ -279,11 +279,11 @@ class ITSEC_Lib_File {
 	 */
 	public static function chmod( $file, $perms ) {
 		if ( ! is_int( $perms ) ) {
-			return new WP_Error( 'itsec-lib-file-chmod-invalid-perms', sprintf( __( 'The file %1$s could not have its permissions updated as non-integer permissions were sent: (%2$s) %3$s', 'it-l10n-better-wp-security' ), $file, gettype( $perms ), $perms ) );
+			return new WP_Error( 'itsec-lib-file-chmod-invalid-perms', sprintf( __( 'The file %1$s could not have its permissions updated as non-integer permissions were sent: (%2$s) %3$s', 'better-wp-security' ), $file, gettype( $perms ), $perms ) );
 		}
 		
 		if ( ! ITSEC_Lib_Utility::is_callable_function( 'chmod' ) ) {
-			return new WP_Error( 'itsec-lib-file-chmod-chmod-is-disabled', sprintf( __( 'The file %s could not have its permissions updated as the chmod() function is disabled. This is a system configuration issue.', 'it-l10n-better-wp-security' ), $file ) );
+			return new WP_Error( 'itsec-lib-file-chmod-chmod-is-disabled', sprintf( __( 'The file %s could not have its permissions updated as the chmod() function is disabled. This is a system configuration issue.', 'better-wp-security' ), $file ) );
 		}
 		
 		return @chmod( $file, $perms );
@@ -327,11 +327,11 @@ class ITSEC_Lib_File {
 	 */
 	public static function get_permissions( $file ) {
 		if ( ! self::is_file( $file ) ) {
-			return new WP_Error( 'itsec-lib-file-get-permissions-missing-file', sprintf( __( 'Permissions for the file %s could not be read as the file could not be found.', 'it-l10n-better-wp-security' ), $file ) );
+			return new WP_Error( 'itsec-lib-file-get-permissions-missing-file', sprintf( __( 'Permissions for the file %s could not be read as the file could not be found.', 'better-wp-security' ), $file ) );
 		}
 		
 		if ( ! ITSEC_Lib_Utility::is_callable_function( 'fileperms' ) ) {
-			return new WP_Error( 'itsec-lib-file-get-permissions-fileperms-is-disabled', sprintf( __( 'Permissions for the file %s could not be read as the fileperms() function is disabled. This is a system configuration issue.', 'it-l10n-better-wp-security' ), $file ) );
+			return new WP_Error( 'itsec-lib-file-get-permissions-fileperms-is-disabled', sprintf( __( 'Permissions for the file %s could not be read as the fileperms() function is disabled. This is a system configuration issue.', 'better-wp-security' ), $file ) );
 		}
 		
 		

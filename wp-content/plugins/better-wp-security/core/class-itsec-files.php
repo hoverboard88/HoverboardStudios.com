@@ -112,7 +112,7 @@ final class ITSEC_Files {
 
 		add_meta_box(
 			'itsec_rewrite',
-			__( 'Rewrite Rules', 'it-l10n-better-wp-security' ),
+			__( 'Rewrite Rules', 'better-wp-security' ),
 			array( $this, 'rewrite_metabox' ),
 			'toplevel_page_itsec',
 			'bottom',
@@ -121,7 +121,7 @@ final class ITSEC_Files {
 
 		add_meta_box(
 			'itsec_wpconfig',
-			__( 'wp-config.php Rules', 'it-l10n-better-wp-security' ),
+			__( 'wp-config.php Rules', 'better-wp-security' ),
 			array( $this, 'config_metabox' ),
 			'toplevel_page_itsec',
 			'bottom',
@@ -155,10 +155,10 @@ final class ITSEC_Files {
 						require_once( trailingslashit( $GLOBALS['itsec_globals']['plugin_dir'] ) . 'core/lib/class-itsec-lib-config-file.php' );
 						$file = ITSEC_Lib_Config_File::get_server_config_file_path();
 						
-						$message = sprintf( __( 'Unable to update the <code>%1$s</code> file. You may need to manually remove the existing iThemes Security modifications and replace them with the rules found at <a href="%2$s">Security > Dashboard</a> under the "Rewrite Rules" section.', 'it-l10n-better-wp-security' ), $file, admin_url( 'admin.php?page=itsec#itsec_rewrite' ) );
+						$message = sprintf( __( 'Unable to update the <code>%1$s</code> file. You may need to manually remove the existing iThemes Security modifications and replace them with the rules found at <a href="%2$s">Security > Dashboard</a> under the "Rewrite Rules" section.', 'better-wp-security' ), $file, admin_url( 'admin.php?page=itsec#itsec_rewrite' ) );
 						add_settings_error( 'itsec', esc_attr( 'settings_updated' ), $message, 'error' );
 					} else if ( true !== $rewrites['text'] ) {
-						add_settings_error( 'itsec', esc_attr( 'settings_updated' ), __( 'Settings Updated', 'it-l10n-better-wp-security' ) . '<br />' . $rewrites['text'], 'updated' );
+						add_settings_error( 'itsec', esc_attr( 'settings_updated' ), __( 'Settings Updated', 'better-wp-security' ) . '<br />' . $rewrites['text'], 'updated' );
 					}
 				} else {
 					add_site_option( 'itsec_manual_update', true );
@@ -178,7 +178,7 @@ final class ITSEC_Files {
 					if ( false === $configs['success'] ) {
 						add_settings_error( 'itsec', esc_attr( 'settings_updated' ), $configs['text'], 'error' );
 						
-						$message = sprintf( __( 'Unable to update the <code>%1$s</code> file. You may need to manually remove the existing iThemes Security modifications and replace them with the rules found at <a href="%2$s">Security > Dashboard</a> under the "wp-config.php Rules" section.', 'it-l10n-better-wp-security' ), ABSPATH . 'wp-config.php', admin_url( 'admin.php?page=itsec#itsec_wpconfig' ) );
+						$message = sprintf( __( 'Unable to update the <code>%1$s</code> file. You may need to manually remove the existing iThemes Security modifications and replace them with the rules found at <a href="%2$s">Security > Dashboard</a> under the "wp-config.php Rules" section.', 'better-wp-security' ), ABSPATH . 'wp-config.php', admin_url( 'admin.php?page=itsec#itsec_wpconfig' ) );
 						add_settings_error( 'itsec', esc_attr( 'settings_updated' ), $message, 'error' );
 					}
 					
@@ -230,7 +230,7 @@ final class ITSEC_Files {
 		$config = ITSEC_Lib_Config_File::get_wp_config();
 		
 		if ( empty( $config ) ) {
-			_e( 'There are no rules to write.', 'it-l10n-better-wp-security' );
+			_e( 'There are no rules to write.', 'better-wp-security' );
 		} else {
 			echo '<div class="itsec_rewrite_rules">' . highlight_string( $config, true ) . '</div>';
 		}
@@ -406,7 +406,7 @@ final class ITSEC_Files {
 		}
 		
 		
-		$host_rule = '# ' . __( 'Quick ban IP. Will be updated on next formal rules save.', 'it-l10n-better-wp-security' ) . "\n";
+		$host_rule = '# ' . __( 'Quick ban IP. Will be updated on next formal rules save.', 'better-wp-security' ) . "\n";
 		
 		if ( 'nginx' === ITSEC_Lib::get_server() ) {
 			$host_rule .= "\tdeny $host;\n";
@@ -518,7 +518,7 @@ final class ITSEC_Files {
 		$config = ITSEC_Lib_Config_File::get_server_config();
 		
 		if ( empty( $config ) ) {
-			_e( 'There are no rules to write.', 'it-l10n-better-wp-security' );
+			_e( 'There are no rules to write.', 'better-wp-security' );
 		} else {
 			echo '<div class="itsec_rewrite_rules">' . highlight_string( $config, true ) . '</div>';
 		}
@@ -549,7 +549,7 @@ final class ITSEC_Files {
 			if ( 'nginx' === $server ) {
 				$retval = array(
 					'success' => true,
-					'text'    => __( 'You must restart your NGINX server for the settings to take effect', 'it-l10n-better-wp-security' ),
+					'text'    => __( 'You must restart your NGINX server for the settings to take effect', 'better-wp-security' ),
 				);
 			} else {
 				$retval = array(

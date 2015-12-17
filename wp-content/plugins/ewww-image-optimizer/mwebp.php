@@ -2,7 +2,7 @@
 function ewww_image_optimizer_webp_migrate_preview() {
 	ewwwio_debug_message( '<b>' . __FUNCTION__ . '()</b>' );
 ?>	<div class="wrap"> 
-	<div id="icon-upload" class="icon32"><br /></div><h2><?php _e('Migrate WebP Images', EWWW_IMAGE_OPTIMIZER_DOMAIN); ?></h2>
+	<div id="icon-upload" class="icon32"><br /></div><h1><?php _e('Migrate WebP Images', EWWW_IMAGE_OPTIMIZER_DOMAIN); ?></h1>
 <?php		_e( 'The migration is split into two parts. First, the plugin needs to scan all folders for webp images. Once it has obtained the list of images to rename, it will proceed with the renaming' );
 	$button_text = __('Start Migration', EWWW_IMAGE_OPTIMIZER_DOMAIN);
 	$loading_image = plugins_url('/wpspin.gif', __FILE__);
@@ -81,7 +81,7 @@ function ewww_image_optimizer_webp_initialize() {
 	// verify that an authorized user has started the migration
 	$permissions = apply_filters( 'ewww_image_optimizer_admin_permissions', '' );
 	if ( ! wp_verify_nonce( $_REQUEST['ewww_wpnonce'], 'ewww-image-optimizer-webp' ) || ! current_user_can( $permissions ) ) {
-		wp_die(__('Cheatin&#8217; eh?', EWWW_IMAGE_OPTIMIZER_DOMAIN));
+		wp_die( __( 'Access denied.', EWWW_IMAGE_OPTIMIZER_DOMAIN ) );
 	}
 	if ( get_option( 'ewww_image_optimizer_webp_skipped' ) ) {
 		delete_option( 'ewww_image_optimizer_webp_skipped' );
@@ -99,7 +99,7 @@ function ewww_image_optimizer_webp_loop() {
 	ewwwio_debug_message( '<b>' . __FUNCTION__ . '()</b>' );
 	$permissions = apply_filters( 'ewww_image_optimizer_admin_permissions', '' );
 	if ( ! wp_verify_nonce( $_REQUEST['ewww_wpnonce'], 'ewww-image-optimizer-webp' ) || ! current_user_can( $permissions ) ) {
-		wp_die(__('Cheatin&#8217; eh?', EWWW_IMAGE_OPTIMIZER_DOMAIN));
+		wp_die( __( 'Access token has expired, please reload the page.', EWWW_IMAGE_OPTIMIZER_DOMAIN ) );
 	} 
 	// retrieve the time when the migration starts
 	$started = microtime(true);
@@ -190,7 +190,7 @@ function ewww_image_optimizer_webp_loop() {
 function ewww_image_optimizer_webp_cleanup() {
 	$permissions = apply_filters( 'ewww_image_optimizer_admin_permissions', '' );
 	if ( ! wp_verify_nonce( $_REQUEST['ewww_wpnonce'], 'ewww-image-optimizer-webp' ) || ! current_user_can( $permissions ) ) {
-		wp_die( __( 'Cheatin&#8217; eh?', EWWW_IMAGE_OPTIMIZER_DOMAIN ) );
+		wp_die( __( 'Access token has expired, please reload the page.', EWWW_IMAGE_OPTIMIZER_DOMAIN ) );
 	}
 	$skipped = get_option( 'ewww_image_optimizer_webp_skipped' );
 	// all done, so we can remove the webp options

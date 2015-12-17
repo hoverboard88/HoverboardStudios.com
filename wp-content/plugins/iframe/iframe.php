@@ -3,14 +3,14 @@
 Plugin Name: iframe
 Plugin URI: http://wordpress.org/plugins/iframe/
 Description: [iframe src="http://www.youtube.com/embed/4qsGTXLnmKs" width="100%" height="500"] shortcode
-Version: 3.0
+Version: 4.2
 Author: webvitaly
 Author URI: http://web-profile.com.ua/wordpress/plugins/
 License: GPLv3
 */
 
 
-function iframe_unqprfx_embed_shortcode( $atts, $content = null ) {
+function iframe_unqprfx_embed_shortcode( $atts ) {
 	$defaults = array(
 		'src' => 'http://www.youtube.com/embed/4qsGTXLnmKs',
 		'width' => '100%',
@@ -26,31 +26,15 @@ function iframe_unqprfx_embed_shortcode( $atts, $content = null ) {
 		}
 	}
 
-	// get_params_from_url
-	if ( isset( $atts["get_params_from_url"] ) && ( $atts["get_params_from_url"] == '1' || $atts["get_params_from_url"] == 1 ) ) {
-		$encode_string = '';
-		if ( $_GET != NULL ) {
-			if ( strpos( $atts["src"], '?' ) ) { // if we already have '?' and GET params
-				$encode_string = '&';
-			} else {
-				$encode_string = '?';
-			}
-			foreach( $_GET as $key => $value ) {
-				$encode_string .= $key.'='.$value.'&';
-			}
-		}
-		$encode_string = rtrim($encode_string, '&'); // remove last '&'
-		$atts["src"] .= $encode_string;
-	}
-
-	$html = "\n".'<!-- iframe plugin v.3.0 wordpress.org/plugins/iframe/ -->'."\n";
+	$html = "\n".'<!-- iframe plugin v.4.2 wordpress.org/plugins/iframe/ -->'."\n";
 	$html .= '<iframe';
 	foreach( $atts as $attr => $value ) {
-		if ( $attr != 'same_height_as' ) { // remove some attributes
+		if ( strtolower($attr) != 'same_height_as' AND strtolower($attr) != 'onload'
+			AND strtolower($attr) != 'onpageshow' AND strtolower($attr) != 'onclick') { // remove some attributes
 			if ( $value != '' ) { // adding all attributes
-				$html .= ' ' . $attr . '="' . $value . '"';
+				$html .= ' ' . esc_attr( $attr ) . '="' . esc_attr( $value ) . '"';
 			} else { // adding empty attributes
-				$html .= ' ' . $attr;
+				$html .= ' ' . esc_attr( $attr );
 			}
 		}
 	}
@@ -61,8 +45,8 @@ function iframe_unqprfx_embed_shortcode( $atts, $content = null ) {
 			<script>
 			document.addEventListener("DOMContentLoaded", function(){
 				var target_element, iframe_element;
-				iframe_element = document.querySelector("iframe.' . $atts["class"] . '");
-				target_element = document.querySelector("' . $atts["same_height_as"] . '");
+				iframe_element = document.querySelector("iframe.' . esc_attr( $atts["class"] ) . '");
+				target_element = document.querySelector("' . esc_attr( $atts["same_height_as"] ) . '");
 				iframe_element.style.height = target_element.offsetHeight + "px";
 			});
 			</script>
@@ -75,7 +59,7 @@ add_shortcode( 'iframe', 'iframe_unqprfx_embed_shortcode' );
 
 
 function iframe_unqprfx_plugin_meta( $links, $file ) { // add 'Plugin page' and 'Donate' links to plugin meta row
-	if ( strpos( $file, 'iframe.php' ) !== false ) {
+	if ( strpos( $file, 'iframe/iframe.php' ) !== false ) {
 		$links = array_merge( $links, array( '<a href="http://web-profile.com.ua/wordpress/plugins/iframe/" title="Plugin page">Iframe</a>' ) );
 		$links = array_merge( $links, array( '<a href="http://web-profile.com.ua/donate/" title="Support the development">Donate</a>' ) );
 		$links = array_merge( $links, array( '<a href="http://codecanyon.net/item/advanced-iframe-pro/5344999?ref=webvitaly">Advanced iFrame Pro</a>' ) );

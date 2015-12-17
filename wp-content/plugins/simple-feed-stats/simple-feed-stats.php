@@ -8,10 +8,10 @@
 	Author URI: http://monzilla.biz/
 	Donate link: http://m0n.co/donate
 	Contributors: specialk
-	Requires at least: 3.9
-	Tested up to: 4.2
+	Requires at least: 4.1
+	Tested up to: 4.4
 	Stable tag: trunk
-	Version: 20150507
+	Version: 20151111
 	Text Domain: sfs
 	Domain Path: /languages/
 	License: GPL v2 or later
@@ -19,8 +19,8 @@
 
 if (!defined('ABSPATH')) die();
 
-$sfs_wp_vers = '3.9';
-$sfs_version = '20150507';
+$sfs_wp_vers = '4.1';
+$sfs_version = '20151111';
 $sfs_options = get_option('sfs_options');
 
 // i18n
@@ -58,7 +58,7 @@ if (isset($_GET['activate']) && $_GET['activate'] == 'true') {
 
 // create stats table
 function sfs_create_table() {
-	global $wpdb, $user_level, $sac_admin_user_level;
+	global $wpdb;
 	
 	$table_name = $wpdb->prefix . 'simple_feed_stats';
 	$check_table = $wpdb->get_var("SHOW TABLES LIKE '$table_name'");
@@ -88,6 +88,12 @@ function sfs_create_table() {
 }
 if (isset($_GET['activate']) && $_GET['activate'] == 'true') {
 	add_action('init', 'sfs_create_table');
+}
+
+// enable shortcodes in widgets and post content
+if (isset($sfs_options['sfs_enable_shortcodes']) && $sfs_options['sfs_enable_shortcodes']) {
+	add_filter('the_content', 'do_shortcode', 10);
+	add_filter('widget_text', 'do_shortcode', 10); 
 }
 
 // string cleaner
@@ -304,6 +310,7 @@ if ($sfs_options['default_options'] == 1) {
 function sfs_delete_table_on_deactivation() {
 	global $wpdb;
 	$result = $wpdb->query("DROP TABLE " . $wpdb->prefix . "simple_feed_stats");
+	sfs_delete_transients();
 }
 if ($sfs_options['sfs_delete_table'] == 1) {
 	register_deactivation_hook(__FILE__, 'sfs_delete_table_on_deactivation');
@@ -327,6 +334,7 @@ function sfs_add_defaults() {
 			'sfs_custom_key'          => 'custom_key',
 			'sfs_custom_value'        => 'custom_value',
 			'sfs_ignore_bots'         => 0,
+			'sfs_enable_shortcodes'   => 0,
 			'sfs_custom_styles'       => '.sfs-subscriber-count { width: 88px; overflow: hidden; height: 26px; color: #424242; font: 9px Verdana, Geneva, sans-serif; letter-spacing: 1px; }
 .sfs-count { width: 86px; height: 17px; line-height: 17px; margin: 0 auto; background: #ccc; border: 1px solid #909090; border-top-color: #fff; border-left-color: #fff; }
 .sfs-count span { display: inline-block; height: 11px; line-height: 12px; margin: 2px 1px 2px 2px; padding: 0 2px 0 3px; background: #e4e4e4; border: 1px solid #a2a2a2; border-bottom-color: #fff; border-right-color: #fff; }
@@ -380,7 +388,10 @@ function sfs_validate_options($input) {
 	
 	if (!isset($input['sfs_ignore_bots'])) $input['sfs_ignore_bots'] = null;
 	$input['sfs_ignore_bots'] = ($input['sfs_ignore_bots'] == 1 ? 1 : 0);
-
+	
+	if (!isset($input['sfs_enable_shortcodes'])) $input['sfs_enable_shortcodes'] = null;
+	$input['sfs_enable_shortcodes'] = ($input['sfs_enable_shortcodes'] == 1 ? 1 : 0);
+	
 	if (!isset($input['sfs_tracking_method'])) $input['sfs_tracking_method'] = null;
 	if (!array_key_exists($input['sfs_tracking_method'], $sfs_tracking_method)) $input['sfs_tracking_method'] = null;
 
@@ -420,7 +431,7 @@ function add_querystring_var($url, $key, $value) {
 	}
 }
 
-// truncate() by David Duong: shorten string & add ellipsis 
+// shorten string & add ellipsis (by David Duong)
 function sfs_truncate($string, $max = 50, $rep = '') {
     $leave = $max - strlen($rep);
     return substr_replace($string, $rep, $leave);
@@ -562,22 +573,22 @@ function sfs_cache_data() {
 	// all-time stats
 	$all_stats = $wpdb->get_row("SELECT " . $count . " FROM " . $wpdb->prefix . "simple_feed_stats", ARRAY_A);
 	if (is_array($all_stats)) $all_stats = $all_stats[$count];
-	else $all_stats = 'n/a';
+	else $all_stats = '0';
 	
 	// daily stats
 	$current_stats = $wpdb->get_row("SELECT " . $count . " FROM " . $wpdb->prefix . "simple_feed_stats WHERE cur_timestamp BETWEEN TIMESTAMP(DATE_SUB(NOW(), INTERVAL 1 DAY)) AND NOW()", ARRAY_A); // AND TYPE != 'Comments'
 	if (is_array($current_stats)) $current_stats = $current_stats[$count];
-	else $current_stats = 'n/a';
+	else $current_stats = '0';
 	
 	// daily RSS2 stats
 	$rss2_stats = $wpdb->get_row("SELECT " . $count . " FROM " . $wpdb->prefix . "simple_feed_stats WHERE type='RSS2' AND cur_timestamp BETWEEN TIMESTAMP(DATE_SUB(NOW(), INTERVAL 1 DAY)) AND NOW()", ARRAY_A);
 	if (is_array($rss2_stats)) $rss2_stats = $rss2_stats[$count];
-	else $rss2_stats = 'n/a';
+	else $rss2_stats = '0';
 	
 	// daily comment stats
 	$comment_stats = $wpdb->get_row("SELECT " . $count . " FROM " . $wpdb->prefix . "simple_feed_stats WHERE type='Comments' AND cur_timestamp BETWEEN TIMESTAMP(DATE_SUB(NOW(), INTERVAL 1 DAY)) AND NOW()", ARRAY_A);
 	if (is_array($comment_stats)) $comment_stats = $comment_stats[$count];
-	else $comment_stats = 'n/a';
+	else $comment_stats = '0';
 	
 	set_transient('feed_count', $current_stats, 60*60*24); // 12 hour cache 60*60*12 , 24 hour cache = 60*60*24
 	$feed_count = get_transient('feed_count');
@@ -591,6 +602,58 @@ function sfs_cache_data() {
 add_action('sfs_cron_cache', 'sfs_cache_data');
 
 
+
+// delete transients
+function sfs_delete_transients() {
+	
+	if (is_multisite()) {
+		delete_site_transient('feed_count');
+		delete_site_transient('all_count');
+		delete_site_transient('rss2_count');
+		delete_site_transient('comments_count');
+		
+		delete_site_transient('_transient_timeout_all_count');
+		delete_site_transient('_transient_timeout_feed_count');
+		delete_site_transient('_transient_timeout_rss2_count');
+		delete_site_transient('_transient_timeout_comment_count');
+	} else {
+		delete_transient('feed_count');
+		delete_transient('all_count');
+		delete_transient('rss2_count');
+		delete_transient('comments_count');
+		
+		delete_transient('_transient_timeout_all_count');
+		delete_transient('_transient_timeout_feed_count');
+		delete_transient('_transient_timeout_rss2_count');
+		delete_transient('_transient_timeout_comment_count');
+	}
+}
+
+// clear cache
+function sfs_clear_cache() {
+	if (isset($_GET['cache']) && $_GET['cache'] === 'clear') {
+		if (current_user_can('administrator')) {
+			
+			sfs_delete_transients();
+			sfs_cache_data();
+		}
+	}
+}
+add_action('init', 'sfs_clear_cache');
+
+// reset stats
+function sfs_reset_stats() {
+	global $wpdb;
+	if ((isset($_GET['reset'])) && ($_GET['reset'] === 'true')) {
+		if (current_user_can('administrator')) {
+			
+			$truncate = $wpdb->query("TRUNCATE " . $wpdb->prefix . "simple_feed_stats");
+			sfs_delete_transients();
+			sfs_cache_data();
+		}
+	}
+}
+add_action('init', 'sfs_reset_stats');
 
 
 
@@ -650,27 +713,27 @@ function sfs_query_database($sfs_query_type) {
 		
 		$count_recent_rdf = $wpdb->get_row("SELECT " . $count . " FROM " . $wpdb->prefix . "simple_feed_stats WHERE type='RDF' AND cur_timestamp BETWEEN TIMESTAMP(DATE_SUB(NOW(), INTERVAL 1 DAY)) AND NOW()", ARRAY_A);
 		if (is_array($count_recent_rdf)) $count_recent_rdf = $count_recent_rdf[$count];
-		else $count_recent_rdf = 'n/a';
+		else $count_recent_rdf = '0';
 		
 		$count_recent_rss2 = $wpdb->get_row("SELECT " . $count . " FROM " . $wpdb->prefix . "simple_feed_stats WHERE type='RSS2' AND cur_timestamp BETWEEN TIMESTAMP(DATE_SUB(NOW(), INTERVAL 1 DAY)) AND NOW()", ARRAY_A);
 		if (is_array($count_recent_rss2)) $count_recent_rss2 = $count_recent_rss2[$count];
-		else $count_recent_rss2 = 'n/a';
+		else $count_recent_rss2 = '0';
 		
 		$count_recent_atom = $wpdb->get_row("SELECT " . $count . " FROM " . $wpdb->prefix . "simple_feed_stats WHERE type='Atom' AND cur_timestamp BETWEEN TIMESTAMP(DATE_SUB(NOW(), INTERVAL 1 DAY)) AND NOW()", ARRAY_A);
 		if (is_array($count_recent_atom)) $count_recent_atom = $count_recent_atom[$count];
-		else $count_recent_atom = 'n/a';
+		else $count_recent_atom = '0';
 		
 		$count_recent_comments = $wpdb->get_row("SELECT " . $count . " FROM " . $wpdb->prefix . "simple_feed_stats WHERE type='Comments' AND cur_timestamp BETWEEN TIMESTAMP(DATE_SUB(NOW(), INTERVAL 1 DAY)) AND NOW()", ARRAY_A);
 		if (is_array($count_recent_comments)) $count_recent_comments = $count_recent_comments[$count];
-		else $count_recent_comments = 'n/a';
+		else $count_recent_comments = '0';
 		
 		$count_recent_open = $wpdb->get_row("SELECT " . $count . " FROM " . $wpdb->prefix . "simple_feed_stats WHERE tracking='open' AND cur_timestamp BETWEEN TIMESTAMP(DATE_SUB(NOW(), INTERVAL 1 DAY)) AND NOW()", ARRAY_A);
 		if (is_array($count_recent_open)) $count_recent_open = $count_recent_open[$count];
-		else $count_recent_open = 'n/a';
+		else $count_recent_open = '0';
 		
 		$count_recent_other = $wpdb->get_row("SELECT " . $count . " FROM " . $wpdb->prefix . "simple_feed_stats WHERE type='other' AND cur_timestamp BETWEEN TIMESTAMP(DATE_SUB(NOW(), INTERVAL 1 DAY)) AND NOW()", ARRAY_A);
 		if (is_array($count_recent_other)) $count_recent_other = $count_recent_other[$count];
-		else $count_recent_other = 'n/a';
+		else $count_recent_other = '0';
 		
 		$sfs_query_current = array($count_recent_rdf, $count_recent_rss2, $count_recent_atom, $count_recent_comments, $count_recent_open, $count_recent_other);
 		return $sfs_query_current;
@@ -679,27 +742,27 @@ function sfs_query_database($sfs_query_type) {
 		
 		$count_rdf = $wpdb->get_row("SELECT " . $count . " FROM " . $wpdb->prefix . "simple_feed_stats WHERE type='RDF'", ARRAY_A);
 		if (is_array($count_rdf)) $count_rdf = $count_rdf[$count];
-		else $count_rdf = 'n/a';
+		else $count_rdf = '0';
 		
 		$count_rss2 = $wpdb->get_row("SELECT " . $count . " FROM " . $wpdb->prefix . "simple_feed_stats WHERE type='RSS2'", ARRAY_A);
 		if (is_array($count_rss2)) $count_rss2 = $count_rss2[$count];
-		else $count_rss2 = 'n/a';
+		else $count_rss2 = '0';
 		
 		$count_atom = $wpdb->get_row("SELECT " . $count . " FROM " . $wpdb->prefix . "simple_feed_stats WHERE type='Atom'", ARRAY_A);
 		if (is_array($count_atom)) $count_atom = $count_atom[$count];
-		else $count_atom = 'n/a';
+		else $count_atom = '0';
 		
 		$count_comments = $wpdb->get_row("SELECT " . $count . " FROM " . $wpdb->prefix . "simple_feed_stats WHERE type='Comments'", ARRAY_A);
 		if (is_array($count_comments)) $count_comments = $count_comments[$count];
-		else $count_comments = 'n/a';
+		else $count_comments = '0';
 		
 		$count_open = $wpdb->get_row("SELECT " . $count . " FROM " . $wpdb->prefix . "simple_feed_stats WHERE tracking='open'", ARRAY_A);
 		if (is_array($count_open)) $count_open = $count_open[$count];
-		else $count_open = 'n/a';
+		else $count_open = '0';
 		
 		$count_other = $wpdb->get_row("SELECT " . $count . " FROM " . $wpdb->prefix . "simple_feed_stats WHERE type='other'", ARRAY_A);
 		if (is_array($count_other)) $count_other = $count_other[$count];
-		else $count_other = 'n/a';
+		else $count_other = '0';
 		
 		$sfs_query_alltime = array($count_rdf, $count_rss2, $count_atom, $count_comments, $count_open, $count_other);
 		return $sfs_query_alltime;
@@ -739,10 +802,6 @@ function sfs_render_form() {
 	else $numrows = 'undefined';
 	$maxpage = ceil($numrows/$numresults);
 	
-	$i = 1;
-	if ((isset($_GET['reset'])) && ($_GET['reset'] == 'true')) {
-		$truncate = $wpdb->query("TRUNCATE " . $wpdb->prefix . "simple_feed_stats");
-	}
 	if ((isset($_GET['filter'])) && (!empty($_GET['filter']))) {
 		$sql = '';
 		$filter = sfs_clean($_GET['filter']);
@@ -751,24 +810,6 @@ function sfs_render_form() {
 		}
 	} else {
 		$sql = $wpdb->get_results($wpdb->prepare("SELECT * FROM ".$wpdb->prefix."simple_feed_stats ORDER BY id DESC LIMIT %d, %d", $offset, $numresults));
-	}
-	
-	// clear cache
-	if (isset($_GET['cache'])) {
-		if ($_GET['cache'] == 'clear') {
-			if (is_multisite()) {
-				delete_site_transient('feed_count');
-				delete_site_transient('all_count');
-				delete_site_transient('rss2_count');
-				delete_site_transient('comments_count');
-			} else {
-				delete_transient('feed_count');
-				delete_transient('all_count');
-				delete_transient('rss2_count');
-				delete_transient('comments_count');
-			}
-			sfs_cache_data();
-		} 
 	} ?>
 
 	<style type="text/css">
@@ -782,10 +823,12 @@ function sfs_render_form() {
 		.sfs-menu-row { margin: 12px 0 0 0; }
 		.sfs-img { float: left; margin: 0 15px 10px 0; }
 		
-		.sfs-admin h2 small { font-size: 60%; color: #777; }
-		.js .sfs-admin .postbox h3 { cursor: pointer; }
-		.sfs-admin ul { margin: 15px 15px 25px 40px; clear: both; }
-		.sfs-admin li { margin: 6px 0; line-height: 18px; list-style-type: disc; }
+		.sfs-admin h1 small { font-size: 60%; color: #777; }
+		.js .sfs-admin .postbox h2 { margin: 0; padding: 12px 0 12px 15px; font-size: 16px; cursor: pointer; }
+		.sfs-admin h3 { margin: 20px 15px; font-size: 14px; }
+		.sfs-admin ul { margin: 15px 15px 25px 40px; clear: both; line-height: 16px; }
+		.sfs-admin li { margin: 8px 0; list-style-type: disc; }
+		.sfs-admin abbr { cursor: help; border-bottom: 1px dotted #dfdfdf; }
 		
 		.sfs-table table { border-collapse: collapse; }
 		.sfs-table th { font-size: 13px; }
@@ -837,22 +880,22 @@ function sfs_render_form() {
 	</style>
 
 	<div class="wrap sfs-admin">
-		<h2><?php _e('Simple Feed Stats', 'sfs'); ?> <small><?php global $sfs_version; echo 'v' . $sfs_version; ?></small></h2>
-
+		<h1><?php _e('Simple Feed Stats', 'sfs'); ?> <small><?php global $sfs_version; echo 'v' . $sfs_version; ?></small></h1>
+		
 		<?php if (isset($_GET['cache'])) : ?>
-		<div class="updated settings-error"><p><?php _e('Cache cleared', 'sfs'); ?>.</p></div>
+		<div class="updated settings-error notice is-dismissible"><p><strong><?php _e('Cache cleared', 'sfs'); ?>.</strong></p></div>
 		<?php endif; ?>
 		
 		<?php if (isset($_GET['reset'])) : ?>
-		<div class="updated settings-error"><p><?php _e('All feed stats deleted', 'sfs'); ?>.</p></div>
+		<div class="updated settings-error notice is-dismissible"><p><strong><?php _e('All feed stats deleted', 'sfs'); ?>.</strong></p></div>
 		<?php endif; ?>
-
+		
 		<div class="sfs-toggle-panels"><a href="<?php get_admin_url() . 'options-general.php?page=sfs-options'; ?>"><?php _e('Toggle all panels', 'sfs'); ?></a></div>
 		<div class="metabox-holder">
 			<div class="meta-box-sortables ui-sortable">
 				
 				<div <?php echo $display_alert; ?> class="postbox">
-					<h3><?php _e('Simple Feed Stats needs your support!', 'sfs'); ?></h3>
+					<h2><?php _e('Simple Feed Stats needs your support!', 'sfs'); ?></h2>
 					<div class="toggle">
 						<div class="mm-panel-alert">
 							<p>
@@ -879,7 +922,7 @@ function sfs_render_form() {
 				</div>
 				
 				<div class="postbox">
-					<h3><?php _e('Overview', 'sfs'); ?></h3>
+					<h2><?php _e('Overview', 'sfs'); ?></h2>
 					<div class="toggle">
 						<p>
 							<img class="sfs-img" src="<?php echo plugins_url(); ?>/simple-feed-stats/sfs-logo.png" width="120" height="55" alt="[ Simple Feed Stats ]">
@@ -898,7 +941,7 @@ function sfs_render_form() {
 							</li>
 							<li><?php _e('If you like this plugin, please', 'sfs'); ?> 
 								<a target="_blank" href="http://wordpress.org/support/view/plugin-reviews/<?php echo basename(dirname(__FILE__)); ?>?rate=5#postform" title="<?php _e('Click here to rate and review this plugin', 'sfs'); ?>">
-									<?php _e('rate it at the Plugin Directory', 'sfs'); ?>&nbsp;&raquo;
+									<?php _e('give it a 5-star rating at the Plugin Directory', 'sfs'); ?>&nbsp;&raquo;
 								</a>
 							</li>
 						</ul>
@@ -908,14 +951,14 @@ function sfs_render_form() {
 				<?php if ($maxpage != 0) { // begin section ?>
 
 				<div class="postbox">
-					<h3><?php _e('Current Subscriber Count', 'sfs'); ?>: <?php sfs_display_subscriber_count(); ?></h3>
+					<h2><?php _e('Daily Subscriber Count', 'sfs'); ?>: <?php sfs_display_subscriber_count(); ?></h2>
 					<div class="toggle default-hidden">
 						<p>
-							<strong><?php _e('Subscribers by Type', 'sfs'); ?></strong><br />
-							<em><?php _e('Note: the number reported for the &ldquo;Current Subscriber Count&rdquo; (shown above) is updated every 24 hours. ', 'sfs'); 
-									_e('The &ldquo;Subscribers by Type&rdquo; data cover the most recent 24 hours and may not equal the current subscriber count. ', 'sfs');
-									_e('Tip: you can manually refresh the &ldquo;Current Subscriber Count&rdquo; to reflect current numbers by clearing the cache (see Tools &amp; Options). ', 'sfs'); ?>
-							</em>
+							<strong><?php _e('Daily Subscribers by Type', 'sfs'); ?></strong> 
+							<span class="tooltip" title="<?php 
+								_e('Count totals are cached and updated every 12 hours for better performance. So the count total may not always equal the sum of the individual counts, which are reported in real-time. ', 'sfs');
+								_e('Tip: to get the numbers to match up, you can manually clear the cache via the &ldquo;Tools &amp; Options&rdquo; panel. ', 'sfs');
+								?>">?</span>
 						</p>
 						<div class="sfs-table">
 							<table class="widefat">
@@ -944,7 +987,7 @@ function sfs_render_form() {
 					</div>
 				</div>
 				<div class="postbox">
-					<h3><?php _e('Feed Statistics', 'sfs'); ?></h3>
+					<h2><?php _e('Feed Statistics', 'sfs'); ?></h2>
 					<div class="toggle<?php if (!isset($_GET['filter']) && !isset($_GET['p'])) echo ' default-hidden'; ?>">
 	
 						<?php if (isset($_GET['filter'])) : ?>
@@ -972,7 +1015,7 @@ function sfs_render_form() {
 						<div class="sfs-menu-item">
 							<form class="sfs-sub-item" action="">
 								<select name="sfs-paging-menu" onchange="myF('parent',this,0)">
-									<?php while ($i <= $maxpage) {
+									<?php $i = 1; while ($i <= $maxpage) {
 											$url = get_admin_url() . 'options-general.php' . add_querystring_var('?'. sfs_clean($_SERVER['QUERY_STRING']), 'p', $i);
 											if ($pagevar == $i) echo '<option selected class="current" value="selected">'. __('Page ', 'sfs') . $i .'</option>';
 											else echo '<option value="'. $url .'">'. __('Page ', 'sfs') . $i .'</option>';
@@ -1033,11 +1076,14 @@ function sfs_render_form() {
 				<?php } // end section ?>
 
 				<div class="postbox">
-					<h3><?php _e('Total Subscriber Count', 'sfs'); ?>: <?php sfs_display_total_count(); ?></h3>
+					<h2><?php _e('Total Subscriber Count', 'sfs'); ?>: <?php sfs_display_total_count(); ?></h2>
 					<div class="toggle default-hidden">
 						<p>
-							<strong><?php _e('All-time number of subscribers by type', 'sfs'); ?></strong><br />
-							<em><?php _e('Note: the number reported for the &ldquo;Total Subscriber Count&rdquo; (shown above) includes everything recorded in the database and is the sum total of the following data.', 'sfs'); ?></em>
+							<strong><?php _e('Total Subscribers by Type', 'sfs'); ?></strong> 
+							<span class="tooltip" title="<?php 
+								_e('Count totals are cached and updated every 12 hours for better performance. So the count total may not always equal the sum of the individual counts, which are reported in real-time. ', 'sfs');
+								_e('Tip: to get the numbers to match up, you can manually clear the cache via the &ldquo;Tools &amp; Options&rdquo; panel. ', 'sfs');
+								?>">?</span>
 						</p>
 						<div class="sfs-table">
 							<table class="widefat">
@@ -1066,7 +1112,7 @@ function sfs_render_form() {
 					</div>
 				</div>
 				<div id="sfs_custom-options" class="postbox">
-					<h3><?php _e('Tools &amp; Options', 'sfs'); ?></h3>
+					<h2><?php _e('Tools &amp; Options', 'sfs'); ?></h2>
 					<div class="toggle<?php if (!isset($_GET['cache']) && !isset($_GET['reset']) && !isset($_GET['settings-updated'])) echo ' default-hidden'; ?>">
 						<form method="post" action="options.php">
 							<?php settings_fields('sfs_plugin_options'); ?>
@@ -1118,26 +1164,22 @@ function sfs_render_form() {
 									<tr>
 										<th scope="row"><label class="description" for="sfs_options[sfs_strict_stats]"><?php _e('Enable strict reporting?', 'sfs'); ?></label></th>
 										<td><input name="sfs_options[sfs_strict_stats]" type="checkbox" value="1" <?php if (isset($sfs_options['sfs_strict_stats'])) checked('1', $sfs_options['sfs_strict_stats']); ?> /> 
-											<em>
-												<?php _e('Check this box to enable strict reporting of feed statistics. Note: this will result in a more accurate reporting of feed stats; 
-												however, if you have been using SFS for awhile, you will notice that the feed count reported in strict mode is lower than reported previously. 
-												Tip: after changing this option, click the &ldquo;Clear the cache&rdquo; link below to reset the cache. Default setting: off (unchecked).', 'sfs'); ?>
-											</em>
+											<?php _e('Check this box to enable strict reporting of feed statistics.', 'sfs'); ?> 
+											<span class="tooltip" title="<?php _e('Note: this will result in a more accurate reporting of feed stats; 
+												however, if you have been using SFS for awhile, you may notice that the feed count is lower with this option enabled. 
+												Tip: after changing this option, click the &ldquo;Clear the cache&rdquo; link below to reset the cache. Default setting: off (unchecked).', 'sfs'); ?>">?</span>
 										</td>
 									</tr>
-									
 									<tr>
 										<th scope="row"><label class="description" for="sfs_options[sfs_ignore_bots]"><?php _e('Ignore bots?', 'sfs'); ?></label></th>
 										<td><input name="sfs_options[sfs_ignore_bots]" type="checkbox" value="1" <?php if (isset($sfs_options['sfs_ignore_bots'])) checked('1', $sfs_options['sfs_ignore_bots']); ?> /> 
-											<em>
-												<?php _e('Check this box to ignore feed requests from the most common bots/spiders. The bot list is located in tracker.php and may be filtered via the sfs_filter_bots hook. 
-												Note: this will result in a more accurate reporting of feed stats; however, if you have been using SFS for awhile, you will notice the feed count decrease. 
-												Tip: after changing this option, click the &ldquo;Clear the cache&rdquo; link below to reset the cache. Default setting: off (unchecked).', 'sfs'); ?>
-											</em>
+											<?php _e('Check this box to ignore feed requests from the most common bots/spiders.', 'sfs'); ?> 
+											<span class="tooltip" title="<?php _e('Note: this will result in a more accurate reporting of feed stats; 
+												however, if you have been using SFS for awhile, you may notice that the feed count is lower with this option enabled. 
+												Tip: after changing this option, click the &ldquo;Clear the cache&rdquo; link below to reset the cache. Default setting: off (unchecked). 
+												Also note that the bot list for this feature is located in tracker.php and may be filtered via the sfs_filter_bots hook.', 'sfs'); ?>">?</span>
 										</td>
 									</tr>
-									
-									
 								</table>
 							</div>
 							<div class="sfs-table">
@@ -1178,6 +1220,19 @@ function sfs_render_form() {
 													This feature will be extended in future versions, send feedback with any requests.', 'sfs'); ?>">?
 												</span>
 											</div>
+										</td>
+									</tr>
+								</table>
+							</div>
+							<div class="sfs-table">
+								<table class="form-table">
+									<tr>
+										<th scope="row"><label class="description" for="sfs_options[sfs_enable_shortcodes]"><?php _e('Enable Shortcodes', 'sfs'); ?></label></th>
+										<td><input name="sfs_options[sfs_enable_shortcodes]" type="checkbox" value="1" <?php if (isset($sfs_options['sfs_enable_shortcodes'])) checked('1', $sfs_options['sfs_enable_shortcodes']); ?> /> 
+											<em><?php _e('Enable shortcodes in widget areas and post content.', 'sfs'); ?></em> 
+											<span class="tooltip" title="<?php _e('By default, WordPress does not enable shortcodes in widgets. 
+											This setting enables shortcodes to work when they are added to widgets, and also ensures that shortcodes will work when they are added to post/page content. 
+											Note: this setting applies to any/all shortcodes, even those of other plugins.', 'sfs'); ?>">?</span>
 										</td>
 									</tr>
 								</table>
@@ -1231,14 +1286,14 @@ function sfs_render_form() {
 										<th scope="row"><label class="description"><?php _e('Clear the cache', 'sfs'); ?></label></th>
 										<td><strong><a href="<?php get_admin_url(); ?>options-general.php?page=sfs-options&amp;cache=clear"><?php _e('Clear cache', 'sfs'); ?></a></strong> 
 											&ndash; <em><?php _e('Tip: refresh this page to renew the cache after clearing.', 'sfs'); ?></em> 
-											<span class="tooltip" title="<?php _e('Note: it&rsquo;s safe to clear the cache at any time. WP will automatically cache fresh data.', 'sfs'); ?>">?</span>
+											<span class="tooltip" title="<?php _e('Note: it&rsquo;s safe to clear the cache at any time. WordPress automatically will cache fresh data.', 'sfs'); ?>">?</span>
 										</td>
 									</tr>
 									<tr>
 										<th scope="row"><label class="description"><?php _e('Reset feed stats', 'sfs'); ?></label></th>
 										<td><strong><a class="reset" href="<?php get_admin_url(); ?>options-general.php?page=sfs-options&amp;reset=true"><?php _e('Reset stats', 'sfs'); ?></a></strong> 
 											&ndash; <em><?php _e('Warning: this will delete all feed stats!', 'sfs'); ?></em> 
-											<span class="tooltip" title="<?php _e('Note: deletes data only. To delete the sfs table, see the &ldquo;Delete Database Table&rdquo; option (below).', 'sfs'); ?>">?</span>
+											<span class="tooltip" title="<?php _e('Note: deletes data only. To delete the SFS table, see the &ldquo;Delete Database Table&rdquo; option (below).', 'sfs'); ?>">?</span>
 										</td>
 									</tr>
 									<tr valign="top">
@@ -1246,7 +1301,8 @@ function sfs_render_form() {
 										<td>
 											<input name="sfs_options[default_options]" type="checkbox" value="1" id="sfs_restore_defaults" <?php if (isset($sfs_options['default_options'])) { checked('1', $sfs_options['default_options']); } ?> /> 
 											<em><?php _e('Restore default options upon plugin deactivation/reactivation.', 'sfs'); ?></em> 
-											<span class="tooltip" title="<?php _e('Tip: leave this option unchecked to remember your settings. Or, to go ahead and restore all default options, check the box, save your settings, and then deactivate/reactivate the plugin.', 'sfs'); ?>">?</span>
+											<span class="tooltip" title="<?php _e('Tip: leave this option unchecked to remember your settings. ', 'sfs'); ?>
+												<?php _e('Note that this setting applies only to plugin settings. Checking this box will not affect any of your statistical data.', 'sfs'); ?>">?</span>
 										</td>
 									</tr>
 									<tr valign="top">
@@ -1254,7 +1310,8 @@ function sfs_render_form() {
 										<td>
 											<input name="sfs_options[sfs_delete_table]" type="checkbox" value="1" id="sfs_delete_table" <?php if (isset($sfs_options['sfs_delete_table'])) { checked('1', $sfs_options['sfs_delete_table']); } ?> /> 
 											<em><?php _e('Delete the stats table the next time plugin is deactivated.', 'sfs'); ?></em> 
-											<span class="tooltip" title="<?php _e('Tip: leave this option unchecked to keep your feed stats if the plugin is deactivated. Or, to go ahead and delete the sfs table (and all of its data), check the box, save your settings, and then deactivate the plugin.', 'sfs'); ?>">?</span>
+											<span class="tooltip" title="<?php _e('Tip: leave this setting unchecked to keep your feed stats if the plugin is deactivated. ', 'sfs'); ?>
+												<?php _e('Note that this setting applies only to plugin *deactivation*. If you *uninstall* (i.e., delete) the plugin, all data including feed stats will be removed.', 'sfs'); ?>">?</span>
 										</td>
 									</tr>
 								</table>
@@ -1266,7 +1323,7 @@ function sfs_render_form() {
 					</div>
 				</div>
 				<div id="sfs-shortcodes" class="postbox">
-					<h3><?php _e('Template Tags &amp; Shortcodes', 'sfs'); ?></h3>
+					<h2><?php _e('Template Tags &amp; Shortcodes', 'sfs'); ?></h2>
 					<div class="toggle default-hidden">
 						<p><strong><?php _e('Simple feed count (number/text only)', 'sfs'); ?></strong></p>
 						<p><?php _e('To display your current subscriber count as simple text, add the following template tag anywhere in your theme (e.g., sidebar, footer, etc.):', 'sfs'); ?></p>
@@ -1295,7 +1352,7 @@ function sfs_render_form() {
 					</div>
 				</div>
 				<div class="postbox">
-					<h3><?php _e('Your Info / More Info', 'sfs'); ?></h3>
+					<h2><?php _e('Your Info / More Info', 'sfs'); ?></h2>
 					<div class="toggle default-hidden">
 						<p>
 							<?php _e('Here are some helpful things to know when working with feeds.', 'sfs'); ?> 
@@ -1346,7 +1403,7 @@ function sfs_render_form() {
 					</div>
 				</div>
 				<div class="postbox">
-					<h3><?php _e('Updates &amp; Info', 'sfs'); ?></h3>
+					<h2><?php _e('Updates &amp; Info', 'sfs'); ?></h2>
 					<div class="toggle">
 						<div class="sfs-current">
 							<iframe src="https://perishablepress.com/current/index-sfs.html"></iframe>
@@ -1449,7 +1506,7 @@ function sfs_render_form() {
 				return false;
 			});
 			jQuery('.default-hidden').hide();
-			jQuery('h3').click(function(){
+			jQuery('h2').click(function(){
 				jQuery(this).next().slideToggle(300);
 			});
 			jQuery('.sfs-options-link').click(function(){

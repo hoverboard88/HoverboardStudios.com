@@ -87,7 +87,7 @@ final class ITSEC_File_Change_Log extends ITSEC_WP_List_Table {
 	 **/
 	function column_memory( $item ) {
 
-		return $item['memory'] . __( 'MB', 'it-l10n-better-wp-security' );
+		return $item['memory'] . __( 'MB', 'better-wp-security' );
 
 	}
 
@@ -103,59 +103,59 @@ final class ITSEC_File_Change_Log extends ITSEC_WP_List_Table {
 
 		if ( $item['added'] > 0 || $item['removed'] > 0 || $item['changed'] > 0 ) {
 
-			echo '<a href="itsec-log-file-change-row-' . $item['detail'] . '" class="dialog">' . __( 'Details', 'it-l10n-better-wp-security' ) . '</a>';
+			echo '<a href="itsec-log-file-change-row-' . $item['detail'] . '" class="dialog">' . __( 'Details', 'better-wp-security' ) . '</a>';
 
 			echo '<div id="itsec-log-file-change-row-' . $item['detail'] . '" style="display:none;">';
 
-			echo '<h3>' . __( 'Files Added', 'it-l10n-better-wp-security' ) . '</h3>';
+			echo '<h3>' . __( 'Files Added', 'better-wp-security' ) . '</h3>';
 
 			echo '<ol class="file_change_detail_list">';
 
 			if ( sizeof( $item['added_detail'] ) > 0 ) {
 
 				foreach ( $item['added_detail'] as $file => $details ) {
-					echo '<li class="file_change_detail"><strong>' . __( 'File', 'it-l10n-better-wp-security' ) . '</strong>: ' . $file . '<br /><strong>' . __( 'Date', 'it-l10n-better-wp-security' ) . '</strong>: ' . date( 'l F jS, Y \a\t g:i a e', ( isset( $details['mod_date'] ) ? $details['mod_date'] : $details['d'] ) ) . '</li>';
+					echo '<li class="file_change_detail"><strong>' . __( 'File', 'better-wp-security' ) . '</strong>: ' . $file . '<br /><strong>' . __( 'Date', 'better-wp-security' ) . '</strong>: ' . date( 'l F jS, Y \a\t g:i a e', ( isset( $details['mod_date'] ) ? $details['mod_date'] : $details['d'] ) ) . '</li>';
 				}
 
 			} else {
 
-				echo '<li class="file_change_detail">' . __( 'There are no added files to report', 'it-l10n-better-wp-security' ) . '</li>';
+				echo '<li class="file_change_detail">' . __( 'There are no added files to report', 'better-wp-security' ) . '</li>';
 
 			}
 
 			echo '</ol>';
 
-			echo '<h3>' . __( 'Files Removed', 'it-l10n-better-wp-security' ) . '</h3>';
+			echo '<h3>' . __( 'Files Removed', 'better-wp-security' ) . '</h3>';
 
 			echo '<ol class="file_change_detail_list">';
 
 			if ( sizeof( $item['removed_detail'] ) > 0 ) {
 
 				foreach ( $item['removed_detail'] as $file => $details ) {
-					echo '<li class="file_change_detail"><strong>' . __( 'File', 'it-l10n-better-wp-security' ) . '</strong>:' . $file . '<br /><strong>' . __( 'Date', 'it-l10n-better-wp-security' ) . '</strong>: ' . date( 'l F jS, Y \a\t g:i a e', ( isset( $details['mod_date'] ) ? $details['mod_date'] : $details['d'] ) ) . '</li>';
+					echo '<li class="file_change_detail"><strong>' . __( 'File', 'better-wp-security' ) . '</strong>:' . $file . '<br /><strong>' . __( 'Date', 'better-wp-security' ) . '</strong>: ' . date( 'l F jS, Y \a\t g:i a e', ( isset( $details['mod_date'] ) ? $details['mod_date'] : $details['d'] ) ) . '</li>';
 				}
 
 			} else {
 
-				echo '<li class="file_change_detail">' . __( 'There are no deleted files to report', 'it-l10n-better-wp-security' ) . '</li>';
+				echo '<li class="file_change_detail">' . __( 'There are no deleted files to report', 'better-wp-security' ) . '</li>';
 
 			}
 
 			echo '</ol>';
 
-			echo '<h3>' . __( 'Files Changed', 'it-l10n-better-wp-security' ) . '</h3>';
+			echo '<h3>' . __( 'Files Changed', 'better-wp-security' ) . '</h3>';
 
 			echo '<ol class="file_change_detail_list">';
 
 			if ( sizeof( $item['changed_detail'] ) > 0 ) {
 
 				foreach ( $item['changed_detail'] as $file => $details ) {
-					echo '<li class="file_change_detail"><strong>' . __( 'File', 'it-l10n-better-wp-security' ) . '</strong>: ' . $file . '<br /><strong>' . __( 'Date', 'it-l10n-better-wp-security' ) . '</strong>: ' . date( 'l F jS, Y \a\t g:i a e', ( isset( $details['mod_date'] ) ? $details['mod_date'] : $details['d'] ) ) . '</li>';
+					echo '<li class="file_change_detail"><strong>' . __( 'File', 'better-wp-security' ) . '</strong>: ' . $file . '<br /><strong>' . __( 'Date', 'better-wp-security' ) . '</strong>: ' . date( 'l F jS, Y \a\t g:i a e', ( isset( $details['mod_date'] ) ? $details['mod_date'] : $details['d'] ) ) . '</li>';
 				}
 
 			} else {
 
-				echo '<li class="file_change_detail">' . __( 'There are no changed files to report', 'it-l10n-better-wp-security' ) . '</li>';
+				echo '<li class="file_change_detail">' . __( 'There are no changed files to report', 'better-wp-security' ) . '</li>';
 
 			}
 
@@ -174,12 +174,12 @@ final class ITSEC_File_Change_Log extends ITSEC_WP_List_Table {
 	public function get_columns() {
 
 		return array(
-			'time'    => __( 'Check Time', 'it-l10n-better-wp-security' ),
-			'added'   => __( 'Files Added', 'it-l10n-better-wp-security' ),
-			'removed' => __( 'Files Deleted', 'it-l10n-better-wp-security' ),
-			'changed' => __( 'Files Changed', 'it-l10n-better-wp-security' ),
-			'memory'  => __( 'Memory Used', 'it-l10n-better-wp-security' ),
-			'detail'  => __( 'Details', 'it-l10n-better-wp-security' ),
+			'time'    => __( 'Check Time', 'better-wp-security' ),
+			'added'   => __( 'Files Added', 'better-wp-security' ),
+			'removed' => __( 'Files Deleted', 'better-wp-security' ),
+			'changed' => __( 'Files Changed', 'better-wp-security' ),
+			'memory'  => __( 'Memory Used', 'better-wp-security' ),
+			'detail'  => __( 'Details', 'better-wp-security' ),
 		);
 
 	}

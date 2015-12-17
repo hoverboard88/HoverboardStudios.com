@@ -37,7 +37,7 @@ class ITSEC_Database_Prefix_Admin {
 		//add metaboxes
 		add_meta_box(
 			'database_prefix_options',
-			__( 'Change Database Prefix', 'it-l10n-better-wp-security' ),
+			__( 'Change Database Prefix', 'better-wp-security' ),
 			array( $this, 'metabox_advanced_settings' ),
 			'security_page_toplevel_page_itsec_advanced',
 			'advanced',
@@ -59,7 +59,7 @@ class ITSEC_Database_Prefix_Admin {
 
 			$status_array = 'safe-medium';
 			$status       = array(
-				'text'     => sprintf( '%s wp_.', __( 'Your database table prefix is not using', 'it-l10n-better-wp-security' ) ),
+				'text'     => sprintf( '%s wp_.', __( 'Your database table prefix is not using', 'better-wp-security' ) ),
 				'link'     => '#itsec_change_table_prefix',
 				'advanced' => true,
 			);
@@ -68,7 +68,7 @@ class ITSEC_Database_Prefix_Admin {
 
 			$status_array = 'medium';
 			$status       = array(
-				'text'     => sprintf( '%s wp_.', __( 'Your database table prefix should not be', 'it-l10n-better-wp-security' ) ),
+				'text'     => sprintf( '%s wp_.', __( 'Your database table prefix should not be', 'better-wp-security' ) ),
 				'link'     => '#itsec_change_table_prefix',
 				'advanced' => true,
 			);
@@ -92,7 +92,7 @@ class ITSEC_Database_Prefix_Admin {
 
 			if ( ! wp_verify_nonce( $_POST['wp_nonce'], 'ITSEC_admin_save' ) ) {
 
-				die( __( 'Security check', 'it-l10n-better-wp-security' ) );
+				die( __( 'Security check', 'better-wp-security' ) );
 
 			}
 
@@ -109,9 +109,9 @@ class ITSEC_Database_Prefix_Admin {
 	 */
 	public function metabox_advanced_settings() {
 
-		echo '<p>' . __( 'By default, WordPress assigns the prefix "wp" to all tables in the database where your content, users, and objects exist. For potential attackers, this means it is easier to write scripts that can target WordPress databases as all the important table names for 95% of sites are already known. Changing the "wp" prefix makes it more difficult for tools that are trying to take advantage of vulnerabilities in other places to affect the database of your site.', 'it-l10n-better-wp-security' ) . '<strong>' . __( 'Before using this tool, we strongly recommend running a backup of your database.', 'it-l10n-better-wp-security' ) . '</strong></p>';
-		echo '<p>' . __( 'Note: The use of this tool requires quite a bit of system memory which may be more than some hosts can handle. If you back your database up you can\'t do any permanent damage but without a proper backup you risk breaking your site and having to perform a rather difficult fix.', 'it-l10n-better-wp-security' ) . '</p>';
-		echo sprintf( '<div class="itsec-warning-message"><span>%s: </span><a href="?page=toplevel_page_itsec_backups">%s</a> %s</div>', __( 'WARNING', 'it-l10n-better-wp-security' ), __( 'Backup your database', 'it-l10n-better-wp-security' ), __( 'before using this tool.', 'it-l10n-better-wp-security' ) );
+		echo '<p>' . __( 'By default, WordPress assigns the prefix "wp" to all tables in the database where your content, users, and objects exist. For potential attackers, this means it is easier to write scripts that can target WordPress databases as all the important table names for 95% of sites are already known. Changing the "wp" prefix makes it more difficult for tools that are trying to take advantage of vulnerabilities in other places to affect the database of your site.', 'better-wp-security' ) . '<strong>' . __( 'Before using this tool, we strongly recommend running a backup of your database.', 'better-wp-security' ) . '</strong></p>';
+		echo '<p>' . __( 'Note: The use of this tool requires quite a bit of system memory which may be more than some hosts can handle. If you back your database up you can\'t do any permanent damage but without a proper backup you risk breaking your site and having to perform a rather difficult fix.', 'better-wp-security' ) . '</p>';
+		echo sprintf( '<div class="itsec-warning-message"><span>%s: </span><a href="?page=toplevel_page_itsec_backups">%s</a> %s</div>', __( 'WARNING', 'better-wp-security' ), __( 'Backup your database', 'better-wp-security' ), __( 'before using this tool.', 'better-wp-security' ) );
 
 		global $itsec_globals;
 
@@ -122,8 +122,8 @@ class ITSEC_Database_Prefix_Admin {
 			if ( $this->settings === true ) { //Show the correct info
 
 				?>
-				<p><strong><?php _e( 'Your database is using the default table prefix', 'it-l10n-better-wp-security' ); ?>
-						<em>wp_</em>. <?php _e( 'You should change this.', 'it-l10n-better-wp-security' ); ?></strong></p>
+				<p><strong><?php _e( 'Your database is using the default table prefix', 'better-wp-security' ); ?>
+						<em>wp_</em>. <?php _e( 'You should change this.', 'better-wp-security' ); ?></strong></p>
 			<?php
 
 			} else {
@@ -131,7 +131,7 @@ class ITSEC_Database_Prefix_Admin {
 				$prefix = $this->settings === false ? $wpdb->base_prefix : $this->settings;
 
 				?>
-				<p><?php _e( 'Your current database table prefix is', 'it-l10n-better-wp-security' ); ?>
+				<p><?php _e( 'Your current database table prefix is', 'better-wp-security' ); ?>
 					<strong><em><?php echo $prefix; ?></em></strong></p>
 			<?php
 
@@ -147,14 +147,14 @@ class ITSEC_Database_Prefix_Admin {
 					<tr valign="top">
 						<th scope="row" class="settinglabel">
 							<label
-								for="itsec_change_table_prefix"><?php _e( 'Change Table Prefix', 'it-l10n-better-wp-security' ); ?></label>
+								for="itsec_change_table_prefix"><?php _e( 'Change Table Prefix', 'better-wp-security' ); ?></label>
 						</th>
 						<td class="settingfield">
 
 							<input type="checkbox" id="itsec_change_table_prefix" name="itsec_change_table_prefix"
 							       value="true"/>
 
-							<p class="description"><?php _e( 'Check this box to generate a new database table prefix.', 'it-l10n-better-wp-security' ); ?></p>
+							<p class="description"><?php _e( 'Check this box to generate a new database table prefix.', 'better-wp-security' ); ?></p>
 						</td>
 					</tr>
 					</tbody>
@@ -162,7 +162,7 @@ class ITSEC_Database_Prefix_Admin {
 
 				<p class="submit">
 					<input type="submit" class="button-primary"
-					       value="<?php _e( 'Change Database Prefix', 'it-l10n-better-wp-security' ); ?>"/>
+					       value="<?php _e( 'Change Database Prefix', 'better-wp-security' ); ?>"/>
 				</p>
 			</form>
 
@@ -172,9 +172,9 @@ class ITSEC_Database_Prefix_Admin {
 
 			printf(
 				'<p>%s <a href="?page=toplevel_page_itsec_settings">%s</a> %s',
-				__( 'You must allow this plugin to write to the wp-config.php file on the', 'it-l10n-better-wp-security' ),
-				__( 'Settings', 'it-l10n-better-wp-security' ),
-				__( 'page to use this feature.', 'it-l10n-better-wp-security' )
+				__( 'You must allow this plugin to write to the wp-config.php file on the', 'better-wp-security' ),
+				__( 'Settings', 'better-wp-security' ),
+				__( 'page to use this feature.', 'better-wp-security' )
 			);
 
 		}
@@ -222,7 +222,7 @@ class ITSEC_Database_Prefix_Admin {
 
 		//assume this will work
 		$type    = 'updated';
-		$message = __( 'Settings Updated', 'it-l10n-better-wp-security' );
+		$message = __( 'Settings Updated', 'better-wp-security' );
 
 		$tables = $wpdb->get_results( 'SHOW TABLES LIKE "' . $wpdb->base_prefix . '%"', ARRAY_N ); //retrieve a list of all tables in the DB
 
@@ -235,7 +235,7 @@ class ITSEC_Database_Prefix_Admin {
 			if ( $wpdb->query( 'RENAME TABLE `' . $wpdb->base_prefix . $table . '` TO `' . $new_prefix . $table . '`;' ) === false ) {
 
 				$type    = 'error';
-				$message = sprintf( '%s %s%s. %s', __( 'Error: Could not rename table', 'it-l10n-better-wp-security' ), $wpdb->base_prefix, $table, __( 'You may have to rename the table manually.', 'it-l10n-better-wp-security' ) );
+				$message = sprintf( '%s %s%s. %s', __( 'Error: Could not rename table', 'better-wp-security' ), $wpdb->base_prefix, $table, __( 'You may have to rename the table manually.', 'better-wp-security' ) );
 
 				add_settings_error( 'itsec', esc_attr( 'settings_updated' ), $message, $type );
 
@@ -265,7 +265,7 @@ class ITSEC_Database_Prefix_Admin {
 		if ( $upOpts === false ) { //set an error
 
 			$type    = 'error';
-			$message = __( 'Could not update prefix references in options table.', 'it-l10n-better-wp-security' );;
+			$message = __( 'Could not update prefix references in options table.', 'better-wp-security' );;
 
 			add_settings_error( 'itsec', esc_attr( 'settings_updated' ), $message, $type );
 
@@ -285,7 +285,7 @@ class ITSEC_Database_Prefix_Admin {
 				if ( $result == false ) {
 
 					$type    = 'error';
-					$message = __( 'Could not update prefix references in usermeta table.', 'it-l10n-better-wp-security' );
+					$message = __( 'Could not update prefix references in usermeta table.', 'better-wp-security' );
 
 					add_settings_error( 'itsec', esc_attr( 'settings_updated' ), $message, $type );
 
@@ -305,7 +305,7 @@ class ITSEC_Database_Prefix_Admin {
 		$error = '';
 		
 		if ( is_wp_error( $config ) ) {
-			$error = sprintf( __( 'Unable to read the <code>wp-config.php</code> file in order to update the Database Prefix. Error details as follows: %1$s (%2$s)', 'it-l10n-better-wp-security' ), $config->get_error_message(), $config->get_error_code() );
+			$error = sprintf( __( 'Unable to read the <code>wp-config.php</code> file in order to update the Database Prefix. Error details as follows: %1$s (%2$s)', 'better-wp-security' ), $config->get_error_message(), $config->get_error_code() );
 		} else {
 			$regex = '/(\$table_prefix\s*=\s*)([\'"]).+?\\2(\s*;)/';
 			$config = preg_replace( $regex, "\${1}'$new_prefix'\${3}", $config );
@@ -313,7 +313,7 @@ class ITSEC_Database_Prefix_Admin {
 			$write_result = ITSEC_Lib_File::write( $config_file_path, $config );
 			
 			if ( is_wp_error( $write_result ) ) {
-				$error = sprintf( __( 'Unable to update the <code>wp-config.php</code> file in order to update the Database Prefix. Error details as follows: %1$s (%2$s)', 'it-l10n-better-wp-security' ), $config->get_error_message(), $config->get_error_code() );
+				$error = sprintf( __( 'Unable to update the <code>wp-config.php</code> file in order to update the Database Prefix. Error details as follows: %1$s (%2$s)', 'better-wp-security' ), $config->get_error_message(), $config->get_error_code() );
 			}
 		}
 		

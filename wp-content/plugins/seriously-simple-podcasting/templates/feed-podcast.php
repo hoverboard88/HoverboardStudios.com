@@ -25,7 +25,7 @@ if ( $protection && $protection == 'on' ) {
 	$give_access = false;
 
 	$message_option = get_option('ss_podcasting_protection_no_access_message');
-	$message = __( 'You are not permitted to view this podcast feed.' , 'ss-podcasting' );
+	$message = __( 'You are not permitted to view this podcast feed.' , 'seriously-simple-podcasting' );
 	if ( $message_option && strlen( $message_option ) > 0 && $message_option != '' ) {
 		$message = $message_option;
 	}
@@ -85,9 +85,22 @@ if ( isset( $_GET['podcast_series'] ) && $_GET['podcast_series'] ) {
 	$podcast_series = esc_attr( $wp_query->query_vars['podcast_series'] );
 }
 
+$series_id = 0;
 if ( $podcast_series ) {
 	$series = get_term_by( 'slug', $podcast_series, 'series' );
 	$series_id = $series->term_id;
+
+	// Do we need to redirect a single feed?
+	$redirect = get_option( 'ss_podcasting_redirect_feed_' . $series_id );
+	$new_feed_url = false;
+	if ( $redirect && $redirect == 'on' ) {
+		$new_feed_url = get_option( 'ss_podcasting_new_feed_url_' . $series_id );
+		if ( $new_feed_url ) {
+			header ( 'HTTP/1.1 301 Moved Permanently' );
+			header ( 'Location: ' . $new_feed_url );
+			exit;
+		}
+	}
 }
 
 // Podcast title
@@ -170,9 +183,21 @@ if ( $podcast_series ) {
 	$explicit_option = $series_explicit_option;
 }
 if ( $explicit_option && 'on' == $explicit_option ) {
-	$explicit = 'Yes';
+	$explicit = 'yes';
 } else {
-	$explicit = 'No';
+	$explicit = 'clean';
+}
+
+// Podcast complete setting
+$complete_option = get_option( 'ss_podcasting_complete', '' );
+if ( $podcast_series ) {
+	$series_complete_option = get_option( 'ss_podcasting_complete_' . $series_id, '' );
+	$complete_option = $series_complete_option;
+}
+if ( $complete_option && 'on' == $complete_option ) {
+	$complete = 'yes';
+} else {
+	$complete = '';
 }
 
 // Podcast cover image
@@ -184,26 +209,10 @@ if ( $podcast_series ) {
 	}
 }
 
-// Podcast category and subcategory
-$category = get_option( 'ss_podcasting_data_category', '' );
-if ( $podcast_series ) {
-	$series_category = get_option( 'ss_podcasting_data_category_' . $series_id, 'no-category' );
-	if ( 'no-category' != $series_category ) {
-		$category = $series_category;
-	}
-}
-if ( ! $category ) {
-	$category = false;
-	$subcategory = false;
-} else {
-	$subcategory = get_option( 'ss_podcasting_data_subcategory', '' );
-	if ( $podcast_series ) {
-		$series_subcategory = get_option( 'ss_podcasting_data_subcategory_' . $series_id, 'no-subcategory' );
-		if ( 'no-subcategory' != $series_subcategory ) {
-			$subcategory = $series_subcategory;
-		}
-	}
-}
+// Podcast category and subcategory (all levels)
+$category1 = ssp_get_feed_category_output( 1, $series_id );
+$category2 = ssp_get_feed_category_output( 2, $series_id );
+$category3 = ssp_get_feed_category_output( 3, $series_id );
 
 // Set RSS header
 header( 'Content-Type: ' . feed_content_type( 'rss-http' ) . '; charset=' . get_option( 'blog_charset' ), true );
@@ -238,13 +247,28 @@ echo '<?xml version="1.0" encoding="' . get_option('blog_charset') . '"?'.'>'; ?
 		<itunes:email><?php echo esc_html( $owner_email ); ?></itunes:email>
 	</itunes:owner>
 	<itunes:explicit><?php echo esc_html( $explicit ); ?></itunes:explicit>
+	<?php if( $complete ) { ?><itunes:complete><?php echo esc_html( $complete ); ?></itunes:complete><?php } ?>
 	<?php if ( $image ) { ?>
 	<itunes:image href="<?php echo esc_url( $image ); ?>"></itunes:image>
 	<?php } ?>
-	<?php if ( $category ) { ?>
-	<itunes:category text="<?php echo esc_attr( $category ); ?>">
-		<?php if ( $subcategory ) { ?>
-		<itunes:category text="<?php echo esc_attr( $subcategory ); ?>"></itunes:category>
+	<?php if ( isset( $category1['category'] ) && $category1['category'] ) { ?>
+	<itunes:category text="<?php echo esc_attr( $category1['category'] ); ?>">
+		<?php if ( isset( $category1['subcategory'] ) && $category1['subcategory'] ) { ?>
+		<itunes:category text="<?php echo esc_attr( $category1['subcategory'] ); ?>"></itunes:category>
+		<?php } ?>
+	</itunes:category>
+	<?php } ?>
+	<?php if ( isset( $category2['category'] ) && $category2['category'] ) { ?>
+	<itunes:category text="<?php echo esc_attr( $category2['category'] ); ?>">
+		<?php if ( isset( $category2['subcategory'] ) && $category2['subcategory'] ) { ?>
+		<itunes:category text="<?php echo esc_attr( $category2['subcategory'] ); ?>"></itunes:category>
+		<?php } ?>
+	</itunes:category>
+	<?php } ?>
+	<?php if ( isset( $category3['category'] ) && $category3['category'] ) { ?>
+	<itunes:category text="<?php echo esc_attr( $category3['category'] ); ?>">
+		<?php if ( isset( $category3['subcategory'] ) && $category3['subcategory'] ) { ?>
+		<itunes:category text="<?php echo esc_attr( $category3['subcategory'] ); ?>"></itunes:category>
 		<?php } ?>
 	</itunes:category>
 	<?php } ?>
@@ -330,15 +354,18 @@ echo '<?xml version="1.0" encoding="' . get_option('blog_charset') . '"?'.'>'; ?
 			$content = get_the_content_feed( 'rss2' );
 			$content = preg_replace( '/<\/?iframe(.|\s)*?>/', '', $content );
 
-			// iTunes summary does not allow any HTML and must be shorter than 4000 characters
-			$itunes_summary = strip_tags( get_the_content() );
-			$itunes_summary = str_replace( array( '&', '>', '<', '\'', '"', '`' ), array( __( 'and', 'ss-podcasting' ), '', '', '', '', '' ), $itunes_summary );
-			$itunes_summary = mb_substr( $itunes_summary, 0, 3949 );
+			// iTunes summary is the full episode content, but must be shorter than 4000 characters
+			$itunes_summary = mb_substr( $content, 0, 3999 );
 
-			// iTunes short description does not allow any HTML and must be shorter than 4000 characters
-			$itunes_excerpt = strip_tags( get_the_excerpt() );
-			$itunes_excerpt = str_replace( array( '&', '>', '<', '\'', '"', '`', '[andhellip;]', '[&hellip;]' ), array( 'and', '', '', '', '', '', '', '' ), $itunes_excerpt );
-			$itunes_excerpt = mb_substr( $itunes_excerpt, 0, 224 );
+			// Episode description
+			ob_start();
+			the_excerpt_rss();
+			$description = ob_get_clean();
+
+			// iTunes subtitle does not allow any HTML and must be shorter than 255 characters
+			$itunes_subtitle = strip_tags( strip_shortcodes( $description ) );
+			$itunes_subtitle = str_replace( array( '&', '>', '<', '\'', '"', '`', '[andhellip;]', '[&hellip;]', '[&#8230;]' ), array( 'and', '', '', '', '', '', '', '', '' ), $itunes_subtitle );
+			$itunes_subtitle = mb_substr( $itunes_subtitle, 0, 254 );
 
 	?>
 	<item>
@@ -347,10 +374,10 @@ echo '<?xml version="1.0" encoding="' . get_option('blog_charset') . '"?'.'>'; ?
 		<pubDate><?php echo esc_html( mysql2date( 'D, d M Y H:i:s +0000', get_post_time( 'Y-m-d H:i:s', true ), false ) ); ?></pubDate>
 		<dc:creator><?php echo $author; ?></dc:creator>
 		<guid isPermaLink="false"><?php esc_html( the_guid() ); ?></guid>
-		<description><![CDATA[<?php the_excerpt_rss(); ?>]]></description>
-		<itunes:subtitle><?php echo $itunes_excerpt; ?></itunes:subtitle>
+		<description><![CDATA[<?php echo $description; ?>]]></description>
+		<itunes:subtitle><![CDATA[<?php echo $itunes_subtitle; ?>]]></itunes:subtitle>
 		<content:encoded><![CDATA[<?php echo $content; ?>]]></content:encoded>
-		<itunes:summary><?php echo $itunes_summary; ?></itunes:summary><?php if ( $episode_image ) { ?>
+		<itunes:summary><![CDATA[<?php echo $itunes_summary; ?>]]></itunes:summary><?php if ( $episode_image ) { ?>
 		<itunes:image href="<?php echo esc_url( $episode_image ); ?>"></itunes:image><?php } ?>
 		<enclosure url="<?php echo esc_url( $enclosure ); ?>" length="<?php echo esc_attr( $size ); ?>" type="<?php echo esc_attr( $mime_type ); ?>"></enclosure>
 		<itunes:explicit><?php echo esc_html( $explicit_flag ); ?></itunes:explicit>

@@ -161,7 +161,7 @@ class ITSEC_IPCheck extends ITSEC_Lockout {
 						$expiration     = date( 'Y-m-d H:i:s', $itsec_globals['current_time'] + $cache );
 						$expiration_gmt = date( 'Y-m-d H:i:s', $itsec_globals['current_time_gmt'] + $cache );
 
-						$itsec_logger->log_event( __( 'lockout', 'it-l10n-better-wp-security' ), 10, array(
+						$itsec_logger->log_event( __( 'lockout', 'better-wp-security' ), 10, array(
 							'expires' => $expiration, 'expires_gmt' => $expiration_gmt, 'type' => 'host'
 						), $ip );
 
@@ -230,7 +230,7 @@ class ITSEC_IPCheck extends ITSEC_Lockout {
 
 		$logger_modules['ipcheck'] = array(
 			'type'     => 'ipcheck',
-			'function' => __( 'IP Flagged as bad by iThemes IPCheck', 'it-l10n-better-wp-security' ),
+			'function' => __( 'IP Flagged as bad by iThemes IPCheck', 'better-wp-security' ),
 		);
 
 		return $logger_modules;
@@ -325,7 +325,7 @@ class ITSEC_IPCheck extends ITSEC_Lockout {
 						$expiration     = date( 'Y-m-d H:i:s', $itsec_globals['current_time'] + $cache );
 						$expiration_gmt = date( 'Y-m-d H:i:s', $itsec_globals['current_time_gmt'] + $cache );
 
-						$itsec_logger->log_event( __( 'lockout', 'it-l10n-better-wp-security' ), 10, array(
+						$itsec_logger->log_event( __( 'lockout', 'better-wp-security' ), 10, array(
 							'expires' => $expiration, 'expires_gmt' => $expiration_gmt, 'type' => 'host'
 						), $ip );
 

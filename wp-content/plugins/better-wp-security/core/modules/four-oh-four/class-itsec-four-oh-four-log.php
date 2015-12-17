@@ -81,13 +81,13 @@ final class ITSEC_Four_Oh_Four_Log extends ITSEC_WP_List_Table {
 
 		echo '<div id="itsec_404_details_' . $item['id'] . '" style="display:none;">';
 
-		echo '<h3>' . __( 'Details for ' . $item['uri'], 'it-l10n-better-wp-security' ) . '</h3>';
+		echo '<h3>' . __( 'Details for ' . $item['uri'], 'better-wp-security' ) . '</h3>';
 
 		echo '<ol class="file_change_detail_list">';
 
 		foreach ( $items as $item => $details ) {
 			$data = maybe_unserialize( $details['log_data'] );
-			echo '<li class="404_detail"><strong>' . __( 'Time', 'it-l10n-better-wp-security' ) . '</strong>: ' . $details['log_date'] . '<br /><strong>' . __( 'Host', 'it-l10n-better-wp-security' ) . '</strong>: ' . $details['log_host'] . '<br /><strong>' . __( 'Referrer', 'it-l10n-better-wp-security' ) . '</strong>: ' . esc_html( $details['log_referrer'] ) . '<br /><strong>' . __( 'Query', 'it-l10n-better-wp-security' ) . '</strong>: ' . esc_html( $data['query_string'] ) . '</li>';
+			echo '<li class="404_detail"><strong>' . __( 'Time', 'better-wp-security' ) . '</strong>: ' . $details['log_date'] . '<br /><strong>' . __( 'Host', 'better-wp-security' ) . '</strong>: ' . $details['log_host'] . '<br /><strong>' . __( 'Referrer', 'better-wp-security' ) . '</strong>: ' . esc_html( $details['log_referrer'] ) . '<br /><strong>' . __( 'Query', 'better-wp-security' ) . '</strong>: ' . esc_html( $data['query_string'] ) . '</li>';
 		}
 
 		echo '</ol>';
@@ -104,10 +104,10 @@ final class ITSEC_Four_Oh_Four_Log extends ITSEC_WP_List_Table {
 	public function get_columns() {
 
 		return array(
-			'uri'        => __( 'Location', 'it-l10n-better-wp-security' ),
-			'count'      => __( 'Count', 'it-l10n-better-wp-security' ),
-			'first_time' => __( 'First Recorded', 'it-l10n-better-wp-security' ),
-			'last_time'  => __( 'Last Recorded', 'it-l10n-better-wp-security' ),
+			'uri'        => __( 'Location', 'better-wp-security' ),
+			'count'      => __( 'Count', 'better-wp-security' ),
+			'first_time' => __( 'First Recorded', 'better-wp-security' ),
+			'last_time'  => __( 'Last Recorded', 'better-wp-security' ),
 		);
 
 	}

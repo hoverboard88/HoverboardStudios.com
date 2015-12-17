@@ -80,7 +80,7 @@ class ITSEC_Salts_Admin {
 
 		add_meta_box(
 			'salts_options',
-			__( 'WordPress Salts', 'it-l10n-better-wp-security' ),
+			__( 'WordPress Salts', 'better-wp-security' ),
 			array( $this, 'metabox_advanced_settings' ),
 			'security_page_toplevel_page_itsec_advanced',
 			'advanced',
@@ -111,7 +111,7 @@ class ITSEC_Salts_Admin {
 
 			$status_array = 'low';
 			$status       = array(
-				'text' => __( 'Your WordPress Salts have not been changed. You should change them now.', 'it-l10n-better-wp-security' ),
+				'text' => __( 'Your WordPress Salts have not been changed. You should change them now.', 'better-wp-security' ),
 				'link' => '#itsec_enable_salts', 'advanced' => true,
 			);
 
@@ -119,7 +119,7 @@ class ITSEC_Salts_Admin {
 
 			$status_array = 'low';
 			$status       = array(
-				'text' => __( 'Your WordPress Salts have not been changed 30 days. You should change them now.', 'it-l10n-better-wp-security' ),
+				'text' => __( 'Your WordPress Salts have not been changed 30 days. You should change them now.', 'better-wp-security' ),
 				'link' => '#itsec_enable_salts', 'advanced' => true,
 			);
 
@@ -127,7 +127,7 @@ class ITSEC_Salts_Admin {
 
 			$status_array = 'safe-low';
 			$status       = array(
-				'text' => __( 'You have recently changed your WordPress Salts.', 'it-l10n-better-wp-security' ),
+				'text' => __( 'You have recently changed your WordPress Salts.', 'better-wp-security' ),
 				'link' => '#itsec_enable_salts', 'advanced' => true,
 			);
 
@@ -150,7 +150,7 @@ class ITSEC_Salts_Admin {
 
 			if ( ! wp_verify_nonce( $_POST['wp_nonce'], 'ITSEC_admin_save' ) ) {
 
-				die( __( 'Security check', 'it-l10n-better-wp-security' ) );
+				die( __( 'Security check', 'better-wp-security' ) );
 
 			}
 
@@ -201,9 +201,9 @@ class ITSEC_Salts_Admin {
 
 		if ( false === $this->settings ) {
 
-			$content .= '<p>' . __( 'A secret key makes your site harder to hack and access by adding random elements to the password.', 'it-l10n-better-wp-security' ) . '</p>';
-			$content .= '<p>' . __( 'In simple terms, a secret key is a password with elements that make it harder to generate enough options to break through your security barriers. A password like "password" or "test" is simple and easily broken. A random, unpredictable password such as "88a7da62429ba6ad3cb3c76a09641fc" takes years to come up with the right combination. A salt is used to further enhance the security of the generated result.', 'it-l10n-better-wp-security' ) . '</p>';
-			$content .= '<p><strong>' . __( 'Note that enabling this feature will log you out of your WordPress site.', 'it-l10n-better-wp-security' ) . '</strong></p>';
+			$content .= '<p>' . __( 'A secret key makes your site harder to hack and access by adding random elements to the password.', 'better-wp-security' ) . '</p>';
+			$content .= '<p>' . __( 'In simple terms, a secret key is a password with elements that make it harder to generate enough options to break through your security barriers. A password like "password" or "test" is simple and easily broken. A random, unpredictable password such as "88a7da62429ba6ad3cb3c76a09641fc" takes years to come up with the right combination. A salt is used to further enhance the security of the generated result.', 'better-wp-security' ) . '</p>';
+			$content .= '<p><strong>' . __( 'Note that enabling this feature will log you out of your WordPress site.', 'better-wp-security' ) . '</strong></p>';
 		}
 
 		echo $content;
@@ -218,17 +218,17 @@ class ITSEC_Salts_Admin {
 				<table class="form-table">
 					<tr valign="top">
 						<th scope="row" class="settinglabel">
-							<label for="itsec_enable_salts"><?php _e( 'Change WordPress Salts', 'it-l10n-better-wp-security' ); ?></label>
+							<label for="itsec_enable_salts"><?php _e( 'Change WordPress Salts', 'better-wp-security' ); ?></label>
 						</th>
 						<td class="settingfield">
 							<input type="checkbox" id="itsec_enable_salts" name="itsec_enable_salts" value="true"/>
-							<p class="description"><?php _e( 'Check this box to change your WordPress Salts.', 'it-l10n-better-wp-security' ); ?></p>
+							<p class="description"><?php _e( 'Check this box to change your WordPress Salts.', 'better-wp-security' ); ?></p>
 						</td>
 					</tr>
 				</table>
 				<p class="submit">
 					<input type="submit" class="button-primary"
-					       value="<?php _e( 'Change WordPress Salts', 'it-l10n-better-wp-security' ); ?>"/>
+					       value="<?php _e( 'Change WordPress Salts', 'better-wp-security' ); ?>"/>
 				</p>
 			</form>
 
@@ -238,9 +238,9 @@ class ITSEC_Salts_Admin {
 
 			$content = sprintf(
 				'<p>%s <a href="?page=toplevel_page_itsec_settings">%s</a> %s',
-				__( 'You must allow this plugin to write to the wp-config.php file on the', 'it-l10n-better-wp-security' ),
-				__( 'Settings', 'it-l10n-better-wp-security' ),
-				__( 'page to use this feature.', 'it-l10n-better-wp-security' )
+				__( 'You must allow this plugin to write to the wp-config.php file on the', 'better-wp-security' ),
+				__( 'Settings', 'better-wp-security' ),
+				__( 'page to use this feature.', 'better-wp-security' )
 			);
 
 			echo $content;
@@ -286,7 +286,7 @@ class ITSEC_Salts_Admin {
 		$error = '';
 		
 		if ( is_wp_error( $config ) ) {
-			$error = sprintf( __( 'Unable to read the <code>wp-config.php</code> file in order to update the salts. Error details as follows: %1$s (%2$s)', 'it-l10n-better-wp-security' ), $config->get_error_message(), $config->get_error_code() );
+			$error = sprintf( __( 'Unable to read the <code>wp-config.php</code> file in order to update the salts. Error details as follows: %1$s (%2$s)', 'better-wp-security' ), $config->get_error_message(), $config->get_error_code() );
 		} else {
 			$defines = array(
 				'AUTH_KEY',
@@ -310,7 +310,7 @@ class ITSEC_Salts_Admin {
 			$write_result = ITSEC_Lib_File::write( $config_file_path, $config );
 			
 			if ( is_wp_error( $write_result ) ) {
-				$error = sprintf( __( 'Unable to update the <code>wp-config.php</code> file in order to update the salts. Error details as follows: %1$s (%2$s)', 'it-l10n-better-wp-security' ), $config->get_error_message(), $config->get_error_code() );
+				$error = sprintf( __( 'Unable to update the <code>wp-config.php</code> file in order to update the salts. Error details as follows: %1$s (%2$s)', 'better-wp-security' ), $config->get_error_message(), $config->get_error_code() );
 			}
 		}
 		

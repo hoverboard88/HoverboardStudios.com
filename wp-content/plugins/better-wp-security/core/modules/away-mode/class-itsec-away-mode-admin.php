@@ -42,7 +42,7 @@ class ITSEC_Away_Mode_Admin {
 	public function add_admin_meta_boxes() {
 
 		$id    = 'away_mode_options';
-		$title = __( 'Away Mode', 'it-l10n-better-wp-security' );
+		$title = __( 'Away Mode', 'better-wp-security' );
 
 		add_meta_box(
 			$id,
@@ -98,7 +98,7 @@ class ITSEC_Away_Mode_Admin {
 		}
 
 		$content = '<input type="checkbox" id="itsec_away_mode_enabled" name="itsec_away_mode[enabled]" value="1" ' . checked( 1, $enabled, false ) . '/>';
-		$content .= '<label for="itsec_away_mode_enabled"> ' . __( 'Enable away mode', 'it-l10n-better-wp-security' ) . '</label>';
+		$content .= '<label for="itsec_away_mode_enabled"> ' . __( 'Enable away mode', 'better-wp-security' ) . '</label>';
 
 		echo $content;
 
@@ -124,7 +124,7 @@ class ITSEC_Away_Mode_Admin {
 
 		//Date Field
 		$content = '<input class="end_date_field" type="text" id="itsec_away_mode_end_date" name="itsec_away_mode[away_end][date]" value="' . date( 'm/d/y', $end ) . '"/><br>';
-		$content .= '<label class="end_date_field" for="itsec_away_mode_end_date"> ' . __( 'Set the date at which the admin dashboard should become available', 'it-l10n-better-wp-security' ) . '</label>';
+		$content .= '<label class="end_date_field" for="itsec_away_mode_end_date"> ' . __( 'Set the date at which the admin dashboard should become available', 'better-wp-security' ) . '</label>';
 
 		echo $content;
 
@@ -169,10 +169,10 @@ class ITSEC_Away_Mode_Admin {
 
 		//AM/PM Field
 		$content .= '<select name="itsec_away_mode[away_end][sel]" id="itsec_away_mode">';
-		$content .= '<option value="am" ' . selected( date( 'a', $end ), 'am', false ) . '>' . __( 'am', 'it-l10n-better-wp-security' ) . '</option>';
-		$content .= '<option value="pm" ' . selected( date( 'a', $end ), 'pm', false ) . '>' . __( 'pm', 'it-l10n-better-wp-security' ) . '</option>';
+		$content .= '<option value="am" ' . selected( date( 'a', $end ), 'am', false ) . '>' . __( 'am', 'better-wp-security' ) . '</option>';
+		$content .= '<option value="pm" ' . selected( date( 'a', $end ), 'pm', false ) . '>' . __( 'pm', 'better-wp-security' ) . '</option>';
 		$content .= '</select><br>';
-		$content .= '<label for="itsec_away_mode_away_mod_end_time"> ' . __( 'Set the time at which the admin dashboard should become available again.', 'it-l10n-better-wp-security' ) . '</label>';
+		$content .= '<label for="itsec_away_mode_away_mod_end_time"> ' . __( 'Set the time at which the admin dashboard should become available again.', 'better-wp-security' ) . '</label>';
 
 		echo $content;
 
@@ -198,7 +198,7 @@ class ITSEC_Away_Mode_Admin {
 
 		//Date Field
 		$content = '<input class="start_date_field" type="text" id="itsec_away_mode_start_date" name="itsec_away_mode[away_start][date]" value="' . date( 'm/d/y', $start ) . '"/><br>';
-		$content .= '<label class="start_date_field" for="itsec_away_mode_start_date"> ' . __( 'Set the date at which the admin dashboard should become unavailable', 'it-l10n-better-wp-security' ) . '</label>';
+		$content .= '<label class="start_date_field" for="itsec_away_mode_start_date"> ' . __( 'Set the date at which the admin dashboard should become unavailable', 'better-wp-security' ) . '</label>';
 
 		echo $content;
 
@@ -243,10 +243,10 @@ class ITSEC_Away_Mode_Admin {
 
 		//AM/PM Field
 		$content .= '<select name="itsec_away_mode[away_start][sel]" id="itsec_away_mode_away_mod_start_time">';
-		$content .= '<option value="am" ' . selected( date( 'a', $start ), 'am', false ) . '>' . __( 'am', 'it-l10n-better-wp-security' ) . '</option>';
-		$content .= '<option value="pm" ' . selected( date( 'a', $start ), 'pm', false ) . '>' . __( 'pm', 'it-l10n-better-wp-security' ) . '</option>';
+		$content .= '<option value="am" ' . selected( date( 'a', $start ), 'am', false ) . '>' . __( 'am', 'better-wp-security' ) . '</option>';
+		$content .= '<option value="pm" ' . selected( date( 'a', $start ), 'pm', false ) . '>' . __( 'pm', 'better-wp-security' ) . '</option>';
 		$content .= '</select><br>';
-		$content .= '<label for="itsec_away_mode_away_mod_start_time"> ' . __( 'Set the time at which the admin dashboard should become unavailable.', 'it-l10n-better-wp-security' ) . '</label>';
+		$content .= '<label for="itsec_away_mode_away_mod_start_time"> ' . __( 'Set the time at which the admin dashboard should become unavailable.', 'better-wp-security' ) . '</label>';
 
 		echo $content;
 
@@ -262,10 +262,10 @@ class ITSEC_Away_Mode_Admin {
 	public function away_mode_type() {
 
 		$content = '<select name="itsec_away_mode[type]" id="itsec_away_mode_type">';
-		$content .= '<option value="1" ' . selected( $this->settings['type'], 1, false ) . '>' . __( 'Daily', 'it-l10n-better-wp-security' ) . '</option>';
-		$content .= '<option value="2" ' . selected( $this->settings['type'], 2, false ) . '>' . __( 'One Time', 'it-l10n-better-wp-security' ) . '</option>';
+		$content .= '<option value="1" ' . selected( $this->settings['type'], 1, false ) . '>' . __( 'Daily', 'better-wp-security' ) . '</option>';
+		$content .= '<option value="2" ' . selected( $this->settings['type'], 2, false ) . '>' . __( 'One Time', 'better-wp-security' ) . '</option>';
 		$content .= '</select><br>';
-		$content .= '<label for="itsec_away_mode_type"> ' . __( 'Select the type of restriction you would like to enable', 'it-l10n-better-wp-security' ) . '</label>';
+		$content .= '<label for="itsec_away_mode_type"> ' . __( 'Select the type of restriction you would like to enable', 'better-wp-security' ) . '</label>';
 
 		echo $content;
 
@@ -284,7 +284,7 @@ class ITSEC_Away_Mode_Admin {
 
 			$status_array = 'safe-medium';
 			$status       = array(
-				'text' => __( 'Away Mode is enabled and your WordPress Dashboard is not available when you will not be needing it.', 'it-l10n-better-wp-security' ),
+				'text' => __( 'Away Mode is enabled and your WordPress Dashboard is not available when you will not be needing it.', 'better-wp-security' ),
 				'link' => '#itsec_away_mode_enabled',
 			);
 
@@ -292,7 +292,7 @@ class ITSEC_Away_Mode_Admin {
 
 			$status_array = 'medium';
 			$status       = array(
-				'text' => __( 'Your WordPress Dashboard is available 24/7. Do you really update 24 hours a day? Consider using Away Mode.', 'it-l10n-better-wp-security' ),
+				'text' => __( 'Your WordPress Dashboard is available 24/7. Do you really update 24 hours a day? Consider using Away Mode.', 'better-wp-security' ),
 				'link' => '#itsec_away_mode_enabled',
 			);
 
@@ -314,14 +314,14 @@ class ITSEC_Away_Mode_Admin {
 		//Add Settings sections
 		add_settings_section(
 			'away_mode-enabled',
-			__( 'Away Mode', 'it-l10n-better-wp-security' ),
+			__( 'Away Mode', 'better-wp-security' ),
 			'__return_empty_string',
 			'security_page_toplevel_page_itsec_settings'
 		);
 
 		add_settings_section(
 			'away_mode-settings',
-			__( 'Away Mode', 'it-l10n-better-wp-security' ),
+			__( 'Away Mode', 'better-wp-security' ),
 			'__return_empty_string',
 			'security_page_toplevel_page_itsec_settings'
 		);
@@ -329,7 +329,7 @@ class ITSEC_Away_Mode_Admin {
 		//Away Mode Fields
 		add_settings_field(
 			'itsec_away_mode[enabled]',
-			__( 'Away Mode', 'it-l10n-better-wp-security' ),
+			__( 'Away Mode', 'better-wp-security' ),
 			array( $this, 'away_mode_enabled' ),
 			'security_page_toplevel_page_itsec_settings',
 			'away_mode-enabled'
@@ -337,21 +337,21 @@ class ITSEC_Away_Mode_Admin {
 
 		add_settings_field(
 			'itsec_away_mode[type]',
-			__( 'Type of Restriction', 'it-l10n-better-wp-security' ),
+			__( 'Type of Restriction', 'better-wp-security' ),
 			array( $this, 'away_mode_type' ),
 			'security_page_toplevel_page_itsec_settings',
 			'away_mode-settings'
 		);
 
 		add_settings_field(
-			'itsec_away_mode[start_date]', __( 'Start Date', 'it-l10n-better-wp-security' ),
+			'itsec_away_mode[start_date]', __( 'Start Date', 'better-wp-security' ),
 			array( $this, 'away_mode_start_date' ),
 			'security_page_toplevel_page_itsec_settings',
 			'away_mode-settings'
 		);
 
 		add_settings_field(
-			'itsec_away_mode[start_time]', __( 'Start Time', 'it-l10n-better-wp-security' ),
+			'itsec_away_mode[start_time]', __( 'Start Time', 'better-wp-security' ),
 			array( $this, 'away_mode_start_time' ),
 			'security_page_toplevel_page_itsec_settings',
 			'away_mode-settings'
@@ -359,7 +359,7 @@ class ITSEC_Away_Mode_Admin {
 
 		add_settings_field(
 			'itsec_away_mode[end_date]',
-			__( 'End Date', 'it-l10n-better-wp-security' ),
+			__( 'End Date', 'better-wp-security' ),
 			array( $this, 'away_mode_end_date' ),
 			'security_page_toplevel_page_itsec_settings',
 			'away_mode-settings'
@@ -367,7 +367,7 @@ class ITSEC_Away_Mode_Admin {
 
 		add_settings_field(
 			'itsec_away_mode[end_time]',
-			__( 'End Time', 'it-l10n-better-wp-security' ),
+			__( 'End Time', 'better-wp-security' ),
 			array( $this, 'away_mode_end_time' ),
 			'security_page_toplevel_page_itsec_settings',
 			'away_mode-settings'
@@ -391,7 +391,7 @@ class ITSEC_Away_Mode_Admin {
 	 */
 	public function metabox_away_mode_settings() {
 
-		$content = '<p>' . __( 'As most sites are only updated at certain times of the day it is not always necessary to provide access to the WordPress dashboard 24 hours a day, 7 days a week. The options below will allow you to disable access to the WordPress Dashboard for the specified period. In addition to limiting exposure to attackers this could also be useful to disable site access based on a schedule for classroom or other reasons.', 'it-l10n-better-wp-security' ) . '</p>';
+		$content = '<p>' . __( 'As most sites are only updated at certain times of the day it is not always necessary to provide access to the WordPress dashboard 24 hours a day, 7 days a week. The options below will allow you to disable access to the WordPress Dashboard for the specified period. In addition to limiting exposure to attackers this could also be useful to disable site access based on a schedule for classroom or other reasons.', 'better-wp-security' ) . '</p>';
 
 		if ( preg_match( "/^(G|H)(:| \\h)/", get_option( 'time_format' ) ) ) {
 			$currdate = date_i18n( 'l, d F Y' . ' ' . get_option( 'time_format' ), current_time( 'timestamp' ) );
@@ -399,9 +399,9 @@ class ITSEC_Away_Mode_Admin {
 			$currdate = date( 'g:i a \o\n l F jS, Y', current_time( 'timestamp' ) );
 		}
 
-		$content .= '<p>' . sprintf( __( 'Please note that according to your %sWordPress timezone settings%s your current time is:', 'it-l10n-better-wp-security' ), '<a href="' . admin_url( 'options-general.php#timezone_string' ) . '">', '</a>' );
+		$content .= '<p>' . sprintf( __( 'Please note that according to your %sWordPress timezone settings%s your current time is:', 'better-wp-security' ), '<a href="' . admin_url( 'options-general.php#timezone_string' ) . '">', '</a>' );
 		$content .= '<div class="current-time-date">' . $currdate . '</div>';
-		$content .= '<p>' . sprintf( __( 'If this is incorrect please correct it on the %sWordPress general settings page%s by setting the appropriate time zone. Failure to set the correct timezone may result in unintended lockouts.', 'it-l10n-better-wp-security' ), '<a href="' . admin_url( 'options-general.php#timezone_string' ) . '">', '</a>' ) . '</p>';
+		$content .= '<p>' . sprintf( __( 'If this is incorrect please correct it on the %sWordPress general settings page%s by setting the appropriate time zone. Failure to set the correct timezone may result in unintended lockouts.', 'better-wp-security' ), '<a href="' . admin_url( 'options-general.php#timezone_string' ) . '">', '</a>' ) . '</p>';
 
 		echo $content;
 
@@ -410,20 +410,20 @@ class ITSEC_Away_Mode_Admin {
 
 			$content = '<hr />';
 
-			$content .= sprintf( '<p><strong>%s</strong></p>', __( 'Away mode is currently enabled.', 'it-l10n-better-wp-security' ) );
+			$content .= sprintf( '<p><strong>%s</strong></p>', __( 'Away mode is currently enabled.', 'better-wp-security' ) );
 
 			//Create the appropriate notification based on daily or one time use
 			if ( $this->settings['type'] === 1 ) {
 
-				$content .= sprintf( '<p>' . __( 'The dashboard of this website will become unavailable %s%s%s from %s%s%s until %s%s%s.', 'it-l10n-better-wp-security' ) . '</p>', '<strong>', __( 'every day', 'it-l10n-better-wp-security' ), '</strong>', '<strong>', date_i18n( get_option( 'time_format' ), $this->settings['start'] ), '</strong>', '<strong>', date_i18n( get_option( 'time_format' ), $this->settings['end'] ), '</strong>' );
+				$content .= sprintf( '<p>' . __( 'The dashboard of this website will become unavailable %s%s%s from %s%s%s until %s%s%s.', 'better-wp-security' ) . '</p>', '<strong>', __( 'every day', 'better-wp-security' ), '</strong>', '<strong>', date_i18n( get_option( 'time_format' ), $this->settings['start'] ), '</strong>', '<strong>', date_i18n( get_option( 'time_format' ), $this->settings['end'] ), '</strong>' );
 
 			} else {
 
-				$content .= sprintf( '<p>' . __( 'The dashboard of this website will become unavailable from %s%s%s on %s%s%s until %s%s%s on %s%s%s.', 'it-l10n-better-wp-security' ) . '</p>', '<strong>', date_i18n( get_option( 'time_format' ), $this->settings['start'] ), '</strong>', '<strong>', date_i18n( get_option( 'date_format' ), $this->settings['start'] ), '</strong>', '<strong>', date_i18n( get_option( 'time_format' ), $this->settings['end'] ), '</strong>', '<strong>', date_i18n( get_option( 'date_format' ), $this->settings['end'] ), '</strong>' );
+				$content .= sprintf( '<p>' . __( 'The dashboard of this website will become unavailable from %s%s%s on %s%s%s until %s%s%s on %s%s%s.', 'better-wp-security' ) . '</p>', '<strong>', date_i18n( get_option( 'time_format' ), $this->settings['start'] ), '</strong>', '<strong>', date_i18n( get_option( 'date_format' ), $this->settings['start'] ), '</strong>', '<strong>', date_i18n( get_option( 'time_format' ), $this->settings['end'] ), '</strong>', '<strong>', date_i18n( get_option( 'date_format' ), $this->settings['end'] ), '</strong>' );
 
 			}
 
-			$content .= '<p>' . __( 'You will not be able to log into this website when the site is unavailable.', 'it-l10n-better-wp-security' ) . '</p>';
+			$content .= '<p>' . __( 'You will not be able to log into this website when the site is unavailable.', 'better-wp-security' ) . '</p>';
 
 			echo $content;
 		}
@@ -435,7 +435,7 @@ class ITSEC_Away_Mode_Admin {
 
 		settings_fields( 'security_page_toplevel_page_itsec_settings' );
 
-		echo '<input class="button-primary" name="submit" type="submit" value="' . __( 'Save All Changes', 'it-l10n-better-wp-security' ) . '" />' . PHP_EOL;
+		echo '<input class="button-primary" name="submit" type="submit" value="' . __( 'Save All Changes', 'better-wp-security' ) . '" />' . PHP_EOL;
 
 		echo '</p>' . PHP_EOL;
 
@@ -497,7 +497,7 @@ class ITSEC_Away_Mode_Admin {
 			$input['enabled'] = false; //disable away mode
 
 			$type    = 'error';
-			$message = __( 'Invalid  away mode time listed. The time entered would lock you out of your site now. Please try again.', 'it-l10n-better-wp-security' );
+			$message = __( 'Invalid  away mode time listed. The time entered would lock you out of your site now. Please try again.', 'better-wp-security' );
 
 			add_settings_error( 'itsec', esc_attr( 'settings_updated' ), $message, $type );
 
@@ -508,7 +508,7 @@ class ITSEC_Away_Mode_Admin {
 			$input['enabled'] = false; //disable away mode
 
 			$type    = 'error';
-			$message = __( 'Invalid  away mode time listed. The start time selected is after the end time selected.', 'it-l10n-better-wp-security' );
+			$message = __( 'Invalid  away mode time listed. The start time selected is after the end time selected.', 'better-wp-security' );
 
 			add_settings_error( 'itsec', esc_attr( 'settings_updated' ), $message, $type );
 
@@ -519,7 +519,7 @@ class ITSEC_Away_Mode_Admin {
 			$input['enabled'] = false; //disable away mode
 
 			$type    = 'error';
-			$message = __( 'Invalid away mode time listed. The period selected already ended.', 'it-l10n-better-wp-security' );
+			$message = __( 'Invalid away mode time listed. The period selected already ended.', 'better-wp-security' );
 
 			add_settings_error( 'itsec', esc_attr( 'settings_updated' ), $message, $type );
 
@@ -571,7 +571,7 @@ class ITSEC_Away_Mode_Admin {
 		if ( isset( $_POST['itsec_away_mode'] ) ) {
 
 			if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'security_page_toplevel_page_itsec_settings-options' ) ) {
-				die( __( 'Security error!', 'it-l10n-better-wp-security' ) );
+				die( __( 'Security error!', 'better-wp-security' ) );
 			}
 
 			update_site_option( 'itsec_away_mode', $_POST['itsec_away_mode'] ); //we must manually save network options

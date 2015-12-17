@@ -93,7 +93,7 @@ class ITSEC_Brute_Force {
 
 			$lockout_modules['brute_force'] = array(
 				'type'   => 'brute_force',
-				'reason' => __( 'too many bad login attempts', 'it-l10n-better-wp-security' ),
+				'reason' => __( 'too many bad login attempts', 'better-wp-security' ),
 				'host'   => $this->settings['max_attempts_host'],
 				'user'   => $this->settings['max_attempts_user'],
 				'period' => $this->settings['check_period'],
@@ -101,7 +101,7 @@ class ITSEC_Brute_Force {
 
 			$lockout_modules['brute_force_admin_user'] = array(
 				'type'   => 'brute_force',
-				'reason' => __( 'user tried to login as "admin."', 'it-l10n-better-wp-security' ),
+				'reason' => __( 'user tried to login as "admin."', 'better-wp-security' ),
 				'host'   => 1,
 				'user'   => 1,
 				'period' => $this->settings['check_period']
@@ -128,7 +128,7 @@ class ITSEC_Brute_Force {
 
 			$logger_modules['brute_force'] = array(
 				'type'     => 'brute_force',
-				'function' => __( 'Invalid Login Attempt', 'it-l10n-better-wp-security' ),
+				'function' => __( 'Invalid Login Attempt', 'better-wp-security' ),
 			);
 
 		}

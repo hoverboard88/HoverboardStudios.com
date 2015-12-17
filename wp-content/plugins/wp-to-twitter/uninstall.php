@@ -25,6 +25,7 @@ if ( ! defined( 'ABSPATH' ) && ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	delete_option( 'wpt_rate_limits' );
 	delete_option( 'wpt_default_rate_limit' );
 	delete_option( 'wpt_rate_limit' );
+	delete_option( 'wpt_rate_limiting' );
 	
 // Blogroll options
 	delete_option( 'jd-use-link-title' );

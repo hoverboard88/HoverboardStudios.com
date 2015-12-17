@@ -35,7 +35,7 @@ class ITSEC_Strong_Passwords_Admin {
 	public function add_admin_meta_boxes() {
 
 		$id    = 'strong_passwords_options';
-		$title = __( 'Strong Passwords', 'it-l10n-better-wp-security' );
+		$title = __( 'Strong Passwords', 'better-wp-security' );
 
 		add_meta_box(
 			$id,
@@ -85,7 +85,7 @@ class ITSEC_Strong_Passwords_Admin {
 
 			$status_array = 'safe-high';
 			$status       = array(
-				'text' => __( 'You are enforcing strong passwords for all users.', 'it-l10n-better-wp-security' ),
+				'text' => __( 'You are enforcing strong passwords for all users.', 'better-wp-security' ),
 				'link' => '#itsec_strong_passwords_enabled',
 			);
 
@@ -93,7 +93,7 @@ class ITSEC_Strong_Passwords_Admin {
 
 			$status_array = 'low';
 			$status       = array(
-				'text' => __( 'You are enforcing strong passwords, but not for all users.', 'it-l10n-better-wp-security' ),
+				'text' => __( 'You are enforcing strong passwords, but not for all users.', 'better-wp-security' ),
 				'link' => '#itsec_strong_passwords_enabled',
 			);
 
@@ -101,7 +101,7 @@ class ITSEC_Strong_Passwords_Admin {
 
 			$status_array = 'high';
 			$status       = array(
-				'text' => __( 'You are not enforcing strong passwords for any users.', 'it-l10n-better-wp-security' ),
+				'text' => __( 'You are not enforcing strong passwords for any users.', 'better-wp-security' ),
 				'link' => '#itsec_strong_passwords_enabled',
 			);
 
@@ -123,14 +123,14 @@ class ITSEC_Strong_Passwords_Admin {
 		//Add Settings sections
 		add_settings_section(
 			'strong_passwords-enabled',
-			__( 'Enforce Strong Passwords', 'it-l10n-better-wp-security' ),
+			__( 'Enforce Strong Passwords', 'better-wp-security' ),
 			'__return_empty_string',
 			'security_page_toplevel_page_itsec_settings'
 		);
 
 		add_settings_section(
 			'strong_passwords-settings',
-			__( 'Enforce Strong Passwords', 'it-l10n-better-wp-security' ),
+			__( 'Enforce Strong Passwords', 'better-wp-security' ),
 			'__return_empty_string',
 			'security_page_toplevel_page_itsec_settings'
 		);
@@ -138,7 +138,7 @@ class ITSEC_Strong_Passwords_Admin {
 		//Strong Passwords Fields
 		add_settings_field(
 			'itsec_strong_passwords[enabled]',
-			__( 'Strong Passwords', 'it-l10n-better-wp-security' ),
+			__( 'Strong Passwords', 'better-wp-security' ),
 			array( $this, 'strong_passwords_enabled' ),
 			'security_page_toplevel_page_itsec_settings',
 			'strong_passwords-enabled'
@@ -146,7 +146,7 @@ class ITSEC_Strong_Passwords_Admin {
 
 		add_settings_field(
 			'itsec_strong_passwords[roll]',
-			__( 'Select Role for Strong Passwords', 'it-l10n-better-wp-security' ),
+			__( 'Select Role for Strong Passwords', 'better-wp-security' ),
 			array( $this, 'strong_passwords_role' ),
 			'security_page_toplevel_page_itsec_settings',
 			'strong_passwords-settings'
@@ -170,7 +170,7 @@ class ITSEC_Strong_Passwords_Admin {
 	 */
 	public function metabox_strong_passwords_settings() {
 
-		echo '<p>' . __( 'Force users to use strong passwords as rated by the WordPress password meter.', 'it-l10n-better-wp-security' ) . '</p>';
+		echo '<p>' . __( 'Force users to use strong passwords as rated by the WordPress password meter.', 'better-wp-security' ) . '</p>';
 
 		$this->core->do_settings_section( 'security_page_toplevel_page_itsec_settings', 'strong_passwords-enabled', false );
 		$this->core->do_settings_section( 'security_page_toplevel_page_itsec_settings', 'strong_passwords-settings', false );
@@ -179,7 +179,7 @@ class ITSEC_Strong_Passwords_Admin {
 
 		settings_fields( 'security_page_toplevel_page_itsec_settings' );
 
-		echo '<input class="button-primary" name="submit" type="submit" value="' . __( 'Save All Changes', 'it-l10n-better-wp-security' ) . '" />' . PHP_EOL;
+		echo '<input class="button-primary" name="submit" type="submit" value="' . __( 'Save All Changes', 'better-wp-security' ) . '" />' . PHP_EOL;
 
 		echo '</p>' . PHP_EOL;
 
@@ -242,7 +242,7 @@ class ITSEC_Strong_Passwords_Admin {
 		if ( isset( $_POST['itsec_strong_passwords'] ) ) {
 
 			if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'security_page_toplevel_page_itsec_settings-options' ) ) {
-				die( __( 'Security error!', 'it-l10n-better-wp-security' ) );
+				die( __( 'Security error!', 'better-wp-security' ) );
 			}
 
 			update_site_option( 'itsec_strong_passwords', $_POST['itsec_strong_passwords'] ); //we must manually save network options
@@ -267,7 +267,7 @@ class ITSEC_Strong_Passwords_Admin {
 		}
 
 		$content = '<input type="checkbox" id="itsec_strong_passwords_enabled" name="itsec_strong_passwords[enabled]" value="1" ' . checked( 1, $enabled, false ) . '/>';
-		$content .= '<label for="itsec_strong_passwords_enabled"> ' . __( 'Enable strong password enforcement.', 'it-l10n-better-wp-security' ) . '</label>';
+		$content .= '<label for="itsec_strong_passwords_enabled"> ' . __( 'Enable strong password enforcement.', 'better-wp-security' ) . '</label>';
 
 		echo $content;
 
@@ -297,8 +297,8 @@ class ITSEC_Strong_Passwords_Admin {
 		$content .= '</select><br>';
 		$content .= '<label for="itsec_strong_passwords_roll"> ' . __( 'Minimum role at which a user must choose a strong password.' ) . '</label>';
 
-		$content .= '<p class="description"> ' . __( 'For more information on WordPress roles and capabilities please see', 'it-l10n-better-wp-security' ) . ' <a href="http://codex.wordpress.org/Roles_and_Capabilities" target="_blank">http://codex.wordpress.org/Roles_and_Capabilities</a>.</p>';
-		$content .= '<p class="warningtext description">' . __( 'Warning: If your site invites public registrations setting the role too low may annoy your members.', 'it-l10n-better-wp-security' ) . '</p>';
+		$content .= '<p class="description"> ' . __( 'For more information on WordPress roles and capabilities please see', 'better-wp-security' ) . ' <a href="http://codex.wordpress.org/Roles_and_Capabilities" target="_blank">http://codex.wordpress.org/Roles_and_Capabilities</a>.</p>';
+		$content .= '<p class="warningtext description">' . __( 'Warning: If your site invites public registrations setting the role too low may annoy your members.', 'better-wp-security' ) . '</p>';
 
 		echo $content;
 

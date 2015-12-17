@@ -209,7 +209,7 @@ class ITSEC_Away_Mode {
 			             5,
 			             array(
 				             __( 'A host was prevented from accessing the dashboard due to away-mode restrictions being in effect',
-				                 'it-l10n-better-wp-security' ),
+				                 'better-wp-security' ),
 			             ),
 			             ITSEC_Lib::get_ip(),
 			             '',
@@ -236,7 +236,7 @@ class ITSEC_Away_Mode {
 
 		$logger_modules['away_mode'] = array(
 			'type'     => 'away_mode',
-			'function' => __( 'Away Mode Triggered', 'it-l10n-better-wp-security' ),
+			'function' => __( 'Away Mode Triggered', 'better-wp-security' ),
 		);
 
 		return $logger_modules;

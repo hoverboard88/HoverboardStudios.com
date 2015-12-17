@@ -31,7 +31,7 @@ class ITSEC_Core_Admin {
 
 			add_meta_box(
 				'itsec_security_updates',
-				__( 'Download Our WordPress Security Pocket Guide', 'it-l10n-better-wp-security' ),
+				__( 'Download Our WordPress Security Pocket Guide', 'better-wp-security' ),
 				array( $this, 'metabox_security_updates' ),
 				$page,
 				'priority_side',
@@ -42,7 +42,7 @@ class ITSEC_Core_Admin {
 
 				add_meta_box(
 					'itsec_get_backup',
-					__( 'Complete Your Security Strategy With BackupBuddy', 'it-l10n-better-wp-security' ),
+					__( 'Complete Your Security Strategy With BackupBuddy', 'better-wp-security' ),
 					array( $this, 'metabox_get_backupbuddy' ),
 					$page,
 					'priority_side',
@@ -53,7 +53,7 @@ class ITSEC_Core_Admin {
 
 			add_meta_box(
 				'itsec_sync_integration',
-				__( 'Manage Your Sites Remotely', 'it-l10n-better-wp-security' ),
+				__( 'Manage Your Sites Remotely', 'better-wp-security' ),
 				array( $this, 'metabox_sync_integration' ),
 				$page,
 				'side',
@@ -62,7 +62,7 @@ class ITSEC_Core_Admin {
 
 			add_meta_box(
 				'itsec_need_help',
-				__( 'Need Help Securing Your Site?', 'it-l10n-better-wp-security' ),
+				__( 'Need Help Securing Your Site?', 'better-wp-security' ),
 				array( $this, 'metabox_need_help' ),
 				$page,
 				'side',
@@ -73,7 +73,7 @@ class ITSEC_Core_Admin {
 
 		add_meta_box(
 			'itsec_get_started',
-			__( 'Getting Started', 'it-l10n-better-wp-security' ),
+			__( 'Getting Started', 'better-wp-security' ),
 			array( $this, 'metabox_get_started' ),
 			'toplevel_page_itsec',
 			'normal',
@@ -93,8 +93,7 @@ class ITSEC_Core_Admin {
 	 */
 	public function add_plugin_meta_links( $meta ) {
 
-		$meta[] = '<a href="http://ithemes.com/security/ithemes-security-professional-setup" target="_blank">' . __( 'Get Pro Setup', 'it-l10n-better-wp-security' ) . '</a>';
-		$meta[] = '<a href="https://ithemes.com/security?utm_source=wordpressadmin&utm_medium=banner&utm_campaign=itsecfreecta" target="_blank">' . __( 'Get Support', 'it-l10n-better-wp-security' ) . '</a>';
+		$meta[] = '<a href="https://ithemes.com/security?utm_source=wordpressadmin&utm_medium=banner&utm_campaign=itsecfreecta" target="_blank">' . __( 'Get Support', 'better-wp-security' ) . '</a>';
 
 		return $meta;
 	}
@@ -109,9 +108,9 @@ class ITSEC_Core_Admin {
 	public function metabox_get_backupbuddy() {
 
 		echo '<p style="text-align: center;"><img src="' . plugins_url( 'img/backupbuddy-logo.png', __FILE__ ) . '" alt="BackupBuddy"></p>';
-		echo '<p>' . __( 'BackupBuddy is the complete backup, restore and migration solution for your WordPress site. Schedule automated backups, store your backups safely off-site and restore your site quickly & easily.', 'it-l10n-better-wp-security' ) . '</p>';
-		echo sprintf( '<p style="font-weight: bold; font-size: 1em;">%s<span style="display: block; text-align: center; font-size: 1.2em; background: #ebebeb; padding: .5em;">%s</span></p>', __( '25% off BackupBuddy with coupon code', 'it-l10n-better-wp-security' ), __( 'BACKUPPROTECT', 'it-l10n-better-wp-security' ) );
-		echo '<a href="http://ithemes.com/better-backups" class="button-secondary" target="_blank">' . __( 'Get BackupBuddy', 'it-l10n-better-wp-security' ) . '</a>';
+		echo '<p>' . __( 'BackupBuddy is the complete backup, restore and migration solution for your WordPress site. Schedule automated backups, store your backups safely off-site and restore your site quickly & easily.', 'better-wp-security' ) . '</p>';
+		echo sprintf( '<p style="font-weight: bold; font-size: 1em;">%s<span style="display: block; text-align: center; font-size: 1.2em; background: #ebebeb; padding: .5em;">%s</span></p>', __( '25% off BackupBuddy with coupon code', 'better-wp-security' ), __( 'BACKUPPROTECT', 'better-wp-security' ) );
+		echo '<a href="http://ithemes.com/better-backups" class="button-secondary" target="_blank">' . __( 'Get BackupBuddy', 'better-wp-security' ) . '</a>';
 
 	}
 
@@ -126,17 +125,17 @@ class ITSEC_Core_Admin {
 
 		echo '<div class="itsec_getting_started">';
 		echo '<div class="column">';
-		echo '<h2>' . __( 'Watch the Walk-Through Video', 'it-l10n-better-wp-security' ) . '</h2>';
+		echo '<h2>' . __( 'Watch the Walk-Through Video', 'better-wp-security' ) . '</h2>';
 		echo '<a class="itsec-video-link" href="#" data-video-id="itsec_video"><img src="' . plugins_url( 'img/video.png', __FILE__ ) . '" /></a>';
-		echo sprintf( '<p class="itsec-video-description">%s <a href="http://ithem.es/6y" target="_blank">%s</a> %s </p>', __( 'In this short video, we walk through', 'it-l10n-better-wp-security' ), __( 'how to get started securing your site', 'it-l10n-better-wp-security' ), __( 'with iThemes Security.', 'it-l10n-better-wp-security' ) );
+		echo sprintf( '<p class="itsec-video-description">%s <a href="http://ithem.es/6y" target="_blank">%s</a> %s </p>', __( 'In this short video, we walk through', 'better-wp-security' ), __( 'how to get started securing your site', 'better-wp-security' ), __( 'with iThemes Security.', 'better-wp-security' ) );
 		echo '<p class="itsec_video"><iframe src="//player.vimeo.com/video/89142424?title=0&amp;byline=0&amp;portrait=0" width="853" height="480" frameborder="0" ></iframe></p>';
 
 		echo '</div>';
 
 		echo '<div class="column two">';
-		echo '<h2>' . __( 'Website Security is a complicated subject, but we have experts that can help.', 'it-l10n-better-wp-security' ) . '</h2>';
-		echo '<p>' . __( 'Get added peace of mind with professional support from our expert team and pro features to take your site security to the next level with iThemes Security Pro.', 'it-l10n-better-wp-security' ) . '</p>';
-		echo '<p><a class="button-primary" href="https://ithemes.com/security?utm_source=wordpressadmin&utm_medium=banner&utm_campaign=itsecfreecta" target="_blank">' . __( 'Get Support and Pro Features', 'it-l10n-better-wp-security' ) . '</a></p>';
+		echo '<h2>' . __( 'Website Security is a complicated subject, but we have experts that can help.', 'better-wp-security' ) . '</h2>';
+		echo '<p>' . __( 'Get added peace of mind with professional support from our expert team and pro features to take your site security to the next level with iThemes Security Pro.', 'better-wp-security' ) . '</p>';
+		echo '<p><a class="button-primary" href="https://ithemes.com/security?utm_source=wordpressadmin&utm_medium=banner&utm_campaign=itsecfreecta" target="_blank">' . __( 'Get Support and Pro Features', 'better-wp-security' ) . '</a></p>';
 		echo '</div>';
 		echo '</div>';
 
@@ -151,12 +150,10 @@ class ITSEC_Core_Admin {
 	 */
 	public function metabox_need_help() {
 
-		echo '<p>' . __( 'Since you are using the free version of iThemes Security from WordPress.org, you can get free support from the WordPress community.', 'it-l10n-better-wp-security' ) . '</p>';
-		echo '<p><a class="button-secondary" href="http://wordpress.org/support/plugin/better-wp-security" target="_blank">' . __( 'Get Free Support', 'it-l10n-better-wp-security' ) . '</a></p>';
-		echo '<p>' . __( 'Be sure your site has been properly secured by having one of our security experts tailor iThemes Security settings to the specific needs of this site.', 'it-l10n-better-wp-security' ) . '</p>';
-		echo '<p><a class="button-secondary" href="https://ithemes.com/security/ithemes-security-professional-setup" target="_blank">' . __( 'Have an expert secure my site', 'it-l10n-better-wp-security' ) . '</a></p>';
-		echo '<p>' . __( 'Get added peace of mind with professional support from our expert team and pro features with iThemes Security Pro.', 'it-l10n-better-wp-security' ) . '</p>';
-		echo '<p><a class="button-secondary" href="https://ithemes.com/security/?utm_source=wordpressadmin&utm_medium=widget&utm_campaign=itsecfreecta" target="_blank">' . __( 'Get iThemes Security Pro', 'it-l10n-better-wp-security' ) . '</a></p>';
+		echo '<p>' . __( 'Since you are using the free version of iThemes Security from WordPress.org, you can get free support from the WordPress community.', 'better-wp-security' ) . '</p>';
+		echo '<p><a class="button-secondary" href="http://wordpress.org/support/plugin/better-wp-security" target="_blank">' . __( 'Get Free Support', 'better-wp-security' ) . '</a></p>';
+		echo '<p>' . __( 'Get added peace of mind with professional support from our expert team and pro features with iThemes Security Pro.', 'better-wp-security' ) . '</p>';
+		echo '<p><a class="button-secondary" href="https://ithemes.com/security/?utm_source=wordpressadmin&utm_medium=widget&utm_campaign=itsecfreecta" target="_blank">' . __( 'Get iThemes Security Pro', 'better-wp-security' ) . '</a></p>';
 
 	}
 
@@ -219,10 +216,10 @@ class ITSEC_Core_Admin {
 		</div>
 		<?php
 
-		echo '<p>' . __( 'Manage updates remotely for up to 10 WordPress sites today for free!', 'it-l10n-better-wp-security' ) . '</p>';
-		echo '<p>' . __( 'Integrated with iThemes Security, so you can release lockouts and turn Away Mode on or off right from your Sync dashboard or your phone.', 'it-l10n-better-wp-security' ) . '</p>';
+		echo '<p>' . __( 'Manage updates remotely for up to 10 WordPress sites today for free!', 'better-wp-security' ) . '</p>';
+		echo '<p>' . __( 'Integrated with iThemes Security, so you can release lockouts and turn Away Mode on or off right from your Sync dashboard or your phone.', 'better-wp-security' ) . '</p>';
 		echo '<div style="text-align: center;">';
-		echo '<p><a class="button-primary" href="http://www.ithemes.com/sync" target="_blank">' . __( 'Try iThemes Sync for Free', 'it-l10n-better-wp-security' ) . '</a></p>';
+		echo '<p><a class="button-primary" href="http://www.ithemes.com/sync" target="_blank">' . __( 'Try iThemes Sync for Free', 'better-wp-security' ) . '</a></p>';
 		echo '</div>';
 
 	}
@@ -254,7 +251,7 @@ class ITSEC_Core_Admin {
 					global $itsec_globals;
 
 					echo '<div class="updated" id="itsec_setup_notice"><span class="it-icon-itsec"></span>'
-					     . $itsec_globals['plugin_name'] . ' ' . __( 'is almost ready.', 'it-l10n-better-wp-security' ) . '<a href="#" class="itsec-notice-button" onclick="document.location.href=\'?itsec_setup=yes&_wpnonce=' . wp_create_nonce( 'itsec-nag' ) . '\';">' . __( 'Secure Your Site Now', 'it-l10n-better-wp-security' ) . '</a><a target="_blank" href="http://ithemes.com/ithemes-security-4-is-here" class="itsec-notice-button">' . __( "See what's new in 4.0", 'it-l10n-better-wp-security' ) . '</a><a href="#" class="itsec-notice-hide" onclick="document.location.href=\'?itsec_setup=no&_wpnonce=' . wp_create_nonce( 'itsec-nag' ) . '\';">&times;</a>
+					     . $itsec_globals['plugin_name'] . ' ' . __( 'is almost ready.', 'better-wp-security' ) . '<a href="#" class="itsec-notice-button" onclick="document.location.href=\'?itsec_setup=yes&_wpnonce=' . wp_create_nonce( 'itsec-nag' ) . '\';">' . __( 'Secure Your Site Now', 'better-wp-security' ) . '</a><a target="_blank" href="http://ithemes.com/ithemes-security-4-is-here" class="itsec-notice-button">' . __( "See what's new in 4.0", 'better-wp-security' ) . '</a><a href="#" class="itsec-notice-hide" onclick="document.location.href=\'?itsec_setup=no&_wpnonce=' . wp_create_nonce( 'itsec-nag' ) . '\';">&times;</a>
 						</div>';
 
 				}
@@ -328,7 +325,7 @@ class ITSEC_Core_Admin {
 					global $itsec_globals;
 
 					echo '<div class="updated" id="itsec_support_notice">
-						<span class="itsec_notice_text">' . __( 'It looks like you\'ve been enjoying', 'it-l10n-better-wp-security' ) . ' ' . $itsec_globals['plugin_name'] . ' ' . __( "for at least 30 days. It's time to take the next step.", 'it-l10n-better-wp-security' ) . '</span><input type="button" class="itsec-notice-button" value="' . __( 'Upgrade to Pro', 'it-l10n-better-wp-security' ) . '" onclick="document.location.href=\'?itsec_donate=yes&_wpnonce=' . wp_create_nonce( 'itsec-nag' ) . '\';">  <input type="button" class="itsec-notice-button" value="' . __( 'Rate it 5★\'s', 'it-l10n-better-wp-security' ) . '" onclick="document.location.href=\'?itsec_rate=yes&_wpnonce=' . wp_create_nonce( 'itsec-nag' ) . '\';">  <input type="button" class="itsec-notice-button" value="' . __( 'Tell Your Followers', 'it-l10n-better-wp-security' ) . '" onclick="document.location.href=\'?itsec_tweet=yes&_wpnonce=' . wp_create_nonce( 'itsec-nag' ) . '\';">  <input type="button" class="itsec-notice-hide" value="&times;" onclick="document.location.href=\'?itsec_no_nag=off&_wpnonce=' . wp_create_nonce( 'itsec-nag' ) . '\';">
+						<span class="itsec_notice_text">' . __( 'It looks like you\'ve been enjoying', 'better-wp-security' ) . ' ' . $itsec_globals['plugin_name'] . ' ' . __( "for at least 30 days. It's time to take the next step.", 'better-wp-security' ) . '</span><input type="button" class="itsec-notice-button" value="' . __( 'Upgrade to Pro', 'better-wp-security' ) . '" onclick="document.location.href=\'?itsec_donate=yes&_wpnonce=' . wp_create_nonce( 'itsec-nag' ) . '\';">  <input type="button" class="itsec-notice-button" value="' . __( 'Rate it 5★\'s', 'better-wp-security' ) . '" onclick="document.location.href=\'?itsec_rate=yes&_wpnonce=' . wp_create_nonce( 'itsec-nag' ) . '\';">  <input type="button" class="itsec-notice-button" value="' . __( 'Tell Your Followers', 'better-wp-security' ) . '" onclick="document.location.href=\'?itsec_tweet=yes&_wpnonce=' . wp_create_nonce( 'itsec-nag' ) . '\';">  <input type="button" class="itsec-notice-hide" value="&times;" onclick="document.location.href=\'?itsec_no_nag=off&_wpnonce=' . wp_create_nonce( 'itsec-nag' ) . '\';">
 						</div>';
 
 				}

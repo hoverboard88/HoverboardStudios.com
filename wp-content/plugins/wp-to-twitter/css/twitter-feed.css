@@ -1,3 +1,7 @@
+.wpt-header iframe {
+	float: right;
+}
+
 .wpt-left {
     float: left;
     margin-right: 10px;

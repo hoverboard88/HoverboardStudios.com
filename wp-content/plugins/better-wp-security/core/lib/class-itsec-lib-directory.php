@@ -34,7 +34,7 @@ class ITSEC_Lib_Directory {
 		}
 		
 		if ( empty( $callable ) ) {
-			return new WP_Error( 'itsec-lib-directory-read-no-callable-functions', sprintf( __( '%s could not be read. Both the opendir/readdir/closedir and glob functions are disabled on the server.', 'it-l10n-better-wp-security' ), $dir ) );
+			return new WP_Error( 'itsec-lib-directory-read-no-callable-functions', sprintf( __( '%s could not be read. Both the opendir/readdir/closedir and glob functions are disabled on the server.', 'better-wp-security' ), $dir ) );
 		}
 		
 		
@@ -85,7 +85,7 @@ class ITSEC_Lib_Directory {
 		}
 		
 		
-		return new WP_Error( 'itsec-lib-directory-read-cannot-read', sprintf( __( '%s could not be read due to an unknown error.', 'it-l10n-better-wp-security' ), $dir ) );
+		return new WP_Error( 'itsec-lib-directory-read-cannot-read', sprintf( __( '%s could not be read due to an unknown error.', 'better-wp-security' ), $dir ) );
 	}
 	
 	/**
@@ -119,11 +119,11 @@ class ITSEC_Lib_Directory {
 		}
 		
 		if ( ITSEC_Lib_File::exists( $dir ) ) {
-			return new WP_Error( 'itsec-lib-directory-create-file-exists', sprintf( __( 'The directory %s could not be created as a file with that name already exists.', 'it-l10n-better-wp-security' ), $dir ) );
+			return new WP_Error( 'itsec-lib-directory-create-file-exists', sprintf( __( 'The directory %s could not be created as a file with that name already exists.', 'better-wp-security' ), $dir ) );
 		}
 		
 		if ( ! ITSEC_Lib_Utility::is_callable_function( 'mkdir' ) ) {
-			return new WP_Error( 'itsec-lib-directory-create-mkdir-is-disabled', sprintf( __( 'The directory %s could not be created as the mkdir() function is disabled. This is a system configuration issue.', 'it-l10n-better-wp-security' ), $dir ) );
+			return new WP_Error( 'itsec-lib-directory-create-mkdir-is-disabled', sprintf( __( 'The directory %s could not be created as the mkdir() function is disabled. This is a system configuration issue.', 'better-wp-security' ), $dir ) );
 		}
 		
 		
@@ -134,7 +134,7 @@ class ITSEC_Lib_Directory {
 		}
 		
 		if ( empty( $parent ) ) {
-			return new WP_Error( 'itsec-lib-directory-create-unable-to-find-parent', sprintf( __( 'The directory %s could not be created as an existing parent directory could not be found.', 'it-l10n-better-wp-security' ), $dir ) );
+			return new WP_Error( 'itsec-lib-directory-create-unable-to-find-parent', sprintf( __( 'The directory %s could not be created as an existing parent directory could not be found.', 'better-wp-security' ), $dir ) );
 		}
 		
 		
@@ -152,7 +152,7 @@ class ITSEC_Lib_Directory {
 			return true;
 		}
 		
-		return new WP_Error( 'itsec-lib-directory-create-failed', sprintf( __( 'The directory %s could not be created due to an unknown error. This could be due to a permissions issue.', 'it-l10n-better-wp-security' ), $dir ) );
+		return new WP_Error( 'itsec-lib-directory-create-failed', sprintf( __( 'The directory %s could not be created due to an unknown error. This could be due to a permissions issue.', 'better-wp-security' ), $dir ) );
 	}
 	
 	/**
@@ -169,14 +169,14 @@ class ITSEC_Lib_Directory {
 		
 		
 		if ( ! ITSEC_Lib_Utility::is_callable_function( 'rmdir' ) ) {
-			return new WP_Error( 'itsec-lib-directory-remove-rmdir-is-disabled', sprintf( __( 'The directory %s could not be removed as the rmdir() function is disabled. This is a system configuration issue.', 'it-l10n-better-wp-security' ), $dir ) );
+			return new WP_Error( 'itsec-lib-directory-remove-rmdir-is-disabled', sprintf( __( 'The directory %s could not be removed as the rmdir() function is disabled. This is a system configuration issue.', 'better-wp-security' ), $dir ) );
 		}
 		
 		
 		$files = self::read( $dir );
 		
 		if ( is_wp_error( $files ) ) {
-			return new WP_Error( 'itsec-lib-directory-remove-read-error', sprintf( __( 'Unable to remove %1$s due to the following error: %2$s', 'it-l10n-better-wp-security' ), $dir, $files->get_error_message() ) );
+			return new WP_Error( 'itsec-lib-directory-remove-read-error', sprintf( __( 'Unable to remove %1$s due to the following error: %2$s', 'better-wp-security' ), $dir, $files->get_error_message() ) );
 		}
 		
 		foreach ( $files as $file ) {
@@ -194,7 +194,7 @@ class ITSEC_Lib_Directory {
 			return true;
 		}
 		
-		return new WP_Error( 'itsec-lib-directory-remove-unknown-error', sprintf( __( 'Unable to remove %s due to an unknown error.', 'it-l10n-better-wp-security' ), $dir ) );
+		return new WP_Error( 'itsec-lib-directory-remove-unknown-error', sprintf( __( 'Unable to remove %s due to an unknown error.', 'better-wp-security' ), $dir ) );
 	}
 	
 	/**
@@ -209,11 +209,11 @@ class ITSEC_Lib_Directory {
 	 */
 	public static function get_permissions( $dir ) {
 		if ( ! self::is_dir( $dir ) ) {
-			return new WP_Error( 'itsec-lib-dir-get-permissions-missing-dir', sprintf( __( 'Permissions for the directory %s could not be read as the directory could not be found.', 'it-l10n-better-wp-security' ), $dir ) );
+			return new WP_Error( 'itsec-lib-dir-get-permissions-missing-dir', sprintf( __( 'Permissions for the directory %s could not be read as the directory could not be found.', 'better-wp-security' ), $dir ) );
 		}
 		
 		if ( ! ITSEC_Lib_Utility::is_callable_function( 'fileperms' ) ) {
-			return new WP_Error( 'itsec-lib-directory-get-permissions-fileperms-is-disabled', sprintf( __( 'Permissions for the directory %s could not be read as the fileperms() function is disabled. This is a system configuration issue.', 'it-l10n-better-wp-security' ), $dir ) );
+			return new WP_Error( 'itsec-lib-directory-get-permissions-fileperms-is-disabled', sprintf( __( 'Permissions for the directory %s could not be read as the fileperms() function is disabled. This is a system configuration issue.', 'better-wp-security' ), $dir ) );
 		}
 		
 		

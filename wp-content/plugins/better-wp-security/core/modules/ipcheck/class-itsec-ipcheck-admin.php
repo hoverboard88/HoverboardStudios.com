@@ -88,9 +88,9 @@ class ITSEC_IPCheck_Admin {
 				'itsec_ipcheck',
 				array(
 					'api_nonce' => wp_create_nonce( 'itsec_api_nonce' ),
-					'text1'     => __( 'Receive email updates from iThemes', 'it-l10n-better-wp-security' ),
-					'text2'     => __( 'Leverage the power of the iThemes Brute Force Protection network to ban IPs hitting your site.', 'it-l10n-better-wp-security' ),
-					'text3'     => __( 'Enter email and click Save All Changes', 'it-l10n-better-wp-security' ),
+					'text1'     => __( 'Receive email updates from iThemes', 'better-wp-security' ),
+					'text2'     => __( 'Leverage the power of the iThemes Brute Force Protection network to ban IPs hitting your site.', 'better-wp-security' ),
+					'text3'     => __( 'Enter email and click Save All Changes', 'better-wp-security' ),
 				)
 			);
 
@@ -153,7 +153,7 @@ class ITSEC_IPCheck_Admin {
 		//Add Settings sections
 		add_settings_section(
 			'ipcheck-settings-brute-force',
-			__( 'Get your iThemes Brute Force Protection API Key', 'it-l10n-better-wp-security' ),
+			__( 'Get your iThemes Brute Force Protection API Key', 'better-wp-security' ),
 			'__return_empty_string',
 			'security_page_toplevel_page_itsec_settings'
 		);
@@ -161,7 +161,7 @@ class ITSEC_IPCheck_Admin {
 		/*
 		add_settings_section(
 			'ipcheck-settings-malware',
-			__( 'Get your iThemes Brute Force Protection API Key', 'it-l10n-better-wp-security' ),
+			__( 'Get your iThemes Brute Force Protection API Key', 'better-wp-security' ),
 			'__return_empty_string',
 			'security_page_toplevel_page_itsec_settings'
 		);
@@ -170,7 +170,7 @@ class ITSEC_IPCheck_Admin {
 		//Add Settings Fields
 		add_settings_field(
 			'itsec_ipcheck',
-			__( 'Get your iThemes Brute Force Protection API Key', 'it-l10n-better-wp-security' ),
+			__( 'Get your iThemes Brute Force Protection API Key', 'better-wp-security' ),
 			array( $this, 'settings_field_api_key_brute_force' ),
 			'security_page_toplevel_page_itsec_settings',
 			'ipcheck-settings-brute-force'
@@ -179,7 +179,7 @@ class ITSEC_IPCheck_Admin {
 		/*
 		add_settings_field(
 			'itsec_ipcheck',
-			__( 'Get your iThemes Malware API Key', 'it-l10n-better-wp-security' ),
+			__( 'Get your iThemes Malware API Key', 'better-wp-security' ),
 			array( $this, 'settings_field_api_key_malware' ),
 			'security_page_toplevel_page_itsec_settings',
 			'ipcheck-settings-malware'
@@ -190,7 +190,7 @@ class ITSEC_IPCheck_Admin {
 
 			add_settings_field(
 				'itsec_ipcheck[api_ban]',
-				__( 'Enable iThemes Brute Force Network Protection', 'it-l10n-better-wp-security' ),
+				__( 'Enable iThemes Brute Force Network Protection', 'better-wp-security' ),
 				array( $this, 'settings_field_api_ban' ),
 				'security_page_toplevel_page_itsec_settings',
 				'ipcheck-settings-brute-force'
@@ -219,7 +219,7 @@ class ITSEC_IPCheck_Admin {
 		if ( isset( $_POST['itsec_ipcheck'] ) ) {
 
 			if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'security_page_toplevel_page_itsec_settings-options' ) ) {
-				die( __( 'Security error!', 'it-l10n-better-wp-security' ) );
+				die( __( 'Security error!', 'better-wp-security' ) );
 			}
 
 			update_site_option( 'itsec_ipcheck', $_POST['itsec_ipcheck'] ); //we must manually save network options
@@ -278,7 +278,7 @@ class ITSEC_IPCheck_Admin {
 				if ( $email === false ) {
 
 					$type    = 'error';
-					$message = __( 'The email address you used to get an iThemes API key appears to be invalid. Please enter a valid email address', 'it-l10n-better-wp-security' );
+					$message = __( 'The email address you used to get an iThemes API key appears to be invalid. Please enter a valid email address', 'better-wp-security' );
 
 					add_settings_error( 'itsec', esc_attr( 'settings_updated' ), $message, $type );
 
@@ -315,7 +315,7 @@ class ITSEC_IPCheck_Admin {
 				if ( $api_error === true && ! isset( $input['api_key'] ) && ! isset( $input['api_s'] ) ) {
 
 					$type    = 'error';
-					$message = __( 'There was an error getting an API key from the IPCheck server. If the problem persists please contact support.', 'it-l10n-better-wp-security' );
+					$message = __( 'There was an error getting an API key from the IPCheck server. If the problem persists please contact support.', 'better-wp-security' );
 
 					add_settings_error( 'itsec', esc_attr( 'settings_updated' ), $message, $type );
 
@@ -359,7 +359,7 @@ class ITSEC_IPCheck_Admin {
 		}
 
 		echo '<input type="checkbox" id="itsec_ipcheck_api_ban" name="itsec_ipcheck[api_ban]" value="1" ' . checked( 1, $api_ban, false ) . '/>';
-		echo '<label for="itsec_ipcheck_api_ban"> ' . __( 'Use the iThemes IPCheck Service to ban IPs reported as a problem by other users in the community.', 'it-l10n-better-wp-security' ) . '</label>';
+		echo '<label for="itsec_ipcheck_api_ban"> ' . __( 'Use the iThemes IPCheck Service to ban IPs reported as a problem by other users in the community.', 'better-wp-security' ) . '</label>';
 
 	}
 
@@ -393,18 +393,18 @@ class ITSEC_IPCheck_Admin {
 
 		if ( $api_key == '' || $api_key == false || $activated == '' || $activated == false ) {
 
-			echo '<input type="text" class="regular-text" id="itsec_ipcheck_email" name="itsec_ipcheck[email-' . $module . ']" value="' . $email . '" placeholder="' . __( 'Enter email and click Save All Changes', 'it-l10n-better-wp-security' ) . '" /><br />';
+			echo '<input type="text" class="regular-text" id="itsec_ipcheck_email" name="itsec_ipcheck[email-' . $module . ']" value="' . $email . '" placeholder="' . __( 'Enter email and click Save All Changes', 'better-wp-security' ) . '" /><br />';
 			echo '<input type="checkbox" id="itsec_ipcheck_optin" name="itsec_ipcheck[optin-' . $module . ']" value="1" checked/>';
-			echo '<label for="itsec_ipcheck_optin">' . __( 'Receive email updates about WP Security from iThemes', 'it-l10n-better-wp-security' ) . '</label>';
+			echo '<label for="itsec_ipcheck_optin">' . __( 'Receive email updates about WP Security from iThemes', 'better-wp-security' ) . '</label>';
 
-			echo '<p class="description">' . __( 'Leverage the power of the iThemes Brute Force Protection network to ban IPs hitting your site. ', 'it-l10n-better-wp-security' ) . '</p>';
+			echo '<p class="description">' . __( 'Leverage the power of the iThemes Brute Force Protection network to ban IPs hitting your site. ', 'better-wp-security' ) . '</p>';
 
 		} else {
 
 			echo '<div class="itsec_api_key_field">';
 			echo '<input type="text" class="regular-text" id="itsec_ipcheck_api_key" name="itsec_ipcheck[api_key]" value="' . $api_key . '" readonly />';
-			echo '<span class="submit"><a class="itsec_reset_ipcheck_api_key button-primary">' . __( 'Reset API Key', 'it-l10n-better-wp-security' ) . '</a></span>';
-			echo '<p class="description">' . __( 'Your API key for the iThemes Security community appears to be valid.', 'it-l10n-better-wp-security' ) . '</p>';
+			echo '<span class="submit"><a class="itsec_reset_ipcheck_api_key button-primary">' . __( 'Reset API Key', 'better-wp-security' ) . '</a></span>';
+			echo '<p class="description">' . __( 'Your API key for the iThemes Security community appears to be valid.', 'better-wp-security' ) . '</p>';
 			echo '</div>';
 
 		}
@@ -434,7 +434,7 @@ class ITSEC_IPCheck_Admin {
 	public function wp_ajax_itsec_api_key_ajax() {
 
 		if ( ! wp_verify_nonce( sanitize_text_field( $_POST['nonce'] ), 'itsec_api_nonce' ) ) {
-			die( __( 'Security error!', 'it-l10n-better-wp-security' ) );
+			die( __( 'Security error!', 'better-wp-security' ) );
 		}
 
 		$this->settings['reset'] = true;

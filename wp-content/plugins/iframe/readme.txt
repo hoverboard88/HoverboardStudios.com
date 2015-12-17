@@ -3,8 +3,8 @@ Contributors: webvitaly
 Donate link: http://web-profile.com.ua/donate/
 Tags: iframe, embed, youtube, vimeo, google-map, google-maps
 Requires at least: 3.0
-Tested up to: 4.1
-Stable tag: 3.0
+Tested up to: 4.5
+Stable tag: 4.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 
@@ -50,7 +50,6 @@ If you need to embed content from YouTube, Vimeo, SlideShare, SoundCloud, Twitte
 * **class** - allows to add the class of the iframe: `[iframe class="custom_class"]`; by default class="iframe-class";
 * **style** - allows to add the css styles of the iframe: `[iframe style="margin-left:-30px;"]`; removed by default;
 * **same_height_as** - allows to set the height of iframe same as target element: `[iframe same_height_as="div.sidebar"]`, `[iframe same_height_as="div#content"]`, `[iframe same_height_as="body"]`, `[iframe same_height_as="html"]`; removed by default;
-* **get_params_from_url** - allows to add GET params from url to the src of iframe; Example: page url - `site.com/?prm1=11`, shortcode - `[iframe src="embed.com" get_params_from_url="1"]`, iframe src - `embed.com?prm1=11` (disabled by default);
 * **any_other_param** - allows to add new parameter of the iframe `[iframe any_other_param="any_value"]`;
 * **any_other_empty_param** - allows to add new empty parameter of the iframe (like "allowfullscreen" on youtube) `[iframe any_other_empty_param=""]`;
 
@@ -59,6 +58,18 @@ If you need to embed content from YouTube, Vimeo, SlideShare, SoundCloud, Twitte
 1. [iframe] shortcode
 
 == Changelog ==
+
+= 4.2 - 2015-08-16 =
+* minor bugfixing.
+
+= 4.1 - 2015-08-11 =
+* removed onpageshow and onclick params. Reason: XSS vulnerability (thanks to dxw.com).
+
+= 4.0 - 2015-08-09 =
+* removed get_params_from_url param. Reason: XSS vulnerability (thanks to dxw.com).
+If you still need this feature you can [download iframe ver 3.0[(https://wordpress.org/plugins/iframe/developers/) and stick to it but keep in mind of XSS vulnerability.
+* removed onload param. Reason: XSS vulnerability (thanks to dxw.com).
+* escaping attributes
 
 = 3.0 - 2015-01-25 =
 * removed same_height_as="content", same_height_as="window", same_height_as="document" features because it was not working properly

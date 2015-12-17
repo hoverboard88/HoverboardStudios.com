@@ -361,53 +361,39 @@ final class ITSEC_Lib {
 	 * @return  String The IP address of the user
 	 */
 	public static function get_ip() {
-
 		global $itsec_globals;
 
 		if ( isset( $itsec_globals['settings']['proxy_override'] ) && true === $itsec_globals['settings']['proxy_override'] ) {
 			return esc_sql( $_SERVER['REMOTE_ADDR'] );
 		}
 
-		//Just get the headers if we can or else use the SERVER global
-		if ( function_exists( 'apache_request_headers' ) ) {
+		$headers = array(
+			'HTTP_CF_CONNECTING_IP', // CloudFlare
+			'HTTP_X_FORWARDED_FOR',  // Squid and most other forward and reverse proxies
+			'REMOTE_ADDR',           // Default source of remote IP
+		);
 
-			$headers = apache_request_headers();
+		$headers = apply_filters( 'itsec_filter_remote_addr_headers', $headers );
 
-		} else {
+		$headers = (array) $headers;
 
-			$headers = $_SERVER;
-
+		if ( ! in_array( 'REMOTE_ADDR', $headers ) ) {
+			$headers[] = 'REMOTE_ADDR';
 		}
 
-		//Get the forwarded IP if it exists
-		if ( array_key_exists( 'X-Forwarded-For', $headers ) &&
-		     (
-			     filter_var( $headers['X-Forwarded-For'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 ) ||
-			     filter_var( $headers['X-Forwarded-For'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV6 ) )
-		) {
+		foreach ( $headers as $header ) {
+			if ( empty( $_SERVER[$header] ) ) {
+				continue;
+			}
 
-			$the_ip = $headers['X-Forwarded-For'];
+			$ip = filter_var( $_SERVER[$header], FILTER_VALIDATE_IP );
 
-		} elseif (
-			array_key_exists( 'HTTP_X_FORWARDED_FOR', $headers ) &&
-			(
-				filter_var( $headers['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 ) ||
-				filter_var( $headers['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV6 )
-			)
-		) {
-
-			$the_ip = $headers['HTTP_X_FORWARDED_FOR'];
-
-		} else if ( isset( $_SERVER['REMOTE_ADDR'] ) ) {
-
-			$the_ip = $_SERVER['REMOTE_ADDR'];
-
-		} else {
-			$the_ip = '';
+			if ( ! empty( $ip ) ) {
+				break;
+			}
 		}
 
-		return esc_sql( $the_ip );
-
+		return esc_sql( (string) $ip );
 	}
 
 	/**
@@ -493,10 +479,12 @@ final class ITSEC_Lib {
 	 */
 	public static function get_server() {
 
+		// @codeCoverageIgnoreStart
 		//Allows to override server authentication for testing or other reasons.
 		if ( defined( 'ITSEC_SERVER_OVERRIDE' ) ) {
 			return ITSEC_SERVER_OVERRIDE;
 		}
+		// @codeCoverageIgnoreEnd
 
 		$server_raw = strtolower( filter_var( $_SERVER['SERVER_SOFTWARE'], FILTER_SANITIZE_STRING ) );
 

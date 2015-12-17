@@ -74,7 +74,7 @@ function wpt_test_rate_limit( $post_ID, $auth ) {
 }
 
 /**
- * Default rate limiting value.
+ * Default rate limiting value. Limit can't be 0.
  *
  * @param $term Term ID
  *
@@ -82,6 +82,7 @@ function wpt_test_rate_limit( $post_ID, $auth ) {
  */
 function wpt_default_rate_limit( $term = false ) {
 	$limit = ( get_option( 'wpt_default_rate_limit' ) != '' ) ? get_option( 'wpt_default_rate_limit' ) : 10;
+	$limit = ( $limit == 0 ) ? 1 : $limit;
 	return apply_filters( 'wpt_default_rate_limit', $limit, $term );	
 }
 

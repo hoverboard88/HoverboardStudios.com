@@ -112,33 +112,10 @@ if ( ! function_exists( 'ss_podcast' ) ) {
 						$title = '<a href="' . esc_url( $post->url ) . '" title="' . esc_attr( $title ) . '">' . $title . '</a>';
 					}
 
+					$meta = $ss_podcasting->episode_meta( $post->ID, 'shortcode' );
+
 					$template = str_replace( '%%CLASS%%', $class, $template );
 					$template = str_replace( '%%TITLE%%', $title, $template );
-
-					$link = $ss_podcasting->get_episode_download_link( $post->ID );
-					$duration = get_post_meta( $post->ID, 'duration', true );
-					$size = get_post_meta( $post->ID, 'filesize', true );
-
-					if ( ! $size ) {
-						$file = $ss_podcasting->get_enclosure( $post->ID );
-						$size_data = $ss_podcasting->get_file_size( $file );
-						$size = $size_data['formatted'];
-						if ( $size ) {
-							if ( isset( $size_data['formatted'] ) ) {
-								update_post_meta( $post->ID, 'filesize', $size_data['formatted'] );
-							}
-
-							if ( isset( $size_data['raw'] ) ) {
-								update_post_meta( $post->ID, 'filesize_raw', $size_data['raw'] );
-							}
-						}
-					}
-
-					$meta = '';
-					if ( $link && strlen( $link ) > 0 ) { $meta .= '<a href="' . esc_url( $link ) . '" title="' . get_the_title() . ' ">' . __( 'Download file' , 'ss-podcasting' ) . '</a>'; }
-					if ( $duration && strlen( $duration ) > 0 ) { if ( $link && strlen( $link ) > 0 ) { $meta .= ' | '; } $meta .= __( 'Duration' , 'ss-podcasting' ) . ': ' . $duration; }
-					if ( $size && strlen( $size ) > 0 ) { if ( ( $duration && strlen( $duration ) > 0 ) || ( $link && strlen( $link ) > 0 ) ) { $meta .= ' | '; } $meta .= __( 'Size' , 'ss-podcasting' ) . ': ' . $size; }
-
 					$template = str_replace( '%%META%%', $meta, $template );
 
 					$html .= $template;
@@ -165,7 +142,7 @@ if ( ! function_exists( 'ss_podcast' ) ) {
 					$template = str_replace( '%%CLASS%%', $class, $template );
 					$template = str_replace( '%%TITLE%%', $title, $template );
 
-					$meta = $series->count . __( ' episodes' , 'ss-podcasting' );
+					$meta = $series->count . __( ' episodes' , 'seriously-simple-podcasting' );
 					$template = str_replace( '%%META%%' , $meta , $template );
 
 					$html .= $template;
@@ -236,37 +213,37 @@ if ( ! function_exists( 'ssp_episode_ids' ) ) {
 		// Remove action to prevent infinite loop
 		remove_action( 'pre_get_posts', array( $ss_podcasting, 'add_all_post_types' ) );
 
+		// Setup the default args
 		$args = array(
-			'post_type' => 'podcast',
-			'post_status' => 'publish',
+			'post_type'      => array( 'podcast' ),
+			'post_status'    => 'publish',
 			'posts_per_page' => -1,
-			'fields' => 'ids',
+			'fields'         => 'ids',
 		);
 
-		$podcast_episodes = get_posts( $args );
-
+		// Do we have any additional post types to add?
 		$podcast_post_types = ssp_post_types( false );
 
 		if ( ! empty( $podcast_post_types ) ) {
-
-			$args = array(
-				'post_type' => $podcast_post_types,
-				'post_status' => 'publish',
-				'posts_per_page' => -1,
-				'meta_query' => array(
-					array(
-						'key' => 'audio_file',
-						'compare' => '!=',
-						'value' => '',
-					),
+			$args['post_type']  = ssp_post_types();
+			$args['meta_query'] = array(
+				array(
+					'key'     => 'audio_file',
+					'compare' => '!=',
+					'value'   => '',
 				),
-				'fields' => 'ids',
 			);
+		}
 
-			$other_episodes = get_posts( $args );
+		// Do we have this stored in the cache?
+		$key   = 'episode_ids';
+		$group = 'ssp';
+		$podcast_episodes = wp_cache_get( $key, $group );
 
-			$podcast_episodes = array_merge( (array) $podcast_episodes, (array) $other_episodes );
-
+		// If nothing in cache then fetch episodes again and store in cache
+		if ( $podcast_episodes === false ) {
+			$podcast_episodes = get_posts( $args );
+			wp_cache_set( $key, $podcast_episodes, $group, HOUR_IN_SECONDS * 12 );
 		}
 
 		// Reinstate action for future queries
@@ -293,6 +270,10 @@ if ( ! function_exists( 'ssp_episodes' ) ) {
 		// Get all podcast episodes IDs
 		$episode_ids = (array) ssp_episode_ids();
 
+		if ( $context === 'glance' ) {
+			return $episode_ids;
+		}
+
 		if ( empty( $episode_ids ) ) {
 			return array();
 		}
@@ -306,11 +287,11 @@ if ( ! function_exists( 'ssp_episodes' ) ) {
 
 		// Fetch podcast episodes
 		$args = array(
-			'post_type' => $podcast_post_types,
-			'post_status' => 'publish',
-			'posts_per_page' => $n,
+			'post_type'           => $podcast_post_types,
+			'post_status'         => 'publish',
+			'posts_per_page'      => $n,
 			'ignore_sticky_posts' => true,
-			'post__in' => $episode_ids,
+			'post__in'            => $episode_ids,
 		);
 
 		if ( $series ) {
@@ -323,7 +304,18 @@ if ( ! function_exists( 'ssp_episodes' ) ) {
 			return $args;
 		}
 
-		return get_posts( $args );
+		// Do we have anything in the cache here?
+		$key   = 'episodes_' . $series;
+		$group = 'ssp';
+		$posts = wp_cache_get( $key, $group );
+
+		// If nothing in cache then fetch episodes again and store in cache
+		if ( $posts === false ) {
+			$posts = get_posts( $args );
+			wp_cache_add( $key, $posts, $group, HOUR_IN_SECONDS * 12 );
+		}
+
+		return $posts;
 	}
 
 }
@@ -362,6 +354,46 @@ if ( ! function_exists( 'ssp_post_types' ) ) {
 		// Return only the valid podcast post types
 		return apply_filters( 'ssp_podcast_post_types', $valid_podcast_post_types, $include_podcast );
 	}
+}
+
+if( ! function_exists( 'ssp_get_feed_category_output' ) ) {
+
+	/**
+	 * Get the XML markup for the feed category st the specified level
+	 * @param  int    $level Category level
+	 * @return string        XML output for feed vategory
+	 */
+	function ssp_get_feed_category_output ( $level = 1, $series_id ) {
+
+		$level = (int) $level;
+
+		if( 1 == $level ) {
+			$level = '';
+		}
+
+		$category = get_option( 'ss_podcasting_data_category' . $level, '' );
+		if ( $series_id ) {
+			$series_category = get_option( 'ss_podcasting_data_category' . $level . '_' . $series_id, 'no-category' );
+			if ( 'no-category' != $series_category ) {
+				$category = $series_category;
+			}
+		}
+		if ( ! $category ) {
+			$category = '';
+			$subcategory = '';
+		} else {
+			$subcategory = get_option( 'ss_podcasting_data_subcategory' . $level, '' );
+			if ( $series_id ) {
+				$series_subcategory = get_option( 'ss_podcasting_data_subcategory' . $level . '_' . $series_id, 'no-subcategory' );
+				if ( 'no-subcategory' != $series_subcategory ) {
+					$subcategory = $series_subcategory;
+				}
+			}
+		}
+
+		return apply_filters( 'ssp_feed_category_output', array( 'category' => $category, 'subcategory' => $subcategory ), $level, $series_id );
+	}
+
 }
 
 if ( ! function_exists( 'ssp_readfile_chunked' ) ) {

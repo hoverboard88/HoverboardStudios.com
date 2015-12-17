@@ -17,8 +17,6 @@
 }
 
 #wp-to-twitter .resources {
-    background: url(../images/logo.png) 50% 5px no-repeat;
-    padding-top: 70px;
     text-align: center;
 }
 
@@ -113,7 +111,7 @@ label[for="wpt_license_key"] {
 }
 
 #wp-to-twitter .wpt-upgrade {
-    background: crimson;
+    background: #e25822;
     color: #fff;
     text-shadow: #000 0 1px 0;
     border-radius: 2px 2px 0 0;
@@ -159,6 +157,16 @@ label[for="wpt_license_key"] {
     margin-bottom: 10px;
     min-height: 200px;
     border: 1px solid #ccc;
+}
+
+#wp-to-twitter  .wpt-pro-tab {
+	background: #213e7f;
+	color: #fff;
+}
+
+#wp-to-twitter .wpt-pro-tab:hover, #wp-to-twitter .wpt-pro-tab:focus {
+	background: #fff;
+	color: #213e7f;
 }
 
 #wpt_settings_page input[type=text] {
@@ -244,6 +252,45 @@ label[for='wpt_prepend_rt'], label[for='wpt_prepend_rt2'], label[for='wpt_prepen
 .wpt-button .cta a:hover, .wpt-button .cta a:focus {
 	text-decoration: underline;
 	background: #233c7f;
+}
+
+.jcd-narrow .free .postbox, .jcd-narrow .free .postbox a, .jcd-narrow .free .postbox h3 {
+	background: #233c7f;
+	color: #fff;
+}
+
+.jcd-narrow .free .postbox .cta a {
+	font-size: 1.4em;
+	padding: .5em;
+}
+
+.jcd-narrow .postbox a:hover, .jcd-narrow .postbox a:focus {
+	text-decoration: none; 
+}
+
+.jcd-narrow .free .postbox h3 {
+	background: #007eb3;
+	color: #fff;
+	text-shadow: 0 0 1px #000;
+	font-size: 1.1em;
+}
+
+.wpt-support-me p {
+    font-size: 1.6em;
+    font-weight: 600;
+    background: #007eb3;
+    text-shadow: 1px 1px rgb( 35, 60, 127 );
+    padding: 1em;
+    text-align: center;
+    margin: 0 0 1em;
+}
+
+.wpt-support-me p, .wpt-support-me a {
+    color: #fff;
+}
+
+.wpt-support-me a:hover, .wpt-support-me a:focus {
+    text-decoration: none;
 }
 
 @media (max-width: 782px) {

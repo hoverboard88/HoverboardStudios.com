@@ -43,13 +43,57 @@ jQuery(document).ready(function($) {
 		jQuery.fn.ssp_upload_media_file( jQuery(this), false );
 	});
 
+	jQuery('#episode_embed_code').click(function() {
+		jQuery(this).select();
+	});
+
+	jQuery( '.episode_embed_code_size_option' ).change(function() {
+
+		var width = jQuery( '#episode_embed_code_width' ).val();
+		var height = jQuery( '#episode_embed_code_height' ).val();
+		var post_id = jQuery( '#post_ID' ).val();
+
+		jQuery.post(
+		    ajaxurl,
+		    {
+		        'action': 'update_episode_embed_code',
+		        'width': width,
+		        'height': height,
+		        'post_id': post_id,
+		    },
+		    function( response ){
+		        if( response ) {
+		        	jQuery( '#episode_embed_code' ).val( response );
+		        	jQuery( '#episode_embed_code' ).select();
+		        }
+		    }
+		);
+	});
+
 	/* DATEPICKER */
 
 	jQuery('.ssp-datepicker').datepicker({
 		changeMonth: true,
       	changeYear: true,
       	showAnim: 'slideDown',
-      	dateFormat: 'dd-mm-yy'
+      	dateFormat: 'd MM, yy',
+      	altField: '#date_recorded',
+      	altFormat: 'dd-mm-yy',
+      	onClose : function ( dateText, obj ) {
+		    var d = $.datepicker.parseDate("d MM, yy", dateText);
+		    var date = $.datepicker.formatDate("dd-mm-yy", d);
+		    var save_field = $(this).attr('id').replace( '_display', '' );
+		    $( '#' + save_field ).val( date );
+		}
+	});
+
+	jQuery('.ssp-datepicker').change( function () {
+		var value = jQuery( this ).val();
+		if( !value ) {
+			var id = jQuery( this ).attr( 'id' );
+			var save_field = id.replace( '_display', '' );
+			jQuery( '#' + save_field ).val( '' );
+		}
 	});
 
 	/* SETTINGS PAGE */
