@@ -12,7 +12,6 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     inline = require('gulp-inline'),
     imagemin = require('gulp-imagemin'),
-    svg2png = require('gulp-svg2png'),
     // svgmin = require('gulp-svgmin'),
     rename = require('gulp-rename'),
     concat = require('gulp-concat'),
@@ -56,13 +55,6 @@ gulp.task('scripts', function() {
     .pipe(notify({ message: 'Scripts task complete' }));
 });
 
-// SVGs to PNGs
-gulp.task('svg2png', function () {
-  return gulp.src('src/img/**/*.svg')
-    .pipe(svg2png())
-    .pipe(gulp.dest('dist/img'));
-});
-
 // Minify SVGs
 // gulp.task('svgmin', function () {
 //   return gulp.src('dist/img/**/*.svg')
@@ -104,7 +96,7 @@ gulp.task('default', function() {
     console.log("Critical CSS truncated.");
   });
 
-  gulp.start('styles', 'scripts', 'images', 'svg2png');
+  gulp.start('styles', 'scripts', 'images');
 });
 
 // Watch
