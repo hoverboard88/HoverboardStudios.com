@@ -1,8 +1,8 @@
 #!/bin/sh
 
-echo "Pulling DB from Production..."
+#echo "Pulling DB from Production..."
 
 # pull database from PROD
-vagrant ssh -c 'wp migratedb pull http://hoverboardstudios.com Wqbf4gZP+KA84vKHO1e4tg6c8ros2fCK0FbO9PQk --find=//hoverboardstudios.com,/home/hoverboard/hoverboardstudios.com/prod --preserve-active-plugins --replace=//hoverboardstudios.vvv,/srv/www/hoverboardstudios/htdocs --media=compare --path="/srv/www/hoverboardstudios/htdocs"'
+#vagrant ssh -c 'wp migratedb pull http://hoverboardstudios.com Wqbf4gZP+KA84vKHO1e4tg6c8ros2fCK0FbO9PQk --find=//hoverboardstudios.com,/home/hoverboard/hoverboardstudios.com/prod --preserve-active-plugins --replace=//hoverboardstudios.vvv,/srv/www/hoverboardstudios/htdocs --media=compare --path="/srv/www/hoverboardstudios/htdocs"'
 
 # wp migratedb <push|pull> <url> <secret-key> [--find=<strings>] [--replace=<strings>] [--include-tables=<tables>] [--exclude-post-types=<post-types>] [--skip-replace-guids] [--exclude-spam] [--preserve-active-plugins] [--include-transients] [--backup=<prefix|selected|table_one,table_two,table_etc>] [--media=<compare|compare-and-remove|remove-and-copy>]
