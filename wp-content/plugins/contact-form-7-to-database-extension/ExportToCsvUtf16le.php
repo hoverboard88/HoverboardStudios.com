@@ -51,6 +51,7 @@ class ExportToCsvUtf16le extends ExportBase implements CFDBExport {
         // Query DB for the data for that form
         $submitTimeKeyName = 'Submit_Time_Key';
         $this->setDataIterator($formName, $submitTimeKeyName);
+        $this->clearOutputBuffer();
 
         // Column Headers
         if (isset($this->options['header']) && $this->options['header'] != 'true') {

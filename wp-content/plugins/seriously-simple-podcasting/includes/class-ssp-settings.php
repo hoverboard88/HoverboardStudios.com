@@ -221,6 +221,10 @@ class SSP_Settings {
 			'Other' => array( 'label' => __( 'Other', 'seriously-simple-podcasting' ), 'group' => __( 'Religion & Spirituality', 'seriously-simple-podcasting' ) ),
 			'Spirituality' => array( 'label' => __( 'Spirituality', 'seriously-simple-podcasting' ), 'group' => __( 'Religion & Spirituality', 'seriously-simple-podcasting' ) ),
 
+			'Medicine' => array( 'label' => __( 'Medicine', 'seriously-simple-podcasting' ), 'group' => __( 'Science & Medicine', 'seriously-simple-podcasting' ) ),
+			'Natural Sciences' => array( 'label' => __( 'Natural Sciences', 'seriously-simple-podcasting' ), 'group' => __( 'Science & Medicine', 'seriously-simple-podcasting' ) ),
+			'Social Sciences' => array( 'label' => __( 'Social Sciences', 'seriously-simple-podcasting' ), 'group' => __( 'Science & Medicine', 'seriously-simple-podcasting' ) ),
+
 			'History' => array( 'label' => __( 'History', 'seriously-simple-podcasting' ), 'group' => __( 'Society & Culture', 'seriously-simple-podcasting' ) ),
 			'Personal Journals' => array( 'label' => __( 'Personal Journals', 'seriously-simple-podcasting' ), 'group' => __( 'Society & Culture', 'seriously-simple-podcasting' ) ),
 			'Philosophy' => array( 'label' => __( 'Philosophy', 'seriously-simple-podcasting' ), 'group' => __( 'Society & Culture', 'seriously-simple-podcasting' ) ),
@@ -261,16 +265,16 @@ class SSP_Settings {
 				),
 				array(
 					'id' 			=> 'player_locations',
-					'label'			=> __( 'Audio player locations', 'seriously-simple-podcasting' ),
-					'description'	=> __( 'Select where to show the podcast audio player along with the episode data (download link, duration and file size)', 'seriously-simple-podcasting' ),
+					'label'			=> __( 'Media player locations', 'seriously-simple-podcasting' ),
+					'description'	=> __( 'Select where to show the podcast media player along with the episode data (download link, duration and file size)', 'seriously-simple-podcasting' ),
 					'type'			=> 'checkbox_multi',
-					'options'		=> array( 'content' => __( 'Full content', 'seriously-simple-podcasting' ), 'excerpt' => __( 'Excerpt', 'seriously-simple-podcasting' ),  'excerpt_embed' => __( 'oEmbed Excerpt (WordPress 4.4+)', 'seriously-simple-podcasting' ) ),
+					'options'		=> array( 'content' => __( 'Full content', 'seriously-simple-podcasting' ), 'excerpt' => __( 'Excerpt', 'seriously-simple-podcasting' ),  'excerpt_embed' => __( 'oEmbed Excerpt', 'seriously-simple-podcasting' ) ),
 					'default'		=> array(),
 				),
 				array(
 					'id' 			=> 'player_content_location',
-					'label'			=> __( 'Audio player position', 'seriously-simple-podcasting' ),
-					'description'	=> __( 'Select whether to display the audio player above or below the full post content.', 'seriously-simple-podcasting' ),
+					'label'			=> __( 'Media player position', 'seriously-simple-podcasting' ),
+					'description'	=> __( 'Select whether to display the media player above or below the full post content.', 'seriously-simple-podcasting' ),
 					'type'			=> 'radio',
 					'options'		=> array( 'above' => __( 'Above content', 'seriously-simple-podcasting' ), 'below' => __( 'Below content', 'seriously-simple-podcasting' ) ),
 					'default'		=> 'above',

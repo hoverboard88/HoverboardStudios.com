@@ -2,6 +2,11 @@
 if ( ! defined( 'ABSPATH' ) && ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit();
 } else {
+	wtt_fs_uninstall_cleanup();
+}
+
+// uninstall WP to Twitter
+function wtt_fs_uninstall_cleanup() {
 	delete_option( 'wpt_post_types' );
 	delete_option( 'jd_twit_remote' );
 	delete_option( 'jd_post_excerpt' );

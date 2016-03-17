@@ -14,7 +14,7 @@ function wpt_updated_settings() {
 	}
 
 	if ( isset( $_POST['oauth_settings'] ) ) {
-		$oauth_message = jd_update_oauth_settings( false, $_POST );
+		$oauth_message = wpt_update_oauth_settings( false, $_POST );
 	} else {
 		$oauth_message = '';
 	}
@@ -24,7 +24,7 @@ function wpt_updated_settings() {
 	// notifications from oauth connection		
 	if ( isset( $_POST['oauth_settings'] ) ) {
 		if ( $oauth_message == "success" ) {
-			$admin_url = ( is_plugin_active( 'wp-tweets-pro/wpt-pro-functions.php' ) ) ? admin_url( 'admin.php?page=wp-tweets-pro?tab=basic' ) : admin_url( 'options-general.php?page=wp-to-twitter/wp-to-twitter.php&amp;tab=basic' );
+			$admin_url = admin_url( 'admin.php?page=wp-tweets-pro?tab=basic' );
 
 			print( '
 				<div id="message" class="updated fade">
@@ -229,7 +229,7 @@ function wpt_update_settings() {
 								?>
 							</p>
 							<p class='wpt-button'>
-								<strong class='cta'><a href="https://www.joedolson.com/wp-tweets-pro/"><?php _e( 'Upgrade to <strong>WP Tweets PRO</strong>!', 'wp-to-twitter' ); ?></a></strong>
+								<strong class='cta'><a href="http://www.wptweetspro.com/wp-tweets-pro"><?php _e( 'Upgrade to <strong>WP Tweets PRO</strong>!', 'wp-to-twitter' ); ?></a></strong>
 							</p>	
 							
 							<h4><?php _e( 'What else does WP Tweets PRO do?', 'wp-to-twitter' ); ?></h4>
@@ -238,11 +238,11 @@ function wpt_update_settings() {
 								<?php _e( 'WP Tweets PRO is packed with features to help you increase engagement with your Twitter followers. Upload images, use Twitter Cards, and automated re-posting of your Tweets are just a few of the features available in the premium add-on to WP to Twitter.', 'wp-to-twitter' ); ?>
 							</p>
 							<p>
-								<?php sprintf( _e( '<a href="%s">Learn more about WP Tweets PRO</a>!', 'wp-to-twitter' ), 'https://www.joedolson.com/wp-tweets-pro/?campaign=get-wpt' ); ?>
+								<?php sprintf( _e( '<a href="%s">Learn more about WP Tweets PRO</a>!', 'wp-to-twitter' ), 'http://www.wptweetspro.com/wp-tweets-pro?campaign=get-wpt' ); ?>
 							</p>
 							
 							<p class='wpt-button'>
-								<strong class='cta'><a href="https://www.joedolson.com/wp-tweets-pro/"><?php _e( 'Buy WP Tweets PRO today!', 'wp-to-twitter' ); ?></a></strong>
+								<strong class='cta'><a href="http://www.wptweetspro.com/wp-tweets-pro"><?php _e( 'Buy WP Tweets PRO today!', 'wp-to-twitter' ); ?></a></strong>
 							</p>
 							
 						</div>
@@ -317,14 +317,14 @@ function wpt_update_settings() {
 										}
 										echo "</ul>";
 										if ( ! function_exists( 'wpt_pro_exists' ) ) {
-											printf( __( '<a href="%s">Upgrade to WP Tweets PRO</a> to filter posts in all custom post types on any taxonomy.', 'wp-to-twitter' ), "https://www.joedolson.com/wp-tweets-pro/" );
+											printf( __( '<a href="%s">Upgrade to WP Tweets PRO</a> to filter posts in all custom post types on any taxonomy.', 'wp-to-twitter' ), "http://www.wptweetspro.com/wp-tweets-pro" );
 										} else {
 											_e( 'Updating the WP Tweets PRO taxonomy filters will overwrite your old category filters.', 'wp-to-twitter' );
 										}
 									}
 									?>
 									<fieldset>
-										<legend><span><?php echo $name ?></span></legend>
+										<legend><?php _e( 'Tweet Templates', 'wp-to-twitter' ); ?></legend>
 										<p>
 											<input type="checkbox"
 											       name="wpt_post_types[<?php echo $slug; ?>][post-published-update]"
@@ -445,7 +445,6 @@ function wpt_update_settings() {
 	<div class="ui-sortable meta-box-sortables">
 		<div class="postbox">
 			<h3><span><?php _e( 'Advanced Settings', 'wp-to-twitter' ); ?></span></h3>
-
 			<div class="inside">
 				<form method="post" action="">
 					<div>
@@ -455,7 +454,7 @@ function wpt_update_settings() {
 						?>
 
 						<fieldset>
-							<legend><?php _e( 'Tags', 'wp-to-twitter' ); ?></legend>
+							<legend><?php _e( 'Hashtags', 'wp-to-twitter' ); ?></legend>
 							<p>
 								<input type="checkbox" name="jd_strip_nonan" id="jd_strip_nonan"
 								       value="1" <?php echo jd_checkCheckbox( 'jd_strip_nonan' ); ?> /> <label
@@ -492,16 +491,16 @@ function wpt_update_settings() {
 							</p>
 						</fieldset>
 						<fieldset>
-							<legend><?php _e( 'Template Tag Settings', 'wp-to-twitter' ); ?></legend>
+							<legend><?php _e( 'Template Settings', 'wp-to-twitter' ); ?></legend>
 							<p>
 								<label
-									for="jd_post_excerpt"><?php _e( "Length of post excerpt (in characters):", 'wp-to-twitter' ); ?></label>
+									for="jd_post_excerpt"><?php _e( "Post excerpt (#post#) in characters:", 'wp-to-twitter' ); ?></label>
 								<input type="text" name="jd_post_excerpt" id="jd_post_excerpt" size="3" maxlength="3" value="<?php echo( esc_attr( get_option( 'jd_post_excerpt' ) ) ) ?>"/>
 							</p>
 
 							<p>
 								<label
-									for="jd_date_format"><?php _e( "WP to Twitter Date Formatting:", 'wp-to-twitter' ); ?></label>
+									for="jd_date_format"><?php _e( "Date Format (#date#):", 'wp-to-twitter' ); ?></label>
 								<input type="text" aria-describedby="date_format_label" name="jd_date_format"
 								       id="jd_date_format" size="12" maxlength="12"
 								       value="<?php if ( get_option( 'jd_date_format' ) == '' ) {
@@ -521,54 +520,15 @@ function wpt_update_settings() {
 								<input type="text" name="jd_twit_prepend" id="jd_twit_prepend" size="20"
 								       value="<?php esc_attr_e( stripslashes( get_option( 'jd_twit_prepend' ) ) ) ?>"/>
 							</p>
-
 							<p>
 								<label for="jd_twit_append"><?php _e( "Custom text after Tweets:", 'wp-to-twitter' ); ?></label>
 								<input type="text" name="jd_twit_append" id="jd_twit_append" size="20"
 								       value="<?php esc_attr_e( stripslashes( get_option( 'jd_twit_append' ) ) ) ?>"/>
 							</p>
-
 							<p>
 								<label for="jd_twit_custom_url"><?php _e( "Custom field for alternate post URL:", 'wp-to-twitter' ); ?></label>
 								<input type="text" name="jd_twit_custom_url" id="jd_twit_custom_url" size="30" maxlength="120"
 								       value="<?php esc_attr_e( stripslashes( get_option( 'jd_twit_custom_url' ) ) ) ?>"/>
-							</p>
-						</fieldset>
-
-						<?php
-						$inputs          = '';
-						$default_order   = array(
-							'excerpt'  => 0,
-							'title'    => 1,
-							'date'     => 2,
-							'category' => 3,
-							'blogname' => 4,
-							'author'   => 5,
-							'account'  => 6,
-							'tags'     => 7,
-							'modified' => 8,
-							'@'        => 9,
-							'cat_desc' => 10
-						);
-						$preferred_order = get_option( 'wpt_truncation_order' );
-						if ( ! $preferred_order ) {
-							$preferred_order = array();
-						}
-						$preferred_order = array_merge( $default_order, $preferred_order );
-						if ( is_array( $preferred_order ) ) {
-							$default_order = $preferred_order;
-						}
-						asort( $default_order );
-						foreach ( $default_order as $k => $v ) {
-							$label = '<code>#' . $k . '#</code>';
-							$inputs .= "<div class='wpt-truncate'><label for='$k-$v'>$label</label><br /><input type='number' size='3' value='$v' name='wpt_truncation_order[$k]' /></div> ";
-						}
-						?>
-						<fieldset>
-							<legend><?php _e( 'Template tag priority order', 'wp-to-twitter' ); ?></legend>
-							<p><?php _e( 'The order in which items will be abbreviated or removed from your Tweet if the Tweet is too long to send to Twitter.', 'wp-to-twitter' ); ?> <?php _e( 'Tags with lower values will be modified first.', 'wp-to-twitter' ); ?></p>
-							<p>
-								<?php echo $inputs; ?>
 							</p>
 						</fieldset>
 						<fieldset>
@@ -669,8 +629,8 @@ function wpt_update_settings() {
 									if ( $role == 'administrator' ) {
 										continue;
 									}
-									$role_tabs .= "<li><a href='#wpt_$role'>$rolename</a></li>\n";
-									$role_container .= "<div class='wptab wpt_$role' id='wpt_$role' aria-live='assertive'><fieldset id='wpt_$role' class='roles'><legend>$rolename</legend>";
+									$role_tabs .= "<li><a href='#wpt_" . sanitize_title( $role ) . "'>$rolename</a></li>\n";
+									$role_container .= "<div class='wptab wpt_$role' id='wpt_" . sanitize_title( $role ) . "' aria-live='assertive'><fieldset id='wpt_$role' class='roles'><legend>$rolename</legend>";
 									$role_container .= "<input type='hidden' value='none' name='wpt_caps[" . $role . "][none]' />
 			<ul class='wpt-settings checkboxes'>";
 									foreach ( $caps as $cap => $name ) {
@@ -687,8 +647,44 @@ function wpt_update_settings() {
 								?>
 							</fieldset>
 						</div>
+	<?php
+						$inputs          = '';
+						$default_order   = array(
+							'excerpt'  => 0,
+							'title'    => 1,
+							'date'     => 2,
+							'category' => 3,
+							'blogname' => 4,
+							'author'   => 5,
+							'account'  => 6,
+							'tags'     => 7,
+							'modified' => 8,
+							'@'        => 9,
+							'cat_desc' => 10
+						);
+						$preferred_order = get_option( 'wpt_truncation_order' );
+						if ( ! $preferred_order ) {
+							$preferred_order = array();
+						}
+						$preferred_order = array_merge( $default_order, $preferred_order );
+						if ( is_array( $preferred_order ) ) {
+							$default_order = $preferred_order;
+						}
+						asort( $default_order );
+						foreach ( $default_order as $k => $v ) {
+							$label = '<code>#' . $k . '#</code>';
+							$inputs .= "<div class='wpt-truncate'><label for='$k-$v'>$label</label><br /><input type='number' size='3' value='$v' name='wpt_truncation_order[$k]' /></div> ";
+						}
+						?>
 						<fieldset>
-							<legend><?php _e( 'Error Messages and Debugging', 'wp-to-twitter' ); ?></legend>
+							<legend><?php _e( 'Template tag priority order', 'wp-to-twitter' ); ?></legend>
+							<p><?php _e( 'The order in which items will be abbreviated or removed from your Tweet if the Tweet is too long to send to Twitter.', 'wp-to-twitter' ); ?> <?php _e( 'Tags with lower values will be modified first.', 'wp-to-twitter' ); ?></p>
+							<p>
+								<?php echo $inputs; ?>
+							</p>
+						</fieldset>						
+						<fieldset>
+							<legend><?php _e( 'Miscellaneous Settings', 'wp-to-twitter' ); ?></legend>
 							<ul>
 								<li>
 									<input type="checkbox" name="wpt_permit_feed_styles" id="wpt_permit_feed_styles" value="1" <?php echo jd_checkCheckbox( 'wpt_permit_feed_styles' ) ?> />
@@ -725,7 +721,7 @@ function wpt_update_settings() {
 				<div class='wpt-support-me'>
 					<p>
 						<?php printf(
-							__( 'Please, consider a <a href="%s">purchase</a> to support WP to Twitter!', 'wp-to-twitter' ), "https://www.joedolson.com/wp-tweets-pro/" ); ?>
+							__( 'Please, consider a <a href="%s">purchase</a> to support WP to Twitter!', 'wp-to-twitter' ), "http://www.wptweetspro.com/wp-tweets-pro" ); ?>
 					</p>
 				</div>	
 				<?php } ?>
@@ -757,7 +753,7 @@ function wpt_sidebar() {
 				<?php } ?>
 				<div class="inside resources">
 					<?php if ( get_option( 'jd_donations' ) != 1 && ! function_exists( 'wpt_pro_exists' ) ) { ?>
-						<p class='cta'><?php _e( '<a href="https://www.joedolson.com/wp-tweets-pro/">Get WP Tweets Pro</a>', 'wp-to-twitter' ); ?></p>
+						<p class='cta'><?php _e( '<a href="http://www.wptweetspro.com/wp-tweets-pro">Get WP Tweets Pro</a>', 'wp-to-twitter' ); ?></p>
 					<?php } ?>
 					<p>
 						<a href="https://twitter.com/intent/follow?screen_name=joedolson" class="twitter-follow-button"
@@ -888,6 +884,6 @@ function wpt_do_server_check( $test = false ) {
 		update_option( 'wpt_server_string', $wpt_server_string );
 	}
 	echo $wpt_server_string;
-	$admin_url = ( is_plugin_active( 'wp-tweets-pro/wpt-pro-functions.php' ) ) ? admin_url( 'admin.php?page=wp-tweets-pro&amp;refresh_wpt_server_string=true' ) : admin_url( 'options-general.php?page=wp-to-twitter/wp-to-twitter.php&amp;refresh_wpt_server_string=true' );
+	$admin_url = admin_url( 'admin.php?page=wp-tweets-pro&amp;refresh_wpt_server_string=true' );
 	echo "<p><a href='" . $admin_url . "'>" . __( 'Test again', 'wp-to-twitter' ) . "</a></p>";
 }

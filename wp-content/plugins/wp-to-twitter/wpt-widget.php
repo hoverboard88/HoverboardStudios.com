@@ -16,10 +16,14 @@ function wpt_get_user( $twitter_ID = false ) {
 	$secret       = get_option( 'app_consumer_secret' );
 	$token        = get_option( 'oauth_token' );
 	$token_secret = get_option( 'oauth_token_secret' );
-	$connection   = new jd_TwitterOAuth( $key, $secret, $token, $token_secret );
-	$result       = $connection->get( "https://api.twitter.com/1.1/users/show.json?screen_name=$twitter_ID", $options );
+	if ( $key && $secret && $token && $token_secret ) {
+		$connection   = new wpt_TwitterOAuth( $key, $secret, $token, $token_secret );
+		$result       = $connection->get( "https://api.twitter.com/1.1/users/show.json?screen_name=$twitter_ID", $options );
 
-	return json_decode( $result );
+		return json_decode( $result );
+	} else {
+		return array();
+	}
 }
 
 add_shortcode( 'get_tweets', 'wpt_get_twitter_feed' );
@@ -61,6 +65,9 @@ function wpt_twitter_feed( $instance ) {
 	if ( ! isset( $instance['search'] ) ) {
 		$twitter_ID = ( isset( $instance['twitter_id'] ) && $instance['twitter_id'] != '' ) ? $instance['twitter_id'] : get_option( 'wtt_twitter_username' );
 		$user = wpt_get_user( $twitter_ID );
+		if ( empty( $user ) ) {
+			return __( 'Error: You are not connected to Twitter.', 'wp-to-twitter' );
+		}
 		if ( isset( $user->errors ) && $user->errors[0]->message ) {
 			return __( "Error: ", 'wp-to-twitter' ) . $user->errors[0]->message;
 		}
@@ -72,16 +79,18 @@ function wpt_twitter_feed( $instance ) {
 		$follow_url       = esc_url( 'https://twitter.com/' . $twitter_ID );
 		$follow_button    = apply_filters( 'wpt_follow_button', "<a href='$follow_url' class='twitter-follow-button $follow_alignment' data-width='30px' data-show-screen-name='false' data-size='large' data-show-count='false' data-lang='en'>Follow @" .  esc_html( $twitter_ID ) . "</a>" );
 		$header .= '<div class="wpt-header">';
-		$header .= "<p>
-		$follow_button
+		$header .= "<div class='wpt-follow-button'>$follow_button</div>
+		</p>
 		<img src='$avatar' alt='' class='wpt-twitter-avatar $img_alignment $verified' />
 		<span class='wpt-twitter-name'>$name</span><br />
 		<span class='wpt-twitter-id'><a href='$follow_url'>@" .  esc_html( $twitter_ID ) . "</a></span>
 		</p>";
 		$header .= '</div>';
+	} else {
+		$twitter_ID = false;
 	}
 	
-	$hide_header = ( $instance['hide_header'] == 1 ) ? true : false;
+	$hide_header = ( isset( $instance['hide_header'] ) && $instance['hide_header'] == 1 ) ? true : false;
 	
 	if ( ! isset( $instance['search'] ) ) {
 		$options['exclude_replies'] = ( isset( $instance['twitter_hide_replies'] ) ) ? $instance['twitter_hide_replies'] : false;
@@ -102,7 +111,7 @@ function wpt_twitter_feed( $instance ) {
 	$opts['mentions']    = $instance['link_mentions'];
 	$opts['hashtags']    = $instance['link_hashtags'];
 	$opts['show_images'] = isset( $instance['show_images'] ) ? $instance['show_images'] : false;
-	$rawtweets        = WPT_getTweets( $instance['twitter_num'], $twitter_ID, $options );
+	$rawtweets           = WPT_getTweets( $instance['twitter_num'], $twitter_ID, $options );
 
 	if ( isset( $rawtweets['error'] ) ) {
 		$return .= "<li>" . $rawtweets['error'] . "</li>";

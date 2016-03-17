@@ -61,7 +61,6 @@ class ITSEC_Backup_Admin {
 		add_action( 'itsec_add_admin_meta_boxes', array( $this, 'itsec_add_admin_meta_boxes' ) ); //add meta boxes to admin page
 		add_action( 'itsec_admin_init', array( $this, 'itsec_admin_init' ) ); //initialize admin area
 
-		add_filter( 'itsec_add_dashboard_status', array( $this, 'itsec_add_dashboard_status' ) ); //add information for plugin status
 		add_filter( 'itsec_tooltip_modules', array( $this, 'itsec_tooltip_modules' ) ); //register tooltip action
 		add_filter( 'itsec_tracking_vars', array( $this, 'itsec_tracking_vars' ) );
 
@@ -71,6 +70,19 @@ class ITSEC_Backup_Admin {
 			add_action( 'itsec_admin_init', array( $this, 'itsec_admin_init_multisite' ) ); //save multisite options
 		}
 
+		add_filter( 'itsec_advanced_intro_backup_text', array( $this, 'itsec_advanced_intro_backup_text' ) );
+
+	}
+
+	/**
+	 * Wrap the advanced intro backup text in a link
+	 *
+	 * @param string $text The current text
+	 *
+	 * @return string The link
+	 */
+	public function itsec_advanced_intro_backup_text( $text ) {
+		return "<strong><a href='?page=toplevel_page_itsec_backups'>{$text}</a></strong>";
 	}
 
 	/**
@@ -246,104 +258,6 @@ class ITSEC_Backup_Admin {
 			);
 
 		}
-
-	}
-
-	/**
-	 * Sets the status in the plugin dashboard
-	 *
-	 * Sets a medium priority item for the module's functionality in the plugin
-	 * dashboard.
-	 *
-	 * @since 4.0.0
-	 *
-	 * @param array $statuses array of existing plugin dashboard statuses
-	 *
-	 * @return array statuses
-	 */
-	public function itsec_add_dashboard_status( $statuses ) {
-
-		if ( ! is_multisite() && class_exists( 'backupbuddy_api' ) && 1 <= sizeof( backupbuddy_api::getSchedules() ) ) {
-
-			if ( true === $this->settings['enabled'] ) { //disable our backups if we have to
-
-				$this->settings['enabled'] = false;
-				update_site_option( 'itsec_backup', $this->settings );
-
-			}
-
-			$status_array = 'safe-medium';
-			$status       = array(
-				'text' => __( 'Your site is performing scheduled database and file backups.', 'better-wp-security' ),
-				'link' => '?page=pb_backupbuddy_scheduling',
-			);
-
-		} elseif ( ! is_multisite() && class_exists( 'backupbuddy_api' ) ) {
-
-			if ( $this->settings['enabled'] === true ) { //disable our backups if we have to
-
-				$this->settings['enabled'] = false;
-				update_site_option( 'itsec_backup', $this->settings );
-
-			}
-
-			$status_array = 'medium';
-			$status       = array(
-				'text' => __( 'BackupBuddy is installed but backups do not appear to have been scheduled. Please schedule backups.', 'better-wp-security' ),
-				'link' => '?page=pb_backupbuddy_scheduling',
-			);
-
-		} elseif ( true === $this->has_backup() && true === $this->scheduled_backup() ) {
-
-			if ( true === $this->settings['enabled'] ) { //disable our backups if we have to
-
-				$this->settings['enabled'] = false;
-				update_site_option( 'itsec_backup', $this->settings );
-
-			}
-
-			$status_array = 'safe-medium';
-			$status       = array(
-				'text' => __( 'You are using a 3rd party backup solution.', 'better-wp-security' ),
-				'link' => $this->external_backup_link(),
-			);
-
-		} elseif ( true === $this->has_backup() ) {
-
-			if ( true === $this->settings['enabled'] ) { //disable our backups if we have to
-
-				$this->settings['enabled'] = false;
-				update_site_option( 'itsec_backup', $this->settings );
-
-			}
-
-			$status_array = 'medium';
-			$status       = array(
-				'text' => __( 'It looks like you have a 3rd-party backup solution in place but are not using it. Please turn on scheduled backups.', 'better-wp-security' ),
-				'link' => $this->external_backup_link(),
-			);
-
-		} elseif ( true === $this->settings['enabled'] ) {
-
-			$status_array = 'medium';
-			$status       = array(
-				'text' => __( 'Your site is performing scheduled database backups but is not backing up files. Consider purchasing or scheduling BackupBuddy to protect your investment.', 'better-wp-security' ),
-				'link' => 'http://ithemes.com/better-backups',
-			);
-
-		} else {
-
-			$status_array = 'high';
-			$status       = array(
-				'text' => __( 'Your site is not performing any scheduled database backups.', 'better-wp-security' ),
-				'link' => '#itsec_backup_enabled',
-			);
-
-		}
-
-		array_push( $statuses[$status_array], $status );
-
-		return $statuses;
 
 	}
 

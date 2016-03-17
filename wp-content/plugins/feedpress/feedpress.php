@@ -5,7 +5,7 @@ Plugin URI: https://feed.press
 Description: Redirects all feeds to a FeedPress feed and enables realtime feed updates.
 Author: FeedPress
 Author URI: https://feed.press
-Version: 1.7
+Version: 1.7.2
 */
 
 define('FEEDPRESS_TEXTDOMAIN', 'feedpress');
@@ -258,6 +258,12 @@ function feedpress_conf() {
 
             foreach ($_POST['feedpress_url_path'] as $i => $path) {
 
+                $urlInfos = parse_url($path);
+                $path = $urlInfos['path'];
+                if (empty($path)) {
+                    continue;
+                }
+
                 if (!empty($_POST['feedpress_url_url'][$i])) {
                     $feedpress_url[strtolower($path)] = $_POST['feedpress_url_url'][$i];
                 }
@@ -413,7 +419,7 @@ function feedpress_conf() {
         foreach ($options['feedpress_cat'] as $slug => $url) {
 
             echo '<p>'.__('Category:', FEEDPRESS_TEXTDOMAIN).' '.$slug;
-            echo ' &rarr; <a href="\'.$url.\'" target="_blank">'.$url.'</a> — <a href="'.admin_url('options-general.php?page='.FEEDPRESS_SLUG).'&delete=cat&slug='.$slug.'">'.__('Delete', FEEDPRESS_TEXTDOMAIN).'</a></p>';
+            echo ' &rarr; <a href="'.$url.'" target="_blank">'.$url.'</a> — <a href="'.admin_url('options-general.php?page='.FEEDPRESS_SLUG).'&delete=cat&slug='.$slug.'">'.__('Delete', FEEDPRESS_TEXTDOMAIN).'</a></p>';
 
             echo '<input type="hidden" name="feedpress_cat_slug[]" value="'.$slug.'">';
             echo '<input type="hidden" name="feedpress_cat_url[]" value="'.$url.'">';
@@ -454,7 +460,7 @@ function feedpress_conf() {
 
         if (count($categories) > count($options['feedpress_cat'])) {
 
-            echo '<p><input type="button" class="button-secondary" name="add" onclick="document.getElementById(\'feedpress_cat_form_display\').innerHTML += document.getElementById(\'feedpress_cat_form\').innerHTML;" value="'.__('New category', FEEDPRESS_TEXTDOMAIN).' &raquo;" /></p>';
+            echo '<p><input type="button" class="button-secondary" name="add" onclick="jQuery(\'#feedpress_cat_form_display\').append(jQuery(\'#feedpress_cat_form\').html());" value="'.__('New category', FEEDPRESS_TEXTDOMAIN).' &raquo;" /></p>';
 
         }
 
@@ -504,7 +510,7 @@ function feedpress_conf() {
 
         if (count($tags) > count($options['feedpress_tag'])) {
 
-            echo '<p><input type="button" class="button-secondary" name="add" onclick="document.getElementById(\'feedpress_tag_form_display\').innerHTML += document.getElementById(\'feedpress_tag_form\').innerHTML;" value="'.__('New tag', FEEDPRESS_TEXTDOMAIN).' &raquo;" /></p>';
+            echo '<p><input type="button" class="button-secondary" name="add" onclick="jQuery(\'#feedpress_tag_form_display\').append(jQuery(\'#feedpress_tag_form\').html());" value="'.__('New tag', FEEDPRESS_TEXTDOMAIN).' &raquo;" /></p>';
 
         }
 
@@ -540,7 +546,7 @@ function feedpress_conf() {
 
         echo '</select></p></div><div id="feedpress_url_form_display"></div>';
 
-        echo '<p><input type="button" class="button-secondary" name="add" onclick="document.getElementById(\'feedpress_url_form_display\').innerHTML += document.getElementById(\'feedpress_url_form\').innerHTML;" value="'.__('New URL', FEEDPRESS_TEXTDOMAIN).' &raquo;" /></p>';
+        echo '<p><input type="button" class="button-secondary" name="add" onclick="jQuery(\'#feedpress_url_form_display\').append(jQuery(\'#feedpress_url_form\').html());" value="'.__('New URL', FEEDPRESS_TEXTDOMAIN).' &raquo;" /></p>';
 
         echo '<h2>'.__('Advanced Options', FEEDPRESS_TEXTDOMAIN).'</h2>';
 
@@ -643,7 +649,7 @@ function feedpress_redirect() {
         header('Cache-Control: no-cache, must-revalidate');
         header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
         wp_redirect($options['feedpress_url'][strtolower($_SERVER['REQUEST_URI'])], 307);
-		
+
 		exit;
 
     }
@@ -697,7 +703,7 @@ function feedpress_redirect() {
 			$cat = $wpdb->get_var("SELECT category_nicename FROM $wpdb->categories WHERE cat_ID = '".$wp->query_vars['cat']."' LIMIT 1");
 		}
 	}
-	
+
 	// Get tag
 	$tag = null;
 	if (isset($wp->query_vars['tag']) && $wp->query_vars['tag'] != null) {
@@ -800,7 +806,25 @@ function feedpress_publish_post() {
 
     if ($options['feedpress_no_ping'] == 0) {
 
-        feedpress_api_call('feeds/ping', array('feed' => $options['feedpress_feed_id']));
+				$feedsToPing = array();
+
+				if ($options['feedpress_feed_id']) {
+					$feedsToPing[] = $options['feedpress_feed_id'];
+				}
+
+				if ($options['feedpress_comment_id']) {
+					$feedsToPing[] = $options['feedpress_comment_id'];
+				}
+
+				foreach ($options['feedpress_ids'] as $type => $data) {
+						foreach ($data as $key => $name) {
+								$feedsToPing[] = $name;
+						}
+				}
+
+				if (count($feedsToPing)) {
+					feedpress_api_call('feeds/ping', array('feed' => implode(',', $feedsToPing)));
+				}
 
     }
 
@@ -1006,10 +1030,12 @@ function feedpress_no_responsive_image_feeds() {
     $options = feedpress_get_options();
 
     if ($options['feedpress_no_responsive'] == 1) {
-        add_filter( 'max_srcset_image_width', function() {
-            return 1;
-        } );
+        add_filter( 'max_srcset_image_width', 'feedpress_set_responsive_image_width' );
     }
+}
+
+function feedpress_set_responsive_image_width() {
+    return 1;
 }
 
 add_action('rss2_head', 'feedpress_no_responsive_image_feeds' );

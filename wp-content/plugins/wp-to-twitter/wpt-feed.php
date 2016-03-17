@@ -184,7 +184,7 @@ class WPT_TwitterFeed {
 			return array( 'error' => __( 'Missing Twitter Feed Screen Name - Check Settings', 'wp-to-twitter' ) );
 		}
 
-		$connection = new jd_TwitterOAuth( $key, $secret, $token, $token_secret );
+		$connection = new wpt_TwitterOAuth( $key, $secret, $token, $token_secret );
 
 		if ( isset( $options['search'] ) ) {
 			$args = array( 'q'           => urlencode( $options['search'] ),

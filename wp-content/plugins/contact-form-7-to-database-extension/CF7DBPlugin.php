@@ -1,6 +1,6 @@
 <?php
 /*
-    "Contact Form to Database" Copyright (C) 2011-2014 Michael Simpson  (email : michael.d.simpson@gmail.com)
+    "Contact Form to Database" Copyright (C) 2011-2015 Michael Simpson  (email : michael.d.simpson@gmail.com)
 
     This file is part of Contact Form to Database.
 
@@ -55,11 +55,13 @@ class CF7DBPlugin extends CF7DBPluginLifeCycle implements CFDBDateFormatter {
             'IntegrateWithFSCF' => array(__('Capture form submissions from Fast Secure Contact Form Plugin', 'contact-form-7-to-database-extension'), 'true', 'false'),
             'IntegrateWithJetPackContactForm' => array(__('Capture form submissions from JetPack Contact Form', 'contact-form-7-to-database-extension'), 'true', 'false'),
             'IntegrateWithGravityForms' => array(__('Capture form submissions from Gravity Forms', 'contact-form-7-to-database-extension'), 'true', 'false'),
+            'IntegrateWithFormidableForms' => array(__('Capture form submissions from Formidable Forms', 'contact-form-7-to-database-extension'), 'true', 'false'),
             'IntegrateWithWrContactForms' => array(__('Capture form submissions from WR ContactForm', 'contact-form-7-to-database-extension'), 'true', 'false'),
             'IntegrateWithQuform' => array(__('Capture form submissions from Quform', 'contact-form-7-to-database-extension'), 'true', 'false'),
             'IntegrateWithNinjaForms' => array(__('Capture form submissions from Ninja Forms', 'contact-form-7-to-database-extension'), 'true', 'false'),
             'IntegrateWithCalderaForms' => array(__('Capture form submissions from Caldera Forms', 'contact-form-7-to-database-extension'), 'true', 'false'),
             'IntegrateWithEnfoldThemForms' => array(__('Capture form submissions from Enfold Theme', 'contact-form-7-to-database-extension'), 'true', 'false'),
+            'IntegrateWithCFormsII' => array(__('Capture form submissions from CformsII', 'contact-form-7-to-database-extension'), 'true', 'false'),
             'CanSeeSubmitData' => array(__('Can See Submission data', 'contact-form-7-to-database-extension'),
                                         'Administrator', 'Editor', 'Author', 'Contributor', 'Subscriber', 'Anyone'),
             'HideAdminPanelFromNonAdmins' => array(__('Allow only Administrators to see CFDB administration screens', 'contact-form-7-to-database-extension'), 'false', 'true'),
@@ -92,7 +94,7 @@ class CF7DBPlugin extends CF7DBPluginLifeCycle implements CFDBDateFormatter {
         );
     }
 
-    protected function getOptionValueI18nString($optionValue) {
+    public function getOptionValueI18nString($optionValue) {
         switch ($optionValue) {
             case 'true':
                 return __('true', 'contact-form-7-to-database-extension');
@@ -138,7 +140,7 @@ class CF7DBPlugin extends CF7DBPluginLifeCycle implements CFDBDateFormatter {
                                     if ($this->isVersionLessThan($savedVersion, '1.4.5')) {
                                         if ($this->isVersionLessThan($savedVersion, '1.3.1')) {
                                             // Version 1.3.1 update
-                                            $tableName = $this->getSubmitsTableName();
+                                            $tableName = $this->getSubmitsTableName_raw();
                                             $wpdb->show_errors();
                                             $upgradeOk &= false !== $wpdb->query("ALTER TABLE `$tableName` ADD COLUMN `field_order` INTEGER");
                                             $upgradeOk &= false !== $wpdb->query("ALTER TABLE `$tableName` ADD COLUMN `file` LONGBLOB");
@@ -162,7 +164,7 @@ class CF7DBPlugin extends CF7DBPluginLifeCycle implements CFDBDateFormatter {
                                     if (!$this->getOption('MaxRows')) {
                                         $this->addOption('MaxRows', '100');
                                     }
-                                    $tableName = $this->getSubmitsTableName();
+                                    $tableName = $this->getSubmitsTableName_raw();
                                     $wpdb->show_errors();
                                     /* $upgradeOk &= false !== */
                                     $wpdb->query("ALTER TABLE `$tableName` MODIFY COLUMN submit_time DECIMAL(16,4) NOT NULL");
@@ -174,31 +176,31 @@ class CF7DBPlugin extends CF7DBPluginLifeCycle implements CFDBDateFormatter {
                                 }
 
                                 // Version 2.0 upgrade
-                                $tableName = $this->getSubmitsTableName();
+                                $tableName = $this->getSubmitsTableName_raw();
                                 $oldTableName = $this->prefixTableName('SUBMITS');
                                 @$wpdb->query("RENAME TABLE `$oldTableName` TO `$tableName`");
                             }
 
                             // Version 2.2 upgrade
-                            $tableName = $this->getSubmitsTableName();
+                            $tableName = $this->getSubmitsTableName_raw();
                             $wpdb->query("ALTER TABLE `$tableName` DROP INDEX `form_name_field_name_idx`");
                             $wpdb->query("ALTER TABLE `$tableName` ADD INDEX `field_name_idx` ( `field_name` )");
                         }
 
                         // Version 2.4.1 upgrade
-                        $tableName = $this->getSubmitsTableName();
+                        $tableName = $this->getSubmitsTableName_raw();
                         $oldTableName = strtolower($tableName);
                         $wpdb->query("RENAME TABLE '$oldTableName' TO '$tableName'");
                     }
                     // Version 2.8.25 update
-                    $tableName = $this->getSTTableName();
+                    $tableName = $this->getSTTableName_raw();
                     $wpdb->show_errors();
                     $wpdb->query("CREATE TABLE IF NOT EXISTS `$tableName` (`submit_time` DECIMAL(16,4) NOT NULL, PRIMARY KEY (submit_time))");
                     $wpdb->hide_errors();
                 }
                 // Version 2.8.29 update
                 // tyring this again b/c was not put into new installs
-                $tableName = $this->getSTTableName();
+                $tableName = $this->getSTTableName_raw();
                 $wpdb->show_errors();
                 $wpdb->query("CREATE TABLE IF NOT EXISTS `$tableName` (`submit_time` DECIMAL(16,4) NOT NULL, PRIMARY KEY (submit_time))");
                 $wpdb->hide_errors();
@@ -222,7 +224,7 @@ class CF7DBPlugin extends CF7DBPluginLifeCycle implements CFDBDateFormatter {
      */
     protected function installDatabaseTables() {
         global $wpdb;
-        $tableName = $this->getSubmitsTableName();
+        $tableName = $this->getSubmitsTableName_raw();
         $wpdb->show_errors();
         $wpdb->query("CREATE TABLE IF NOT EXISTS `$tableName` (
             `submit_time` DECIMAL(16,4) NOT NULL,
@@ -234,7 +236,7 @@ class CF7DBPlugin extends CF7DBPluginLifeCycle implements CFDBDateFormatter {
         $wpdb->query("ALTER TABLE `$tableName` ADD INDEX `submit_time_idx` ( `submit_time` )");
         $wpdb->query("ALTER TABLE `$tableName` ADD INDEX `form_name_idx` ( `form_name` )");
         $wpdb->query("ALTER TABLE `$tableName` ADD INDEX `field_name_idx` ( `field_name` )");
-        $tableName = $this->getSTTableName();
+        $tableName = $this->getSTTableName_raw();
         $wpdb->query("CREATE TABLE IF NOT EXISTS `$tableName` (`submit_time` DECIMAL(16,4) NOT NULL, PRIMARY KEY (submit_time))");
         $wpdb->hide_errors();
     }
@@ -248,7 +250,7 @@ class CF7DBPlugin extends CF7DBPluginLifeCycle implements CFDBDateFormatter {
      * @return void
      */
     protected function unInstallDatabaseTables() {
-        if ('true' == $this->getOption('DropOnUninstall', 'false')) {
+        if ('true' == $this->getOption('DropOnUninstall', 'false', true)) {
             global $wpdb;
             $tableName = $this->getSubmitsTableName();
             $wpdb->query("DROP TABLE IF EXISTS `$tableName`");
@@ -266,7 +268,7 @@ class CF7DBPlugin extends CF7DBPluginLifeCycle implements CFDBDateFormatter {
     }
 
     public function add_wpcf7_noSaveFields() {
-        $nsfArray = explode(',', $this->getOption('NoSaveFields',''));
+        $nsfArray = explode(',', $this->getOption('NoSaveFields','', true));
         $wpcf7Fields = array('/.*wpcf7.*/', '_wpnonce');
         foreach ($wpcf7Fields as $aWpcf7) {
            if (!in_array($aWpcf7, $nsfArray)) {
@@ -297,65 +299,79 @@ class CF7DBPlugin extends CF7DBPluginLifeCycle implements CFDBDateFormatter {
         add_action('admin_menu', array(&$this, 'addSettingsSubMenuPage'));
 
         // Hook into Contact Form 7 when a form post is made to save the data to the DB
-        if ($this->getOption('IntegrateWithCF7', 'true') == 'true') {
+        if ($this->getOption('IntegrateWithCF7', 'true', true) == 'true') {
             require_once('CFDBIntegrationContactForm7.php');
             $integration = new CFDBIntegrationContactForm7($this);
             $integration->registerHooks();
         }
 
         // Hook into Fast Secure Contact Form
-        if ($this->getOption('IntegrateWithFSCF', 'true') == 'true') {
+        if ($this->getOption('IntegrateWithFSCF', 'true', true) == 'true') {
             require_once('CFDBIntegrationFSCF.php');
             $integration = new CFDBIntegrationFSCF($this);
             $integration->registerHooks();
         }
 
         // Hook into JetPack Contact Form
-        if ($this->getOption('IntegrateWithJetPackContactForm', 'true') == 'true') {
+        if ($this->getOption('IntegrateWithJetPackContactForm', 'true', true) == 'true') {
             require_once('CFDBIntegrationJetPack.php');
             $integration = new CFDBIntegrationJetPack($this);
             $integration->registerHooks();
         }
 
         // Hook into Gravity Forms
-        if ($this->getOption('IntegrateWithGravityForms', 'true') == 'true') {
+        if ($this->getOption('IntegrateWithGravityForms', 'true', true) == 'true') {
             require_once('CFDBIntegrationGravityForms.php');
             $integration = new CFDBIntegrationGravityForms($this);
             $integration->registerHooks();
         }
 
+        // Hook into Formidable Forms
+        if ($this->getOption('IntegrateWithFormidableForms', 'true', true) == 'true') {
+            require_once('CFDBIntegrationFormidableForms.php');
+            $integration = new CFDBIntegrationFormidableForms($this);
+            $integration->registerHooks();
+        }
+
         // Hook to work with WR ContactForms
-        if ($this->getOption('IntegrateWithWrContactForms', 'true') == 'true') {
+        if ($this->getOption('IntegrateWithWrContactForms', 'true', true) == 'true') {
             require_once('CFDBIntegrationWRContactForm.php');
             $integration = new CFDBIntegrationWRContactForm($this);
             $integration->registerHooks();
         }
 
         // Hook to work with Quform
-        if ($this->getOption('IntegrateWithQuform', 'true') == 'true') {
+        if ($this->getOption('IntegrateWithQuform', 'true', true) == 'true') {
             require_once('CFDBIntegrationQuform.php');
             $integration = new CFDBIntegrationQuform($this);
             $integration->registerHooks();
         }
 
         // Hook to work with Ninja Forms
-        if ($this->getOption('IntegrateWithNinjaForms', 'true') == 'true') {
+        if ($this->getOption('IntegrateWithNinjaForms', 'true', true) == 'true') {
             require_once('CFDBIntegrationNinjaForms.php');
             $integration = new CFDBIntegrationNinjaForms($this);
             $integration->registerHooks();
         }
 
         // Hook to work with Caldera Forms Forms
-        if ($this->getOption('IntegrateWithCalderaForms', 'true') == 'true') {
+        if ($this->getOption('IntegrateWithCalderaForms', 'true', true) == 'true') {
             require_once('CFDBIntegrationCalderaForms.php');
             $integration = new CFDBIntegrationCalderaForms($this);
             $integration->registerHooks();
         }
 
         // Enfold theme forms
-        if ($this->getOption('IntegrateWithEnfoldThemForms', 'true') == 'true') {
+        if ($this->getOption('IntegrateWithEnfoldThemForms', 'true', true) == 'true') {
             require_once('CFDBIntegrationEnfoldTheme.php');
             $enfold = new CFDBIntegrationEnfoldTheme($this);
+            $enfold->registerHooks();
+        }
+
+        // CFormsII
+        if ($this->getOption('IntegrateWithCFormsII', 'true', true) == 'true') {
+            require_once('CFDBIntegrationCFormsII.php');
+            $enfold = new CFDBIntegrationCFormsII($this);
             $enfold->registerHooks();
         }
 
@@ -774,7 +790,7 @@ class CF7DBPlugin extends CF7DBPluginLifeCycle implements CFDBDateFormatter {
             }
 
             // Save Cookie data if that option is true
-            if ($this->getOption('SaveCookieData', 'false') == 'true' && is_array($_COOKIE)) {
+            if ($this->getOption('SaveCookieData', 'false', true) == 'true' && is_array($_COOKIE)) {
                 $saveCookies = $this->getSaveCookies();
                 foreach ($_COOKIE as $cookieName => $cookieValue) {
                     if (empty($saveCookies) || $this->fieldMatches($cookieName, $saveCookies)) {
@@ -864,7 +880,7 @@ class CF7DBPlugin extends CF7DBPluginLifeCycle implements CFDBDateFormatter {
         $roleAllowed = 'Administrator';
         $displayName = $this->getPluginDisplayName();
 
-        $hideFromNonAdmins = $this->getOption('HideAdminPanelFromNonAdmins', 'false') != 'false';
+        $hideFromNonAdmins = $this->getOption('HideAdminPanelFromNonAdmins', 'false', true) != 'false';
         if ($hideFromNonAdmins) {
             $roleAllowed = 'Administrator';
         } else {
@@ -899,7 +915,7 @@ class CF7DBPlugin extends CF7DBPluginLifeCycle implements CFDBDateFormatter {
             wp_enqueue_style('jquery-ui.css', $pluginUrl . 'jquery-ui/jquery-ui-1.8.21.custom.css');
 
             // Datatables http://www.datatables.net
-            if ($this->getOption('UseDataTablesJS', 'true') == 'true') {
+            if ($this->getOption('UseDataTablesJS', 'true', true) == 'true') {
 //                wp_enqueue_style('datatables-demo', 'http://www.datatables.net/release-datatables/media/css/demo_table.css');
 //                wp_enqueue_script('datatables', 'http://www.datatables.net/release-datatables/media/js/jquery.dataTables.js', array('jquery'));
                 wp_enqueue_style('datatables-demo', $pluginUrl .'DataTables/media/css/demo_table.css');
@@ -1034,7 +1050,7 @@ class CF7DBPlugin extends CF7DBPluginLifeCycle implements CFDBDateFormatter {
         // repeated get_option calls to the database
         if (CF7DBPlugin::$checkForCustomDateFormat) {
             if ($this->getOption('UseCustomDateTimeFormat', 'true') == 'true') {
-                CF7DBPlugin::$customDateFormat = $this->getOption('SubmitDateTimeFormat', 'Y-m-d H:i:s P');
+                CF7DBPlugin::$customDateFormat = $this->getOption('SubmitDateTimeFormat', 'Y-m-d H:i:s P', true);
             }
             else {
                CF7DBPlugin::$dateFormat = get_option('date_format');
@@ -1095,58 +1111,153 @@ class CF7DBPlugin extends CF7DBPluginLifeCycle implements CFDBDateFormatter {
      * @return string URL to download file
      */
     public function getFileUrl($submitTime, $formName, $fieldName) {
-        return sprintf('%s?action=cfdb-file&s=%s&form=%s&field=%s',
-                       admin_url('admin-ajax.php'),
-                       $submitTime,
-                       urlencode($formName),
-                       urlencode($fieldName));
+        return sprintf('%saction=cfdb-file&s=%s&form=%s&field=%s',
+                $this->getAdminUrlPrefix('admin-ajax.php'),
+                $submitTime,
+                urlencode($formName),
+                urlencode($fieldName));
+    }
+
+    /**
+     * Returns admin_url with a trailing "?" or "&" ready for parameters to be appended to it.
+     * It check the output of admin_url() for a "?"
+     * The reason for this method is to deal with installations that have WPML which injects
+     * a "?lang=ca" after the admin/ajax urls
+     *
+     * @param $path string
+     * @return string
+     */
+    public function getAdminUrlPrefix($path) {
+        $url = admin_url($path);
+        if (strpos($url, '?') === false) {
+            return $url . '?';
+        } else {
+            return $url . '&';
+        }
     }
 
     public function getFormFieldsAjaxUrlBase() {
-        return admin_url('admin-ajax.php') . '?action=cfdb-getFormFields&form=';
+        return $this->getAdminUrlPrefix('admin-ajax.php') . 'action=cfdb-getFormFields&form=';
     }
 
     public function getValidateSubmitTimeAjaxUrlBase() {
-        return admin_url('admin-ajax.php') . '?action=cfdb-validate-submit_time&submit_time=';
+        return $this->getAdminUrlPrefix('admin-ajax.php') . 'action=cfdb-validate-submit_time&submit_time=';
     }
 
     /**
      * @return array of string
      */
     public function getNoSaveFields() {
-        return preg_split('/,|;/', $this->getOption('NoSaveFields'), -1, PREG_SPLIT_NO_EMPTY);
+        return $this->parseOption($this->getOption('NoSaveFields'));
     }
 
     /**
      * @return array of string
      */
     public function getNoSaveForms() {
-        return preg_split('/,|;/', $this->getOption('NoSaveForms'), -1, PREG_SPLIT_NO_EMPTY);
+        return $this->parseOption($this->getOption('NoSaveForms'));
+    }
+
+    /**
+     * Parse option string that is a comma-delimited set of stings (some of which may be regex's with commas in them)
+     * @param $option string
+     * @return array
+     */
+    public function parseOption($option) {
+//        return preg_split('/,|;/', $option, -1, PREG_SPLIT_NO_EMPTY);
+        $values = array();
+        if ($option) {
+            $regex = false;
+            $esc = false;
+            $value = '';
+            $len = strlen($option);
+            for ($i = 0; $i < $len; $i++) {
+
+                if ($regex && !$esc && $option[$i] == '\\') {
+                    $esc = true;
+                    $value .= $option[$i];
+                    continue;
+                }
+
+                if (!$value && $option[$i] == '/') {
+                    $regex = true;
+                    $value .= $option[$i];
+                    continue;
+                }
+
+                if (!$regex) {
+                    if ($option[$i] == ',') {
+                        if ($value) {
+                            $values[] = $value;
+                        }
+                        $value = '';
+                    } else {
+                        $value .= $option[$i];
+                    }
+                } else {
+                    if ($option[$i] == '/' && !$esc) {
+                        $regex = false;
+                    }
+                    $value .= $option[$i];
+                }
+                $esc = false;
+            }
+            if ($value) {
+                $values[] = $value;
+            }
+        }
+        return $values;
     }
 
     /**
      * @return array of string
      */
     public function getSaveCookies() {
-        return preg_split('/,|;/', $this->getOption('SaveCookieNames'), -1, PREG_SPLIT_NO_EMPTY);
+        return $this->parseOption($this->getOption('SaveCookieNames'));
+    }
+
+    /**
+     * @return string
+     */
+    public function getSubmitsTableName_raw() {
+        global $wpdb;
+        return $wpdb->prefix . strtolower($this->prefix('SUBMITS'));
+    }
+
+    public function getSTTableName_raw() {
+        global $wpdb;
+        return $wpdb->prefix . strtolower($this->prefix('ST'));
     }
 
     /**
      * @return string
      */
     public function getSubmitsTableName() {
-        //        $overrideTable = $this->getOption('SubmitTableNameOverride');
-        //        if ($overrideTable && "" != $overrideTable) {
-        //            return $overrideTable;
-        //        }
-        //return strtolower($this->prefixTableName('SUBMITS'));
         global $wpdb;
-        return $wpdb->prefix . strtolower($this->prefix('SUBMITS'));
+        $tableName = $this->getSubmitsTableName_raw();
+        if (! $this->isTableDefined($tableName)) {
+            // This should correct for missing tables and dynamically add them
+            // in multisite configurations
+            $this->installDatabaseTables();
+        }
+        return $tableName;
     }
 
     public function getSTTableName() {
         global $wpdb;
-        return $wpdb->prefix . strtolower($this->prefix('ST'));
+        $tableName = $this->getSTTableName_raw();
+        if (! $this->isTableDefined($tableName)) {
+            // This should correct for missing tables and dynamically add them
+            // in multisite configurations
+            $this->installDatabaseTables();
+        }
+        return $tableName;
+    }
+
+    public function isTableDefined($tableName) {
+        global $wpdb;
+        $rows = $wpdb->get_results("SHOW TABLES LIKE '$tableName'");
+        return !empty($rows);
     }
 
     /**
@@ -1258,7 +1369,7 @@ class CF7DBPlugin extends CF7DBPluginLifeCycle implements CFDBDateFormatter {
         if (!$this->isEditorActive()) {
             return;
         }
-        $requiredEditorVersion = '1.4.1';
+        $requiredEditorVersion = '1.4.2';
         $editorData = $this->getEditorPluginData();
         if (isset($editorData['Version'])) {
             if (version_compare($editorData['Version'], $requiredEditorVersion) == -1) {
@@ -1293,7 +1404,7 @@ class CF7DBPlugin extends CF7DBPluginLifeCycle implements CFDBDateFormatter {
      * return CFDBErrorLog
      */
     public function getErrorLog() {
-        $destination = trim($this->getOption('ErrorOutput', ''));
+        $destination = trim($this->getOption('ErrorOutput', '', true));
         return new CFDBErrorLog($this, $destination);
     }
 

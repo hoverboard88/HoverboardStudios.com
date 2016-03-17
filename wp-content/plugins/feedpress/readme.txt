@@ -4,7 +4,7 @@ Donate link: http://maxime.sh/paypal
 Tags: feedpress, uri.lv, redirect, rss, feed, feedburner
 Requires at least: 3.0
 Tested up to: 4.4
-Stable tag: 1.7
+Stable tag: 1.7.2
 
 Redirects all feeds to a FeedPress feed and enables realtime feed updates.
 
@@ -23,6 +23,12 @@ Additionally, every time you publish a new article, a ping is sent to FeedPress 
 3. Configure your feed from the new FeedPress Settings submenu
 
 == Changelog ==
+
+= 1.7.2 =
+* Now pings every configured feeds when publishing a new post.
+
+= 1.7.1 =
+* Remove use of anonymous function feature that is not available with old PHP versions.
 
 = 1.7 =
 * Automatic syncing of your feed URLs and hostnames.

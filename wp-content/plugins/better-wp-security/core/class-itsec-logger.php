@@ -21,7 +21,7 @@ final class ITSEC_Logger {
 		//make sure the log file info is there or generate it. This should only affect beta users.
 		if ( ! isset( $itsec_globals['settings']['log_info'] ) ) {
 
-			$itsec_globals['settings']['log_info'] = substr( sanitize_title( get_bloginfo( 'name' ) ), 0, 20 ) . '-' . ITSEC_Lib::get_random( mt_rand( 0, 10 ) );
+			$itsec_globals['settings']['log_info'] = substr( sanitize_title( get_bloginfo( 'name' ) ), 0, 20 ) . '-' . wp_generate_password( 30, false );
 
 			update_site_option( 'itsec_global', $itsec_globals['settings'] );
 
@@ -29,7 +29,10 @@ final class ITSEC_Logger {
 
 		//Make sure the logs directory was created
 		if ( ! is_dir( $itsec_globals['ithemes_log_dir'] ) ) {
-			@mkdir( trailingslashit( $itsec_globals['ithemes_dir'] ) . 'logs' );
+			if ( wp_mkdir_p( $itsec_globals['ithemes_log_dir'] ) ) {
+				// Make sure we have an index file to block directory listing
+				file_put_contents( path_join( $itsec_globals['ithemes_log_dir'], 'index.php' ), "<?php\n// Silence is golden." );
+			}
 		}
 
 		//don't create a log file if we don't need it.

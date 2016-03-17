@@ -197,7 +197,7 @@ class ITSEC_Tweaks {
 	 */
 	public function force_unique_nicename( &$errors, $update, &$user ) {
 
-		$display_name = isset( $user->display_name ) ? $user->display_name : ITSEC_Lib::get_random( 14 );
+		$display_name = isset( $user->display_name ) ? $user->display_name : wp_generate_password( 14, false );
 
 		if ( ! empty( $user->nickname ) ) {
 

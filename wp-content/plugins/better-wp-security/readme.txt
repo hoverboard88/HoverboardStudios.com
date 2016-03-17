@@ -2,8 +2,8 @@
 Contributors: ithemes, chrisjean, aaroncampbell, gerroald, mattdanner
 Tags: security, malware, secure, multi-site, network, mu, login, lockdown, htaccess, hack, header, cleanup, ban, restrict, access, protect, protection, disable, images, image, hotlink, admin, username, database, prefix, wp-content, rename, directory, directories, secure, SSL, iThemes, BackupBuddy, Exchange, iThemes Exchange
 Requires at least: 4.1
-Tested up to: 4.3.1
-Stable tag: 5.1.1
+Tested up to: 4.4.2
+Stable tag: 5.3.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -99,7 +99,7 @@ For complete site backups and the ability to restore or move WordPress easily, c
 
 = Tutorials =
 
-Learn how to use iThemes Security with our series of <a href="http://ithemes.com/tutorial/category/ithemes-security/">in-depth tutorial videos</a> taught by lead developer Chris Wiegman:
+Learn how to use iThemes Security with our series of <a href="http://ithemes.com/tutorial/category/ithemes-security/">in-depth tutorial videos</a>:
 
 * <a href="http://ithemes.com/tutorials/getting-started-ithemes-security-part-1/">Getting Started</a>
 * <a href="http://ithemes.com/tutorials/getting-started-ithemes-security-part-2-global-settings/">Global Settings</a>
@@ -188,6 +188,63 @@ Free support may be available with the help of the community in the <a href="htt
 5. Easy-to-navigate Security dashboard
 
 == Changelog ==
+
+= 5.3.3 =
+* Bug Fix: Fixed temporary whitelisting by preventing a temporarily whitelisted IP from being locked out.
+
+= 5.3.2 =
+* Bug Fix: Updated code that generates the backups and logs directories to ensure that it attempts to create the parent directory if it does not exist yet.
+* Bug Fix: Removed warnings that could be generated if the logs directory could not be created.
+* Bug Fix: Database backup files sent via email no longer have a name without an extension if zipping up the file fails.
+
+= 5.3.1 =
+* Security Fix: Hardened the created backups and logs directories. Thanks to Nicolas Chatelain (SYSDREAM IT Security Services) for notifying us of this issue.
+* Security Fix: More secure backup and log file names. Thanks to Nicolas Chatelain (SYSDREAM IT Security Services) for notifying us of this issue.
+* Bug Fix: The "NGINX Conf File" setting is now properly respected, causing the generated NGINX configuration file to be stored in that location.
+* Enhancement: Generated database backup file names now contain a human-readable timestamp in the format of YYYYMMDD-HHMMSS.
+* Enhancement: Zipped database backup files no longer contain a deeply nested directory structure. Instead, they only contain the sql file.
+* Enhancement: When the "Force Unique Nickname" feature is enabled, the generated display name now uses an improved randomization function.
+* Enhancement: Improved tabbing of rules in generated nginx.conf files.
+* Enhancement: Removed the "See what's new button" as it has fulfilled its purpose.
+
+= 5.3.0 =
+* New Feature: Added support for IPv6 addresses. This includes support for IPv6 in lockouts, ban hosts, and white lists.
+* Bug Fix: Fixed issue that could cause username-based lockouts to fail for long usernames.
+* Bug Fix: Fixed issue that prevented wildcard IP ranges from being blacklisted or whitelisted.
+* Bug Fix: Removed warnings generated when the Away Mode module is disabled and iThemes Sync contacts the site.
+* Enhancement: Updated descriptions of valid IP and IP range formats for the Lockout White List and the Ban Hosts settings.
+* Enhancement: Updated host entries in log details to link to traceip.net rather than ip-adress.com. This is because ip-adress.com does not support IPv6 addresses.
+* Enhancement: Updated some translatable strings relating to blacklisting and whitelisting to allow for better translations.
+* Enhancement: Added details about how wildcard IP ranges are converted to CIDR format (this improves performance).
+
+= 5.2.1 =
+* Bug Fix: Comparisons of IPv4 addresses and ranges now include the IP's at the edge of the ranges.
+* Bug Fix: IPv4 tests now work as expected when deciding if a blacklisted IP or range overlaps a whitelisted IP's and ranges.
+* Bug Fix: Fixed styling issue that affected the display of the horizontal tabs on settings pages in WordPress 4.5.
+* Bug Fix: Replaced old module sorting order in settings screens.
+* Bug Fix: Fixed PHP 7 compatibility issue that triggers the following error: "Uncaught Error: Call to undefined function mysql_get_client_info()".
+* Bug Fix: Fixed warnings and errors that could occur when deleting the plugin.
+* Bug Fix: Fixed warning that could occur on a failed login when Local Brute Force Detection is disabled.
+* Bug Fix: All data added to the options table by iThemes Security is removed on uninstall.
+* Bug Fix: Fixed the cause of the following warning: call_user_func_array() expects parameter 1 to be a valid callback, class 'ITSEC_SSL_Setup' does not have a method 'execute_deactivate'
+* Enhancement: When a lockout is being executed, wp_logout() will only be called if the current page request comes from a logged in user. This prevents plugins that log logout events from logging log outs from unknown users.
+* Enhancement: Improved the descriptions used for some of the data displayed in the "System Information" section of Security > Dashboard.
+* Enhancement: Added "Use MySQLi" entry to the "System Information" section of Security > Dashboard to show whether the MySQLi driver is enabled.
+* Enhancement: Updated the "SQL Mode" entry in the "System Information" section of Security > Dashboard to show the full details if that value is set.
+* Enhancement: Improved code that ensures that tables and options table entries created by iThemes Security are removed on uninstall only when no other iThemes Security plugin is active.
+
+= 5.2.0 =
+* Security Fix: Fixed PHP code that could allow AJAX requests to list directories and files outside the directory structure of the WordPress installation. Note that these AJAX requests required a logged in user with admin-level privileges. This vulnerability was unable to be exploited by non-privileged or anonymous requests.
+* Bug Fix: Updated the SSL feature to use 301 redirects rather than 302 redirects.
+* Bug Fix: Fixed situations where security nonces would incorrectly trigger "security check" errors when enabling specific combinations of features on the settings page.
+* Bug Fix: Enabling scheduled database backups and setting a backup interval of 0 days no longer results in a backup being created on every page load.
+* Bug Fix: Module-specific data is properly initialized/removed on plugin activation, deactivation, and uninstallation.
+* Feature Removal: Removed the "Security Status" portion of the Security > Dashboard page. This is in preparation for a new tool that provides suggestions tailored to the site and server that Security is running on.
+* Enhancement: Updated the way the feature modules function in order to allow them to be redesigned in a more efficient and flexible way for future releases.
+* Enhancement: Updated the File Change Detection feature to attempt a max memory limit of 256M rather than 128M as some users experience out of memory issues which could be fixed with the higher memory limit.
+* Enhancement: Updated the Database Backup feature to attempt a max memory limit of 256M rather than 128M as some users experience out of memory issues which could be fixed with the higher memory limit.
+* Enhancement: Added localization support for some non-localized strings.
+* Enhancement: Improved detection of multiple active versions of iThemes Security.
 
 = 5.1.1 =
 * Enhancement: Removed Yandex and Sogou from the HackRepair blacklist as they are legitimate search engine bots.

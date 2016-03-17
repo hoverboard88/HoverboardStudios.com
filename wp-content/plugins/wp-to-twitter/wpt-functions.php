@@ -103,7 +103,7 @@ function wpt_settings_tabs() {
 	$output = '';
 	$default = ( get_option( 'wtt_twitter_username' ) == '' ) ? 'connection' : 'basic';
 	$current = ( isset( $_GET['tab'] ) ) ? $_GET['tab'] : $default;
-	$pro_text = ( is_plugin_active( 'wp-tweets-pro/wpt-pro-functions.php' ) ) ? __( 'Pro Settings', 'wp-to-twitter' ) : __( 'Get WP Tweets PRO', 'wp-to-twitter' );
+	$pro_text = ( function_exists( 'wpt_pro_exists' ) ) ? __( 'Pro Settings', 'wp-to-twitter' ) : __( 'Get WP Tweets PRO', 'wp-to-twitter' );
 	$pages = array( 
 		'connection'=> __( 'Twitter Connection', 'wp-to-twitter' ), 
 		'basic'=> __( 'Basic Settings', 'wp-to-twitter' ),
@@ -113,7 +113,7 @@ function wpt_settings_tabs() {
 		'pro' => $pro_text
 	);
 	$pages = apply_filters( 'wpt_settings_tabs_pages', $pages, $current );
-	$admin_url = ( is_plugin_active( 'wp-tweets-pro/wpt-pro-functions.php' ) ) ? admin_url( 'admin.php?page=wp-tweets-pro' ) : admin_url( 'options-general.php?page=wp-to-twitter/wp-to-twitter.php' );
+	$admin_url = admin_url( 'admin.php?page=wp-tweets-pro' );
 
 	foreach ( $pages as $key => $value ) {
 		$selected = ( $key == $current ) ? " nav-tab-active" : '';
@@ -150,7 +150,7 @@ function wpt_handle_errors() {
 		delete_option( 'wp_url_failure' );
 	}
 	if ( get_option( 'wp_url_failure' ) == '1' ) {
-		$admin_url = ( is_plugin_active( 'wp-tweets-pro/wpt-pro-functions.php' ) ) ? admin_url( 'admin.php?page=wp-tweets-pro' ) : admin_url( 'options-general.php?page=wp-to-twitter/wp-to-twitter.php' );
+		$admin_url = admin_url( 'admin.php?page=wp-tweets-pro' );
 		$nonce = wp_nonce_field( 'wp-to-twitter-nonce', '_wpnonce', true, false ) . wp_referer_field( false );
 		$error = '<div class="error">' . 
 			__( "<p>The query to the URL shortener API failed, and your URL was not shrunk. The full post URL was attached to your Tweet. Check with your URL shortening provider to see if there are any known issues.</p>", 'wp-to-twitter' ) .
@@ -207,9 +207,10 @@ function wpt_show_debug() {
 	}	
 }
 
-function jd_remote_json( $url, $array = true ) {
-	$input = jd_fetch_url( $url );
+function wpt_remote_json( $url, $array = true, $method = 'GET' ) {
+	$input = wpt_fetch_url( $url, $method );
 	$obj   = json_decode( $input, $array );
+	wpt_mail( 'Remote JSON return value', print_r( $obj, 1 ) );
 	if ( function_exists( 'json_last_error' ) ) { // > PHP 5.3
 		try {
 			if ( is_null( $obj ) ) {
@@ -243,7 +244,7 @@ function jd_remote_json( $url, $array = true ) {
 	return $obj;
 }
 
-function is_valid_url( $url ) {
+function wpt_is_valid_url( $url ) {
 	if ( is_string( $url ) ) {
 		$url = urldecode( $url );
 
@@ -254,7 +255,7 @@ function is_valid_url( $url ) {
 }
 
 // Fetch a remote page. Input url, return content
-function jd_fetch_url( $url, $method = 'GET', $body = '', $headers = '', $return = 'body' ) {
+function wpt_fetch_url( $url, $method = 'GET', $body = '', $headers = '', $return = 'body' ) {
 	$request = new WP_Http;
 	$result  = $request->request( $url, array( 'method'     => $method,
 	                                           'body'       => $body,
@@ -529,13 +530,13 @@ function wpt_post_attachment( $post_ID ) {
 
 function wpt_get_support_form() {
 	global $current_user, $wpt_version;
-	get_currentuserinfo();
+	$current_user = wp_get_current_user();
 	$request = '';
 	$response_email = '';
 	// send fields for WP to Twitter
 	$license = ( get_option( 'wpt_license_key' ) != '' ) ? get_option( 'wpt_license_key' ) : 'none';
-	if ( $license != '' ) {
-		$valid = ( get_option( 'wpt_license_valid' ) == 'true' ) ? ' (valid)' : ' (invalid)';
+	if ( $license != 'none' ) {
+		$valid = ( ( get_option( 'wpt_license_valid' ) == 'true' ) || ( get_option( 'wpt_license_valid' ) == 'active' ) ) ? ' (active)' : ' (inactive)';
 	} else {
 		$valid = '';
 	}
@@ -651,7 +652,7 @@ $plugins_string
 	} else {
 		$checked = '';
 	}
-	$admin_url = ( is_plugin_active( 'wp-tweets-pro/wpt-pro-functions.php' ) ) ? admin_url( 'admin.php?page=wp-tweets-pro' ) : admin_url( 'options-general.php?page=wp-to-twitter/wp-to-twitter.php' );
+	$admin_url = admin_url( 'admin.php?page=wp-tweets-pro' );
 	$admin_url = add_query_arg( 'tab', 'support', $admin_url );
 	
 	echo "
@@ -674,7 +675,7 @@ $plugins_string
 		<input type='checkbox' name='has_read_faq' id='has_read_faq' value='on' required='required' aria-required='true' /> <label for='has_read_faq'>" . sprintf( __( 'I have read <a href="%1$s">the FAQ for this plug-in</a> <span>(required)</span>', 'wp-to-twitter' ), 'http://www.joedolson.com/wp-to-twitter/support-2/' ) . "
         </p>
         <p>
-        <input type='checkbox' name='has_donated' id='has_donated' value='on' $checked /> <label for='has_donated'>" . sprintf( __( 'I <a href="%1$s">made a donation to help support this plug-in</a>', 'wp-to-twitter' ), 'http://www.joedolson.com/donate.php' ) . "</label>
+        <input type='checkbox' name='has_donated' id='has_donated' value='on' $checked /> <label for='has_donated'>" . __( 'I made a donation or purchase to help support this plug-in', 'wp-to-twitter' ) . "</label>
         </p>
         <p>
         <label for='support_request'>" . __( 'Support Request:', 'wp-to-twitter' ) . "</label><br /><textarea class='support-request' name='support_request' id='support_request' cols='80' rows='10' class='widefat'>" . stripslashes( esc_attr( $request ) ) . "</textarea>
@@ -977,6 +978,14 @@ class WPT_Normalizer
 /**
  * Functions to provide fallbacks for changed function names in case any plug-ins or themes are calling WP to Twitter functions in custom code.
  */
+function jd_fetch_url( $url, $method = 'GET', $body = '', $headers = '', $return = 'body' ) {
+	return wpt_fetch_url( $url, $method, $body, $headers, $return );
+}
+
+function jd_remote_json( $url, $array = true ) {
+	return wpt_remote_json( $url, $array );
+}
+
 function jd_twit_link( $link_ID ) {
 	return wpt_twit_link( $link_ID );
 }

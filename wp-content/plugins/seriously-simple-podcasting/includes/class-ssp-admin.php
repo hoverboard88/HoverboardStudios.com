@@ -122,7 +122,7 @@ class SSP_Admin {
 		add_rewrite_rule( '^podcast-download/([^/]*)/([^/]*)/?', 'index.php?podcast_episode=$matches[1]', 'top' );
 		add_rewrite_rule( '^podcast-player/([^/]*)/([^/]*)/?', 'index.php?podcast_episode=$matches[1]&podcast_ref=player', 'top' );
 
-		// Custo query variables
+		// Custom query variables
 		add_rewrite_tag( '%podcast_episode%', '([^&]+)' );
 		add_rewrite_tag( '%podcast_ref%', '([^&]+)' );
 
@@ -242,24 +242,13 @@ class SSP_Admin {
 	public function register_custom_column_headings( $defaults ) {
 		$new_columns = apply_filters( 'ssp_admin_columns_episodes', array( 'series' => __( 'Series' , 'seriously-simple-podcasting' ) , 'image' => __( 'Image' , 'seriously-simple-podcasting' ) ) );
 
-		$last_item = '';
+		// remove date column
+		unset( $defaults['date'] );
 
-		if ( isset( $defaults['date'] ) ) { unset( $defaults['date'] ); }
+		// add new columns before last default one
+		$columns = array_slice( $defaults, 0, -1 ) + $new_columns + array_slice( $defaults, -1 );
 
-		if ( count( $defaults ) > 2 ) {
-			$last_item = array_slice( $defaults, -1 );
-			array_pop( $defaults );
-		}
-		$defaults = array_merge( $defaults, $new_columns );
-
-		if ( $last_item ) {
-			foreach ( (array) $last_item as $k => $v ) {
-				$defaults[$k] = $v;
-				break;
-			}
-		}
-
-		return $defaults;
+		return $columns;
 	}
 
     /**
@@ -274,18 +263,9 @@ class SSP_Admin {
 		switch ( $column_name ) {
 
 			case 'series':
-				$value = '';
-
 				$terms = wp_get_post_terms( $id , 'series' );
-
-				$i = 0;
-				foreach ( $terms as $term ) {
-					if ( $i > 0 ) { $value .= ', '; }
-					else { ++$i; }
-					$value .= $term->name;
-				}
-
-				echo $value;
+				$term_names = wp_list_pluck( $terms, 'name' );
+				echo join( ', ', $term_names );
 			break;
 
 			case 'image':
@@ -319,9 +299,12 @@ class SSP_Admin {
 
     /**
      * Display column data in series list table
+     *
      * @param string  $column_data Default column content
      * @param string  $column_name Name of current column
      * @param integer $term_id     ID of term
+     *
+     * @return string
      */
     public function add_series_columns( $column_data , $column_name , $term_id ) {
 
@@ -334,10 +317,16 @@ class SSP_Admin {
 					$feed_slug = apply_filters( 'ssp_feed_slug', $this->token );
 					$feed_url = $this->home_url . 'feed/' . $feed_slug . '/' . $series_slug;
 				} else {
-					$feed_url = $this->home_url . '?feed=' . $this->token . '&podcast_series=' . $series_slug;
+					$feed_url = add_query_arg(
+						array(
+							'feed' => $this->token,
+							'podcast_series' => $series_slug
+						),
+						$this->home_url
+					);
 				}
 
-                $column_data = '<a href="' . $feed_url . '" target="_blank">' . $feed_url . '</a>';
+                $column_data = '<a href="' . esc_attr( $feed_url ) . '" target="_blank">' . esc_html( $feed_url ) . '</a>';
             break;
         }
 
@@ -415,7 +404,7 @@ class SSP_Admin {
 		// Generate markup for meta box
 		$html = '<p><em>' . __( 'Customise the size of your episode embed below, then copy the HTML to your clipboard.', 'seriously-simple-podcasting' ) . '</em></p>';
 		$html .= '<p><label for="episode_embed_code_width">' . __( 'Width:', 'seriously-simple-podcasting' ) . '</label> <input id="episode_embed_code_width" class="episode_embed_code_size_option" type="number" value="500" length="3" min="0" step="1" /> &nbsp;&nbsp;&nbsp;&nbsp;<label for="episode_embed_code_height">' . __( 'Height:', 'seriously-simple-podcasting' ) . '</label> <input id="episode_embed_code_height" class="episode_embed_code_size_option" type="number" value="350" length="3" min="0" step="1" /></p>';
-		$html .= '<p><textarea readonly id="episode_embed_code">' . $embed_code . '</textarea></p>';
+		$html .= '<p><textarea readonly id="episode_embed_code">' . esc_textarea( $embed_code ) . '</textarea></p>';
 
 		echo $html;
 	}
@@ -427,7 +416,7 @@ class SSP_Admin {
 	public function update_episode_embed_code () {
 
 		// Make sure we have a valid post ID
-		if( ! isset( $_POST['post_id'] ) || ! $_POST['post_id'] ) {
+		if( empty( $_POST['post_id'] ) ) {
 			return;
 		}
 
@@ -480,12 +469,20 @@ class SSP_Admin {
 				}
 
 				if ( $k == 'audio_file' ) {
-					$html .= '<tr valign="top"><th scope="row"><label for="' . esc_attr( $k ) . '">' . $v['name'] . '</label></th><td><input type="button" class="button" id="upload_audio_file_button" value="'. __( 'Upload File' , 'seriously-simple-podcasting' ) . '" data-uploader_title="Choose a file" data-uploader_button_text="Insert audio file" /><input name="' . esc_attr( $k ) . '" type="text" id="upload_audio_file" class="regular-text" value="' . esc_attr( $data ) . '" />' . "\n";
+					$html .= '<tr valign="top"><th scope="row"><label for="' . esc_attr( $k ) . '">' . $v['name'] . '</label></th><td><input name="' . esc_attr( $k ) . '" type="text" id="upload_audio_file" class="regular-text" value="' . esc_attr( $data ) . '" /> <input type="button" class="button" id="upload_audio_file_button" value="' . __( 'Upload File' , 'seriously-simple-podcasting' ) . '" data-uploader_title="' . __( 'Choose a file', 'seriously-simple-podcasting' ) . '" data-uploader_button_text="' . __( 'Insert podcast file', 'seriously-simple-podcasting' ) . '" />' . "\n";
 					$html .= '<p class="description">' . $v['description'] . '</p>' . "\n";
 					$html .= '</td><tr/>' . "\n";
 				} else {
 					if ( $v['type'] == 'checkbox' ) {
 						$html .= '<tr valign="top"><th scope="row">' . $v['name'] . '</th><td><input name="' . esc_attr( $k ) . '" type="checkbox" class="' . esc_attr( $class ) . '" id="' . esc_attr( $k ) . '" ' . checked( 'on' , $data , false ) . ' /> <label for="' . esc_attr( $k ) . '"><span class="description">' . $v['description'] . '</span></label>' . "\n";
+						$html .= '</td><tr/>' . "\n";
+					} elseif ( $v['type'] == 'radio' ) {
+						$html .= '<tr valign="top"><th scope="row">' . $v['name'] . '</th><td>' ."\n";
+						foreach( $v['options'] as $option => $label ) {
+
+							$html .= '<input style="vertical-align: bottom;" name="' . esc_attr( $k ) . '" type="radio" class="' . esc_attr( $class ) . '" id="' . esc_attr( $k ) . '_' . esc_attr( $option ) . '" ' . checked( $option , $data , false ) . ' value="' . esc_attr( $option ) . '" /> <label style="margin-right:10px;" for="' . esc_attr( $k ) . '_' . esc_attr( $option ) . '">' . esc_html( $label ) . '</label>' . "\n";
+						}
+						$html .= '<p class="description">' . $v['description'] . '</p>' . "\n";
 						$html .= '</td><tr/>' . "\n";
 					} elseif ( $v['type'] == 'datepicker' ) {
 						$display_date = '';
@@ -514,7 +511,7 @@ class SSP_Admin {
 	/**
 	 * Save episoe meta box content
 	 * @param  integer $post_id ID of post
-	 * @return void
+	 * @return mixed
 	 */
 	public function meta_box_save( $post_id ) {
 		global $ss_podcasting;
@@ -589,7 +586,7 @@ class SSP_Admin {
 				}
 			}
 
-			// Save audio file to 'enclosure' meta field for standards-sake
+			// Save podcast file to 'enclosure' meta field for standards-sake
 			update_post_meta( $post_id, 'enclosure', $enclosure );
 
 		}
@@ -604,9 +601,19 @@ class SSP_Admin {
 		global $pagenow;
 		$fields = array();
 
+		$fields['episode_type'] = array(
+			'name' => __( 'Episode type:' , 'seriously-simple-podcasting' ),
+		    'description' => '',
+		    'type' => 'radio',
+		    'default' => 'audio',
+		    'options' => array( 'audio' => __( 'Audio', 'seriously-simple-podcasting' ), 'video' => __( 'Video', 'seriously-simple-podcasting' ) ),
+		    'section' => 'info',
+		);
+
+		// In v1.14+ the `audio_file` field can actually be either audio or video, but we're keeping the field name here for backwards compatibility
 		$fields['audio_file'] = array(
-		    'name' => __( 'Audio file:' , 'seriously-simple-podcasting' ),
-		    'description' => __( 'Upload the primary podcast audio file. If the file is hosted on another server simply paste the URL here.' , 'seriously-simple-podcasting' ),
+		    'name' => __( 'Podcast file:' , 'seriously-simple-podcasting' ),
+		    'description' => __( 'Upload the primary podcast file or paste the file URL here.' , 'seriously-simple-podcasting' ),
 		    'type' => 'url',
 		    'default' => '',
 		    'section' => 'info',
@@ -614,7 +621,7 @@ class SSP_Admin {
 
 		$fields['duration'] = array(
 		    'name' => __( 'Duration:' , 'seriously-simple-podcasting' ),
-		    'description' => __( 'Duration of audio file for display (calculated automatically if possible).' , 'seriously-simple-podcasting' ),
+		    'description' => __( 'Duration of podcast file for display (calculated automatically if possible).' , 'seriously-simple-podcasting' ),
 		    'type' => 'text',
 		    'default' => '',
 		    'section' => 'info',
@@ -622,7 +629,7 @@ class SSP_Admin {
 
 		$fields['filesize'] = array(
 		    'name' => __( 'File size:' , 'seriously-simple-podcasting' ),
-		    'description' => __( 'Size of the audio file for display (calculated automatically if possible).' , 'seriously-simple-podcasting' ),
+		    'description' => __( 'Size of the podcast file for display (calculated automatically if possible).' , 'seriously-simple-podcasting' ),
 		    'type' => 'text',
 		    'default' => '',
 		    'section' => 'info',
@@ -645,8 +652,8 @@ class SSP_Admin {
 		);
 
 		$fields['block'] = array(
-		    'name' => __( 'Block from iTunes:' , 'seriously-simple-podcasting' ),
-		    'description' => __( 'Block this episode from appearing in iTunes.' , 'seriously-simple-podcasting' ),
+		    'name' => __( 'Block:' , 'seriously-simple-podcasting' ),
+		    'description' => __( 'Block this episode from appearing in the iTunes & Google Play podcast libraries.' , 'seriously-simple-podcasting' ),
 		    'type' => 'checkbox',
 		    'default' => '',
 		    'section' => 'info',
@@ -799,7 +806,7 @@ class SSP_Admin {
 
     	$file_name = 'feed-podcast.php';
 
-    	$user_template_file = apply_filters( 'ssp_feed_template_file', trailingslashit( get_template_directory() ) . $file_name );
+    	$user_template_file = apply_filters( 'ssp_feed_template_file', trailingslashit( get_stylesheet_directory() ) . $file_name );
 
 		// Any functions hooked in here must NOT output any data or else feed will break
 		do_action( 'ssp_before_feed' );

@@ -5,8 +5,8 @@ Tags: contact form,database,contact form database,save contact form,form databas
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Requires at least: 3.2.1
-Tested up to: 4.3
-Stable tag: 2.9.12
+Tested up to: 4.4.1
+Stable tag: 2.10.1
 
 Saves submitted form data to the database. Export the data to a file or use short codes to display it.
 
@@ -17,15 +17,17 @@ Video tutorial on the <a href="http://cfdbplugin.com/">CFDB Plugin Site</a>
 
 By simply installing the plugin, it will automatically begin to capture form submissions from:
 
-* JetPack Contact Form plugin
-* Contact Form 7 (CF7) plugin
-* Fast Secure Contact Form (FSCF) plugin
-* Gravity Forms plugin
-* WR ContactForm plugin
-* Quform plugin (BETA)
-* Ninja Forms plugin (BETA)
-* Caldera Forms plugin (BETA)
-* Enfold theme forms
+* <a href="https://wordpress.org/plugins/contact-form-7/">Contact Form 7 (CF7) plugin</a>
+* <a href="https://wordpress.org/plugins/si-contact-form/">Fast Secure Contact Form (FSCF) plugin</a>
+* <a href="https://wordpress.org/plugins/jetpack/">JetPack Contact Form plugin</a>
+* <a href="http://www.gravityforms.com">Gravity Forms plugin</a>
+* <a href="https://wordpress.org/plugins/wr-contactform/">WR ContactForm plugin</a>
+* <a href="https://wordpress.org/plugins/formidable/">Formidable Forms (BETA)</a>
+* <a href="http://codecanyon.net/item/quform-wordpress-form-builder/706149/">Quform plugin (BETA)</a>
+* <a href="https://wordpress.org/plugins/ninja-forms/">Ninja Forms plugin (BETA)</a>
+* <a href="https://wordpress.org/plugins/caldera-forms/">Caldera Forms plugin (BETA)</a>
+* <a href="https://wordpress.org/plugins/cforms2/">CFormsII (BETA)</a>
+* <a href="http://themeforest.net/item/enfold-responsive-multipurpose-theme/4519990">Enfold theme forms</a>
 
 Other form submissions can be saved with the addition of the <a href="http://cfdbplugin.com/?page_id=508">[cfdb-save-form-post]</a> short code on the target submission page.
 
@@ -83,6 +85,34 @@ You can always deactivate the plugin without loosing data.
 1. Admin Panel view of submitted form data
 
 == Changelog ==
+
+= 2.10.2 =
+* NOTE: Parsing of functions in shortcodes has changed to be more strict.
+Check your shortcodes and update them to remove any extraneous spaces.
+For example, change trans="field=str_replace(a, b, c)" to trans="field=str_replace(a,b,c)"
+
+= 2.10.1 =
+* Bug Fix: Extra output generated (possibly by other plugins or debug) ahead of export file download made export file corrupt. (Not seen on most sites)
+
+= 2.10.0 =
+* New: Now supports exports to .xlsx and .ods file formats
+* Update: Can now specify the delimiter for CSV exports
+* Update: Added support for multisite (BETA)
+* Update: Variable substitution enabled for form name in shortcodes
+
+= 2.9.16 =
+* Bug Fix: [cfdb-export-link] is now processing filter $_GET, $_POST, $_COOKIE values before creating the URL
+* Bug Fix: To Formidable Forms integration (BETA)
+
+= 2.9.15 =
+* Bug Fix: Where WP installations that output debug would add text to ajax return value
+* Bug Fix: When WPML plugin is also installed, export and ajax URLs were incorrect
+
+= 2.9.14 =
+* New: Formidable Forms integration added (BETA)
+* New: CFormsII integration added (BETA)
+* Bug Fix: Ninja Form integration (BETA) - warning messages seen when using PayPal
+* Performance enhancement: related to accessing options
 
 = 2.9.13 =
 * Bug Fix: on some WP installations, delete operations were being blocked

@@ -20,8 +20,10 @@ class SSP_Frontend {
 	private $assets_dir;
 	private $assets_url;
 	private $template_path;
-	public $token;
+	public $template_url;
 	public $home_url;
+	public $site_url;
+	public $token;
 
 	/**
 	 * Constructor
@@ -36,7 +38,9 @@ class SSP_Frontend {
 		$this->assets_dir = trailingslashit( $this->dir ) . 'assets';
 		$this->assets_url = esc_url( trailingslashit( plugins_url( '/assets/', $file ) ) );
 		$this->template_path = trailingslashit( $this->dir ) . 'templates/';
+		$this->template_url = esc_url( trailingslashit( plugins_url( '/templates/', $file ) ) );
 		$this->home_url = trailingslashit( home_url() );
+		$this->site_url = trailingslashit( site_url() );
 		$this->token = 'podcast';
 
 		// Add meta data to start of podcast content
@@ -116,6 +120,26 @@ class SSP_Frontend {
 		}
 
 		return apply_filters( 'ssp_episode_download_link', esc_url( $link ), $episode_id, $file );
+	}
+
+	/**
+	 * Get the type of podcast episode (audio or video)
+	 * @param  integer $episode_id ID of episode
+	 * @return mixed              [description]
+	 */
+	public function get_episode_type( $episode_id = 0 ) {
+
+		if( ! $episode_id ) {
+			return false;
+		}
+
+		$type = get_post_meta( $episode_id , 'episode_type' , true );
+
+		if( ! $type ) {
+			$type = 'audio';
+		}
+
+		return $type;
 	}
 
 	/**
@@ -231,12 +255,12 @@ class SSP_Frontend {
 				$show_player = false;
 			}
 
-			// Allow audio player to be dynamically hidden/displayed
-			$show_player = apply_filters( 'ssp_show_audio_player', $show_player, $context );
+			// Allow media player to be dynamically hidden/displayed
+			$show_player = apply_filters( 'ssp_show_media_player', $show_player, $context );
 
 			// Show audio player if requested
 			if( $show_player ) {
-				$meta .= '<div class="podcast_player">' . $this->audio_player( $file ) . '</div>';
+				$meta .= '<div class="podcast_player">' . $this->media_player( $file, $episode_id ) . '</div>';
 			}
 
 			if ( apply_filters( 'ssp_show_episode_details', true, $episode_id, $context ) ) {
@@ -350,7 +374,7 @@ class SSP_Frontend {
 				break;
 
 				case 'date_recorded':
-					$meta_display .= __( 'Recorded on' , 'seriously-simple-podcasting' ) . ' ' . date( get_option( 'date_format' ), strtotime( $data ) );
+					$meta_display .= __( 'Recorded on' , 'seriously-simple-podcasting' ) . ' ' . date_i18n( get_option( 'date_format' ), strtotime( $data ) );
 				break;
 
 				// Allow for custom items to be added, but only allow a small amount of HTML tags
@@ -492,7 +516,7 @@ class SSP_Frontend {
 
 			// Identify file by root path and not URL (required for getID3 class)
 			$site_root = trailingslashit( ABSPATH );
-			$file = str_replace( $this->home_url, $site_root, $file );
+			$file = str_replace( $this->site_url, $site_root, $file );
 
 			// Get file data (will only work for local files)
 			$data = wp_read_audio_metadata( $file );
@@ -617,8 +641,7 @@ class SSP_Frontend {
 	 */
 	public function get_attachment_mimetype( $attachment = '' ) {
 
-		// Let's hash the URL to ensure that we don't get
-		// any illegal chars that might break the cache.
+		// Let's hash the URL to ensure that we don't get any illegal chars that might break the cache.
 		$key = md5( $attachment );
 
 		if ( $attachment ) {
@@ -627,7 +650,7 @@ class SSP_Frontend {
 			if ( $mime === false ) {
 
 				// Get the ID
-				$id   = $this->get_attachment_id_from_url( $attachment );
+				$id = $this->get_attachment_id_from_url( $attachment );
 
 				// Get the MIME type
 				$mime = get_post_mime_type( $id );
@@ -643,24 +666,56 @@ class SSP_Frontend {
 	}
 
 	/**
-	 * Load audio player for given file
-	 * @param  string $src Source of audio file
-	 * @return mixed       Audio player HTML on success, false on failure
+	 * Load audio player for given file - wrapper for `media_player` method to maintain backwards compatibility
+	 * @param  string  $src 	   Source of audio file
+	 * @param  integer $episode_id Episode ID for audio empty string
+	 * @return string        	   Audio player HTML on success, false on failure
 	 */
-	public function audio_player( $src = '' ) {
+	public function audio_player( $src = '', $episode_id = 0 ) {
+		$player = $this->media_player( $src, $episode_id );
+		return apply_filters( 'ssp_audio_player', $player, $src, $episode_id );
+	}
 
+	/**
+	 * Load media player for given file
+	 * @param  string  $src        Source of file
+	 * @param  integer $episode_id Episode ID for audio file
+	 * @return string              Media player HTML on success, empty string on failure
+	 */
+	public function media_player ( $src = '', $episode_id = 0 ) {
 		$player = '';
 
 		if ( $src ) {
 
-			// Switch to podcast audio player URL
+			// Get episode type and default to audio
+			$type = $this->get_episode_type( $episode_id );
+			if( ! $type ) {
+				$type = 'audio';
+			}
+
+			// Switch to podcast player URL
 			$src = str_replace( 'podcast-download', 'podcast-player', $src );
 
+			// Set up paramters for media player
+			$params = array( 'src' => $src, 'preload' => 'none' );
+
 			// Use built-in WordPress media player
-			$player = wp_audio_shortcode( array( 'src' => $src, 'preload' => 'none' ) );
+			switch( $type ) {
+				case 'audio': $player = wp_audio_shortcode( $params ); break;
+				case 'video':
+					// Use featured image as video poster
+					if( $episode_id && has_post_thumbnail( $episode_id ) ) {
+						$poster = wp_get_attachment_url( get_post_thumbnail_id( $episode_id ) );
+						if( $poster ) {
+							$params['poster'] = $poster;
+						}
+					}
+					$player = wp_video_shortcode( $params );
+				break;
+			}
 
 			// Allow filtering so that alternative players can be used
-			$player = apply_filters( 'ssp_audio_player', $player, $src );
+			$player = apply_filters( 'ssp_media_player', $player, $src, $episode_id );
 		}
 
 		return $player;
@@ -672,7 +727,7 @@ class SSP_Frontend {
 	 * @param  string  $size Image size
 	 * @return string        Image HTML markup
 	 */
-	public function get_image( $id = 0, $size = 'podcast-thumbnail' ) {
+	public function get_image( $id = 0, $size = 'full' ) {
 		$image = '';
 
 		if ( has_post_thumbnail( $id ) ) {
@@ -1054,7 +1109,7 @@ class SSP_Frontend {
 						if ( get_option( 'permalink_structure' ) ) {
 							$file = $this->get_episode_download_link( $episode_id );
 						}
-		    			$html .= '<div class="podcast_player">' . $this->audio_player( $file ) . '</div>' . "\n";
+		    			$html .= '<div class="podcast_player">' . $this->media_player( $file, $episode_id ) . '</div>' . "\n";
 					break;
 
 					case 'details':

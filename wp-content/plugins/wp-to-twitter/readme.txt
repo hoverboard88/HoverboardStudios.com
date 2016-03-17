@@ -2,11 +2,11 @@
 Contributors: joedolson
 Donate link: http://www.joedolson.com/donate/
 Tags: twitter, microblogging, su.pr, bitly, yourls, redirect, shortener, post, links, social, sharing, media, tweet
-Requires at least: 4.0
-Tested up to: 4.4.0
+Requires at least: 4.1
+Tested up to: 4.4.2
 License: GPLv2 or later
 Text Domain: wp-to-twitter
-Stable tag: 3.1.8
+Stable tag: 3.2.5
 
 Posts a Twitter update when you update your WordPress blog or add a link, with your chosen URL shortening service.
 
@@ -66,6 +66,53 @@ Translating my plug-ins is always appreciated. Work on WP to Twitter translation
 * Add regex filter to detect URLs typed into Tweet fields for counting/shortening purposes. [todo]
 * 4.2 added compat function for mb_substr; drop mine when I drop support for 4.1
 * WP to Twitter timing bug with images?
+
+= 3.2.6 =
+
+* Bug fix: wrap Twitter follow button in div to prevent obscure Blink rendering bug.
+* Bug fix: obscure bug saving incorrect short URL when saving draft
+
+= 3.2.5 =
+
+* Bug fix: added prefix to is_valid_url (function used by some other plug-ins)
+* Bug fix: undismissable promotion for WP Tweets PRO
+* Minor style changes
+
+= 3.2.4 =
+
+* Bug fix: functionalized uninstall, but placed in file only imported while WPT active.
+
+= 3.2.3 =
+
+* Remove Freemius integration due to excessive API load.
+
+= 3.2.2 =
+
+* Only call Freemius integration in admin.
+
+= 3.2.1 =
+
+* Bug fix: uninstall issue with Freemius
+* Bug fix: extraneous function call with Freemius
+* More style streamlining
+
+= 3.2.0 =
+
+* Bug fix: if user without permissions to edit WP to Twitter meta updated profiles, Twitter profile data was deleted.
+* Bug fix: PHP notices (2) in Twitter search widget
+* Bug fix: no notice to update settings when setting new URL shortener.
+* Bug fix: permissions tabs non functional if custom role name had a space
+* Bug fix: remove notice thrown when rate limiting is run on a Tweet not associated with a post
+* Bug fix: remove notice thrown when no error defined by custom shortener.
+* Design update in metabox panel
+* Misc. design & text updates
+* Ability to add new URL shorteners via filters ('wpt_shorten_link', 'wpt_shortener_settings', 'wpt_choose_shortener')
+* Remove ability to set YOURLS as a local resource in new installs
+* Added filter to disable storing URLs in post meta
+* Deprecate more old jd_ prefixed functions
+* Change admin page URL to match Pro version.
+* Remove dependency on is_plugin_active()
+* Added opt-in usage tracking via Freemius.com
 
 = 3.1.9 =
 
@@ -221,7 +268,7 @@ Right here: [WP to Twitter FAQ](http://www.joedolson.com/wp-to-twitter/support-2
 
 = How can I help you make WP to Twitter a better plug-in? =
 
-Writing and maintaining a plug-in is a lot of work. You can help me by providing detailed support requests (which saves me time), or by providing financial support, either via my [plug-in donations page](https://www.joedolson.com/donate/) or by [upgrading to WP Tweets Pro](https://www.joedolson.com/wp-tweets-pro/). Believe me, your donation really makes a difference!
+Writing and maintaining a plug-in is a lot of work. You can help me by providing detailed support requests (which saves me time), or by providing financial support, either via my [plug-in donations page](https://www.joedolson.com/donate/) or by [upgrading to WP Tweets Pro](http://www.wptweetspro.com/wp-tweets-pro). Believe me, your donation really makes a difference!
 
 == Screenshots ==
 
@@ -234,4 +281,4 @@ Writing and maintaining a plug-in is a lot of work. You can help me by providing
 
 == Upgrade Notice ==
 
-* 3.1.6 - Rewritten Tweet truncating functions; minor bug fixes.
+* 3.2.5 - Bug fix; undismissable admin notice

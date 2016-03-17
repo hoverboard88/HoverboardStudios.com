@@ -36,11 +36,12 @@
 }
 
 #wp2t p.disabled {
-    font-weight: 700;
-    background: #ffc;
-    padding: 5px 12px;
-    font-size: 1.2em;
-	margin: -10px -12px .5em;
+    font-weight: 400;
+	font-style: italic;
+    background: #ffd;
+    padding: 4px 12px;
+    font-size: 1.1em;
+	margin: .5em -12px -12px;
 }
 
 #wp2t .wpt-options .disabled {
@@ -74,6 +75,27 @@
 #side-sortables #wp2t .wpt_auth_users select {
     width: 98%;
     max-height: 120px;
+}
+
+.panel-toggle a {
+	display: block;
+	padding: 2px;
+	background: rgba( 240,240,240, .9 );
+	border: 1px solid rgba( 240,240,240, .9 );
+	text-decoration: none;
+}
+
+.panel-toggle a:hover, .panel-toggle a:focus {
+	border: 1px solid rgba( 220,220,220, 1 );
+}
+
+.wp-to-twitter .dashicons {
+	font-size: inherit;
+	line-height: inherit;
+}
+
+.wp-to-twitter .dashicons-clock {
+	font-size: 20px;
 }
 
 .wpt-options {
@@ -163,7 +185,7 @@ button.time div {
 
 .wpt-options .tabs a {
     display: inline-block;
-    padding: 4px;
+    padding: 4px 6px;
     border-radius: 4px 4px 0 0;
     border: 1px solid #ccc;
     background: #f3f3f3;
@@ -172,6 +194,9 @@ button.time div {
 .wpt-options .tabs a.active {
     border-bottom: 1px solid #fefefe;
     background: #fefefe;
+	text-decoration: none;
+	color: #444;
+	font-weight: 700;
 }
 
 .wpt_log, #jts {
@@ -189,54 +214,62 @@ button.time div {
     background: #f6f6f6;
 }
 
+.wp-to-twitter .template {
+	margin: 0;
+}
+
 .toggle-btn-group {
     margin: .25em auto .5em;
+	width: auto;
+}
+
+.wptab .toggle-btn-group {
+	margin: .25em -5px .25em;
+}
+
+.toggle-btn-group:after {
     content: "";
     display: table;
-    clear: both;
+    clear: both;	
 }
 
 .toggle-btn-group label {
-    padding: .25em;
+    padding: .25em 0;
     float: left;
     text-align: center;
     cursor: pointer;
     background-color: #f3f3f3;
-    border: #aaa 1px solid;
+	display: inline-block;
+	width: 50%;
+    text-decoration: underline;	
+	color: #6e6e6e;
 }
 
 .toggle-btn-group label:first-of-type {
-    border-radius: 0 .5em .5em 0;
+    border-radius: 0;
 }
 
 .toggle-btn-group input[type="radio"]:checked + label {
-    background-color: #ddd;
-    border: #666 1px solid;
-    text-decoration: underline;
+    background-color: #0073aa;
+	outline: 1px solid #00a0d2;
+	text-decoration: none;
     cursor: text;
+	font-weight: 700;
+	color: #fff;
+}
+
+.toggle-btn-group input[type="radio"]:checked + label:before {
+	font-family: dashicons;
+	content: "\f147";
+	color: #fff;
+	margin-right: 2px;
+	vertical-align: bottom;
 }
 
 .toggle-btn-group label:hover,
 .toggle-btn-group label:focus {
     background-color: #ddd;
-    border: #000 1px solid;
-}
-
-.toggle-btn-group label:first-of-type {
-    border-radius: .5em 0 0 .5em;
-}
-
-.toggle-btn-group label:last-of-type {
-    border-top-right-radius: .5em;
-    border-bottom-right-radius: .5em;
-}
-
-.toggle-btn-group label:first-of-type {
-    border-right: 0px solid;
-}
-
-.toggle-btn-group label:last-of-type {
-    border-left: 0px solid;
+    outline: #aaa 1px solid;
 }
 
 .toggle-btn-group input {

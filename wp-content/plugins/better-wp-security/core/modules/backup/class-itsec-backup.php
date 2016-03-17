@@ -61,8 +61,9 @@ class ITSEC_Backup {
 				! defined( 'ITSEC_BACKUP_CRON' ) ||
 				false === ITSEC_BACKUP_CRON
 			) &&
-			true === $this->settings['enabled'] &&
 			! class_exists( 'pb_backupbuddy' ) &&
+			true === $this->settings['enabled'] &&
+			( $this->settings['interval'] > 0 ) &&
 			( $itsec_globals['current_time_gmt'] - $this->settings['interval'] * 24 * 60 * 60 ) > $this->settings['last_run']
 		) {
 
@@ -91,7 +92,7 @@ class ITSEC_Backup {
 
 		global $itsec_files;
 
-		ITSEC_Lib::set_minimum_memory_limit( '128M' );
+		ITSEC_Lib::set_minimum_memory_limit( '256M' );
 
 		if ( $itsec_files->get_file_lock( 'backup' ) ) {
 
@@ -237,14 +238,17 @@ class ITSEC_Backup {
 
 		$return .= PHP_EOL . PHP_EOL;
 
-		$current_time = current_time( 'timestamp' );
-
 		//save file
-		$file = 'backup-' . substr( sanitize_title( get_bloginfo( 'name' ) ), 0, 20 ) . '-' . $current_time . '-' . ITSEC_Lib::get_random( mt_rand( 5, 10 ) );
+		$file = 'backup-' . substr( sanitize_title( get_bloginfo( 'name' ) ), 0, 20 ) . '-' . current_time( 'Ymd-His' ) . '-' . wp_generate_password( 30, false );
 
-		if ( ! is_dir( $itsec_globals['ithemes_backup_dir'] ) ) {
-			@mkdir( trailingslashit( $itsec_globals['ithemes_dir'] ) . 'backups' );
+		wp_mkdir_p( $itsec_globals['ithemes_backup_dir'] );
+
+		// Make sure we have an index file to block directory listing
+		if ( ! file_exists( path_join( $itsec_globals['ithemes_backup_dir'], 'index.php' ) ) ) {
+			file_put_contents( path_join( $itsec_globals['ithemes_backup_dir'], 'index.php' ), "<?php\n// Silence is golden." );
 		}
+
+		$fileext = '.sql';
 
 		$handle = @fopen( $itsec_globals['ithemes_backup_dir'] . '/' . $file . '.sql', 'w+' );
 
@@ -260,7 +264,7 @@ class ITSEC_Backup {
 
 			$zip = new PclZip( $itsec_globals['ithemes_backup_dir'] . '/' . $file . '.zip' );
 
-			if ( 0 != $zip->create( $itsec_globals['ithemes_backup_dir'] . '/' . $file . '.sql' ) ) {
+			if ( 0 != $zip->create( $itsec_globals['ithemes_backup_dir'] . '/' . $file . '.sql', PCLZIP_OPT_REMOVE_PATH, $itsec_globals['ithemes_backup_dir'] ) ) {
 
 				//delete .sql and keep zip
 				@unlink( $itsec_globals['ithemes_backup_dir'] . '/' . $file . '.sql' );
@@ -268,10 +272,6 @@ class ITSEC_Backup {
 				$fileext = '.zip';
 
 			}
-
-		} else {
-
-			$fileext = '.sql';
 
 		}
 

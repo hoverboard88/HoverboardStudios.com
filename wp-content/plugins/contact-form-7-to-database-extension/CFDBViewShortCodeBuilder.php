@@ -232,6 +232,7 @@ class CFDBViewShortCodeBuilder extends CFDBView {
             if (exportSelected) {
                 if (exportSelected == 'RSS') {
                     jQuery('#itemtitle_span').show();
+                    jQuery('#csvdelim_span').hide();
                 }
                 else {
                     jQuery('#itemtitle_span').hide();
@@ -249,9 +250,17 @@ class CFDBViewShortCodeBuilder extends CFDBView {
                     else {
                         jQuery('#json_div').hide();
                     }
+
+                    if (['CSVUTF8BOM', 'CSVUTF8', 'CSVSJIS'].indexOf(exportSelected) > -1) {
+                        jQuery('#csvdelim_span').show();
+                    }
+                    else {
+                        jQuery('#csvdelim_span').hide();
+                    }
                 }
             } else {
                 jQuery('#itemtitle_span').hide();
+                jQuery('#csvdelim_span').hide();
                 jQuery('#userpass_span_msg').show();
                 jQuery('#gld_userpass_span_msg').hide();
                 jQuery('#label_gld_script').hide();
@@ -720,7 +729,7 @@ class CFDBViewShortCodeBuilder extends CFDBView {
                     break;
             }
 
-            var urlBase = '<?php echo admin_url('admin-ajax.php') ?>?action=cfdb-export&';
+            var urlBase = '<?php echo $plugin->getAdminUrlPrefix('admin-ajax.php') ?>action=cfdb-export&';
 
             if (shortcode) {
                 // Output short code text
@@ -755,6 +764,13 @@ class CFDBViewShortCodeBuilder extends CFDBView {
                     exportUrlElements.push(getValueUrl('format', jQuery('#format_cntl').val(), scValidationErrors));
                 }
 
+                if (['CSVUTF8BOM', 'CSVUTF8', 'CSVSJIS'].indexOf(exportSelection) > -1) {
+                    delim = jQuery('#csv_delim').val();
+                    if (delim != ',') {
+                        exportUrlElements.push(getValueUrl("delimiter", delim));
+                    }
+                }
+
                 var user = jQuery("#gld_user").val();
                 var pass = jQuery("#gld_pass").val();
                 var obfuscate = jQuery('#obfuscate_cntl').is(':checked')
@@ -766,7 +782,7 @@ class CFDBViewShortCodeBuilder extends CFDBView {
                         exportUrlElements.push("username=" + encodeURI(user));
                         exportUrlElements.push("password=" + encodeURI(pass));
                     }
-                    urlBase = '<?php echo admin_url('admin-ajax.php') ?>?action=cfdb-login&cfdb-action=cfdb-export&';
+                    urlBase = '<?php echo $plugin->getAdminUrlPrefix('admin-ajax.php') ?>action=cfdb-login&cfdb-action=cfdb-export&';
                     exportValidationErrors.push("<?php echo htmlspecialchars(__('Warning: the function includes your WP login information. Avoid sharing it.', 'contact-form-7-to-database-extension')) ?>");
                 }
 
@@ -921,6 +937,7 @@ class CFDBViewShortCodeBuilder extends CFDBView {
             // Export File
             jQuery('#export_cntl').val(<?php echo json_encode($postedEnc) ?>);
             jQuery('#add_itemtitle').val(<?php echo json_encode($postedItemtitle) ?>);
+            jQuery('#csv_delim').val(<?php echo json_encode(",") ?>);
 
             // Short Code
             jQuery('#shortcode_ctrl').val(<?php echo json_encode($postedSC) ?>);
@@ -1014,6 +1031,7 @@ class CFDBViewShortCodeBuilder extends CFDBView {
                 createShortCodeAndExportLink();
             });
             jQuery('#add_itemtitle').change(createShortCodeAndExportLink);
+            jQuery('#csv_delim').keyup(createShortCodeAndExportLink);
             jQuery('#gld_user').change(createShortCodeAndExportLink);
             jQuery('#gld_user').keyup(createShortCodeAndExportLink);
             jQuery('#gld_pass').change(createShortCodeAndExportLink);
@@ -1024,7 +1042,8 @@ class CFDBViewShortCodeBuilder extends CFDBView {
 
 
     </script>
-    <style type="text/css">
+    <!--suppress CssInvalidPropertyValue -->
+        <style type="text/css">
         div.shortcodeoptions {
             border: #ccccff groove;
             margin-bottom: 10px;
@@ -1097,6 +1116,12 @@ class CFDBViewShortCodeBuilder extends CFDBView {
         <label for="export_cntl"><?php echo htmlspecialchars(__('Export File', 'contact-form-7-to-database-extension')); ?></label>
         <select id="export_cntl" name="export_cntl">
             <option value=""></option>
+            <option value="xlsx">
+                <?php echo htmlspecialchars(__('Excel .xlsx', 'contact-form-7-to-database-extension')); ?>
+            </option>
+            <option value="ods">
+                <?php echo htmlspecialchars(__('OpenDocument .ods', 'contact-form-7-to-database-extension')); ?>
+            </option>
             <option value="CSVUTF8BOM">
                 <?php echo htmlspecialchars(__('Excel CSV (UTF8-BOM)', 'contact-form-7-to-database-extension')); ?>
             </option>
@@ -1122,7 +1147,11 @@ class CFDBViewShortCodeBuilder extends CFDBView {
                 <?php echo htmlspecialchars(__('JSON', 'contact-form-7-to-database-extension')); ?>
             </option>
         </select>
-        <span  id="itemtitle_span">
+        <span id="csvdelim_span">
+            <label for="csv_delim"><?php echo htmlspecialchars(__('CSV Delimiter', 'contact-form-7-to-database-extension')); ?></label>
+            <input id="csv_delim" type="text" size="2" value="<?php echo htmlspecialchars(','); ?>"/>
+        </span>
+        <span id="itemtitle_span">
             <label for="add_itemtitle"><?php echo htmlspecialchars(__('Item Title', 'contact-form-7-to-database-extension')); ?></label>
             <select name="add_itemtitle" id="add_itemtitle"></select>
         </span>

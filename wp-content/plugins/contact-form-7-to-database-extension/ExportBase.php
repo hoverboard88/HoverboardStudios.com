@@ -132,7 +132,7 @@ class ExportBase {
             foreach (array(
                              'debug', 'permissionmsg', 'unbuffered', 'show', 'hide', 'class', 'style', 'id',
                              'orderby', 'limit', 'tlimit', 'header', 'headers', 'content',
-                             'filter', 'tfilter', 'search', 'tsearch', 'trans')
+                             'filter', 'tfilter', 'search', 'tsearch', 'trans', 'delimiter')
                      as $optionName) {
                 $this->dereferenceOption($optionName);
             }
@@ -518,6 +518,20 @@ class ExportBase {
         }
     }
 
+    /**
+     * Clear the "ob_" buffer.
+     * Call immediately after setDataIterator() to prevent misc chars
+     * from being printed during export
+     */
+    public function clearOutputBuffer() {
+        if (ob_get_length()) {
+            // Prevents misc crap from being printed during export.
+            // Seen on one customer's site where a newline is injected
+            // causes an empty header row for .csv and corrupting .xlsx file
+            ob_clean();
+        }
+    }
+
 //    protected function &getFileMetaData($formName) {
 //        global $wpdb;
 //        $tableName = $this->plugin->getSubmitsTableName();
@@ -741,7 +755,7 @@ class ExportBase {
      * @return bool
      */
     public function queryPermitAllFunctions() {
-        return $this->plugin->getOption('FunctionsInShortCodes', 'false') === 'true';
+        return $this->plugin->getOption('FunctionsInShortCodes', 'false', true) === 'true';
     }
 
     /**

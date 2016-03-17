@@ -1,9 +1,9 @@
 === Seriously Simple Podcasting ===
 Contributors: hlashbrooke, whyisjake
-Tags: seriously simple podcasting, podcast, audio, rss, rss2, m4a, mp3, feed, itunes, media player, podcasting, radio, audio player, media, id3, stitcher, show, shows, series, simple, docs, documentation, wav, oembed, embed, ssp, free, add-ons, extensions, addons
+Tags: podcast, audio, video, vodcast, rss, mp3, mp4, feed, itunes, podcasting, media, stitcher, google play
 Requires at least: 4.2
-Tested up to: 4.4
-Stable tag: 1.13.3
+Tested up to: 4.4.2
+Stable tag: 1.14.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,12 +18,13 @@ Podcasting the way it's meant to be. No mess, no fuss - just you and your conten
 - Simple settings so you can get your podcast up and running quickly
 - Run multiple podcasts from the same site - each with their own, unique RSS feed
 - Gather thorough stats on your listeners using the [free stats add-on](https://wordpress.org/plugins/seriously-simple-stats/)
+- Supports both audio *and* video podcasting
 - New `podcast` post type and `series` taxonomy for managing your podcast episodes
 - Use any post type for your podcast episodes
-- Highly configurable and robust RSS feed designed for *all* podcast services and feed readers, including iTunes and Stitcher
+- Highly configurable and robust RSS feed designed for *all* podcast services and feed readers - including iTunes, Google Play and Stitcher
 - Shortcodes & widgets for displaying podcast episode lists as well as single episodes anywhere on your site
 - Playable episodes using the built-in WordPress media player
-- The freedom to host your audio files on the same site or any other server
+- The freedom to host your media files on the same site or any other server
 - Complete user and developer [documentation](http://www.seriouslysimplepodcasting.com/)
 - Full i18n support
 
@@ -33,7 +34,7 @@ Seriously Simple Podcasting comes with complete user and developer [documentatio
 
 **Add-ons**
 
-Seriously Simple Podcasting comes with a growing [library of add-ons](http://www.seriouslysimplepodcasting.com/add-ons/). Just like the core plugin itself, all of the add-ons are 100% free to use and will always remain that way.
+Seriously Simple Podcasting comes with a growing [library of add-ons](http://www.seriouslysimplepodcasting.com/add-ons/). Just like the core plugin itself, **all of the add-ons are 100% free to use and will always remain that way**.
 
 **How to contribute**
 
@@ -47,7 +48,7 @@ If you would like to contribute translations to this plugin you can do so throug
 
 Simply upload the plugin and you're good to go. Go to "Podcast > Add New" to add new episodes and go to "Podcast > Settings" to customise your podcast.
 
-Podcast audio files can be uploaded directly into WordPress or hosted on any other site - in the latter case all you'll need to supply is the URL to the file. *Please note that episode lengths and file sizes can only be automatically calculated for files that are hosted on the same server as the website - either way though, you can input them in manually.*
+Podcast media files can be uploaded directly into WordPress or hosted on any other site - in the latter case all you'll need to supply is the URL to the file. *Please note that episode lengths and file sizes can only be automatically calculated for files that are hosted on the same server as the website - either way though, you can input them manually.*
 
 If you need help, you can find complete user and developer documentation [here](http://www.seriouslysimplepodcasting.com/).
 
@@ -68,7 +69,7 @@ You can find complete user and developer documentation (along with the FAQs) on 
 
 == Screenshots ==
 
-1. Audio player and episode details displayed on the frontend above post content.
+1. Media player and episode details displayed on the frontend above post content.
 2. The only info that you need to add to each podcast episode.
 3. Set up your podcast.
 4. Customise your podcast feed.
@@ -77,11 +78,40 @@ You can find complete user and developer documentation (along with the FAQs) on 
 7. Publish your podcast.
 8. The podcast admin menu location.
 9. Podcast episodes are shown in the At a Glance dashboard widget.
-10. Recent episodes widget
-11. Single episode widget
-12. Podcast series widget
+10. Recent episodes widget.
+11. Single episode widget.
+12. Podcast series widget.
+13. An example of the styled podcast RSS feed when viewed directly in the browser.
 
 == Changelog ==
+
+= 1.14.3 =
+* 2016-02-18
+* [TWEAK] Making sure that the episode recorded date is internationalised corrently
+* [TWEAK] Adding filters to feed item content, description and subtitle fields (see the [filter reference](https://www.seriouslysimplepodcasting.com/documentation/filter-reference/) for details)
+* [FIX] Fixing dislay of ampersands in episode content in feeds
+
+= 1.14.2 =
+* 2016-02-17
+* [TWEAK] Updating and improving admin field names, descriptions and labels
+* [FIX] Making sure that the custom feed template file is taken from child theme if one exists (props [Justin Fletcher](https://github.com/justinticktock))
+* [FIX] Making sure the file durations can be calculated for sites with WordPress installed in a different folder
+
+= 1.14.1 =
+* 2016-01-19
+* [TWEAK] Updating available podcast categories to use the latest specified by iTunes
+* [FIX] Removing erroneous `subtitle` tag from RSS feed
+* [FIX] Adding Google Play namespace definition to RSS feed header
+
+= 1.14 =
+* 2016-01-19
+* [NEW] Adding full support for video podcasting
+* [NEW] Adding full support for the Google Play Podcast specification
+* [NEW] Adding a stylesheet for RSS feeds to make them readable in the browser and more easily shareable
+* [TWEAK] Correctly escaping HTML output in the dashboard (props [Danny van Kooten](https://profiles.wordpress.org/dvankooten/))
+* [TWEAK] Optimising code for clarity and performance (props [Danny van Kooten](https://profiles.wordpress.org/dvankooten/))
+* [TWEAK] Ensuring that the feed URL is always supplied correctly (props [Danny van Kooten](https://profiles.wordpress.org/dvankooten/))
+* [TWEAK] Improving inline comments all round
 
 = 1.13.3 =
 * 2015-11-24
@@ -541,5 +571,5 @@ You can find complete user and developer documentation (along with the FAQs) on 
 
 == Upgrade Notice ==
 
-= 1.13.3 =
-* v1.13.x contains a number of important updates and some helpful new features - all users are advised to update ASAP.
+= 1.14.3 =
+* v1.14.x contains a number of great new features and optimisations - all users are advised to update ASAP.

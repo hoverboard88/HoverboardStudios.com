@@ -38,7 +38,7 @@ class CFDBIntegrationContactForm7 {
         // Generate submit_time for CF7 mail. Some people complain this causes an error
         // so this is now optional and off by default. Seems to be related to CF7
         // checking its data against blacklist
-        if ($this->plugin->getOption('GenerateSubmitTimeInCF7Email', 'false') == 'true') {
+        if ($this->plugin->getOption('GenerateSubmitTimeInCF7Email', 'false', true) == 'true') {
             add_action('wpcf7_posted_data', array(&$this, 'generateSubmitTimeForCF7'));
         }
     }
@@ -93,7 +93,7 @@ class CFDBIntegrationContactForm7 {
 
 // No longer generating submit_url because it seems to cause CF7 to think it is
 // a spam submission and it drops it.
-//            $url = get_admin_url() . sprintf('admin.php?page=%s&submit_time=%s',
+//            $url = $this->getAdminUrlPrefix('admin.php') . sprintf('page=%s&submit_time=%s',
 //
 //                    $this->getDBPageSlug(),
 //                    $time);

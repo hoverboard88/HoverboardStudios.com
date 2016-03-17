@@ -42,7 +42,7 @@ function wtt_oauth_connection( $auth = false ) {
 	}
 	if ( ! empty( $ack ) && ! empty( $acs ) && ! empty( $ot ) && ! empty( $ots ) ) {
 		require_once( plugin_dir_path( __FILE__ ) . 'wpt_twitter_oauth.php' );
-		$connection            = new jd_TwitterOAuth( $ack, $acs, $ot, $ots );
+		$connection            = new wpt_TwitterOAuth( $ack, $acs, $ot, $ots );
 		$connection->useragent = get_option( 'blogname' ) . ' ' . home_url();
 
 		return $connection;
@@ -62,8 +62,15 @@ function wtt_oauth_credentials_to_hash( $auth = false ) {
 	return $hash;
 }
 
-// response to settings updates
+/**
+ * Back compat
+ */
 function jd_update_oauth_settings( $auth = false, $post = false ) {
+	return wpt_update_oauth_settings( $auth, $post );
+}
+
+// response to settings updates
+function wpt_update_oauth_settings( $auth = false, $post = false ) {
 	if ( isset( $post['oauth_settings'] ) ) {
 		switch ( $post['oauth_settings'] ) {
 			case 'wtt_oauth_test':
@@ -190,7 +197,7 @@ function wtt_connect_oauth( $auth = false ) {
 
 		// show notification to authenticate with OAuth. No longer global; settings only.
 		if ( ! wpt_check_oauth() ) {
-			$admin_url = ( is_plugin_active( 'wp-tweets-pro/wpt-pro-functions.php' ) ) ? admin_url( 'admin.php?page=wp-tweets-pro' ) : admin_url( 'options-general.php?page=wp-to-twitter/wp-to-twitter.php' );
+			$admin_url = admin_url( 'admin.php?page=wp-tweets-pro' );
 			$message   = sprintf( __( "Twitter requires authentication by OAuth. You will need to <a href='%s'>update your settings</a> to complete installation of WP to Twitter.", 'wp-to-twitter' ), $admin_url );
 			echo "<div class='error'><p>$message</p></div>";
 		}
@@ -207,7 +214,7 @@ function wtt_connect_oauth( $auth = false ) {
 			<div class="notes">
 			<h4>' . __( 'WP to Twitter Set-up', 'wp-to-twitter' ) . '</h4>
 			</div>
-					<h4>' . __( '1. Register this site as an application on ', 'wp-to-twitter' ) . '<a href="https://apps.twitter.com/app/new/" target="_blank">' . __( 'Twitter\'s application registration page', 'wp-to-twitter' ) . '</a></h4>
+					<h4>' . __( '1. Register this site as an application on ', 'wp-to-twitter' ) . '<a href="https://apps.twitter.com/app/new/">' . __( 'Twitter\'s application registration page', 'wp-to-twitter' ) . '</a></h4>
 						<ul>
 						<li>' . __( 'If you\'re not currently logged in to Twitter, log-in to the account you want associated with this site', 'wp-to-twitter' ) . '</li>
 						<li>' . __( 'Your application name cannot include the word "Twitter."', 'wp-to-twitter' ) . '</li>
