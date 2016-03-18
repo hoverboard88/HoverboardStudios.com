@@ -3,7 +3,7 @@ Contributors: ithemes, chrisjean, aaroncampbell, gerroald, mattdanner
 Tags: security, malware, secure, multi-site, network, mu, login, lockdown, htaccess, hack, header, cleanup, ban, restrict, access, protect, protection, disable, images, image, hotlink, admin, username, database, prefix, wp-content, rename, directory, directories, secure, SSL, iThemes, BackupBuddy, Exchange, iThemes Exchange
 Requires at least: 4.1
 Tested up to: 4.4.2
-Stable tag: 5.3.3
+Stable tag: 5.3.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -189,6 +189,11 @@ Free support may be available with the help of the community in the <a href="htt
 
 == Changelog ==
 
+= 5.3.4 =
+* Bug Fix: Fixed issue that could cause a fatal error after changing the content directory.
+* Bug Fix: Updated the link to sign up for security guide download to point to a https address. This is better security and prevents warnings when submitting from a http site in some browsers.
+* Bug Fix: If a cryptographically secure log file name can't be generated, queue up log file writes until we can.
+
 = 5.3.3 =
 * Bug Fix: Fixed temporary whitelisting by preventing a temporarily whitelisted IP from being locked out.
 
@@ -318,7 +323,7 @@ Free support may be available with the help of the community in the <a href="htt
 
 = 4.6.10 =
 * Bug Fix: Fixed regression that prevented adding wildcard IP's in the form of 'XXX.XXX.XXX.*' to Ban Hosts.
-* Bug Fix: When a file scan is run from iThemes Sync, a warning will no longer be added to the site's error log. 
+* Bug Fix: When a file scan is run from iThemes Sync, a warning will no longer be added to the site's error log.
 
 = 4.6.8 =
 * Enhancement: Minor refactoring for performance and scalability.
@@ -1498,6 +1503,9 @@ This release is a complete rewrite from the ground up. Special thanks to Cory Mi
 * First alpha release including simple feature set.
 
 == Upgrade Notice ==
+
+= 5.3.4 =
+Version 5.3.4 contains minor bugfixes and enhancements and is recommended for all users.
 
 = 4.6.8 =
 Version 4.6.8 contains minor bugfixes and enhancements and is recommended for all users.

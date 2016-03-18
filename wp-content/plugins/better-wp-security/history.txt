@@ -485,3 +485,7 @@
 	Bug Fix: Database backup files sent via email no longer have a name without an extension if zipping up the file fails.
 5.3.3 - 2016-03-03 - Chris Jean & Aaron D. Campbell
 	Bug Fix: Fixed temporary whitelisting by preventing a temporarily whitelisted IP from being locked out.
+5.3.4 - 2016-03-17 - Chris Jean & Aaron D. Campbell
+	Bug Fix: Fixed issue that could cause a fatal error after changing the content directory.
+	Bug Fix: Updated the link to sign up for security guide download to point to a https address. This is better security and prevents warnings when submitting from a http site in some browsers.
+	Bug Fix: If a cryptographically secure log file name can't be generated, queue up log file writes until we can.

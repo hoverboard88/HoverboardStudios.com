@@ -29,11 +29,11 @@ if ( ! class_exists( 'ITSEC_Core' ) ) {
 			$pages,
 			$pro_toc_items,
 			$tracking_vars,
-			$toc_items,
-			$_plugin_file;
+			$toc_items;
 
 		public
-			$available_pages;
+			$available_pages,
+			$plugin_file;
 
 		/**
 		 * Private constructor to make this a singleton
@@ -58,7 +58,7 @@ if ( ! class_exists( 'ITSEC_Core' ) ) {
 		 *
 		 */
 		public function init( $plugin_file, $plugin_name ) {
-			$this->_plugin_file = $plugin_file;
+			$this->plugin_file = $plugin_file;
 
 			global $itsec_globals, $itsec_files, $itsec_logger, $itsec_lockout, $itsec_notify, $itsec_sync;
 
@@ -1122,7 +1122,7 @@ if ( ! class_exists( 'ITSEC_Core' ) ) {
 
 			foreach ( $active_plugins as $active_plugin ) {
 				$file = basename( $active_plugin );
-				
+
 				if ( in_array( $file, array( 'better-wp-security.php', 'ithemes-security-pro.php' ) ) ) {
 					return;
 				}
@@ -1562,7 +1562,7 @@ if ( ! class_exists( 'ITSEC_Core' ) ) {
 		}
 
 		public function get_plugin_file() {
-			return $this->_plugin_file;
+			return $this->plugin_file;
 		}
 
 	}

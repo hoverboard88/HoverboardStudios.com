@@ -171,7 +171,7 @@ class ITSEC_Core_Admin {
 
 		<div id="mc_embed_signup">
 			<form
-				action="http://ithemes.us2.list-manage.com/subscribe/post?u=7acf83c7a47b32c740ad94a4e&amp;id=5176bfed9e"
+				action="https://ithemes.us2.list-manage.com/subscribe/post?u=7acf83c7a47b32c740ad94a4e&amp;id=5176bfed9e"
 				method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
 				target="_blank" novalidate>
 				<div style="text-align: center;">
