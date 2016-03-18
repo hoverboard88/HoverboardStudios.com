@@ -10,3 +10,6 @@
 [submodule "git-wordpress-checks"]
 	path = git-wordpress-checks
 	url = git@github.com:hoverboard88/git-wordpress-checks.git
+[submodule "wp-content/plugins/hoverboard-wp-starter"]
+	path = wp-content/plugins/hoverboard-wp-starter
+	url = git@github.com:hoverboard88/hoverboard-wp-starter.git
