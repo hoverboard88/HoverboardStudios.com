@@ -62,6 +62,7 @@ class CF7DBPlugin extends CF7DBPluginLifeCycle implements CFDBDateFormatter {
             'IntegrateWithCalderaForms' => array(__('Capture form submissions from Caldera Forms', 'contact-form-7-to-database-extension'), 'true', 'false'),
             'IntegrateWithEnfoldThemForms' => array(__('Capture form submissions from Enfold Theme', 'contact-form-7-to-database-extension'), 'true', 'false'),
             'IntegrateWithCFormsII' => array(__('Capture form submissions from CformsII', 'contact-form-7-to-database-extension'), 'true', 'false'),
+            'IntegrateWithFormCraft' => array(__('Capture form submissions from FormCraft Premium', 'contact-form-7-to-database-extension'), 'true', 'false'),
             'CanSeeSubmitData' => array(__('Can See Submission data', 'contact-form-7-to-database-extension'),
                                         'Administrator', 'Editor', 'Author', 'Contributor', 'Subscriber', 'Anyone'),
             'HideAdminPanelFromNonAdmins' => array(__('Allow only Administrators to see CFDB administration screens', 'contact-form-7-to-database-extension'), 'false', 'true'),
@@ -361,17 +362,24 @@ class CF7DBPlugin extends CF7DBPluginLifeCycle implements CFDBDateFormatter {
             $integration->registerHooks();
         }
 
-        // Enfold theme forms
+        // Hook to work with Enfold theme forms
         if ($this->getOption('IntegrateWithEnfoldThemForms', 'true', true) == 'true') {
             require_once('CFDBIntegrationEnfoldTheme.php');
             $enfold = new CFDBIntegrationEnfoldTheme($this);
             $enfold->registerHooks();
         }
 
-        // CFormsII
+        // Hook to work with CFormsII
         if ($this->getOption('IntegrateWithCFormsII', 'true', true) == 'true') {
             require_once('CFDBIntegrationCFormsII.php');
             $enfold = new CFDBIntegrationCFormsII($this);
+            $enfold->registerHooks();
+        }
+
+        // Hook to work with FormCraft
+        if ($this->getOption('IntegrateWithFormCraft', 'true', true) == 'true') {
+            require_once('CFDBIntegrationFromCraft.php');
+            $enfold = new CFDBIntegrationFromCraft($this);
             $enfold->registerHooks();
         }
 
@@ -511,9 +519,9 @@ class CF7DBPlugin extends CF7DBPluginLifeCycle implements CFDBDateFormatter {
             !$this->canUserDoRoleOption('CanSeeSubmitDataViaShortcode')) {
             CFDBDie::wp_die(__('You do not have sufficient permissions to access this page.', 'contact-form-7-to-database-extension'));
         }
-        $submitTime = $_REQUEST['s'];
-        $formName = $_REQUEST['form'];
-        $fieldName = $_REQUEST['field'];
+        $submitTime = stripslashes($_REQUEST['s']);
+        $formName = stripslashes($_REQUEST['form']);
+        $fieldName = stripslashes($_REQUEST['field']);
         if (!$submitTime || !$formName || !$fieldName) {
             CFDBDie::wp_die(__('Missing form parameters', 'contact-form-7-to-database-extension'));
         }
@@ -805,7 +813,7 @@ class CF7DBPlugin extends CF7DBPluginLifeCycle implements CFDBDateFormatter {
             }
 
             // If the submitter is logged in, capture his id
-            if ($user) {
+            if ($user && !$this->fieldMatches('Submitted Login', $noSaveFields)) {
                 $order = ($order < 9999) ? 9999 : $order + 1; // large order num to try to make it always next-to-last
                 $wpdb->query($wpdb->prepare($parametrizedQuery,
                                             $time,
@@ -816,13 +824,15 @@ class CF7DBPlugin extends CF7DBPluginLifeCycle implements CFDBDateFormatter {
             }
 
             // Capture the IP Address of the submitter
-            $order = ($order < 10000) ? 10000 : $order + 1; // large order num to try to make it always last
-            $wpdb->query($wpdb->prepare($parametrizedQuery,
-                                        $time,
-                                        $title,
-                                        'Submitted From',
-                                        $ip,
-                                        $order));
+            if (!$this->fieldMatches('Submitted From', $noSaveFields)) {
+                $order = ($order < 10000) ? 10000 : $order + 1; // large order num to try to make it always last
+                $wpdb->query($wpdb->prepare($parametrizedQuery,
+                        $time,
+                        $title,
+                        'Submitted From',
+                        $ip,
+                        $order));
+            }
 
         }
         catch (Exception $ex) {
@@ -863,8 +873,9 @@ class CF7DBPlugin extends CF7DBPluginLifeCycle implements CFDBDateFormatter {
     public function getFileFromDB($time, $formName, $fieldName) {
         global $wpdb;
         $tableName = $this->getSubmitsTableName();
-        $parametrizedQuery = "SELECT `field_value`, `file` FROM `$tableName` WHERE `submit_time` = %F AND `form_name` = %s AND `field_name` = '%s'";
-        $rows = $wpdb->get_results($wpdb->prepare($parametrizedQuery, $time, $formName, $fieldName));
+        $sql = "SELECT `field_value`, `file` FROM `$tableName` WHERE `submit_time` = %F AND `form_name` = %s AND `field_name` = '%s'";
+        $sql = $wpdb->prepare($sql, $time, $formName, $fieldName);
+        $rows = $wpdb->get_results($sql);
         if ($rows == null || count($rows) == 0) {
             return null;
         }
@@ -877,13 +888,11 @@ class CF7DBPlugin extends CF7DBPluginLifeCycle implements CFDBDateFormatter {
      * @return void
      */
     public function createAdminMenu() {
-        $roleAllowed = 'Administrator';
         $displayName = $this->getPluginDisplayName();
 
         $hideFromNonAdmins = $this->getOption('HideAdminPanelFromNonAdmins', 'false', true) != 'false';
-        if ($hideFromNonAdmins) {
-            $roleAllowed = 'Administrator';
-        } else {
+        $roleAllowed = 'Administrator';
+        if (!$hideFromNonAdmins) {
             $roleAllowed = $this->getRoleOption('CanSeeSubmitData');
             if (!$roleAllowed) {
                 $roleAllowed = 'Administrator';
@@ -1233,7 +1242,6 @@ class CF7DBPlugin extends CF7DBPluginLifeCycle implements CFDBDateFormatter {
      * @return string
      */
     public function getSubmitsTableName() {
-        global $wpdb;
         $tableName = $this->getSubmitsTableName_raw();
         if (! $this->isTableDefined($tableName)) {
             // This should correct for missing tables and dynamically add them
@@ -1244,7 +1252,6 @@ class CF7DBPlugin extends CF7DBPluginLifeCycle implements CFDBDateFormatter {
     }
 
     public function getSTTableName() {
-        global $wpdb;
         $tableName = $this->getSTTableName_raw();
         if (! $this->isTableDefined($tableName)) {
             // This should correct for missing tables and dynamically add them

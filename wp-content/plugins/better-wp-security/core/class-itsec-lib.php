@@ -510,6 +510,8 @@ final class ITSEC_Lib {
 			}
 		}
 
+		$white_ips = apply_filters( 'itsec_white_ips', $white_ips );
+
 		foreach ( $white_ips as $white_ip ) {
 			if ( ITSEC_Lib_IP_Tools::intersect( $ip_to_check, ITSEC_Lib_IP_Tools::ip_wild_to_ip_cidr( $white_ip ) ) ) {
 				return true;

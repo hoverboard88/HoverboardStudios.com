@@ -755,9 +755,10 @@ if ( ! class_exists( 'ITSEC_Core' ) ) {
 				wp_enqueue_script( 'jquery-ui-dialog' );
 				wp_enqueue_style( 'jquery-ui-tabs' );
 				wp_enqueue_style( 'wp-jquery-ui-dialog' );
-				wp_enqueue_script( 'itsec_dashboard_js', $itsec_globals['plugin_url'] . 'core/js/admin-dashboard.js', array( 'jquery' ) );
+				wp_enqueue_script( 'itsec_dashboard_js', $itsec_globals['plugin_url'] . 'core/js/admin-dashboard.js', array( 'jquery' ), '20160322' );
 				wp_localize_script( 'itsec_dashboard_js', 'itsec_dashboard', array(
 					'text' => __( 'Show Intro', 'better-wp-security' ),
+					'url'  => esc_url( add_query_arg( array( 'show_admin_modal' => 'true' ) ) ),
 				) );
 				wp_enqueue_script( 'itsec_footer', $itsec_globals['plugin_url'] . 'core/js/admin-dashboard-footer.js', array( 'jquery' ), $itsec_globals['plugin_build'], true );
 

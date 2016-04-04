@@ -399,6 +399,7 @@ class CFDBViewWhatsInDB extends CFDBView {
                         <a target="_ninjaforms" href="https://wordpress.org/plugins/ninja-forms/">Ninja Forms (BETA)</a>,
                         <a target="_caldera" href="https://wordpress.org/plugins/caldera-forms/">Caldera Forms (BETA)</a>
                         <a target="_cf2" href="https://wordpress.org/plugins/cforms2/">CFormsII Forms (BETA)</a>
+                        <a target="_fcraft" href="http://codecanyon.net/item/formcraft-premium-wordpress-form-builder/5335056">FormCraft Premium (BETA)</a>
                     </span>
                 </td>
             </tr>

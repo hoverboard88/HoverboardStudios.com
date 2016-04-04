@@ -296,19 +296,29 @@ class ewwwflag {
 		if ( ! wp_verify_nonce( $_REQUEST['ewww_wpnonce'], 'ewww-image-optimizer-bulk' ) || ! current_user_can( $permissions ) ) {
 			wp_die( esc_html__( 'Access denied.', EWWW_IMAGE_OPTIMIZER_DOMAIN ) );
 		}
+		$output = array();
 		// set the resume flag to indicate the bulk operation is in progress
 		update_option( 'ewww_image_optimizer_bulk_flag_resume', 'true' );
 		// retrieve the list of attachments left to work on
 		$attachments = get_option( 'ewww_image_optimizer_bulk_flag_attachments' );
+		if ( ! is_array( $attachments ) && ! empty( $attachments ) ) {
+			$attachments = unserialize( $attachments );
+		}
+		if ( ! is_array( $attachments ) ) {
+			$output['error'] = esc_html__( 'Error retrieving list of images' );
+	                echo json_encode( $output );
+	                die();
+		}
 		$id = array_shift( $attachments );
 		$file_name = $this->ewww_flag_bulk_filename( $id );
 		$loading_image = plugins_url( '/images/wpspin.gif', __FILE__ );
 		// output the initial message letting the user know we are starting
 		if ( empty( $file_name ) ) {
-			echo "<p>" . esc_html__( 'Optimizing', EWWW_IMAGE_OPTIMIZER_DOMAIN ) . "&nbsp;<img src='$loading_image' alt='loading'/></p>";
+			$output['results'] = "<p>" . esc_html__( 'Optimizing', EWWW_IMAGE_OPTIMIZER_DOMAIN ) . "&nbsp;<img src='$loading_image' alt='loading'/></p>";
 		} else {
-			echo "<p>" . esc_html__( 'Optimizing', EWWW_IMAGE_OPTIMIZER_DOMAIN ) . " <b>" . $file_name . "</b>&nbsp;<img src='$loading_image' alt='loading'/></p>";
+			$output['results'] = "<p>" . esc_html__( 'Optimizing', EWWW_IMAGE_OPTIMIZER_DOMAIN ) . " <b>" . $file_name . "</b>&nbsp;<img src='$loading_image' alt='loading'/></p>";
 		}
+		echo json_encode( $output );
 		die();
 	}
 
@@ -338,6 +348,13 @@ class ewwwflag {
 			$output['error'] = esc_html__( 'Access token has expired, please reload the page.', EWWW_IMAGE_OPTIMIZER_DOMAIN );
 			echo json_encode( $output );
 			die();
+		}
+		// find out if our nonce is on it's last leg/tick
+		$tick = wp_verify_nonce( $_REQUEST['ewww_wpnonce'], 'ewww-image-optimizer-bulk' );
+		if ( $tick === 2 ) {
+			$output['new_nonce'] = wp_create_nonce( 'ewww-image-optimizer-bulk' );
+		} else {
+			$output['new_nonce'] = '';
 		}
 		// need this file to work with flag meta
 		require_once( WP_CONTENT_DIR . '/plugins/flash-album-gallery/lib/meta.php' );

@@ -6,7 +6,7 @@
  * Description: Protect your WordPress site by hiding vital areas of your site, protecting access to important files, preventing brute-force login attempts, detecting attack attempts and more.
  * Author: iThemes
  * Author URI: https://ithemes.com
- * Version: 5.3.4
+ * Version: 5.3.5
  * Text Domain: better-wp-security
  * Network: True
  * License: GPLv2

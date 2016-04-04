@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: image, attachment, optimize, optimization, lossless, lossy, photo, picture, seo, compression, gmagick, jpegtran, gifsicle, optipng, pngout, pngquant, jpegmini, tinyjpg, tinypng, webp, wp-cli 
 Requires at least: 4.4
 Tested up to: 4.5
-Stable tag: 2.6.0
+Stable tag: 2.7.1
 License: GPLv3
 
 Reduce image sizes in WordPress including NextGEN, GRAND FlAGallery, FooGallery and more using lossless/lossy methods and image format conversion.
@@ -245,6 +245,33 @@ Pngout, TinyJPG/TinyPNG, JPEGmini, and Pngquant were recommended by EWWW IO user
 
 * feature requests are sticky at the top of the support forums, vote for the ones you like: https://wordpress.org/support/plugin/ewww-image-optimizer
 * If you would like to help translate this plugin in your language, get started here: https://translate.wordpress.org/projects/wp-plugins/ewww-image-optimizer/
+
+= 2.7.1 =
+* fixed: Bulk Optimization not including PDF files
+* fixed: PDF files not being checked for prior optimization
+* fixed: notice for undefined index when running scheduled optimization
+* changed: Scan and Optimize changed from extension blacklist to smaller extension whitelist
+
+= 2.7.0 =
+* added: PDF Optimization, both lossless AND lossy
+
+= 2.6.2 =
+* fixed: url matching for Amazon S3 urls not working for region-specific protocol handlers
+* fixed: discrepancy between number of images actually queued for bulk and number of images listed as selected
+* fixed: S3 images not being fetched when doing local optimization and local images have been removed
+* removed: optimize again for media library after bulk optimize is complete
+* changed: fewer timeouts for long-running Bulk operations by re-issuing nonce values
+* changed: previously optimized CDN images show Re-optimize instead of Optimize Now
+* added: pre-emptive mime-type detection for Amazon S3 images since the AWS Stream Wrapper is not reliable
+
+= 2.6.1 =
+* fixed: disabled tools being tested during optimization
+* fixed: slow loading of Media Library list view with Amazon S3 attachments
+* fixed: Amazon S3 images could be re-optimized after upload without Force enabled
+* fixed: Amazon S3 images not shown when pressing Show Optimized Images
+* fixed: error when legacy image_md5 column did not exist
+* changed: last optimized time set in db for all images, not just re-optimized ones
+* changed: NextGEN bulk optimize requires admin permissions by default
 
 = 2.6.0 =
 * security: missing validate, sanitize, and escape for some user and database inputs

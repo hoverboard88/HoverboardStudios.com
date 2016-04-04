@@ -358,3 +358,7 @@
 	Bug Fix: Fixed issue that could cause a fatal error after changing the content directory.
 	Bug Fix: Updated the link to sign up for security guide download to point to a https address. This is better security and prevents warnings when submitting from a http site in some browsers.
 	Bug Fix: If a cryptographically secure log file name can't be generated, queue up log file writes until we can.
+2.2.9 - 2016-03-29 - Chris Jean & Aaron D. Campbell
+	Security Fix: No longer using document.location to build 'Show Intro' link in admin - Thanks to David Lodge (Pen Test Partners) for notifying us of this issue.
+	Bug Fix: Fixed some notices when certain multisite options are used on BuddyPress
+	Enhancement: New itsec_white_ips filter to allow plugins that work with external services to whitelist service IPs

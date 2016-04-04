@@ -20,7 +20,6 @@
     If not, see <http://www.gnu.org/licenses/>.
 */
 
-require_once 'Spout-2.4.2/Autoloader/autoload.php';
 require_once('ExportBase.php');
 require_once('CFDBExport.php');
 
@@ -45,6 +44,22 @@ class ExportToExcel extends ExportBase implements CFDBExport {
             $this->assertSecurityErrorMessage();
             return;
         }
+
+        if (version_compare(phpversion(), '5.4') < 0) {
+            $this->echoHeaders(array('Content-Type: text/html'));
+            printf('<html><head><title>%s</title></head>',
+                    __('PHP Upgrade Needed', 'contact-form-7-to-database-extension'));
+            _e('CFDB Excel file export requires PHP 5.4 or later on your server.',  'contact-form-7-to-database-extension');
+            echo '<br/>';
+            _e('Your server\'s PHP version: ', 'contact-form-7-to-database-extension');
+            echo phpversion();
+            echo '<br/>';
+            printf('<a href="https://wordpress.org/about/requirements/">%s</a>',
+                    __('See WordPress Recommended PHP Version', 'contact-form-7-to-database-extension'));
+            printf('</body></html');
+            return;
+        }
+        require_once 'Spout-2.4.2/Autoloader/autoload.php'; // required PHP 5.4
 
         // Query DB for the data for that form
         $submitTimeKeyName = 'Submit_Time_Key';
@@ -100,11 +115,20 @@ class ExportToExcel extends ExportBase implements CFDBExport {
             }
             foreach ($this->dataIterator->getDisplayColumns() as $aCol) {
                 $cell = isset($this->dataIterator->row[$aCol]) ? $this->dataIterator->row[$aCol] : '';
+                if ($aCol == 'Submitted' && isset($this->dataIterator->row[$submitTimeKeyName])) {
+                    // Put date in a format that Excel et. al. understand
+                    $timestamp = $this->dataIterator->row[$submitTimeKeyName];
+                    $cell = date('Y-m-d H:i:s', $timestamp);
+                }
+
                 if (//$showFileUrlsInExport &&
                         $fields_with_file &&
                         $cell &&
                         in_array($aCol, $fields_with_file)
                 ) {
+                    // In the case of file links, we want to create a HYPERLINK formula as a link to download the file.
+                    // But the Spout library doesn't support creating formulas.
+                    // http://cfdbplugin.com/?p=1430
                     $url = $this->plugin->getFileUrl($this->dataIterator->row[$submitTimeKeyName], $formName, $aCol);
                     if ($type == Type::ODS) {
                         $cell = "=HYPERLINK(\"$url\"; \"$cell\")";

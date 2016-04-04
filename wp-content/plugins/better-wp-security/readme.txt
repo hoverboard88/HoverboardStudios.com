@@ -2,8 +2,8 @@
 Contributors: ithemes, chrisjean, aaroncampbell, gerroald, mattdanner
 Tags: security, malware, secure, multi-site, network, mu, login, lockdown, htaccess, hack, header, cleanup, ban, restrict, access, protect, protection, disable, images, image, hotlink, admin, username, database, prefix, wp-content, rename, directory, directories, secure, SSL, iThemes, BackupBuddy, Exchange, iThemes Exchange
 Requires at least: 4.1
-Tested up to: 4.4.2
-Stable tag: 5.3.4
+Tested up to: 4.5
+Stable tag: 5.3.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -188,6 +188,11 @@ Free support may be available with the help of the community in the <a href="htt
 5. Easy-to-navigate Security dashboard
 
 == Changelog ==
+
+= 5.3.5 =
+* Security Fix: No longer using document.location to build 'Show Intro' link in admin - Thanks to David Lodge (Pen Test Partners) for notifying us of this issue.
+* Bug Fix: Fixed some notices when certain multisite options are used on BuddyPress
+* Enhancement: New itsec_white_ips filter to allow plugins that work with external services to whitelist service IPs
 
 = 5.3.4 =
 * Bug Fix: Fixed issue that could cause a fatal error after changing the content directory.
@@ -1503,6 +1508,9 @@ This release is a complete rewrite from the ground up. Special thanks to Cory Mi
 * First alpha release including simple feature set.
 
 == Upgrade Notice ==
+
+= 5.3.5 =
+Version 5.3.5 contains minor bugfixes and enhancements and is recommended for all users.
 
 = 5.3.4 =
 Version 5.3.4 contains minor bugfixes and enhancements and is recommended for all users.

@@ -32,7 +32,7 @@ class ewwwngg {
 		if ( ! defined( 'NGGFOLDER' ) ) {
 			return;
 		}
-		add_submenu_page(NGGFOLDER, esc_html__('Bulk Optimize', EWWW_IMAGE_OPTIMIZER_DOMAIN), esc_html__('Bulk Optimize', EWWW_IMAGE_OPTIMIZER_DOMAIN), 'NextGEN Manage gallery', 'ewww-ngg-bulk', array (&$this, 'ewww_ngg_bulk_preview'));
+		add_submenu_page(NGGFOLDER, esc_html__('Bulk Optimize', EWWW_IMAGE_OPTIMIZER_DOMAIN), esc_html__('Bulk Optimize', EWWW_IMAGE_OPTIMIZER_DOMAIN), apply_filters( 'ewww_image_optimizer_manual_permissions', '' ), 'ewww-ngg-bulk', array (&$this, 'ewww_ngg_bulk_preview'));
 	}
 
 	/* ngg_added_new_image hook */
@@ -421,18 +421,28 @@ class ewwwngg {
                 if ( ! wp_verify_nonce( $_REQUEST['ewww_wpnonce'], 'ewww-image-optimizer-bulk' ) || ! current_user_can( $permissions ) ) {
 			wp_die( esc_html__( 'Access denied.', EWWW_IMAGE_OPTIMIZER_DOMAIN ) );
                 }
+		$output = array();
 		// toggle the resume flag to indicate an operation is in progress
                 update_option( 'ewww_image_optimizer_bulk_ngg_resume', 'true' );
 		$attachments = get_option( 'ewww_image_optimizer_bulk_ngg_attachments' );
+	        if ( ! is_array( $attachments ) && ! empty( $attachments ) ) {
+	                $attachments = unserialize( $attachments );
+	        }
+	        if ( ! is_array( $attachments ) ) {
+	                $output['error'] = esc_html__( 'Error retrieving list of images' );
+	                echo json_encode( $output );
+	                die();
+	        }
 		$id = array_shift( $attachments );
 		$file = $this->ewww_ngg_bulk_filename( $id );
 		// let the user know we are starting
                 $loading_image = plugins_url( '/images/wpspin.gif', __FILE__ );
 		if ( empty( $file ) ) {
-			echo "<p>" . esc_html__('Optimizing', EWWW_IMAGE_OPTIMIZER_DOMAIN) . "&nbsp;<img src='$loading_image' alt='loading'/></p>";
+			$output['results'] = "<p>" . esc_html__('Optimizing', EWWW_IMAGE_OPTIMIZER_DOMAIN) . "&nbsp;<img src='$loading_image' alt='loading'/></p>";
 		} else {
-			echo "<p>" . esc_html__('Optimizing', EWWW_IMAGE_OPTIMIZER_DOMAIN) . " <b>$file</b>&nbsp;<img src='$loading_image' alt='loading'/></p>";
+			$output['results'] = "<p>" . esc_html__('Optimizing', EWWW_IMAGE_OPTIMIZER_DOMAIN) . " <b>$file</b>&nbsp;<img src='$loading_image' alt='loading'/></p>";
 		}
+		echo json_encode( $output );
                 die();
         }
 
@@ -464,6 +474,13 @@ class ewwwngg {
 			echo json_encode( $output );
 			die();
                 }
+		// find out if our nonce is on it's last leg/tick
+		$tick = wp_verify_nonce( $_REQUEST['ewww_wpnonce'], 'ewww-image-optimizer-bulk' );
+		if ( $tick === 2 ) {
+			$output['new_nonce'] = wp_create_nonce( 'ewww-image-optimizer-bulk' );
+		} else {
+			$output['new_nonce'] = '';
+		}
 		// find out what time we started, in microseconds
 		$started = microtime( true );
 		// get the list of attachments remaining from the db

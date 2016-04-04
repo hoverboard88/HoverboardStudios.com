@@ -708,9 +708,18 @@ class CFDBViewShortCodeBuilder extends CFDBView {
                     }
                     break;
                 case '[cfdb-export-link]':
-                    val = jQuery('#enc_cntl').val();
-                    scElements.push(getValue('enc', val, scValidationErrors));
-                    scUrlElements.push(getValueUrl('enc', val));
+                    enc = jQuery('#enc_cntl').val();
+                    scElements.push(getValue('enc', enc, scValidationErrors));
+                    scUrlElements.push(getValueUrl('enc', enc));
+
+                    if (['CSVUTF8BOM', 'CSVUTF8', 'CSVSJIS'].indexOf(enc) > -1) {
+                        delim = jQuery('#export_link_csv_delim').val();
+                        if (delim != ',') {
+                            scElements.push(getValue('delimiter', delim, scValidationErrors));
+                            scUrlElements.push(getValueUrl('delimiter', delim));
+                        }
+                    }
+
                     scElements.push(getValue('urlonly', jQuery('#urlonly_cntl').val(), scValidationErrors));
                     scElements.push(getValue('linktext', jQuery('#linktext_cntl').val(), scValidationErrors));
 
@@ -1019,7 +1028,21 @@ class CFDBViewShortCodeBuilder extends CFDBView {
                 addFieldToContent();
                 createShortCodeAndExportLink();
             });
-            jQuery('#enc_cntl').click(createShortCodeAndExportLink);
+
+            var showHideExportLinkDelimiter = function() {
+                var enc = jQuery('#enc_cntl').val();
+                if (['CSVUTF8BOM', 'CSVUTF8', 'CSVSJIS'].indexOf(enc) > -1) {
+                    jQuery('#export_link_csvdelim_span').show();
+                }
+                else {
+                    jQuery('#export_link_csvdelim_span').hide();
+                }
+            };
+            jQuery('#enc_cntl').change(function() {
+                showHideExportLinkDelimiter();
+                createShortCodeAndExportLink();
+            });
+            showHideExportLinkDelimiter();
             jQuery('#urlonly_cntl').click(createShortCodeAndExportLink);
             jQuery('#reset_button').click(reset);
             jQuery('#btn_validate_submit_time').click(validateSubmitTime);
@@ -1032,6 +1055,7 @@ class CFDBViewShortCodeBuilder extends CFDBView {
             });
             jQuery('#add_itemtitle').change(createShortCodeAndExportLink);
             jQuery('#csv_delim').keyup(createShortCodeAndExportLink);
+            jQuery('#export_link_csv_delim').keyup(createShortCodeAndExportLink);
             jQuery('#gld_user').change(createShortCodeAndExportLink);
             jQuery('#gld_user').keyup(createShortCodeAndExportLink);
             jQuery('#gld_pass').change(createShortCodeAndExportLink);
@@ -1521,6 +1545,12 @@ class CFDBViewShortCodeBuilder extends CFDBView {
             </div>
             <select id="enc_cntl" name="enc_cntl">
                 <option value=""></option>
+                <option id="xlsx" value="xlsx">
+                    <?php echo htmlspecialchars(__('Excel .xlsx', 'contact-form-7-to-database-extension')); ?>
+                </option>
+                <option id="ods" value="ods">
+                    <?php echo htmlspecialchars(__('OpenDocument .ods', 'contact-form-7-to-database-extension')); ?>
+                </option>
                 <option id="CSVUTF8BOM" value="CSVUTF8BOM">
                     <?php echo htmlspecialchars(__('Excel CSV (UTF8-BOM)', 'contact-form-7-to-database-extension'));; ?>
                 </option>
@@ -1537,6 +1567,10 @@ class CFDBViewShortCodeBuilder extends CFDBView {
                     <?php echo htmlspecialchars(__('Excel Internet Query', 'contact-form-7-to-database-extension')); ?>
                 </option>
             </select>
+            <span id="export_link_csvdelim_span" style="display:none">
+                <label for="export_link_csv_delim"><?php echo htmlspecialchars(__('CSV Delimiter', 'contact-form-7-to-database-extension')); ?></label>
+                <input id="export_link_csv_delim" type="text" size="2" value="<?php echo htmlspecialchars(','); ?>"/>
+            </span>
         </div>
         <div>
             <div class="label_box">
