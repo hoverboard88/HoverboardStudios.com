@@ -1,0 +1,88 @@
+// Mixins
+//
+// Available Mixins
+//
+// Styleguide 3.0.0
+
+// font-size
+//
+// Declare font-size. Falls back from rem's with optional line-height for vertial rhythm.
+//
+// * `$font-size`: Size in pixels
+// * `$line-height`: Boolean
+//
+// Markup:
+// @include font-size(14px, false);
+//
+// Styleguide 3.1.0
+@mixin font-size($font-size, $line-height:true){
+
+  font-size:$font-size;
+  font-size:($font-size / $base--font-size)*1rem;
+
+  // set line-height for fonts under $base--font-size
+  $lh: $base--spacing / $font-size;
+
+  // if the line-height is going to look crammed together (aka $font-size is bigger than $base--font-size)...
+  @if ((floor($font-size / $base--font-size / 2) * 2) > 0) {
+    // find HOW many times bigger it is than the base font size (like 1.5, 2 times). In order to round to the nearest half, we have to divide it by 2 before rounding down (aka floor()) then multiply back by 2 to get the number back to normal.
+    $lh: $lh * (floor($font-size / $base--font-size / 2) * 2);
+  }
+
+  @if $line-height == true{
+    line-height: $lh;
+    margin: 0 0 $base--spacing;
+  }
+}
+
+// font-weight
+//
+// Declare font-weight. Some fonts use 400, 300, etc. To keep consistency, using this mixin.
+//
+// * `$font-weight`: bold or normal.
+//
+// Markup:
+// @include font-weight(bold);
+//
+// Styleguide 3.2.0
+@mixin font-weight($weight) {
+  @if $weight == "bold" {
+    font-weight: $font-weight__bold;
+  } @else {
+    font-weight: $font-weight__normal;
+  }
+}
+// input-placeholder
+//
+// When declaring placeholder style in `<input>`.
+//
+// Markup:
+// @include input-placeholder(){
+//  ...
+// };
+//
+// Styleguide 3.3.0
+@mixin input-placeholder {
+  &.placeholder { @content; }
+  &:-moz-placeholder { @content; }
+  &::-moz-placeholder { @content; }
+  &:-ms-input-placeholder { @content; }
+  &::-webkit-input-placeholder { @content; }
+}
+// Breakpoint
+//
+// Mixin for Mobile-first media queries
+//
+// * `$width`: Any value, em or px.
+//
+// Markup:
+// @include breakpoint(30em){
+//  ...
+// };
+//
+// Styleguide 3.4.0
+@mixin breakpoint($width) {
+  @media only screen and (min-width: $width) {
+    @content;
+  }
+}

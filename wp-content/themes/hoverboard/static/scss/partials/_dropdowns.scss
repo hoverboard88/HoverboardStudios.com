@@ -1,0 +1,83 @@
+/* CSS Dropdowns */
+.menu {
+  margin: 0;
+  padding-left: 0;
+  width: 100%;
+  display:table;
+  > li, span > li {
+    display: table-cell;
+  }
+  .innerWrapper {
+    position: relative;
+    @media only screen and (max-width: 900px) {
+      position: static;
+    }
+  }
+    a {
+      display: block;
+    }
+  ul a {
+    display: block;
+  }
+  list-style: none;
+  //child menus
+  ul, div, li:hover ul ul, li.hover ul ul {
+    z-index: 1;
+    width: $dropdown__width;
+    position: absolute;
+    top: 0;
+    left: -9999px;
+  }
+  li:hover, li.hover {
+    ul ul {
+      position: static;
+      left: 0;
+      padding: 0;
+      background: none;
+      opacity: 1;
+      width: auto;
+    }
+  }
+  &.vertical {
+    height: auto;
+    li {
+      display: block;
+      float: none;
+    }
+  }
+  li:hover, li.hover {
+    position: relative;
+    @media only screen and (max-width: 900px) {
+      position: static;
+    }
+    z-index: 1;
+    ul, div {
+      top: auto;
+      left: 0;
+      height: auto;
+      opacity: 1;
+      @media only screen and (max-width: 900px) {
+        left: 10px;
+      }
+    }
+    li:hover, li.hover {
+      ul, div {
+        top: 0;
+        left: $dropdown__width--offset;
+      }
+    }
+    &.right ul, &.right div {
+      right: 0;
+      left: auto;
+    }
+    &.right ul ul {
+      right: $dropdown__width--offset;
+    }
+
+  }
+  li.hover ul li.hover ul ul, li:hover ul li:hover ul ul, .menu.vertical li:hover ul ul ul, .menu.vertical li.hover ul ul ul, div ul {
+    position: static;
+    left: 0;
+    @include box-shadow(none);
+  }
+}
