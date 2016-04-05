@@ -1,0 +1,117 @@
+// Variables
+//
+// SCSS Variables
+//
+// Styleguide 1.0.0
+
+// Grid
+//
+// Declare variables for grid.
+//
+// * `$grid__columns`: (integer) Amount of columns in grid.
+// * `$grid__mobile-breakpoint`: (width) Breakpoint for when "mobile" becomes "desktop".
+//
+// Styleguide 1.1.0
+$grid__columns: 16;
+$grid__mobile-breakpoint: 40em;
+
+// Booleans
+//
+// Declare variables for grid.
+//
+// * `$border-box`: (Boolean) Turn box-sizing: `border-box` on or off.
+//
+// Styleguide 1.2.0
+$border-box: true;
+
+// Colors
+//
+// To use colors throughout stylesheets
+//
+// Styleguide 1.3.0
+$testcolor: #ff0;
+
+// Base Styles
+//
+// Base variables
+//
+// * `$border-color`: (color) Used with font color and `<hr>`'s.
+// * `$border-border`: (color) Used with input borders.
+// * `$base--font-family`: (font stack) Base body font.
+// * `$secondary--font-family`: (font stack) Display font font.
+//
+// Styleguide 1.4.0
+$base--color: #555;
+$base--border: $base--color;
+
+$base--font-family: 'Open Sans', sans-serif;
+$secondary--font-family: 'PlutoSansMedium', sans-serif;
+
+// Font Weights
+//
+// set "bold" and "normal" weights here and use @include font-weight() mixin instead of font-weight.
+//
+// * `$font-weight__normal`: (font-weight declaration) Used in font-weight() mixin.
+// * `$font-weight__bold`: (font-weight declaration) Used in font-weight() mixin.
+//
+// Styleguide 1.5.0
+$font-weight__normal: 400;
+$font-weight__bold: 700;
+
+// Vertical Rhythm
+//
+// Set base `font-size` and `line-height` for vertical rhythm
+//
+// * `$base--font-size`: (size in pixels) Used for vertical rhythm grid.
+// * `$base--line-height`: (height in non-units) Used for vertical rhythm grid.
+//
+// Styleguide 1.6.0
+$base--font-size: 16px;
+$base--line-height: 1.6;
+// Don't change $base--spacing. It will mess up the vertical rhythm.
+// http://coding.smashingmagazine.com/2011/03/14/technical-web-typography-guidelines-and-techniques/
+$base--spacing: $base--font-size * $base--line-height;
+
+// Headings
+//
+// Set font-size for Headings
+//
+// * `$font-size--h1`: (size in pixels) `<h1>` size.
+// * `$font-size--h2`: (size in pixels) `<h2>` size.
+// * `$font-size--h3`: (size in pixels) `<h3>` size.
+// * `$font-size--h4`: (size in pixels) `<h4>` size.
+// * `$font-size--h5`: (size in pixels) `<h5>` size.
+// * `$font-size--h6`: (size in pixels) `<h6>` size.
+//
+// Styleguide 1.7.0
+
+$font-size--h1: 50px;
+$font-size--h2: 42px;
+$font-size--h3: 23px;
+$font-size--h4: 20px;
+$font-size--h5: 18px;
+$font-size--h6: 14px;
+
+// Other Sizes
+//
+// Set font-size for others
+//
+// * `$font-size--hero`: (size in pixels) Hero size.
+// * `$font-size--small`: (size in pixels) `<small>` size.
+//
+// Styleguide 1.8.0
+
+$font-size--hero: 24px;
+$font-size--small: 10px;
+
+// Dropdowns
+//
+// Values for dropdowns
+//
+// * `$dropdown__width`: (size in pixels) Width of dropdowns.
+// * `$dropdown__width--offset`: (size in pixels) If your boxes have borders or padding.
+//
+// Styleguide 1.8.0
+
+$dropdown__width: 700px;
+$dropdown__width--offset: $dropdown__width - 2;

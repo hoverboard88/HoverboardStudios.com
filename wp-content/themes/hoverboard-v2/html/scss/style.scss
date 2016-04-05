@@ -1,0 +1,31 @@
+//Fonts
+@import "http://fonts.googleapis.com/css?family=Open+Sans";
+
+@import "partials/variables";
+@import "partials/mixins";
+@import "partials/normalize";
+
+@import "partials/grid";
+@import "partials/generics";
+@import "partials/links";
+@import "partials/code";
+@import "partials/menus";
+@import "partials/wells";
+@import "partials/forms";
+@import "partials/layout";
+@import "partials/typography";
+@import "partials/lists";
+@import "partials/tables";
+@import "partials/shame"; // code located here: TODO: needs to be organized
+
+//add your @imports here
+
+
+@import "partials/helpers";
+@import "partials/print";
+
+//to check vertical rhythm
+// body {
+//   background-image: linear-gradient(green 1px, transparent 1px);
+//   background-size: 100% ($base--spacing / $base--font-size * 1em)/2; // .05em for some crazy reason. maybe .05em = 1px?
+// }

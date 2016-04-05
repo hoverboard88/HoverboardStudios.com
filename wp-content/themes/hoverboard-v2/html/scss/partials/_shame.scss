@@ -1,0 +1,90 @@
+html {
+  border: 4px solid #69c9ca;
+}
+
+body {
+  border: 4px solid #eee;
+}
+
+header {
+  background: #013333;
+  border-bottom: 20px solid #0D5957;
+}
+
+.primary {
+  font-family: $secondary--font-family;
+}
+
+.line {
+  height: 20px;
+  background: #329999;
+}
+
+.line--two {
+  height: 20px;
+  background: #69C9CA;
+}
+
+.line--three {
+  height: 20px;
+  background: #A6E2E0;
+}
+
+.line--four {
+  height: 20px;
+  background: #CBEFED;
+}
+
+.logo {
+  float: left; // TODO: use grid
+}
+
+// TODO: think about renaming this
+.feature-block {
+  clear: both;
+  text-align: center;
+}
+
+.tagline {
+  font-size: 36px;
+  color: #fff;
+}
+
+.mission {
+  color: #69C9CA;
+  font-size: 18px;
+}
+
+.latest-work {
+  border-bottom: 4px solid #C4C4C3;
+  padding: 2em 0 0;
+}
+
+// TODO: needs to be added to a global center style
+.center {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.latest-work--title {
+  background: #C4C4C3;
+  border-radius: 4px;
+  color: #EEEEEE;
+  display: inline-block;
+  font-size: 14px;
+  padding: $base--spacing / 2;
+  text-transform: uppercase;
+}
+
+.client-block {
+  float: left;
+  width: 50%;
+}
+
+.svg-container {
+  float: right;
+}
+
+.summary {
+  float: left;
+}
