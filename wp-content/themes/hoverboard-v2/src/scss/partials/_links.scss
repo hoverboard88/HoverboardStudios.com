@@ -1,0 +1,38 @@
+// Links
+//
+// Styleguide 10.0.0
+
+// Text Links
+//
+// Markup:
+// <a href="#">Link Text</a>
+//
+// Styleguide 10.1.0
+a {
+  color: #336767;
+  &:hover, &:focus {
+  	text-decoration: none;
+  }
+}
+a:visited {
+
+}
+a:hover, a:focus {
+
+}
+a:active {
+  text-decoration: none;
+}
+
+header {
+  a {
+    color: #fff;
+  }
+}
+
+// Buttons
+//
+// Markup:
+// <a class="btn" href="#">Button</a>
+//
+// Styleguide 10.2.0

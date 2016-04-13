@@ -1,0 +1,54 @@
+.mantra {
+  padding: 0 ($base--spacing / 2);
+}
+
+.mantra__header--border {
+  margin: $base--spacing 0;
+  position: relative;
+  &::before {
+    background: $gray--medium;
+    content: "";
+    height: 1px;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+  }
+}
+
+.mantra__header {
+  @include font-size(14px);
+  background: url(../img/mantra-header-bg.svg) no-repeat;
+  background-size: cover;
+  display: inline-block;
+  color: $gray--light;
+  font-family: $secondary--font-family;
+  letter-spacing: 1px;
+  line-height: 1;
+  min-height: 70px;
+  margin: 0;
+  min-width: 190px;
+  padding: 30px 30px 25px;
+  position: relative;
+  text-transform: uppercase;
+  text-align: center;
+  z-index: 2;
+}
+
+.mantra__items {
+  text-align: center;
+}
+
+.mantra__item {
+  padding: 0 $base--spacing;
+}
+.mantra__title {
+  @include font-size(28px);
+  font-family: $secondary--font-family__light;
+}
+
+.mantra__summary {
+  strong {
+    font-family: $secondary--font-family__bold;
+  }
+}

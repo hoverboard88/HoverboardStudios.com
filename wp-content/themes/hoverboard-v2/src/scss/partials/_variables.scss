@@ -1,0 +1,101 @@
+/***********************
+Variables
+***********************/
+
+/**
+  * Booleans
+  */
+$border-box: true;
+
+/**
+  * Colors
+  */
+$white: #ffffff;
+$gray--light: #EEEEEE;
+$gray--medium: #C4C4C3;
+$gray--dark: #222222;
+$green--light: #69C9CA;
+$green--medium: #013333;
+$green--dark: #031E1D;
+
+/**
+  * Secondary Colors
+  */
+$secondary--red: #ad1414;
+$secondary--red-dark: #580d0a;
+$secondary--red-light: #994141;
+$secondary--purple: #673695;
+$secondary--purple-dark: #483360;
+$secondary--blue: #24408f;
+$secondary--blue-dark: #27365b;
+$secondary--teal: #329999;
+$secondary--green: #6fc067;
+$secondary--green-light: #6fc067; // TODO
+
+/**
+  * Grid
+  */
+// TODO: Add grid system if necessary
+
+/**
+  * Base Styles
+  */
+$base--color: $gray--dark;
+$base--border: $gray--medium;
+
+$base--font-family: "ff-tisa-web-pro", Georgia, "Times New Roman", serif;
+$secondary--font-family: 'PlutoSansMedium', sans-serif;
+$secondary--font-family__bold: "PlutoSansCondBold", sans-serif;
+$secondary--font-family__light: "PlutoSansCondLight", sans-serif;
+
+//set "bold" and "normal" weights here and use @include font-weight() mixin instead of font-weight.
+$font-weight__normal: normal;
+$font-weight__bold: bold;
+
+$base--font-size: 15px;
+$base--line-height: 2;
+// Don't change $base--spacing. It will mess up the vertical rhythm.
+// http://coding.smashingmagazine.com/2011/03/14/technical-web-typography-guidelines-and-techniques/
+$base--spacing: $base--font-size * $base--line-height;
+
+/**
+  * Headings
+  */
+$font-size--h1: 48px;
+$font-size--h2: 36px;
+$font-size--h3: 28px;
+$font-size--h4: 21px;
+$font-size--h5: 18px;
+$font-size--h6: 16px;
+
+/**
+  * Other Sizes
+  */
+$font-size--hero: 25px;
+$font-size--small: 10px;
+
+/**
+  * Dropdowns
+  */
+
+$dropdown__width: 700px;
+//if your boxes have borders or padding;
+$dropdown__width--offset: $dropdown__width - 2;
+
+$legacy_support_for_ie: false;
+
+// Widths
+$width--1: 1/12 * 100%;
+$width--2: 2/12 * 100%;
+$width--3: 3/12 * 100%;
+$width--4: 4/12 * 100%;
+$width--5: 5/12 * 100%;
+$width--6: 6/12 * 100%;
+$width--7: 7/12 * 100%;
+$width--8: 8/12 * 100%;
+$width--9: 9/12 * 100%;
+$width--10: 10/12 * 100%;
+$width--11: 11/12 * 100%;
+$width--12: 12/12 * 100%;
+
+$base-spacing-change-breakpoint: 50em;

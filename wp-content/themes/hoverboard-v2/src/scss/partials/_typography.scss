@@ -1,0 +1,114 @@
+// Typography
+//
+// This is the basic typography of the site.
+//
+// Styleguide 6.0.0
+
+// Body Copy
+//
+// Heading Sizes
+//
+// Markup:
+// <p>The quick brown fox jumps over the lazy dog.</p>
+//
+// Styleguide 6.1.0
+p, ul, ol, blockquote, input, textarea, fieldset, pre, table, hr, dl {
+  margin: 0 0 $base--spacing;
+  @include font-size(16px);
+}
+
+// Headings
+//
+// Heading Sizes
+//
+// Markup:
+// <h1 class="single-spaced">Heading 1</h1>
+// <h2 class="single-spaced">Heading 2</h2>
+// <h3 class="single-spaced">Heading 3</h3>
+// <h4 class="single-spaced">Heading 4</h4>
+// <h5 class="single-spaced">Heading 5</h5>
+// <h6 class="single-spaced">Heading 6</h6>
+//
+// Styleguide 6.1.0
+h1, h2, h3, h4, h5, h6 {
+  font-family: $secondary--font-family;
+  @include font-weight(normal);
+}
+
+h1, .h1 {
+  @include font-size($font-size--h1, true);
+}
+
+h2, .h2 {
+  @include font-size($font-size--h2, true);
+}
+
+h3, .h3 {
+  @include font-size($font-size--h3, true);
+}
+
+h4, .h4 {
+  @include font-size($font-size--h4, true);
+}
+
+h5, .h5 {
+  @include font-size($font-size--h5, true);
+}
+
+h6, .h6 {
+  @include font-size($font-size--h6, true);
+}
+
+hr {
+  border: 0;
+  border-bottom: 1px solid $base--border;
+  margin-top: -1px;
+}
+
+.font--base {
+  font-family: $base--font-family;
+  font-weight: $font-weight__bold;
+}
+// Spacing
+//
+// Various spacing
+//
+// Markup:
+// <p>Normal Spaced</p>
+// <p class="single-spaced">Single Spaced</p>
+// <p class="one-half-spaced">One-Half Spaced</p>
+// <p class="double-spaced">Double Spaced</p>
+//
+// Styleguide 6.2.0
+.single-spaced {
+  margin-bottom: 0;
+}
+
+.one-half-spaced {
+  margin-bottom: $base--spacing / 2;
+}
+
+.double-spaced {
+  margin-bottom: $base--spacing;
+}
+
+// Small
+//
+// Markup:
+// <p><small>Small Tag</small></p>
+// <p class="small">Small Text</p>
+//
+// Styleguide 6.3.0
+.small, small {
+  @include font-size($font-size--small);
+}
+
+// Display Font
+//
+// Markup:
+// <p class="h2 display-font">Display Font (PlutoSansLight)</p>
+//
+// Styleguide 6.4.0
+.display-font {
+  font-family: $secondary--font-family;
+}

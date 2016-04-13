@@ -1,0 +1,18 @@
+a.btn, .btn {
+  background: $secondary--blue;
+  border-radius: 4px;
+  color: #fff;
+  display: inline-block;
+  font-family: $secondary--font-family;
+  letter-spacing: 1px;
+  line-height: 1;
+  padding: 14px 20px 12px;
+  text-decoration: none;
+  text-transform: uppercase;
+  &.btn--shadow {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+  }
+  &:hover, &:active, &:focus {
+    background: lighten($secondary--blue, 10%);
+  }
+}

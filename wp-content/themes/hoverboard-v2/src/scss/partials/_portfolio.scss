@@ -1,0 +1,41 @@
+.portfolio {
+  padding: $base--spacing 0 0;
+  .portfolio__item {
+    padding: 0 ($base--spacing / 2) ($base--spacing); 
+  }
+  .portfolio__header {
+    @include font-size(14px);
+    border-radius: 4px;
+    display: inline-block;
+    font-family: $secondary--font-family;
+    letter-spacing: 1px;
+    line-height: 1;
+    padding: 14px 30px 12px;
+    text-transform: uppercase;
+    &.portfolio__header--gray-light {
+      background: $gray--medium;
+      color: $gray--light;
+    }
+  }
+  .portfolio__title {
+    @include font-size(28px);
+    font-family: $secondary--font-family__bold;
+    margin-bottom: $base--spacing / 2;
+  }
+  .portfolio__website {
+    @include font-size(15px);
+    color: $secondary--blue;
+    display: block;
+    font-family: $base--font-family;
+    font-weight: bold;
+    margin-bottom: $base--spacing / 2;
+    text-decoration: none;
+    &:hover, &:active, &:focus {
+      text-decoration: underline;
+    }
+    svg {
+      position: relative;
+      top: 5px;
+    }
+  }
+}

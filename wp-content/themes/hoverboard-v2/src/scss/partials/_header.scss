@@ -1,0 +1,17 @@
+.logo {
+  text-align: center;
+  width: 100%;
+  svg {
+    max-width: 200px;
+    width: 100%;
+    @include breakpoint(600px) {
+      display: block;
+      float: left;
+      max-width: 300px;
+      width: 70%;
+    };
+  }
+  @include breakpoint(600px) {
+    width: 25%;
+  };
+}

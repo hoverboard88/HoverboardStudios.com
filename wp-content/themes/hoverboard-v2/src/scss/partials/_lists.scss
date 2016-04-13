@@ -1,0 +1,136 @@
+// Unordered Lists
+//
+// Markup:
+// <ul>
+//  <li>List Item 1</li>
+//  <li>List Item 2</li>
+//  <li>List Item 3</li>
+//  <li>List Item 4</li>
+// </ul>
+//
+// Styleguide 6.5.0
+
+// Ordered Lists
+//
+// Markup:
+// <ol>
+//  <li>List Item 1</li>
+//  <li>List Item 2</li>
+//  <li>List Item 3</li>
+//  <li>List Item 4</li>
+// </ol>
+//
+// Styleguide 6.6.0
+ul, ol {
+  padding-left: 25px;
+}
+
+// Unstyled Lists
+//
+// Markup:
+// <ul class="list--unstyled">
+//  <li>List Item 1</li>
+//  <li>List Item 2</li>
+//  <li>List Item 3</li>
+//  <li>List Item 4</li>
+// </ul>
+//
+// Styleguide 6.7.0
+
+// Horizontal Lists
+//
+// Markup:
+// <ul class="list--unstyled list--horizontal">
+//  <li>List Item 1</li>
+//  <li>List Item 2</li>
+//  <li>List Item 3</li>
+//  <li>List Item 4</li>
+// </ul>
+//
+// Styleguide 6.8.0
+.list--unstyled {
+  list-style: none;
+  padding: 0;
+  margin-left: 0;
+  margin-bottom: 0;
+  li {
+    display: block;
+  }
+  &.list--horizontal li {
+    display: inline-block;
+  }
+}
+
+.list--icons {
+  margin-bottom: $base--spacing / 2;
+}
+// Spaced Lists
+//
+// Markup:
+// <ul class="list--unstyled list--horizontal list--spaced">
+//  <li>List Item 1</li>
+//  <li>List Item 2</li>
+//  <li>List Item 3</li>
+//  <li>List Item 4</li>
+// </ul>
+//
+// Styleguide 6.9.0
+.list--spaced {
+  li {
+    padding: $base--spacing/2;
+  }
+}
+
+// Justified Lists
+//
+// Markup:
+// <ul class="list--unstyled list--justified">
+//  <li>List Item 1</li>
+//  <li>List Item 2</li>
+//  <li>List Item 3</li>
+//  <li>List Item 4</li>
+// </ul>
+//
+// Styleguide 6.10.0
+.list--justified {
+  display: table;
+  width: 100%;
+  li {
+    display: table-cell;
+    text-align: center;
+  }
+}
+
+// Definition Lists
+//
+// Markup:
+// <dl class="def-list-inline">
+//   <dt>Term</dt>
+//   <dd>Definition</dd>
+//   <dt>Term</dt>
+//   <dd>Definition</dd>
+//   <dt>Term</dt>
+//   <dd>Definition</dd>
+//   <dt>Term</dt>
+//   <dd>Definition</dd>
+// </dl>
+//
+// Styleguide 6.11.0
+.def-list-inline {
+  @extend .clearfix;
+  dt {
+    clear: both;
+    float: left;
+    display: inline-block;
+    font-weight: bold;
+    &:after {
+      content: ":";
+      padding-right: 3px;
+    }
+  }
+  dd {
+    float: left;
+    display: inline-block;
+    margin-left: 0;
+  }
+}

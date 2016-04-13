@@ -1,0 +1,69 @@
+.icon--search {
+  position: relative;
+  top: 9px;
+}
+
+.icon {
+  display: inline-block;
+  line-height: 1;
+  svg {
+    vertical-align: middle;
+  }
+  path {
+    fill: $base--color;
+  }
+}
+
+.icon--circle {
+  border: 3px solid $base--color;
+  border-radius: 50%;
+  padding: 2px;
+}
+
+.icon--square {
+  border: 3px solid $base--color;
+  border-radius: 5px;
+  padding: 2px 15px;
+}
+
+.icon--blue {
+  border-color: $secondary--blue;
+  path {
+    fill: $secondary--blue;
+  }
+}
+
+.icon--purple {
+  border-color: $secondary--purple;
+  path {
+    fill: $secondary--purple;
+  }
+}
+
+.icon--red {
+  border-color: $secondary--red;
+  path {
+    fill: $secondary--red;
+  }
+}
+
+.icon--red-light {
+  border-color: $secondary--red-light;
+  path {
+    fill: $secondary--red-light;
+  }
+}
+
+.icon--teal {
+  border-color: $secondary--teal;
+  path {
+    fill: $secondary--teal;
+  }
+}
+
+.icon--green {
+  border-color: $secondary--green;
+  path {
+    fill: $secondary--green;
+  }
+}

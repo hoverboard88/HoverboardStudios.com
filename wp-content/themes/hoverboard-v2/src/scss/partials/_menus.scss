@@ -1,0 +1,108 @@
+/***********************
+Menus
+***********************/
+
+/**
+  * Primary
+  */
+.primary {
+  @extend .clearfix;
+  font-family: $secondary--font-family;
+  width: 100%;
+  @include breakpoint(600px) {
+    float: right;
+    padding: $base--spacing/2 0 0;
+    width: 75%;
+  }
+  ul, ol {
+    @include font-size(14px);
+    float: right;
+    list-style: none;
+    list-style-image: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    width: 100%;
+    @include breakpoint(600px) {
+      text-align: right;
+    }
+  }
+  &.primary--spaced li {
+    padding: 0 2%;
+  }
+  &.primary--horizontal {
+    li {
+      &:last-child { // add class instead of :last-child
+        margin: 0;
+        padding-right: 0;
+      }
+    }
+    @include breakpoint(450px) {
+      li {
+        display: inline-block;
+      }
+    }
+  }
+  a {
+    display: block;
+    text-decoration: none;
+    text-transform: uppercase;
+    &:hover, &:active, &:focus {
+      color: $green--light;
+      border-bottom: 3px solid $green--light;
+    }
+    &.btn {
+      border: none;
+      color: $white;
+      margin-top: $base--spacing/2;
+      @include breakpoint(600px) {
+        margin-top: 0;
+      }
+    }
+  }
+}
+
+// Horizontal Menu
+//
+// Markup:
+// <nav class="menu menu--horizontal">
+//   <ul>
+//     <li><a href="#">Link 1</a></li>
+//     <li><a href="#">Link 2</a></li>
+//     <li><a href="#">Link 3</a></li>
+//     <li><a href="#">Link 4</a></li>
+//   </ul>
+// </nav>
+//
+// Styleguide 7.3.0
+.primary--horizontal {
+  li {
+    display: inline-block;
+  }
+}
+
+// Menu (equal width)
+//
+// Menu spans whole parent container
+//
+// Markup:
+// <nav class="menu menu--equal-width">
+//   <ul>
+//     <li><a href="#">Link 1</a></li>
+//     <li><a href="#">Link 2</a></li>
+//     <li><a href="#">Link 3</a></li>
+//     <li><a href="#">Link 4</a></li>
+//   </ul>
+// </nav>
+//
+// Styleguide 7.4.0
+.primary--equal-width {
+  ul, ol {
+    display: table;
+    width: 100%;
+  }
+  li {
+    text-align: center;
+    display: table-cell;
+  }
+}
