@@ -1,0 +1,12 @@
+.services__header {
+  font-family: $base--font-family;
+  font-weight: $font-weight__bold;
+}
+
+.services__title {
+  @include font-size(21px);
+  color: $green--light;
+  font-family: $base--font-family;
+  font-style: italic;
+  line-height: $base--spacing;
+}
