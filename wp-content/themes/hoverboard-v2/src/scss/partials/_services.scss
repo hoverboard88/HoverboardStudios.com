@@ -1,3 +1,8 @@
+.services {
+  margin: $base--spacing 0;
+  padding: 0 ($base--spacing);
+}
+
 .services__header {
   font-family: $base--font-family;
   font-weight: $font-weight__bold;
@@ -9,4 +14,11 @@
   font-family: $base--font-family;
   font-style: italic;
   line-height: $base--spacing;
+}
+
+.services__title--h4 {
+  @include font-size(14px);
+  color: $green--light;
+  font-family: $secondary--font-family__regular;
+  text-transform: uppercase;
 }

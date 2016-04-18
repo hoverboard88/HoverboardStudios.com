@@ -45,6 +45,7 @@ $base--border: $gray--medium;
 
 $base--font-family: "ff-tisa-web-pro", Georgia, "Times New Roman", serif;
 $secondary--font-family: 'PlutoSansMedium', sans-serif;
+$secondary--font-family__regular: 'PlutoSansRegular', sans-serif;
 $secondary--font-family__bold: "PlutoSansCondBold", sans-serif;
 $secondary--font-family__light: "PlutoSansCondLight", sans-serif;
 
@@ -72,7 +73,8 @@ $font-size--h6: 16px;
   * Other Sizes
   */
 $font-size--hero: 25px;
-$font-size--small: 10px;
+$font-size--small: 14px;
+$font-size--ex-small: 13px;
 
 /**
   * Dropdowns
