@@ -1,0 +1,28 @@
+.about {
+  padding: ($base--spacing);
+}
+
+.about__title {
+  @include font-size(16px);
+  background: $green--dark;
+  border: 2px solid $green--light;
+  box-shadow: 0 0 0 4px $green--dark;
+  padding: ($base--spacing / 4) 0;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.about__position {
+  @include font-size(14px);
+  font-family: $secondary--font-family__light;
+  letter-spacing: 1px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.about__link {
+  color: $green--light;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+}

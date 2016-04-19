@@ -45,6 +45,7 @@ Menus
   }
   a {
     display: block;
+    border-bottom: 3px solid rgba(0,0,0,0);
     text-decoration: none;
     text-transform: uppercase;
     &:hover, &:active, &:focus {
