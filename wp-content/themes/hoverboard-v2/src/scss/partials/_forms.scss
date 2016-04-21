@@ -3,46 +3,21 @@ fieldset {
   border: 0;
   padding: 0;
 }
+
 legend {
   padding: 0;
   margin-bottom: $base--spacing;
 }
-// Forms
-//
-// Normal `<input>` with `<label>` wrapper
-//
-// Markup:
-// <label for="input-text">Normal Input</label>
-// <input name="input-text" type="text">
-//
-// Styleguide 2.0.0
+
 label {
   display: block;
   width: 100%;
 }
-// Inline
-//
-// If you want the label on the left side of the `<input>`
-//
-// Markup:
-// <label class="label--inline" for="input-inline">
-//   Inline Input
-//   <input name="input-inline" type="text">
-// </label>
-//
-// Styleguide 2.2.0
+
 .label--inline {
   display: inline;
 }
-// Required
-//
-// Adds asterisks after label. Creating a span with the words "Required" for accessibility purposes.
-//
-// Markup:
-// <label for="input-required">Required Input <span class="span--required">(required)</span></label>
-// <input required name="input-required" type="text">
-//
-// Styleguide 2.1.0
+
 .span--required {
   visibility: hidden;
   &:before {
@@ -51,21 +26,7 @@ label {
     visibility: visible;
   }
 }
-// Radio
-//
-// add to `<label>` if `<input type="radio">`
-//
-// Markup:
-// <label class="label--radio" for="input-radio-1">
-//   <input name="radio-group" id="input-radio-1" type="radio">
-//   Inline Input
-// </label>
-// <label class="label--radio" for="input-radio-2">
-//   <input name="radio-group" id="input-radio-2" type="radio">
-//   Inline Input
-// </label>
-//
-// Styleguide 2.3.0
+
 .label--radio {
   margin-bottom: 0;
   input[type="radio"] {
@@ -73,15 +34,7 @@ label {
     margin-bottom: 0;
   }
 }
-// Checkbox
-//
-// Markup:
-// <label class="label--checkbox" for="input-checkbox">
-//   <input id="input-checkbox" type="checkbox">
-//   Checkbox
-// </label>
-//
-// Styleguide 2.4.0
+
 .label--checkbox {
   margin-bottom: 0;
   input[type="checkbox"] {
@@ -89,13 +42,7 @@ label {
     margin-bottom: 0;
   }
 }
-// Submit Buttons
-//
-// Markup:
-// <input type="submit" value="Submit Input">
-// <button>Submit Button</button>
-//
-// Styleguide 2.5.0
+
 input[type="submit"] {
   display: block;
   background: #033;
@@ -112,6 +59,7 @@ input[type="submit"] {
 button {
   background: none;
   border: none;
+  line-height: 1;
   margin: 0;
   padding: 0;
 }
@@ -121,6 +69,7 @@ select {
   cursor: pointer;
   z-index: 1;
 }
+
 input[type="text"],
 input[type="color"],
 input[type="date"],
@@ -148,6 +97,32 @@ textarea {
     color: rgba(#000, 0.5);
   }
 }
+
 textarea {
   height: 130px;
+}
+
+.form {}
+
+.form--search-input[type="text"] {
+  @include font-size(21px);
+  @include input-placeholder {
+    color: darken(rgba($white, 0.2), 30%);
+  }
+  background: none;
+  border: none;
+  color: $white;
+  font-family: $secondary--font-family__light;
+  line-height: 1;
+  margin: 0;
+  padding: ($base--spacing / 2) 5%;
+  vertical-align: top;
+  width: 80%;
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+.form__submit {
+  padding-top: $base--spacing / 3; 
 }
