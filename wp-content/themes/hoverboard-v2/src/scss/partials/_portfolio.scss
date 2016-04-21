@@ -1,7 +1,10 @@
 .portfolio {
   padding: $base--spacing 0 0;
   .portfolio__item {
-    padding: 0 ($base--spacing / 2) ($base--spacing); 
+    border-bottom: 5px solid $gray--medium;
+    overflow: hidden;
+    padding: 0 ($base--spacing / 2) $base--spacing;
+    position: relative;
   }
   .portfolio__header {
     @include font-size(14px);
@@ -15,6 +18,29 @@
     &.portfolio__header--gray-light {
       background: $gray--medium;
       color: $gray--light;
+    }
+  }
+  .portfolio__summary {}
+  .portfolio__example {
+    background: #d2d2d2;
+    border: 3px solid #c4c4c3;
+    box-shadow: -20px 35px 100px 0px rgba(0,0,0,0.35);
+    padding: 40px 0 0;
+    position: absolute;
+    right: -70%;
+    bottom: 0;
+    &::before {
+      background: url(../img/address-bar.svg) center top no-repeat;
+      background-size: 100% 100%;
+      content: "";
+      width: 100%;
+      height: 10px;
+      position: absolute;
+      top: 15px;
+      left: 15px;
+    }
+    img {
+      display: block;
     }
   }
   .portfolio__title {
