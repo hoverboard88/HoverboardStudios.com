@@ -1,9 +1,9 @@
 .portfolio {
   padding: $base--spacing 0 0;
   .portfolio__item {
-    border-bottom: 5px solid $gray--medium;
+    border-bottom: 4px solid $gray--medium;
     overflow: hidden;
-    padding: 0 ($base--spacing / 2) $base--spacing;
+    padding: $base--spacing ($base--spacing / 2);
     position: relative;
   }
   .portfolio__header {
@@ -29,7 +29,7 @@
     position: absolute;
     right: -70%;
     bottom: 0;
-    &::before {
+    &::after {
       background: url(../img/address-bar.svg) center top no-repeat;
       background-size: 100% 100%;
       content: "";
@@ -38,6 +38,7 @@
       position: absolute;
       top: 15px;
       left: 15px;
+      z-index: 2;
     }
     img {
       display: block;

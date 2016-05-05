@@ -9,8 +9,7 @@ License URI: http://creativecommons.org/licenses/by-nc-nd/4.0/
 Text Domain: hb
 Tags: design, development
 */
-//Fonts TODO: remove
-@import "http://fonts.googleapis.com/css?family=Open+Sans";
+
 
 @import "partials/variables";
 @import "partials/mixins";
@@ -41,6 +40,7 @@ Tags: design, development
 
 @import "partials/helpers";
 @import "partials/print";
+
 
 //to check vertical rhythm
 // body {

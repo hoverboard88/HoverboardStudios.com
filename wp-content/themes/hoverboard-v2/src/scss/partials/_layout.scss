@@ -34,12 +34,12 @@
       background: linear-gradient(to bottom, #04211e 0%, #04211e 33.3333%, #042623 33.3333%, #042623 66.6666%, #042d2b 66.6666%, #042d2b 100%);
       content: "";
       display: block;
-      height: 50px;
+      height: 30px;
       width: 100%;
     }
     @include breakpoint(600px) {
       &::after {
-        height: 100px;
+        height: 60px;
       }
     }
   }
