@@ -105,27 +105,30 @@ add_shortcode( 'column', 'supcamp_40_grid_column' );
  // </div>
  //
  // Styleguide 5.3.0
-// .grid-columns {
-// 	@extend .clearfix;
-// 	display: flex;
-// 	.grid-column--padded {
-// 		padding-left: $base--spacing/2;
-//     padding-right: $base--spacing/2;
-// 		&:first-child {
-// 			padding-left: 0;
-// 		}
-//     &:last-child {
-// 			padding-right: 0;
-// 		}
-// 	}
-// }
-//
-// @for $i from 1 through $grid__columns {
-// 	.grid-columns .grid-column-#{$i} {
-// 		float: left;
-// 		width: 100%;
-// 		@include breakpoint($grid__mobile-breakpoint) {
-// 			width: ($i / $grid__columns * 100%);
-// 		}
-// 	}
-// }
+
+$grid__columns: 16;
+
+.grid-columns {
+	@extend .clearfix;
+	display: flex;
+	.grid-column--padded {
+		padding-left: $base--spacing/2;
+    padding-right: $base--spacing/2;
+		&:first-child {
+			padding-left: 0;
+		}
+    &:last-child {
+			padding-right: 0;
+		}
+	}
+}
+
+@for $i from 1 through $grid__columns {
+	.grid-columns .grid-column-#{$i} {
+		float: left;
+		width: 100%;
+		// @include breakpoint($grid__mobile-breakpoint) {
+		// 	width: ($i / $grid__columns * 100%);
+		// }
+	}
+}
