@@ -6,7 +6,7 @@ License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Requires at least: 3.2.1
 Tested up to: 4.5
-Stable tag: 2.10.4
+Stable tag: 2.10.14
 
 Saves submitted form data to the database. Export the data to a file or use short codes to display it.
 
@@ -86,6 +86,48 @@ You can always deactivate the plugin without loosing data.
 1. Admin Panel view of submitted form data
 
 == Changelog ==
+
+= 2.10.15 =
+* Bug Fix: When adding [submit_time] in Contact Form 7 mails, the value might not match what is in the DB depending on your locale setting.
+* Bug Fix: In the CFDB admin page, the WP Footer would appear on top of the CFDB table when it had a lot of entries. The "wpfooter" is not hidden on that page.
+
+= 2.10.14 =
+* New: [in] and [!in] operators for filters, for example filter="name[in]Mike,John,Tom"
+* Bug Fix: (Minor) Exporting from admin window when more than one work entered in the search box did not match what was shown on screen
+* Improvement: When exporting from admin page, if certain rows are selected then only those rows are exported
+* Improvement: Minor display fixes
+
+= 2.10.13 =
+* Improvement: Excel (.xlsx) exports for forms that include files, now have working hyperlinks to download files from the Excel spreadsheet
+
+= 2.10.12 =
+* Improvement: Plugin settings page now organized in tabs
+* Improvement: Minor CSS changes on admin pages
+
+= 2.10.11 =
+* New: changes to support capturing submissions from Very Simple Contact Form and Very Simple Signup Form
+
+= 2.10.10 =
+* Improvement: Admin page allow for the setting of the CSV delimiter for export files. If not set, regional delimiter is used ("," or ";")
+* Change: Previous change set CSV exports to use a delimiter based on the region. This is changed back to always use "," unless "delimiter" parameter sets the delimiter or if new "regionaldelimiter" paramter is set to "true"
+* New: Added transform trans="AddRowNumberField(fieldname,start)" to add a column labeled "fieldname" that simply numbers the rows starting at number "start"
+* New: Integration with Very Simple Contact Form
+
+= 2.10.9 =
+* Bug Fix: Google Spreadsheet Live data: bug was introduced in 2.10.6 where data fetched by IMPORTDATA() could return with wrong delimiter (semicolon instead of comma) based on regional settings for CSV delimiter.
+This would cause Google Spreadsheet to be unable to parse data into columns
+
+= 2.10.8 =
+* Improvement: Links to exports and file downloads now redirect to login page when user is not logged in
+
+= 2.10.7 =
+* Bug Fix: Gravity Form integration was not capturing certain date fields
+
+= 2.10.6 =
+* Improvement: UTF8 CSV and Excel export now smarter about choosing "," or ";" for field and function delimiters respectively.
+* Improvement: Dashboard single-record view now has download links on files which was missing
+* Improvement: CFDB Option Error Output File - no longer need to specify full path. Just put in a file name and it will put in the top level WP install directory
+* Note: If you have CFDB Editor installed, you will need to update that to version 1.4.3 to work properly with this update
 
 = 2.10.5 =
 * New: Now captures form submission from FormCraft Premium (BETA)

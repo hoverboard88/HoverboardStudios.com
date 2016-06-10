@@ -7,11 +7,11 @@ use \Apple_Exporter\Builders\Components as Components;
 use \Apple_Exporter\Builders\Component_Layouts as Component_Layouts;
 use \Apple_Exporter\Builders\Component_Text_Styles as Component_Text_Styles;
 
-class Component_Tests extends PHPUnit_Framework_TestCase {
+class Component_Tests extends WP_UnitTestCase {
 
 	protected $prophet;
 
-	protected function setup() {
+	public function setup() {
 		$this->prophet  = new \Prophecy\Prophet;
 		$this->settings = new Settings();
 		$this->content	= new Exporter_Content( 1, 'My Title', '<p>Hello, World!</p>', null, null, 'Author Name' );
@@ -22,7 +22,7 @@ class Component_Tests extends PHPUnit_Framework_TestCase {
 		Component_Factory::initialize( $workspace, $this->settings, $this->styles, $this->layouts );
 	}
 
-	protected function tearDown() {
+	public function tearDown() {
 		$this->prophet->checkPredictions();
 	}
 
@@ -31,10 +31,9 @@ class Component_Tests extends PHPUnit_Framework_TestCase {
 		$builder = new Components( $this->content, $this->settings );
 		$result  = $builder->to_array();
 
-		$this->assertEquals( 3, count( $result ) );
-		$this->assertEquals( 'title', $result[0]['role'] );
-		$this->assertEquals( 'byline', $result[1]['role'] );
-		$this->assertEquals( 'body', $result[2]['role'] );
+		$this->assertEquals( 2, count( $result ) );
+		$this->assertEquals( 'container', $result[0]['role'] );
+		$this->assertEquals( 'body', $result[1]['role'] );
 	}
 
 	public function testMetaComponentOrdering() {

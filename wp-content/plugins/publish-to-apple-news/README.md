@@ -6,13 +6,32 @@ Installing the Publish to Apple News plugin is similar to the process of
 installing other WordPress plugins. Simply perform these steps:
 
 1. Download the Publish to Apple News plugin.
-2. Upload the entire “apple-news” folder to the “./wp-content/plugins” directory
+2. Upload the entire “publish-to-apple-news” folder to the “./wp-content/plugins” directory
    on your web server.
 3. Activate the Publish to Apple News plugin using the “Plugins” menu in
    WordPress.
 
 Once activated, the "Apple News" menu should appear in your WordPress Admin
 panel.
+
+NEW IN 1.1.4: We've made some improvements to the default template built into the plugin.
+Although it won't override your current settings, we strongly recommend placing the
+Cover image at the top of the Component Order settings for the best experience.
+
+BREAKING CHANGE IN 1.1: Please note the "Options" page has been merged into a single
+page for setting sections, preview and pull quotes when pushing content to Apple News.
+This both adds functionality and streamlines the workflow.
+
+### Troubleshooting: Resolving Image Issues
+
+Until recently, Apple News required all images to be bundled with the API request.
+Some hosts do not support [allow_url_fopen](http://php.net/manual/en/filesystem.configuration.php#ini.allow-url-fopen), which is required for this functionality to work.
+Apple News now supports remote images so if you are experiencing any errors with images,
+please go to Settings > Apple News and set Use Remote Images to 'yes' under Advanced Settings.
+Please note that in order for this to work, your images must be publicly accessible which
+is the case for most sites. However, if you're testing on a local development site, your
+images are likely not accessible and therefore you should set this to 'no'.
+
 
 ###Troubleshooting: Resolving Potential Permissions Issues
 
@@ -136,25 +155,25 @@ or later update — WordPress posts to Apple News.
 To publish a single post to your Apple News channel (or perform other actions),
 locate the desired post in the list of your locally published content, and hover
 your mouse immediately below the post’s title. This will display a contextual
-menu, presenting the following choices: “Options”, “Download”, and “Publish”. In
+menu, presenting the following choices: “Download” and “Publish”. In
 addition, for posts already published to Apple News, two more choices will be
 displayed: “Delete from Apple News” and “Copy News URL“.
 
-Choosing “Publish” or “Delete from Apple News” will either push the current
-version of the selected post to Apple News, or permanently remove the post from
+Choosing “Publish” will take you to a screen where you can select the sections to publish
+to, set the article as a preview, and optionally add a Pull Quote for the selected
+post. In addition to entering a pull quote, you can choose to place it at the
+top, middle, or bottom of the selected post. Click the button at the bottom to push the
+current version of the selected post to Apple News
+
+Choosing “Delete from Apple News” will permanently remove the post from
 Apple News. You can override either choice at any future time (e.g., a post
 deleted from Apple News can later be published once again if desired). Note that
 once a post has been deleted from Apple News, no further updates will
 automatically be published to Apple News, regardless of whether you’ve enabled
 “Automatically Publish to Apple News” in your general settings.
 
-The “Download” option will generate a JSON
-document describing the selected post to your
+The “Download” option will generate a JSON document describing the selected post to your
 browser’s default Downloads location.
-
-Finally, the “Options” menu allows you to create a Pull Quote for the selected
-post. In addition to entering a pull quote, you can choose to place it at the
-top, middle, or bottom of the selected post.
 
 ####Bulk Publishing Controls
 
@@ -176,6 +195,9 @@ menu. This will open a page displaying the posts you’ve selected, and the stat
 of each post as it is pushed to Apple News. Note that while bulk publishing
 actions are in progress, you should not close your browser window or navigate
 away from this page. Doing so will halt the bulk action in progress.
+
+Bulk publishing will use the default section for your channel unless you have previously
+set the channel via the Apple News meta box on the post edit screen.
 
 
 ###Tips

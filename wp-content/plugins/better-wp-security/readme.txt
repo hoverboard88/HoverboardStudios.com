@@ -1,9 +1,9 @@
 === iThemes Security (formerly Better WP Security) ===
 Contributors: ithemes, chrisjean, aaroncampbell, gerroald, mattdanner
-Tags: security, malware, secure, multi-site, network, mu, login, lockdown, htaccess, hack, header, cleanup, ban, restrict, access, protect, protection, disable, images, image, hotlink, admin, username, database, prefix, wp-content, rename, directory, directories, secure, SSL, iThemes, BackupBuddy, Exchange, iThemes Exchange
+Tags: security, security plugin, malware, hack, secure, block, SSL, admin, htaccess, lockdown, login, protect, protection, anti virus, attack, injection, login security, maintenance, permissions, prevention, authentication, administration, password, brute force, ban, permissions, bots, user agents, xml rpc, security log
 Requires at least: 4.1
-Tested up to: 4.5
-Stable tag: 5.3.5
+Tested up to: 4.5.2
+Stable tag: 5.5.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,49 +12,51 @@ Released under the terms of the GNU General Public License.
 
 == Description ==
 
-= iThemes Security (formerly Better WP Security), #1 WordPress Security Plugin =
+= iThemes Security is the #1 WordPress Security Plugin =
 
 iThemes Security (formerly Better WP Security) gives you over 30+ ways to secure and protect your WordPress site. On average, 30,000 new websites are hacked each day. WordPress sites can be an easy target for attacks because of plugin vulnerabilities, weak passwords and obsolete software.
 
-Most WordPress admins don't know they're vulnerable, but iThemes Security works to fix common holes, stop automated attacks and strengthen user credentials. With one-click activation for most features, as well as advanced features for experienced users, iThemes Security can help protect any WordPress site.
+Most WordPress admins don't know they're vulnerable, but iThemes Security works to lock down Wordpress, fix common holes, stop automated attacks and strengthen user credentials. With advanced features for experienced users, our WordPress security plugin can help harden WordPress.
 
 = Maintained and Supported by iThemes =
 
-iThemes has been building and supporting WordPress tools since 2008. With our full range of WordPress <a href="http://ithemes.com/find/plugins/">plugins</a>, <a href="http://ithemes.com/find/themes/">themes</a> and <a href="http://webdesign.com">training</a>, WordPress security is the next step in providing you with everything you need to build the WordPress web.
+iThemes has been building and supporting WordPress tools since 2008 like BackupBuddy, our <a href="http://ithemes.com/purchase/backupbuddy">WordPress backup plugin</a>. With our full range of WordPress <a href="http://ithemes.com/find/plugins/">plugins</a>, <a href="http://ithemes.com/find/themes/">themes</a> and <a href="http://ithemes.com/training">training</a>, WordPress security is the next step in providing you with everything you need to build the WordPress web.
 
-= Get Support and Pro Features =
+= Get Plugin Support and Pro Features =
 
 Get added peace of mind with professional support from our expert team and pro features to take your site's security to the next level with <a href="http://ithemes.com/security">iThemes Security Pro</a>.
 
 Pro Features:
 
-* User Action Logging - Track when user's edit content, login or logout.
 * Two-Factor Authentication - Use a mobile app such as Google Authenticator or Authy to generate a code or have a generated code emailed to you.
-* Import/Export Settings - Saves time setting up multiple WordPress sites.
+* WordPress Salts & Security Keys - The iThemes Security plugin makes updating your WordPress keys and salts easy.
 * Malware Scan Scheduling - Have your site scanned for malware automatically each day. If an issue is found, an email is sent with the details.
-* Password Expiration - Set a maximum password age and force users to choose a new password. You can also force all users to choose a new password immediately (if needed).
-* Generate Strong Passwords - Generate strong passwords right from your profile screen.
+* Password Security - Generate strong passwords right from your profile screen.
+* Password Expiration - Set a maximum password age and force users to choose a new password.  You can also force all users to choose a new password immediately (if needed).
+* Google reCAPTCHA - Protect your site against spammers.
+* User Action Logging - Track when users edit content, login or logout.
+* Import/Export Settings - Saves time setting up multiple WordPress sites.
 * Dashboard Widget - Manage important tasks such as user banning and system scans right from the WordPress dashboard.
 * Online File Comparison - When a file change is detected it will scan the origin of the files to determine if the change was malicious or not. Currently works only in WordPress core but plugins and themes are coming.
 * Temporary Privilege Escalation - give a contractor or someone else temporary admin or editor access to your site that will automatically reset itself.
 * wp-cli Integration - Manage your site's security from the command line.
-* Google reCAPTCHA - Protect your site against spammers.
+
 
 = iThemes Sync Integration =
 
-Manage more than one site? Manage away mode, release lockouts and make sure your WordPress site is up to date with <a href="http://ithemes.com/sync/">iThemes Sync</a>.
+Manage more than one WordPress site? Manage Away Mode, release lockouts and keep your themes, plugins and WordPress core up to date from one dashboard with iThemes Sync. <a href="http://ithemes.com/sync/">Start managing 10 WordPress sites for free with iThemes Sync</a>.
 
-= iThemes Brute Force Protection Network =
+= iThemes Brute Force Attack Protection Network =
 
-Network Brute Force Protection takes brute force protection to the next level by further banning users who have tried to break into other sites from breaking into yours. The iThemes Brute Force Protection Network will automatically report IP addresses of failed login attempts to iThemes and will block them for a length of time necessary to protect your site based on the number of sites that have seen a similar attack.
+iThemes Security takes brute force attack protection to the next level by banning users who have tried to break into other sites from breaking into yours. The iThemes Brute Force Attack Protection Network will automatically report IP addresses of failed login attempts and will block them for a length of time necessary to protect your site based on the number of sites that have seen a similar attack.
 
 = Protect =
 
-Hiding parts of your site is helpful, but won't prevent all attacks. In addition to obscuring sensitive areas of your WordPress site, iThemes Security works to protect it by blocking bad users and increasing the security of passwords and other vital information.
+iThemes Security works to protect your site by blocking bad users and increasing the security of passwords and other vital information.
 
+* Prevents brute force attacks by banning hosts and users with too many invalid login attempts
 * Scans your site to instantly report where vulnerabilities exist and fixes them in seconds
 * Bans troublesome user agents, bots and other hosts
-* Prevents brute force attacks by banning hosts and users with too many invalid login attempts
 * Strengthens server security
 * Enforces strong passwords for all accounts of a configurable minimum role
 * Forces SSL for admin pages (on supporting servers)
@@ -90,16 +92,16 @@ iThemes Security hides common WordPress security vulnerabilities, preventing att
 
 iThemes Security makes regular backups of your WordPress database, allowing you to get back online quickly in the event of an attack. Use iThemes Security to create and email database backups on a customizable schedule.
 
-For complete site backups and the ability to restore or move WordPress easily, check out <a href="http://ithemes.com/purchase/backupbuddy">BackupBuddy</a> by iThemes.
+For complete site backups and the ability to restore or move WordPress to a new host or domain, check out <a href="http://ithemes.com/purchase/backupbuddy">BackupBuddy</a>.
 
-= Other Benefits =
+= Other WordPress Security Benefits =
 
 * Makes it easier for users not accustomed to WordPress to remember login and admin URLs by customizing default admin URLs
 * Detects hidden 404 errors on your site that can affect your SEO such as bad links and missing images
 
-= Tutorials =
+= WordPress Security Tutorials =
 
-Learn how to use iThemes Security with our series of <a href="http://ithemes.com/tutorial/category/ithemes-security/">in-depth tutorial videos</a>:
+Learn how to use our WordPress security plugin with our series of <a href="http://ithemes.com/tutorial/category/ithemes-security/">in-depth tutorial videos</a>:
 
 * <a href="http://ithemes.com/tutorials/getting-started-ithemes-security-part-1/">Getting Started</a>
 * <a href="http://ithemes.com/tutorials/getting-started-ithemes-security-part-2-global-settings/">Global Settings</a>
@@ -107,7 +109,7 @@ Learn how to use iThemes Security with our series of <a href="http://ithemes.com
 * <a href="http://ithemes.com/tutorials/getting-started-ithemes-security-part-4-away-mode/">Away Mode</a>
 * <a href="http://ithemes.com/tutorials/getting-started-ithemes-security-part-5-banned-users/">Banned Users</a>
 * <a href="http://ithemes.com/tutorials/getting-started-ithemes-security-part-6-brute-force-protection/">Brute Force Protection</a>
-* Many more to come!
+
 
 = Compatibility =
 
@@ -123,7 +125,7 @@ Please <a href="http://ithemes.com/contact" target="_blank">let us know</a> if y
 
 = Warning =
 
-Please read the installation instructions and FAQ before installing this plugin. iThemes Security makes significant changes to your database and other site files which can be problematic, so a backup is strongly recommended before making any changes to your site with this plugin. While problems are rare, most support requests involve the failure to make a proper backup before installation.
+Please read the installation instructions and FAQ before installing this WordPress security plugin. iThemes Security makes significant changes to your database and other site files which can be problematic, so a backup is strongly recommended before making any changes to your site with this plugin. While problems are rare, most support requests involve the failure to make a proper backup before installation.
 
 == Installation ==
 
@@ -145,9 +147,6 @@ DISCLAIMER: Under no circumstances do we release this plugin with any warranty, 
 
 = Will this plugin completely stop all attacks on my site? =
 * No. iThemes Security is designed to help improve the security of your WordPress installation from many common attack methods, but it cannot prevent every possible attack. Nothing replaces diligence and good practice. This plugin makes it a little easier for you to apply both.
-
-= Is "one-click" protection good enough? =
-* One-click protection will help reduce the risk of attack on your site, but we recommend fixing as many high, medium and low priority items in the Security Status section as possible. If you have a plugin or theme that conflicts with an iThemes Security feature, we recommend deactivating the offending feature.
 
 = Is this plugin only for new WordPress installs or can I use it on existing sites, too? =
 * Many of the changes made by this plugin are complex and can break existing sites. While iThemes Security can be installed on either a new or existing site, we strongly recommend making a <a href="http://ithemes.com/purchase/backupbuddy" target="_blank">complete backup</a> of your existing site before applying any features included in this plugin.
@@ -181,13 +180,59 @@ Free support may be available with the help of the community in the <a href="htt
 
 == Screenshots ==
 
-1. After activation, iThemes Security guides you through important first steps
-2. One-click secure button enables most security features
-3. Instantly scan your site and see where you can improve your security with high, medium and low priority items
-4. Simple, informative settings options show you what you need to know about each setting
-5. Easy-to-navigate Security dashboard
+1. WordPress security settings are organized into an easy-to-use dashboard.
+2. Settings can also be managed in a list view.
+3. Settings are easily configured and explained with descriptions.
+4. Advanced WordPress security settings let you make more complex modifications to your site.
+5. Free malware scan powered by Sucuri SiteCheck.
 
 == Changelog ==
+
+= 5.5.0 =
+ * New Feature: Added a new File Permissions section on the settings page to bring back the directory and file permissions listing feature found on the Security > Dashboard page of older plugin versions.
+ * Bug Fix: Fixed a situation where adding a very large list of IP's in the Ban Hosts list would generate an invalid .htaccess file on some servers.
+ * Enhancement: The Database Backups, Local Brute Force Protection, Network Brute Force Protection, Strong Password Enforcement, and WordPress Tweaks features are now active by default on new installations.
+ * Enhancement: The WordPress Tweaks feature now uses the "Disable File Editor" setting by default on new installations.
+ * Enhancement: The WordPress Tweaks feature now sets the "Multiple Authentication Attempts per XML-RPC Request" setting to "Block" by default on new installations.
+ * Enhancement: Improved the styling of notices.
+
+= 5.4.5 =
+ * Bug Fix: Fixed SQL query for Database Backups when "Backup Full Database" is enabled.
+
+= 5.4.4 =
+ * Bug Fix: Fixed bug that could cause some sites to lose settings when upgrading.
+
+= 5.4.3 =
+ * Bug Fix: Don't rely on externally loaded MailChimp JavaScript.
+
+= 5.4.2 =
+ * Bug Fix: Fixed links to Settings, Logs, and creating a backup on Multisite.
+ * Enhancement: The "Write to Files" setting is now enabled by default.
+
+= 5.4.1 =
+ * Bug Fix: Fixed error that would prevent nginx servers from being able to make use of the "Reduce Comment Spam" feature of the WordPress Tweaks module.
+ * Bug Fix: Restored missing log filter for 404 Detection log entries.
+
+= 5.4.0 =
+ * Enhancement: New user interface with both grid and list views for managing settings.
+ * Enhancement: New automatic temp whitelisting of IPs for users that manage iThemes Security settings.
+ * Enhancement: Better feedback on errors when modifying wp-config.php or server config files.
+ * Enhancement: Improved code efficiency of the Away Mode feature so that it takes less processing time when active.
+ * Enhancement: Rather than disabling features that have invalid user input, the user now can fix the issue before saving.
+ * Enhancement: Improved the efficiency of the plugin's loading code, reducing the amount of time taken to run the plugin.
+ * New Feature: Global settings now has a "Show Error Codes" setting that can provide an error message's specific error code when it is enabled.
+ * Bug Fix: More than one IP can now be temp whitelisted.
+ * Bug Fix: Fixed a bug where some modules would be enabled or disabled when they shouldn't be after upgrading to the latest version.
+ * Bug Fix: Will not send notification emails about the new login address when Hide Backend is enabled and doing an upgrade.
+ * Compatibility Fix: Updated handling of wp_remote_get() responses in preparation for changes coming in WordPress 4.6.
+
+= 5.3.7 =
+* Bug Fix: Throw a real 403 instead of a faked 404 for hide backend - Fixes compatability with certain plugins including WordPress SEO. Hat tip to Joost de Valk (@jdevalk) and the @Yoast team for bringing this issue to our attention.
+
+= 5.3.6 =
+* Security Fix: Better caps checks for dismissal of changed file dialog - Thanks to Julio Potier for notifying us of this issue.
+* Bug Fix: Make file change warning dialog text properly translatable
+* Enhancement: Adding 'itsec_log_event' action for logged events
 
 = 5.3.5 =
 * Security Fix: No longer using document.location to build 'Show Intro' link in admin - Thanks to David Lodge (Pen Test Partners) for notifying us of this issue.
@@ -1508,6 +1553,33 @@ This release is a complete rewrite from the ground up. Special thanks to Cory Mi
 * First alpha release including simple feature set.
 
 == Upgrade Notice ==
+
+= 5.5.0 =
+Version 5.5.0 contains important bug fixes, a new File Permissions feature, and numerous enhancements. It is recommended for all users.
+
+= 5.4.5 =
+Version 5.4.5 contains a bug fix that fixes the listing of tables to exclude from database backups when "Backup Full Database" is enabled.
+
+= 5.4.4 =
+Version 5.4.4 contains a bug fix that addresses problems some users had when upgrading.
+
+= 5.4.3 =
+Version 5.4.3 contains a bug fix that can prevent script issues in some browsers.
+
+= 5.4.2 =
+Version 5.4.2 contains import bug fixes for Multisite.
+
+= 5.4.1 =
+Version 5.4.1 contains import bug fixes for sites on nginx servers and brings back display of 404 errors in the logs.
+
+= 5.4.0 =
+Version 5.4.0 provides an all new, easier to use interface as well as speed and performance improvements. Upgrade now!
+
+= 5.3.7 =
+Version 5.3.6 contains a bugfix that fixes compatability with WordPress SEO and is recommended for all users.
+
+= 5.3.6 =
+Version 5.3.6 contains minor bugfixes and a small security fix and is recommended for all users.
 
 = 5.3.5 =
 Version 5.3.5 contains minor bugfixes and enhancements and is recommended for all users.

@@ -5,17 +5,17 @@ use \Apple_Exporter\Settings as Settings;
 use \Apple_Exporter\Builders\Component_Layouts as Component_Layouts;
 use \Apple_Exporter\Components\Component as Component;
 
-class Component_Layouts_Test extends PHPUnit_Framework_TestCase {
+class Component_Layouts_Test extends WP_UnitTestCase {
 
 	protected $prophet;
 
-	protected function setup() {
+	public function setup() {
 		$this->prophet  = new \Prophecy\Prophet;
 		$this->settings = new Settings();
 		$this->content  = new Exporter_Content( 1, 'My Title', '<p>Hello, World!</p>' );
 	}
 
-	protected function tearDown() {
+	public function tearDown() {
 		$this->prophet->checkPredictions();
 	}
 
@@ -43,11 +43,6 @@ class Component_Layouts_Test extends PHPUnit_Framework_TestCase {
 			->willReturn( false )
 			->shouldBeCalled();
 		$component->set_json( 'layout', 'anchor-layout-left' )->shouldBeCalled();
-		$component->set_json( 'animation', array(
-			'type'             => 'fade_in',
-			'userControllable' => true,
-			'initialAlpha'     => 0.0,
-		) )->shouldBeCalled();
 
 		$layouts->set_anchor_layout_for( $component->reveal() );
 

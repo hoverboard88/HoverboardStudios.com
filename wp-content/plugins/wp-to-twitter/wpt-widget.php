@@ -18,7 +18,7 @@ function wpt_get_user( $twitter_ID = false ) {
 	$token_secret = get_option( 'oauth_token_secret' );
 	if ( $key && $secret && $token && $token_secret ) {
 		$connection   = new wpt_TwitterOAuth( $key, $secret, $token, $token_secret );
-		$result       = $connection->get( "https://api.twitter.com/1.1/users/show.json?screen_name=$twitter_ID", $options );
+		$result       = $connection->get( "https://api.twitter.com/1.1/users/show.json?screen_name=$twitter_ID&include_ext_alt_text=true", $options );
 
 		return json_decode( $result );
 	} else {
@@ -184,6 +184,7 @@ class WPT_Latest_Tweets_Widget extends WP_Widget {
 		$widget_ops = array(
 			'classname'   => 'wpt-latest-tweets',
 			'description' => __( 'Display a list of your latest tweets.', 'wp-to-twitter' ),
+			'customize_selective_refresh' => true 
 		);
 
 		$control_ops = array(
@@ -384,6 +385,7 @@ class WPT_Search_Tweets_Widget extends WP_Widget {
 		$widget_ops = array(
 			'classname'   => 'wpt-search-tweets',
 			'description' => __( 'Display a list of tweets returned by a search.', 'wp-to-twitter' ),
+			'customize_selective_refresh' => true 
 		);
 
 		$control_ops = array(
@@ -557,18 +559,21 @@ add_action( 'widgets_init', create_function( '', "register_widget('WPT_Search_Tw
  */
 function wpt_tweet_linkify( $text, $opts, $tweet ) {
 	if ( $opts['show_images'] == true ) {
-		$media = $tweet['entities']['media'];
-		$media_urls = array();
-		if ( !empty( $media ) ) {
-			foreach ( $media as $image ) {
-				$media_urls[] = $image['url'];
-				// alt attributes are not available on Twitter.
-				$text .= "<img src='$image[media_url_https]' alt='' class='wpt-twitter-image' />";
+		$media = isset( $tweet['entities']['media'] ) ? $tweet['entities']['media'] : false;
+		if ( $media ) {
+			$media_urls = array();
+			if ( !empty( $media ) ) {
+				foreach ( $media as $key => $image ) {
+					$media_urls[] = $image['url'];
+					// alt attributes are not available on Twitter.
+					$alt = isset( $tweet['extended_entities']['media'][$key]['ext_alt_text'] ) ? $tweet['extended_entities']['media'][$key]['ext_alt_text']  : '';
+					$text .= "<img src='$image[media_url_https]' alt='$alt' class='wpt-twitter-image' />";
+				}
 			}
-		}
-		if ( !empty( $media_urls ) ) {
-			foreach ( $media_urls as $media_url ) {
-				$text = str_replace( "$media_url", '', $text );
+			if ( !empty( $media_urls ) ) {
+				foreach ( $media_urls as $media_url ) {
+					$text = str_replace( "$media_url", '', $text );
+				}
 			}
 		}
 	}

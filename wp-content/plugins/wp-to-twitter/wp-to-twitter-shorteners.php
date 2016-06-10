@@ -250,7 +250,7 @@ if ( ! function_exists( 'wpt_shorten_url' ) ) { // prep work for future plug-in 
 
 		return $shrink;
 	}
-
+	
 	function wpt_store_url( $post_ID, $url ) {
 		$store_urls = apply_filters( 'wpt_store_urls', true, $post_ID, $url );
 		if ( function_exists( 'wpt_shorten_url' )  && $store_urls ) {

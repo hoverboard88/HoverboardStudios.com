@@ -80,6 +80,11 @@ class SSP_Frontend {
 
 		// Register widgets
 		add_action( 'widgets_init', array( $this, 'register_widgets' ), 1 );
+
+		add_filter( 'feed_content_type', array( $this, 'feed_content_type' ), 10, 2 );
+
+		// Handle localisation
+		add_action( 'plugins_loaded', array( $this, 'load_localisation' ) );
 	}
 
 	/**
@@ -466,6 +471,9 @@ class SSP_Frontend {
 				require_once( ABSPATH . 'wp-admin/includes/media.php' );
 			}
 
+			// translate file URL to local file path if possible
+			$file = $this->get_local_file_path( $file );
+
 			// Get file data (for local file)
 			$data = wp_read_audio_metadata( $file );
 
@@ -514,9 +522,8 @@ class SSP_Frontend {
 				require_once( ABSPATH . 'wp-admin/includes/media.php' );
 			}
 
-			// Identify file by root path and not URL (required for getID3 class)
-			$site_root = trailingslashit( ABSPATH );
-			$file = str_replace( $this->site_url, $site_root, $file );
+			// translate file URL to local file path if possible
+			$file = $this->get_local_file_path( $file );
 
 			// Get file data (will only work for local files)
 			$data = wp_read_audio_metadata( $file );
@@ -882,8 +889,18 @@ class SSP_Frontend {
 					return;
 				}
 
-				// Get audio file for download
-				$file = $this->get_enclosure( $episode_id );
+				// Do we have newlines?
+				$parts = false;
+				if( is_string( $episode ) ) {
+					$parts = explode( "\n", $episode );
+				}
+
+				if ( $parts && is_array( $parts ) && count( $parts ) > 1 ) {
+					$file = $parts[0];
+				} else {
+					// Get audio file for download
+					$file = $this->get_enclosure( $episode_id );
+				}
 
 				// Exit if no file is found
 				if ( ! $file ) {
@@ -903,35 +920,70 @@ class SSP_Frontend {
 				// Allow other actions - functions hooked on here must not output any data
 			    do_action( 'ssp_file_download', $file, $episode, $referrer );
 
-			    // Set necessary headers for download
+			    // Set necessary headers
 				header( "Pragma: no-cache" );
 				header( "Expires: 0" );
 				header( "Cache-Control: must-revalidate, post-check=0, pre-check=0" );
 				header( "Robots: none" );
-				header( "Content-Description: File Transfer" );
-				header( "Content-Disposition: attachment; filename=\"" . basename( $file ) . "\";" );
-				header( "Content-Transfer-Encoding: binary" );
-
-				// Set size of file
-		        if ( $size = @filesize( $file ) ) {
-		        	header( "Content-Length: " . $size );
-		        }
 
 		        // Check file referrer
 		        if( 'download' == $referrer ) {
 
+		        	// Set size of file
+					// Do we have anything in Cache/DB?
+					$size = wp_cache_get( $episode_id, 'filesize_raw' );
+
+					// Nothing in the cache, let's see if we can figure it out.
+					if ( false === $size ) {
+
+						// Do we have anything in post_meta?
+						$size = get_post_meta( $episode_id, 'filesize_raw', true );
+
+						if ( empty( $size ) ) {
+
+							// Let's see if we can figure out the path...
+							$attachment_id = $this->get_attachment_id_from_url( $file );
+
+							if ( ! empty( $attachment_id )  ) {
+								$size = filesize( get_attached_file( $attachment_id ) );
+								update_post_meta( $episode_id, 'filesize_raw', $size );
+							}
+
+						}
+
+						// Update the cache
+						wp_cache_set( $episode_id, $size, 'filesize_raw' );
+					}
+
+					// Send Content-Length header
+		        	if ( ! empty( $size ) ) {
+						header( "Content-Length: " . $size );
+					}
+
 		        	// Force file download
 		        	header( "Content-Type: application/force-download" );
 
+			        // Set other relevant headers
+			        header( "Content-Description: File Transfer" );
+			        header( "Content-Disposition: attachment; filename=\"" . basename( $file ) . "\";" );
+			        header( "Content-Transfer-Encoding: binary" );
+
+			        // Encode spaces in file names until this is fixed in core (https://core.trac.wordpress.org/ticket/36998)
+					$file = str_replace( ' ', '%20', $file );
+
 			        // Use ssp_readfile_chunked() if allowed on the server or simply access file directly
-					@ssp_readfile_chunked( "$file" ) or header( 'Location: ' . $file );
+					@ssp_readfile_chunked( $file ) or header( 'Location: ' . $file );
 				} else {
-					// For all other referrers simply access the file directly
+
+					// Encode spaces in file names until this is fixed in core (https://core.trac.wordpress.org/ticket/36998)
+					$file = str_replace( ' ', '%20', $file );
+
+					// For all other referrers redirect to the raw file
 					wp_redirect( $file, 302 );
 				}
 
 				// Exit to prevent other processes running later on
-				exit();
+				exit;
 
 			}
 		}
@@ -1127,4 +1179,57 @@ class SSP_Frontend {
 	    return $html;
 	}
 
+	/**
+	 * Returns a local file path for the given file URL if it's local. Otherwise
+	 * returns the original URL
+	 *
+	 * @param    string    file
+	 * @return   string    file or local file path
+	 */
+	function get_local_file_path( $file ) {
+
+		// Identify file by root path and not URL (required for getID3 class)
+		$site_root = trailingslashit( ABSPATH );
+
+		// Remove common dirs from the ends of site_url and site_root, so that file can be outside of the WordPress installation
+		$root_chunks = explode( '/', $site_root );
+		$url_chunks  = explode( '/', $this->site_url );
+
+		end( $root_chunks );
+		end( $url_chunks );
+
+		while ( ! is_null( key( $root_chunks ) ) && ! is_null( key( $url_chunks ) ) && ( current( $root_chunks ) == current( $url_chunks ) ) ) {
+			array_pop( $root_chunks );
+			array_pop( $url_chunks );
+			end( $root_chunks );
+			end( $url_chunks );
+		}
+
+		$site_root = implode('/', $root_chunks);
+		$site_url  = implode('/', $url_chunks);
+
+		$file = str_replace( $site_url, $site_root, $file );
+
+		return $file;
+	}
+
+	/**
+	 * Set RSS content type for podcast feed
+	 *
+	 * @param  string $content_type Current content type
+	 * @param  string $type         Type of feed
+	 * @return string               Updated content type
+	 */
+	public function feed_content_type ( $content_type = '', $type = '' ) {
+
+		if( 'podcast' == $type ) {
+			$content_type = 'text/xml';
+		}
+
+		return $content_type;
+	}
+
+	public function load_localisation () {
+		load_plugin_textdomain( 'seriously-simple-podcasting', false, basename( dirname( $this->file ) ) . '/languages/' );
+	}
 }

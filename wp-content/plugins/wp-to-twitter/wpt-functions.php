@@ -112,6 +112,10 @@ function wpt_settings_tabs() {
 		'support' => __( 'Get Help', 'wp-to-twitter' ),
 		'pro' => $pro_text
 	);
+	if ( get_option( 'jd_donations' ) == '1' && !function_exists( 'wpt_pro_exists' ) ) {
+		unset( $pages['pro'] );
+	}
+	
 	$pages = apply_filters( 'wpt_settings_tabs_pages', $pages, $current );
 	$admin_url = admin_url( 'admin.php?page=wp-tweets-pro' );
 
@@ -973,6 +977,208 @@ class WPT_Normalizer
 			return false;
 		}
     }
+}
+
+
+/**
+ *  Migrates post meta to new format when post is called in editor.
+ */
+add_action( 'load-post.php', 'wpt_migrate_url_meta' );
+function wpt_migrate_url_meta() {
+	$post_id = isset( $_GET['post'] ) ? intval( $_GET['post'] ) : false;
+	if ( !$post_id ) { 
+		// if this is a new post screen, no migration
+		return;
+	}
+	
+	$post = get_post( $post_id );
+	if ( strtotime( $post->post_date ) > 1449764285 ) {
+		// if this post was added after the migration function was added, it will not need to be migrated. Guaranteed.
+		return;
+	}
+	
+	$short = get_post_meta( $post_id, '_wpt_short_url', true );
+	if ( $short != '' ) { 
+		return; 
+	}
+	if ( $short == "" ) {
+		$short = get_post_meta( $post_id, '_wp_jd_goo', true );
+		delete_post_meta( $post_id, '_wp_jd_goo' );
+	}
+	if ( $short == "" ) {
+		$short = get_post_meta( $post_id, '_wp_jd_supr', true );
+		delete_post_meta( $post_id, '_wp_jd_supr' );
+	}
+	if ( $short == "" ) {
+		$short = get_post_meta( $post_id, '_wp_jd_wp', true );
+		delete_post_meta( $post_id, '_wp_jd_wp' );
+	}
+	if ( $short == "" ) {
+		$short = get_post_meta( $post_id, '_wp_jd_ind', true );
+		delete_post_meta( $post_id, '_wp_jd_ind' );
+	}
+	if ( $short == "" ) {
+		$short = get_post_meta( $post_id, '_wp_jd_yourls', true );
+		delete_post_meta( $post_id, '_wp_jd_yourls' );
+	}
+	if ( $short == "" ) {
+		$short = get_post_meta( $post_id, '_wp_jd_url', true );
+		delete_post_meta( $post_id, '_wp_jd_url' );
+	}
+	if ( $short == "" ) {
+		$short = get_post_meta( $post_id, '_wp_jd_joturl', true );
+		delete_post_meta( $post_id, '_wp_jd_joturl' );
+	}
+	if ( $short == "" ) {
+		// don't delete target link
+		$short = get_post_meta( $post_id, '_wp_jd_target', true );
+	}
+	if ( $short == "" ) {
+		$short = get_post_meta( $post_id, '_wp_jd_clig', true );
+		delete_post_meta( $post_id, '_wp_jd_clig' );
+	}
+	
+	if ( $short == '' ) {
+		$short = get_permalink( $post_id );
+	}
+	
+	update_post_meta( $post_id, '_wpt_short_url', $short );
+}
+
+function wp_get_curl( $url ) {
+	
+	$curl = curl_init( $url );
+
+	curl_setopt( $curl, CURLOPT_RETURNTRANSFER, true );
+	curl_setopt( $curl, CURLOPT_HEADER, 0 );
+	curl_setopt( $curl, CURLOPT_USERAGENT, '' );
+	curl_setopt( $curl, CURLOPT_TIMEOUT, 10 );
+	curl_setopt( $curl, CURLOPT_FOLLOWLOCATION, true );
+	curl_setopt( $curl, CURLOPT_BINARYTRANSFER, true );
+
+	$response = curl_exec( $curl );
+	if( 0 !== curl_errno( $curl ) || 200 !== curl_getinfo( $curl, CURLINFO_HTTP_CODE ) ) {
+		$response = false;
+	} // end if
+	curl_close( $curl );
+
+	return $response;
+}
+
+add_action( 'dp_duplicate_post', 'wpt_delete_copied_meta', 10, 2 );
+add_action( 'dp_duplicate_page', 'wpt_delete_copied_meta', 10, 2 );
+/**
+ * Prevent 'Duplicate Posts' plug-in from copying WP to Twitter meta data
+ */
+function wpt_delete_copied_meta( $new_id, $post ) {
+	$disable = apply_filters( 'wpt_allow_copy_meta', false );
+	if ( $disable ) {
+		return;
+	}
+	// delete WP to Twitter's meta data from copied post.
+	// I can't prevent them from being copied, but I can delete them after the fact.
+	delete_post_meta( $new_id, '_wpt_short_url' );
+	delete_post_meta( $new_id, '_wp_jd_target' );
+	delete_post_meta( $new_id, '_jd_wp_twitter' );
+	delete_post_meta( $new_id, '_jd_twitter' );
+	delete_post_meta( $new_id, '_wpt_failed' );
+}
+
+// uninstall WP to Twitter
+function wtt_fs_uninstall_cleanup() {
+	delete_option( 'wpt_post_types' );
+	delete_option( 'jd_twit_remote' );
+	delete_option( 'jd_post_excerpt' );
+
+	delete_option( 'comment-published-update' );
+	delete_option( 'comment-published-text' );
+	delete_option( 'wpt_status_message_last' );
+	delete_option( 'wtt_twitter_username' );
+// Su.pr API
+	delete_option( 'suprapi' );
+
+// Error checking
+	delete_option( 'jd-functions-checked' );
+	delete_option( 'wp_twitter_failure' );
+	delete_option( 'wp_supr_failure' );
+	delete_option( 'wp_url_failure' );
+	delete_option( 'wp_bitly_failure' );
+	delete_option( 'wpt_curl_error' );
+
+// Rate Limiting
+	delete_option( 'wpt_rate_limits' );
+	delete_option( 'wpt_default_rate_limit' );
+	delete_option( 'wpt_rate_limit' );
+	delete_option( 'wpt_rate_limiting' );
+	
+// Blogroll options
+	delete_option( 'jd-use-link-title' );
+	delete_option( 'jd-use-link-description' );
+	delete_option( 'newlink-published-text' );
+	delete_option( 'jd_twit_blogroll' );
+
+// Default publishing options.
+	delete_option( 'jd_tweet_default' );
+	delete_option( 'jd_tweet_default_edit' );
+	delete_option( 'wpt_inline_edits' );
+
+// Note that default options are set.
+	delete_option( 'twitterInitialised' );
+	delete_option( 'wpt_twitter_setup' );
+	delete_option( 'wp_twitter_failure' );
+	delete_option( 'twitterlogin' );
+	delete_option( 'twitterpw' );
+	delete_option( 'twitterlogin_encrypted' );
+	delete_option( 'suprapi' );
+	delete_option( 'jd_twit_quickpress' );
+	delete_option( 'jd-use-supr' );
+	delete_option( 'jd-use-none' );
+	delete_option( 'jd-use-wp' );
+
+// Special Options
+	delete_option( 'jd_twit_prepend' );
+	delete_option( 'jd_twit_append' );
+	delete_option( 'jd_twit_remote' );
+	delete_option( 'twitter-analytics-campaign' );
+	delete_option( 'use-twitter-analytics' );
+	delete_option( 'jd_twit_custom_url' );
+	delete_option( 'jd_shortener' );
+	delete_option( 'jd_strip_nonan' );
+
+	delete_option( 'jd_individual_twitter_users' );
+	delete_option( 'use_tags_as_hashtags' );
+	delete_option( 'jd_max_tags' );
+	delete_option( 'jd_max_characters' );
+// Bitly Settings
+	delete_option( 'bitlylogin' );
+	delete_option( 'jd-use-bitly' );
+	delete_option( 'bitlyapi' );
+
+// twitter compatible api
+	delete_option( 'jd_api_post_status' );
+	delete_option( 'app_consumer_key' );
+	delete_option( 'app_consumer_secret' );
+	delete_option( 'oauth_token' );
+	delete_option( 'oauth_token_secret' );
+
+//dymamic analytics
+	delete_option( 'jd_dynamic_analytics' );
+	delete_option( 'use_dynamic_analytics' );
+//category limits
+	delete_option( 'limit_categories' );
+	delete_option( 'tweet_categories' );
+//yourls installation
+	delete_option( 'yourlsapi' );
+	delete_option( 'yourlspath' );
+	delete_option( 'yourlsurl' );
+	delete_option( 'yourlslogin' );
+	delete_option( 'jd_replace_character' );
+	delete_option( 'jd_date_format' );
+	delete_option( 'jd_keyword_format' );
+//Version
+	delete_option( 'wp_to_twitter_version' );
+	delete_option( 'wpt_authentication_missing' );
+	delete_option( 'wpt_http' );
 }
 
 /**

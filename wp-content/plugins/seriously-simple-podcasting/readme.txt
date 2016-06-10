@@ -1,9 +1,9 @@
 === Seriously Simple Podcasting ===
 Contributors: hlashbrooke, whyisjake
 Tags: podcast, audio, video, vodcast, rss, mp3, mp4, feed, itunes, podcasting, media, stitcher, google play
-Requires at least: 4.2
-Tested up to: 4.4.2
-Stable tag: 1.14.3
+Requires at least: 4.3
+Tested up to: 4.5.2
+Stable tag: 1.14.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -25,16 +25,16 @@ Podcasting the way it's meant to be. No mess, no fuss - just you and your conten
 - Shortcodes & widgets for displaying podcast episode lists as well as single episodes anywhere on your site
 - Playable episodes using the built-in WordPress media player
 - The freedom to host your media files on the same site or any other server
-- Complete user and developer [documentation](http://www.seriouslysimplepodcasting.com/)
-- Full i18n support
+- Complete user and developer [documentation](https://www.seriouslysimplepodcasting.com/)
+- [Full i18n support](https://translate.wordpress.org/projects/wp-plugins/seriously-simple-podcasting)
 
 **Where to find help**
 
-Seriously Simple Podcasting comes with complete user and developer [documentation](http://www.seriouslysimplepodcasting.com/). Please read this documentation thoroughly before posting on [the support forum](https://wordpress.org/support/plugin/seriously-simple-podcasting).
+Seriously Simple Podcasting comes with complete user and developer [documentation](https://www.seriouslysimplepodcasting.com/). Please read this documentation thoroughly before posting on [the support forum](https://wordpress.org/support/plugin/seriously-simple-podcasting).
 
 **Add-ons**
 
-Seriously Simple Podcasting comes with a growing [library of add-ons](http://www.seriouslysimplepodcasting.com/add-ons/). Just like the core plugin itself, **all of the add-ons are 100% free to use and will always remain that way**.
+Seriously Simple Podcasting comes with a growing [library of add-ons](https://www.seriouslysimplepodcasting.com/add-ons/). Just like the core plugin itself, **all of the add-ons are 100% free to use and will always remain that way**.
 
 **How to contribute**
 
@@ -50,7 +50,7 @@ Simply upload the plugin and you're good to go. Go to "Podcast > Add New" to add
 
 Podcast media files can be uploaded directly into WordPress or hosted on any other site - in the latter case all you'll need to supply is the URL to the file. *Please note that episode lengths and file sizes can only be automatically calculated for files that are hosted on the same server as the website - either way though, you can input them manually.*
 
-If you need help, you can find complete user and developer documentation [here](http://www.seriouslysimplepodcasting.com/).
+If you need help, you can find complete user and developer documentation [here](https://www.seriouslysimplepodcasting.com/).
 
 == Installation ==
 
@@ -65,7 +65,7 @@ Installing "Seriously Simple Podcasting" can be done either by searching for "Se
 
 = Where are the FAQs? =
 
-You can find complete user and developer documentation (along with the FAQs) on [the Seriously Simple Podcasting documentation site](http://www.seriouslysimplepodcasting.com/).
+You can find complete user and developer documentation (along with the FAQs) on [the Seriously Simple Podcasting documentation site](https://www.seriouslysimplepodcasting.com/).
 
 == Screenshots ==
 
@@ -85,9 +85,42 @@ You can find complete user and developer documentation (along with the FAQs) on 
 
 == Changelog ==
 
+= 1.14.8 =
+* 2016-06-06
+* UPDATE SUMMARY: Improving loading of episode details in dashboard to allow for more extensibility, as well as making sure that translations are applied correctly.
+* [TWEAK] Improving generation of episode details fields on episode edit screen
+* [FIX] Ensuring full localisation support works correctly
+
+= 1.14.7 =
+* 2016-06-02
+* UPDATE SUMMARY: Improving file loading to prevent lag/timeouts in some podcast players as well as making sure that file names with spaces work correctly.
+* [FIX] Ensuring that spaces in file names don't lead to broken links or unplayable files by correctly encoding them
+* [FIX] Moving file content headers to prevent slow loading (and possible timeouts) in some podcast players (props [Mattias Geniar](https://github.com/mattiasgeniar))
+* [FIX] Ensuring that audio file is always obtained correctly, even for legacy WordPress enclosures (props [Jake Spurlock](https://github.com/whyisjake))
+* [TWEAK] Adding `ssp_feed_image` filter to RSS feed to allow dynamic filtering of main feed image (props [Rhys Wynne](https://github.com/rhyswynne))
+
+= 1.14.6 =
+* 2016-04-19
+* UPDATE SUMMARY: Fixing feed validation errors and making sure that feeds can be viewed instead always being forced to be downloaded.
+* [FIX] Removing unused tags from RSS feed items
+* [FIX] Correcting RSS feed MIME type
+* [TWEAK] Improving RSS feed XML formatting
+
+= 1.14.5 =
+* 2016-04-14
+* [FIX] Fixing scope of `get_attachment_id_from_url` function reference - this was breaking file downloads and file size calculations
+* [FIX] Fixing podcast cover image display on feed page
+
+= 1.14.4 =
+* 2016-04-06
+* [TWEAK] Adding `customize_selective_refresh` flag to all widget options for WordPress 4.5+ compatibility
+* [FIX] Updating file location function to properly allow media files to live outside of the WordPress directory (props [stoney](https://github.com/stoney))
+* [FIX] Correctly finding media file size and setting content headers accordingly (props [Jake Spurlock](https://github.com/whyisjake) and [sharky44](https://github.com/sharky44))
+* [FIX] Fixing `image` tag output in feeds - this was causing many feeds to be invalidated (props [Travis Northcutt](https://github.com/tnorthcutt))
+
 = 1.14.3 =
 * 2016-02-18
-* [TWEAK] Making sure that the episode recorded date is internationalised corrently
+* [TWEAK] Making sure that the episode recorded date is internationalised correctly
 * [TWEAK] Adding filters to feed item content, description and subtitle fields (see the [filter reference](https://www.seriouslysimplepodcasting.com/documentation/filter-reference/) for details)
 * [FIX] Fixing dislay of ampersands in episode content in feeds
 
@@ -571,5 +604,5 @@ You can find complete user and developer documentation (along with the FAQs) on 
 
 == Upgrade Notice ==
 
-= 1.14.3 =
+= 1.14.8 =
 * v1.14.x contains a number of great new features and optimisations - all users are advised to update ASAP.

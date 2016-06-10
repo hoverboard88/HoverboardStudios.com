@@ -184,7 +184,7 @@ abstract class Component {
 	 * @access public
 	 */
 	public function to_array() {
-		return $this->json;
+		return apply_filters( 'apple_news_' . $this->get_component_name() . '_json', $this->json );
 	}
 
 	/**
@@ -252,7 +252,7 @@ abstract class Component {
 	 * @access public
 	 */
 	public function is_anchor_target() {
-		return !is_null( $this->uid );
+		return ! is_null( $this->uid );
 	}
 
 	/**
@@ -278,6 +278,27 @@ abstract class Component {
 		}
 
 		return $this->uid;
+	}
+
+	/**
+	 * Maybe bundles the source based on current settings.
+	 * Returns the URL to use based on current setings.
+	 *
+	 * @param string $source    The path or URL of the resource which is going to
+	 *                          be bundled
+	 * @param string $filename  The name of the file to be created
+	 * @return string 					The URL to use for this asset in the JSON
+	 */
+	protected function maybe_bundle_source( $source, $filename = null ) {
+		if ( 'yes' === $this->get_setting( 'use_remote_images' ) ) {
+			return $source;
+		} else {
+			if ( null === $filename ) {
+				$filename = \Apple_News::get_filename( $source );
+			}
+			$this->bundle_source( $filename, $source );
+			return 'bundle://' . $filename;
+		}
 	}
 
 	/**
@@ -425,6 +446,18 @@ abstract class Component {
 	 * @abstract
 	 */
 	abstract protected function build( $text );
+
+	/**
+	 * Gets the name of this component from the class name.
+	 *
+	 * @return string
+	 */
+	public function get_component_name() {
+		$class_name = get_class( $this );
+		$class_name_path = explode( '\\', $class_name );
+		$class_name_no_namespace = end( $class_name_path );
+		return strtolower( $class_name_no_namespace );
+	}
 
 	/**
 	 * Check if the remote file exists for this node.

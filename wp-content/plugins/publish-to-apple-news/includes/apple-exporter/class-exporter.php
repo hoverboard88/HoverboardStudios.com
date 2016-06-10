@@ -250,8 +250,18 @@ class Exporter {
 	 */
 	private function build_article_style() {
 		return array(
-			'backgroundColor' => '#FFFFFF',
+			'backgroundColor' => '#FAFAFA',
 		);
+	}
+
+	/**
+	 * Get the Exporter_Content object
+	 *
+	 * @return Exporter_Content
+	 * @access public
+	 */
+	public function get_content() {
+		return $this->content;
 	}
 
 	/**

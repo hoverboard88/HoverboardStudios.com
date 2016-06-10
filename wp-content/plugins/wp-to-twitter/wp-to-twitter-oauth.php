@@ -189,6 +189,10 @@ function wtt_connect_oauth( $auth = false ) {
 		echo '<div class="postbox">';
 	}
 
+	if ( $auth ) {
+		wpt_update_authenticated_users();
+	}
+	
 	$class = ( $auth ) ? 'wpt-profile' : 'wpt-settings';
 	$form  = ( ! $auth ) ? '<form action="" method="post">' : '';
 	$nonce = ( ! $auth ) ? wp_nonce_field( 'wp-to-twitter-nonce', '_wpnonce', true, false ) . wp_referer_field( false ) . '</form>' : '';
@@ -269,12 +273,12 @@ function wtt_connect_oauth( $auth = false ) {
 		$ots   = ( ! $auth ) ? esc_attr( get_option( 'oauth_token_secret' ) ) : esc_attr( get_user_meta( $auth, 'oauth_token_secret', true ) );
 		$uname = ( ! $auth ) ? esc_attr( get_option( 'wtt_twitter_username' ) ) : esc_attr( get_user_meta( $auth, 'wtt_twitter_username', true ) );
 		$nonce = ( ! $auth ) ? wp_nonce_field( 'wp-to-twitter-nonce', '_wpnonce', true, false ) . wp_referer_field( false ) . '</form>' : '';
-		if ( ! $auth ) {
+		if ( ! $auth ) {			
 			$submit = '
 					<input type="submit" name="submit" class="button-primary" value="' . __( 'Disconnect your WordPress and Twitter Account', 'wp-to-twitter' ) . '" />
 					<input type="hidden" name="oauth_settings" value="wtt_twitter_disconnect" class="hidden" />
 				';
-		} else {
+		} else {			
 			$submit = '<input type="checkbox" name="oauth_settings" value="wtt_twitter_disconnect" id="disconnect" /> <label for="disconnect">' . __( 'Disconnect your WordPress and Twitter Account', 'wp-to-twitter' ) . '</label>';
 		}
 
@@ -304,4 +308,21 @@ function wtt_connect_oauth( $auth = false ) {
 		echo "</div>";
 		echo "</div>";
 	}
+}
+
+function wpt_update_authenticated_users() {
+	$args  = array( 'meta_query' => array( array( 'key' => 'wtt_twitter_username', 'compare' => 'EXISTS' ) ) );
+	// get all authorized users
+	$users = get_users( $args );
+	$authorized_users = array();
+	if ( is_array( $users ) ) {
+		foreach ( $users as $this_user ) {
+			if ( wtt_oauth_test( $this_user->ID,'verify' ) ) {
+				$twitter = get_user_meta( $this_user->ID, 'wtt_twitter_username', true );
+				$authorized_users[] = array( 'ID'=>$this_user->ID, 'name'=>$this_user->display_name, 'twitter'=>$twitter ); 
+			}
+		}
+	}
+	
+	update_option( 'wpt_authorized_users', $authorized_users );	
 }

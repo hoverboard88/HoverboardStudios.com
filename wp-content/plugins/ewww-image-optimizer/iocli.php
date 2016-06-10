@@ -188,6 +188,7 @@ function ewww_image_optimizer_bulk_media( $delay = 0 ) {
 		$attachments = get_option('ewww_image_optimizer_bulk_attachments');
 	// since we aren't resuming, and weren't given a list of IDs, we will optimize everything
         } else {
+		global $wpdb;
                 // load up all the image attachments we can find
 		$attachments = $wpdb->get_col( "SELECT ID FROM $wpdb->posts WHERE (post_type = 'attachment' OR post_type = 'ims_image') AND post_mime_type LIKE '%%image%%'" );
         }
@@ -318,7 +319,7 @@ function ewww_image_optimizer_scan_other () {
 							if ( ! $image_size ) {
 								continue;
 							}
-							$query = $wpdb->prepare("SELECT id,path FROM $wpdb->ewwwio_images WHERE path LIKE %s AND image_size LIKE '$image_size'", $path);
+							/*$query = $wpdb->prepare("SELECT id,path FROM $wpdb->ewwwio_images WHERE path LIKE %s AND image_size LIKE '$image_size'", $path);
 							$optimized_query = $wpdb->get_results( $query, ARRAY_A );
 							if (!empty($optimized_query)) {
 								foreach ( $optimized_query as $image ) {
@@ -327,7 +328,8 @@ function ewww_image_optimizer_scan_other () {
 										$already_optimized = $image;
 									}
 								}
-							}
+							}*/
+							$already_optimized = ewww_image_optimizer_find_already_optimized( $path );
 							$mimetype = ewww_image_optimizer_mimetype($path, 'i');
 							if ( preg_match( '/^image\/(jpeg|png|gif)/', $mimetype ) && empty( $already_optimized ) ) {
 								$slide_paths[] = $path;

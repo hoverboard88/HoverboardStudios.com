@@ -3,10 +3,10 @@ Contributors: joedolson
 Donate link: http://www.joedolson.com/donate/
 Tags: twitter, microblogging, su.pr, bitly, yourls, redirect, shortener, post, links, social, sharing, media, tweet
 Requires at least: 4.1
-Tested up to: 4.4.2
+Tested up to: 4.5
 License: GPLv2 or later
 Text Domain: wp-to-twitter
-Stable tag: 3.2.5
+Stable tag: 3.2.8
 
 Posts a Twitter update when you update your WordPress blog or add a link, with your chosen URL shortening service.
 
@@ -63,9 +63,29 @@ Translating my plug-ins is always appreciated. Work on WP to Twitter translation
 = Future =
 
 * Use apply_filters( 'wpt_tweet_sentence', $tweet, $post_ID ) to pass custom taxonomy Tweet formats - Pending WordPress support for taxonomy meta.
-* Add regex filter to detect URLs typed into Tweet fields for counting/shortening purposes. [todo]
+* Add regex filter to detect URLs typed into Tweet fields for counting/shortening purposes.
 * 4.2 added compat function for mb_substr; drop mine when I drop support for 4.1
 * WP to Twitter timing bug with images?
+* If first #category# is excluded from Tweet, fetch 2nd category in its place? See #1490
+
+= 3.2.9 =
+
+* Bug fix: extra is_admin call in Freemius implementation
+* Feature: 'Tweet Now' & dynamic scheduling recognizes currently selected users & upload media status (Pro)
+
+= 3.2.8 =
+
+* Bug fix: Stray debugging email in curl processing.
+
+= 3.2.7 =
+
+* Feature: prevent Duplicate Posts plug-in from copying WP to Twitter meta data
+* Feature: add curl fallback in case WP_http doesn't function correctly.
+* Feature: support for image alt attributes in widget
+* Feature: support for selective refresh in customizer
+* Feature: improved error messages from Twitter
+* Change: added Freemius service back to plug-in
+* Bug fix: disconnect Twitter account in user accounts (PRO)
 
 = 3.2.6 =
 
@@ -281,4 +301,4 @@ Writing and maintaining a plug-in is a lot of work. You can help me by providing
 
 == Upgrade Notice ==
 
-* 3.2.5 - Bug fix; undismissable admin notice
+* 3.2.7: Several important bug fixes; incorporates Freemius opt-in information tracking. 

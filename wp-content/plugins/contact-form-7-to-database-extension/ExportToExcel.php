@@ -64,7 +64,7 @@ class ExportToExcel extends ExportBase implements CFDBExport {
         // Query DB for the data for that form
         $submitTimeKeyName = 'Submit_Time_Key';
         $this->setDataIterator($formName, $submitTimeKeyName);
-        $this->clearOutputBuffer();
+        $this->clearAllOutputBuffers();
 
         $type = Type::XLSX;
         $suffix = 'xlsx';
@@ -127,13 +127,15 @@ class ExportToExcel extends ExportBase implements CFDBExport {
                         in_array($aCol, $fields_with_file)
                 ) {
                     // In the case of file links, we want to create a HYPERLINK formula as a link to download the file.
-                    // But the Spout library doesn't support creating formulas.
-                    // http://cfdbplugin.com/?p=1430
                     $url = $this->plugin->getFileUrl($this->dataIterator->row[$submitTimeKeyName], $formName, $aCol);
                     if ($type == Type::ODS) {
+                        // But the Spout library doesn't support creating formulas.
+                        // So people will have to convert them after the fact
+                        // http://cfdbplugin.com/?p=1430
                         $cell = "=HYPERLINK(\"$url\"; \"$cell\")";
                     } else {
-                        $cell = "=HYPERLINK(\"$url\", \"$cell\")";
+                        // A code change I introduced in the included Spout library will make this become a formula
+                        $cell = "=HYPERLINK(\"$url\",\"$cell\")";
                     }
                 }
                 $dataRow[] = $cell;

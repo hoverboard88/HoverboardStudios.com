@@ -98,7 +98,7 @@ class Request {
 		$response = wp_safe_remote_post( esc_url_raw( $url ), $args );
 
 		// Parse and return the response
-		return $this->parse_response( $response, true, 'post' );
+		return $this->parse_response( $response, true, 'post', $meta );
 	}
 
 	/**
@@ -163,24 +163,33 @@ class Request {
 	 * @param array $response
 	 * @param boolean $json
 	 * @param string $type
+	 * @param array $meta
 	 * @return mixed
 	 * @since 0.2.0
 	 */
-	private function parse_response( $response, $json = true, $type = 'post' ) {
+	private function parse_response( $response, $json = true, $type = 'post', $meta = null ) {
 		// Ensure we have an expected response type
 		if ( ( ! is_array( $response ) || ! isset( $response['body'] ) ) && ! is_wp_error( $response ) ) {
 			throw new Request_Exception( __( 'Invalid response:', 'apple-news' ) . $response );
 		}
 
 		// If debugging mode is enabled, send an email
+		$settings = get_option( 'apple_news_settings' );
 		$debugging = get_option( 'apple_news_enable_debugging' );
-		if ( 'yes' === $debugging && 'get' != $type ) {
-			$admin_email = filter_var( get_option( 'apple_news_admin_email' ), FILTER_VALIDATE_EMAIL );
+		if ( ! empty( $settings['apple_news_enable_debugging'] )
+			&& ! empty( $settings['apple_news_admin_email'] )
+			&& 'yes' === $settings['apple_news_enable_debugging']
+			&& 'get' != $type ) {
+			$admin_email = filter_var( $settings['apple_news_admin_email'], FILTER_VALIDATE_EMAIL );
+			$body = print_r( $response, true );
+			if ( ! empty( $meta ) ) {
+				$body .= "\n\n" . esc_html__( 'request meta', 'apple-news' ) . ":\n\n" . print_r( $meta, true );
+			}
 			if ( ! empty( $admin_email ) ) {
 				wp_mail(
 					$admin_email,
 					esc_html__( 'Apple News Notification', 'apple-news' ),
-					print_r( $response, true )
+					$body
 				);
 			}
 		}
@@ -216,14 +225,14 @@ class Request {
 	 * @return string
 	 * @since 0.2.0
 	 */
-	private function build_content( $article, $bundles = array(), $meta = null ) {
+	private function build_content( $article, $bundles = array(), $meta = array() ) {
 		$bundles = array_unique( $bundles );
 		$content = '';
 
 		// Add custom meta for request.
 		$meta = apply_filters( 'apple_news_api_post_meta', $meta );
 
-		if ( $meta ) {
+		if ( ! empty( $meta['data'] ) && is_array( $meta['data'] ) ) {
 			$content .= $this->mime_builder->add_metadata( $meta );
 		}
 
