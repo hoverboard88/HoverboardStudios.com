@@ -1,4 +1,5 @@
-a.btn, .btn {
+a.btn,
+.btn {
   background: $secondary--blue;
   border-radius: 4px;
   color: #fff;
@@ -10,9 +11,16 @@ a.btn, .btn {
   text-decoration: none;
   text-transform: uppercase;
   &.btn--shadow {
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .25);
   }
-  &:hover, &:active, &:focus {
+  &:hover,
+  &:active,
+  &:focus {
     background: lighten($secondary--blue, 10%);
   }
+}
+
+.btn-tertiary {
+  background: none;
+  border: 2px solid $white;
 }
