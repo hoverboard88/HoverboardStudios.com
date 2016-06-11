@@ -20,11 +20,12 @@ $mantra-breakpoint: 1000px;
   &::before {
     background: $gray--medium;
     content: "";
-    height: 1px;
+    height: 2px;
     position: absolute;
     top: 50%;
     left: 0;
     width: 100%;
+    margin-top: -1px;
   }
 }
 

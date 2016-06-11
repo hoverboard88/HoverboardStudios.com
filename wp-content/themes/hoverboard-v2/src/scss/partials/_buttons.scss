@@ -11,7 +11,7 @@ a.btn,
   padding: $base--spacing / 2 $base--spacing;
   text-decoration: none;
   text-transform: uppercase;
-  p & {
+  &.btn--spaced {
     margin-left: $base--spacing / 2;
     margin-right: $base--spacing / 2;
     margin-bottom: $base--spacing;

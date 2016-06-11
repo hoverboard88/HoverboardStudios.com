@@ -63,8 +63,8 @@
         <p class="mission">We believe in your collaboration throughout every part of your project. <br>From design ideas and inspiration to branding and implementation, Hoverboard is determined to bring your audience the very best experience to the web.</p>
         <p class="tagline tagline-small"><strong>We are your right-hand design and development studio.</strong></p>
         <p>
-          <a href="/about" class="btn btn-tertiary">About Us</a>
-          <a href="/contact" class="btn btn-secondary">Get a Quote</a>
+          <a href="/about" class="btn btn--spaced btn-tertiary">About Us</a>
+          <a href="/contact" class="btn btn--spaced btn-secondary">Get a Quote</a>
         </p>
       </div>
     </header>
@@ -195,19 +195,18 @@
 
     <div class="wrap wrap--green-dark">
       <section class="services">
-        <div>
-          <h3 class="services__header single-spaced">Thinking of a website revamp?</h3>
+        <div class="services__main-column">
+          <h3 class="services__header one-half-spaced">Thinking of a website revamp?</h3>
           <p class="services__title single spaced">Looking for feedback on your latest project? Not sure exactly how we could help?</p>
           <p class="h4">Let us know what you’re up to and we’ll let you know how we can help you on your next project.</p>
-          <a href="#" class="btn btn--shadow">Get in Touch</a>
+          <p><a href="#" class="btn btn--shadow">Get in Touch</a></p>
         </div>
-        <div>
+        <div class="services__side-column">
           <h4 class="services__title--h4">Services</h4>
-          <p class="small">Full Stack Design and Development CMS Integration and Support Continued Support &amp; Maintenance Comprehensive Pagespeed Reports</p>
-        </div>
-        <div>
+          <p>Full Stack Design and Development CMS Integration and Support Continued Support &amp; Maintenance Comprehensive Pagespeed Reports</p>
           <h4 class="services__title--h4">Languages</h4>
-          <p class="small">HTML, CSS, SASS, Javascript, Ruby, PHP, Python and more... Just ask!</p>
+          <p>HTML, CSS, SASS, Javascript, Ruby, PHP, Python<br>
+          and more... Just ask!</p>
         </div>
       </section>
     </div>

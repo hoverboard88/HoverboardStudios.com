@@ -1,6 +1,5 @@
 .services {
-  margin: $base--spacing 0;
-  padding: 0 ($base--spacing);
+  padding: $base--spacing * 2 $base--spacing;
 }
 
 .services__header {
@@ -9,11 +8,11 @@
 }
 
 .services__title {
-  @include font-size(21px);
+  @include font-size(32px, true, true);
+  // line-height: 1.5;
   color: $green--light;
   font-family: $base--font-family;
   font-style: italic;
-  line-height: $base--spacing;
 }
 
 .services__title--h4 {
@@ -21,4 +20,23 @@
   color: $green--light;
   font-family: $secondary--font-family__regular;
   text-transform: uppercase;
+  margin-bottom: 0;
+}
+
+.services__side-column {
+  p {
+    @include font-size($font-size--small);
+  }
+}
+@include breakpoint(800px) {
+  .services__main-column {
+    float: left;
+    width: $width--8;
+    padding-right: $base--spacing * 3;
+  }
+  .services__side-column {
+    float: right;
+    width: $width--4;
+    text-align: center;
+  }
 }

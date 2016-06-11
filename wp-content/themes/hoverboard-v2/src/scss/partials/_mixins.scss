@@ -15,7 +15,7 @@
 // @include font-size(14px, false);
 //
 // Styleguide 3.1.0
-@mixin font-size($font-size, $line-height:true){
+@mixin font-size($font-size, $line-height:true, $half-line-height:false){
 
   font-size:$font-size;
   font-size:($font-size / $base--font-size)*1rem;
@@ -29,8 +29,12 @@
     $lh: $lh * (floor($font-size / $base--font-size / 2) * 2);
   }
 
-  @if $line-height == true{
-    line-height: $lh;
+  @if ($line-height == true) {
+    @if $half-line-height == true{
+      line-height: $lh * (3/4);
+    } @else {
+      line-height: $lh;
+    }
     margin: 0 0 $base--spacing;
   }
 }
