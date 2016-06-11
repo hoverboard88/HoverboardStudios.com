@@ -102,27 +102,30 @@ textarea {
   height: 130px;
 }
 
-.form {}
-
-.form--search-input[type="text"] {
-  @include font-size(21px);
-  @include input-placeholder {
-    color: darken(rgba($white, 0.2), 30%);
+.form--search {
+  .form__submit {
+    position: absolute;
+    top: 23px;
+    left: 25px;
   }
+}
+
+.form--search-input[type="search"] {
+  position: relative;
+  float: right;
   background: none;
   border: none;
   color: $white;
   font-family: $secondary--font-family__light;
   line-height: 1;
+  @include font-size(21px);
   margin: 0;
-  padding: ($base--spacing / 2) 5%;
-  vertical-align: top;
+  padding: ($base--spacing / 2) $base--spacing * 2;
   width: 80%;
   &:focus {
     box-shadow: none;
   }
-}
-
-.form__submit {
-  padding-top: $base--spacing / 3; 
+  @include input-placeholder {
+    color: darken(rgba($white, .3), 30%);
+  }
 }
