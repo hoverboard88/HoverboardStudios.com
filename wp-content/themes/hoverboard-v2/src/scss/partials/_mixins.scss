@@ -81,8 +81,15 @@
 // };
 //
 // Styleguide 3.4.0
-@mixin breakpoint($width) {
-  @media only screen and (min-width: $width) {
-    @content;
+@mixin breakpoint($width, $mobileFirst: true) {
+  @if $mobileFirst {
+    @media only screen and (min-width: $width) {
+      @content;
+    }
+  } @else {
+    @media only screen and (max-width: $width) {
+      @content;
+    }
   }
+
 }

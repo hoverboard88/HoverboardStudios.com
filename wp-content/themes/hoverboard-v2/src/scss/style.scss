@@ -14,15 +14,11 @@ Tags: design, development
 @import "partials/variables";
 @import "partials/mixins";
 @import "partials/normalize";
-@import "partials/header";
-@import "partials/portfolio";
-@import "partials/mantra";
-@import "partials/about";
-@import "partials/services";
 @import "partials/icons";
 @import "partials/buttons";
 
 @import "partials/grid";
+@import "partials/fonts";
 @import "partials/generics";
 @import "partials/links";
 @import "partials/code";
@@ -36,7 +32,12 @@ Tags: design, development
 @import "partials/shame"; // code located here: TODO: needs to be organized
 
 //add your @imports here
-
+@import "partials/header";
+@import "partials/feature-block";
+@import "partials/portfolio";
+@import "partials/mantra";
+@import "partials/about";
+@import "partials/services";
 
 @import "partials/helpers";
 @import "partials/print";

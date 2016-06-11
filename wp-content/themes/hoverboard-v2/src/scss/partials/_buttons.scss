@@ -8,19 +8,24 @@ a.btn,
   letter-spacing: 1px;
   line-height: 1;
   padding: 14px 20px 12px;
+  padding: $base--spacing / 2 $base--spacing;
   text-decoration: none;
   text-transform: uppercase;
+  p & {
+    margin-left: $base--spacing / 2;
+    margin-right: $base--spacing / 2;
+    margin-bottom: $base--spacing;
+  }
   &.btn--shadow {
-    box-shadow: 0 2px 5px rgba(0, 0, 0, .25);
+    box-shadow: 0 2px 5px rgba($base--color, .25);
   }
   &:hover,
   &:active,
   &:focus {
     background: lighten($secondary--blue, 10%);
   }
-}
-
-.btn-tertiary {
-  background: none;
-  border: 2px solid $white;
+  &.btn-tertiary {
+    background: none;
+    border: 2px solid $white;
+  }
 }

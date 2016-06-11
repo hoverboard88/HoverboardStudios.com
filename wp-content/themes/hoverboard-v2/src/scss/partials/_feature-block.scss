@@ -1,0 +1,20 @@
+.feature-block {
+  padding-top: $base--spacing * 2;
+}
+
+.tagline {
+  @include font-size(36px);
+  color: $white;
+  &.tagline-small {
+    @include font-size(24px);
+    font-family: $secondary--font-family__bold;
+  }
+}
+
+.mission {
+  color: $green--light;
+  @include font-size(18px);
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
