@@ -103,16 +103,22 @@ textarea {
 }
 
 .form--search {
+  max-height: 999px;
+  overflow: hidden;
+  transition: max-height .3s;
+  &.inactive {
+    max-height: 0;
+  }
   .form__submit {
-    position: absolute;
-    top: 23px;
-    left: 25px;
+    float: left;
+    margin-top: 15px;
+    margin-left: 25px;
   }
 }
 
 .form--search-input[type="search"] {
   position: relative;
-  float: right;
+  float: left;
   background: none;
   border: none;
   color: $white;
@@ -120,7 +126,7 @@ textarea {
   line-height: 1;
   @include font-size(21px);
   margin: 0;
-  padding: ($base--spacing / 2) $base--spacing * 2;
+  padding: ($base--spacing / 2);
   width: 80%;
   &:focus {
     box-shadow: none;

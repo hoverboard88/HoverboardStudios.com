@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,19 +19,15 @@
 </head>
 <body>
   <div class="wrap wrap--green-dark wrap--gradient-dark">
-    <form action="#" class="form form--search">
-      <div class="grid-columns">
-        <!-- <div class="grid-column-16"> -->
-          <input type="search" placeholder="Search Articles, Work, Bios" class="form__input form--search-input">
-        <!-- </div>
-        <div class="grid-column-4"> -->
-          <button class="form__submit" type="submit">
-            <svg style="width:32px;height:32px" viewBox="0 0 24 24">
-              <path fill="#013333" d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" />
-            </svg>
-          </button>
-        <!-- </div> -->
-      </div>
+    <form id="form--search" action="#" class="form form--search">
+
+      <button class="form__submit" type="submit">
+        <svg style="width:32px;height:32px" viewBox="0 0 24 24">
+          <path fill="#013333" d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" />
+        </svg>
+      </button>
+      <input type="search" placeholder="Search Articles, Work, Bios" class="form__input form--search-input">
+
     </form>
 
   </div>
@@ -48,7 +44,7 @@
             <li><a href="/about">About</a></li>
             <li><a href="/blog">Blog</a></li>
             <li class="menu-item--search">
-              <button class="icon--search active">
+              <button id="toggle-search" class="icon--search">
                 <svg style="width:22px;height:22px" viewBox="0 0 24 24">
                   <path fill="#ffffff" d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" />
                 </svg>
@@ -272,5 +268,6 @@
       </footer>
     </div>
   </div><!-- .main -->
+  <script src="../dist/js/main.min.js"></script>
 </body>
 </html>
