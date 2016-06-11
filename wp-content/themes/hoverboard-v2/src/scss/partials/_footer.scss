@@ -1,0 +1,63 @@
+.copyright {
+  @include font-size(13px, false);
+  color: $secondary--teal;
+}
+
+.menu--footer {
+  @extend .clearfix;
+  font-family: $base--font-family;
+  font-weight: $font-weight__bold;
+  width: 100%;
+  text-align: center;
+  svg {
+    top: 4px;
+    position: relative;
+    max-width: 20px;
+    max-height: 20px;
+  }
+  a:hover,
+  a:focus {
+    path {
+      fill: $green--light;
+    }
+  }
+  ul,
+  ol {
+    @include font-size(16px);
+    list-style: none;
+    list-style-image: none;
+    padding: 0;
+    margin: 0 0 $base--spacing / 2;
+    text-align: center;
+    width: 100%;
+    margin-bottom: $base--spacing / 2;
+    @include breakpoint(800px) {
+      width: auto;
+      display: inline-block;
+      margin-left: $base--spacing;
+      margin-right: $base--spacing;
+    }
+  }
+  li {
+    padding: 0 $base--spacing / 3;
+    &:last-child { // add class instead of :last-child
+      margin: 0;
+      padding-right: 0;
+    }
+  }
+  @include breakpoint(450px) {
+    li {
+      display: inline-block;
+    }
+  }
+  a {
+    color: $white;
+    display: block;
+    text-decoration: none;
+    &:hover,
+    &:active,
+    &:focus {
+      color: $green--light;
+    }
+  }
+}

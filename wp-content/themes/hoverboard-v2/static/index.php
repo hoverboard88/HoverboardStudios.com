@@ -194,7 +194,7 @@
     </div>
 
     <div class="wrap wrap--green-dark">
-      <section class="services">
+      <section class="services container">
         <div class="services__main-column">
           <h3 class="services__header one-half-spaced">Thinking of a website revamp?</h3>
           <p class="services__title single spaced">Looking for feedback on your latest project? Not sure exactly how we could help?</p>
@@ -211,7 +211,7 @@
       </section>
     </div>
     <div class="wrap wrap--green-dark wrap--pattern">
-      <section class="about">
+      <section class="about container">
         <div class="about__partner">
           <img src="../dist/img/ryan.jpg" alt="">
           <div class="about__detail">
@@ -232,7 +232,7 @@
     </div>
     <div class="wrap wrap--green-dark">
       <footer class="information">
-        <nav class="secondary secondary--horizontal secondary--spaced">
+        <nav class="menu--footer secondary--horizontal secondary--spaced">
           <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/work">Work</a></li>
@@ -268,7 +268,7 @@
             </a></li>
           </ul>
         </nav>
-        <div class="centered">© 2015 Hoverboard. All rights reserved.</div>
+        <div class="copyright centered">© 2015 Hoverboard. All rights reserved.</div>
       </footer>
     </div>
   </div><!-- .main -->

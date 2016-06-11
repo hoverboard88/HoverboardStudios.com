@@ -80,58 +80,6 @@ Menus
   }
 }
 
-/**
-  * Secondary
-  */
-.secondary {
-  @extend .clearfix;
-  font-family: $base--font-family;
-  font-weight: $font-weight__bold;
-  width: 100%;
-  @include breakpoint(600px) {
-    float: right;
-    padding: $base--spacing/2 0 0;
-    width: 75%;
-  }
-  ul, ol {
-    @include font-size(16px);
-    float: right;
-    list-style: none;
-    list-style-image: none;
-    padding: 0;
-    margin: 0;
-    text-align: center;
-    width: 100%;
-    @include breakpoint(600px) {
-      text-align: right;
-    }
-  }
-  &.secondary--spaced li {
-    padding: 0 2%;
-  }
-  &.secondary--horizontal {
-    li {
-      &:last-child { // add class instead of :last-child
-        margin: 0;
-        padding-right: 0;
-      }
-    }
-    @include breakpoint(450px) {
-      li {
-        display: inline-block;
-      }
-    }
-  }
-  a {
-    color: $white;
-    display: block;
-    text-decoration: none;
-    &:hover, &:active, &:focus {
-      color: $green--light;
-    }
-  }
-}
-
 .secondary--horizontal {
   li {
     display: inline-block;
@@ -139,7 +87,8 @@ Menus
 }
 
 .secondary--equal-width {
-  ul, ol {
+  ul,
+  ol {
     display: table;
     width: 100%;
   }
