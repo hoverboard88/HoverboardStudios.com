@@ -1,9 +1,10 @@
 .about {
-  padding: ($base--spacing);
+  padding: $base--spacing;
 }
 
 .about__title {
   @include font-size(16px);
+  margin-bottom: $base--spacing / 2;
   background: $green--dark;
   border: 2px solid $green--light;
   box-shadow: 0 0 0 4px $green--dark;
@@ -14,6 +15,7 @@
 
 .about__position {
   @include font-size(14px);
+  margin-bottom: 0;
   font-family: $secondary--font-family__light;
   letter-spacing: 1px;
   text-align: center;
@@ -25,4 +27,43 @@
   display: block;
   text-align: center;
   text-decoration: none;
+}
+
+.about__partner {
+  @extend .clearfix;
+  display: flex;
+  flex-direction: row-reverse;
+  margin-bottom: $base--spacing;
+  align-items: center;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  img {
+    float: right;
+    width: $width--4;
+    padding-left: $base--spacing;
+  }
+  &:nth-child(2n) {
+    flex-direction: row;
+    img {
+      float: left;
+      padding-right: $base--spacing;
+      padding-left: 0;
+    }
+    .about__detail {
+      float: right;
+    }
+  }
+  @include breakpoint(1000px) {
+    float: left;
+    width: $width--6;
+    padding: 0 $base--spacing / 2;
+  }
+}
+
+.about__detail {
+  margin-top: 10px; // looked uneven when vertically centered for some reason
+  text-align: center;
+  width: $width--8;
+  float: left;
 }

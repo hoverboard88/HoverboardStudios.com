@@ -212,17 +212,21 @@
     </div>
     <div class="wrap wrap--green-dark wrap--pattern">
       <section class="about">
-        <div>
+        <div class="about__partner">
           <img src="../dist/img/ryan.jpg" alt="">
-          <h4 class="about__title">Ryan Tvenge</h4>
-          <div class="about__position">Designer/Developer</div>
-          <a class="about__link" href="#">@rtvenge</a>
+          <div class="about__detail">
+            <h4 class="about__title">Ryan Tvenge</h4>
+            <div class="about__position">Designer/Developer</div>
+            <a class="about__link" href="#">@rtvenge</a>
+          </div>
         </div>
-        <div>
+        <div class="about__partner">
           <img src="../dist/img/matt.jpg" alt="">
-          <h4 class="about__title">Matt Biersdorf</h4>
-          <div class="about__position">Designer/Developer</div>
-          <a class="about__link" href="#">@mbiersdo</a>
+          <div class="about__detail">
+            <h4 class="about__title">Matt Biersdorf</h4>
+            <div class="about__position">Designer/Developer</div>
+            <a class="about__link" href="#">@mbiersdo</a>
+          </div>
         </div>
       </section>
     </div>
