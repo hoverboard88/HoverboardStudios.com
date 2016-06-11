@@ -78,6 +78,9 @@
     padding-left: 0;
     padding-right: 0;
   }
+  &.container--xwide {
+    max-width: 2000px;
+  }
   &.container--top-bottom-padding {
     padding-top: 1em;
     padding-bottom: 1em;

@@ -1,10 +1,22 @@
+$mantra-breakpoint: 1000px;
 .mantra {
-  padding: 0 ($base--spacing / 2);
+  padding: $base--spacing ($base--spacing / 2);
+  position: relative;
+  @include breakpoint($mantra-breakpoint) {
+    padding: $base--spacing * 3 ($base--spacing / 2);
+  }
 }
 
 .mantra__header--border {
   margin: $base--spacing 0;
+  width: 100%;
   position: relative;
+  @include breakpoint($mantra-breakpoint) {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    margin-top: -35px;
+  }
   &::before {
     background: $gray--medium;
     content: "";
@@ -18,7 +30,7 @@
 
 .mantra__header {
   @include font-size(14px);
-  background: url(../img/mantra-header-bg.svg) no-repeat;
+  background: url("../img/mantra-header-bg.svg") no-repeat;
   background-size: cover;
   display: inline-block;
   color: $gray--light;
@@ -33,15 +45,38 @@
   text-transform: uppercase;
   text-align: center;
   z-index: 2;
+  left: 50%;
+  margin-left: -(190px / 2);
 }
 
 .mantra__items {
   text-align: center;
+  @extend .clearfix;
+  @include breakpoint($mantra-breakpoint) {
+    // display: flex;
+  }
 }
 
 .mantra__item {
   padding: 0 $base--spacing;
+  @include breakpoint($mantra-breakpoint) {
+    float: left;
+    width: $width--4;
+    padding: $base--spacing * 2;
+    &:nth-child(3n+1) {
+      clear: both;
+    }
+    &:nth-child(2) {
+      top: -$base--spacing * 2;
+      position: relative;
+    }
+    &:nth-child(5) {
+      bottom: -$base--spacing * 2;
+      position: relative;
+    }
+  }
 }
+
 .mantra__title {
   @include font-size(28px);
   font-family: $secondary--font-family__light;

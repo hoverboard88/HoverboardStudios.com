@@ -3,28 +3,24 @@
 }
 .portfolio {
   padding: $base--spacing 0 0;
-  @include breakpoint(2000px) {
-    max-width: 2000px;
-    margin: 0 auto;
-  }
   .portfolio__item {
     overflow: hidden;
     padding: $base--spacing ($base--spacing / 2);
     position: relative;
-    float: left;
-    width: 100%;
+    border-bottom: 4px solid $gray--medium;
+    &:last-child {
+      border: 0;
+    }
     @include breakpoint(1000px) {
-      width: 50%;
+      border: 0;
+      float: left;
+      width: $width--6;
       &:nth-child(2n+1) {
         border-right: 4px solid $gray--medium;
       }
     }
     @include breakpoint(2000px) {
       max-width: 2000px;
-      // border-right: 4px solid $gray--medium;
-      // &:first-child {
-      //   border-left: 4px solid $gray--medium;
-      // }
     }
   }
   .portfolio__header {
@@ -55,7 +51,7 @@
   }
   .portfolio__example {
     position: absolute;
-    width: 50%;
+    width: $width--6;
     bottom: 0;
     right: -145px;
     background: #d2d2d2;
@@ -68,7 +64,7 @@
     }
     &::before {
       content: url(../img/address-bar.svg);
-      width: 100%;
+      width: $width--12;
       display: block;
       height: auto;
       margin-bottom: -4px; // there was extra space under the svg for some reason
