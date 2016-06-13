@@ -1,0 +1,20 @@
+.main--content {
+  padding-top: $base--spacing * 2;
+  padding-bottom: $base--spacing * 2;
+}
+
+.container--page-title {
+  border-bottom: 1px solid $gray--medium;
+}
+
+.page-title {
+  @include font-size(36px);
+  font-family: $base--font-family;
+  @include font-weight(bold);
+  text-align: center;
+  margin-bottom: $base--spacing / 2;
+}
+
+.content {
+  max-width: 600px;
+}

@@ -1,17 +1,18 @@
 .logo {
   text-align: center;
   width: 100%;
+  float: left;
   svg {
     max-width: 200px;
     width: 100%;
-    @include breakpoint(600px) {
+    @include breakpoint(775px) {
       display: block;
+      padding-top: $base--spacing/2;
       float: left;
-      max-width: 300px;
-      width: 70%;
-    };
+      width: 230px;
+    }
   }
-  @include breakpoint(600px) {
+  @include breakpoint(775px) {
     width: 25%;
-  };
+  }
 }

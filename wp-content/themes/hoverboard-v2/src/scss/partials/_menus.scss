@@ -9,7 +9,7 @@ Menus
   @extend .clearfix;
   font-family: $secondary--font-family;
   width: 100%;
-  @include breakpoint(600px) {
+  @include breakpoint(775px) {
     float: right;
     padding: $base--spacing/2 0 0;
     width: 75%;
@@ -23,7 +23,7 @@ Menus
     margin: 0;
     text-align: center;
     width: 100%;
-    @include breakpoint(600px) {
+    @include breakpoint(775px) {
       text-align: right;
     }
   }
@@ -56,7 +56,7 @@ Menus
       border: none;
       color: $white;
       margin-top: $base--spacing/2;
-      @include breakpoint(600px) {
+      @include breakpoint(775px) {
         margin-top: 0;
       }
     }
