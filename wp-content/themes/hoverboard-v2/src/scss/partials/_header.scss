@@ -1,3 +1,8 @@
+.header-wrap {
+  display: flex;
+  align-items: center;
+}
+
 .logo {
   text-align: center;
   width: 100%;
@@ -7,12 +12,97 @@
     width: 100%;
     @include breakpoint(775px) {
       display: block;
-      padding-top: $base--spacing/2;
       float: left;
       width: 230px;
     }
   }
   @include breakpoint(775px) {
     width: 25%;
+  }
+}
+
+/**
+  * Primary
+  */
+.menu--primary {
+  @extend .clearfix;
+  font-family: $secondary--font-family;
+  width: 100%;
+  @include breakpoint(775px) {
+    float: right;
+    padding: 0;
+    width: 75%;
+  }
+  ul,
+  ol {
+    @include font-size(14px);
+    float: right;
+    list-style: none;
+    list-style-image: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    width: 100%;
+    @include breakpoint(775px) {
+      text-align: right;
+    }
+  }
+
+  li {
+    padding: 0 2%;
+    display: inline-block;
+    &:last-child { // add class instead of :last-child
+      margin: 0;
+      padding-right: 0;
+    }
+  }
+  @include breakpoint(450px) {
+    li {
+      display: inline-block;
+    }
+  }
+  .menu-item--search {
+    position: relative;
+  }
+  a {
+    display: block;
+    border-bottom: 3px solid rgba(0, 0, 0, 0);
+    text-decoration: none;
+    text-transform: uppercase;
+    &:hover,
+    &:active,
+    &:focus {
+      color: $green--light;
+      border-bottom: 3px solid $green--light;
+    }
+    &.btn {
+      border: none;
+      color: $white;
+      margin-top: $base--spacing/2;
+      @include breakpoint(775px) {
+        margin-top: 0;
+      }
+    }
+  }
+  .icon--search {
+    outline: 0;
+    position: absolute;
+    top: -31px;
+    left: 0;
+    padding: 16px 10px 10px; // precise to fit svg background in
+    text-align: center;
+    line-height: 1;
+    color: $white;
+    &:hover,
+    &:focus {
+      path {
+        fill: $green--light;
+      }
+    }
+    &.active {
+      background-image: url("../img/bg-search-toggle.svg");
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
   }
 }

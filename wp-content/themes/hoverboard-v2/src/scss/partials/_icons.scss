@@ -1,22 +1,3 @@
-.icon--search {
-  position: relative;
-  top: 9px;
-  padding: 18px 10px 8px; // precise to fit svg background in
-  text-align: center;
-  line-height: 1;
-  &:hover,
-  &:focus {
-    path {
-      fill: $green--light;
-    }
-  }
-  &.active {
-    background-image: url("../img/bg-search-toggle.svg");
-    background-repeat: no-repeat;
-    background-size: contain;
-  }
-}
-
 .icon {
   display: inline-block;
   line-height: 1;

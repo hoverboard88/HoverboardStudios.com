@@ -1,9 +1,12 @@
 {
+  "globals": {
+    "jQuery": true
+  },
   "rules": {
     "indent": ["error", 2],
     "quotes": [
       2,
-      "double"
+      "single"
     ],
     "linebreak-style": [
       2,

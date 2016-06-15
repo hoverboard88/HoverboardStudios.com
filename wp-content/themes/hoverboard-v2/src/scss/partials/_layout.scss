@@ -11,13 +11,13 @@
     background: $white;
   }
   &.wrap--pattern {
-    background-image: url(../img/pattern.svg);
+    background-image: url("../img/pattern.svg");
     background-size: cover;
     background-position: center center;
   }
   &.wrap--gradient {
     &::after {
-      background: linear-gradient(to bottom, rgba(13,89,86,1) 0%, rgba(13,89,86,1) 20%, rgba(50,153,153,1) 20%, rgba(50,153,153,1) 40%, rgba(105,200,202,1) 40%, rgba(105,200,202,1) 60%, rgba(166,226,224,1) 60%, rgba(166,226,224,1) 80%, rgba(203,239,237,1) 80%, rgba(203,239,237,1) 100%);
+      background: linear-gradient(to bottom, rgba(13, 89, 86, 1) 0%, rgba(13, 89, 86, 1) 20%, rgba(50, 153, 153, 1) 20%, rgba(50, 153, 153, 1) 40%, rgba(105, 200, 202, 1) 40%, rgba(105, 200, 202, 1) 60%, rgba(166, 226, 224, 1) 60%, rgba(166, 226, 224, 1) 80%, rgba(203, 239, 237, 1) 80%, rgba(203, 239, 237, 1) 100%);
       content: "";
       display: block;
       height: 50px;
@@ -51,6 +51,7 @@
 .pull-right {
   float: right;
 }
+
 .pull-left {
   float: left;
 }
@@ -58,9 +59,11 @@
 .align-left {
   text-align: left;
 }
+
 .align-right {
   text-align: right;
 }
+
 .align-center {
   text-align: center;
 }
@@ -81,12 +84,15 @@
   &.container--xwide {
     max-width: 2000px;
   }
+  &.container--small {
+    max-width: 600px;
+  }
   &.container--top-bottom-padding {
     padding-top: 1em;
     padding-bottom: 1em;
     @include breakpoint(600px) {
       padding-top: 2em;
       padding-bottom: 2em;
-    };
+    }
   }
 }

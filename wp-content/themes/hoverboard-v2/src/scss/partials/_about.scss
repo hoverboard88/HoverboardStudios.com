@@ -40,17 +40,12 @@
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
-  img {
-    float: right;
-    width: $width--4;
-    padding-left: $base--spacing;
-  }
   &:nth-child(2n) {
     flex-direction: row;
-    img {
+    .about__img {
       float: left;
-      padding-right: $base--spacing;
-      padding-left: 0;
+      margin-right: $base--spacing;
+      margin-left: 0;
     }
     .about__detail {
       float: right;
@@ -60,6 +55,25 @@
     float: left;
     width: $width--6;
     padding: 0 $base--spacing / 2;
+  }
+}
+
+.about__img {
+  float: right;
+  width: $width--4;
+  margin-left: $base--spacing;
+  position: relative;
+  img {
+    display: block;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba($secondary--blue, .3);
   }
 }
 
