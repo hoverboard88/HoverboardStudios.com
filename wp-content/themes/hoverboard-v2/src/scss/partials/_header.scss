@@ -1,6 +1,8 @@
 .header-wrap {
-  display: flex;
-  align-items: center;
+  @include breakpoint(775px) {
+    display: flex;
+    align-items: center;
+  }
 }
 
 .logo {

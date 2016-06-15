@@ -2,11 +2,13 @@ html {
   background: $gray--light;
   border: 4px solid $green--light;
   font-family: $base--font-family;
+  height: 100%;
 }
 
 body {
   background: $gray--light;
   border: 4px solid $gray--light;
+  height: 100%;
 }
 
 // TODO: Footer section

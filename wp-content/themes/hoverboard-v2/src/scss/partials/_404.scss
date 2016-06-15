@@ -1,0 +1,48 @@
+.error404 {
+  background-color: $secondary--purple-dark;
+  .wrap--small-gradient {
+    background: none;
+    &::after {
+      display: none;
+    }
+  }
+  .wrap--404 {
+    background-image: url("../img/404.svg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    padding-top: $base--spacing;
+    padding-bottom: $base--spacing;
+    @include breakpoint(600px) {
+      padding-top: $base--spacing * 4;
+      padding-bottom: $base--spacing * 4;
+    }
+  }
+  .btn {
+    background: $secondary--teal;
+  }
+  .wrap--green-dark {
+    background: none;
+    color: $white;
+  }
+  .wrap--search {
+    background: darken($secondary--purple-dark, 13%);
+  }
+  .wrap.wrap--gradient-dark {
+    &::after {
+      background: linear-gradient(to bottom, #2d2042 0%, #2d2042 33.3333%, #382851 33.3333%, #382851 66.6666%, #412f5b 66.6666%, #412f5b 100%);
+      content: "";
+      display: block;
+      height: 30px;
+      width: 100%;
+    }
+    @include breakpoint(600px) {
+      &::after {
+        height: 60px;
+      }
+    }
+  }
+}
+
+.copyright {
+  color: $white;
+}
