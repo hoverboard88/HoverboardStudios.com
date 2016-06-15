@@ -7,7 +7,7 @@
 
   <?php include('inc/search.php'); ?>
 
-  <header class="wrap wrap--green wrap--gradient">
+  <header class="wrap wrap--green wrap--small-gradient">
     <div class="container container--top-bottom-padding">
       <?php include('inc/header.php'); ?>
     </div>
@@ -16,7 +16,7 @@
   <!-- TODO: possibily switch this out with the <main> tag -->
   <div role="main" class="main main--content">
     <div class="wrap">
-      <div class="container container--page-title">
+      <div class="container container--medium container--page-title">
         <h1 class="page-title">About Us</h1>
       </div>
     </div>

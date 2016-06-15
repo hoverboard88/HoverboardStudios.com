@@ -29,6 +29,20 @@
       }
     }
   }
+  &.wrap--small-gradient {
+    &::after {
+      background: linear-gradient(to bottom, #0d5957 0%, #0d5957 $width--4, #69c9ca $width--4, #69c9ca $width--8, #cbefed $width--8, #cbefed $width--12);
+      content: "";
+      display: block;
+      height: 30px;
+      width: 100%;
+    }
+    @include breakpoint(600px) {
+      &::after {
+        height: 60px;
+      }
+    }
+  }
   &.wrap--gradient-dark {
     &::after {
       background: linear-gradient(to bottom, #04211e 0%, #04211e 33.3333%, #042623 33.3333%, #042623 66.6666%, #042d2b 66.6666%, #042d2b 100%);
