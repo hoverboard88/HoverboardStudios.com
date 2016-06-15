@@ -27,6 +27,17 @@
   .wrap--search {
     background: darken($secondary--purple-dark, 13%);
   }
+  .form__submit {
+    path {
+      fill: $secondary--purple-dark;
+    }
+  }
+  .menu--primary .icon--search {
+    &.active {
+      background: url("../img/bg-search-toggle-purple.svg");
+    }
+  }
+
   .wrap.wrap--gradient-dark {
     &::after {
       background: linear-gradient(to bottom, #2d2042 0%, #2d2042 33.3333%, #382851 33.3333%, #382851 66.6666%, #412f5b 66.6666%, #412f5b 100%);
