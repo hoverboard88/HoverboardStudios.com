@@ -16,5 +16,36 @@
 }
 
 .content {
-  max-width: 600px;
+  blockquote {
+    color: $secondary--teal;
+    @include font-size(29px);
+    margin-bottom: 0;
+    margin-top: $base--spacing * 2;
+    margin-bottom: $base--spacing * 2;
+    p {
+      @include font-size(29px);
+      line-height: 1.5;
+      @include font-weight(bold);
+      font-style: italic;
+    }
+    p:last-child {
+      margin-bottom: 0;
+    }
+    &::before {
+      content: "";
+      width: 100px;
+      height: 4px;
+      background: $secondary--teal;
+      display: block;
+      margin-bottom: $base--spacing - 10px;
+    }
+    &::after {
+      content: "";
+      width: 100px;
+      height: 4px;
+      background: $secondary--teal;
+      display: block;
+      margin-top: $base--spacing;
+    }
+  }
 }

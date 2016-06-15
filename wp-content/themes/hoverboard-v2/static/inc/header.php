@@ -1,7 +1,7 @@
 <div class="header-wrap">
-  <div class="logo">
+  <a href="#" class="logo">
     <?php echo file_get_contents('../dist/img/logo.svg'); ?>
-  </div>
+  </a>
   <nav class="menu--primary primary--spaced">
     <ul>
       <li><a href="/">Home</a></li>

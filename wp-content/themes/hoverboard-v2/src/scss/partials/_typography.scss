@@ -30,33 +30,47 @@ p, ul, ol, blockquote, input, textarea, fieldset, pre, table, hr, dl {
 // <h6 class="single-spaced">Heading 6</h6>
 //
 // Styleguide 6.1.0
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: $secondary--font-family;
   @include font-weight(normal);
 }
 
-h1, .h1 {
+h1,
+.h1 {
   @include font-size($font-size--h1, true);
 }
 
-h2, .h2 {
+h2,
+.h2 {
   @include font-size($font-size--h2, true);
 }
 
-h3, .h3 {
+h3,
+.h3 {
   @include font-size($font-size--h3, true);
 }
 
-h4, .h4 {
+h4,
+.h4 {
   @include font-size($font-size--h4, true);
 }
 
-h5, .h5 {
+h5,
+.h5 {
   @include font-size($font-size--h5, true);
 }
 
-h6, .h6 {
+h6,
+.h6 {
   @include font-size($font-size--h6, true);
+  color: $secondary--teal;
+  text-transform: uppercase;
+  letter-spacing: 4px;
 }
 
 hr {
@@ -94,7 +108,8 @@ hr {
 // <p class="small">Small Text</p>
 //
 // Styleguide 6.3.0
-.small, small {
+.small,
+small {
   @include font-size($font-size--small);
 }
 
@@ -106,4 +121,20 @@ hr {
 // Styleguide 6.4.0
 .display-font {
   font-family: $secondary--font-family;
+}
+
+.base-font {
+  font-family: $base--font-family;
+  @include font-weight(bold);
+}
+
+.italicized-callout {
+  &,
+  p,
+  .well & {
+    font-style: italic;
+    color: $secondary--teal;
+    @include font-size(28px);
+    line-height: 1.5;
+  }
 }

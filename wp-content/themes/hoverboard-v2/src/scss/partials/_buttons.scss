@@ -1,6 +1,7 @@
 a.btn,
 .btn {
   background: $secondary--blue;
+  box-shadow: 0 0 15px rgba($black, .5);
   border-radius: 4px;
   color: #fff;
   display: inline-block;

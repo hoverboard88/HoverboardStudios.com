@@ -16,38 +16,86 @@
 // Styleguide 4.1.0
 .well {
   padding: $base--spacing / 2;
-  background: #ddd;
-  @include breakpoint(700px) {
-    padding: $base--spacing;
-  }
+  background: $white;
+  border-top: 6px solid $gray--medium;
+  border-bottom: 6px solid $gray--medium;
   margin-bottom: $base--spacing;
+  color: lighten($black, 25%);
+  .container & {
+    margin-left: (-$base--spacing / 2) - 4px;
+    margin-right: (-$base--spacing / 2) - 4px;
+  }
+  p {
+    @include font-size(18px);
+  }
+  @include breakpoint(700px) {
+    padding: $base--spacing * 2;
+  }
   > *:last-child {
     margin-bottom: 0;
   }
+  &.well--no-padding {
+    padding: 0;
+  }
+  .flex-row {
+    border-bottom: 4px solid $gray--medium;
+    &:last-child {
+      border-bottom: 0;
+    }
+    @include breakpoint(700px) {
+      display: flex;
+      align-items: center;
+    }
+  }
+  .flex-column {
+    border-bottom: 4px solid $gray--medium;
+    padding: $base--spacing;
+    flex-grow: 1;
+    @include breakpoint(700px) {
+      padding: $base--spacing * 3;
+      border-bottom: 0;
+      border-right: 4px solid $gray--medium;
+    }
+    &:last-child {
+      border: 0;
+    }
+  }
+  @include breakpoint(700px) {
+    .flex-column-half {
+      width: 50%;
+    }
+  }
 }
+
 .alert {
   padding: 15px;
   margin-bottom: 20px;
   border: 1px solid transparent;
   border-radius: 4px;
 }
+
 .alert h4 {
   margin-top: 0;
   color: inherit;
 }
+
 .alert .alert-link {
   font-weight: bold;
 }
+
 .alert > p,
 .alert > ul {
   margin-bottom: 0;
 }
+
 .alert > p + p {
   margin-top: 5px;
 }
+
 .alert-dismissable {
   padding-right: 35px;
 }
+
 .alert-dismissable .close {
   position: relative;
   top: -2px;
@@ -80,42 +128,53 @@
   border-color: #668c62;
   color: darken(#668c62, 20%);
 }
+
 .alert-success hr {
   border-top-color: #668c62;
 }
+
 .alert-success .alert-link {
   color: #668c62;
 }
+
 .alert-info {
   background-color: #d9edf7;
   border-color: #bce8f1;
   color: #31708f;
 }
+
 .alert-info hr {
   border-top-color: #a6e1ec;
 }
+
 .alert-info .alert-link {
   color: #245269;
 }
+
 .alert-warning {
   background-color: #fcf8e3;
   border-color: #faebcc;
   color: #8a6d3b;
 }
+
 .alert-warning hr {
   border-top-color: #f7e1b5;
 }
+
 .alert-warning .alert-link {
   color: #66512c;
 }
+
 .alert-danger {
   background-color: #f2dede;
   border-color: #ebccd1;
   color: #a94442;
 }
+
 .alert-danger hr {
   border-top-color: #e4b9c0;
 }
+
 .alert-danger .alert-link {
   color: #843534;
 }

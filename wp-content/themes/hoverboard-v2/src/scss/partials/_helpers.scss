@@ -3,7 +3,7 @@
   border: 0;
   overflow: hidden;
   *text-indent: -9999px;
-  &:before {
+  &::before {
     content: "";
     display: block;
     width: 0;
@@ -11,15 +11,19 @@
   }
 }
 //for JavaScript. Above doesn't work if you want to show it after DOM load.
-.hide, .hidden {
+.hide,
+.hidden {
   display: none;
 }
+
 .centered {
-	text-align: center;
+  text-align: center;
 }
+
 .show {
   display: block;
 }
+
 .crossed {
   text-decoration: line-through;
 }
@@ -33,7 +37,8 @@
   padding: 0;
   position: absolute;
   width: 1px;
-  &.focusable:active, &.focusable:focus {
+  &.focusable:active,
+  &.focusable:focus {
     clip: auto;
     height: auto;
     margin: 0;
@@ -47,17 +52,30 @@
   visibility: hidden;
 }
 
-.clearfix, .cf {
+.clearfix,
+.cf {
   *zoom: 1;
-  &:before, &:after {
+  &::before,
+  &::after {
     content: " ";
     display: table;
   }
 
-  &:after {
+  &::after {
     clear: both;
   }
 }
+
 .clear {
   clear: both;
+}
+
+.black {
+  color: $black;
+  border-color: $black;
+}
+
+.white {
+  color: $white;
+  border-color: $white;
 }

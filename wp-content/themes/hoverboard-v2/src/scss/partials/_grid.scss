@@ -109,7 +109,7 @@ add_shortcode( 'column', 'supcamp_40_grid_column' );
 $grid__columns: 16;
 
 .grid-columns {
-	@extend .clearfix;
+  @extend .clearfix;
 	display: flex;
 	.grid-column--padded {
 		padding-left: $base--spacing/2;
@@ -127,8 +127,8 @@ $grid__columns: 16;
 	.grid-columns .grid-column-#{$i} {
 		float: left;
 		width: 100%;
-		// @include breakpoint($grid__mobile-breakpoint) {
-		// 	width: ($i / $grid__columns * 100%);
-		// }
+		@include breakpoint(600px) {
+			width: ($i / $grid__columns * 100%);
+		}
 	}
 }

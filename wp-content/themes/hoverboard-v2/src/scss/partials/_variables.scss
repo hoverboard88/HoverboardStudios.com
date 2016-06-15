@@ -10,14 +10,14 @@ $border-box: true;
 /**
   * Colors
   */
-$white: #ffffff;
-$black: #000000;
 $gray--light: #EEEEEE;
 $gray--medium: #C4C4C3;
 $gray--dark: #222222;
 $green--light: #69C9CA;
 $green--medium: #013333;
 $green--dark: #031E1D;
+$white: #ffffff;
+$black: $gray--dark; // shortcut to our "black"
 
 /**
   * Secondary Colors
@@ -40,8 +40,8 @@ $base--color: $gray--dark;
 $base--border: $gray--medium;
 
 $base--font-family: "ff-tisa-web-pro", Georgia, "Times New Roman", serif;
-$secondary--font-family: 'PlutoSansMedium', sans-serif;
-$secondary--font-family__regular: 'PlutoSansRegular', sans-serif;
+$secondary--font-family: "PlutoSansMedium", sans-serif;
+$secondary--font-family__regular: "PlutoSansRegular", sans-serif;
 $secondary--font-family__bold: "PlutoSansCondBold", sans-serif;
 $secondary--font-family__light: "PlutoSansCondLight", sans-serif;
 
