@@ -37,6 +37,7 @@
   .linear-radio {
     border-color: lighten($gray--dark, 20%);
     background-color: $gray--dark;
+    max-width: none;
     .wpcf7-list-item {
       border-color: lighten($gray--dark, 10%);
       label {

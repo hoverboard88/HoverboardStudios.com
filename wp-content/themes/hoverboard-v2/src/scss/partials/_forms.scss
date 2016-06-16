@@ -114,6 +114,7 @@ textarea {
     font-family: $secondary--font-family__bold;
   }
 }
+
 .wpcf7-not-valid-tip {
   margin-top: -$base--spacing;
   display: block;
@@ -172,23 +173,23 @@ textarea {
   display: inline-block;
   font-family: $secondary--font-family__regular;
   margin-bottom: $base--spacing;
+  max-width: 600px;
   .wpcf7-radio {
     display: flex;
     align-items: center;
   }
   .wpcf7-list-item {
-    border-right: 1px dotted lighten($gray--medium, 10%);
+    border-right: 1px dotted $gray--medium;
     padding: 1px;
     label {
-      @include font-size(2px, false);
+      @include font-size(1px, false); // text needs to take up some space for flexbox to work
       opacity: 0;
       color: lighten($gray--dark, 20%);
-      // transition: font-size .3s, color .3s;
+      // transition: font-size .3s, color .3s; // TODO: wonky sliding happening when trying to animate the font size
       padding: $base--spacing / 6 $base--spacing / 3;
       display: block;
       text-align: center;
       cursor: pointer;
-      min-height: 41px;
     }
     &.active label {
       @include font-size(16px, false);
