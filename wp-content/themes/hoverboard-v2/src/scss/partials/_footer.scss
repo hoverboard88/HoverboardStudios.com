@@ -1,3 +1,7 @@
+.information {
+  padding: $base--spacing 0;
+}
+
 .copyright {
   @include font-size(13px, false);
   color: $secondary--teal;

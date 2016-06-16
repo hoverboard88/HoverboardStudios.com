@@ -73,6 +73,8 @@
           <p>Curabitur pulvinar dui et eleifend viverra. Aliquam viverra accumsan nibh, vel mollis magna suscipit ac. Mauris et elit vestibulum, rhoncus augue et, ultricies enim.</p>
         </div>
 
+        <?php include('inc/contact-form.php'); ?>
+
       </div>
     </div>
     <div class="wrap">

@@ -39,3 +39,21 @@
     <div class="copyright centered">© 2015 Hoverboard. All rights reserved.</div>
   </div>
 </footer>
+<div id="contact" class="contact-popup active">
+  <div class="wrap wrap--contact-popup">
+    <button id="contact-popup__close" class="contact-popup__close">Close</button>
+
+    <div class="container container--small">
+
+      <h3 class="contact-popup__title">Contact Us</h3>
+
+      <p>Have a project already in mind but don’t know where to start? Looking for some advice or a quote on a branding revamp? Have an idea for an app but feel lost?</p>
+
+      <p>Send us a quick note about your upcoming project and we will be happy to help!</p>
+
+      <?php include('inc/contact-form.php'); ?>
+
+    </div>
+  </div>
+
+</div>

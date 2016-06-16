@@ -12,6 +12,17 @@ legend {
 label {
   display: block;
   width: 100%;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+form {
+  br {
+    display: none; // might not work. want to get rid of the <br> tags CF7 puts in.
+  }
+  p {
+    margin-bottom: 0;
+  }
 }
 
 .label--inline {
@@ -19,12 +30,10 @@ label {
 }
 
 .span--required {
-  visibility: hidden;
-  &::before {
-    content: "*";
-    color: red;
-    visibility: visible;
-  }
+  text-transform: none;
+  font-weight: normal;
+  @include font-size(14px);
+  padding-left: $base--spacing / 4;
 }
 
 .label--radio {
@@ -82,25 +91,40 @@ input[type="tel"],
 input[type="time"],
 input[type="url"],
 textarea {
-  border: 1px solid $base--border;
-  background: #fff;
-  padding: 5px;
-  max-width: 400px;
+  padding: $base--spacing / 2 0;
+  max-width: 600px;
   border-radius: 0;
   -webkit-appearance: none;
   width: 100%;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid $gray--medium;
+  color: $black;
+  @include font-size(28px);
+  @include input-placeholder() {
+    color: $gray--medium;
+  }
   &:focus {
     border-color: darken($base--border, 10%);
     outline: 0;
-    box-shadow: inset 0 1px 1px rgba(0,0,0, .075), 0 0 8px rgba($base--border, 0.6);
   }
-  @include input-placeholder {
-    color: rgba(#000, .5);
+  &.wpcf7-not-valid {
+    border-color: $secondary--red;
+    color: $secondary--red;
+    font-family: $secondary--font-family__bold;
   }
+}
+.wpcf7-not-valid-tip {
+  margin-top: -$base--spacing;
+  display: block;
+  color: $secondary--red;
+  font-family: $secondary--font-family__bold;
+
 }
 
 textarea {
-  height: 130px;
+  height: 200px;
+  border-bottom-width: 4px;
 }
 
 .wrap--search {
@@ -137,5 +161,44 @@ textarea {
   }
   @include input-placeholder {
     color: darken(rgba($white, .3), 30%);
+  }
+}
+
+.linear-radio {
+  border: 2px solid darken($gray--medium, 10%);
+  background: $gray--light;
+  padding: 1px;
+  border-radius: 4px;
+  display: inline-block;
+  font-family: $secondary--font-family__regular;
+  margin-bottom: $base--spacing;
+  .wpcf7-radio {
+    display: flex;
+    align-items: center;
+  }
+  .wpcf7-list-item {
+    border-right: 1px dotted lighten($gray--medium, 10%);
+    padding: 1px;
+    label {
+      @include font-size(2px, false);
+      opacity: 0;
+      color: lighten($gray--dark, 20%);
+      // transition: font-size .3s, color .3s;
+      padding: $base--spacing / 6 $base--spacing / 3;
+      display: block;
+      text-align: center;
+      cursor: pointer;
+      min-height: 41px;
+    }
+    &.active label {
+      @include font-size(16px, false);
+      min-width: 200px;
+      opacity: 1;
+      color: $gray--dark;
+      background: lighten($gray--medium, 5%);
+    }
+  }
+  input {
+    display: none;
   }
 }

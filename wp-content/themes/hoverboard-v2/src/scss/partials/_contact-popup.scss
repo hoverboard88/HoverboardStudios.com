@@ -1,0 +1,79 @@
+.wrap--contact-popup {
+  background: rgba($black, .98);
+  color: $gray--medium;
+  padding: $base--spacing * 2;
+  @include font-size(18px, false);
+  font-family: $secondary--font-family__regular;
+  height: 100%;
+}
+
+.contact-popup {
+  // only with JS enabled.
+  .js & {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    max-height: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    transition: max-height .3s;
+    &.active {
+      max-height: 3999px;
+    }
+  }
+  input,
+  textarea {
+    max-width: none;
+    color: $gray--light;
+    font-family: $secondary--font-family__light;
+    border-bottom-color: lighten($gray--dark, 20%);
+    @include input-placeholder() {
+      color: lighten($gray--dark, 10%);
+    }
+  }
+  .linear-radio {
+    border-color: lighten($gray--dark, 20%);
+    background-color: $gray--dark;
+    .wpcf7-list-item {
+      border-color: lighten($gray--dark, 10%);
+      label {
+        color: lighten($gray--dark, 20%);
+        background: $gray--dark;
+      }
+      &.active label {
+        color: $white;
+        background-color: lighten($gray--dark, 20%);
+      }
+    }
+  }
+}
+
+.contact-popup__title {
+  font-family: $secondary--font-family__light;
+  @include font-size(40px);
+  color: $white;
+}
+
+.contact-popup__close {
+  font-size: 0;
+  line-height: 1;
+  position: absolute;
+  right: $base--spacing;
+  top: $base--spacing;
+  outline: 0;
+  &:hover,
+  &:focus {
+    &::after {
+      color: $white;
+    }
+  }
+  &::after {
+    content: "✕";
+    font-family: $secondary--font-family__light;
+    @include font-size(32px);
+    color: $gray--medium;
+  }
+}

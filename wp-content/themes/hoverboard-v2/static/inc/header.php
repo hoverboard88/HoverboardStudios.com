@@ -15,7 +15,7 @@
           </svg>
         </button>
       </li>
-      <li class="menu-item--contact"><a href="/contact" class="btn btn--shadow">Contact</a></li>
+      <li class="menu-item--contact"><a id="contact-popup-btn" href="#contact" class="btn btn--shadow">Contact</a></li>
     </ul>
   </nav>
 </div>

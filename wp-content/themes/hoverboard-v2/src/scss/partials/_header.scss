@@ -71,11 +71,25 @@
     border-bottom: 3px solid rgba(0, 0, 0, 0);
     text-decoration: none;
     text-transform: uppercase;
+    position: relative;
+    transition: color .3s;
+    &::after {
+      content: "";
+      width: 100%;
+      height: 0;
+      background: $green--light;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      transition: height .3s;
+    }
     &:hover,
     &:active,
     &:focus {
       color: $green--light;
-      border-bottom: 3px solid $green--light;
+      &::after {
+        height: 3px;
+      }
     }
     &.btn {
       border: none;
@@ -83,6 +97,12 @@
       margin-top: $base--spacing/2;
       @include breakpoint(775px) {
         margin-top: 0;
+      }
+      &:hover,
+      &:focus {
+        &::after {
+          display: none;
+        }
       }
     }
   }
