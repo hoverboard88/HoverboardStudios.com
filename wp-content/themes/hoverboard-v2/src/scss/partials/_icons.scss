@@ -55,8 +55,12 @@
 }
 
 .icon--blue {
-  svg {
+  svg,
+  & {
     border-color: $secondary--blue;
+  }
+  .icon-circle__text {
+    color: $secondary--blue;
   }
   path {
     fill: $secondary--blue;
@@ -64,8 +68,12 @@
 }
 
 .icon--purple {
-  svg {
+  svg,
+  & {
     border-color: $secondary--purple;
+  }
+  .icon-circle__text {
+    color: $secondary--purple;
   }
   path {
     fill: $secondary--purple;
@@ -73,8 +81,12 @@
 }
 
 .icon--red {
-  svg {
+  svg,
+  & {
     border-color: $secondary--red;
+  }
+  .icon-circle__text {
+    color: $secondary--red;
   }
   path {
     fill: $secondary--red;
@@ -82,8 +94,12 @@
 }
 
 .icon--red-light {
-  svg {
+  svg,
+  & {
     border-color: $secondary--red-light;
+  }
+  .icon-circle__text {
+    color: $secondary--red-light;
   }
   path {
     fill: $secondary--red-light;
@@ -91,8 +107,12 @@
 }
 
 .icon--teal {
-  svg {
+  svg,
+  & {
     border-color: $secondary--teal;
+  }
+  .icon-circle__text {
+    color: $secondary--teal;
   }
   path {
     fill: $secondary--teal;
@@ -100,8 +120,12 @@
 }
 
 .icon--green {
-  svg {
+  svg,
+  & {
     border-color: $secondary--green;
+  }
+  .icon-circle__text {
+    color: $secondary--green;
   }
   path {
     fill: $secondary--green;
