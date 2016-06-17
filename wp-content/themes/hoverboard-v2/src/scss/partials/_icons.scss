@@ -18,7 +18,7 @@
   position: relative;
   padding: 0 2px;
   svg {
-    transition: transform .3s;
+    transition: transform .4s;
   }
   a {
     text-decoration: none;
@@ -28,7 +28,7 @@
         opacity: 1;
       }
       svg {
-        transform: rotate(.5turn);
+        transform: rotate(1turn);
       }
     }
 
