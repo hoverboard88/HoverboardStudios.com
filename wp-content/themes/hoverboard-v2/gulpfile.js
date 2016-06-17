@@ -24,7 +24,7 @@
     watch: {
       images: ['src/img/**/*'],
       scss: 'src/scss/style.scss',
-      js: ['src/js/vendor/**/*.js', 'src/js/deps/**/*.js', 'src/js/src/global.js']
+      js: ['src/js/vendor/**/*.js', 'src/js/deps/**/*.js', 'src/js/src/global.js', 'src/js/src/contact-popup.js']
     },
     dist: {
       images: 'dist/img',
