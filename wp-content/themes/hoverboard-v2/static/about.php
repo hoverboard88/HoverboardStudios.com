@@ -17,7 +17,7 @@
   <!-- TODO: possibily switch this out with the <main> tag -->
   <div role="main" class="main main--content">
     <div class="wrap">
-      <div class="container centered container--page-title container--medium container--page-title">
+      <div class="container centered container-page-title container--medium container-page-title">
         <h1 class="page-title">About Us</h1>
       </div>
     </div>

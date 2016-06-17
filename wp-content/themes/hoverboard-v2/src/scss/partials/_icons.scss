@@ -1,63 +1,108 @@
 .icon {
   display: inline-block;
   line-height: 1;
-  svg {
-    vertical-align: middle;
-  }
   path {
     fill: $base--color;
   }
 }
 
 .icon--circle {
-  border: 3px solid $base--color;
-  border-radius: 50%;
-  padding: 2px;
+  svg {
+    border: 3px solid $base--color;
+    border-radius: 50%;
+    padding: 2px;
+  }
+}
+
+.icon--tooltip {
+  svg {
+    transition: transform .3s;
+  }
+  a {
+    text-decoration: none;
+    &:hover,
+    &:focus {
+      .icon-circle__text {
+        max-width: 1000px;
+      }
+      svg {
+        transform: rotate(.5turn);
+      }
+    }
+
+    .icon-circle__text {
+      max-width: 0;
+      overflow: hidden;
+      transition: max-width .3s;
+      display: inline-block;
+      top: -14px;
+      position: relative;
+      @include font-size(14px, false);
+      &::after,
+      &::before {
+        content: " ";
+        width: 5px;
+      }
+    }
+
+  }
 }
 
 .icon--square {
-  border: 3px solid $base--color;
+  border: 2px solid $base--color;
   border-radius: 5px;
   padding: 2px 15px;
 }
 
 .icon--blue {
-  border-color: $secondary--blue;
+  svg {
+    border-color: $secondary--blue;
+  }
   path {
     fill: $secondary--blue;
   }
 }
 
 .icon--purple {
-  border-color: $secondary--purple;
+  svg {
+    border-color: $secondary--purple;
+  }
   path {
     fill: $secondary--purple;
   }
 }
 
 .icon--red {
-  border-color: $secondary--red;
+  svg {
+    border-color: $secondary--red;
+  }
   path {
     fill: $secondary--red;
   }
 }
 
 .icon--red-light {
-  border-color: $secondary--red-light;
+  svg {
+    border-color: $secondary--red-light;
+  }
   path {
     fill: $secondary--red-light;
   }
 }
 
 .icon--teal {
-  border-color: $secondary--teal;
+  svg {
+    border-color: $secondary--teal;
+  }
   path {
     fill: $secondary--teal;
   }
 }
 
 .icon--green {
-  border-color: $secondary--green;
+  svg {
+    border-color: $secondary--green;
+  }
   path {
     fill: $secondary--green;
   }

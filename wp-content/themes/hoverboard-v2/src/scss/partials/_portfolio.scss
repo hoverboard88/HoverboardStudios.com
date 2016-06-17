@@ -1,6 +1,7 @@
 .wrap--portfolio {
   border-bottom: 4px solid $gray--medium;
 }
+
 .portfolio {
   padding: $base--spacing 0 0;
   .portfolio__item {
@@ -43,12 +44,9 @@
     }
   }
   .portfolio__summary {
-    width: $width--6;
+    // width: $width--6;
     padding-right: 30%;
     min-height: 400px;
-    // @include breakpoint(1100px, true) {
-    //   padding-right: 40%;
-    // }
   }
   .portfolio__example {
     position: absolute;
