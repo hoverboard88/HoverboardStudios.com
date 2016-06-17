@@ -12,14 +12,20 @@
   clear: both;
 }
 
+.container--page-title {
+  padding-bottom: $base--spacing / 2;
+  border-bottom: 1px solid $gray--medium;
+  margin-bottom: $base--spacing;
+  .list--icons {
+    margin-bottom: 0;
+  }
+}
+
 .page-title {
   @include font-size(36px);
   font-family: $base--font-family;
   @include font-weight(bold);
-  text-align: center;
-  padding-bottom: $base--spacing / 2;
-  border-bottom: 1px solid $gray--medium;
-  margin-bottom: $base--spacing;
+  margin-bottom: 0;
 }
 
 .content {

@@ -7,6 +7,11 @@
       </svg>
     </button>
     <input type="search" placeholder="Search Articles, Work, Bios" class="form__input form--search-input">
-
+    <script>
+      (function () {
+        var d = document.getElementById("form--search");
+        d.className += " inactive";
+      }());
+    </script>
   </form>
 </div>

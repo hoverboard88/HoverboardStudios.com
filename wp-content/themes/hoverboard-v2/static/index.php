@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en" class="no-js">
 <head>
+  <?php $template_name = basename(__FILE__, '.php'); ?>
   <?php include('inc/head.php'); ?>
 </head>
 <body>
