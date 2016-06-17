@@ -175,16 +175,23 @@ textarea {
   margin-bottom: $base--spacing;
   max-width: 600px;
   .wpcf7-radio {
-    display: flex;
+    display: block;
     align-items: center;
+    @include breakpoint(650px) {
+      display: flex;
+    }
   }
   .wpcf7-list-item {
     border-right: 1px dotted $gray--medium;
     padding: 1px;
+    display: block;
     label {
-      @include font-size(1px, false); // text needs to take up some space for flexbox to work
-      opacity: 0;
-      color: lighten($gray--dark, 20%);
+      @include breakpoint(650px) {
+        @include font-size(1px, false); // text needs to take up some space for flexbox to work
+        opacity: 0;
+        color: lighten($gray--dark, 20%);
+      }
+
       // transition: font-size .3s, color .3s; // TODO: wonky sliding happening when trying to animate the font size
       padding: $base--spacing / 6 $base--spacing / 3;
       display: block;

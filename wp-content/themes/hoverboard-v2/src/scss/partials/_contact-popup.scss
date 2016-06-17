@@ -20,6 +20,7 @@
     height: 100%;
     overflow: hidden;
     transition: max-height .3s;
+    z-index: 100;
     &.active {
       max-height: 3999px;
     }
