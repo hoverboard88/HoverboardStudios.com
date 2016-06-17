@@ -3,7 +3,7 @@ a.btn,
   background: $secondary--blue;
   box-shadow: 0 0 15px rgba($black, .5);
   border-radius: 4px;
-  color: #fff;
+  color: $white;
   display: inline-block;
   font-family: $secondary--font-family;
   letter-spacing: 1px;
@@ -27,6 +27,7 @@ a.btn,
   }
   &.btn-tertiary {
     background: none;
-    border: 2px solid $white;
+    border: 3px solid $white;
+    box-shadow: none;
   }
 }

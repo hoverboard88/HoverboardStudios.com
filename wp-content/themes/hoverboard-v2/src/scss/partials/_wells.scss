@@ -41,6 +41,13 @@
       text-decoration: underline;
     }
   }
+  a.btn {
+    color: $white;
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+  }
   > *:last-child {
     margin-bottom: 0;
   }
@@ -58,6 +65,17 @@
       top: -10px;
       z-index: -1;
       box-shadow: 10px -10px 0 rgba($white, .2);
+    }
+  }
+  &.well--purple {
+    background: $secondary--purple;
+    border: 0;
+    color: $white;
+    a {
+      color: $green--light;
+    }
+    a.btn {
+      color: $white;
     }
   }
   &.well--no-padding {

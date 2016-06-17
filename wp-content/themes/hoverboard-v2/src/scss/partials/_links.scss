@@ -30,6 +30,15 @@ header {
   }
 }
 
+.link--icon {
+  svg {
+    margin-bottom: -5px;
+  }
+  path {
+    fill: $green--light;
+  }
+}
+
 // Buttons
 //
 // Markup:
