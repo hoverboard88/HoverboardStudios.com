@@ -1,0 +1,12 @@
+.wp-caption {
+  background: $gray--medium;
+  padding: 3px;
+}
+
+.wp-caption-text {
+  color: lighten($gray--dark, 15%);
+  font-style: italic;
+  text-align: center;
+  margin-bottom: 4px;
+  @include font-size(14px, false);
+}

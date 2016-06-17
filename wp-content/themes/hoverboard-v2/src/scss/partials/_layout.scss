@@ -1,5 +1,6 @@
 .wrap {
   @extend .clearfix;
+  position: relative;
   &.wrap--green {
     background: $green--medium;
   }

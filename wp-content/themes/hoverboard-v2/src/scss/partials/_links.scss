@@ -31,6 +31,9 @@ header {
 }
 
 .link--icon {
+  color: $green--light;
+  font-weight: bold;
+  text-decoration: none;
   svg {
     margin-bottom: -5px;
   }

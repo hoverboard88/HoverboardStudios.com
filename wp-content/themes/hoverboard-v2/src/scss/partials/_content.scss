@@ -12,10 +12,12 @@
   clear: both;
 }
 
-.container--page-title {
+.container-page-title {
   padding-bottom: $base--spacing / 2;
   border-bottom: 1px solid $gray--medium;
   margin-bottom: $base--spacing;
+  padding-left: 0;
+  padding-right: 0;
   .list--icons {
     margin-bottom: 0;
   }

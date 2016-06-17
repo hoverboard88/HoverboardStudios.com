@@ -12,7 +12,16 @@
 // <p>The quick brown fox jumps over the lazy dog.</p>
 //
 // Styleguide 6.1.0
-p, ul, ol, blockquote, input, fieldset, pre, table, hr, dl {
+p,
+ul,
+ol,
+blockquote,
+input,
+fieldset,
+pre,
+table,
+hr,
+dl {
   margin: 0 0 $base--spacing;
   @include font-size(16px);
 }
@@ -71,6 +80,11 @@ h6,
   color: $secondary--teal;
   text-transform: uppercase;
   letter-spacing: 4px;
+}
+
+.heading--underlined {
+  border-bottom: 1px solid $gray--medium;
+  padding-bottom: $base--spacing / 2;
 }
 
 hr {
