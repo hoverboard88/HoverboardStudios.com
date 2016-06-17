@@ -114,17 +114,60 @@ add_action( 'widgets_init', 'hb_v2_widgets_init' );
  * Enqueue scripts and styles.
  */
 function hb_v2_scripts() {
-	wp_enqueue_style( 'hb_v2-style', get_stylesheet_uri() );
+	// wp_enqueue_style( 'hb_v2-style', get_template_directory_uri() . '/dist/css/style.css' );
 
-	wp_enqueue_script( 'hb_v2-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
+	wp_deregister_script('jquery');
+  wp_register_script('jquery', "//ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js", false, null);
+  wp_enqueue_script('jquery');
 
-	wp_enqueue_script( 'hb_v2-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
+	wp_enqueue_script( 'hb_v2-mainjs', get_template_directory_uri() . '/dist/js/main.min.js', array('jquery'), '20151215', true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
 }
 add_action( 'wp_enqueue_scripts', 'hb_v2_scripts' );
+
+function hb_v2_wp_footer() {
+	echo '<link rel="stylesheet" href="' . get_template_directory_uri() . '/dist/css/style.css" type="text/css" media="all" />';
+}
+add_action( 'wp_footer', 'hb_v2_wp_footer' );
+
+function hb_v2__wp_head() {
+	echo '<style>';
+	include get_stylesheet_directory() . '/dist/css/critical.css';
+	echo '</style>';
+
+	// TypeKit
+	echo '<script> (function(d) { var config = { kitId: "bev1prj", scriptTimeout: 3000, async: true }, h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src="https://use.typekit.net/"+config.kitId+".js";tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s) })(document); </script>';
+}
+add_action( 'wp_head', 'hb_v2__wp_head' );
+
+function hb_v2_cpts() {
+
+	register_post_type( 'studies',
+	// CPT Options
+		array(
+			'labels' => array(
+				'name' => __( 'Case Studies' ),
+				'singular_name' => __( 'Case Study' )
+			),
+			'public' => true,
+			'has_archive' => true,
+			'rewrite' => array('slug' => 'studies'),
+		)
+	);
+
+}
+add_action( 'init', 'hb_v2_cpts' );
+
+function hb_v2_svg($file, $default = '') {
+	if ( file_exists(get_template_directory() . '/dist/img/' . $file) ) {
+		echo file_get_contents(get_template_directory() . '/dist/img/' . $file);
+	} else {
+		echo file_get_contents(get_template_directory() . '/dist/img/' . $default);
+	}
+}
 
 /**
  * Implement the Custom Header feature.

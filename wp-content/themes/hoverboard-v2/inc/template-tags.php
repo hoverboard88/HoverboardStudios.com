@@ -14,7 +14,7 @@ if ( ! function_exists( 'hb_v2_posted_on' ) ) :
 function hb_v2_posted_on() {
 	$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
 	if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
-		$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
+		$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class=" visuallyhidden updated" datetime="%3$s">%4$s</time>';
 	}
 
 	$time_string = sprintf( $time_string,
@@ -25,16 +25,34 @@ function hb_v2_posted_on() {
 	);
 
 	$posted_on = sprintf(
-		esc_html_x( 'Posted on %s', 'post date', 'hb_v2' ),
+		esc_html_x( '%s', 'post date', 'hb_v2' ),
 		'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
 	);
+
+	echo '<span class="posted-on">' . $posted_on . '</span>'; // WPCS: XSS OK.
+
+}
+endif;
+
+if ( ! function_exists( 'hb_v2_posted_by' ) ) :
+/**
+ * Prints HTML with meta information for the current post-date/time and author.
+ */
+function hb_v2_posted_by() {
+
+	// <img alt="" src="https://secure.gravatar.com/avatar/9b82e423026c998cfd7c30bac9115b5e?s=100&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/9b82e423026c998cfd7c30bac9115b5e?s=200&amp;d=mm&amp;r=g 2x" class="avatar avatar-100 photo" height="100" width="100">
+	// <p class="single-spaced">
+	// 	<span class="byline"> by <span class="author vcard"><a class="url fn n" href="http://hoverboardstudios.dev/author/rtvenge/">Ryan Tvenge</a></span></span>
+	// </p>
 
 	$byline = sprintf(
 		esc_html_x( 'by %s', 'post author', 'hb_v2' ),
 		'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
 	);
 
-	echo '<span class="posted-on">' . $posted_on . '</span><span class="byline"> ' . $byline . '</span>'; // WPCS: XSS OK.
+	echo get_avatar( get_the_author_meta('ID'), $size = '150' );
+
+	echo '<p class="single-spaced"><span class="posted-on byline">' . $posted_on . '</span><span class="byline"> ' . $byline . '</span></p>'; // WPCS: XSS OK.
 
 }
 endif;
@@ -77,6 +95,30 @@ function hb_v2_entry_footer() {
 	);
 }
 endif;
+
+/**
+ * Echos icons for categories
+ *
+ * @return null
+ */
+function hb_v2_category_icons() { ?>
+
+	<ul class="list--unstyled list--horizontal list--icons">
+
+	<?php foreach (wp_get_post_categories(get_the_ID()) as $categoryID) { ?>
+
+		<li class="icon icon--circle icon--tooltip icon--blue">
+	    <a href="<?php echo get_category_link($categoryID); ?>">
+	      <?php hb_v2_svg('mdi-' . get_category($categoryID)->slug . '.svg', 'mdi-default.svg'); ?>
+	      <span class="icon-circle__text"><?php echo get_cat_name($categoryID); ?></span>
+	    </a>
+	  </li>
+
+	<?php } ?>
+
+	</ul>
+
+<?php }
 
 /**
  * Returns true if a blog has more than 1 category.

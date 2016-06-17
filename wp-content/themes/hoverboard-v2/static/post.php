@@ -30,8 +30,6 @@
           </div><!-- .entry-meta -->
 			  </header>
       </div>
-    </div>
-    <div class="wrap">
       <div class="container container--post">
         <div class="post__meta">
           <div class="entry-meta">
