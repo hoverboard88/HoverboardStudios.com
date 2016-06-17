@@ -15,6 +15,7 @@
 }
 
 .icon--tooltip {
+  position: relative;
   svg {
     transition: transform .3s;
   }
@@ -23,7 +24,7 @@
     &:hover,
     &:focus {
       .icon-circle__text {
-        max-width: 1000px;
+        opacity: 1;
       }
       svg {
         transform: rotate(.5turn);
@@ -31,18 +32,16 @@
     }
 
     .icon-circle__text {
-      max-width: 0;
-      overflow: hidden;
-      transition: max-width .3s;
+      width: 100%;
+      text-align: center;
+      opacity: 0;
+      transition: opacity .1s;
       display: inline-block;
-      top: -14px;
-      position: relative;
-      @include font-size(14px, false);
-      &::after,
-      &::before {
-        content: " ";
-        width: 5px;
-      }
+      position: absolute;
+      top: 100%;
+      left: 0;
+      margin: 3px 0;
+      @include font-size(10px, false);
     }
 
   }
