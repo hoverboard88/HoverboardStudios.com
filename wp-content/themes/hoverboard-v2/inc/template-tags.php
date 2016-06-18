@@ -107,7 +107,16 @@ function hb_v2_category_icons() { ?>
 
 	<?php foreach (wp_get_post_categories(get_the_ID()) as $categoryID) { ?>
 
-		<li class="icon icon--circle icon--tooltip icon--blue">
+		<?php
+			// if the Advanced custom fields function exists and the icon returns a something
+			if (function_exists('get_field') && get_field('category-icon-color', get_category($categoryID))) {
+				$icon_color = get_field('category-icon-color', get_category($categoryID));
+			} else {
+				$icon_color = 'blue';
+			}
+		?>
+
+		<li class="icon icon--circle icon--tooltip icon--<?php echo $icon_color; ?>">
 	    <a href="<?php echo get_category_link($categoryID); ?>">
 	      <?php hb_v2_svg('mdi-' . get_category($categoryID)->slug . '.svg', 'mdi-default.svg'); ?>
 	      <span class="icon-circle__text"><?php echo get_cat_name($categoryID); ?></span>
