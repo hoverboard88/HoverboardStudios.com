@@ -19,6 +19,7 @@ wp-content/wp-cache-config.php
 wp-content/cache/*
 wp-content/cache/supercache/*
 wp-content/ewww/*
+tmp-*.*
 
 # Theme/Developer Specific
 **/node_modules
