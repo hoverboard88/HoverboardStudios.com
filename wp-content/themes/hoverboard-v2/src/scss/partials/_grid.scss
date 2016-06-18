@@ -132,3 +132,63 @@ $grid__columns: 16;
 		}
 	}
 }
+
+// Shortcode grid stuff
+
+.container--columns {
+	position: relative;
+	padding: 0;
+}
+
+@include breakpoint(50em) {
+	.container--columns {
+		display: flex;
+	}
+	.column--half {
+		float: left;
+		width: 50%;
+		.container {
+			padding: $base--spacing;
+		}
+		.container--devices {
+			padding-bottom: 400px;
+		}
+	}
+	.column--half--spaced.first {
+		padding-right: $base--spacing;
+	}
+	.column--half--spaced.last {
+		padding-left: $base--spacing;
+	}
+	.container--devices {
+		position: static;
+	}
+	.devices {
+		position: absolute;
+		bottom: 0;
+		width: 50%;
+		left: 0;
+		margin-left: 0;
+	}
+}
+
+.column--half.column--half--spaced.first {
+	padding-bottom: $base--spacing;
+	@include breakpoint(50em) {
+		padding-bottom: 0;
+	}
+}
+
+@include breakpoint(55em) {
+	.column--third {
+		float: left;
+		width: 33.3%;
+		word-wrap: break-word;
+	}
+	.column--third--spaced.first {
+		padding-right: $base--spacing;
+	}
+	.column--third--spaced.last {
+		padding-left: $base--spacing;
+	}
+}
