@@ -1,0 +1,114 @@
+.title-box {
+  border: 5px solid $black;
+  @include font-size(21px);
+  border-radius: 5px;
+  margin: -1px;
+  display: inline-block;
+  font-family: $secondary--font-family;
+  font-weight: bold;
+  background: $white;
+  &.title-box--chevron {
+    border-right: 0;
+    border-radius: 5px 0 0 5px;
+  }
+  &.title-box--green {
+    border-color: $green--light;
+  }
+}
+
+.title-box__icon {
+  background: $black;
+  float: left;
+  display: block;
+  position: relative;
+  line-height: 1.5;
+  height: 33px;
+  .title-box--green & {
+    background-color: $green--light;
+  }
+  > svg {
+    position: relative;
+    top: 3px;
+    left: 3px;
+  }
+  .title-box__chevron {
+    display: inline-block;
+    svg {
+      display: inline-block;
+      width: 16.5px;
+      top: -4px;
+      right: -16px;
+      position: absolute;
+    }
+    path {
+      fill: $black;
+    }
+    .title-box--green & {
+      path {
+        fill: $green--light;
+      }
+    }
+  }
+  .title-box__icon-svg {
+    top: 4px;
+    position: relative;
+  }
+  path {
+    fill: $white;
+  }
+}
+
+.title-box__title {
+  display: block;
+  float: left;
+  position: relative;
+  @include font-size(18px, false);
+  color: $black;
+  padding: 3px $base--spacing / 3;
+  text-transform: uppercase;
+  .title-box--chevron & {
+    border-right: 0;
+    border-radius: 5px 0 0 5px;
+    padding-left: $base--spacing / 1.5;
+  }
+  .title-box--green & {
+    color: $green--light;
+  }
+  .title-box__title-svg {
+    display: inline-block;
+    width: 16.5px;
+    top: -4px;
+    right: -16px;
+    position: absolute;
+  }
+}
+
+.category-tabs {
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    font-family: $secondary--font-family__regular;
+  }
+  li {
+    display: inline-block;
+    padding: 3px $base--spacing / 2 7px;
+  }
+  .active a {
+    font-weight: bold;
+    color: $secondary--blue-dark;
+    border-color: $secondary--blue-dark;
+  }
+  a {
+    color: $secondary--blue;
+    border-bottom: 4px solid transparent;
+    text-decoration: none;
+    display: block;
+    &:hover,
+    &:focus {
+      border-color: $secondary--blue-dark;
+      color: $secondary--blue-dark;
+    }
+  }
+}

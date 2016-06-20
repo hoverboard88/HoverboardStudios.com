@@ -16,12 +16,20 @@ get_header(); ?>
 
 			<div class="container">
 				<h1 class="search-title">
-					<div class="search-title__chevron">
-						<div class="search-title__icon">
-							<?php hb_v2_svg('mdi-search.svg'); ?>
+					<div class="title-box title-box--chevron title-box--green">
+						<div class="title-box__icon">
+							<div class="title-box__icon-svg">
+								<?php hb_v2_svg('mdi-search.svg'); ?>
+							</div>
+							<div class="title-box__chevron">
+								<?php hb_v2_svg('chevron-filled.svg'); ?>
+							</div>
 						</div>
-						<div class="search-title__title">
+						<div class="title-box__title">
 							Search Results
+							<div class="title-box__title-svg">
+								<?php hb_v2_svg('chevron-outline.svg'); ?>
+							</div>
 						</div>
 					</div>
 					<div class="search-title__query">
