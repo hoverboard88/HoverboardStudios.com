@@ -109,8 +109,12 @@ function hb_v2_category_icons() { ?>
 
 		<?php
 			// if the Advanced custom fields function exists and the icon returns a something
-			if (function_exists('get_field') && get_field('category-icon-color', get_category($categoryID))) {
-				$icon_color = get_field('category-icon-color', get_category($categoryID));
+			if (function_exists('get_field')) {
+				if (get_field('category-icon-color', get_category($categoryID))) {
+					$icon_color = get_field('category-icon-color', get_category($categoryID));
+				} else {
+					$icon_color = 'blue';
+				}
 			} else {
 				$icon_color = 'blue';
 			}

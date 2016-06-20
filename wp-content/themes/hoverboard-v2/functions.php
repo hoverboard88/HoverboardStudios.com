@@ -204,23 +204,21 @@ function hb_v2_excerpt_length( $length ) {
 }
 add_filter( 'excerpt_length', 'hb_v2_excerpt_length', 999 );
 
-/**
- * Sets the post excerpt length to 40 words.
- *
- * To override this length in a child theme, remove the filter and add your own
- * function tied to the excerpt_length filter hook.
- */
-function mummyblog_excerpt_length( $length ) {
-	return 80;
-}
-add_filter( 'excerpt_length', 'mummyblog_excerpt_length' );
-
-function replace_ellipsis($content) {
+function hb_v2_replace_ellipsis($content) {
 	return str_replace('[...]',
 		'…', $content);
 }
-add_filter('the_excerpt', 'replace_ellipsis');
+add_filter('the_excerpt', 'hb_v2_replace_ellipsis');
 
+function hb_v2_category_color($queried_object) {
+	$term_id = $queried_object->term_id;
+	return get_field('category-icon-color', get_category($term_id));
+}
+
+function hb_v2_category_icon($queried_object) {
+	$term_id = $queried_object->term_id;
+	return hb_v2_svg('mdi-' . get_category($term_id)->slug . '.svg', 'mdi-default.svg');
+}
 
 /**
  * Implement the Custom Header feature.

@@ -16,7 +16,7 @@ get_header(); ?>
 
 			<div class="container">
 				<h1 class="search-title">
-					<div class="title-box title-box--chevron title-box--green">
+					<div class="title-box title-box--chevron title-box--icon title-box--green">
 						<div class="title-box__icon">
 							<div class="title-box__icon-svg">
 								<?php hb_v2_svg('mdi-search.svg'); ?>

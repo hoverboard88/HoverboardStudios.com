@@ -15,14 +15,30 @@ get_header(); ?>
 		<?php
 		if ( have_posts() ) : ?>
 
-			<header class="page-header">
-				<?php
-					the_archive_title( '<h1 class="page-title">', '</h1>' );
-					the_archive_description( '<div class="taxonomy-description">', '</div>' );
-				?>
+			<header class="page-header container container--title-box">
+				<h1 class="title-box title-box--icon title-box--<?php echo hb_v2_category_color( get_queried_object() ); ?>">
+					<div class="title-box__icon">
+						<div class="title-box__icon-svg">
+							<?php hb_v2_category_icon(get_queried_object()); ?>
+						</div>
+						<div class="title-box__chevron">
+							<?php hb_v2_svg('chevron-filled.svg'); ?>
+						</div>
+					</div>
+					<div class="title-box__title">
+						<?php echo str_replace('Category: ', '', get_the_archive_title()); ?>
+					</div>
+				</h1>
 			</header><!-- .page-header -->
 
-      <div class="post-list post-list--side-by-side"><!-- didn't work but this class should be used for archive pages???? -->
+			<div class="container category-tabs">
+				<ul>
+					<li class="active"><a href="/blog/">All</a></li>
+					<?php wp_list_categories( 'taxonomy=category&title_li=' ); ?>
+				</ul>
+			</div>
+
+      <div class="post-list post-list--side-by-side container">
 
 				<?php
 				/* Start the Loop */
@@ -33,7 +49,7 @@ get_header(); ?>
 					 * If you want to override this in a child theme, then include a file
 					 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
 					 */
-					get_template_part( 'template-parts/content', get_post_format() );
+					get_template_part( 'template-parts/content', 'post-list' );
 
 				endwhile;
 
@@ -51,5 +67,4 @@ get_header(); ?>
 	</div><!-- #primary -->
 
 <?php
-get_sidebar();
 get_footer();

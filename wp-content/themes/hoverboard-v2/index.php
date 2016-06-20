@@ -21,7 +21,7 @@ get_header(); ?>
 		if ( have_posts() ) :
 
 			if ( is_home() && ! is_front_page() ) : ?>
-				<header class="container container--padded centered">
+				<header class="container container--title-box">
 					<h1 class="title-box title-box--green">
 						<div class="title-box__title">
 							<?php single_post_title(); ?>
