@@ -91,5 +91,21 @@ a img.aligncenter {
 
 /* Text meant only for screen readers. */
 .screen-reader-text {
-	@extend .visuallyhidden;
+  @extend .visuallyhidden;
+}
+
+.posts-navigation {
+  @extend .container;
+  @extend .container--padded;
+  text-align: center;
+}
+
+.nav-previous,
+.nav-next {
+  display: inline-block;
+  padding: 0 $base--spacing / 2;
+  a {
+    @extend .btn;
+    margin-bottom: $base--spacing / 2;
+  }
 }

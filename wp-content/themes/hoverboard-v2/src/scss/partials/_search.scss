@@ -1,0 +1,154 @@
+// HACK: The search-title is a house of cards. Lots of tweaking pixels to get the right alignment.
+.search-title {
+  @include font-size(21px);
+  display: inline-block;
+  background: $white;
+  border: 1px solid lighten($gray--medium, 5%);
+  border-radius: 3px;
+  padding: $base--spacing / 3;
+  @include breakpoint(650px) {
+    padding: 0;
+  }
+}
+
+.search-title__chevron {
+  border: 5px solid $green--light;
+  border-right: 0;
+  border-radius: 5px 0 0 5px;
+  margin: -1px;
+  display: inline-block;
+}
+
+.search-title__icon {
+  display: none;
+  @include breakpoint(650px) {
+    background: $green--light;
+    display: inline-block;
+    position: relative;
+    line-height: 1.5;
+    height: 33px;
+  }
+  &::after {
+    content: url("../img/chevron-filled.svg");
+    display: inline-block;
+    width: 17.5px;
+    top: -5px;
+    right: -17px;
+    position: absolute;
+  }
+  svg {
+    top: 4px;
+    position: relative;
+  }
+  path {
+    fill: $white;
+  }
+}
+
+.search-title__title {
+  display: inline-block;
+  position: relative;
+  @include font-size(18px, false);
+  color: $green--light;
+  padding-left: $base--spacing / 1.5;
+  padding-right: $base--spacing / 3;
+  text-transform: uppercase;
+  &::after {
+    content: url("../img/chevron-outline.svg");
+    display: inline-block;
+    width: 16px;
+    top: -8px;
+    right: -16px;
+    position: absolute;
+    @include breakpoint(650px) {
+      width: 17px;
+      top: -9px;
+      right: -17px;
+    }
+  }
+}
+
+.search-title__query {
+  display: inline-block;
+  margin-left: $base--spacing;
+  @include font-size(18px);
+  margin-bottom: 0;
+  padding: 0 $base--spacing;
+  color: darken($gray--medium, 10%);
+  font-family: $base--font-family;
+  font-style: italic;
+
+}
+
+.post-list {
+  padding: 0;
+  .post-list--side-by-side {
+    border-bottom: 3px solid $gray--medium;
+    @include breakpoint(800px) {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+  .post {
+    padding: $base--spacing * 1.5 $base--spacing $base--spacing / 2;
+    border-bottom: 1px solid $gray--medium;
+    &.post-list__odd {
+      @include breakpoint(800px) {
+        width: 50%;
+        float: left;
+        border-right: 1px solid $gray--medium;
+        display: block; // cancel out flexbox
+      }
+    }
+    &.post-list__first {
+      width: 100%;
+      border-right: 0;
+      text-align: center;
+      .entry-title {
+        @include font-size(28px);
+        margin-bottom: $base--spacing / 2;
+        @include breakpoint(800px) {
+          @include font-size(48px);
+          margin-bottom: $base--spacing / 2;
+        }
+      }
+    }
+    &.post-list__second {
+      width: 100%;
+      .entry-title {
+        @include font-size(24px);
+        margin-bottom: $base--spacing / 2;
+        @include breakpoint(800px) {
+          @include font-size(36px);
+          margin-bottom: $base--spacing / 2;
+        }
+      }
+    }
+    .list--icons {
+      margin-bottom: 0;
+      width: 100%;
+      min-height: 50px;
+    }
+    .entry-title {
+      @include font-size(21px);
+      margin-bottom: $base--spacing / 2;
+      font-family: $base--font-family;
+      font-weight: bold;
+      a {
+        color: $secondary--blue;
+        text-decoration: none;
+      }
+    }
+    .posted-on {
+      margin-bottom: $base--spacing / 2;
+      display: block;
+      a {
+        font-family: $secondary--font-family__bold;
+        text-decoration: none;
+        color: lighten($gray--dark, 15%);
+        text-transform: uppercase;
+      }
+    }
+  }
+
+}

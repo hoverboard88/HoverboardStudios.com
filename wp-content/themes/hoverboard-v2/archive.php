@@ -22,26 +22,30 @@ get_header(); ?>
 				?>
 			</header><!-- .page-header -->
 
-			<?php
-			/* Start the Loop */
-			while ( have_posts() ) : the_post();
+      <div class="post-list post-list--side-by-side"><!-- didn't work but this class should be used for archive pages???? -->
 
-				/*
-				 * Include the Post-Format-specific template for the content.
-				 * If you want to override this in a child theme, then include a file
-				 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-				 */
-				get_template_part( 'template-parts/content', get_post_format() );
+				<?php
+				/* Start the Loop */
+				while ( have_posts() ) : the_post();
 
-			endwhile;
+					/*
+					 * Include the Post-Format-specific template for the content.
+					 * If you want to override this in a child theme, then include a file
+					 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
+					 */
+					get_template_part( 'template-parts/content', get_post_format() );
 
-			the_posts_navigation();
+				endwhile;
 
-		else :
+				the_posts_navigation();
 
-			get_template_part( 'template-parts/content', 'none' );
+			else :
 
-		endif; ?>
+				get_template_part( 'template-parts/content', 'none' );
+
+			endif; ?>
+
+    </div>
 
 		</main><!-- #main -->
 	</div><!-- #primary -->

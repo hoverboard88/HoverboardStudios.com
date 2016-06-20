@@ -87,6 +87,7 @@ body {
     text-transform: uppercase;
     position: relative;
     transition: color .3s;
+    color: $white;
     &::after {
       content: "";
       width: 100%;

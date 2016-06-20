@@ -81,6 +81,9 @@
   &.well--no-padding {
     padding: 0;
   }
+  &.well--full-border {
+    border: 2px solid $gray--medium;
+  }
   .flex-row {
     border-bottom: 4px solid $gray--medium;
     &:last-child {
@@ -99,6 +102,9 @@
       padding: $base--spacing * 3;
       border-bottom: 0;
       border-right: 4px solid $gray--medium;
+    }
+    div {
+      display: block; // cancel out flexbox
     }
     &:last-child {
       border: 0;

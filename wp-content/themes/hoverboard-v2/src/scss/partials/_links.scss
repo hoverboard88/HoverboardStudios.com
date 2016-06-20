@@ -10,24 +10,22 @@
 // Styleguide 10.1.0
 a {
   color: #336767;
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
   	text-decoration: none;
   }
 }
+
 a:visited {
 
 }
+
 a:hover, a:focus {
 
 }
+
 a:active {
   text-decoration: none;
-}
-
-header {
-  a {
-    color: #fff;
-  }
 }
 
 .link--icon {

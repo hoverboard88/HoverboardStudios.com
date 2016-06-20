@@ -10,21 +10,24 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header class="entry-header">
-		<?php the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
 
-		<?php if ( 'post' === get_post_type() ) : ?>
-		<div class="entry-meta">
-			<?php hb_v2_posted_on(); ?>
-		</div><!-- .entry-meta -->
-		<?php endif; ?>
-	</header><!-- .entry-header -->
+	<div class="container container--small">
+		<header class="entry-header">
+			<?php hb_v2_category_icons(); ?>
+			<?php the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
 
-	<div class="entry-summary">
-		<?php the_excerpt(); ?>
-	</div><!-- .entry-summary -->
+			<?php if ( 'post' === get_post_type() || 'podcast' === get_post_type() ) : ?>
+			<div class="entry-meta">
+				<?php hb_v2_posted_on(); ?>
+			</div><!-- .entry-meta -->
+			<?php endif; ?>
+		</header><!-- .entry-header -->
 
-	<footer class="entry-footer">
-		<?php hb_v2_entry_footer(); ?>
-	</footer><!-- .entry-footer -->
+		<div class="entry-summary">
+			<?php
+				the_excerpt();
+			?>
+		</div><!-- .entry-summary -->
+	</div><!-- .container NEW -->
+
 </article><!-- #post-## -->

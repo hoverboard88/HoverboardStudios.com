@@ -170,6 +170,59 @@ function hb_v2_svg($file, $default = '') {
 }
 
 /**
+ * Add classes to post-list for css purposes
+ */
+function hb_v2_odd_even_classes( $classes ) {
+	global $wp_query;
+
+	// if it's archive
+	if ( is_category() ) {
+		if ($wp_query->current_post == 0) {
+			$classes[] = 'post-list__first';
+			return $classes; // exit
+		}
+
+		if ($wp_query->current_post == 1) {
+			$classes[] = 'post-list__second';
+			return $classes; // exit
+		}
+
+		if($wp_query->current_post % 2 == 0) {
+			$classes[] = 'post-list__odd';
+		}
+		else {
+			$classes[] = 'post-list__even';
+		}
+	}
+
+	return $classes;
+}
+add_filter( 'post_class', 'hb_v2_odd_even_classes' );
+
+function hb_v2_excerpt_length( $length ) {
+	return 25;
+}
+add_filter( 'excerpt_length', 'hb_v2_excerpt_length', 999 );
+
+/**
+ * Sets the post excerpt length to 40 words.
+ *
+ * To override this length in a child theme, remove the filter and add your own
+ * function tied to the excerpt_length filter hook.
+ */
+function mummyblog_excerpt_length( $length ) {
+	return 80;
+}
+add_filter( 'excerpt_length', 'mummyblog_excerpt_length' );
+
+function replace_ellipsis($content) {
+	return str_replace('[...]',
+		'…', $content);
+}
+add_filter('the_excerpt', 'replace_ellipsis');
+
+
+/**
  * Implement the Custom Header feature.
  */
 require get_template_directory() . '/inc/custom-header.php';
