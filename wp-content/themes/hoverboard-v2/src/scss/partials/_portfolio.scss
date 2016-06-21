@@ -3,22 +3,27 @@
 }
 
 .portfolio {
-  padding: $base--spacing 0 0;
+  padding: $base--spacing 0 $base--spacing * 6;
   .portfolio__example {
     position: absolute;
     width: $width--6;
     bottom: 0;
     right: -145px;
     max-width: 300px;
+    max-height: 400px;
+    overflow: hidden;
     border-bottom: 0;
   }
 }
 
 .portfolio__item {
   overflow: hidden;
-  padding: $base--spacing ($base--spacing / 2);
+  padding: $base--spacing * 3 ($base--spacing / 2) $base--spacing;
   position: relative;
   border-bottom: 4px solid $gray--medium;
+  .page-template-page-home & {
+    border-bottom-width: 0;
+  }
   @include breakpoint(1000px) {
     float: left;
     width: $width--6;
@@ -40,6 +45,7 @@
   line-height: 1;
   padding: 14px 30px 12px;
   text-transform: uppercase;
+  margin-bottom: 0;
   &.portfolio__header--gray-light {
     background: $gray--medium;
     color: $gray--light;

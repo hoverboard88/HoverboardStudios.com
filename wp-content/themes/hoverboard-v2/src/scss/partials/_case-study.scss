@@ -85,14 +85,14 @@
       right: -125px;
     }
     @include breakpoint(600px) {
-      right: -145px;
+      right: -235px;
     }
   }
   .featured-study__screenshot-internal {
     position: absolute;
     width: $width--3;
     bottom: 0;
-    right: 150px;
+    right: 40px;
     max-width: 350px;
     border-bottom: 0;
     display: none;

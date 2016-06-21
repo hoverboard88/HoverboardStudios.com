@@ -12,33 +12,32 @@ get_header(); ?>
 	<section id="primary" class="main main--content site-content content-area">
 		<main id="main" class="site-main" role="main">
 
+    <div class="container">
+      <h1 class="search-title">
+        <div class="title-box title-box--chevron title-box--icon title-box--green">
+          <div class="title-box__icon">
+            <div class="title-box__icon-svg">
+              <?php hb_v2_svg('mdi-search.svg'); ?>
+            </div>
+            <div class="title-box__chevron">
+              <?php hb_v2_svg('chevron-filled.svg'); ?>
+            </div>
+          </div>
+          <div class="title-box__title">
+            Search Results
+            <div class="title-box__title-svg">
+              <?php hb_v2_svg('chevron-outline.svg'); ?>
+            </div>
+          </div>
+        </div>
+        <div class="search-title__query">
+          <?php echo get_search_query(); ?>
+        </div>
+      </h1>
+    </div>
+
 		<?php if ( have_posts() ) : ?>
 
-			<div class="container">
-				<h1 class="search-title">
-					<div class="title-box title-box--chevron title-box--icon title-box--green">
-						<div class="title-box__icon">
-							<div class="title-box__icon-svg">
-								<?php hb_v2_svg('mdi-search.svg'); ?>
-							</div>
-							<div class="title-box__chevron">
-								<?php hb_v2_svg('chevron-filled.svg'); ?>
-							</div>
-						</div>
-						<div class="title-box__title">
-							Search Results
-							<div class="title-box__title-svg">
-								<?php hb_v2_svg('chevron-outline.svg'); ?>
-							</div>
-						</div>
-					</div>
-					<div class="search-title__query">
-						<?php echo get_search_query(); ?>
-					</div>
-				</h1>
-			</div>
-
-			<!-- TODO: make dynamic. Pull in first 2 case studies. Or maybe 2 featured case studies? -->
 			<div class="container">
 				<div class="well well--full-border well--no-padding centered portfolio-promo single-spaced">
 

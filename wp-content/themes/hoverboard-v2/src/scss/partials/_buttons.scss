@@ -12,6 +12,7 @@ a.btn,
   padding: $base--spacing / 2 $base--spacing;
   text-decoration: none;
   text-transform: uppercase;
+  transition: background .3s;
   &.btn--spaced {
     margin-left: $base--spacing / 2;
     margin-right: $base--spacing / 2;
@@ -29,5 +30,10 @@ a.btn,
     background: none;
     border: 3px solid $white;
     box-shadow: none;
+    &:hover,
+    &:active,
+    &:focus {
+      background: lighten($green--dark, 10%);
+    }
   }
 }

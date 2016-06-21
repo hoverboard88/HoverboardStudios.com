@@ -187,19 +187,34 @@
     padding: 3px $base--spacing / 2 7px;
   }
   .active a {
-    font-weight: bold;
     color: $secondary--blue-dark;
-    border-color: $secondary--blue-dark;
+    &::after {
+      height: 3px;
+    }
   }
   a {
     color: $secondary--blue;
-    border-bottom: 4px solid transparent;
     text-decoration: none;
     display: block;
+    position: relative;
+    transition: color .3s;
+    &::after {
+      content: "";
+      width: 100%;
+      height: 0;
+      background: $secondary--blue-dark;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      transition: height .3s;
+    }
     &:hover,
+    &:active,
     &:focus {
-      border-color: $secondary--blue-dark;
       color: $secondary--blue-dark;
+      &::after {
+        height: 3px;
+      }
     }
   }
 }

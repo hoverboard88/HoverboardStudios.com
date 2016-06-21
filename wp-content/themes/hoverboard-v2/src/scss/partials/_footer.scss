@@ -18,6 +18,9 @@
     position: relative;
     max-width: 20px;
     max-height: 20px;
+    path {
+      transition: fill .3s;
+    }
   }
   a:hover,
   a:focus {
@@ -58,6 +61,7 @@
     color: $white;
     display: block;
     text-decoration: none;
+    transition: color .3s;
     &:hover,
     &:active,
     &:focus {

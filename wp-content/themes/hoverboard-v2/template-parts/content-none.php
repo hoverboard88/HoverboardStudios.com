@@ -23,10 +23,13 @@
 		<?php elseif ( is_search() ) : ?>
 
 			<p><?php esc_html_e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'hb_v2' ); ?></p>
-			<?php
-				get_search_form();
+			<script>
+			setTimeout(function () {
+				document.querySelector('.toggle-search').click();
+			}, 500);
+			</script>
 
-		else : ?>
+		<?php else : ?>
 
 			<p><?php esc_html_e( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'hb_v2' ); ?></p>
 			<?php
