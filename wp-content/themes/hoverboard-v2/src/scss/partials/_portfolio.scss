@@ -4,6 +4,9 @@
 
 .portfolio {
   padding: $base--spacing 0 $base--spacing * 6;
+  .page-template-page-home & {
+    padding-bottom: 0;
+  }
   .portfolio__example {
     position: absolute;
     width: $width--6;

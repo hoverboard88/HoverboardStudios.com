@@ -117,6 +117,11 @@ function hb_v2_scripts() {
 	// wp_enqueue_style( 'hb_v2-style', get_template_directory_uri() . '/dist/css/style.css' );
 
 	wp_deregister_script('jquery');
+
+	// footnotes plugin, jquery.tools doesn't work with our version of jquery.
+	wp_dequeue_style('mci-footnotes-css-public');
+	wp_dequeue_script('mci-footnotes-js-jquery-tools');
+
   wp_register_script('jquery', "//ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js", false, null);
   wp_enqueue_script('jquery');
 
