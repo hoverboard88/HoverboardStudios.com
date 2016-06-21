@@ -64,6 +64,10 @@
 
 .portfolio__title {
   @include font-size(28px);
+  a {
+    color: $black;
+    text-decoration: none;
+  }
   font-family: $secondary--font-family__bold;
   margin-bottom: $base--spacing / 2;
 }

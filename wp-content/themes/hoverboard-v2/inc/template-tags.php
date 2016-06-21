@@ -101,17 +101,18 @@ endif;
  *
  * @return null
  */
-function hb_v2_category_icons($id) { ?>
+function hb_v2_category_icons($id, $taxonomy = 'category') { ?>
 
 	<ul class="list--unstyled list--horizontal list--icons">
 
-	<?php foreach (wp_get_post_categories($id) as $categoryID) { ?>
+	<?php foreach (wp_get_post_terms($id, $taxonomy) as $taxonomy_object) { ?>
 
 		<?php
+
 			// if the Advanced custom fields function exists and the icon returns a something
 			if (function_exists('get_field')) {
-				if (get_field('category-icon-color', get_category($categoryID))) {
-					$icon_color = get_field('category-icon-color', get_category($categoryID));
+				if (get_field('category-icon-color', $taxonomy_object)) {
+					$icon_color = get_field('category-icon-color', $taxonomy_object);
 				} else {
 					$icon_color = 'blue';
 				}
@@ -121,9 +122,9 @@ function hb_v2_category_icons($id) { ?>
 		?>
 
 		<li class="icon icon--circle icon--tooltip icon--<?php echo $icon_color; ?>">
-	    <a href="<?php echo get_category_link($categoryID); ?>">
-	      <?php hb_v2_svg('mdi-' . get_category($categoryID)->slug . '.svg', 'mdi-default.svg'); ?>
-	      <span class="icon-circle__text"><?php echo get_cat_name($categoryID); ?></span>
+	    <a href="<?php echo get_term_link($taxonomy_object->term_id, $taxonomy); ?>">
+	      <?php hb_v2_svg('mdi-' . $taxonomy_object->slug . '.svg', 'mdi-default.svg'); ?>
+	      <span class="icon-circle__text"><?php echo get_cat_name($taxonomyID); ?></span>
 	    </a>
 	  </li>
 

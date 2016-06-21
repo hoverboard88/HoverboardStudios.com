@@ -271,6 +271,24 @@ function hb_v2_get_featured_study() {
 
 }
 
+function hb_v2_get_home_featured_studies() {
+
+	$args = array(
+		'posts_per_page'   => 2,
+		'orderby'          => 'date',
+		'order'            => 'DESC',
+		'meta_key'         => 'study_home_featured',
+		'meta_value'       => '1',
+		'post_type'        => 'studies',
+		'post_status'      => 'publish'
+	);
+
+	$posts_array = get_posts( $args );
+
+	return $posts_array;
+
+}
+
 /**
  * Implement the Custom Header feature.
  */
