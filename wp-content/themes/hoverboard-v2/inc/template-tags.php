@@ -101,11 +101,11 @@ endif;
  *
  * @return null
  */
-function hb_v2_category_icons() { ?>
+function hb_v2_category_icons($id) { ?>
 
 	<ul class="list--unstyled list--horizontal list--icons">
 
-	<?php foreach (wp_get_post_categories(get_the_ID()) as $categoryID) { ?>
+	<?php foreach (wp_get_post_categories($id) as $categoryID) { ?>
 
 		<?php
 			// if the Advanced custom fields function exists and the icon returns a something

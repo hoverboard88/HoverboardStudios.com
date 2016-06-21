@@ -1,7 +1,7 @@
 <?php
-if(function_exists("register_field_group"))
+if(function_exists("acf_add_local_field_group"))
 {
-	register_field_group(array (
+	acf_add_local_field_group(array (
 		'id' => 'acf_attributes',
 		'title' => 'Attributes',
 		'fields' => array (
@@ -44,7 +44,7 @@ if(function_exists("register_field_group"))
 		),
 		'menu_order' => 0,
 	));
-	register_field_group(array (
+	acf_add_local_field_group(array (
 		'id' => 'acf_case-study',
 		'title' => 'Case Study',
 		'fields' => array (
@@ -110,7 +110,7 @@ if(function_exists("register_field_group"))
 		),
 		'menu_order' => 0,
 	));
-	register_field_group(array (
+	acf_add_local_field_group(array (
 		'id' => 'acf_social',
 		'title' => 'Social',
 		'fields' => array (

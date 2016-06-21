@@ -34,7 +34,7 @@
 			<div class="post__meta">
 				<div class="entry-meta">
 					<?php hb_v2_posted_by(); ?>
-					<?php hb_v2_category_icons(); ?>
+					<?php hb_v2_category_icons(get_the_ID()); ?>
 
 					<?php $user = 'user_' . get_the_author_meta('ID'); ?>
 

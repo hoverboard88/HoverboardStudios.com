@@ -46,7 +46,16 @@
 	<!-- END Search -->
 
 	<!-- START Header -->
-	<header id="masthead" class="wrap wrap--green <?php echo is_page_template('page-home.php') ? 'wrap--gradient' : 'wrap--small-gradient'; ?> site-header" role="banner">
+  <?php
+    if (is_page_template('page-home.php')) {
+      $gradient_class = 'wrap--gradient';
+    } elseif ( is_archive() && get_post_type() === 'studies' ) {
+      $gradient_class = '';
+    } else {
+			$gradient_class = 'wrap--small-gradient';
+		}
+  ?>
+	<header id="masthead" class="wrap wrap--green <?php echo $gradient_class; ?> site-header" role="banner">
     <div class="container container--top-bottom-padding">
 
 			<div class="header-wrap">

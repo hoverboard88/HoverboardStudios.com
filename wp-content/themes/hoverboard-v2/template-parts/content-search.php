@@ -13,7 +13,7 @@
 
 	<div class="container container--small">
 		<header class="entry-header">
-			<?php hb_v2_category_icons(); ?>
+			<?php hb_v2_category_icons(get_the_ID()); ?>
 			<?php the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
 
 			<?php if ( 'post' === get_post_type() || 'podcast' === get_post_type() ) : ?>

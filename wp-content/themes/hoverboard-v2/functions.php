@@ -152,6 +152,7 @@ function hb_v2_cpts() {
 				'name' => __( 'Case Studies' ),
 				'singular_name' => __( 'Case Study' )
 			),
+			'supports' => array( 'excerpt', 'editor' ),
 			'taxonomies' => array( 'category' ),
 
 			'public' => true,
@@ -159,31 +160,6 @@ function hb_v2_cpts() {
 			'rewrite' => array('slug' => 'studies'),
 		)
 	);
-
-	// $labels = array(
-  //   'name' => _x( 'Categories', 'taxonomy general name' ),
-  //   'singular_name' => _x( 'Category', 'taxonomy singular name' ),
-  //   'search_items' =>  __( 'Search Categories' ),
-  //   'all_items' => __( 'All Categories' ),
-  //   'parent_item' => __( 'Parent Category' ),
-  //   'parent_item_colon' => __( 'Parent Category:' ),
-  //   'edit_item' => __( 'Edit Category' ),
-  //   'update_item' => __( 'Update Category' ),
-  //   'add_new_item' => __( 'Add New Category' ),
-  //   'new_item_name' => __( 'New Category Name' ),
-  //   'menu_name' => __( 'Categories' ),
-  // );
-
-	// create a new taxonomy
-	// register_taxonomy(
-	// 	'tech_category',
-	// 	'studies',
-	// 	array(
-	// 		'label' => __( 'Category' ),
-	// 		'hierarchical' => true,
-	// 		'labels' => $labels,
-	// 	)
-	// );
 
 }
 add_action( 'init', 'hb_v2_cpts' );
@@ -194,6 +170,10 @@ function hb_v2_svg($file, $default = '') {
 	} else {
 		echo file_get_contents(get_template_directory() . '/dist/img/' . $default);
 	}
+}
+
+function hb_v2_prettify_url($url) {
+	return preg_replace("/https?:\/\/(.*)/u", "$1", $url);
 }
 
 /**
@@ -245,6 +225,24 @@ function hb_v2_category_color($queried_object) {
 function hb_v2_category_icon($queried_object) {
 	$term_id = $queried_object->term_id;
 	return hb_v2_svg('mdi-' . get_category($term_id)->slug . '.svg', 'mdi-default.svg');
+}
+
+function hb_v2_get_featured_study() {
+
+	$args = array(
+		'posts_per_page'   => 1,
+		'orderby'          => 'date',
+		'order'            => 'DESC',
+		'meta_key'         => 'study_index_featured',
+		'meta_value'       => '1',
+		'post_type'        => 'studies',
+		'post_status'      => 'publish'
+	);
+
+	$posts_array = get_posts( $args );
+
+	return $posts_array[0];
+
 }
 
 /**

@@ -4,6 +4,14 @@
 
 .portfolio {
   padding: $base--spacing 0 0;
+  .portfolio__example {
+    position: absolute;
+    width: $width--6;
+    bottom: 0;
+    right: -145px;
+    max-width: 300px;
+    border-bottom: 0;
+  }
 }
 
 .portfolio__item {
@@ -52,15 +60,6 @@
   // width: $width--6;
   padding-right: 30%;
   min-height: 400px;
-}
-
-.portfolio__example {
-  position: absolute;
-  width: $width--6;
-  bottom: 0;
-  right: -145px;
-  max-width: 300px;
-  border-bottom: 0;
 }
 
 .portfolio__title {

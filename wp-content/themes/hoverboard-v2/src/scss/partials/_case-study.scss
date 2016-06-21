@@ -70,3 +70,35 @@
     margin-bottom: $base--spacing / 2;
   }
 }
+
+.featured-study {
+  color: $white;
+  .featured-study__screenshot-desk {
+    position: absolute;
+    width: $width--6;
+    bottom: 0;
+    right: -145px;
+    max-width: 450px;
+    border-bottom: 0;
+  }
+  .featured-study__screenshot-internal {
+    position: absolute;
+    width: $width--2;
+    bottom: 0;
+    right: 150px;
+    max-width: 350px;
+    border-bottom: 0;
+  }
+}
+
+.featured-study__link {
+  color: $green--light;
+  text-decoration: none;
+  path {
+    fill: $green--light;
+  }
+}
+
+.featured-study__info {
+  width: $width--6;
+}
