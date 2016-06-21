@@ -18,10 +18,10 @@
       <nav class="menu--footer secondary--horizontal secondary--spaced">
         <ul>
           <li><a href="/">Home</a></li>
-          <li><a href="/work">Work</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="/blog">Blog</a></li>
-          <li><a href="/contact">Contact</a></li>
+          <li><a href="/studies/">Work</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
         <ul class="social">
           <li><a href="http://twitter.com/hoverboard88">

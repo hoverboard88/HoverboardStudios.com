@@ -86,8 +86,8 @@
 				<p class="mission">We believe in your collaboration throughout every part of your project. <br>From design ideas and inspiration to branding and implementation, Hoverboard is determined to bring your audience the very best experience to the web.</p>
 				<p class="tagline tagline-small"><strong>We are your right-hand design and development studio.</strong></p>
 				<p>
-					<a href="/about" class="btn btn--spaced btn-tertiary">About Us</a>
-					<a href="/contact" class="btn btn--spaced btn-secondary">Get a Quote</a>
+					<a href="/about/" class="btn btn--spaced btn-tertiary">About Us</a>
+					<a href="#contact" class="btn btn--spaced btn-secondary">Get a Quote</a>
 				</p>
 			</div>
 		<?php } ?>
