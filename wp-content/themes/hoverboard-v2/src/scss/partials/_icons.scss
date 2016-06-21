@@ -64,6 +64,9 @@
   }
   .icon-circle__text {
     color: $secondary--blue;
+    .wrap--green & {
+      color: $white;
+    }
   }
   path {
     fill: $secondary--blue;
@@ -77,6 +80,9 @@
   }
   .icon-circle__text {
     color: $secondary--purple;
+    .wrap--green & {
+      color: $white;
+    }
   }
   path {
     fill: $secondary--purple;
@@ -90,6 +96,9 @@
   }
   .icon-circle__text {
     color: $secondary--red;
+    .wrap--green & {
+      color: $white;
+    }
   }
   path {
     fill: $secondary--red;
@@ -103,6 +112,9 @@
   }
   .icon-circle__text {
     color: $secondary--red-light;
+    .wrap--green & {
+      color: $white;
+    }
   }
   path {
     fill: $secondary--red-light;
@@ -116,6 +128,9 @@
   }
   .icon-circle__text {
     color: $secondary--teal;
+    .wrap--green & {
+      color: $white;
+    }
   }
   path {
     fill: $secondary--teal;
@@ -129,6 +144,9 @@
   }
   .icon-circle__text {
     color: $secondary--green;
+    .wrap--green & {
+      color: $white;
+    }
   }
   path {
     fill: $secondary--green;
