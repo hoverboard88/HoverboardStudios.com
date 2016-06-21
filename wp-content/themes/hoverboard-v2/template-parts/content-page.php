@@ -15,6 +15,33 @@
   </div>
 </div>
 
+<?php if (is_page_template('page-about.php')) { ?>
+  <div class="wrap">
+    <section class="about container">
+      <div class="about__partner">
+        <div class="about__img">
+          <img src="<?php bloginfo('template_directory'); ?>/dist/img/ryan.jpg" alt="">
+        </div>
+        <div class="about__detail">
+          <h4 class="about__title">Ryan Tvenge</h4>
+          <div class="about__position">Designer/Developer</div>
+          <a class="about__link" href="https://twitter.com/rtvenge">@rtvenge</a>
+        </div>
+      </div>
+      <div class="about__partner">
+        <div class="about__img">
+          <img src="<?php bloginfo('template_directory'); ?>/dist/img/matt.jpg" alt="">
+        </div>
+        <div class="about__detail">
+          <h4 class="about__title">Matt Biersdorf</h4>
+          <div class="about__position">Designer/Developer</div>
+          <a class="about__link" href="https://twitter.com/mbiersdo">@mbiersdo</a>
+        </div>
+      </div>
+    </section>
+  </div>
+<?php } ?>
+
 <div class="wrap">
   <article id="post-<?php the_ID(); ?>" <?php post_class('content container container--small'); ?>>
 

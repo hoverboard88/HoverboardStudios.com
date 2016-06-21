@@ -9,17 +9,13 @@
 
 ?>
 
-<?php
-  $featured_studies = hb_v2_get_home_featured_studies();
-?>
-
 <div class="wrap wrap--white wrap--portfolio">
   <section class="portfolio container container--xwide">
     <div class="centered">
       <h2 class="portfolio__header portfolio__header--gray-light">Our Latest Work</h2>
     </div>
     <div class="portfolio__items">
-      <?php foreach ($featured_studies as $key => $featured_study) { ?>
+      <?php foreach (hb_v2_get_home_featured_studies() as $key => $featured_study) { ?>
         <div class="portfolio__item">
           <div class="portfolio__summary">
             <?php hb_v2_category_icons($featured_study->ID, 'tech_category'); ?>
@@ -110,7 +106,7 @@
       <h3 class="services__header one-half-spaced">Thinking of a website revamp?</h3>
       <p class="services__title single spaced">Looking for feedback on your latest project? Not sure exactly how we could help?</p>
       <p class="h4">Let us know what you’re up to and we’ll let you know how we can help you on your next project.</p>
-      <p><a href="#" class="btn btn--shadow">Get in Touch</a></p>
+      <p><a href="#contact" class="btn btn--shadow">Get in Touch</a></p>
     </div>
     <div class="services__side-column">
       <h4 class="services__title--h4">Services</h4>
@@ -130,7 +126,7 @@
       <div class="about__detail">
         <h4 class="about__title">Ryan Tvenge</h4>
         <div class="about__position">Designer/Developer</div>
-        <a class="about__link" href="#">@rtvenge</a>
+        <a class="about__link" href="https://twitter.com/rtvenge">@rtvenge</a>
       </div>
     </div>
     <div class="about__partner">
@@ -140,7 +136,7 @@
       <div class="about__detail">
         <h4 class="about__title">Matt Biersdorf</h4>
         <div class="about__position">Designer/Developer</div>
-        <a class="about__link" href="#">@mbiersdo</a>
+        <a class="about__link" href="https://twitter.com/mbiersdo">@mbiersdo</a>
       </div>
     </div>
   </section>

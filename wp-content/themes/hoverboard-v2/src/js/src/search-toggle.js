@@ -1,7 +1,7 @@
 (function ($) {
 
   var
-    $toggleSearch = $('#toggle-search'),
+    $toggleSearch = $('.toggle-search'),
     $searchForm = $('#form--search');
 
   // moved this to an inline <script> to avoid flash of it being rendered

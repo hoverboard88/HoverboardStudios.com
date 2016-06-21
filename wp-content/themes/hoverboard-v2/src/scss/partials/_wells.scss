@@ -31,7 +31,8 @@
   @include breakpoint(700px) {
     padding: $base--spacing * 2;
   }
-  a {
+  a,
+  button {
     color: $secondary--blue;
     font-weight: bold;
     text-decoration: none;

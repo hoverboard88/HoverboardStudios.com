@@ -4,6 +4,8 @@
     $('#contact').removeClass('active');
   }
 
+  $('a[href="#contact"]').addClass('contact-popup-btn');
+
   $('#contact-popup__close').on('click', function () {
     $('#contact').removeClass('active');
     history.pushState('', document.title, window.location.pathname);
@@ -38,7 +40,7 @@
     });
   });
 
-  $('#contact-popup-btn').on('click', function () {
+  $('.contact-popup-btn').on('click', function () {
     $('#contact').addClass('active');
   });
 

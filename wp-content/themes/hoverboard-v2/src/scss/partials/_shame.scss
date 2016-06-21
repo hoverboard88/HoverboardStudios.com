@@ -72,6 +72,9 @@
     top: -4px;
     right: -16px;
     position: absolute;
+    path {
+      fill: $black;
+    }
   }
 }
 
@@ -80,7 +83,8 @@
   .title-box__icon {
     background-color: $secondary--green;
   }
-  .title-box__icon .title-box__chevron {
+  .title-box__icon .title-box__chevron,
+  .title-box__title-svg {
     path {
       fill: $secondary--green;
     }
@@ -95,7 +99,8 @@
   .title-box__icon {
     background-color: $secondary--blue;
   }
-  .title-box__icon .title-box__chevron {
+  .title-box__icon .title-box__chevron,
+  .title-box__title-svg {
     path {
       fill: $secondary--blue;
     }
@@ -110,7 +115,8 @@
   .title-box__icon {
     background-color: $secondary--purple;
   }
-  .title-box__icon .title-box__chevron {
+  .title-box__icon .title-box__chevron,
+  .title-box__title-svg {
     path {
       fill: $secondary--purple;
     }
@@ -125,7 +131,8 @@
   .title-box__icon {
     background-color: $secondary--red;
   }
-  .title-box__icon .title-box__chevron {
+  .title-box__icon .title-box__chevron,
+  .title-box__title-svg {
     path {
       fill: $secondary--red;
     }
@@ -140,7 +147,8 @@
   .title-box__icon {
     background-color: $secondary--red-light;
   }
-  .title-box__icon .title-box__chevron {
+  .title-box__icon .title-box__chevron,
+  .title-box__title-svg {
     path {
       fill: $secondary--red-light;
     }
@@ -155,7 +163,8 @@
   .title-box__icon {
     background-color: $secondary--teal;
   }
-  .title-box__icon .title-box__chevron {
+  .title-box__icon .title-box__chevron,
+  .title-box__title-svg {
     path {
       fill: $secondary--teal;
     }
