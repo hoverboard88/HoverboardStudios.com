@@ -38,7 +38,7 @@
       flex-wrap: wrap;
     }
   }
-  .post {
+  article {
     padding: $base--spacing * 1.5 $base--spacing $base--spacing / 2;
     border-bottom: 1px solid $gray--medium;
     @include breakpoint(800px) {

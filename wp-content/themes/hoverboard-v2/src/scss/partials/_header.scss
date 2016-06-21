@@ -79,6 +79,7 @@ body {
   }
   .menu-item--search {
     position: relative;
+    width: 40px; // gives it layout :/
   }
   a {
     display: block;

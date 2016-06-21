@@ -1,9 +1,15 @@
 .feature-block {
-  padding-top: $base--spacing * 2;
+  padding: $base--spacing / 2 $base--spacing / 2 0;
+  @include breakpoint(600px) {
+    padding-top: $base--spacing * 2;
+  }
 }
 
 .tagline {
-  @include font-size(36px);
+  @include font-size(24px);
+  @include breakpoint(600px) {
+    @include font-size(36px);
+  }
   color: $white;
   &.tagline-small {
     @include font-size(24px);

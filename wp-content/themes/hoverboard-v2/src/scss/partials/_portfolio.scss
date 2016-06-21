@@ -1,5 +1,11 @@
 .wrap--portfolio {
   border-bottom: 4px solid $gray--medium;
+  .page-template-page-home & {
+    border-bottom-width: 0;
+    @include breakpoint(1000px) {
+      border-bottom-width: 4px;
+    }
+  }
 }
 
 .portfolio {
@@ -21,15 +27,16 @@
 
 .portfolio__item {
   overflow: hidden;
-  padding: $base--spacing * 3 ($base--spacing / 2) $base--spacing;
+  padding: $base--spacing * 2 ($base--spacing / 2) $base--spacing;
   position: relative;
   border-bottom: 4px solid $gray--medium;
-  .page-template-page-home & {
-    border-bottom-width: 0;
-  }
   @include breakpoint(1000px) {
+    padding-top: $base--spacing * 3;
     float: left;
     width: $width--6;
+    .page-template-page-home & {
+      border-bottom-width: 0;
+    }
     &:nth-child(2n+1) {
       border-right: 4px solid $gray--medium;
     }

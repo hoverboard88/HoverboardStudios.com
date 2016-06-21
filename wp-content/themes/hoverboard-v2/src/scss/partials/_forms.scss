@@ -156,7 +156,7 @@ textarea {
   @include font-size(21px);
   margin: 0;
   padding: ($base--spacing / 2);
-  width: 80%;
+  width: 70%;
   &:focus {
     box-shadow: none;
   }

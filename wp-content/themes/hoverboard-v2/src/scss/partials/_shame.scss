@@ -1,5 +1,8 @@
 .container--title-box {
-  padding: $base--spacing * 4 $base--spacing $base--spacing;
+  padding: $base--spacing;
+  @include breakpoint(600px) {
+    padding-top: $base--spacing * 4;
+  }
   text-align: center;
 }
 
@@ -184,7 +187,7 @@
   }
   li {
     display: inline-block;
-    padding: 3px $base--spacing / 2 7px;
+    padding: 3px $base--spacing / 2 0;
   }
   .active a {
     color: $secondary--blue-dark;

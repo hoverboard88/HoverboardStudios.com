@@ -39,7 +39,7 @@ get_header(); ?>
 		<?php if ( have_posts() ) : ?>
 
 			<div class="container">
-				<div class="well well--full-border well--no-padding centered portfolio-promo single-spaced">
+				<div class="well well--full-border well--no-padding centered portfolio-promo">
 
           <?php foreach (hb_v2_get_home_featured_studies() as $key => $featured_study) { ?>
 						<div class="portfolio-promo__item">
