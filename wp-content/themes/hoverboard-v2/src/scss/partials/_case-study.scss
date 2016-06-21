@@ -73,6 +73,7 @@
 
 .featured-study {
   color: $white;
+  min-height: 500px;
   .featured-study__screenshot-desk {
     position: absolute;
     width: $width--6;
@@ -80,14 +81,24 @@
     right: -145px;
     max-width: 450px;
     border-bottom: 0;
+    @include breakpoint(500px) {
+      right: -125px;
+    }
+    @include breakpoint(600px) {
+      right: -145px;
+    }
   }
   .featured-study__screenshot-internal {
     position: absolute;
-    width: $width--2;
+    width: $width--3;
     bottom: 0;
     right: 150px;
     max-width: 350px;
     border-bottom: 0;
+    display: none;
+    @include breakpoint(600px) {
+      display: block;
+    }
   }
 }
 
@@ -100,5 +111,13 @@
 }
 
 .featured-study__info {
-  width: $width--6;
+  width: $width--10;
+  position: relative;
+  z-index: 1;
+  @include breakpoint(450px) {
+    width: $width--8;
+  }
+  @include breakpoint(600px) {
+    width: $width--6;
+  }
 }
