@@ -152,7 +152,7 @@ function hb_v2_cpts() {
 				'name' => __( 'Case Studies' ),
 				'singular_name' => __( 'Case Study' )
 			),
-			'supports' => array( 'excerpt', 'editor' ),
+			'supports' => array( 'excerpt', 'editor', 'title' ),
 			'taxonomies' => array( 'category' ),
 
 			'public' => true,
