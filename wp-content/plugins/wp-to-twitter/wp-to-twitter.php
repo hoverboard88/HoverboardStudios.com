@@ -3,7 +3,7 @@
 Plugin Name: WP to Twitter
 Plugin URI: http://www.joedolson.com/wp-to-twitter/
 Description: Posts a Tweet when you update your WordPress blog or post a link, using your URL shortening service. Rich in features for customizing and promoting your Tweets.
-Version: 3.2.9
+Version: 3.2.10
 Author: Joseph Dolson
 Text Domain: wp-to-twitter
 Domain Path: /lang
@@ -44,7 +44,7 @@ require_once( plugin_dir_path( __FILE__ ) . '/wpt-widget.php' );
 require_once( plugin_dir_path( __FILE__ ) . '/wpt-rate-limiting.php' );
 
 global $wpt_version;
-$wpt_version = "3.2.9";
+$wpt_version = "3.2.10";
 
 
 // Create a helper function for easy SDK access.
@@ -1590,32 +1590,6 @@ function wpt_save_post( $id ) {
 	// only send debug data if post meta is updated. 
 	if ( $update == true || is_int( $update ) ) {
 		wpt_mail( "Post Meta Inserted: #$id", print_r( $_POST, 1 ) ); // DEBUG
-	}
-}
-
-/**
- * Parse custom shortcodes 
- *
- * @param string $sentence Tweet template
- * @param integer $post_ID Post ID.
- *
- * @return string $sentence with any custom shortcodes replaced with their appropriate content.
- */
-function wpt_custom_shortcodes( $sentence, $post_ID ) {
-	$pattern = '/([([\[\]?)([A-Za-z0-9-_])*(\]\]]?)+/';
-	$params  = array( 0 => "[[", 1 => "]]" );
-	preg_match_all( $pattern, $sentence, $matches );
-	if ( $matches && is_array( $matches[0] ) ) {
-		foreach ( $matches[0] as $value ) {
-			$shortcode = "$value";
-			$field     = str_replace( $params, "", $shortcode );
-			$custom    = apply_filters( 'wpt_custom_shortcode', strip_tags( get_post_meta( $post_ID, $field, true ) ), $post_ID, $field );
-			$sentence  = str_replace( $shortcode, $custom, $sentence );
-		}
-
-		return $sentence;
-	} else {
-		return $sentence;
 	}
 }
 

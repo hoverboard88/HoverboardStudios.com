@@ -9,6 +9,7 @@ function jd_truncate_tweet( $tweet, $post, $post_ID, $retweet = false, $ref = fa
 	$length       = ( wpt_post_with_media( $post_ID, $post ) ) ? $maxlength['with_media'] : $maxlength['without_media'];
 	$tweet        = apply_filters( 'wpt_tweet_sentence', $tweet, $post_ID );
 	$tweet        = trim( wpt_custom_shortcodes( $tweet, $post_ID ) );
+	$tweet        = trim( wpt_user_meta_shortcodes( $tweet, $post['authId'] ) );
 	$encoding     = ( get_option( 'blog_charset' ) != 'UTF-8' && get_option( 'blog_charset' ) != '' ) ? get_option( 'blog_charset' ) : 'UTF-8';
 	$diff         = 0;
 
@@ -288,4 +289,53 @@ function wpt_length_array( $values, $encoding ) {
 	}
 
 	return $array;
+}
+
+
+/**
+ * Parse custom shortcodes 
+ *
+ * @param string $sentence Tweet template
+ * @param integer $post_ID Post ID.
+ *
+ * @return string $sentence with any custom shortcodes replaced with their appropriate content.
+ */
+function wpt_custom_shortcodes( $sentence, $post_ID ) {
+	$pattern = '/([([\[\]?)([A-Za-z0-9-_])*(\]\]]?)+/';
+	$params  = array( 0 => "[[", 1 => "]]" );
+	preg_match_all( $pattern, $sentence, $matches );
+	if ( $matches && is_array( $matches[0] ) ) {
+		foreach ( $matches[0] as $value ) {
+			$shortcode = "$value";
+			$field     = str_replace( $params, "", $shortcode );
+			$custom    = apply_filters( 'wpt_custom_shortcode', strip_tags( get_post_meta( $post_ID, $field, true ) ), $post_ID, $field );
+			$sentence  = str_replace( $shortcode, $custom, $sentence );
+		}
+	}
+	
+	return $sentence;
+}
+
+/**
+ * Parse user meta shortcodes 
+ *
+ * @param string $sentence Tweet template
+ * @param integer $auth_ID Post Author ID.
+ *
+ * @return string $sentence with any custom shortcodes replaced with their appropriate content.
+ */
+function wpt_user_meta_shortcodes( $sentence, $auth_ID ) {
+	$pattern = '/([({\{\}?)([A-Za-z0-9-_])*(\}\}}?)+/';
+	$params  = array( 0 => "{{", 1 => "}}" );
+	preg_match_all( $pattern, $sentence, $matches );
+	if ( $matches && is_array( $matches[0] ) ) {
+		foreach ( $matches[0] as $value ) {
+			$shortcode = "$value";
+			$field     = str_replace( $params, "", $shortcode );
+			$custom    = apply_filters( 'wpt_user_meta_shortcode', strip_tags( get_user_meta( $auth_ID, $field, true ) ), $auth_ID, $field );
+			$sentence  = str_replace( $shortcode, $custom, $sentence );
+		}
+	}
+	
+	return $sentence;
 }

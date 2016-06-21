@@ -6,7 +6,7 @@ License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Requires at least: 3.2.1
 Tested up to: 4.5
-Stable tag: 2.10.14
+Stable tag: 2.10.16
 
 Saves submitted form data to the database. Export the data to a file or use short codes to display it.
 
@@ -32,7 +32,7 @@ By simply installing the plugin, it will automatically begin to capture form sub
 
 Other form submissions can be saved with the addition of the <a href="http://cfdbplugin.com/?page_id=508">[cfdb-save-form-post]</a> short code on the target submission page.
 
-Contact form plugins are great but generally one thing...the ability to save and retrieve the form data to/from the database.
+Contact form plugins are great except for one thing...the ability to save and retrieve the form data to/from the database.
 If you get a lot of form submissions, then you end up sorting through a lot of email.
 
 This plugin provides three administration pages in the administration area under the "Contact form DB" submenu.
@@ -86,6 +86,16 @@ You can always deactivate the plugin without loosing data.
 1. Admin Panel view of submitted form data
 
 == Changelog ==
+
+= 2.10.17 =
+* Bug Fix: Form names with double quotes on them could not be viewed in the admin panel
+* New: Can save Page Title and Page URL from Contact Form 7 submissions. Enable this in the CFDB Options page.
+* Improvement: Setting option for property "Allow only Administrators to see CFDB administration screens" to true by default
+
+= 2.10.16 =
+* Improvement: In shortcodes and exports, the form name can be a regular express, for example form names starting with "a" [cfdb-table form="/^a"]
+(this is case insensitive based on your MySQL CI setting. It uses a MySQL REGEX, not PHP preg_match)
+* Improvement: Helpful message on CFDB Options page when it cannot be displayed due to inadequate PHP version
 
 = 2.10.15 =
 * Bug Fix: When adding [submit_time] in Contact Form 7 mails, the value might not match what is in the DB depending on your locale setting.

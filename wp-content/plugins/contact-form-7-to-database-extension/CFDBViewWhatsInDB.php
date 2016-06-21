@@ -123,7 +123,7 @@ class CFDBViewWhatsInDB extends CFDBView {
                             $selected = ($formName == $currSelection) ? "selected" : "";
                             $formNameEscaped = htmlentities($formName, null, 'UTF-8');
                         ?>
-                        <option value="<?php echo $formNameEscaped ?>" <?php echo $selected ?>><?php echo $formNameEscaped ?></option>
+                        <option value="<?php echo str_replace('"', '&quot;', $formNameEscaped) ?>" <?php echo $selected ?>><?php echo $formNameEscaped ?></option>
                         <?php } ?>
                     </select>
                 </form>
@@ -541,14 +541,19 @@ class CFDBViewWhatsInDB extends CFDBView {
 
 
         if (!$page || $page < 1) $page = 1; //default to 1.
-        $startRow = ($totalRows == 0) ? 0 : $rowsPerPage * ($page - 1) + 1;
-
+        $startRow = ($totalRows == 0) ? 1 : $rowsPerPage * ($page - 1) + 1;
 
         $endRow = min($startRow + $rowsPerPage - 1, $totalRows);
+        if ($endRow <= 0) {
+            $startRow = $endRow = 0;
+        }
         echo '<span style="margin-bottom:5px;">';
         printf(__('Returned entries %s to %s of %s entries in the database', 'contact-form-7-to-database-extension'),
                $startRow, $endRow, $totalRows);
         echo '</span>';
+        if ($endRow == 0) {
+            return $startRow;
+        }
         echo '<div class="cfdb_paginate">';
 
         $numPages = ($rowsPerPage > 0) ? ceil($totalRows / $rowsPerPage) : 1;
@@ -638,7 +643,7 @@ class CFDBViewWhatsInDB extends CFDBView {
             echo  "</div>\n";
         }
 
-        // Next scrip it to hide the WP "Thank You" footer which can overlap the CFDB table.
+        // Next script is to hide the WP "Thank You" footer which can overlap the CFDB table.
         ?>
         <script type="text/javascript" language="Javascript">
             jQuery(document).ready(function () {

@@ -6,7 +6,7 @@ Requires at least: 4.1
 Tested up to: 4.5
 License: GPLv2 or later
 Text Domain: wp-to-twitter
-Stable tag: 3.2.8
+Stable tag: 3.2.9
 
 Posts a Twitter update when you update your WordPress blog or add a link, with your chosen URL shortening service.
 
@@ -67,6 +67,13 @@ Translating my plug-ins is always appreciated. Work on WP to Twitter translation
 * 4.2 added compat function for mb_substr; drop mine when I drop support for 4.1
 * WP to Twitter timing bug with images?
 * If first #category# is excluded from Tweet, fetch 2nd category in its place? See #1490
+
+
+= 3.2.10 =
+
+* Bug fix: extra closing `p` tag in widget output.
+* Feature: pattern for getting arbitrary author meta: {{meta_field}}
+* Minor security fix: ignored wpnonce verification if nonce not provided in settings admin.
 
 = 3.2.9 =
 
@@ -301,4 +308,4 @@ Writing and maintaining a plug-in is a lot of work. You can help me by providing
 
 == Upgrade Notice ==
 
-* 3.2.7: Several important bug fixes; incorporates Freemius opt-in information tracking. 
+* 3.2.10: Minor security fix; recommend updating immediately. 

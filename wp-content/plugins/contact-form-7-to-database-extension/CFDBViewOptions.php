@@ -30,8 +30,9 @@ class CFDBViewOptions extends CFDBView {
      */
     function display(&$plugin) {
         $this->pageHeader($plugin);
-        $this->outputHeader();
-        $this->outputOptions($plugin);
+        if ($this->outputHeader()) {
+            $this->outputOptions($plugin);
+        }
     }
 
     public function enqueueSettingsPageScripts() {
@@ -91,6 +92,9 @@ class CFDBViewOptions extends CFDBView {
                     };
                     $this->outputSettings($filter, $plugin);
                     ?>
+                    <p>
+                        <a target="_blank" href="http://cfdbplugin.com/?page_id=625" style="font-weight: bold">Notes on security settings</a>
+                    </p>
                 </div>
                 <div id="cfdb_config-3">
                     <?php
@@ -137,8 +141,24 @@ class CFDBViewOptions extends CFDBView {
         $this->outputFooter();
     }
 
+    /**
+     * @return bool false means don't display additional contents because PHP version is too old
+     */
     public function outputHeader() {
-        ?>
+        if (version_compare(phpversion(), '5.3') < 0) {
+            printf('<h1>%s</h1>',
+                    __('PHP Upgrade Needed', 'contact-form-7-to-database-extension'));
+            _e('This page requires PHP 5.3 or later on your server.', 'contact-form-7-to-database-extension');
+            echo '<br/>';
+            _e('Your server\'s PHP version: ', 'contact-form-7-to-database-extension');
+            echo phpversion();
+            echo '<br/>';
+            printf('<a href="https://wordpress.org/about/requirements/">%s</a>',
+                    __('See WordPress Recommended PHP Version', 'contact-form-7-to-database-extension'));
+            return false;
+        }
+
+    ?>
         <style type="text/css">
             table.cfdb-options-table {
                 width: 100%
@@ -169,13 +189,15 @@ class CFDBViewOptions extends CFDBView {
                            value="<?php echo htmlspecialchars(__('Save Changes', 'contact-form-7-to-database-extension')); ?>"/>
                 </p>
 
-                <?php
-                $settingsGroup = get_class($this) . '-settings-group';
-                settings_fields($settingsGroup);
-                }
+            <?php
+            $settingsGroup = get_class($this) . '-settings-group';
+            settings_fields($settingsGroup);
+            return true;
 
-                public function outputFooter() {
-                ?>
+        }
+
+    public function outputFooter() {
+        ?>
             </form>
         </div>
         <?php

@@ -2,7 +2,7 @@
 /*
 Plugin Name: CodePen Embedded Pens Shortcode
 Description: Enables shortcode to embed Pens.
-Version: 0.4
+Version: 0.6
 License: GPL
 Author: Chris Coyier / CodePen
 Author URI: http://codepen.io
@@ -21,13 +21,14 @@ function createCodePenEmbed($atts, $content = null) {
     'slug_hash'    => '',
     'default_tab'  => 'result',
     'animations'   => 'run',
-    'preview'      => false
+    'preview'      => false,
+    'version'      => '2'
   ), $atts));
 
   if ($setting_override_theme_id) {
     $theme_to_use = $setting_override_theme_id;
   } else {
-    if ($theme_id != 0) {
+    if ($theme_id !== 0) {
       $theme_to_use = $theme_id;
     } else if ($setting_theme_id) {
       $theme_to_use = $setting_theme_id;
@@ -54,6 +55,7 @@ function createCodePenEmbed($atts, $content = null) {
 		$attrs .= " data-slug-hash='" . $slug_hash . "'";
 		$attrs .= " data-default-tab='" . $default_tab . "'";
 		$attrs .= " data-animations='" . $animations . "'";
+    $attrs .= " data-embed-version='" . $version . "'";
 
     if ($preview) {
       $attrs .= " data-preview='true'";
@@ -63,7 +65,7 @@ function createCodePenEmbed($atts, $content = null) {
     $content = str_replace('&#8217;', "'", html_entity_decode($content));
 
 		$embed =  "<p class='codepen' " . $attrs . ">\n";
-		$embed .=   $content;
+		$embed .=   $content . $theme_id;
 		$embed .= "</p>\n";
 
 		$embed .= '<script async src="//codepen.io/assets/embed/ei.js"></script>';
@@ -85,7 +87,7 @@ class CodePenEmbedSettingsPage {
 
   public function __construct() {
     add_action('admin_menu', array($this, 'add_cp_embed_options_page'));
-    add_action( 'admin_init', array($this, 'page_init'));
+    add_action('admin_init', array($this, 'page_init'));
   }
 
   public function add_cp_embed_options_page() {
@@ -157,10 +159,12 @@ class CodePenEmbedSettingsPage {
     $new_input = array();
 
     if (isset($input['theme_id']))
-      $new_input['theme_id'] = absint($input['theme_id']);
+      $new_input['theme_id'] = trim($input['theme_id']);
+      //$new_input['theme_id'] = absint($input['theme_id']);
 
     if (isset($input['override_theme_id']))
-      $new_input['override_theme_id'] = absint($input['override_theme_id']);
+      $new_input['override_theme_id'] = trim($input['override_theme_id']);
+      //$new_input['override_theme_id'] = absint($input['override_theme_id']);
 
     return $new_input;
   }

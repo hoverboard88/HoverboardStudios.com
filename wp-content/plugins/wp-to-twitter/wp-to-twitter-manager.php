@@ -5,12 +5,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	
 function wpt_updated_settings() {
 	wpt_check_version();
-
-	if ( ! empty( $_POST['_wpnonce'] ) ) {
-		$nonce = $_REQUEST['_wpnonce'];
-		if ( ! wp_verify_nonce( $nonce, 'wp-to-twitter-nonce' ) ) {
-			die( "Security check failed" );
-		}
+	
+	if ( empty( $_POST ) ) {
+		return;
+	}
+	
+	$nonce = $_REQUEST['_wpnonce'];
+	if ( ! wp_verify_nonce( $nonce, 'wp-to-twitter-nonce' ) ) {
+		die( "Security check failed" );
 	}
 
 	if ( isset( $_POST['oauth_settings'] ) ) {
@@ -432,6 +434,15 @@ function wpt_update_settings() {
 						_e( "<strong>Example:</strong> <code>[[custom_field]]</code>", 'wp-to-twitter' ); 
 					?>
 					</p>
+					<p>
+					<?php 
+						_e( "Create custom shortcodes and access the post author's custom user meta fields by using curly brackets and the name of the custom field.", 'wp-to-twitter' );
+					?>
+					<br />
+					<?php
+						_e( "<strong>Example:</strong> <code>{{user_meta}}</code>", 'wp-to-twitter' ); 
+					?>
+					</p>					
 				</div>
 			</div>
 		</div>	

@@ -56,7 +56,7 @@ class ExportToExcel extends ExportBase implements CFDBExport {
             echo '<br/>';
             printf('<a href="https://wordpress.org/about/requirements/">%s</a>',
                     __('See WordPress Recommended PHP Version', 'contact-form-7-to-database-extension'));
-            printf('</body></html');
+            printf('</body></html>');
             return;
         }
         require_once 'Spout-2.4.2/Autoloader/autoload.php'; // required PHP 5.4
