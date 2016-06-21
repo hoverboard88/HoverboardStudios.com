@@ -14,6 +14,10 @@
       $toggleSearch.toggleClass('active');
       $searchForm.toggleClass('inactive');
 
+      if ( !$('#form--search').hasClass('inactive') ) {
+        $searchForm.find('.form--search-input').focus();
+      }
+
     });
 
 }(jQuery));
