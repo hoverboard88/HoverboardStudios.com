@@ -40,11 +40,11 @@
   }
   .post {
     padding: $base--spacing * 1.5 $base--spacing $base--spacing / 2;
+    border-bottom: 1px solid $gray--medium;
     @include breakpoint(800px) {
       padding-left: $base--spacing * 6;
       padding-right: $base--spacing * 6;
     }
-    border-bottom: 1px solid $gray--medium;
     &.post-list__even {
       @include breakpoint(800px) {
         width: 50%;

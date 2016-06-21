@@ -165,6 +165,7 @@ function hb_v2_cpts() {
 		'studies',
 		array(
 			'label' => __( 'Category' ),
+			'rewrite' => array( 'slug' => 'project-category' ),
 			'hierarchical' => true,
 			'labels' => $labels,
 		)

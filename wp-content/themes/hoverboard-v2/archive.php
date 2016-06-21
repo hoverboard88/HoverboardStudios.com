@@ -31,9 +31,14 @@ get_header(); ?>
 				</h1>
 			</header><!-- .page-header -->
 
-			<div class="container category-tabs">
+			<div id="category-tabs" class="container category-tabs">
 				<ul>
-					<li class="active"><a href="/blog/">All</a></li>
+					<?php if (get_post_type() == 'post') {
+						$base_slug = 'blog';
+					} else {
+						$base_slug = get_post_type();
+					} ?>
+					<li><a href="/<?php echo $base_slug; ?>/">All</a></li>
 					<?php wp_list_categories( 'taxonomy=category&title_li=' ); ?>
 				</ul>
 			</div>

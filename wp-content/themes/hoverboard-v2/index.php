@@ -30,9 +30,9 @@ get_header(); ?>
 				</header>
 			<?php endif; ?>
 
-			<div class="container category-tabs">
+			<div id="category-tabs" class="container category-tabs">
 				<ul>
-					<li class="active"><a href="/blog/">All</a></li>
+					<li><a href="/blog/">All</a></li>
 					<?php wp_list_categories( 'taxonomy=category&title_li=' ); ?>
 				</ul>
 			</div>

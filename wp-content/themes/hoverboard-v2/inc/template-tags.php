@@ -124,7 +124,7 @@ function hb_v2_category_icons($id, $taxonomy = 'category') { ?>
 		<li class="icon icon--circle icon--tooltip icon--<?php echo $icon_color; ?>">
 	    <a href="<?php echo get_term_link($taxonomy_object->term_id, $taxonomy); ?>">
 	      <?php hb_v2_svg('mdi-' . $taxonomy_object->slug . '.svg', 'mdi-default.svg'); ?>
-	      <span class="icon-circle__text"><?php echo get_cat_name($taxonomyID); ?></span>
+	      <span class="icon-circle__text"><?php echo get_term($taxonomy_object->term_id, $taxonomy)->name; ?></span>
 	    </a>
 	  </li>
 

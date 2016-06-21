@@ -19,11 +19,7 @@
   padding: $base--spacing ($base--spacing / 2);
   position: relative;
   border-bottom: 4px solid $gray--medium;
-  &:last-child {
-    border: 0;
-  }
   @include breakpoint(1000px) {
-    border: 0;
     float: left;
     width: $width--6;
     &:nth-child(2n+1) {
@@ -53,23 +49,23 @@
 .portfolio__items {
   @include breakpoint(1000px) {
     display: flex;
+    flex-wrap: wrap;
   }
 }
 
 .portfolio__summary {
-  // width: $width--6;
   padding-right: 30%;
   min-height: 400px;
 }
 
 .portfolio__title {
   @include font-size(28px);
+  font-family: $secondary--font-family__bold;
+  margin-bottom: $base--spacing / 2;
   a {
     color: $black;
     text-decoration: none;
   }
-  font-family: $secondary--font-family__bold;
-  margin-bottom: $base--spacing / 2;
 }
 
 .portfolio__website {
