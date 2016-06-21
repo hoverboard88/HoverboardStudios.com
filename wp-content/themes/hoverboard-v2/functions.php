@@ -260,7 +260,7 @@ require get_template_directory() . '/inc/template-tags.php';
 /**
  * Create Custom Fields via Advanced Custom Fields plugin
  */
-require get_template_directory() . '/inc/advanced-custom-fields.php';
+// require get_template_directory() . '/inc/advanced-custom-fields.php';
 
 /**
  * Custom functions that act independently of the theme templates.
