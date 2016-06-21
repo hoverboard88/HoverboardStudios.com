@@ -179,9 +179,17 @@ textarea {
     display: flex;
   }
   .wpcf7-list-item {
-    border-right: 1px dotted $gray--medium;
     padding: 1px;
     display: block;
+    border-bottom: 1px dotted $gray--medium;
+    margin-left: 0;
+    &.last {
+      border-bottom: 0;
+    }
+    @include breakpoint(650px) {
+      border-right: 1px dotted $gray--medium;
+      border-bottom: 0;
+    }
     label {
       padding: $base--spacing / 6 $base--spacing / 3;
       display: block;
@@ -196,10 +204,12 @@ textarea {
     }
     &.active label {
       @include font-size(16px, false);
-      min-width: 200px;
       opacity: 1;
       color: $gray--dark;
       background: lighten($gray--medium, 5%);
+      @include breakpoint(650px) {
+        min-width: 200px;
+      }
     }
   }
   input {

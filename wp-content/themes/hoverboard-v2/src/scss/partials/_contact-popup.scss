@@ -10,7 +10,7 @@
 .contact-popup {
   // only with JS enabled.
   .js & {
-    position: fixed;
+    position: absolute;
     left: 0;
     right: 0;
     top: 0;
@@ -21,6 +21,9 @@
     height: 100%;
     transition: max-height .3s;
     z-index: 100;
+    @include breakpoint(800px) {
+      position: fixed;
+    }
     &.active,
     :target {
       max-height: 3999px;
