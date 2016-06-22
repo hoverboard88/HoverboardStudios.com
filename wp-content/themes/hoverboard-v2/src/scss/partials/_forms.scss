@@ -161,7 +161,7 @@ textarea {
     box-shadow: none;
   }
   @include input-placeholder {
-    color: darken(rgba($white, .3), 30%);
+    color: rgba($white, .5);
   }
 }
 
@@ -175,6 +175,7 @@ textarea {
   max-width: 600px;
   display: block;
   align-items: center;
+  @extend .clearfix;
   @include breakpoint(650px) {
     display: flex;
   }
@@ -183,12 +184,14 @@ textarea {
     display: block;
     border-bottom: 1px dotted $gray--medium;
     margin-left: 0;
+    min-width: 70px;
     &.last {
       border-bottom: 0;
     }
     @include breakpoint(650px) {
       border-right: 1px dotted $gray--medium;
       border-bottom: 0;
+      float: left;
     }
     label {
       padding: $base--spacing / 6 $base--spacing / 3;
@@ -196,6 +199,7 @@ textarea {
       text-align: center;
       cursor: pointer;
       @include breakpoint(650px) {
+        min-height: 40px;
         @include font-size(1px, false); // text needs to take up some space for flexbox to work
         opacity: 0;
         color: lighten($gray--dark, 20%);

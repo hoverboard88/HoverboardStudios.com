@@ -106,6 +106,7 @@
     width: 15px;
     padding-right: $base--spacing / 3;
     position: relative;
+    height: 25px; // for IE9
     top: 2px;
   }
 }

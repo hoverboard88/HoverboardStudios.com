@@ -21,10 +21,6 @@
   border-bottom: 6px solid $gray--medium;
   margin-bottom: $base--spacing;
   color: lighten($black, 25%);
-  // .container & {
-  //   margin-left: (-$base--spacing / 2) - 4px;
-  //   margin-right: (-$base--spacing / 2) - 4px;
-  // }
   p {
     @include font-size(18px);
   }
@@ -86,6 +82,7 @@
     border: 2px solid $gray--medium;
   }
   .flex-row {
+    @extend .clearfix;
     border-bottom: 4px solid $gray--medium;
     &:last-child {
       border-bottom: 0;
@@ -113,6 +110,7 @@
   }
   @include breakpoint(700px) {
     .flex-column-half {
+      float: left;
       width: 50%;
     }
   }

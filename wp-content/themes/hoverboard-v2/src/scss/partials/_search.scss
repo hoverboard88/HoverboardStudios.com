@@ -57,6 +57,7 @@
       @include breakpoint(800px) {
         width: 50%;
         float: left;
+        clear: both;
         border-right: 1px solid $gray--medium;
         padding-right: $base--spacing * 2;
         display: block; // cancel out flexbox

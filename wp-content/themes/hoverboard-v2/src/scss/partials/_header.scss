@@ -27,10 +27,11 @@ body {
   svg {
     max-width: 200px;
     width: 100%;
+    max-height: 60px; // for IE10
     @include breakpoint(775px) {
       display: block;
       float: left;
-      width: 230px;
+      width: 200px;
     }
   }
   @include breakpoint(775px) {

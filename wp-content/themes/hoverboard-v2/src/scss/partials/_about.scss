@@ -44,8 +44,8 @@
     flex-direction: row;
     .about__img {
       float: left;
-      margin-right: $base--spacing;
-      margin-left: 0;
+      padding-right: $base--spacing;
+      padding-left: 0;
     }
     .about__detail {
       float: right;
@@ -61,7 +61,7 @@
 .about__img {
   float: right;
   width: $width--4;
-  margin-left: $base--spacing;
+  padding-left: $base--spacing;
   position: relative;
   img {
     display: block;
