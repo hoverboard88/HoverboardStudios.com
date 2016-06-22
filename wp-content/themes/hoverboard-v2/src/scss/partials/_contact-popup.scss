@@ -1,5 +1,11 @@
-.js .contact-popup-open {
-  display: none;
+html.contact-popup-open {
+  &,
+  body {
+    border: 0;
+  }
+  .site {
+    display: none;
+  }
 }
 
 .wrap--contact-popup {
@@ -23,7 +29,7 @@
     transition: max-height .3s;
     z-index: 100;
     overflow: hidden;
-    @include breakpoint(800px) {
+    @include breakpoint(800px) { // when theres enough room for scroll to NOT happen, go to fixed. Scroll on mobile sucks
       position: fixed;
       left: 0;
       right: 0;

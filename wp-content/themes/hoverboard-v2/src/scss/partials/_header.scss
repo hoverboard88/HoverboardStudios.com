@@ -4,18 +4,12 @@ html {
   font-family: $base--font-family;
   display: flex;
   min-height: 100%;
-  &.no-border {
-    border: 0;
-  }
 }
 
 body {
   background: $gray--light;
   border: 4px solid $gray--light;
   min-height: 100%;
-  .no-border & {
-    border: 0;
-  }
 }
 
 
