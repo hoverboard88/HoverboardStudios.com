@@ -20,7 +20,7 @@
           <div class="portfolio__summary">
             <?php hb_v2_category_icons($featured_study->ID, 'tech_category'); ?>
             <h3 class="portfolio__title"><?php echo $featured_study->post_title; ?></h3>
-            <a href="<?php the_field('study_url', $featured_study->ID) ?>" class="portfolio__website">
+            <a target="_blank" href="<?php the_field('study_url', $featured_study->ID) ?>" class="portfolio__website">
               <?php hb_v2_svg('mdi-links.svg'); ?>
               <?php echo hb_v2_prettify_url(get_field('study_url', $featured_study->ID)); ?>
             </a>
@@ -126,7 +126,7 @@
       <div class="about__detail">
         <h4 class="about__title">Ryan Tvenge</h4>
         <div class="about__position">Designer/Developer</div>
-        <a class="about__link" href="https://twitter.com/rtvenge">@rtvenge</a>
+        <a target="_blank" class="about__link" href="https://twitter.com/rtvenge">@rtvenge</a>
       </div>
     </div>
     <div class="about__partner">
@@ -136,7 +136,7 @@
       <div class="about__detail">
         <h4 class="about__title">Matt Biersdorf</h4>
         <div class="about__position">Designer/Developer</div>
-        <a class="about__link" href="https://twitter.com/mbiersdo">@mbiersdo</a>
+        <a target="_blank" class="about__link" href="https://twitter.com/mbiersdo">@mbiersdo</a>
       </div>
     </div>
   </section>

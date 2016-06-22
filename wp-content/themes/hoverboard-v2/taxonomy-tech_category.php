@@ -23,7 +23,7 @@ get_header(); ?>
 					<?php hb_v2_category_icons($study_id, 'tech_category'); ?>
 					<h3 class="single-spaced"><?php echo $featured_study->post_title; ?></h3>
 					<p>
-						<a href="<?php the_field('study_url', $study_id) ?>" class="link--icon">
+						<a target="_blank" href="<?php the_field('study_url', $study_id) ?>" class="link--icon">
 							<?php hb_v2_svg('mdi-links.svg'); ?>
 							<?php echo hb_v2_prettify_url(get_field('study_url', $study_id)); ?>
 						</a>

@@ -14,7 +14,7 @@
 		<div class="container-page-title">
 			<?php hb_v2_category_icons(get_the_ID(), 'tech_category'); ?>
 			<?php the_title( '<h1 class="page-title entry-title">', '</h1>' ); ?>
-			<a href="<?php the_field('study_url'); ?>" class="link--icon">
+			<a target="_blank" href="<?php the_field('study_url'); ?>" class="link--icon">
 				<?php hb_v2_svg('mdi-links.svg'); ?>
 				<?php echo hb_v2_prettify_url(get_field('study_url')); ?>
 			</a>

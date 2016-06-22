@@ -40,11 +40,6 @@ if ( ! function_exists( 'hb_v2_posted_by' ) ) :
  */
 function hb_v2_posted_by() {
 
-	// <img alt="" src="https://secure.gravatar.com/avatar/9b82e423026c998cfd7c30bac9115b5e?s=100&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/9b82e423026c998cfd7c30bac9115b5e?s=200&amp;d=mm&amp;r=g 2x" class="avatar avatar-100 photo" height="100" width="100">
-	// <p class="single-spaced">
-	// 	<span class="byline"> by <span class="author vcard"><a class="url fn n" href="http://hoverboardstudios.dev/author/rtvenge/">Ryan Tvenge</a></span></span>
-	// </p>
-
 	$byline = sprintf(
 		esc_html_x( 'by %s', 'post author', 'hb_v2' ),
 		'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'

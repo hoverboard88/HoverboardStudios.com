@@ -46,7 +46,7 @@ get_header(); ?>
 							<?php hb_v2_category_icons($featured_study->ID, 'tech_category'); ?>
 
 							<h3 class="black single-spaced"><?php echo $featured_study->post_title; ?></h3>
-							<a href="<?php the_field('study_url', $featured_study->ID) ?>" class="portfolio__website">
+							<a target="_blank" href="<?php the_field('study_url', $featured_study->ID) ?>" class="portfolio__website">
 								<?php hb_v2_svg('mdi-links.svg'); ?>
 								<?php echo hb_v2_prettify_url(get_field('study_url', $featured_study->ID)); ?>
 							</a>

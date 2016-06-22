@@ -23,7 +23,7 @@ get_header(); ?>
           <div class="well well--purple centered">
             <h3 class="h4 one-half-spaced"><?php echo $featured_study->post_title; ?></h3>
             <p>
-              <a href="<?php the_field('study_url', $featured_study->ID) ?>" class="link--icon">
+              <a target="_blank" target="_blank" href="<?php the_field('study_url', $featured_study->ID) ?>" class="link--icon">
                 <?php hb_v2_svg('mdi-links.svg'); ?>
                 <?php echo hb_v2_prettify_url(get_field('study_url', $featured_study->ID)); ?>
               </a>
