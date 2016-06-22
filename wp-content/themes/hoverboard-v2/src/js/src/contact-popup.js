@@ -4,6 +4,7 @@
     $('#contact').removeClass('active');
   } else {
     $('#page').addClass('contact-popup-open');
+    $('html').addClass('no-border');
   }
 
   $('a[href="#contact"]').addClass('contact-popup-btn');
@@ -11,6 +12,7 @@
   $('#contact-popup__close').on('click', function () {
     $('#contact').removeClass('active');
     $('#page').removeClass('contact-popup-open');
+    $('html').removeClass('no-border');
     history.pushState('', document.title, window.location.pathname);
   });
 
@@ -46,6 +48,7 @@
   $('.contact-popup-btn').on('click', function () {
     $('#contact').addClass('active');
     $('#page').addClass('contact-popup-open');
+    $('html').addClass('no-border');
   });
 
 }(jQuery));

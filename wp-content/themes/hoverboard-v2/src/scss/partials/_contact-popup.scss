@@ -14,17 +14,19 @@
 .contact-popup {
   // only with JS enabled.
   .js & {
-    // position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    overflow: hidden;
     max-height: 0;
     width: 100%;
     height: 100%;
     transition: max-height .3s;
     z-index: 100;
+    @include breakpoint(800px) {
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      overflow: hidden;
+    }
     &.active,
     :target {
       max-height: 3999px;
