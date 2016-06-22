@@ -56,3 +56,7 @@ function hb_v2_svg($file, $default = '') {
 function hb_v2_prettify_url($url) {
 	return preg_replace("/https?:\/\/(.*)/u", "$1", $url);
 }
+
+function hb_v2_portfolio_screenshot($imageArray, $size) {
+  echo '<img src="' . $imageArray['sizes'][$size] . '" alt="' . $imageArray['alt'] . '">';
+}

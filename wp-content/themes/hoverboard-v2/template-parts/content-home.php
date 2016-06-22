@@ -28,7 +28,7 @@
             <a href="<?php echo get_permalink($featured_study->ID); ?>" class="btn">Case Study</a>
           </div>
           <div class="portfolio__example">
-            <?php echo wp_get_attachment_image(get_field('study_screenshot_mobile', $featured_study->ID)['id'], array('294')); ?>
+            <?php echo wp_get_attachment_image(get_field('study_screenshot_mobile', $featured_study->ID)['id'], 'portfolio_mobile'); ?>
           </div>
         </div>
       <?php } ?>

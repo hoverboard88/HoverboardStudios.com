@@ -106,6 +106,11 @@ function hb_v2_odd_even_classes( $classes ) {
 }
 add_filter( 'post_class', 'hb_v2_odd_even_classes' );
 
+// serve correct size image (not oversized)
+add_image_size( 'portfolio_mobile', 294, 383 );
+add_image_size( 'portfolio_internal', 314, 336 );
+add_image_size( 'portfolio_home', 444, 463 );
+
 function hb_v2_excerpt_length( $length ) {
 	return 25;
 }

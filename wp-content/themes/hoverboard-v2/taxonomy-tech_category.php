@@ -34,10 +34,10 @@ get_header(); ?>
 				<div class="featured-study__screenshots">
 
 					<div class="portfolio__example featured-study__screenshot-internal">
-						<?php echo wp_get_attachment_image(get_field('study_screenshot_internal', $study_id)['id'], 'large'); ?>
+						<?php echo wp_get_attachment_image(get_field('study_screenshot_internal', $study_id)['id'], 'portfolio_internal'); ?>
 	        </div>
 					<div class="portfolio__example featured-study__screenshot-desk">
-						<?php echo wp_get_attachment_image(get_field('study_screenshot_desk', $study_id)['id'], 'large'); ?>
+						<?php echo wp_get_attachment_image(get_field('study_screenshot_desk', $study_id)['id'], 'portfolio_desk'); ?>
 					</div>
 
 				</div>

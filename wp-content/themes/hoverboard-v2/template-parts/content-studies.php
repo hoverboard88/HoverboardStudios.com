@@ -28,7 +28,7 @@
 		<div class="container static entry-content">
 
 			<div class="portfolio__example">
-				<?php echo wp_get_attachment_image(get_field('study_screenshot_desk')['id'], 'large'); ?>
+				<?php echo wp_get_attachment_image(get_field('study_screenshot_desk')['id'], 'portfolio_home'); ?>
 			</div>
 
 			<div class="content content--case-study">
