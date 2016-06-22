@@ -51,3 +51,7 @@ div.wpcf7 div.ajax-error {
 div.wpcf7 .placeheld {
   color: #888;
 }
+
+.screen-reader-response {
+  @extend .visuallyhidden;
+}
