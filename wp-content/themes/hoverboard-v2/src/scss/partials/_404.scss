@@ -59,14 +59,16 @@
 }
 
 .wells--404 {
-  display: flex;
-  .well {
-    float: left;
-    width: 48%;
-    margin-right: 2%;
-    &:last-child {
-      margin-right: 0;
-      margin-left: 2%;
+  @include breakpoint(600px) {
+    display: flex;
+    .well {
+      float: left;
+      width: 48%;
+      margin-right: 2%;
+      &:last-child {
+        margin-right: 0;
+        margin-left: 2%;
+      }
     }
   }
 }

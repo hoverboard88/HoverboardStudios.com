@@ -5,10 +5,13 @@
 .wrap--contact-popup {
   background: rgba($black, .98);
   color: $gray--medium;
-  padding: $base--spacing * 2;
+  padding: $base--spacing;
   @include font-size(18px, false);
   font-family: $secondary--font-family__regular;
   min-height: 100%;
+  @include breakpoint(800px) {
+    padding: $base--spacing * 2;
+  }
 }
 
 .contact-popup {
@@ -19,6 +22,7 @@
     height: 100%;
     transition: max-height .3s;
     z-index: 100;
+    overflow: hidden;
     @include breakpoint(800px) {
       position: fixed;
       left: 0;
@@ -31,14 +35,6 @@
     :target {
       max-height: 3999px;
     }
-    // .wrap {
-    //   position: absolute;
-    //   top: 0;
-    //   right: 0;
-    //   bottom: 0;
-    //   left: 0;
-    //   overflow: auto;
-    // }
   }
   input,
   textarea {
@@ -89,6 +85,7 @@
   right: $base--spacing;
   top: $base--spacing;
   outline: 0;
+  z-index: 200;
   &:hover,
   &:focus {
     &::after {
