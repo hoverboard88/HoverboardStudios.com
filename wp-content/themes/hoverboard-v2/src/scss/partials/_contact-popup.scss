@@ -1,6 +1,5 @@
-.contact-popup-open {
-  height: 0;
-  overflow: hidden;
+.js .contact-popup-open {
+  display: none;
 }
 
 .wrap--contact-popup {
@@ -15,12 +14,12 @@
 .contact-popup {
   // only with JS enabled.
   .js & {
-    position: fixed;
+    // position: fixed;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
-    overflow: auto;
+    overflow: hidden;
     max-height: 0;
     width: 100%;
     height: 100%;

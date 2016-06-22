@@ -2,10 +2,11 @@
 
   if (window.location.hash !== '#contact') {
     $('#contact').removeClass('active');
+  } else {
+    $('#page').addClass('contact-popup-open');
   }
 
   $('a[href="#contact"]').addClass('contact-popup-btn');
-  $('#page').addClass('contact-popup-open');
 
   $('#contact-popup__close').on('click', function () {
     $('#contact').removeClass('active');
@@ -44,6 +45,7 @@
 
   $('.contact-popup-btn').on('click', function () {
     $('#contact').addClass('active');
+    $('#page').addClass('contact-popup-open');
   });
 
 }(jQuery));
