@@ -9,32 +9,30 @@
 
 ?>
 
-<div class="wrap wrap--white wrap--portfolio">
-  <section class="portfolio container container--xwide">
-    <div class="centered">
-      <h2 class="portfolio__header portfolio__header--gray-light">Our Latest Work</h2>
-    </div>
-    <div class="portfolio__items">
-      <?php foreach (hb_v2_get_home_featured_studies() as $key => $featured_study) { ?>
-        <div class="portfolio__item">
-          <div class="portfolio__summary">
-            <?php hb_v2_category_icons($featured_study->ID, 'tech_category'); ?>
-            <h3 class="portfolio__title"><?php echo $featured_study->post_title; ?></h3>
-            <a target="_blank" href="<?php the_field('study_url', $featured_study->ID) ?>" class="portfolio__website">
-              <?php hb_v2_svg('mdi-links.svg'); ?>
-              <?php echo hb_v2_prettify_url(get_field('study_url', $featured_study->ID)); ?>
-            </a>
-            <?php echo wpautop($featured_study->post_excerpt); ?>
-            <a href="<?php echo get_permalink($featured_study->ID); ?>" class="btn">Case Study</a>
-          </div>
-          <div class="portfolio__example">
-            <?php echo wp_get_attachment_image(get_field('study_screenshot_mobile', $featured_study->ID)['id'], 'portfolio_mobile'); ?>
-          </div>
+<section class="wrap wrap--white wrap--portfolio portfolio">
+  <div class="centered">
+    <h2 class="portfolio__header portfolio__header--gray-light">Our Latest Work</h2>
+  </div>
+  <div class="portfolio__items">
+    <?php foreach (hb_v2_get_home_featured_studies() as $key => $featured_study) { ?>
+      <div class="portfolio__item">
+        <div class="portfolio__summary">
+          <?php hb_v2_category_icons($featured_study->ID, 'tech_category'); ?>
+          <h3 class="portfolio__title"><?php echo $featured_study->post_title; ?></h3>
+          <a target="_blank" href="<?php the_field('study_url', $featured_study->ID) ?>" class="portfolio__website">
+            <?php hb_v2_svg('mdi-links.svg'); ?>
+            <?php echo hb_v2_prettify_url(get_field('study_url', $featured_study->ID)); ?>
+          </a>
+          <?php echo wpautop($featured_study->post_excerpt); ?>
+          <a href="<?php echo get_permalink($featured_study->ID); ?>" class="btn">Case Study</a>
         </div>
-      <?php } ?>
-    </div>
-  </section>
-</div>
+        <div class="portfolio__example">
+          <?php echo wp_get_attachment_image(get_field('study_screenshot_mobile', $featured_study->ID)['id'], 'portfolio_mobile'); ?>
+        </div>
+      </div>
+    <?php } ?>
+  </div>
+</section>
 
 <div class="wrap">
   <section class="mantra container container--xwide">

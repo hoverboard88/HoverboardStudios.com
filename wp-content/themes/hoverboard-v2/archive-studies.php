@@ -62,7 +62,7 @@ get_header(); ?>
 				</ul>
 			</div>
 
-			<div class="portfolio container container--xwide">
+			<div class="portfolio">
 	      <div class="portfolio__items">
 
 					<?php

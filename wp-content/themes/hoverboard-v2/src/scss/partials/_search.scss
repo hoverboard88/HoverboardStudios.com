@@ -61,6 +61,12 @@
         border-right: 1px solid $gray--medium;
         padding-right: $base--spacing * 2;
         display: block; // cancel out flexbox
+        &:last-child {
+          width: 100%;
+          padding-right: 25%;
+          padding-left: 25%;
+          border-right: 0;
+        }
       }
     }
     &.post-list__first {

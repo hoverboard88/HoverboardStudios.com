@@ -117,7 +117,7 @@ function hb_v2_excerpt_length( $length ) {
 add_filter( 'excerpt_length', 'hb_v2_excerpt_length', 999 );
 
 function hb_v2_replace_ellipsis($content) {
-	return str_replace('[...]',
+	return str_replace(' [&hellip;]',
 		'…', $content);
 }
 add_filter('the_excerpt', 'hb_v2_replace_ellipsis');
