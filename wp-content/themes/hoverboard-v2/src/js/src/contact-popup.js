@@ -5,9 +5,11 @@
   }
 
   $('a[href="#contact"]').addClass('contact-popup-btn');
+  $('#page').addClass('contact-popup-open');
 
   $('#contact-popup__close').on('click', function () {
     $('#contact').removeClass('active');
+    $('#page').removeClass('contact-popup-open');
     history.pushState('', document.title, window.location.pathname);
   });
 

@@ -18,11 +18,6 @@
       <nav class="menu--footer secondary--horizontal secondary--spaced">
         <ul>
           <?php wp_nav_menu( array( 'theme_location' => 'footer', 'menu_id' => 'footer-menu' , 'container' => false, 'items_wrap' => '%3$s') ); ?>
-          <!-- <li><a href="/">Home</a></li>
-          <li><a href="/studies/">Work</a></li>
-          <li><a href="/about/">About</a></li>
-          <li><a href="/blog/">Blog</a></li>
-          <li><a href="#contact">Contact</a></li> -->
         </ul>
         <ul class="social">
           <li><a href="http://twitter.com/hoverboard88">
@@ -56,25 +51,23 @@
     </div>
   </footer>
   <div id="contact" class="contact-popup active">
-    <div class="contact-popup-wrapper">
 
-      <div class="wrap wrap--contact-popup">
-        <button id="contact-popup__close" class="contact-popup__close">Close</button>
+    <div class="wrap wrap--contact-popup">
+      <button id="contact-popup__close" class="contact-popup__close">Close</button>
 
-        <div class="container container--small">
+      <div class="container container--small">
 
-          <h3 class="contact-popup__title">Contact Us</h3>
+        <h3 class="contact-popup__title">Contact Us</h3>
 
-          <p>Have a project already in mind but don’t know where to start? Looking for some advice or a quote on a branding revamp? Have an idea for an app but feel lost?</p>
+        <p>Have a project already in mind but don’t know where to start? Looking for some advice or a quote on a branding revamp? Have an idea for an app but feel lost?</p>
 
-          <p>Send us a quick note about your upcoming project and we will be happy to help!</p>
+        <p>Send us a quick note about your upcoming project and we will be happy to help!</p>
 
-          <?php echo do_shortcode('[contact-form-7 id="378" title="Contact Form (v2)"]'); ?>
+        <?php echo do_shortcode('[contact-form-7 id="378" title="Contact Form (v2)"]'); ?>
 
-        </div>
       </div>
-
     </div>
+
   </div>
 
 </div><!-- #page -->
