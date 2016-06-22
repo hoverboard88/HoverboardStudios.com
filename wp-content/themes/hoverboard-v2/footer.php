@@ -56,22 +56,25 @@
     </div>
   </footer>
   <div id="contact" class="contact-popup active">
-    <div class="wrap wrap--contact-popup">
-      <button id="contact-popup__close" class="contact-popup__close">Close</button>
+    <div class="contact-popup-wrapper">
 
-      <div class="container container--small">
+      <div class="wrap wrap--contact-popup">
+        <button id="contact-popup__close" class="contact-popup__close">Close</button>
 
-        <h3 class="contact-popup__title">Contact Us</h3>
+        <div class="container container--small">
 
-        <p>Have a project already in mind but don’t know where to start? Looking for some advice or a quote on a branding revamp? Have an idea for an app but feel lost?</p>
+          <h3 class="contact-popup__title">Contact Us</h3>
 
-        <p>Send us a quick note about your upcoming project and we will be happy to help!</p>
+          <p>Have a project already in mind but don’t know where to start? Looking for some advice or a quote on a branding revamp? Have an idea for an app but feel lost?</p>
 
-        <?php echo do_shortcode('[contact-form-7 id="378" title="Contact Form (v2)"]'); ?>
+          <p>Send us a quick note about your upcoming project and we will be happy to help!</p>
 
+          <?php echo do_shortcode('[contact-form-7 id="378" title="Contact Form (v2)"]'); ?>
+
+        </div>
       </div>
-    </div>
 
+    </div>
   </div>
 
 </div><!-- #page -->
