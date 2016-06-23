@@ -38,8 +38,11 @@
   .avatar {
     border-radius: 2px;
     float: left;
-    min-width: 150px;
+    max-width: 100px;
     margin-right: $base--spacing / 2;
+    @include breakpoint(400px) {
+      max-width: 150px;
+    }
     @include breakpoint(800px) {
       float: none;
     }
@@ -52,11 +55,15 @@
 }
 
 .post__social {
-  border-top: 1px solid $gray--medium;
-  padding-top: $base--spacing / 2;
-  float: left;
-  width: 33%;
+  clear: both;
+  @include breakpoint(400px) {
+    clear: none;
+    display: block;
+  }
   @include breakpoint(800px) {
+    padding-top: $base--spacing / 2;
+    border-top: 1px solid $gray--medium;
+    clear: none;
     display: block;
     width: auto;
     float: none;
