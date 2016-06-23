@@ -98,6 +98,10 @@ endif;
  */
 function hb_v2_category_icons($id, $taxonomy = 'category') { ?>
 
+	<?php if ( sizeof(wp_get_post_terms($id, $taxonomy)) == 0 ) {
+		return false;
+	} ?>
+
 	<ul class="list--unstyled list--horizontal list--icons">
 
 	<?php foreach (wp_get_post_terms($id, $taxonomy) as $taxonomy_object) { ?>
