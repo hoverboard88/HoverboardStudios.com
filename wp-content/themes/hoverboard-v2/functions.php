@@ -83,7 +83,7 @@ function hb_v2_odd_even_classes( $classes ) {
 	global $wp_query;
 
 	// if it's archive
-	if ( is_category() || is_home() ) {
+	if ( is_category() || is_home() || get_post_type() == 'podcast' ) {
 		if ($wp_query->current_post == 0) {
 			$classes[] = 'post-list__first';
 			return $classes; // exit

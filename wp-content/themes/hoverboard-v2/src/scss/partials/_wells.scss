@@ -227,3 +227,26 @@
 .alert-danger .alert-link {
   color: #843534;
 }
+
+.podcast_player {
+  max-width: 600px;
+  margin-bottom: 0;
+  br {
+    display: none;
+  }
+  .mejs-container .mejs-controls { // nested for specificity to override plugins styles
+    background: $secondary--blue;
+    div {
+      @include font-size(14px, false);
+    }
+  }
+  .mejs-controls .mejs-horizontal-volume-slider .mejs-horizontal-volume-current,
+  .mejs-controls .mejs-time-rail .mejs-time-loaded {
+    background: lighten($secondary--blue, 60%);
+  }
+}
+
+.podcast_meta {
+  @include font-size(12px);
+  margin-bottom: $base--spacing / 2;
+}
