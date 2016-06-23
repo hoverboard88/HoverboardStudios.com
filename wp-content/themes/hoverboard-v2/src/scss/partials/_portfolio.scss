@@ -27,7 +27,7 @@
 
 .portfolio__item {
   overflow: hidden;
-  padding: $base--spacing * 2 ($base--spacing / 2) $base--spacing;
+  padding: $base--spacing ($base--spacing / 2) $base--spacing;
   position: relative;
   border-bottom: 4px solid $gray--medium;
   @include breakpoint(1000px) {

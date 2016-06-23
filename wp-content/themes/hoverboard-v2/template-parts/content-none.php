@@ -11,7 +11,7 @@
 
 <section class="no-results not-found container">
 	<header class="page-header">
-		<h1 class="page-title"><?php esc_html_e( 'Nothing Found', 'hb_v2' ); ?></h1>
+		<h1 style="padding-top: 30px;" class="h3 centered"><?php esc_html_e( 'Nothing Found', 'hb_v2' ); ?></h1>
 	</header><!-- .page-header -->
 
 	<div class="page-content">
@@ -31,9 +31,8 @@
 
 		<?php else : ?>
 
-			<p><?php esc_html_e( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'hb_v2' ); ?></p>
+			<p class="centered"><?php esc_html_e( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'hb_v2' ); ?></p>
 			<?php
-				get_search_form();
 
 		endif; ?>
 	</div><!-- .page-content -->
