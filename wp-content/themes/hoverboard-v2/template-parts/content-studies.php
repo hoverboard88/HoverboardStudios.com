@@ -13,7 +13,7 @@
 	<div class="container container--case-study-title">
 		<div class="container-page-title">
 			<?php hb_v2_category_icons(get_the_ID(), 'tech_category'); ?>
-			<?php the_title( '<h1 class="page-title entry-title">', '</h1>' ); ?>
+			<?php the_title( '<h1 class="page-title entry-title" style="margin-bottom: 0;">', '</h1>' ); ?>
 			<a target="_blank" href="<?php the_field('study_url'); ?>" class="link--icon">
 				<?php hb_v2_svg('mdi-links.svg'); ?>
 				<?php echo hb_v2_prettify_url(get_field('study_url')); ?>

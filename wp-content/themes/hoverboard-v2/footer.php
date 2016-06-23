@@ -47,7 +47,7 @@
           </a></li>
         </ul>
       </nav>
-      <div class="copyright centered">© <?php date('Y'); ?> <?php bloginfo( 'name' ); ?>. All rights reserved.</div>
+      <div class="copyright centered">© <?php echo date('Y'); ?> <?php bloginfo( 'name' ); ?>. All rights reserved.</div>
     </div>
   </footer>
 
