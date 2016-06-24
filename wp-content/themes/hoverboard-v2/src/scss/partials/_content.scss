@@ -40,6 +40,12 @@
     margin-bottom: 0;
     margin-top: $base--spacing * 2;
     margin-bottom: $base--spacing * 2;
+    &.blockquote--small {
+      &,
+      p {
+        @include font-size(18px);
+      }
+    }
     p {
       @include font-size(29px);
       line-height: 1.5;
