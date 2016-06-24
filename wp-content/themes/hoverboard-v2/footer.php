@@ -77,6 +77,13 @@
 
 </div>
 
+<script>
+  (function () {
+    var d = document.getElementById("contact");
+    d.className = " contact-popup";
+  }());
+</script>
+
 <?php wp_footer(); ?>
 
 </body>

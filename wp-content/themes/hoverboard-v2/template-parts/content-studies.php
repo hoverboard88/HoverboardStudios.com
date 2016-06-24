@@ -50,11 +50,13 @@
 
 	</article><!-- #post-## -->
 </div>
-<div class="wrap">
-	<div class="container container--medium container--padded">
-		<div class="well">
-			<h3>Conclusion</h3>
-			<?php the_field('study_conclusion'); ?>
+<?php if ( !empty(get_field('study_conclusion')) ) { ?>
+	<div class="wrap">
+		<div class="container container--medium container--padded">
+			<div class="well">
+				<h3>Conclusion</h3>
+				<?php the_field('study_conclusion'); ?>
+			</div>
 		</div>
 	</div>
-</div>
+<?php } ?>
