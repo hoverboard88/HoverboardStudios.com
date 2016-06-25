@@ -26,14 +26,13 @@ html.contact-popup-open {
   height: 100%;
   transition: max-height .3s;
   z-index: 100;
-  overflow: hidden;
+  overflow: auto;
   @include breakpoint(800px) { // when theres enough room for scroll to NOT happen, go to fixed. Scroll on mobile sucks
     position: fixed;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
-    overflow: hidden;
   }
   .no-js &:target,
   &.active {
