@@ -53,10 +53,10 @@
 
 </div><!-- #page -->
 
-<div id="contact" class="contact-popup active">
+<div id="contact" class="contact-popup">
 
   <div class="wrap wrap--contact-popup">
-    <button id="contact-popup__close" class="contact-popup__close">Close</button>
+    <a href="#" id="contact-popup__close" class="contact-popup__close">Close</a>
 
     <div class="container container--small">
 

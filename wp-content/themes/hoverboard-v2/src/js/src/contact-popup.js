@@ -1,17 +1,18 @@
 (function ($) {
 
-  if (window.location.hash !== '#contact') {
-    $('#contact').removeClass('active');
-  } else {
+  if (window.location.hash === '#contact') {
     $('html').addClass('contact-popup-open');
+    $('#contact').addClass('active');
   }
 
   $('a[href="#contact"]').addClass('contact-popup-btn');
 
-  $('#contact-popup__close').on('click', function () {
-    $('#contact').removeClass('active');
+  $('#contact-popup__close').on('click', function (e) {
     $('html').removeClass('contact-popup-open');
+    $('#contact').removeClass('active');
     history.pushState('', document.title, window.location.pathname);
+
+    e.preventDefault();
   });
 
   $('.linear-radio').each(function () {
@@ -44,8 +45,8 @@
   });
 
   $('.contact-popup-btn').on('click', function () {
-    $('#contact').addClass('active');
     $('html').addClass('contact-popup-open');
+    $('#contact').addClass('active');
   });
 
 }(jQuery));
