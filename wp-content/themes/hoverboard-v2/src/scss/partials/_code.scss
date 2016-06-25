@@ -6,45 +6,44 @@
 
 code,
 pre {
-	color: black;
-	text-shadow: 0 1px #fff;
-	font-family: Consolas, Monaco, 'Andale Mono', monospace;
-	direction: ltr;
-	text-align: left;
-	white-space: pre;
-	word-spacing: normal;
-	tab-size: 4;
-	hyphens: none;
+  color: black;
+  font-size: $base--font-size;
+  font-family: Consolas, Monaco, "Andale Mono", monospace;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  tab-size: 4;
+  hyphens: none;
 }
-
 @media print {
-	code,
-	pre {
-		text-shadow: none;
-	}
+  code,
+  pre {
+    text-shadow: none;
+  }
 }
 
 /* Code blocks */
 pre {
-	padding: 1em;
-	margin: 0 0 $base--spacing;
-	overflow: auto;
-	.kss-markup & {
+  padding: 1em;
+  margin: 0 0 $base--spacing;
+  overflow: auto;
+  .kss-markup & {
     padding: 0;
-		margin: 0;
+    margin: 0;
   }
 }
 
 :not(pre) > code,
 pre {
-	.kss-markup & {
+  .kss-markup & {
     background: none;
   }
-  background: #ddd;
+  background: $white;
 }
 
 /* Inline code */
 :not(pre) > code {
-	padding: .1em;
-	border-radius: .3em;
+  padding: 3px;
+  border-radius: 2px;
 }
