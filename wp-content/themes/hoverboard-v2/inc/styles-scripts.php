@@ -44,10 +44,19 @@ function hb_v2_wp_footer() {
 }
 add_action( 'wp_footer', 'hb_v2_wp_footer' );
 
-function hb_v2__wp_head() {
-	echo '<style>';
-	include get_stylesheet_directory() . '/dist/css/critical.css';
-	echo '</style>';
+function hb_v2__wp_head() { ?>
+	<style><?php include get_stylesheet_directory() . '/dist/css/critical.css'; ?></style>
 
-}
+  <!-- START Favicons -->
+	<link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/dist/img/favicons/Hoverboard.ico">
+	<link rel="apple-touch-icon-precomposed" sizes="76x76" href="<?php echo get_template_directory_uri(); ?>/dist/img/favicons/Hoverboard-76.png">
+	<link rel="apple-touch-icon-precomposed" sizes="152x152" href="<?php echo get_template_directory_uri(); ?>/dist/img/favicons/Hoverboard-76@2x.png">
+	<link rel="apple-touch-icon-precomposed" sizes="60x60" href="<?php echo get_template_directory_uri(); ?>/dist/img/favicons/Hoverboard-60@.png">
+	<link rel="apple-touch-icon-precomposed" sizes="120x120" href="<?php echo get_template_directory_uri(); ?>/dist/img/favicons/Hoverboard-60@2x.png">
+	<link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/dist/img/favicons/Hoverboard.ico">
+	<link rel="icon" type="image/png" sizes="60x60" href="<?php echo get_template_directory_uri(); ?>/dist/img/favicons/Hoverboard-60.png">
+	<!-- END Favicons -->
+	<!--[if lt IE 9]><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.js"></script><![endif]-->
+
+<?php }
 add_action( 'wp_head', 'hb_v2__wp_head' );
