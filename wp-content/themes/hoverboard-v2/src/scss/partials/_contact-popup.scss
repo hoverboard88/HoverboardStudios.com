@@ -56,7 +56,7 @@ html.contact-popup-open {
     .wpcf7-list-item {
       border-color: lighten($gray--dark, 10%);
       label {
-        color: lighten($gray--dark, 20%);
+        color: lighten($gray--dark, 10%);
         background: $gray--dark;
       }
       &.active label {

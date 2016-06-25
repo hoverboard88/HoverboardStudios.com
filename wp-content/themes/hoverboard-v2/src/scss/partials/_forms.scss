@@ -195,15 +195,14 @@ textarea {
     }
     label {
       padding: $base--spacing / 6 $base--spacing / 3;
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
       cursor: pointer;
-      @include breakpoint(650px) {
-        min-height: 40px;
-        @include font-size(1px, false); // text needs to take up some space for flexbox to work
-        opacity: 0;
-        color: lighten($gray--dark, 20%);
-      }
+      color: lighten($gray--dark, 20%);
+      min-height: 40px;
+      @include font-size(9px, false); // text needs to take up some space for flexbox to work
       // transition: font-size .3s, color .3s; // TODO: wonky sliding happening when trying to animate the font size
     }
     &.active label {
