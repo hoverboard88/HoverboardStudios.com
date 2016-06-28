@@ -90,15 +90,15 @@
   //padding if to give breathing room to elements on smaller screens
   padding-left: $base--spacing/2;
   padding-right: $base--spacing/2;
-  max-width: 1280px;
+  max-width: 1400px;
   position: relative;
   &.container--no-padding {
     padding-left: 0;
     padding-right: 0;
   }
-  &.container--xwide {
-    max-width: 2000px;
-  }
+  // &.container--xwide {
+  //   max-width: 2000px;
+  // }
   &.container--padded {
     padding-top: $base--spacing * 2;
     padding-bottom: $base--spacing * 2;
@@ -107,12 +107,12 @@
     padding-top: $base--spacing;
     padding-bottom: $base--spacing;
   }
-  &.container--medium {
-    max-width: 1000px;
-  }
-  &.container--small {
-    max-width: 800px;
-  }
+  // &.container--medium {
+  //   max-width: 1000px;
+  // }
+  // &.container--small {
+  //   max-width: 800px;
+  // }
   &.container--top-bottom-padding {
     padding-top: 1em;
     padding-bottom: 1em;

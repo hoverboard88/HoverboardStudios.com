@@ -41,18 +41,28 @@
       clear: both;
       border-right: 4px solid $gray--medium;
       padding: $base--spacing * 3 $base--spacing * 2 $base--spacing $base--spacing / 2;
-      &:last-child {
-        width: 100%;
-        padding-right: 25%;
-        padding-left: 25%;
-        .portfolio__example {
-          right: 19%;
-        }
-      }
     }
   }
   @include breakpoint(2000px) {
     max-width: 2000px;
+  }
+  &.portfolio__item--empty {
+    background: $gray--medium;
+    color: $gray--light;
+    text-align: center;
+    align-items: center;
+    padding: $base--spacing * 2;
+    display: none;
+    @include breakpoint(1000px) {
+      display: block;
+      display: flex;
+    }
+    .portfolio__title {
+      @include font-size($font-size--h2);
+    }
+    .entry-header {
+      width: 100%;
+    }
   }
 }
 

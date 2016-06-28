@@ -62,10 +62,12 @@ get_header(); ?>
 				</ul>
 			</div>
 
-			<div class="portfolio">
+			<div class="portfolio container">
 	      <div class="portfolio__items">
 
 					<?php
+          $index = 0;
+
 					/* Start the Loop */
 					while ( have_posts() ) : the_post();
 
@@ -76,6 +78,8 @@ get_header(); ?>
 						 */
 						get_template_part( 'template-parts/content', 'case-study' );
 
+						$index++;
+
 					endwhile;
 
 					the_posts_navigation();
@@ -85,6 +89,18 @@ get_header(); ?>
 					get_template_part( 'template-parts/content', 'none' );
 
 				endif; ?>
+
+				<?php if ( $index % 2 != 0) { ?>
+
+					<article id="post-empty" <?php post_class('portfolio__item portfolio__item--empty'); ?>>
+
+						<header class="entry-header">
+							<h2 class="portfolio__title entry-title">Your project could be the next one we work on!</h2>
+						</header><!-- .entry-header -->
+
+					</article><!-- #post-## -->
+
+				<?php } ?>
 
 	    </div>
 		</div>

@@ -12,8 +12,9 @@
     background: $white;
     border-radius: 50%;
     padding: 2px;
-    width: 42px;
-    height: 42px;
+    width: 46px;
+    height: 46px;
+    transform: scale(.9, .9);
   }
 }
 
@@ -31,7 +32,7 @@
         opacity: 1;
       }
       svg {
-        transform: rotate(1turn);
+        transform: scale(1, 1);
       }
     }
 
