@@ -1,5 +1,6 @@
 .services {
-  padding: $base--spacing * 2 $base--spacing;
+  padding-top: $base--spacing * 2;
+  padding-bottom: $base--spacing * 2;
 }
 
 .services__header {
@@ -8,8 +9,8 @@
 }
 
 .services__title {
-  @include font-size(32px, true, true);
-  // line-height: 1.5;
+  @include font-size(32px, false);
+  line-height: 1.1; // hack: default line height didn't look good
   color: $green--light;
   font-family: $base--font-family;
   font-style: italic;

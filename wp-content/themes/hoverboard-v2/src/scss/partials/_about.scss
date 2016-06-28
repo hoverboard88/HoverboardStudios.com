@@ -1,5 +1,6 @@
 .about {
-  padding: $base--spacing;
+  padding-top: $base--spacing;
+  padding-bottom: $base--spacing;
   margin: 0 auto;
 }
 
@@ -42,6 +43,9 @@
   margin-right: auto;
   &:nth-child(2n) {
     flex-direction: row;
+    @include breakpoint(1000px) {
+      padding: 0 0 0 $base--spacing / 2;
+    }
     .about__img {
       float: left;
       padding-right: $base--spacing;
@@ -54,7 +58,7 @@
   @include breakpoint(1000px) {
     float: left;
     width: $width--6;
-    padding: 0 $base--spacing / 2;
+    padding: 0 $base--spacing / 2 0 0;
   }
 }
 
@@ -70,6 +74,6 @@
 .about__detail {
   margin-top: 10px; // looked uneven when vertically centered for some reason
   text-align: center;
-  width: $width--8;
+  width: 71%; // arbitrary amount to fill up container
   float: left;
 }

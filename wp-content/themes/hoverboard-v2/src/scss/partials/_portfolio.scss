@@ -27,11 +27,11 @@
 
 .portfolio__item {
   overflow: hidden;
-  padding: $base--spacing ($base--spacing / 2) $base--spacing;
+  padding: $base--spacing $base--spacing / 2;
   position: relative;
   border-bottom: 4px solid $gray--medium;
   @include breakpoint(1000px) {
-    padding-top: $base--spacing * 3;
+    padding: $base--spacing * 3 $base--spacing / 2 $base--spacing $base--spacing * 2;
     float: left;
     width: $width--6;
     .page-template-page-home & {
@@ -40,6 +40,7 @@
     &:nth-child(2n+1) {
       clear: both;
       border-right: 4px solid $gray--medium;
+      padding: $base--spacing * 3 $base--spacing * 2 $base--spacing $base--spacing / 2;
       &:last-child {
         width: 100%;
         padding-right: 25%;
