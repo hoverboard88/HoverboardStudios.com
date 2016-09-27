@@ -4,6 +4,7 @@
   @include breakpoint(600px) {
     padding-top: $base--spacing * 2;
     padding-bottom: $base--spacing * 2;
+    overflow: hidden;
   }
 }
 
