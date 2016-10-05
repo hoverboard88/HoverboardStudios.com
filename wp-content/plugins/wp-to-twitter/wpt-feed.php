@@ -169,19 +169,19 @@ class WPT_TwitterFeed {
 		$options      = array_merge( $options, array( 'screen_name' => $screenname, 'count' => 20, 'include_ext_alt_text' => 'true' ) );
 
 		if ( empty( $key ) ) {
-			return array( 'error' => 'Missing Consumer Key - Check Settings' );
+			return array( 'error' => __( 'Missing Consumer Key - Check settings', 'wp-to-twitter' ) );
 		}
 		if ( empty( $secret ) ) {
-			return array( 'error' => 'Missing Consumer Secret - Check Settings' );
+			return array( 'error' => __( 'Missing Consumer Secret - Check settings', 'wp-to-twitter' ) );
 		}
 		if ( empty( $token ) ) {
-			return array( 'error' => 'Missing Access Token - Check Settings' );
+			return array( 'error' => __( 'Missing Access Token - Check settings', 'wp-to-twitter' ) );
 		}
 		if ( empty( $token_secret ) ) {
-			return array( 'error' => 'Missing Access Token Secret - Check Settings' );
+			return array( 'error' => __( 'Missing Access Token Secret - Check settings', 'wp-to-twitter' ) );
 		}
 		if ( empty( $screenname ) ) {
-			return array( 'error' => __( 'Missing Twitter Feed Screen Name - Check Settings', 'wp-to-twitter' ) );
+			return array( 'error' => __( 'Missing Twitter Feed Screen Name - Check settings', 'wp-to-twitter' ) );
 		}
 
 		$connection = new wpt_TwitterOAuth( $key, $secret, $token, $token_secret );

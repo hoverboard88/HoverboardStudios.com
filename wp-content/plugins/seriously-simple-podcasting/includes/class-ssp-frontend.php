@@ -74,12 +74,11 @@ class SSP_Frontend {
 		// Download podcast episode
 		add_action( 'wp', array( $this, 'download_file' ), 1 );
 
-		// Add shortcodes
-		add_shortcode( 'ss_podcast', 'ss_podcast_shortcode' );
-		add_shortcode( 'podcast_episode', array( $this, 'podcast_episode_shortcode' ) );
-
 		// Register widgets
 		add_action( 'widgets_init', array( $this, 'register_widgets' ), 1 );
+
+		// Add shortcodes
+		add_action( 'init', array( $this, 'register_shortcodes' ), 1 );
 
 		add_filter( 'feed_content_type', array( $this, 'feed_content_type' ), 10, 2 );
 
@@ -171,7 +170,15 @@ class SSP_Frontend {
 
 		$podcast_post_types = ssp_post_types( true );
 
-		if ( in_array( $post->post_type, $podcast_post_types ) && ! is_feed() && ! isset( $_GET['feed'] ) ) {
+		$player_visibility = get_option( 'ss_podcasting_player_content_visibility', 'all' );
+
+		switch( $player_visibility ) {
+			case 'all': $show_player = true; break;
+			case 'membersonly': $show_player = is_user_logged_in(); break;
+			default: $show_player = true; break;
+		}
+
+		if ( $show_player && in_array( $post->post_type, $podcast_post_types ) && ! is_feed() && ! isset( $_GET['feed'] ) ) {
 
 			// Get episode meta data
 			$meta = $this->episode_meta( $post->ID, 'content' );
@@ -221,7 +228,15 @@ class SSP_Frontend {
 
 		$podcast_post_types = ssp_post_types( true );
 
-		if ( ( in_array( $post->post_type, $podcast_post_types ) ) && ! is_feed() ) {
+		$player_visibility = get_option( 'ss_podcasting_player_content_visibility', 'all' );
+
+		switch( $player_visibility ) {
+			case 'all': $show_player = true; break;
+			case 'membersonly': $show_player = is_user_logged_in(); break;
+			default: $show_player = true; break;
+		}
+
+		if ( $show_player && in_array( $post->post_type, $podcast_post_types ) && ! is_feed() && ! isset( $_GET['feed'] ) ) {
 
 			$meta = $this->episode_meta( $post->ID, $content );
 
@@ -362,24 +377,24 @@ class SSP_Frontend {
 			switch( $key ) {
 
 				case 'link':
-					$meta_display .= '<a href="' . esc_url( $data ) . '" title="' . get_the_title() . ' ">' . __( 'Download file' , 'seriously-simple-podcasting' ) . '</a>';
+					$meta_display .= '<a href="' . esc_url( $data ) . '" title="' . get_the_title() . ' " class="podcast-meta-download" download>' . __( 'Download file' , 'seriously-simple-podcasting' ) . '</a>';
 				break;
 
 				case 'new_window':
 					$play_link = add_query_arg( 'ref', 'new_window', $link );
-					$meta_display .= '<a href="' . esc_url( $play_link ) . '" target="_blank" title="' . get_the_title() . ' ">' . __( 'Play in new window' , 'seriously-simple-podcasting' ) . '</a>';
+					$meta_display .= '<a href="' . esc_url( $play_link ) . '" target="_blank" title="' . get_the_title() . ' " class="podcast-meta-new-window">' . __( 'Play in new window' , 'seriously-simple-podcasting' ) . '</a>';
 				break;
 
 				case 'duration':
-					$meta_display .= __( 'Duration' , 'seriously-simple-podcasting' ) . ': ' . $data;
+					$meta_display .= '<span class="podcast-meta-duration">' . __( 'Duration' , 'seriously-simple-podcasting' ) . ': ' . $data . '</span>';
 				break;
 
 				case 'size':
-					$meta_display .= __( 'Size' , 'seriously-simple-podcasting' ) . ': ' . $data;
+					$meta_display .= '<span class="podcast-meta-size">' . __( 'Size' , 'seriously-simple-podcasting' ) . ': ' . $data . '</span>';
 				break;
 
 				case 'date_recorded':
-					$meta_display .= __( 'Recorded on' , 'seriously-simple-podcasting' ) . ' ' . date_i18n( get_option( 'date_format' ), strtotime( $data ) );
+					$meta_display .= '<span class="podcast-meta-date">' . __( 'Recorded on' , 'seriously-simple-podcasting' ) . ' ' . date_i18n( get_option( 'date_format' ), strtotime( $data ) ) . '</span>';
 				break;
 
 				// Allow for custom items to be added, but only allow a small amount of HTML tags
@@ -1073,6 +1088,7 @@ class SSP_Frontend {
 			'recent-episodes' => 'Recent_Episodes',
 			'single-episode' => 'Single_Episode',
 			'series' => 'Series',
+			'playlist' => 'Playlist',
 		);
 
 		foreach ( $widgets as $id => $name ) {
@@ -1083,31 +1099,21 @@ class SSP_Frontend {
 	}
 
 	/**
-	 * Shortcode function to display single podcast episode
-	 * @param  array  $params Shortcode paramaters
-	 * @return string         HTML output
+	 * Register plugin shortcodes
+	 * @return void
 	 */
-	public function podcast_episode_shortcode ( $params ) {
+	public function register_shortcodes () {
 
-		$atts = shortcode_atts( array(
-	        'episode' => 0,
-	        'content' => 'title,player,details',
-	    ), $params );
+		$shortcodes = array(
+			'podcast_episode',
+			'podcast_playlist',
+			'ss_podcast',
+		);
 
-		extract( $atts );
-
-	    if ( ! $episode ) {
-	    	return;
-	    }
-
-	    // Setup array of content items and trim whitespace
-	    $content_items = explode( ',', $content );
-	    $content_items = array_map( 'trim', $content_items );
-
-	    // Get episode for display
-	    $html = $this->podcast_episode( $episode, $content_items, 'shortcode' );
-
-	    return $html;
+		foreach ( $shortcodes as $shortcode ) {
+			require_once( $this->dir . '/includes/shortcodes/class-ssp-shortcode-' . $shortcode . '.php' );
+			add_shortcode( $shortcode, array( $GLOBALS['ssp_shortcodes'][ $shortcode ], 'shortcode' ) );
+		}
 
 	}
 

@@ -13,22 +13,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 global $ss_podcasting, $wp_query;
 
-
 // Hide all errors
 error_reporting( 0 );
+
+// Allow feed access by default
+$give_access = true;
 
 // Check if feed is password protected
 $protection = get_option( 'ss_podcasting_protect', '' );
 
+// Handle feed protection if required
 if ( $protection && $protection == 'on' ) {
 
 	$give_access = false;
-
-	$message_option = get_option('ss_podcasting_protection_no_access_message');
-	$message = __( 'You are not permitted to view this podcast feed.' , 'seriously-simple-podcasting' );
-	if ( $message_option && strlen( $message_option ) > 0 && $message_option != '' ) {
-		$message = $message_option;
-	}
 
 	// Request password and give access if correct
 	if ( ! isset( $_SERVER['PHP_AUTH_USER'] ) && ! isset( $_SERVER['PHP_AUTH_PW'] ) ) {
@@ -43,17 +40,47 @@ if ( $protection && $protection == 'on' ) {
 			}
 		}
 	}
+}
 
-	// Send 401 status and display no access message
-	if ( ! $give_access ) {
+// Get specified podcast series
+$podcast_series = '';
+if ( isset( $_GET['podcast_series'] ) && $_GET['podcast_series'] ) {
+	$podcast_series = esc_attr( $_GET['podcast_series'] );
+} elseif ( isset( $wp_query->query_vars['podcast_series'] ) && $wp_query->query_vars['podcast_series'] ) {
+	$podcast_series = esc_attr( $wp_query->query_vars['podcast_series'] );
+}
 
-		$no_access_message = '<div style="text-align:center;font-family:sans-serif;border:1px solid red;background:pink;padding:20px 0;color:red;">' . $message . '</div>';
+// Get series ID
+$series_id = 0;
+if ( $podcast_series ) {
+	$series = get_term_by( 'slug', $podcast_series, 'series' );
+	$series_id = $series->term_id;
+}
 
-		header('WWW-Authenticate: Basic realm="Podcast Feed"');
-	    header('HTTP/1.0 401 Unauthorized');
+// Allow dynamic access control
+$give_access = apply_filters( 'ssp_feed_access', $give_access, $series_id );
 
-		die( $no_access_message );
+// Send 401 status and display no access message if access has been denied
+if ( ! $give_access ) {
+
+	// Set default message
+	$message = __( 'You are not permitted to view this podcast feed.' , 'seriously-simple-podcasting' );
+
+	// Check message option from plugin settings
+	$message_option = get_option('ss_podcasting_protection_no_access_message');
+	if ( $message_option ) {
+		$message = $message_option;
 	}
+
+	// Allow message to be filtered dynamically
+	$message = apply_filters( 'ssp_feed_no_access_message', $message );
+
+	$no_access_message = '<div style="text-align:center;font-family:sans-serif;border:1px solid red;background:pink;padding:20px 0;color:red;">' . $message . '</div>';
+
+	header('WWW-Authenticate: Basic realm="Podcast Feed"');
+    header('HTTP/1.0 401 Unauthorized');
+
+	die( $no_access_message );
 }
 
 // If redirect is on, get new feed URL and redirect if setting was changed more than 48 hours ago
@@ -77,20 +104,8 @@ if ( $redirect && $redirect == 'on' ) {
 	}
 }
 
-// Get specified podcast series
-$podcast_series = '';
-if ( isset( $_GET['podcast_series'] ) && $_GET['podcast_series'] ) {
-	$podcast_series = esc_attr( $_GET['podcast_series'] );
-} elseif ( isset( $wp_query->query_vars['podcast_series'] ) && $wp_query->query_vars['podcast_series'] ) {
-	$podcast_series = esc_attr( $wp_query->query_vars['podcast_series'] );
-}
-
-$series_id = 0;
-if ( $podcast_series ) {
-	$series = get_term_by( 'slug', $podcast_series, 'series' );
-	$series_id = $series->term_id;
-
-	// Do we need to redirect a single feed?
+// If this is a series-sepcific feed, then check if we need to redirect
+if( $series_id ) {
 	$redirect = get_option( 'ss_podcasting_redirect_feed_' . $series_id );
 	$new_feed_url = false;
 	if ( $redirect && $redirect == 'on' ) {
@@ -111,6 +126,7 @@ if ( $podcast_series ) {
 		$title = $series_title;
 	}
 }
+$title = apply_filters( 'ssp_feed_title', $title, $series_id );
 
 // Podcast description
 $description = get_option( 'ss_podcasting_data_description', get_bloginfo( 'description' ) );
@@ -121,6 +137,7 @@ if ( $podcast_series ) {
 	}
 }
 $podcast_description = mb_substr( strip_tags( $description ), 0, 3999 );
+$podcast_description = apply_filters( 'ssp_feed_description', $podcast_description, $series_id );
 
 // Podcast language
 $language = get_option( 'ss_podcasting_data_language', get_bloginfo( 'language' ) );
@@ -130,6 +147,7 @@ if ( $podcast_series ) {
 		$language = $series_language;
 	}
 }
+$language = apply_filters( 'ssp_feed_language', $language, $series_id );
 
 // Podcast copyright string
 $copyright = get_option( 'ss_podcasting_data_copyright', '&#xA9; ' . date( 'Y' ) . ' ' . get_bloginfo( 'name' ) );
@@ -139,6 +157,7 @@ if ( $podcast_series ) {
 		$copyright = $series_copyright;
 	}
 }
+$copyright = apply_filters( 'ssp_feed_copyright', $copyright, $series_id );
 
 // Podcast subtitle
 $subtitle = get_option( 'ss_podcasting_data_subtitle', get_bloginfo( 'description' ) );
@@ -148,6 +167,7 @@ if ( $podcast_series ) {
 		$subtitle = $series_subtitle;
 	}
 }
+$subtitle = apply_filters( 'ssp_feed_subtitle', $subtitle, $series_id );
 
 // Podcast author
 $author = get_option( 'ss_podcasting_data_author', get_bloginfo( 'name' ) );
@@ -157,6 +177,7 @@ if ( $podcast_series ) {
 		$author = $series_author;
 	}
 }
+$author = apply_filters( 'ssp_feed_author', $author, $series_id );
 
 // Podcast owner name
 $owner_name = get_option( 'ss_podcasting_data_owner_name', get_bloginfo( 'name' ) );
@@ -166,6 +187,7 @@ if ( $podcast_series ) {
 		$owner_name = $series_owner_name;
 	}
 }
+$owner_name = apply_filters( 'ssp_feed_owner_name', $owner_name, $series_id );
 
 // Podcast owner email address
 $owner_email = get_option( 'ss_podcasting_data_owner_email', get_bloginfo( 'admin_email' ) );
@@ -175,6 +197,7 @@ if ( $podcast_series ) {
 		$owner_email = $series_owner_email;
 	}
 }
+$owner_email = apply_filters( 'ssp_feed_owner_email', $owner_email, $series_id );
 
 // Podcast explicit setting
 $explicit_option = get_option( 'ss_podcasting_explicit', '' );
@@ -182,6 +205,7 @@ if ( $podcast_series ) {
 	$series_explicit_option = get_option( 'ss_podcasting_explicit_' . $series_id, '' );
 	$explicit_option = $series_explicit_option;
 }
+$explicit_option = apply_filters( 'ssp_feed_explicit', $explicit_option, $series_id );
 if ( $explicit_option && 'on' == $explicit_option ) {
 	$itunes_explicit = 'yes';
 	$googleplay_explicit = 'Yes';
@@ -196,6 +220,7 @@ if ( $podcast_series ) {
 	$series_complete_option = get_option( 'ss_podcasting_complete_' . $series_id, '' );
 	$complete_option = $series_complete_option;
 }
+$complete_option = apply_filters( 'ssp_feed_complete', $complete_option, $series_id );
 if ( $complete_option && 'on' == $complete_option ) {
 	$complete = 'yes';
 } else {
@@ -210,11 +235,9 @@ if ( $podcast_series ) {
 		$image = $series_image;
 	}
 }
-
-// Image URL (filterable to allow custom images)
 $image = apply_filters( 'ssp_feed_image', $image, $series_id );
 
-// Podcast category and subcategory (all levels)
+// Podcast category and subcategory (all levels) - can be filtered with `ssp_feed_category_output`
 $category1 = ssp_get_feed_category_output( 1, $series_id );
 $category2 = ssp_get_feed_category_output( 2, $series_id );
 $category3 = ssp_get_feed_category_output( 3, $series_id );
@@ -317,9 +340,6 @@ if ( isset( $category1['category'] ) && $category1['category'] ) { ?>
 			while ( $qry->have_posts()) {
 				$qry->the_post();
 
-				// Get the episode type (audio or video)
-				$episode_type = $ss_podcasting->get_episode_type( get_the_ID() );
-
 				// Audio file
 				$audio_file = $ss_podcasting->get_enclosure( get_the_ID() );
 				if ( get_option( 'permalink_structure' ) ) {
@@ -327,6 +347,8 @@ if ( isset( $category1['category'] ) && $category1['category'] ) { ?>
 				} else {
 					$enclosure = $audio_file;
 				}
+
+				$enclosure = apply_filters( 'ssp_feed_item_enclosure', $enclosure, get_the_ID() );
 
 				// If there is no enclosure then go no further
 				if ( ! isset( $enclosure ) || ! $enclosure ) {
@@ -342,30 +364,39 @@ if ( isset( $category1['category'] ) && $category1['category'] ) { ?>
 						$episode_image = $image_att[0];
 					}
 				}
+				$episode_image = apply_filters( 'ssp_feed_item_image', $episode_image, get_the_ID() );
 
 				// Episode duration (default to 0:00 to ensure there is always a value for this)
 				$duration = get_post_meta( get_the_ID(), 'duration', true );
 				if ( ! $duration ) {
 					$duration = '0:00';
 				}
+				$duration = apply_filters( 'ssp_feed_item_duration', $duration, get_the_ID() );
 
 				// File size
 				$size = get_post_meta( get_the_ID(), 'filesize_raw', true );
 				if ( ! $size ) {
 					$size = 1;
 				}
+				$size = apply_filters( 'ssp_feed_item_size', $size, get_the_ID() );
 
 				// File MIME type (default to MP3/MP4 to ensure there is always a value for this)
 				$mime_type = $ss_podcasting->get_attachment_mimetype( $audio_file );
 				if ( ! $mime_type ) {
+
+					// Get the episode type (audio or video) to determine the appropriate default MIME type
+					$episode_type = $ss_podcasting->get_episode_type( get_the_ID() );
+
 					switch( $episode_type ) {
 						case 'audio': $mime_type = 'audio/mpeg'; break;
 						case 'video': $mime_type = 'video/mp4'; break;
 					}
 				}
+				$mime_type = apply_filters( 'ssp_feed_item_mime_type', $mime_type, get_the_ID() );
 
 				// Episode explicit flag
 				$ep_explicit = get_post_meta( get_the_ID(), 'explicit', true );
+				$ep_explicit = apply_filters( 'ssp_feed_item_explicit', $ep_explicit, get_the_ID() );
 				if ( $ep_explicit && $ep_explicit == 'on' ) {
 					$itunes_explicit_flag = 'yes';
 					$googleplay_explicit_flag = 'Yes';
@@ -376,6 +407,7 @@ if ( isset( $category1['category'] ) && $category1['category'] ) { ?>
 
 				// Episode block flag
 				$ep_block = get_post_meta( get_the_ID(), 'block', true );
+				$ep_block = apply_filters( 'ssp_feed_item_block', $ep_block, get_the_ID() );
 				if ( $ep_block && $ep_block == 'on' ) {
 					$block_flag = 'yes';
 				} else {
@@ -384,6 +416,7 @@ if ( isset( $category1['category'] ) && $category1['category'] ) { ?>
 
 				// Episode author
 				$author = esc_html( get_the_author() );
+				$author = apply_filters( 'ssp_feed_item_author', $author, get_the_ID() );
 
 				// Episode content (with iframes removed)
 				$content = get_the_content_feed( 'rss2' );

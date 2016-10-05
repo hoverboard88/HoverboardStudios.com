@@ -46,7 +46,7 @@ class SSP_Admin {
 		$this->load_plugin_textdomain();
 		add_action( 'init', array( $this, 'load_localisation' ), 0 );
 
-		// Regsiter podcast post type and taxonomies
+		// Regsiter podcast post type, taxonomies and meta fields
 		add_action( 'init', array( $this, 'register_post_type' ), 1 );
 
 		// Register podcast feed
@@ -184,6 +184,7 @@ class SSP_Admin {
 		register_post_type( $this->token, $args );
 
 		$this->register_taxonomies();
+		$this->register_meta();
 	}
 
 	/**
@@ -232,6 +233,36 @@ class SSP_Admin {
         if ( apply_filters( 'ssp_use_post_tags', true ) ) {
         	register_taxonomy_for_object_type( 'post_tag', $this->token );
         }
+    }
+
+    public function register_meta() {
+    	global $wp_version;
+
+    	// The enhanced register_meta function is only available for WordPress 4.6+
+    	if( version_compare( $wp_version, '4.6', '<' ) ) {
+    		return;
+    	}
+
+    	// Get all displayed custom fields
+    	$fields = $this->custom_fields();
+
+    	// Add 'filesize_raw' as this is not included in the displayed field options
+    	$fields['filesize_raw'] = array(
+    		'meta_description' => __( 'The raw file size of the podcast episode media file in bytes.', 'seriously-simple-podcasting' ),
+		);
+
+    	foreach( $fields as $key => $data ) {
+
+    		$args = array(
+				'type' => 'string',
+				'description' => $data['meta_description'],
+				'single' => true,
+				'show_in_rest' => true,
+			);
+
+    		register_meta( 'post', $key, $args );
+    	}
+
     }
 
     /**
@@ -446,8 +477,6 @@ class SSP_Admin {
 		$html .= '<input type="hidden" name="seriouslysimple_' . $this->token . '_nonce" id="seriouslysimple_' . $this->token . '_nonce" value="' . wp_create_nonce( plugin_basename( $this->dir ) ) . '" />';
 
 		if ( 0 < count( $field_data ) ) {
-			$html .= '<table class="form-table">' . "\n";
-			$html .= '<tbody>' . "\n";
 
 			$html .= '<input id="seriouslysimple_post_id" type="hidden" value="'. $post_id . '" />';
 
@@ -470,23 +499,29 @@ class SSP_Admin {
 
 				switch( $v['type'] ) {
 					case 'file':
-						$html .= '<tr valign="top"><th scope="row"><label for="' . esc_attr( $k ) . '">' . $v['name'] . '</label></th><td><input name="' . esc_attr( $k ) . '" type="text" id="upload_' . esc_attr( $k ) . '" class="regular-text" value="' . esc_attr( $data ) . '" /> <input type="button" class="button" id="upload_' . esc_attr( $k ) . '_button" value="' . __( 'Upload File' , 'seriously-simple-podcasting' ) . '" data-uploader_title="' . __( 'Choose a file', 'seriously-simple-podcasting' ) . '" data-uploader_button_text="' . __( 'Insert podcast file', 'seriously-simple-podcasting' ) . '" />' . "\n";
-						$html .= '<p class="description">' . $v['description'] . '</p>' . "\n";
-						$html .= '</td><tr/>' . "\n";
+						$html .= '<p>
+									<label class="ssp-episode-details-label" for="' . esc_attr( $k ) . '">' . $v['name'] . '</label>
+									<br/>
+									<input name="' . esc_attr( $k ) . '" type="text" id="upload_' . esc_attr( $k ) . '" value="' . esc_attr( $data ) . '" />
+									<input type="button" class="button" id="upload_' . esc_attr( $k ) . '_button" value="' . __( 'Upload File' , 'seriously-simple-podcasting' ) . '" data-uploader_title="' . __( 'Choose a file', 'seriously-simple-podcasting' ) . '" data-uploader_button_text="' . __( 'Insert podcast file', 'seriously-simple-podcasting' ) . '" />
+									<br/>
+									<span class="description">' . $v['description'] . '</span>
+								</p>' . "\n";
 					break;
 
 					case 'checkbox':
-						$html .= '<tr valign="top"><th scope="row">' . $v['name'] . '</th><td><input name="' . esc_attr( $k ) . '" type="checkbox" class="' . esc_attr( $class ) . '" id="' . esc_attr( $k ) . '" ' . checked( 'on' , $data , false ) . ' /> <label for="' . esc_attr( $k ) . '"><span class="description">' . $v['description'] . '</span></label>' . "\n";
-						$html .= '</td><tr/>' . "\n";
+						$html .= '<p><input name="' . esc_attr( $k ) . '" type="checkbox" class="' . esc_attr( $class ) . '" id="' . esc_attr( $k ) . '" ' . checked( 'on' , $data , false ) . ' /> <label for="' . esc_attr( $k ) . '"><span>' . $v['description'] . '</span></label></p>' . "\n";
 					break;
 
 					case 'radio':
-						$html .= '<tr valign="top"><th scope="row">' . $v['name'] . '</th><td>' ."\n";
-						foreach( $v['options'] as $option => $label ) {
-							$html .= '<input style="vertical-align: bottom;" name="' . esc_attr( $k ) . '" type="radio" class="' . esc_attr( $class ) . '" id="' . esc_attr( $k ) . '_' . esc_attr( $option ) . '" ' . checked( $option , $data , false ) . ' value="' . esc_attr( $option ) . '" /> <label style="margin-right:10px;" for="' . esc_attr( $k ) . '_' . esc_attr( $option ) . '">' . esc_html( $label ) . '</label>' . "\n";
-						}
-						$html .= '<p class="description">' . $v['description'] . '</p>' . "\n";
-						$html .= '</td><tr/>' . "\n";
+						$html .= '<p>
+									<span class="ssp-episode-details-label">' . $v['name'] . '</span><br/>';
+										foreach( $v['options'] as $option => $label ) {
+											$html .= '<input style="vertical-align: bottom;" name="' . esc_attr( $k ) . '" type="radio" class="' . esc_attr( $class ) . '" id="' . esc_attr( $k ) . '_' . esc_attr( $option ) . '" ' . checked( $option , $data , false ) . ' value="' . esc_attr( $option ) . '" />
+											<label style="margin-right:10px;" for="' . esc_attr( $k ) . '_' . esc_attr( $option ) . '">' . esc_html( $label ) . '</label>' . "\n";
+										}
+						$html .= '<span class="description">' . $v['description'] . '</span>
+								</p>' . "\n";
 					break;
 
 					case 'datepicker':
@@ -494,23 +529,28 @@ class SSP_Admin {
 						if( $data ) {
 							$display_date = date( 'j F, Y', strtotime( $data ) );
 						}
-						$html .= '<tr valign="top"><th scope="row"><label for="' . esc_attr( $k ) . '_display">' . $v['name'] . '</label></th><td class="hasDatepicker"><input type="text" id="' . esc_attr( $k ) . '_display" class="ssp-datepicker ' . esc_attr( $class ) . '" value="' . esc_attr( $display_date ) . '" />' . "\n";
-						$html .= '<input name="' . esc_attr( $k ) . '" id="' . esc_attr( $k ) . '" type="hidden" value="' . esc_attr( $data ) . '" />' . "\n";
-						$html .= '<p class="description">' . $v['description'] . '</p>' . "\n";
-						$html .= '</td><tr/>' . "\n";
+						$html .= '<p class="hasDatepicker">
+									<label class="ssp-episode-details-label" for="' . esc_attr( $k ) . '_display">' . $v['name'] . '</label>
+									<br/>
+									<input type="text" id="' . esc_attr( $k ) . '_display" class="ssp-datepicker ' . esc_attr( $class ) . '" value="' . esc_attr( $display_date ) . '" />
+									<input name="' . esc_attr( $k ) . '" id="' . esc_attr( $k ) . '" type="hidden" value="' . esc_attr( $data ) . '" />
+									<br/>
+									<span class="description">' . $v['description'] . '</span>
+								</p>' . "\n";
 					break;
 
 					default:
-						$html .= '<tr valign="top"><th scope="row"><label for="' . esc_attr( $k ) . '">' . $v['name'] . '</label></th><td><input name="' . esc_attr( $k ) . '" type="text" id="' . esc_attr( $k ) . '" class="' . esc_attr( $class ) . '" value="' . esc_attr( $data ) . '" />' . "\n";
-						$html .= '<p class="description">' . $v['description'] . '</p>' . "\n";
-						$html .= '</td><tr/>' . "\n";
+						$html .= '<p>
+									<label class="ssp-episode-details-label" for="' . esc_attr( $k ) . '">' . $v['name'] . '</label>
+									<br/>
+									<input name="' . esc_attr( $k ) . '" type="text" id="' . esc_attr( $k ) . '" class="' . esc_attr( $class ) . '" value="' . esc_attr( $data ) . '" />
+									<br/>
+									<span class="description">' . $v['description'] . '</span>
+								</p>' . "\n";
 					break;
 				}
 
 			}
-
-			$html .= '</tbody>' . "\n";
-			$html .= '</table>' . "\n";
 		}
 
 		echo $html;
@@ -616,6 +656,7 @@ class SSP_Admin {
 		    'default' => 'audio',
 		    'options' => array( 'audio' => __( 'Audio', 'seriously-simple-podcasting' ), 'video' => __( 'Video', 'seriously-simple-podcasting' ) ),
 		    'section' => 'info',
+		    'meta_description' => __( 'The type of podcast episode - either Audio or Video', 'seriously-simple-podcasting' ),
 		);
 
 		// In v1.14+ the `audio_file` field can actually be either audio or video, but we're keeping the field name here for backwards compatibility
@@ -625,6 +666,7 @@ class SSP_Admin {
 		    'type' => 'file',
 		    'default' => '',
 		    'section' => 'info',
+		    'meta_description' => __( 'The full URL for the podcast episode media file.', 'seriously-simple-podcasting' ),
 		);
 
 		$fields['duration'] = array(
@@ -633,6 +675,7 @@ class SSP_Admin {
 		    'type' => 'text',
 		    'default' => '',
 		    'section' => 'info',
+		    'meta_description' => __( 'The duration of the file for display purposes.', 'seriously-simple-podcasting' ),
 		);
 
 		$fields['filesize'] = array(
@@ -641,6 +684,7 @@ class SSP_Admin {
 		    'type' => 'text',
 		    'default' => '',
 		    'section' => 'info',
+		    'meta_description' => __( 'The size of the podcast episode for display purposes.', 'seriously-simple-podcasting' ),
 		);
 
 		$fields['date_recorded'] = array(
@@ -649,6 +693,7 @@ class SSP_Admin {
 		    'type' => 'datepicker',
 		    'default' => '',
 		    'section' => 'info',
+		    'meta_description' => __( 'The date on which the podcast episode was recorded.', 'seriously-simple-podcasting' ),
 		);
 
 		$fields['explicit'] = array(
@@ -657,6 +702,7 @@ class SSP_Admin {
 		    'type' => 'checkbox',
 		    'default' => '',
 		    'section' => 'info',
+		    'meta_description' => __( 'Indicates whether the episode is explicit or not.', 'seriously-simple-podcasting' ),
 		);
 
 		$fields['block'] = array(
@@ -665,6 +711,7 @@ class SSP_Admin {
 		    'type' => 'checkbox',
 		    'default' => '',
 		    'section' => 'info',
+		    'meta_description' => __( 'Indicates whether this specific episode should be blocked from the iTunes and Google Play Podcast libraries.', 'seriously-simple-podcasting' ),
 		);
 
 		return apply_filters( 'ssp_episode_fields', $fields );
@@ -949,7 +996,7 @@ class SSP_Admin {
 
 			// Change the footer text
 			if ( ! get_option( 'ssp_admin_footer_text_rated' ) ) {
-				$footer_text = sprintf( __( 'If you like %1$sSeriously Simple Podcasting%2$s please leave a %3$s&#9733;&#9733;&#9733;&#9733;&#9733;%4$s rating. A huge thank you in advance!', 'seriously-simple-podcasting' ), '<strong>', '</strong>', '<a href="https://wordpress.org/support/view/plugin-reviews/seriously-simple-podcasting?filter=5#postform" target="_blank" class="ssp-rating-link" data-rated="' . __( 'Thanks!', 'seriously-simple-podcasting' ) . '">', '</a>' );
+				$footer_text = sprintf( __( 'If you like %1$sSeriously Simple Podcasting%2$s please leave a %3$s&#9733;&#9733;&#9733;&#9733;&#9733;%4$s rating. A huge thank you in advance!', 'seriously-simple-podcasting' ), '<strong>', '</strong>', '<a href="https://wordpress.org/support/plugin/seriously-simple-podcasting/reviews/?rate=5#new-post" target="_blank" class="ssp-rating-link" data-rated="' . __( 'Thanks!', 'seriously-simple-podcasting' ) . '">', '</a>' );
 				$footer_text .= "<script type='text/javascript'>
 					jQuery('a.ssp-rating-link').click(function() {
 						jQuery.post( '" . admin_url( 'admin-ajax.php' ) . "', { action: 'ssp_rated' } );

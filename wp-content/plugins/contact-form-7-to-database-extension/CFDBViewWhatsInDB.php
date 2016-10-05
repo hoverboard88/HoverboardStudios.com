@@ -58,10 +58,10 @@ class CFDBViewWhatsInDB extends CFDBView {
 
         if ($currSelection) {
             $currSelection = stripslashes($currSelection);
-            $currSelection = html_entity_decode($currSelection);
+            $currSelection = htmlspecialchars_decode($currSelection, ENT_QUOTES);
         }
 
-        $currSelectionEscaped = htmlentities($currSelection, null, 'UTF-8');
+        $currSelectionEscaped = htmlspecialchars($currSelection, ENT_QUOTES, 'UTF-8');
         // If there is only one form in the DB, select that by default
         if (!$currSelection && count($formsList) == 1) {
             $currSelection = $formsList[0];
@@ -121,9 +121,9 @@ class CFDBViewWhatsInDB extends CFDBView {
                         <option value=""><?php echo htmlspecialchars(__('* Select a form *', 'contact-form-7-to-database-extension')); ?></option>
                         <?php foreach ($formsList as $formName) {
                             $selected = ($formName == $currSelection) ? "selected" : "";
-                            $formNameEscaped = htmlentities($formName, null, 'UTF-8');
+                            $formNameEscaped = htmlspecialchars($formName, ENT_QUOTES, 'UTF-8');
                         ?>
-                        <option value="<?php echo str_replace('"', '&quot;', $formNameEscaped) ?>" <?php echo $selected ?>><?php echo $formNameEscaped ?></option>
+                        <option value="<?php echo $formNameEscaped ?>" <?php echo $selected ?>><?php echo $formNameEscaped ?></option>
                         <?php } ?>
                     </select>
                 </form>
@@ -229,6 +229,11 @@ class CFDBViewWhatsInDB extends CFDBView {
                         if (searchVal != null && searchVal != "") {
                             url += '&search=' + encodeURI(searchVal);
                         }
+                        var checkedValues = [];
+                        jQuery('input[id^="delete_"]:checked').each(function() {
+                            checkedValues.push(this.name);
+                        });
+                        checkedValues = checkedValues.join(',');
                         if (checkedValues) {
                             url += "&filter=submit_time[in]" + checkedValues;
                         }
@@ -398,7 +403,8 @@ class CFDBViewWhatsInDB extends CFDBView {
                 $options = array_merge($_POST, $_GET);
                 $options['canDelete'] = $canEdit;
                 if ($maxRows) {
-                    $options['limit'] = ($startRow - 1) . ',' . ($maxRows);
+                    $limitStart = ($startRow < 1) ? 0 : ($startRow - 1);
+                    $options['limit'] = "$limitStart,$maxRows";
                 }
                 if ($useDataTables) {
                     $options['id'] = $tableHtmlId;
@@ -432,25 +438,6 @@ class CFDBViewWhatsInDB extends CFDBView {
             <tr>
                 <td align="center" colspan="4">
                     <span style="font-size:x-small; font-style: italic;">
-                        <?php echo htmlspecialchars(__('Did you know: This plugin captures data from these plugins:', 'contact-form-7-to-database-extension')); ?>
-                        <br/>
-                        <a target="_cf7" href="https://wordpress.org/plugins/contact-form-7/">Contact Form 7</a>,
-                        <a target="_fscf" href="https://wordpress.org/plugins/si-contact-form/">Fast Secure Contact Form</a>,
-                        <a target="_jetpack" href="https://wordpress.org/plugins/jetpack/">JetPack Contact Form</a>,
-                        <a target="_gravityforms" href="http://www.gravityforms.com">Gravity Forms</a>,
-                        <a target="_wr" href="https://wordpress.org/plugins/wr-contactform/">WR ContactForm</a>,
-                        <a target="_formidable" href="https://wordpress.org/plugins/formidable/">Formidable Forms (BETA)</a>,
-                        <a target="_quform" href="http://codecanyon.net/item/quform-wordpress-form-builder/706149/">Quform (BETA)</a>,
-                        <a target="_ninjaforms" href="https://wordpress.org/plugins/ninja-forms/">Ninja Forms (BETA)</a>,
-                        <a target="_caldera" href="https://wordpress.org/plugins/caldera-forms/">Caldera Forms (BETA)</a>
-                        <a target="_cf2" href="https://wordpress.org/plugins/cforms2/">CFormsII Forms (BETA)</a>
-                        <a target="_fcraft" href="http://codecanyon.net/item/formcraft-premium-wordpress-form-builder/5335056">FormCraft Premium (BETA)</a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td align="center" colspan="4">
-                    <span style="font-size:x-small; font-style: italic;">
                     <?php echo htmlspecialchars(__('Did you know: You can add this data to your posts and pages using these shortcodes:', 'contact-form-7-to-database-extension')); ?>
                         <br/>
                         <a target="_faq" href="http://cfdbplugin.com/?page_id=284">[cfdb-html]</a>
@@ -477,7 +464,7 @@ class CFDBViewWhatsInDB extends CFDBView {
     <?php
            if ($currSelection && 'true' == $plugin->getOption('ShowQuery', 'false', true)) {
             ?>
-        <div id="query" style="margin: 20px; border: dotted #d3d3d3 1pt;">
+        <div id="query" style="direction: ltr; margin: 20px; border: dotted #d3d3d3 1pt;">
             <strong><?php echo htmlspecialchars(__('Query:', 'contact-form-7-to-database-extension')); ?></strong><br/>
             <pre><?php echo $exporter->getPivotQuery($currSelection); ?></pre>
         </div>

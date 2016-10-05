@@ -173,33 +173,6 @@ if ( ! function_exists( 'ss_podcast' ) ) {
 	}
 }
 
-if ( ! function_exists( 'ss_podcast_shortcode' ) ) {
-
-	/**
-	 * Load podcast shortcode
-	 * @param  array  $atts    Shortcode attributes
-	 * @return string          HTML output
-	 */
-	function ss_podcast_shortcode ( $atts ) {
-
-		$defaults = array(
-			'title' => '',
-			'content' => 'series',
-			'series' => '',
-			'echo' => false,
-			'size' => 100,
-			'link_title' => true
-		);
-
-		$args = shortcode_atts( $defaults, $atts );
-
-		// Make sure we return and don't echo.
-		$args['echo'] = false;
-
-		return ss_podcast( $args );
-	}
-}
-
 if ( ! function_exists( 'ssp_episode_ids' ) ) {
 
 	/**
@@ -330,7 +303,7 @@ if ( ! function_exists( 'ssp_post_types' ) ) {
 	 */
 	function ssp_post_types ( $include_podcast = true ) {
 
-		// Get saved podcast post type option
+		// Get saved podcast post type option (default to empty array)
 		$podcast_post_types = get_option( 'ss_podcasting_use_post_types', array() );
 
 		// Add `podcast` post type to array if required
@@ -359,7 +332,7 @@ if ( ! function_exists( 'ssp_post_types' ) ) {
 if( ! function_exists( 'ssp_get_feed_category_output' ) ) {
 
 	/**
-	 * Get the XML markup for the feed category st the specified level
+	 * Get the XML markup for the feed category at the specified level
 	 * @param  int    $level Category level
 	 * @return string        XML output for feed vategory
 	 */

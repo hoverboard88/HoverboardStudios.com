@@ -346,8 +346,6 @@ if ( ! class_exists( 'wpt_TwitterOAuth' ) ) {
 					$url      = $req->get_normalized_http_url();
 					$args     = wp_parse_args( $req->to_postdata() );
 					$response = wp_remote_post( $url, array( 'body' => $args, 'timeout' => 30 ) );
-								//wp_mail( 'joe@joedolson.com', 'req results', print_r( $req, 1 ) );
-								//wp_mail( 'joe@joedolson.com', 'post response', print_r( $response, 1 ) );
 					break;				
 			}
 

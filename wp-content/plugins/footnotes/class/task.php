@@ -410,6 +410,7 @@ class MCI_Footnotes_Task {
 			}
 			// add offset to the new starting position
 			$l_int_PosStart += $l_int_Length + strlen($l_str_EndingTag);
+			$l_int_PosStart = $l_int_Length + strlen($l_str_FootnoteReplaceText);
 		} while (true);
 
 		// return content

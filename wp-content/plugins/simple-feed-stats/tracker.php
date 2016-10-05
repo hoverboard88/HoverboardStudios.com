@@ -22,7 +22,30 @@ function sfs_cleaner($string) {
 }
 
 function sfs_ignore_bots() {
-	$bots = array('googlebot', 'googleproducer', 'google-site-verification', 'google-test', 'baidu', 'bingbot', 'bingpreview', 'msnbot', 'yandex', 'sosospider', 'sosoimagespider', 'exabot', 'sogou', 'facebookexternalhit', 'feedfetcher-google');
+	$bots = array(
+		'aolbuild', 
+		'adsbot-google',
+		'googlebot', 
+		'googleproducer', 
+		'google-site-verification', 
+		'google-test', 
+		'mediapartners-google', 
+		'baidu', 
+		'bingbot', 
+		'bingpreview', 
+		'duckduckgo',
+		'msnbot', 
+		'yandex', 
+		'sosospider', 
+		'sosoimagespider', 
+		'exabot', 
+		'sogou', 
+		'teoma',
+		'slurp',
+		'yandex',
+		'facebookexternalhit', 
+		'feedfetcher-google',
+	);
 	return apply_filters('sfs_filter_bots', $bots);
 }
 

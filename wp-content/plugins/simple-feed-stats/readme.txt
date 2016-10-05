@@ -5,15 +5,15 @@ Plugin URI: https://perishablepress.com/simple-feed-stats/
 Description: Tracks your feeds, adds custom content, and displays your feed statistics on your site.
 Tags: atom, comments, count, feed, feedburner, feeds, posts, rdf, rss, stats, statistics, subscribers, tracking
 Author: Jeff Starr
-Author URI: http://monzilla.biz/
+Author URI: https://plugin-planet.com/
 Donate link: http://m0n.co/donate
 Contributors: specialk
 Requires at least: 4.1
-Tested up to: 4.5
+Tested up to: 4.6
 Stable tag: trunk
-Version: 20160409
-Text Domain: sfs
-Domain Path: /languages/
+Version: 20160815
+Text Domain: simple-feed-stats
+Domain Path: /languages
 License: GPL v2 or later
 
 Tracks your feeds and displays your feed count via shortcode.
@@ -189,7 +189,7 @@ __Note:__ uninstalling the plugin from the WP Plugins screen results in the _rem
 3. Simple Feed Stats: Feed Stats Table
 4. Simple Feed Stats: FeedBurner-style count badge
 5. Simple Feed Stats: Dashboard Widget
-6. Simple Feed Stats: Full plugin settings page
+6. Simple Feed Stats: Full plugin settings page (panels toggle open/closed)
 
 More screenshots and info available at the [SFS Homepage](https://perishablepress.com/simple-feed-stats/).
 
@@ -248,6 +248,21 @@ Links, tweets and likes also appreciated. Thanks! :)
 
 
 == Changelog ==
+
+**20160815**
+
+* Streamlined and optimized the plugin settings page
+* Improved logic of sfs_cache_data() function
+* Replaced `_e()` with `esc_html_e()` or `esc_attr_e()`
+* Replaced `__()` with `esc_html__()` or `esc_attr__()`
+* Added more user agents to the list of ignored bots
+* Improved logic of sfs_count_badge() function
+* Added plugin icons and larger banner image
+* Changed text-domain from "sfs" to "simple-feed-stats"
+* Removed local translations in favor of [GlotPress](https://make.wordpress.org/polyglots/handbook/tools/glotpress-translate-wordpress-org/)
+* Improved translation support
+* Generated new translation template
+* Tested on WordPress 4.6
 
 **20160409**
 

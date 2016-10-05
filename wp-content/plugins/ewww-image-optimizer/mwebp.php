@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 function ewww_image_optimizer_webp_migrate_preview() {
 	ewwwio_debug_message( '<b>' . __FUNCTION__ . '()</b>' );
 ?>	<div class="wrap"> 
@@ -30,7 +33,9 @@ function ewww_image_optimizer_webp_scan() {
 	$start = microtime( true );
 	$file_counter = 0;
 	foreach ( $iterator as $path ) {
-		set_time_limit ( 0 );
+		if ( ewww_image_optimizer_stl_check() ) {
+			set_time_limit ( 0 );
+		}
 		$skip_optimized = false;
 		if ( $path->isDir() ) {
 			continue;
@@ -103,8 +108,9 @@ function ewww_image_optimizer_webp_loop() {
 	} 
 	// retrieve the time when the migration starts
 	$started = microtime( true );
-	// allow 50 seconds for each loop
-	set_time_limit( 50 );
+	if ( ewww_image_optimizer_stl_check() ) {
+		set_time_limit( 0 );
+	}
 	$images = array();
 	ewwwio_debug_message( 'renaming images now' );
 	$images_processed = 0;

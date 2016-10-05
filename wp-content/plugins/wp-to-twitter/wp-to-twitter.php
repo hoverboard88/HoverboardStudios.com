@@ -3,7 +3,7 @@
 Plugin Name: WP to Twitter
 Plugin URI: http://www.joedolson.com/wp-to-twitter/
 Description: Posts a Tweet when you update your WordPress blog or post a link, using your URL shortening service. Rich in features for customizing and promoting your Tweets.
-Version: 3.2.10
+Version: 3.2.14
 Author: Joseph Dolson
 Text Domain: wp-to-twitter
 Domain Path: /lang
@@ -44,7 +44,7 @@ require_once( plugin_dir_path( __FILE__ ) . '/wpt-widget.php' );
 require_once( plugin_dir_path( __FILE__ ) . '/wpt-rate-limiting.php' );
 
 global $wpt_version;
-$wpt_version = "3.2.10";
+$wpt_version = "3.2.14";
 
 
 // Create a helper function for easy SDK access.
@@ -448,7 +448,7 @@ function jd_doTwitterAPIPost( $twit, $auth = false, $id = false, $media = false 
 
 		if ( wtt_oauth_test( $auth ) && ( $connection = wtt_oauth_connection( $auth ) ) ) {
 			if ( $media && $attachment && !$media_id ) {
-				$media_id  = $connection->media( $upload_api, array( 'auth'=>$auth, 'media'=>$attachment ) );
+				$media_id     = $connection->media( $upload_api, array( 'auth'=>$auth, 'media'=>$attachment ) );
 				wpt_mail( 'Media Uploaded', "$auth, $media_id, $attachment" );
 				if ( $media_id ) {
 					$status['media_ids'] = $media_id;
@@ -790,7 +790,7 @@ function wpt_category_limit( $post_type, $post_info, $post_ID ) {
  * @return integer $post_ID
  */
 function wpt_tweet( $post_ID, $type = 'instant' ) {
-	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE || wp_is_post_revision( $post_ID ) ) {
+	if ( wp_is_post_autosave( $post_ID ) || wp_is_post_revision( $post_ID ) ) {
 		return $post_ID;
 	}
 	
@@ -1207,9 +1207,9 @@ function wpt_add_twitter_inner_box( $post ) {
 		if ( current_user_can( 'wpt_twitter_custom' ) || current_user_can( 'manage_options' ) ) {
 			?>
 			<p class='jtw'>
-				<label
-					for="jtw"><?php _e( "Custom Twitter Post", 'wp-to-twitter', 'wp-to-twitter' ) ?></label><br/><textarea class="wpt_tweet_box" name="_jd_twitter" id="jtw" rows="2"
-					cols="60"><?php echo esc_attr( $tweet ); ?></textarea>
+				<label for="jtw"><?php _e( "Custom Twitter Post", 'wp-to-twitter', 'wp-to-twitter' ) ?></label><br/>
+				<textarea class="wpt_tweet_box" name="_jd_twitter" id="jtw" rows="2" cols="60"><?php echo esc_attr( $tweet ); ?></textarea>
+				<?php echo apply_filters( 'wpt_custom_box', '', $tweet, $post_id ); ?>				
 			</p>
 			<?php
 			$jd_expanded = $jd_template;
@@ -1223,6 +1223,7 @@ function wpt_add_twitter_inner_box( $post ) {
 			<p class='template'>
 				<?php _e( 'Template:', 'wp-to-twitter' ); ?><br />
 				<code><?php echo stripcslashes( $jd_expanded ); ?></code>
+				<?php echo apply_filters( 'wpt_template_block', '', $jd_expanded, $post_id ); ?>
 			</p>
 			<?php
 			echo apply_filters( 'wpt_custom_retweet_fields', '', $post_id );
@@ -1451,8 +1452,6 @@ function wpt_ajax_tweet() {
 		die;
 	}
 	$action       = ( $_REQUEST['tweet_action'] == 'tweet' ) ? 'tweet' : 'schedule';
-	// This isn't used right now, because of time
-	
 	$authors      = ( isset( $_REQUEST['tweet_auth'] ) && $_REQUEST['tweet_auth'] != null ) ? $_REQUEST['tweet_auth'] : false;
 	$upload      = ( isset( $_REQUEST['tweet_upload'] ) && $_REQUEST['tweet_upload'] != null ) ? $_REQUEST['tweet_upload'] : 1;
 	$current_user = wp_get_current_user();
@@ -1520,7 +1519,7 @@ function wpt_admin_script() {
 		wp_register_style( 'wpt-post-styles', plugins_url( 'css/post-styles.css', __FILE__ ) );
 		wp_enqueue_style( 'wpt-post-styles' );
 		if ( $current_screen->base == 'post' ) {
-			$allowed = 140 - mb_strlen( get_option( 'jd_twit_prepend' ) . get_option( 'jd_twit_append' ) );
+			$allowed = 140 - mb_strlen( stripslashes( get_option( 'jd_twit_prepend' ) . get_option( 'jd_twit_append' ) ) );
 		} else {
 			$allowed = ( wpt_is_ssl( home_url() ) ) ? 137 : 138;
 		}
@@ -1781,6 +1780,7 @@ function wpt_in_post_type( $id ) {
 			}
 		}
 	}
+	
 	return false;
 }
 
@@ -1790,7 +1790,7 @@ add_action( 'future_to_publish', 'wpt_future_to_publish', 16 );
  */
 function wpt_future_to_publish( $post ) {
 	$id = $post->ID;
-	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE || wp_is_post_revision( $id ) || ! wpt_in_post_type( $id ) ) {
+	if ( wp_is_post_autosave( $id ) || wp_is_post_revision( $id ) || ! wpt_in_post_type( $id ) ) {
 		return;
 	}
 	wpt_twit_future( $id );
@@ -1807,7 +1807,11 @@ function wpt_twit( $id ) {
 	if ( $post->post_status != 'publish' ) {
 		return;
 	} // is there any reason to accept any other status?
+	
+	// This is an issue only until the release of WP 4.7
+	remove_action( 'save_post', 'wpt_twit', 15 );
 	wpt_twit_instant( $id );
+	add_action( 'save_post', 'wpt_twit', 15 );
 }
 
 add_action( 'xmlrpc_publish_post', 'wpt_twit_xmlrpc' );
@@ -1826,6 +1830,7 @@ function wpt_twit_future( $id ) {
 
 		return;
 	}
+	
 	wpt_tweet( $id, 'future' );
 }
 

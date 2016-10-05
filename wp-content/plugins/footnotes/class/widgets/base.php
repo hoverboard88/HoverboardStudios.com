@@ -1,6 +1,6 @@
 <?php
 /**
- * 
+ *
  * @filesource
  * @author Stefan Herndler
  * @since x.x.x 14.09.14 14:30
@@ -65,11 +65,11 @@ abstract class MCI_Footnotes_WidgetBase extends WP_Widget {
 		$l_arr_WidgetOptions = array("classname" => __CLASS__, "description" => $this->getDescription());
 		$l_arr_ControlOptions = array("id_base" => strtolower($this->getID()), "width" => $this->getWidgetWidth());
 		// registers the Widget
-		$this->WP_Widget(
+		parent::__construct(
 			strtolower($this->getID()), // unique ID for the widget, has to be lowercase
 			$this->getName(), // Plugin name to be displayed
 			$l_arr_WidgetOptions, // Optional Widget Options
 			$l_arr_ControlOptions // Optional Widget Control Options
-		);
+		);	
 	}
 }

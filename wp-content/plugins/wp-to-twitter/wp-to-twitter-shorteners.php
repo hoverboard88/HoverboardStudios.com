@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! function_exists( 'wpt_shorten_url' ) ) { // prep work for future plug-in replacement.
 	add_filter( 'wptt_shorten_link', 'wpt_shorten_url', 10, 4 );
 
-	function wpt_shorten_url( $url, $thisposttitle, $post_ID, $testmode = false ) {
+	function wpt_shorten_url( $url, $thisposttitle, $post_ID, $testmode = false, $store_urls = true ) {
 		wpt_mail( "Initial Link Data: #$post_ID", "$url, $thisposttitle, $post_ID, $testmode" ); // DEBUG
 		// filter link before sending to shortener or adding analytics
 		$shortener = get_option( 'jd_shortener' );
@@ -176,11 +176,12 @@ if ( ! function_exists( 'wpt_shorten_url' ) ) { // prep work for future plug-in 
 					break;
 				case 8:
 					// Goo.gl
-					$target = "https://www.googleapis.com/urlshortener/v1/url?key=AIzaSyBSnqQOg3vX1gwR7y2l-40yEG9SZiaYPUQ";
-					$body   = "{'longUrl':'$url'}";
+					$googl_api_key = ( get_option( 'googl_api_key' ) == '' ) ? 'AIzaSyBSnqQOg3vX1gwR7y2l-40yEG9SZiaYPUQ' : get_option( 'googl_api_key' );
+					$target  = "https://www.googleapis.com/urlshortener/v1/url?key=$googl_api_key";
+					$body    = "{'longUrl':'$url'}";
 					$json    = wpt_fetch_url( $target, 'POST', $body, 'Content-Type: application/json' );
 					$decoded = json_decode( $json );
-					$shrink = $decoded->id;
+					$shrink  = $decoded->id;
 					if ( ! wpt_is_valid_url( $shrink ) ) {
 						$shrink = false;
 					}
@@ -243,7 +244,7 @@ if ( ! function_exists( 'wpt_shorten_url' ) ) { // prep work for future plug-in 
 				update_option( 'wp_url_failure', '0' );
 			}
 		}
-		$store_urls = apply_filters( 'wpt_store_url', true );
+		$store_urls = apply_filters( 'wpt_store_url', $store_urls );
 		if ( $store_urls ) {
 			wpt_store_url( $post_ID, $shrink );
 		}
@@ -283,17 +284,11 @@ if ( ! function_exists( 'wpt_shorten_url' ) ) { // prep work for future plug-in 
 		return wpt_expand_url( $short_url );
 	}
 	
+	/** 
+	 * LongUrl.org was taken off line; this no longer works.
+	 */
 	function wpt_expand_url( $short_url ) {
-		$short_url = urlencode( $short_url );
-		$decoded   = wpt_remote_json( "http://api.longurl.org/v2/expand?format=json&url=" . $short_url );
-		if ( isset( $decoded['long-url'] ) ) {
-			$url = $decoded['long-url'];
-		} else {
-			$url = $short_url;
-		}
-
-		return $url;
-		//return $short_url;
+		return $short_url;
 	}
 	
 	function jd_expand_yourl( $short_url, $remote ) {
@@ -453,9 +448,18 @@ if ( ! function_exists( 'wpt_shorten_url' ) ) { // prep work for future plug-in 
 						</p>
 
 						<div>
-							<input type="hidden" name="submit-type" value="yourlsapi"/>
+							<input type="hidden" name="submit-type" value="yourlsapi" />
 						</div>
 						<?php echo $form_end; ?>
+					<?php } else if ( $shortener == 8 ) { ?>
+<?php echo $form_start; ?>
+						<p>
+							<label for="googl_api_key"><?php _e( "Goo.gl API Key:", 'wp-to-twitter' ); ?></label>
+							<input type="text" name="googl_api_key" id="googl_api_key" value="<?php esc_attr_e( get_option( 'googl_api_key' ) ) ?>"/>
+						</p>
+
+						<div><input type="hidden" name="submit-type" value="googlapi" /></div>
+						<?php echo $form_end; ?>					
 					<?php } else if ( $shortener == 10 ) { ?>
 						<?php echo $form_start; ?>
 						<p>
@@ -581,6 +585,14 @@ if ( ! function_exists( 'wpt_shorten_url' ) ) { // prep work for future plug-in 
 				$message = __( "Bit.ly Login not added - <a href='http://bit.ly/account/'>get one here</a>! ", 'wp-to-twitter' );
 			}
 		}
+		if ( isset( $post['submit-type'] ) && $post['submit-type'] == 'googlapi' ) {
+			if ( $post['googl_api_key'] != '' && isset( $post['submit'] ) ) {
+				update_option( 'googl_api_key', trim( $post['googl_api_key'] ) );
+				$message .= __( "Goo.gl API Key Updated. ", 'wp-to-twitter' );
+			} else {
+				$message = __( "Goo.gl API Key not added - <a href='https://developers.google.com/url-shortener/v1/getting_started'>get one here</a>! ", 'wp-to-twitter' );
+			}	
+		}
 		
 		if ( isset( $post['submit-type'] ) && $post['submit-type'] == 'joturlapi' ) {
 			if ( $post['joturlapi'] != '' && isset( $post['submit'] ) ) {
@@ -600,7 +612,7 @@ if ( ! function_exists( 'wpt_shorten_url' ) ) { // prep work for future plug-in 
 				$message = __( "jotURL public API Key deleted. You cannot use the jotURL API without providing your public API Key. ", 'wp-to-twitter' );
 			} else {
 				$message = __( "jotURL public API Key not added - <a href='https://www.joturl.com/reserved/api.html'>get one here</a>! ", 'wp-to-twitter' );
-			}
+			}		
 			if ( $post['joturl_longurl_params'] != '' && isset( $post['submit'] ) ) {
 				$v = trim( $post['joturl_longurl_params'] );
 				if ( substr( $v, 0, 1 ) == '&' || substr( $v, 0, 1 ) == '?' ) {

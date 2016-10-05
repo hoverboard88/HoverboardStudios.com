@@ -193,6 +193,16 @@ label[for="wpt_license_key"] {
 	padding: 0;
 }
 
+.inside.purchase {
+	width: 70%;
+	margin: 0 auto;
+	min-width: 300px;
+}
+
+.inside.purchase h4 {
+	font-size: 1.8em;
+}
+
 .wpt-terms li {
     padding: 2px !important;
     border-radius: 3px;

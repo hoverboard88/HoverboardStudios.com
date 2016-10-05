@@ -74,7 +74,7 @@ if ( ! class_exists( 'ITSEC_Core' ) ) {
 		public function init( $plugin_file, $plugin_name ) {
 			global $itsec_globals, $itsec_logger, $itsec_lockout;
 
-			$this->plugin_build = 4041; // used to trigger updates
+			$this->plugin_build = 4043; // used to trigger updates
 			$this->plugin_file = $plugin_file;
 			$this->plugin_dir = dirname( $plugin_file ) . '/';
 			$this->current_time = current_time( 'timestamp' );
@@ -103,6 +103,7 @@ if ( ! class_exists( 'ITSEC_Core' ) ) {
 			require( $this->plugin_dir . 'core/class-itsec-files.php' );
 			require( $this->plugin_dir . 'core/class-itsec-notify.php' );
 			require( $this->plugin_dir . 'core/class-itsec-response.php' );
+			require( $this->plugin_dir . 'core/lib/class-itsec-lib-user-activity.php' );
 
 			$this->itsec_files = ITSEC_Files::get_instance();
 			$this->itsec_notify = new ITSEC_Notify();
@@ -140,9 +141,6 @@ if ( ! class_exists( 'ITSEC_Core' ) ) {
 
 			if ( is_admin() ) {
 				require( $this->plugin_dir . 'core/admin-pages/init.php' );
-
-				require( $this->plugin_dir . 'core/class-itsec-dashboard-admin.php' );
-				new ITSEC_Dashboard_Admin( $this );
 
 				//add action link
 				add_filter( 'plugin_action_links', array( $this, 'add_action_link' ), 10, 2 );
@@ -523,7 +521,13 @@ if ( ! class_exists( 'ITSEC_Core' ) ) {
 
 		}
 
-		public static function add_notice( $callback ) {
+		public static function add_notice( $callback, $all_pages = false ) {
+			global $pagenow, $plugin_page;
+
+			if ( ! $all_pages && ! in_array( $pagenow, array( 'plugins.php', 'update-core.php' ) ) && ( ! isset( $plugin_page ) || ! in_array( $plugin_page, array( 'itsec', 'itsec-logs' ) ) ) ) {
+				return;
+			}
+
 			$self = self::get_instance();
 
 			if ( ! $self->notices_loaded ) {
@@ -617,7 +621,7 @@ if ( ! class_exists( 'ITSEC_Core' ) ) {
 		}
 
 		public static function get_security_check_page_url() {
-			return admin_url( 'admin.php?page=itsec&module=security-check' );
+			return network_admin_url( 'admin.php?page=itsec&module=security-check' );
 		}
 
 		public static function set_interactive( $interactive ) {
@@ -645,10 +649,10 @@ if ( ! class_exists( 'ITSEC_Core' ) ) {
 			}
 
 
-			$HTTP_RAW_POST_DATA = @file_get_contents( 'php://input' );
+			$post_data = @file_get_contents( 'php://input' );
 
-			if ( ! empty( $HTTP_RAW_POST_DATA ) ) {
-				$data = base64_decode( $HTTP_RAW_POST_DATA );
+			if ( ! empty( $post_data ) ) {
+				$data = base64_decode( $post_data );
 
 				if ( false !== strpos( $data, 's:10:"iwp_action";' ) ) {
 					$self->is_iwp_call = true;

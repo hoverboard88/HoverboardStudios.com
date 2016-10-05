@@ -3,10 +3,74 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } // Exit if accessed directly
 
+function wpt_max_length() {
+	$config     = get_transient( 'wpt_twitter_config' );
+	if ( ! $config ) {
+		$connection = wtt_oauth_connection();
+		if ( $connection ) {
+			$config     = $connection->get( 'https://api.twitter.com/1.1/help/configuration.json' );
+			set_transient( 'wpt_twitter_config', $config, 60*60*24 );
+		} else {
+			$config     = json_encode( array( 
+				'base_length' => 139, 
+				'http_length' => 23, 
+				'https_length' => 23,
+				'reserved_chars' => 24
+			) );
+		}
+	}
+	
+	$decoded = json_decode( $config );
+	
+	if ( is_object( $decoded ) && isset( $decoded->short_url_length ) ) {
+		$short_url_length = $decoded->short_url_length;
+		$short_url_https  = $decoded->short_url_length_https;
+		$reserved_char    = $decoded->characters_reserved_per_media;
+		$values = array( 
+			'base_length' => 139, 
+			'http_length' => $short_url_length, 
+			'https_length' => $short_url_https,
+			'reserved_chars' => $reserved_char
+		);	
+		
+	} else {
+		// if config query is invalid, use default values; these may become invalid
+		$values = array( 
+			'base_length' => 139, 
+			'http_length' => 23, 
+			'https_length' => 23,
+			'reserved_chars' => 24
+		);	
+	}
+	
+	return apply_filters( 'wpt_max_length', $values );	
+}
+
+add_filter( 'wpt_tweet_sentence', 'wpt_filter_urls', 10, 2 );
+function wpt_filter_urls( $tweet, $post_ID ) {
+	preg_match_all('#\bhttps?://[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/))#', $tweet, $match);
+	$title = get_the_title( $post_ID );
+	
+	if ( isset( $match[0] ) && !empty( $match[0] ) ) {
+		$urls = $match[0];
+		foreach( $urls as $url ) {
+			if ( esc_url( $url ) ) {
+				$short = wpt_shorten_url( $url, $title, $post_ID, false, false );
+				if ( $short ) {
+					$tweet = str_replace( $url, $short, $tweet );
+				}
+			}
+		}
+	}
+	
+	return $tweet;
+}
+
+
 function jd_truncate_tweet( $tweet, $post, $post_ID, $retweet = false, $ref = false ) {
-	// media file occupies 22 characters, need to account for in shortening.
-	$maxlength    = apply_filters( 'wpt_max_length', array( 'with_media' => 116, 'without_media' => 139 ) );
-	$length       = ( wpt_post_with_media( $post_ID, $post ) ) ? $maxlength['with_media'] : $maxlength['without_media'];
+	// media file no longer needs accounting in shortening. 9/22/2016
+	$maxlength    = wpt_max_length();
+	$length       = $maxlength['base_length'];
 	$tweet        = apply_filters( 'wpt_tweet_sentence', $tweet, $post_ID );
 	$tweet        = trim( wpt_custom_shortcodes( $tweet, $post_ID ) );
 	$tweet        = trim( wpt_user_meta_shortcodes( $tweet, $post['authId'] ) );
@@ -60,8 +124,8 @@ function jd_truncate_tweet( $tweet, $post, $post_ID, $retweet = false, $ref = fa
 		 */
 		$length_array = wpt_length_array( $values, $encoding );
 
-		// Twitter's t.co shortener is mandatory. All URLS are max-character value set by Twitter.			
-		$tco   = ( wpt_is_ssl( $values['url'] ) ) ? 23 : 22;
+		// Twitter's t.co shortener is mandatory. All URLS are max-character value set by Twitter.	
+		$tco   = ( wpt_is_ssl( $values['url'] ) ) ? $maxlength['https_length'] : $maxlength['http_length'];
 		$order = get_option( 'wpt_truncation_order' );
 		if ( is_array( $order ) ) {
 			asort( $order );

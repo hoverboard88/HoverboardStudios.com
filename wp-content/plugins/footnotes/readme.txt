@@ -1,18 +1,13 @@
 === Plugin Name ===
-Contributors: Aricura, mark.cheret
+Contributors: dartiss, Aricura, mark.cheret
 Tags: footnote, footnotes, bibliography, formatting, notes, Post, posts, reference, referencing
 Requires at least: 3.9
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BYSY26N8L8VJC
-Tested up to: 4.4.2
+Tested up to: 4.5.3
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
-Stable Tag: 1.6.3
+Stable Tag: 1.6.4
 
 == Description ==
-
-HELP WANTED! Dear fine footnotes community. Unpredicted challenges in the lives of the footnotes team currently make it impossible to further the development and curation of the plugin.
-We are proud of you and what we could give you. Turns out our plugin's ships with some kinks, we'd like to address. We therefore need you as a developer to have a look at our code and the forum and help in solving these issues.
-I'm willing to pay you for helping our users out. This plugin's got about 10% market share in all footnotes related plugins, so we serve a significant part of the community. Please get in touch and assist. Thank you.
 
 Featured on wpmudev: http://premium.wpmudev.org/blog/12-surprisingly-useful-wordpress-plugins-you-dont-know-about/
 Cheers for the review, folks!
@@ -63,12 +58,6 @@ No, this Plugin has been written from scratch. Of course some inspirations on ho
 1. For anyone interested in converting from the FD Footnotes plugin:
 Visit this swift write-up from a **footnotes** user by the name of **Southwest**: http://wordpress.org/support/topic/how-to-make-this-footnote-style?replies=6#post-5946306
 2. From what we've researched, all other footnotes Plugins use open and close shortcodes, which can be left as is. In the **footnotes** settings menu, you can setup **footnotes** to use the existing (=previously used) shortcodes. Too easy? Yippy Ki-Yey!
-= I'm happy with how the Plugin works =
-1. Pour a glass of your favourite beverage
-2. Take a deep breath
-3. Donate whatever amount you think is appropriate here: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BYSY26N8L8VJC
-4. Enjoy how you just made a bunch of young folks even more enthusiastic about developing useful stuff
-5. Now it's time to empty that glass in one go
 
 == Installation ==
 - Visit your WordPress Admin area
@@ -87,6 +76,10 @@ Visit this swift write-up from a **footnotes** user by the name of **Southwest**
 7. Here you can see the **footnotes** Plugin at work. Isn't that plain beautiful?
 
 == Changelog ==
+
+= 1.6.4 =
+- Bugfix: The deprecated WP_Widget elements have been replaced
+- Bugfix: Fixed occasional bug where footnote ordering could be out of sequence
 
 = 1.6.3 =
 - Bugfix: We were provided a fix by a user named toma. footnotes now works in sub-folder installations of WordPress
