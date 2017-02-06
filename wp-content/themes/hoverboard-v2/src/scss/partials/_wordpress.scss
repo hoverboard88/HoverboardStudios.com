@@ -110,3 +110,10 @@ a img.aligncenter {
     margin-bottom: $base--spacing / 2;
   }
 }
+
+.gallery-item {
+  float: left;
+  width: 33%;
+  padding-right: $base--spacing;
+  padding-bottom: $base--spacing;
+}
