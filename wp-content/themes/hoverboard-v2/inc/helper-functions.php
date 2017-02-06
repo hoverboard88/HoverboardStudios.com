@@ -53,8 +53,13 @@ function hb_v2_svg($file, $default = '') {
 	}
 }
 
-function hb_v2_prettify_url($url) {
-	return preg_replace("/https?:\/\/([^\/]*)\/?/u", "$1", $url);
+function hb_v2_prettify_url($url, $post_id = null) {
+	// if display_url isn't empty, return that
+	if (!empty(get_field('display_url', $post_id))) {
+		return get_field('display_url', $post_id);
+	} else {
+		return preg_replace("/https?:\/\/([^\/]*)\/?/u", "$1", $url);
+	}
 }
 
 function hb_v2_portfolio_screenshot($imageArray, $size) {

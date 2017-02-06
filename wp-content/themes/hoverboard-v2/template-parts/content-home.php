@@ -20,10 +20,12 @@
           <div class="portfolio__summary">
             <?php hb_v2_category_icons($featured_study->ID, 'tech_category'); ?>
             <h3 class="portfolio__title"><?php echo $featured_study->post_title; ?></h3>
-            <a target="_blank" href="<?php the_field('study_url', $featured_study->ID) ?>" class="portfolio__website">
-              <?php hb_v2_svg('mdi-links.svg'); ?>
-              <?php echo hb_v2_prettify_url(get_field('study_url', $featured_study->ID)); ?>
-            </a>
+            <?php if (get_field('study_url', $featured_study->ID)) { ?>
+              <a target="_blank" href="<?php the_field('study_url', $featured_study->ID) ?>" class="portfolio__website">
+                <?php hb_v2_svg('mdi-links.svg'); ?>
+                <?php echo hb_v2_prettify_url(get_field('study_url', $featured_study->ID), $featured_study->ID); ?>
+              </a>
+            <?php } ?>
             <?php echo wpautop($featured_study->post_excerpt); ?>
             <a href="<?php echo get_permalink($featured_study->ID); ?>" class="btn">Case Study</a>
           </div>

@@ -15,10 +15,12 @@
 		<header class="entry-header">
 			<?php hb_v2_category_icons(get_the_ID(), 'tech_category'); ?>
 			<?php the_title( sprintf( '<h2 class="portfolio__title entry-title">', esc_url( get_permalink() ) ), '</h2>' ); ?>
-			<a target="_blank" href="<?php the_field('study_url', get_the_ID()) ?>" class="portfolio__website">
-				<?php hb_v2_svg('mdi-links.svg'); ?>
-				<?php echo hb_v2_prettify_url(get_field('study_url', get_the_ID())); ?>
-			</a>
+			<?php if (get_field('study_url', get_the_ID())) { ?>
+				<a target="_blank" href="<?php the_field('study_url', get_the_ID()) ?>" class="portfolio__website">
+					<?php hb_v2_svg('mdi-links.svg'); ?>
+					<?php echo hb_v2_prettify_url(get_field('study_url', get_the_ID())); ?>
+				</a>
+			<?php } ?>
 		</header><!-- .entry-header -->
 
 		<div class="entry-summary">
