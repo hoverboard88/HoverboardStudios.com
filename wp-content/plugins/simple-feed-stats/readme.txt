@@ -9,9 +9,9 @@ Author URI: https://plugin-planet.com/
 Donate link: http://m0n.co/donate
 Contributors: specialk
 Requires at least: 4.1
-Tested up to: 4.6
-Stable tag: trunk
-Version: 20160815
+Tested up to: 4.7
+Stable tag: 20161118
+Version: 20161118
 Text Domain: simple-feed-stats
 Domain Path: /languages
 License: GPL v2 or later
@@ -248,6 +248,18 @@ Links, tweets and likes also appreciated. Thanks! :)
 
 
 == Changelog ==
+
+**20161118**
+
+* Tweaked some styles on the settings page
+* Bug fix: apostrophes getting slashed in style setting
+* Updated plugin author URL
+* Changed stable tag from trunk to latest version
+* Refactored `add_sfs_links()` function
+* Updated URL for rate this plugin links
+* Added `&raquo;` to home link on plugins page
+* Removed styles for abbr on settings page
+* Tested on WordPress version 4.7 (beta)
 
 **20160815**
 

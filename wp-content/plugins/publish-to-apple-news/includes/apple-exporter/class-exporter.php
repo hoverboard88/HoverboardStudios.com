@@ -77,12 +77,13 @@ class Exporter {
 		if ( $builders ) {
 			$this->builders = $builders;
 		} else {
-			$this->register_builder( 'layout'             	, new Builders\Layout( $this->content, $this->settings ) );
-			$this->register_builder( 'components'						, new Builders\Components( $this->content, $this->settings ) );
-			$this->register_builder( 'componentTextStyles'	, new Builders\Component_Text_Styles( $this->content, $this->settings ) );
-			$this->register_builder( 'componentLayouts'   	, new Builders\Component_Layouts( $this->content, $this->settings ) );
-			$this->register_builder( 'metadata'           	, new Builders\Metadata( $this->content, $this->settings ) );
-			$this->register_builder( 'advertisingSettings'	, new Builders\Advertising_Settings( $this->content, $this->settings ) );
+			$this->register_builder( 'layout', new Builders\Layout( $this->content, $this->settings ) );
+			$this->register_builder( 'components', new Builders\Components( $this->content, $this->settings ) );
+			$this->register_builder( 'componentTextStyles', new Builders\Component_Text_Styles( $this->content, $this->settings ) );
+			$this->register_builder( 'textStyles', new Builders\Text_Styles( $this->content, $this->settings ) );
+			$this->register_builder( 'componentLayouts', new Builders\Component_Layouts( $this->content, $this->settings ) );
+			$this->register_builder( 'metadata', new Builders\Metadata( $this->content, $this->settings ) );
+			$this->register_builder( 'advertisingSettings', new Builders\Advertising_Settings( $this->content, $this->settings ) );
 		}
 
 		Component_Factory::initialize( $this->workspace, $this->settings, $this->get_builder( 'componentTextStyles' ), $this->get_builder( 'componentLayouts' ) );
@@ -191,7 +192,29 @@ class Exporter {
 
 		$json = apply_filters( 'apple_news_generate_json', $json, $this->content_id() );
 
-		return json_encode( $json );
+		$json = json_encode( $json );
+
+		// Check the JSON for unicode errors.
+		// For now, we'll assume that multiple unicode characters in sequence
+		// containing the Â (\u00C2) indicate a problem as that has been the
+		// most common indication of the issue.
+		preg_match_all( '/(\\\u[0-9a-fA-F]{4}){2,}/', $json, $matches );
+		if ( ! empty( $matches[0] ) ) {
+			// Get a unique list of character sequences
+			$character_sequences = array_unique( $matches[0] );
+			foreach ( $character_sequences as &$sequence ) {
+				// Convert back to a display format
+				$sequence = json_decode( '{ "value":"' . $sequence . '"}' );
+				$sequence = $sequence->value;
+			}
+
+			$this->workspace->log_error( 'json_errors', sprintf(
+				__( 'Invalid unicode character sequences were found that could cause display issues on Apple News: %s', 'apple-news' ),
+				implode( ', ', $character_sequences )
+			) );
+		}
+
+		return $json;
 	}
 
 	/**

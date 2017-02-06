@@ -9,9 +9,9 @@
 	Donate link: http://m0n.co/donate
 	Contributors: specialk
 	Requires at least: 4.1
-	Tested up to: 4.6
-	Stable tag: trunk
-	Version: 20160815
+	Tested up to: 4.7
+	Stable tag: 20161118
+	Version: 20161118
 	Text Domain: simple-feed-stats
 	Domain Path: /languages
 	License: GPL v2 or later
@@ -20,7 +20,7 @@
 if (!defined('ABSPATH')) die();
 
 $sfs_wp_vers = '4.1';
-$sfs_version = '20160815';
+$sfs_version = '20161118';
 $sfs_options = get_option('sfs_options');
 
 // i18n
@@ -307,8 +307,13 @@ add_filter ('plugin_action_links', 'sfs_plugin_action_links', 10, 2);
 // rate plugin link
 function add_sfs_links($links, $file) {
 	if ($file == plugin_basename(__FILE__)) {
-		$rate_url = 'http://wordpress.org/support/view/plugin-reviews/'. basename(dirname(__FILE__)) .'?rate=5#postform';
-		$links[] = '<a href="'. $rate_url .'" target="_blank" title="'. esc_attr__('THANK YOU for your support!', 'simple-feed-stats') .'">'. esc_html__('Rate this plugin', 'simple-feed-stats') .'</a>';
+		
+		$href  = 'https://wordpress.org/support/plugin/simple-feed-stats/reviews/?rate=5#new-post';
+		$title = esc_html__('Give us a 5-star rating at WordPress.org', 'simple-feed-stats');
+		$text  = esc_html__('Rate this plugin', 'simple-feed-stats') .'&nbsp;&raquo;';
+		
+		$links[] = '<a target="_blank" href="'. $href .'" title="'. $title .'">'. $text .'</a>';
+		
 	}
 	return $links;
 }
@@ -420,12 +425,12 @@ function sfs_validate_options($input) {
 	if (!array_key_exists($input['sfs_tracking_method'], $sfs_tracking_method)) $input['sfs_tracking_method'] = null;
 
 	$input['sfs_custom']         = wp_filter_nohtml_kses($input['sfs_custom']);
-	$input['sfs_custom_styles']  = wp_filter_nohtml_kses($input['sfs_custom_styles']);
 	$input['sfs_number_results'] = wp_filter_nohtml_kses($input['sfs_number_results']);
 	$input['sfs_open_image_url'] = wp_filter_nohtml_kses($input['sfs_open_image_url']);
 	$input['sfs_custom_key']     = wp_filter_nohtml_kses($input['sfs_custom_key']);
 	$input['sfs_custom_value']   = wp_filter_nohtml_kses($input['sfs_custom_value']);
-
+	
+	$input['sfs_custom_styles']       = wp_kses_post($input['sfs_custom_styles']);
 	$input['sfs_feed_content_before'] = wp_kses_post($input['sfs_feed_content_before']);
 	$input['sfs_feed_content_after']  = wp_kses_post($input['sfs_feed_content_after']);
 
@@ -875,7 +880,6 @@ function sfs_render_form() {
 		.sfs-admin h3 { margin: 20px 0; font-size: 14px; }
 		.sfs-admin ul { margin: 15px 15px 15px 40px; clear: both; }
 		.sfs-admin li { margin: 8px 0; list-style-type: disc; }
-		.sfs-admin abbr { cursor: help; border-bottom: 1px dotted #dfdfdf; }
 		
 		.sfs-table table { border-collapse: collapse; }
 		.sfs-table th { font-size: 13px; }
@@ -901,8 +905,7 @@ function sfs_render_form() {
 		
 		.sfs-radio { margin: 5px 0; }
 		.sfs-table-item { margin: 0 0 10px 0; }
-		.sfs-code-input[type="text"], .sfs-admin textarea.code { padding: 10px; color: #777; font-size: 12px; }
-		.sfs-table input[type="text"] { padding: 6px; color: #777; font-size: 12px; }
+		.sfs-admin textarea.code, .sfs-table input[type="text"] { padding: 6px; color: #777; font-size: 12px; }
 		.sfs-last-item { margin: 24px 0 0 0; }
 		
 		.tooltip { 
@@ -983,12 +986,12 @@ function sfs_render_form() {
 						<ul>
 							<li><a class="sfs-options-link" href="#sfs_custom-options"><?php esc_html_e('Plugin Settings', 'simple-feed-stats'); ?></a></li>
 							<li><a class="sfs-shortcodes-link" href="#sfs-shortcodes"><?php esc_html_e('Shortcodes &amp; Template Tags', 'simple-feed-stats'); ?></a></li>
-							<li><a target="_blank" href="https://wordpress.org/plugins/simple-feed-stats/"><?php esc_html_e('Plugin Homepage', 'simple-feed-stats'); ?></a>
+							<li><a target="_blank" href="https://wordpress.org/plugins/simple-feed-stats/"><?php esc_html_e('Plugin Homepage', 'simple-feed-stats'); ?>&nbsp;&raquo;</a>
 							</li>
 						</ul>
 						<p>
 							<?php esc_html_e('If you like this plugin, please', 'simple-feed-stats'); ?> 
-							<a target="_blank" href="http://wordpress.org/support/view/plugin-reviews/<?php echo basename(dirname(__FILE__)); ?>?rate=5#postform" title="<?php esc_attr_e('THANK YOU for your support!', 'simple-feed-stats'); ?>"><?php esc_html_e('give it a 5-star rating', 'simple-feed-stats'); ?>&nbsp;&raquo;</a>
+							<a target="_blank" href="https://wordpress.org/support/plugin/simple-feed-stats/reviews/?rate=5#new-post" title="<?php esc_attr_e('THANK YOU for your support!', 'simple-feed-stats'); ?>"><?php esc_html_e('give it a 5-star rating', 'simple-feed-stats'); ?>&nbsp;&raquo;</a>
 						</p>
 					</div>
 				</div>
@@ -1501,7 +1504,7 @@ function sfs_render_form() {
 		<div class="sfs-credits">
 			<a target="_blank" href="https://perishablepress.com/simple-feed-stats/" title="<?php esc_attr_e('Plugin Homepage', 'simple-feed-stats'); ?>">Simple Feed Stats</a> <?php esc_html_e('by', 'simple-feed-stats'); ?> 
 			<a target="_blank" href="https://twitter.com/perishable" title="<?php esc_attr_e('Jeff Starr on Twitter', 'simple-feed-stats'); ?>">Jeff Starr</a> @ 
-			<a target="_blank" href="http://monzilla.biz/" title="<?php esc_attr_e('Obsessive Web Design &amp; Development', 'simple-feed-stats'); ?>">Monzilla Media</a>
+			<a target="_blank" href="http://monzillamedia.com/" title="<?php esc_attr_e('Obsessive Web Design &amp; Development', 'simple-feed-stats'); ?>">Monzilla Media</a>
 		</div>
 	</div>
 

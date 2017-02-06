@@ -95,6 +95,8 @@ final class ITSEC_WordPress_Tweaks {
 			add_filter( 'xmlrpc_methods', array( $this, 'xmlrpc_methods' ) );
 		}
 
+		add_filter( 'rest_dispatch_request', array( $this, 'filter_rest_dispatch_request' ), 10, 4 );
+
 		if ( $this->settings['safe_jquery'] ) {
 			add_action( 'wp_enqueue_scripts', array( $this, 'current_jquery' ) );
 		}
@@ -114,6 +116,130 @@ final class ITSEC_WordPress_Tweaks {
 			add_action( 'template_redirect', array( $this, 'disable_unused_author_pages' ) );
 		}
 
+		if ( $this->settings['block_tabnapping'] ) {
+			add_action( 'wp_enqueue_scripts', array( $this, 'add_block_tabnapping_script' ) );
+			add_action( 'admin_enqueue_scripts', array( $this, 'add_block_tabnapping_script' ) );
+		}
+	}
+
+	public function filter_rest_dispatch_request( $result, $request, $route_schema, $handler ) {
+		if ( in_array( $this->settings['rest_api'], array( 'enable', 'default-access' ) ) ) {
+			return $result;
+		}
+
+		$route = $request->get_route();
+		$route_parts = explode( '/', trim( $route, '/' ) );
+
+		if ( 'wp' !== $route_parts[0] ) {
+			// Only interested in the wp endpoints for now.
+			return $result;
+		}
+
+		if ( ! isset( $route_parts[2] ) ) {
+			// Only interested in requests that extend beyond the wp/v2 endpoint.
+			return $result;
+		}
+
+		if ( 'settings' === $route_parts[2] ) {
+			// The settings endpoint requires specific capabilities already.
+			return $result;
+		}
+
+		// Each of the following endpoints can be restricted based on a simple capability check.
+		$endpoint_caps = array(
+			'comments'   => 'moderate_comments',
+			'statuses'   => 'edit_posts',
+			'taxonomies' => 'edit_terms',
+			'types'      => 'edit_posts',
+		);
+
+		foreach ( $endpoint_caps as $endpoint => $cap ) {
+			if ( $endpoint === $route_parts[2] ) {
+				if ( current_user_can( $cap ) ) {
+					return $result;
+				}
+
+				return new WP_Error( 'itsec_rest_api_access_restricted', __( 'You do not have sufficient permission to access this endpoint. Access to REST API requests is restricted by iThemes Security settings.', 'better-wp-security' ) );
+			}
+		}
+
+		if ( 'users' === $route_parts[2] ) {
+			if ( isset( $route_parts[3] ) && 'me' === $route_parts[3] ) {
+				// The users/me endpoint has its own permissions checks.
+				return $result;
+			}
+
+			if ( current_user_can( 'list_users' ) ) {
+				// All other users endpoints can be restricted to those with the list_users cap.
+				return $result;
+			}
+
+			return new WP_Error( 'itsec_rest_api_access_restricted', __( 'You do not have sufficient permission to access this endpoint. Access to REST API requests is restricted by iThemes Security settings.', 'better-wp-security' ) );
+		}
+
+
+		// Pulling the specific taxonomy or post type object out for proper cap checking is a bit complex.
+
+		if ( is_array( $handler['callback'] ) && isset( $handler['callback'][0] ) && is_object( $handler['callback'][0] ) ) {
+			// Get the callback object if one exists.
+			$callback_object = $handler['callback'][0];
+		} else {
+			return $result;
+		}
+
+		if ( is_a( $callback_object, 'WP_REST_Terms_Controller' ) ) {
+			// The callback handles requests for terms, so we know that the request is for a term.
+
+			// Get the registered taxonomies.
+			$taxonomies = get_taxonomies( array(), 'objects' );
+
+			foreach ( $taxonomies as $taxonomy ) {
+				// Find the taxonomy that matches the request.
+
+				if ( ( isset( $taxonomy->rest_base ) && $taxonomy->rest_base === $route_parts[2] ) || $taxonomy->name === $route_parts[2] ) {
+					// This is the requested taxonomy. Check to ensure that the current user can edit this taxonomy.
+					if ( current_user_can( $taxonomy->cap->edit_terms ) ) {
+						return $result;
+					} else {
+						return new WP_Error( 'itsec_rest_api_access_restricted', __( 'You do not have sufficient permission to access this endpoint. Access to REST API requests is restricted by iThemes Security settings.', 'better-wp-security' ) );
+					}
+				}
+			}
+
+			return $result;
+		}
+
+		if ( is_a( $callback_object, 'WP_REST_Posts_Controller' ) ) {
+			// The callback handles requests for post types, so we know that the request is for a post type.
+
+			// Get the registered post types
+			$post_types = get_post_types( array(), 'objects' );
+
+			foreach ( $post_types as $post_type ) {
+				// Find the post type that matches the request.
+
+				if ( ( isset( $post_type->rest_base ) && $post_type->rest_base === $route_parts[2] ) || $post_type->name === $route_parts[2] ) {
+					// This is the requested post type. Check to ensure that the current user can edit this post type.
+					if ( current_user_can( $post_type->cap->edit_posts ) ) {
+						return $result;
+					} else {
+						return new WP_Error( 'itsec_rest_api_access_restricted', __( 'You do not have sufficient permission to access this endpoint. Access to REST API requests is restricted by iThemes Security settings.', 'better-wp-security' ) );
+					}
+				}
+			}
+
+			return $result;
+		}
+
+
+		// We don't have any specific rules to handle this request, default to doing nothing.
+		return $result;
+	}
+
+
+	public function add_block_tabnapping_script() {
+		wp_enqueue_script( 'blankshield', plugins_url( 'js/blankshield/blankshield.min.js', __FILE__ ), array(), ITSEC_Core::get_plugin_build(), true );
+		wp_enqueue_script( 'itsec-wt-block-tabnapping', plugins_url( 'js/block-tabnapping.js', __FILE__ ), array( 'blankshield' ), ITSEC_Core::get_plugin_build(), true );
 	}
 
 	public function block_multiauth_attempts( $filter_val, $username, $password ) {
@@ -145,7 +271,7 @@ final class ITSEC_WordPress_Tweaks {
 			wp_deregister_script( 'jquery-core' );
 
 			wp_register_script( 'jquery', false, array( 'jquery-core', 'jquery-migrate' ), '1.11.0' );
-			wp_register_script( 'jquery-core', '/wp-includes/js/jquery/jquery.js', false, '1.11.0' );
+			wp_register_script( 'jquery-core', '/' . WPINC . '/js/jquery/jquery.js', false, '1.11.0' );
 
 			wp_enqueue_script( 'jquery' );
 			wp_enqueue_script( 'jquery-core' );

@@ -2,94 +2,94 @@
 
 final class ITSEC_File_Change_Settings_Page extends ITSEC_Module_Settings_Page {
 	private $script_version = 1;
-	
-	
+
+
 	public function __construct() {
 		$this->id = 'file-change';
 		$this->title = __( 'File Change Detection', 'better-wp-security' );
 		$this->description = __( 'Monitor the site for unexpected file changes.', 'better-wp-security' );
 		$this->type = 'recommended';
-		
+
 		parent::__construct();
 	}
-	
+
 	public function enqueue_scripts_and_styles() {
 		$settings = ITSEC_Modules::get_settings( $this->id );
-		
+
 		$logs_page_url = ITSEC_Core::get_logs_page_url( 'file_change' );
-		
+
 		$vars = array(
 			'button_text'          => isset( $settings['split'] ) && true === $settings['split'] ? __( 'Scan Next File Chunk', 'better-wp-security' ) : __( 'Scan Files Now', 'better-wp-security' ),
 			'scanning_button_text' => __( 'Scanning...', 'better-wp-security' ),
 			'no_changes'           => __( 'No changes were detected.', 'better-wp-security' ),
-			'found_changes'        => sprintf( __( 'Changes were detected. Please check the <a href="%s" target="_blank">logs page</a> for details.', 'better-wp-security' ), esc_url( $logs_page_url ) ),
+			'found_changes'        => sprintf( __( 'Changes were detected. Please check the <a href="%s" target="_blank" rel="noopener noreferrer">logs page</a> for details.', 'better-wp-security' ), esc_url( $logs_page_url ) ),
 			'unknown_error'        => __( 'An unknown error occured. Please try again later', 'better-wp-security' ),
-			'already_running'      => sprintf( __( 'A scan is already in progress. Please check the <a href="%s" target="_blank">logs page</a> at a later time for the results of the scan.', 'better-wp-security' ), esc_url( $logs_page_url ) ),
+			'already_running'      => sprintf( __( 'A scan is already in progress. Please check the <a href="%s" target="_blank" rel="noopener noreferrer">logs page</a> at a later time for the results of the scan.', 'better-wp-security' ), esc_url( $logs_page_url ) ),
 			'ABSPATH'              => ITSEC_Lib::get_home_path(),
 			'nonce'                => wp_create_nonce( 'itsec_do_file_check' ),
 		);
-		
+
 		wp_enqueue_script( 'itsec-file-change-settings-script', plugins_url( 'js/settings-page.js', __FILE__ ), array( 'jquery' ), $this->script_version, true );
 		wp_localize_script( 'itsec-file-change-settings-script', 'itsec_file_change_settings', $vars );
-		
-		
+
+
 		$vars = array(
 			'nonce' => wp_create_nonce( 'itsec_jquery_filetree' ),
 		);
-		
+
 		wp_enqueue_script( 'itsec-file-change-admin-filetree-script', plugins_url( 'js/filetree/jqueryFileTree.js', __FILE__ ), array( 'jquery' ), $this->script_version, true );
 		wp_localize_script( 'itsec-file-change-admin-filetree-script', 'itsec_jquery_filetree', $vars );
-		
-		
+
+
 		wp_enqueue_style( 'itsec-file-change-admin-filetree-style', plugins_url( 'js/filetree/jqueryFileTree.css', __FILE__ ), array(), $this->script_version );
 		wp_enqueue_style( 'itsec-file-change-admin-style', plugins_url( 'css/settings.css', __FILE__ ), array(), $this->script_version );
 	}
-	
+
 	public function handle_ajax_request( $data ) {
 		if ( 'one-time-scan' === $data['method'] ) {
 			require_once( dirname( __FILE__ ) . '/scanner.php' );
-			
+
 			ITSEC_Response::set_response( ITSEC_File_Change_Scanner::run_scan( false ) );
 		} else if ( 'get-filetree-data' === $data['method'] ) {
 			ITSEC_Response::set_response( $this->get_filetree_data( $data ) );
 		}
 	}
-	
+
 	protected function render_description( $form ) {
-		
+
 ?>
 	<p><?php _e( 'Even the best security solutions can fail. How do you know if someone gets into your site? You will know because they will change something. File Change detection will tell you what files have changed in your WordPress installation alerting you to changes not made by yourself. Unlike other solutions, this plugin will look only at your installation and compare files to the last check instead of comparing them with a remote installation thereby taking into account whether or not you modify the files yourself.', 'better-wp-security' ); ?></p>
 <?php
-		
+
 	}
-	
+
 	protected function render_settings( $form ) {
 		$methods = array(
 			'exclude' => __( 'Exclude Selected', 'better-wp-security' ),
 			'include' => __( 'Include Selected', 'better-wp-security' ),
 		);
-		
-		
+
+
 		$file_list = $form->get_option( 'file_list' );
-		
+
 		if ( is_array( $file_list ) ) {
 			$file_list = implode( "\n", $file_list );
 		} else {
 			$file_list = '';
 		}
-		
+
 		$form->set_option( 'file_list', $file_list );
-		
+
 		$split = $form->get_option( 'split' );
 		$one_time_button_label = ( true === $split ) ? __( 'Scan Next File Chunk', 'better-wp-security' ) : __( 'Scan Files Now', 'better-wp-security' )
-		
+
 ?>
 	<div class="hide-if-no-js">
 		<p><?php _e( "Press the button below to scan your site's files for changes. Note that if changes are found this will take you to the logs page for details.", 'better-wp-security' ); ?></p>
 		<p><?php $form->add_button( 'one_time_check', array( 'value' => $one_time_button_label, 'class' => 'button-primary' ) ); ?></p>
 		<div id="itsec_file_change_status"></div>
 	</div>
-	
+
 	<table class="form-table itsec-settings-section">
 		<tr>
 			<th scope="row"><label for="itsec-file-change-split"><?php _e( 'Split File Scanning', 'better-wp-security' ); ?></label></th>
@@ -144,7 +144,7 @@ final class ITSEC_File_Change_Settings_Page extends ITSEC_Module_Settings_Page {
 		<?php do_action( 'itsec-file-change-settings-form', $form ); ?>
 	</table>
 <?php
-		
+
 	}
 
 	/**

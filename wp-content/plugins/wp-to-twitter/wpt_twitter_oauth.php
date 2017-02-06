@@ -256,6 +256,7 @@ if ( ! class_exists( 'wpt_TwitterOAuth' ) ) {
 				$transport = 'wp_http';
 				$binary    = wp_remote_retrieve_body( $remote );
 			}
+			wpt_mail( 'Media fetched binary', print_r( $remote, 1 ) . "\n\n" . print_r( $binary, 1 ) );
 			if ( !$binary ) {
 				return;
 			}

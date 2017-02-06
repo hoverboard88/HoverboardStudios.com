@@ -118,6 +118,20 @@ if ( ! class_exists( 'ITSEC_WordPress_Tweaks_Setup' ) ) {
 					ITSEC_Modules::set_settings( 'wordpress-tweaks', $current_options );
 				}
 			}
+
+			if ( $itsec_old_version < 4050 ) {
+				$settings = ITSEC_Modules::get_settings( 'wordpress-tweaks' );
+
+				if ( isset( $settings['rest_api'] ) ) {
+					if ( 'enable' === $settings['rest_api'] ) {
+						$settings['rest_api'] = 'default-access';
+					} else if ( in_array( $settings['rest_api'], array( 'disable', 'require-admin' ) ) ) {
+						$settings['rest_api'] = 'restrict-access';
+					}
+
+					ITSEC_Modules::set_settings( 'wordpress-tweaks', $settings );
+				}
+			}
 		}
 
 	}

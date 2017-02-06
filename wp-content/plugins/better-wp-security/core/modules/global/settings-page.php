@@ -159,7 +159,7 @@ final class ITSEC_Global_Settings_Page extends ITSEC_Module_Settings_Page {
 			<td>
 				<?php $form->add_text( 'lockout_period', array( 'class' => 'small-text' ) ); ?>
 				<label for="itsec-global-lockout_period"><?php _e( 'Minutes', 'better-wp-security' ); ?></label>
-				<p class="description"><?php _e( 'The length of time a host or user will be banned from this site after hitting the limit of bad logins.', 'better-wp-security' ); ?></p>
+				<p class="description"><?php _e( 'The length of time a host or user will be banned from this site after hitting the limit of bad logins. The default setting of 15 minutes is recommended as increasing it could prevent attacking IP addresses from being added to the blacklist.', 'better-wp-security' ); ?></p>
 			</td>
 		</tr>
 		<tr>
@@ -179,7 +179,7 @@ final class ITSEC_Global_Settings_Page extends ITSEC_Module_Settings_Page {
 					</li>
 					<li><?php _e( 'Enter only 1 IP address or 1 IP address range per line.', 'better-wp-security' ); ?></li>
 				</ul>
-				<p><a href="http://ip-lookup.net/domain-lookup.php" target="_blank"><?php _e( 'Lookup IP Address.', 'better-wp-security' ); ?></a></p>
+				<p><a href="<?php echo esc_url( ITSEC_Lib::get_trace_ip_link() ); ?>" target="_blank" rel="noopener noreferrer"><?php _e( 'Lookup IP Address.', 'better-wp-security' ); ?></a></p>
 				<p class="description"><strong><?php _e( 'This white list will prevent any IP listed from triggering an automatic lockout. You can still block the IP address manually in the banned users settings.', 'better-wp-security' ); ?></strong></p>
 			</td>
 		</tr>
@@ -222,7 +222,7 @@ final class ITSEC_Global_Settings_Page extends ITSEC_Module_Settings_Page {
 				<td>
 					<?php $form->add_checkbox( 'infinitewp_compatibility' ); ?>
 					<label for="itsec-global-infinitewp_compatibility"><?php _e( 'Enable InfiniteWP Compatibility', 'better-wp-security' ); ?></label>
-					<p class="description"><?php printf( __( 'Turning this feature on will enable compatibility with <a href="%s" target="_blank">InfiniteWP</a>. Do not turn it on unless you use the InfiniteWP service.', 'better-wp-security' ), 'http://infinitewp.com' ); ?></p>
+					<p class="description"><?php printf( __( 'Turning this feature on will enable compatibility with <a href="%s" target="_blank" rel="noopener noreferrer">InfiniteWP</a>. Do not turn it on unless you use the InfiniteWP service.', 'better-wp-security' ), 'http://infinitewp.com' ); ?></p>
 				</td>
 			</tr>
 		<?php endif; ?>

@@ -310,9 +310,14 @@ final class ITSEC_Lib {
 	 *
 	 * @return  String The IP address of the user
 	 */
-	public static function get_ip() {
+	public static function get_ip( $use_cache = true ) {
+		if ( isset( $GLOBALS['__itsec_remote_ip'] ) && $use_cache ) {
+			return $GLOBALS['__itsec_remote_ip'];
+		}
+
 		if ( ITSEC_Modules::get_setting( 'global', 'proxy_override' ) ) {
-			return esc_sql( $_SERVER['REMOTE_ADDR'] );
+			$GLOBALS['__itsec_remote_ip'] = $_SERVER['REMOTE_ADDR'];
+			return $GLOBALS['__itsec_remote_ip'];
 		}
 
 		$headers = array(
@@ -329,19 +334,44 @@ final class ITSEC_Lib {
 			$headers[] = 'REMOTE_ADDR';
 		}
 
-		foreach ( $headers as $header ) {
-			if ( empty( $_SERVER[$header] ) ) {
-				continue;
-			}
+		// Loop through twice. The first run won't accept a reserved or private range IP. If an acceptable IP is not
+		// found, try again while accepting reserved or private range IPs.
+		for ( $x = 0; $x < 2; $x++ ) {
+			foreach ( $headers as $header ) {
+				if ( ! isset( $_SERVER[$header] ) ) {
+					continue;
+				}
 
-			$ip = filter_var( $_SERVER[$header], FILTER_VALIDATE_IP );
+				$ip = trim( $_SERVER[$header] );
+
+				if ( empty( $ip ) ) {
+					continue;
+				}
+
+				if ( false !== ( $comma_index = strpos( $_SERVER[$header], ',' ) ) ) {
+					$ip = substr( $ip, 0, $comma_index );
+				}
+
+				if ( 0 === $x ) {
+					// First run through. Only accept an IP not in the reserved or private range.
+					$ip = filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_RES_RANGE | FILTER_FLAG_NO_PRIV_RANGE );
+				} else {
+					$ip = filter_var( $ip, FILTER_VALIDATE_IP );
+				}
+
+				if ( ! empty( $ip ) ) {
+					break;
+				}
+			}
 
 			if ( ! empty( $ip ) ) {
 				break;
 			}
 		}
 
-		return esc_sql( (string) $ip );
+		$GLOBALS['__itsec_remote_ip'] = (string) $ip;
+
+		return $GLOBALS['__itsec_remote_ip'];
 	}
 
 	/**
@@ -821,5 +851,52 @@ final class ITSEC_Lib {
 		}
 
 		echo "<div class=\"error inline\"><p><strong>$message</strong></p></div>\n";
+	}
+
+	public static function get_user( $user = false ) {
+		if ( $user instanceof WP_User ) {
+			return $user;
+		}
+
+		if ( false === $user ) {
+			$user = wp_get_current_user();
+		} else if ( is_int( $user ) ) {
+			$user = get_user_by( 'id', $user );
+		} else if ( is_string( $user ) ) {
+			$user = get_user_by( 'login', $user );
+		} else {
+			if ( is_object( $user ) ) {
+				$type = 'object(' . get_class( $user ) . ')';
+			} else {
+				$type = gettype( $user );
+			}
+
+			trigger_error( "ITSEC_Lib::get_user() called with an invalid \$user argument. Received \$user variable of type: $type", E_USER_ERROR );
+
+			return false;
+		}
+
+		if ( $user instanceof WP_User ) {
+			return $user;
+		}
+
+		return false;
+	}
+
+	public static function get_password_strength_results( $password, $penalty_strings = array() ) {
+		if ( ! isset( $GLOBALS['itsec_zxcvbn'] ) ) {
+			require_once( ITSEC_Core::get_core_dir() . '/lib/itsec-zxcvbn-php/zxcvbn.php' );
+			$GLOBALS['itsec_zxcvbn'] = new ITSEC_Zxcvbn();
+		}
+
+		return $GLOBALS['itsec_zxcvbn']->test_password( $password, $penalty_strings );
+	}
+
+	public static function get_trace_ip_link( $ip = false ) {
+		if ( empty( $ip ) ) {
+			return 'http://www.traceip.net/';
+		} else {
+			return 'http://www.traceip.net/?query=' . urlencode( $ip );
+		}
 	}
 }

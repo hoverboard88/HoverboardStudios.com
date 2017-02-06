@@ -492,6 +492,7 @@ class WPT_Search_Tweets_Widget extends WP_Widget {
 				for="<?php echo $this->get_field_id( 'geocode' ); ?>"><?php _e( 'Geocode (Latitude,Longitude,Radius)', 'wp-to-twitter' ); ?>
 				:</label>
 			<input type="text" id="<?php echo $this->get_field_id( 'geocode' ); ?>"
+				   class="widefat" 
 			       name="<?php echo $this->get_field_name( 'geocode' ); ?>"
 			       value="<?php echo esc_attr( $instance['geocode'] ); ?>" size="32"
 			       placeholder="37.781157,-122.398720,2km"/>

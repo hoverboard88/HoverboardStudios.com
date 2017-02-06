@@ -14,11 +14,16 @@
             }
         );
         $('button.tweet').on('click', function (e) {
+			visible = $( '.wpt_log' ).is( ':visible' );
+			if ( visible ) {
+				$( '.wpt_log' ).hide( 200 );
+			}
             e.preventDefault();
             var text   = $('#jtw').val();
             var date   = $('#jts .date').val();
             var time   = $('#jts .time').val();
 			var auth   = $('#wpt_authorized_users').val();
+			
 			var upload = $('input:radio[name=_wpt_image]:checked').val();
             var tweet_action = ( $(this).attr('data-action') === 'tweet' ) ? 'tweet' : 'schedule'
             var data = {

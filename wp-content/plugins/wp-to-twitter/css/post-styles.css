@@ -210,8 +210,8 @@ button.time div {
 
 .tweet-buttons {
     padding: .75em 12px;
-    margin: -10px -12px 10px;
-    background: #f6f6f6;
+    margin: -10px -12px 0;
+    background: #f3f3f3;
 }
 
 .wp-to-twitter .template {

@@ -30,7 +30,7 @@ class ITSEC_Core_Admin {
 	 */
 	public function add_plugin_meta_links( $meta ) {
 
-		$meta[] = '<a href="https://ithemes.com/security?utm_source=wordpressadmin&utm_medium=banner&utm_campaign=itsecfreecta" target="_blank">' . __( 'Get Support', 'better-wp-security' ) . '</a>';
+		$meta[] = '<a href="https://ithemes.com/security?utm_source=wordpressadmin&utm_medium=banner&utm_campaign=itsecfreecta" target="_blank" rel="noopener noreferrer">' . __( 'Get Support', 'better-wp-security' ) . '</a>';
 
 		return $meta;
 	}

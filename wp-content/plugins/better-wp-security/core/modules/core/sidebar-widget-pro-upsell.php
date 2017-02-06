@@ -18,7 +18,7 @@ class ITSEC_Settings_Page_Sidebar_Widget_Pro_Upsell extends ITSEC_Settings_Page_
 		echo '<li>' . __( 'Private, ticketed support', 'better-wp-security' ) . '</li>';
 		echo '<li>' . __( '+ more Pro-only features', 'better-wp-security' ) . '</li>';
 		echo '</ul>';
-		echo '<a href="https://ithemes.com/security/?utm_source=wordpressadmin&utm_medium=widget&utm_campaign=itsecfreecta" class="button-primary" target="_blank">' . __( 'Get iThemes Security Pro', 'better-wp-security' ) . '</a>';
+		echo '<a href="https://ithemes.com/security/?utm_source=wordpressadmin&utm_medium=widget&utm_campaign=itsecfreecta" class="button-primary" target="_blank" rel="noopener noreferrer">' . __( 'Get iThemes Security Pro', 'better-wp-security' ) . '</a>';
 	}
 
 }

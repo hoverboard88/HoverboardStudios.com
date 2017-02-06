@@ -2,11 +2,11 @@
 Contributors: joedolson
 Donate link: http://www.joedolson.com/donate/
 Tags: twitter, microblogging, su.pr, bitly, yourls, redirect, shortener, post, links, social, sharing, media, tweet
-Requires at least: 4.2
-Tested up to: 4.6
+Requires at least: 4.4
+Tested up to: 4.7
 License: GPLv2 or later
 Text Domain: wp-to-twitter
-Stable tag: 3.2.13
+Stable tag: 3.2.16
 
 Posts a Twitter update when you update your WordPress blog or add a link, with your chosen URL shortening service.
 
@@ -60,10 +60,22 @@ Translating my plug-ins is always appreciated. Work on WP to Twitter translation
 
 == Changelog ==
 
-= Future =
+= 3.2.17 =
 
-* WP to Twitter timing bug with images?
-* If first #category# is excluded from Tweet, fetch 2nd category in its place? See #1490
+* Function name change in primary function. 
+* Early exit in wpt-feed
+* Fix icon in metabox headings
+* Misc. minor design tweaks
+
+= 3.2.16 =
+
+* Bug fix: missing check to verify array caused AJAX error
+
+= 3.2.15 =
+
+* Bug fix: "Tweet Now" button threw error if selecting main site account [Pro]
+* New action executed when posting to Twitter
+* New debugging point in media retrieval
 
 = 3.2.14 =
 

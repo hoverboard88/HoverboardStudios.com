@@ -117,7 +117,7 @@ function jd_truncate_tweet( $tweet, $post, $post_ID, $retweet = false, $ref = fa
 		$has_short_url   = wpt_has( $tweet, '#url#' );
 		$has_long_url    = wpt_has( $tweet, '#longurl#' );
 		
-		$url_strlen = mb_strlen( urldecode( wpt_normalize( $values['url'] ) ), $encoding );		
+		$url_strlen     = mb_strlen( urldecode( wpt_normalize( $values['url'] ) ), $encoding );		
 		$longurl_strlen = mb_strlen( urldecode( wpt_normalize( $values['longurl'] ) ), $encoding );		
 		/**
 		 * Tweet is too long, so we'll have to truncate that sucker.
@@ -272,7 +272,6 @@ function wpt_remove_tag( $key ) {
 	}
 	
 	return $return;
-	//$key == 'account' || $key == 'author' || $key == 'category' || $key == 'date' || $key == 'modified' || $key == 'reference' || $key == '@'
 }
 
 function wpt_tags() {

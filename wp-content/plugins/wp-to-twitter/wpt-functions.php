@@ -74,7 +74,7 @@ function wpt_check_functions() {
 	//check twitter credentials
 	if ( wtt_oauth_test() ) {
 		$rand     = rand( 1000000, 9999999 );
-		$testpost = jd_doTwitterAPIPost( "This is a test of WP to Twitter. $shrink ($rand)" );
+		$testpost = wpt_post_to_twitter( "This is a test of WP to Twitter. $shrink ($rand)" );
 		if ( $testpost ) {
 			$message .= __( "<li><strong>WP to Twitter successfully submitted a status update to Twitter.</strong></li>", 'wp-to-twitter' );
 		} else {
@@ -1164,4 +1164,8 @@ function jd_twit( $post_ID, $type = 'instant' ) {
 
 function jd_addTwitterAdminStyles() {
 	return wpt_admin_style();
+}
+
+function jd_doTwitterAPIPost( $twit, $auth = false, $id = false, $media = false ) {
+	return wpt_post_to_twitter( $twit, $auth, $id, $media );
 }

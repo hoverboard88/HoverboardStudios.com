@@ -13,7 +13,9 @@ class ITSEC_System_Tweaks_Validator extends ITSEC_Validator {
 		$this->sanitize_setting( 'bool', 'non_english_characters', __( 'Non-English Characters', 'better-wp-security' ) );
 		$this->sanitize_setting( 'bool', 'long_url_strings', __( 'Long URL Strings', 'better-wp-security' ) );
 		$this->sanitize_setting( 'bool', 'write_permissions', __( 'File Writing Permissions', 'better-wp-security' ) );
-		$this->sanitize_setting( 'bool', 'uploads_php', __( 'Uploads', 'better-wp-security' ) );
+		$this->sanitize_setting( 'bool', 'uploads_php', __( 'PHP in Uploads', 'better-wp-security' ) );
+		$this->sanitize_setting( 'bool', 'plugins_php', __( 'PHP in Plugins', 'better-wp-security' ) );
+		$this->sanitize_setting( 'bool', 'themes_php', __( 'PHP in Themes', 'better-wp-security' ) );
 	}
 
 	protected function validate_settings() {

@@ -74,12 +74,13 @@ class Request {
 	 * @param string $article
 	 * @param array $bundles
 	 * @param array $meta
+	 * @param int $post_id
 	 * @return mixed
 	 * @since 0.2.0
 	 */
-	public function post( $url, $article, $bundles = array(), $meta = null ) {
+	public function post( $url, $article, $bundles = array(), $meta = null, $post_id = null ) {
 		// Assemble the content to send
-		$content = $this->build_content( $article, $bundles, $meta );
+		$content = $this->build_content( $article, $bundles, $meta, $post_id );
 
 		// Build the post request args
 		$args = array(
@@ -92,13 +93,16 @@ class Request {
 		);
 
 		// Allow filtering and merge with the default args
-		$args = apply_filters( 'apple_news_post_args', wp_parse_args( $args, $this->default_args ) );
+		$args = apply_filters( 'apple_news_post_args', wp_parse_args( $args, $this->default_args ), $post_id );
 
 		// Perform the request
 		$response = wp_safe_remote_post( esc_url_raw( $url ), $args );
 
+		// Build a debug version of the MIME content for the debug email
+		$debug_mime_request = $this->mime_builder->get_debug_content( $args );
+
 		// Parse and return the response
-		return $this->parse_response( $response, true, 'post', $meta, $bundles, $article );
+		return $this->parse_response( $response, true, 'post', $meta, $bundles, $article, $debug_mime_request );
 	}
 
 	/**
@@ -166,10 +170,11 @@ class Request {
 	 * @param array $meta
 	 * @param array $bundles
 	 * @param string $article
+	 * @param array $debug_mime
 	 * @return mixed
 	 * @since 0.2.0
 	 */
-	private function parse_response( $response, $json = true, $type = 'post', $meta = null, $bundles = null, $article = '' ) {
+	private function parse_response( $response, $json = true, $type = 'post', $meta = null, $bundles = null, $article = '', $debug_mime_request = '' ) {
 		// Ensure we have an expected response type
 		if ( ( ! is_array( $response ) || ! isset( $response['body'] ) ) && ! is_wp_error( $response ) ) {
 			throw new Request_Exception( __( 'Invalid response:', 'apple-news' ) . $response );
@@ -213,6 +218,9 @@ class Request {
 
 			// Add the JSON for the post
 			$body .= "\n\n" . esc_html__( 'JSON', 'apple-news' ) . ":\n" . $article . "\n";
+
+			// Add the MIME request
+			$body .= "\n\n" . esc_html__( 'MIME request', 'apple-news' ) . ":\n" . $debug_mime_request . "\n";
 
 			// Send the email
 			if ( ! empty( $body ) ) {
@@ -283,15 +291,16 @@ class Request {
 	 * @param string $article
 	 * @param array $bundles
 	 * @param array $meta
+	 * @param int $post_id
 	 * @return string
 	 * @since 0.2.0
 	 */
-	private function build_content( $article, $bundles = array(), $meta = array() ) {
+	private function build_content( $article, $bundles = array(), $meta = array(), $post_id = null ) {
 		$bundles = array_unique( $bundles );
 		$content = '';
 
 		// Add custom meta for request.
-		$meta = apply_filters( 'apple_news_api_post_meta', $meta );
+		$meta = apply_filters( 'apple_news_api_post_meta', $meta, $post_id );
 
 		if ( ! empty( $meta['data'] ) && is_array( $meta['data'] ) ) {
 			$content .= $this->mime_builder->add_metadata( $meta );

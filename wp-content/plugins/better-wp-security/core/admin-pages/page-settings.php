@@ -442,7 +442,7 @@ final class ITSEC_Settings_Page {
 		<h1>
 			<?php _e( 'iThemes Security', 'better-wp-security' ); ?>
 			<a href="<?php echo esc_url( ITSEC_Core::get_logs_page_url() ); ?>" class="page-title-action"><?php _e( 'View Logs', 'better-wp-security' ); ?></a>
-			<a href="<?php echo esc_url( apply_filters( 'itsec_support_url', 'https://wordpress.org/support/plugin/better-wp-security' ) ); ?>" target="_blank" class="page-title-action"><?php _e( 'Support', 'better-wp-security' ); ?></a>
+			<a href="<?php echo esc_url( apply_filters( 'itsec_support_url', 'https://wordpress.org/support/plugin/better-wp-security' ) ); ?>" target="_blank" rel="noopener noreferrer" class="page-title-action"><?php _e( 'Support', 'better-wp-security' ); ?></a>
 		</h1>
 
 		<div id="itsec-settings-messages-container">
@@ -495,7 +495,7 @@ final class ITSEC_Settings_Page {
 									<li id="itsec-module-card-<?php echo $id; ?>" class="itsec-module-card <?php echo implode( ' ', $classes ); ?>" data-module-id="<?php echo $id; ?>">
 										<div class="itsec-module-card-content">
 											<?php if ( $module->upsell ) : ?>
-												<a href="<?php echo esc_url( $module->upsell_url ); ?>" target="_blank" class="itsec-pro-upsell">&nbsp;</a>
+												<a href="<?php echo esc_url( $module->upsell_url ); ?>" target="_blank" rel="noopener noreferrer" class="itsec-pro-upsell">&nbsp;</a>
 											<?php endif; ?>
 											<h2><?php echo esc_html( $module->title ); ?></h2>
 											<?php if ( $module->pro ) : ?>

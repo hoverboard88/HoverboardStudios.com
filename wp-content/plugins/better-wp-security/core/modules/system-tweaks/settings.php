@@ -4,7 +4,7 @@ final class ITSEC_System_Tweaks_Settings extends ITSEC_Settings {
 	public function get_id() {
 		return 'system-tweaks';
 	}
-	
+
 	public function get_defaults() {
 		return array(
 			'protect_files'            => false,
@@ -15,6 +15,8 @@ final class ITSEC_System_Tweaks_Settings extends ITSEC_Settings {
 			'long_url_strings'         => false,
 			'write_permissions'        => false,
 			'uploads_php'              => false,
+			'themes_php'               => false,
+			'plugins_php'              => false,
 		);
 	}
 }

@@ -393,14 +393,10 @@ function wpt_update_settings() {
 								</p>
 							</fieldset>
 						</div>
-						<br class='clear'/>
-
 						<div>
-							<input type="hidden" name="submit-type" value="options"/>
+							<input type="hidden" name="submit-type" value="options" />
 						</div>
-						<input type="submit" name="submit"
-						       value="<?php _e( "Save WP to Twitter Options", 'wp-to-twitter' ); ?>"
-						       class="button-primary"/>
+						<input type="submit" name="submit" value="<?php _e( "Save WP to Twitter Options", 'wp-to-twitter' ); ?>" class="button-primary"/>
 					</div>
 				</form>
 			</div>
@@ -819,14 +815,12 @@ function wpt_sidebar() {
 					<?php _e( 'Check whether WP to Twitter is setup correctly for Twitter and your URL Shortener. The test sends a status update to Twitter and shortens a URL using your chosen shortener.', 'wp-to-twitter' ); ?>
 				</p>
 				<form method="post" action="">
-					<fieldset>
-						<input type="hidden" name="submit-type" value="check-support"/>
-						<?php $nonce = wp_nonce_field( 'wp-to-twitter-nonce', '_wpnonce', true, false ) . wp_referer_field( false );
-						echo "<div>$nonce</div>"; ?>
-						<p>
-							<input type="submit" name="submit" value="<?php _e( 'Test WP to Twitter', 'wp-to-twitter' ); ?>" class="button-primary" />
-						</p>
-					</fieldset>
+					<input type="hidden" name="submit-type" value="check-support"/>
+					<?php $nonce = wp_nonce_field( 'wp-to-twitter-nonce', '_wpnonce', true, false ) . wp_referer_field( false );
+					echo "<div>$nonce</div>"; ?>
+					<p>
+						<input type="submit" name="submit" value="<?php _e( 'Test WP to Twitter', 'wp-to-twitter' ); ?>" class="button-primary" />
+					</p>
 				</form>				
 				</div>
 			</div>

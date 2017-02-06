@@ -1,9 +1,9 @@
 === iThemes Security (formerly Better WP Security) ===
 Contributors: ithemes, chrisjean, gerroald, mattdanner
 Tags: security, security plugin, malware, hack, secure, block, SSL, admin, htaccess, lockdown, login, protect, protection, anti virus, attack, injection, login security, maintenance, permissions, prevention, authentication, administration, password, brute force, ban, permissions, bots, user agents, xml rpc, security log
-Requires at least: 4.1
-Tested up to: 4.6.1
-Stable tag: 5.6.2
+Requires at least: 4.5
+Tested up to: 4.7
+Stable tag: 6.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -187,6 +187,62 @@ Free support may be available with the help of the community in the <a href="htt
 5. Free malware scan powered by Sucuri SiteCheck.
 
 == Changelog ==
+
+= 6.0.0 =
+ * Bug Fix: Removed "comodo" from the list of user agents blocked by the HackRepair.com blacklist. This ensures that Comodo's AutoSSL feature of cPanel/WHM is able to function.
+ * Updated Feature: Updated the "REST API" feature in the WordPress Tweaks section. The feature now has proper support for protecting privacy on your site without preventing the REST API from functioning.
+ * Enhancement: Updated Security Check to enforce setting the "REST API" setting to "Restricted Access".
+
+= 5.9.0 =
+ * New Feature: Added a "REST API" feature in the WordPress Tweaks section. This new feature allows you to block or restrict access to the REST API.
+
+= 5.8.1 =
+ * Bug Fix: Fixed issue that could cause database backup emails to be sent without the backup zip attached.
+
+= 5.8.0 =
+ * Enhancement: Updated the lockouts notification email to a new design. This new design also cleaned up the translation strings to allow better translations.
+ * New Feature: Added a "Protect Against Tabnapping" feature in the WordPress Tweaks section. Details of what this feature protects against can be found here: https://www.jitbit.com/alexblog/256-targetblank---the-most-underestimated-vulnerability-ever/
+ * Misc: Updated the description for the Lockout Period setting to indicate that the default value of 15 minutes is recommended.
+
+= 5.7.1 =
+ * Bug Fix: Remote IP is now correctly identified if the server is behind a reverse proxy that sends requests with more than one IP listed in a single header.
+ * Bug Fix: Fixed the link for a user in the logs page so that it properly works on sites that are inside a subdirectory.
+ * Bug Fix: Improved how Strong Password Enforcement works on password resets to improve compatibility with various plugins.
+ * Bug Fix: Improved the logic for determining whether a user should have Strong Password Enforcement applied. This covers situations where the user may have a custom role, a customized default role, or added capabilities beyond their role.
+ * Enhancement: Improved the logic for determing the requesting IP address to better handle situations where the site is behind a reverse proxy.
+ * Enhancement: Strong Password Enforcement now uses a PHP port of zxcvbn to ensure that a strong password was selected.
+ * Enhancement: All links in Security that have target="_blank" now have added rel attributes to protect against tabnapping.
+ * Misc: Updated remaining ip-lookup.net links to instead link to traceip.net in keeping with other links that were previously updated to traceip.net.
+
+= 5.7.0 =
+ * Bug Fix: Fixed data save issue that could cause multiple notification emails to be sent in a short period of time.
+ * Bug Fix: Fixed issue that could cause the malware scanner to fail on sites that change the arg_separator.output php.ini value from its default value.
+ * Bug Fix: Removed redundant entries in the HackRepair blacklist.
+ * Bug Fix: Enabling Protect System Files in System Tweaks will now only block install.php for the current site. This fixes the issue where the setting can block installation of a site in a subdirectory.
+ * Bug Fix: Fixed problem that could cause requests for iThemes Security data from iThemes Sync to fail due to large amounts of log entries.
+ * Bug Fix: Scheduled backups now run if the ITSEC_BACKUP_CRON define is set with a non-boolean value.
+ * Bug Fix: Replaced static references to wp-includes with the WPINC define.
+ * Bug Fix: Moved blocking of query strings containing %0[0-9A-F] characters from the Non-English Characters setting to the Suspicious Query Strings setting as those characters are control code characters and are not associated with a language.
+ * Bug Fix: Added escaping to some translation strings.
+ * Bug Fix: Removed unused files from the WordPress Tweaks module directory.
+ * Bug Fix: Fixed the Daily Digest email reversing the user and host lockout counts.
+ * Bug Fix: The database backup email no longer sends from the email address configured in Settings > General. It now defaults to the same from address that the wp_mail() function uses. This will fix the mail being blocked by some mail servers due to a spoofed from address.
+ * Enhancement: Updated the server config rules generated by the System Tweaks settings. They are now more consistent between Apache, LiteSpeed, and nginx. They are also more efficient and have been improved to limit accidentally blocking non-targeted requests.
+ * Enhancement: Updated the database backup email to a new design.
+ * Enhancement: Added a note that the Filter Request Methods setting in System Tweaks should not be enabled if the WordPress REST API is used. This is becasue the DELETE HTTP method is blocked when the setting is enabled.
+ * New Feature: Added setting to block requests for PHP files in the plugins directory in System Tweaks.
+ * New Feature: Added setting to block requests for PHP files in the themes directory in System Tweaks.
+
+= 5.6.4 =
+ * Bug Fix: Fixed issue that reported invalid counts for host and user lockouts in the daily digest email.
+ * Bug Fix: Fixed issue that caused the daily digest email to be sent every day, even if no lockouts occurred and no file changes were found.
+ * Bug Fix: Fixed issue that could prevent saving of File Change settings, resulting in an error messages of "A validation function for file-change received data that did not have the required entry for latest_changes."
+ * Bug Fix: Fixed iThemes Security Pro logo appearing in daily digest emails.
+
+= 5.6.3 =
+ * Bug Fix: Removed the "Wget" user agent from the Hack Repair blacklist as it can block wp-cron jobs on some hosts.
+ * Bug Fix: Fixed error "PHP message: PHP Fatal error:  'continue' not in the 'loop' or 'switch' context".
+ * Enhancement: Added new Daily Digest email design.
 
 = 5.6.2 =
  * Security Fix: Fixed issue where a locked out but not yet blacklisted IP/user could receive different HTTP headers when testing a valid username/password combination. Thanks Leon Atkinson of 18INT for contacting us about this issue.
@@ -1579,119 +1635,5 @@ This release is a complete rewrite from the ground up. Special thanks to Cory Mi
 
 == Upgrade Notice ==
 
-= 5.6.2 =
-Version 5.6.2 contains important security updates and bug fixes. It is important to update immediately.
-
-= 5.6.1 =
-Version 5.6.1 contains bug fixes and PHP 7 compatibility changes. It is recommended for all users.
-
-= 5.6.0 =
-Version 5.6.0 contains a new feature to quickly apply recommended settings. It is recommended for all users.
-
-= 5.5.0 =
-Version 5.5.0 contains important bug fixes, a new File Permissions feature, and numerous enhancements. It is recommended for all users.
-
-= 5.4.5 =
-Version 5.4.5 contains a bug fix that fixes the listing of tables to exclude from database backups when "Backup Full Database" is enabled.
-
-= 5.4.4 =
-Version 5.4.4 contains a bug fix that addresses problems some users had when upgrading.
-
-= 5.4.3 =
-Version 5.4.3 contains a bug fix that can prevent script issues in some browsers.
-
-= 5.4.2 =
-Version 5.4.2 contains import bug fixes for Multisite.
-
-= 5.4.1 =
-Version 5.4.1 contains import bug fixes for sites on nginx servers and brings back display of 404 errors in the logs.
-
-= 5.4.0 =
-Version 5.4.0 provides an all new, easier to use interface as well as speed and performance improvements. Upgrade now!
-
-= 5.3.7 =
-Version 5.3.6 contains a bugfix that fixes compatability with WordPress SEO and is recommended for all users.
-
-= 5.3.6 =
-Version 5.3.6 contains minor bugfixes and a small security fix and is recommended for all users.
-
-= 5.3.5 =
-Version 5.3.5 contains minor bugfixes and enhancements and is recommended for all users.
-
-= 5.3.4 =
-Version 5.3.4 contains minor bugfixes and enhancements and is recommended for all users.
-
-= 4.6.8 =
-Version 4.6.8 contains minor bugfixes and enhancements and is recommended for all users.
-
-= 4.6.6 =
-Version 4.6.6 contains minor bugfixes and is recommended for all users.
-
-= 4.6.2 =
-Version 4.6.2 contains new features and enhancements and is recommended for all users.
-
-= 4.5.10 =
-Version 4.5.10 contains minor bugfixes and is recommended for all users.
-
-= 4.5.8 =
-Version 4.5.8 contains minor bugfixes and enhancements and is recommended for all users.
-
-= 4.5.6 =
-Version 4.5.6 contains a minor bugfix and is recommended for all users.
-
-= 4.5.2 =
-Version 4.5.2 is a feature and bug-fix release addressing numerous minor bugs affecting some users. It is recommended for all users.
-
-= 4.4.23 =
-Version 4.4.23 contains a security update and is recommended for all users.
-
-= 4.4.21 =
-Version 4.4.21 contains a fix to an issue that affects daylight savings time as well as other minor bug fixes. It is recommended for all users.
-
-= 4.4.20 =
-Version 4.4.20 contains a minor bugfix and is recommended for all users.
-
-= 4.4.18 =
-Version 4.4.18 contains a minor bugfix and is recommended for all users.
-
-= 4.4.16 =
-Version 4.4.16 is a bug-fix release addressing numerous minor bugs affecting some users. It is recommended for all users.
-
-= 4.4.15 =
-Version 4.4.15 is a bug-fix release addressing numerous minor bugs affecting some users. It is recommended for all users.
-
-= 4.4.13 =
-Version 4.4.13 is a bug-fix release addressing numerous minor bugs affecting some users. It is recommended for all users.
-
-= 4.4.11 =
-Version 4.4.11 is a bug-fix release addressing numerous minor bugs affecting some users. It is recommended for all users.
-
-= 4.4.9 =
-Version 4.4.9 is a bugfix release for the free version and contains new features for pro users. It is a recommended update for all users.
-
-= 4.4.6 =
-Version 4.4.6 adds new features, enhancements, bug fixes and more. It is recommended for all users.
-
-= 4.3.11 =
-Version 4.3.11 contains a security fix and should be installed by all users.
-
-= 4.3.9 =
-Version 4.3.9 is a bug-fix release addressing numerous minor bugs affecting some users. It is recommended for all users.
-
-= 4.3.7 =
-Version 4.3.7 adds malware scheduling and other features as well as numerous minor bugfixes and enhancements. It is recommended for all users.
-
-= 4.3.3 =
-Version 4.3.3 adds malware scheduling and other features as well as numerous minor bugfixes and enhancements. It is recommended for all users.
-
-= 4.2.15 =
-Version 4.2.15 delivers fixes for minor bugs experienced by some users.
-
-= 4.2.13 =
-Version 4.2.13 delivers fixes for minor bugs experienced by some users.
-
-= 4.2.8 =
-Version 4.2.8 delivers fixes for minor bugs and some enhancements including the ability to whitelist file types in 404 detection.
-
-= 4.2.6 =
-Better WP Security is now iThemes Security with new features and a greatly improved code base. We recommend disabling Better WP Security before upgrading to 4.2.6 if you are not already on 4.0 or greater.
+= 6.0.0 =
+Version 6.0.0 adds privacy enhancement for the REST API. It is recommended for all users.

@@ -77,8 +77,8 @@ class Heading extends Component {
 
 		$this->json = array(
 			'role'   => 'heading' . $level,
-			'text'   => trim( $this->markdown->parse( $text ) ),
-			'format' => 'markdown',
+			'text'   => trim( $this->parser->parse( $text ) ),
+			'format' => $this->parser->format,
 		);
 
 		$this->set_style( $level );
@@ -92,8 +92,13 @@ class Heading extends Component {
 	 */
 	private function set_layout() {
 		$this->json['layout'] = 'heading-layout';
-		$this->register_full_width_layout( 'heading-layout', array(
-			'margin' => array( 'top' => 15, 'bottom' => 15 ),
+		$this->register_layout( 'heading-layout', array(
+			'columnStart' => $this->get_setting( 'body_offset' ),
+			'columnSpan' => $this->get_setting( 'body_column_span' ),
+			'margin' => array(
+				'bottom' => 15,
+				'top' => 15,
+			),
 		) );
 	}
 
@@ -105,11 +110,12 @@ class Heading extends Component {
 	private function set_style( $level ) {
 		$this->json[ 'textStyle' ] = 'default-heading-' . $level;
 		$this->register_style( 'default-heading-' . $level, array(
-			'fontName'      => $this->get_setting( 'header_font' ),
-			'fontSize'      => intval( $this->get_setting( 'header' . $level . '_size' ) ),
-			'lineHeight'    => intval( $this->get_setting( 'header_line_height' ) ),
-			'textColor'     => $this->get_setting( 'header_color' ),
+			'fontName' => $this->get_setting( 'header' . $level . '_font' ),
+			'fontSize' => intval( $this->get_setting( 'header' . $level . '_size' ) ),
+			'lineHeight' => intval( $this->get_setting( 'header' . $level . '_line_height' ) ),
+			'textColor' => $this->get_setting( 'header' . $level . '_color' ),
 			'textAlignment' => $this->find_text_alignment(),
+			'tracking' => intval( $this->get_setting( 'header' . $level . '_tracking' ) ) / 100,
 		) );
 	}
 

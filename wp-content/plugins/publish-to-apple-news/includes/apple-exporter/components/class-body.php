@@ -36,8 +36,8 @@ class Body extends Component {
 	 * @access public
 	 */
 	public static function node_matches( $node ) {
-		// We are only interested in p, ul and ol
-		if ( ! in_array( $node->nodeName, array( 'p', 'ul', 'ol' ) ) ) {
+		// We are only interested in p, pre, ul and ol
+		if ( ! in_array( $node->nodeName, array( 'p', 'pre', 'ul', 'ol' ) ) ) {
 			return null;
 		}
 
@@ -106,8 +106,8 @@ class Body extends Component {
 	protected function build( $text ) {
 		$this->json = array(
 			'role'   => 'body',
-			'text'   => $this->markdown->parse( $text ),
-			'format' => 'markdown',
+			'text'   => $this->parser->parse( $text ),
+			'format' => $this->parser->format,
 		);
 
 		if ( 'yes' == $this->get_setting( 'initial_dropcap' ) ) {
@@ -122,24 +122,13 @@ class Body extends Component {
 	}
 
 	/**
-	 * Get the start column for the body based on the layout.
+	 * Whether HTML format is enabled for this component type.
 	 *
-	 * @access private
+	 * @access protected
+	 * @return bool Whether HTML format is enabled for this component type.
 	 */
-	private function get_col_start() {
-		// Find out where the body must start according to the body orientation.
-		// Orientation defaults to left, thus, col_start is 0.
-		$col_start = 0;
-		switch ( $this->get_setting( 'body_orientation' ) ) {
-		case 'right':
-			$col_start = $this->get_setting( 'layout_columns' ) - $this->get_setting( 'body_column_span' );
-			break;
-		case 'center':
-			$col_start = floor( ( $this->get_setting( 'layout_columns' ) - $this->get_setting( 'body_column_span' ) ) / 2 );
-			break;
-		}
-
-		return $col_start;
+	protected function html_enabled() {
+		return true;
 	}
 
 	/**
@@ -150,7 +139,7 @@ class Body extends Component {
 	private function set_default_layout() {
 		$this->json[ 'layout' ] = 'body-layout';
 		$this->register_layout( 'body-layout', array(
-			'columnStart' => $this->get_col_start(),
+			'columnStart' => $this->get_setting( 'body_offset' ),
 			'columnSpan'  => $this->get_setting( 'body_column_span' ),
 			'margin'      => array(
 				'top' => 12,
@@ -160,7 +149,7 @@ class Body extends Component {
 
 		// Also pre-register the layout that will be used later for the last body component
 		$this->register_layout( 'body-layout-last', array(
-			'columnStart' => $this->get_col_start(),
+			'columnStart' => $this->get_setting( 'body_offset' ),
 			'columnSpan'  => $this->get_setting( 'body_column_span' ),
 			'margin'      => array(
 				'top' => 12,
@@ -177,16 +166,17 @@ class Body extends Component {
 	 */
 	private function get_default_style() {
 		return array(
-			'textAlignment' 			=> 'left',
-			'fontName'      			=> $this->get_setting( 'body_font' ),
-			'fontSize'      			=> intval( $this->get_setting( 'body_size' ) ),
-			'lineHeight'    			=> intval( $this->get_setting( 'body_line_height' ) ),
-			'textColor'     			=> $this->get_setting( 'body_color' ),
-			'linkStyle'     			=> array(
+			'textAlignment' => 'left',
+			'fontName' => $this->get_setting( 'body_font' ),
+			'fontSize' => intval( $this->get_setting( 'body_size' ) ),
+			'tracking' => intval( $this->get_setting( 'body_tracking' ) ) / 100,
+			'lineHeight' => intval( $this->get_setting( 'body_line_height' ) ),
+			'textColor' => $this->get_setting( 'body_color' ),
+			'linkStyle' => array(
 				'textColor' => $this->get_setting( 'body_link_color' )
 			),
-			'paragraphSpacingBefore' 	=> 18,
-			'paragraphSpacingAfter'		=> 18,
+			'paragraphSpacingBefore' => 18,
+			'paragraphSpacingAfter' => 18,
 		);
 	}
 
